@@ -217,7 +217,8 @@
     }
 
     if (callStatus == RCCallActive) {
-      if ([RCCallKitUtility isLandscape] && [self isSupportOrientation:[UIDevice currentDevice].orientation]) {
+      if ([RCCallKitUtility isLandscape] &&
+          [self isSupportOrientation:[UIDevice currentDevice].orientation]) {
         self.subVideoView.frame = CGRectMake(
             self.view.frame.size.width - RCCallHeaderLength -
                 RCCallHorizontalMargin / 2,
@@ -239,7 +240,11 @@
 }
 
 - (BOOL)isSupportOrientation:(UIInterfaceOrientationMask)orientation {
-  return [[UIApplication sharedApplication] supportedInterfaceOrientationsForWindow:[UIApplication sharedApplication].keyWindow] & (1 <<  orientation);
+  return [[UIApplication sharedApplication]
+             supportedInterfaceOrientationsForWindow:[UIApplication
+                                                         sharedApplication]
+                                                         .keyWindow] &
+         (1 << orientation);
 }
 
 #pragma mark - UserInfo Update

@@ -105,7 +105,8 @@ static NSString *RCVoipFloatingBoardPosY = @"RCVoipFloatingBoardPosY";
              : posY;
 
   if ([UIDevice currentDevice].orientation ==
-      UIDeviceOrientationLandscapeLeft && [self isSupportOrientation:UIInterfaceOrientationLandscapeLeft] ) {
+          UIDeviceOrientationLandscapeLeft &&
+      [self isSupportOrientation:UIInterfaceOrientationLandscapeLeft]) {
     self.window.transform = CGAffineTransformMakeRotation(M_PI / 2);
     self.window.frame = CGRectMake(posX, posY, 64, 96);
     self.floatingButton.frame = CGRectMake(0, 0, 96, 64);
@@ -113,7 +114,8 @@ static NSString *RCVoipFloatingBoardPosY = @"RCVoipFloatingBoardPosY";
       self.videoView.frame = CGRectMake(0, 0, 96, 64);
     }
   } else if ([UIDevice currentDevice].orientation ==
-             UIDeviceOrientationLandscapeRight && [self isSupportOrientation:UIInterfaceOrientationLandscapeRight]) {
+                 UIDeviceOrientationLandscapeRight &&
+             [self isSupportOrientation:UIInterfaceOrientationLandscapeRight]) {
     self.window.transform = CGAffineTransformMakeRotation(-M_PI / 2);
     self.window.frame = CGRectMake(posX, posY, 64, 96);
     self.floatingButton.frame = CGRectMake(0, 0, 96, 64);
@@ -121,12 +123,14 @@ static NSString *RCVoipFloatingBoardPosY = @"RCVoipFloatingBoardPosY";
       self.videoView.frame = CGRectMake(0, 0, 96, 64);
     }
   } else {
-    if ([UIDevice currentDevice].orientation == UIDeviceOrientationPortraitUpsideDown && [self isSupportOrientation:UIInterfaceOrientationPortraitUpsideDown]) {
+    if ([UIDevice currentDevice].orientation ==
+            UIDeviceOrientationPortraitUpsideDown &&
+        [self isSupportOrientation:UIInterfaceOrientationPortraitUpsideDown]) {
       self.window.transform = CGAffineTransformMakeRotation(M_PI);
     } else {
       self.window.transform = CGAffineTransformMakeRotation(0);
     }
-    
+
     self.window.frame = CGRectMake(posX, posY, 64, 96);
     self.floatingButton.frame = CGRectMake(0, 0, 64, 96);
     if (self.callSession.mediaType == RCCallMediaVideo) {
@@ -260,8 +264,9 @@ static NSString *RCVoipFloatingBoardPosY = @"RCVoipFloatingBoardPosY";
 }
 
 - (BOOL)isSupportOrientation:(UIInterfaceOrientation)orientation {
-  UIInterfaceOrientationMask mask = [[UIApplication sharedApplication] supportedInterfaceOrientationsForWindow:self.window];
-  return  mask & (1 <<  orientation);
+  UIInterfaceOrientationMask mask = [[UIApplication sharedApplication]
+      supportedInterfaceOrientationsForWindow:self.window];
+  return mask & (1 << orientation);
 }
 
 - (void)handlePanGestures:(UIPanGestureRecognizer *)paramSender {
@@ -270,19 +275,23 @@ static NSString *RCVoipFloatingBoardPosY = @"RCVoipFloatingBoardPosY";
     CGPoint location = [paramSender
         locationInView:[UIApplication sharedApplication].windows[0]];
 
-
     if ([UIDevice currentDevice].orientation ==
-        UIDeviceOrientationLandscapeLeft && [self isSupportOrientation:UIInterfaceOrientationLandscapeLeft]) {
+            UIDeviceOrientationLandscapeLeft &&
+        [self isSupportOrientation:UIInterfaceOrientationLandscapeLeft]) {
       CGFloat tmp = location.x;
       location.x = [UIScreen mainScreen].bounds.size.height - location.y;
       location.y = tmp;
     } else if ([UIDevice currentDevice].orientation ==
-               UIDeviceOrientationLandscapeRight && [self isSupportOrientation:UIInterfaceOrientationLandscapeRight]) {
+                   UIDeviceOrientationLandscapeRight &&
+               [self
+                   isSupportOrientation:UIInterfaceOrientationLandscapeRight]) {
       CGFloat tmp = location.x;
       location.x = location.y;
       location.y = [UIScreen mainScreen].bounds.size.width - tmp;
     } else if ([UIDevice currentDevice].orientation ==
-               UIDeviceOrientationPortraitUpsideDown && [self isSupportOrientation:UIInterfaceOrientationPortraitUpsideDown]) {
+                   UIDeviceOrientationPortraitUpsideDown &&
+               [self isSupportOrientation:
+                         UIInterfaceOrientationPortraitUpsideDown]) {
       CGFloat tmp = location.x;
       location.x = [UIScreen mainScreen].bounds.size.height - location.y;
       location.y = [UIScreen mainScreen].bounds.size.width - tmp;
@@ -299,7 +308,8 @@ static NSString *RCVoipFloatingBoardPosY = @"RCVoipFloatingBoardPosY";
       frame.origin.y = 2;
     }
 
-    if ([RCCallKitUtility isLandscape] && [self isSupportOrientation:[UIDevice currentDevice].orientation]) {
+    if ([RCCallKitUtility isLandscape] &&
+        [self isSupportOrientation:[UIDevice currentDevice].orientation]) {
       if (frame.origin.y + frame.size.height >
           [UIScreen mainScreen].bounds.size.width) {
         frame.origin.y =

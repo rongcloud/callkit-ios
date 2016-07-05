@@ -47,6 +47,9 @@
 		F8235CDD1CE5B2A100C95B26 /* RCloudImageLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = F8235CD91CE5B2A100C95B26 /* RCloudImageLoader.h */; };
 		F8235CDE1CE5B2A100C95B26 /* RCloudImageView.h in Headers */ = {isa = PBXBuildFile; fileRef = F8235CDA1CE5B2A100C95B26 /* RCloudImageView.h */; };
 		F8235CDF1CE5B2A100C95B26 /* RCUserInfoCacheManager.h in Headers */ = {isa = PBXBuildFile; fileRef = F8235CDB1CE5B2A100C95B26 /* RCUserInfoCacheManager.h */; };
+		F8D2904C1D2790E3002BFA65 /* RCCallKitExtensionModel.h in Headers */ = {isa = PBXBuildFile; fileRef = F8D2904A1D2790E3002BFA65 /* RCCallKitExtensionModel.h */; };
+		F8D2904D1D2790E3002BFA65 /* RCCallKitExtensionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F8D2904B1D2790E3002BFA65 /* RCCallKitExtensionModel.m */; };
+		F8D290511D279174002BFA65 /* RongIMKitExtensionModel.h in Headers */ = {isa = PBXBuildFile; fileRef = F8D290501D279174002BFA65 /* RongIMKitExtensionModel.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -92,6 +95,9 @@
 		F8235CD91CE5B2A100C95B26 /* RCloudImageLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RCloudImageLoader.h; path = Header/RCloudImageLoader.h; sourceTree = "<group>"; };
 		F8235CDA1CE5B2A100C95B26 /* RCloudImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RCloudImageView.h; path = Header/RCloudImageView.h; sourceTree = "<group>"; };
 		F8235CDB1CE5B2A100C95B26 /* RCUserInfoCacheManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RCUserInfoCacheManager.h; path = Header/RCUserInfoCacheManager.h; sourceTree = "<group>"; };
+		F8D2904A1D2790E3002BFA65 /* RCCallKitExtensionModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RCCallKitExtensionModel.h; path = Extension/RCCallKitExtensionModel.h; sourceTree = "<group>"; };
+		F8D2904B1D2790E3002BFA65 /* RCCallKitExtensionModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RCCallKitExtensionModel.m; path = Extension/RCCallKitExtensionModel.m; sourceTree = "<group>"; };
+		F8D290501D279174002BFA65 /* RongIMKitExtensionModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RongIMKitExtensionModel.h; path = Header/RongIMKitExtensionModel.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,6 +135,7 @@
 			isa = PBXGroup;
 			children = (
 				A6EF9B941D0E640E00785C27 /* VideoObserver */,
+				F8D290491D2790C1002BFA65 /* Extension */,
 				A6BE1AFB1CCEFAAC00FF6BF7 /* Cell */,
 				A6BE1B041CCEFAAC00FF6BF7 /* Controller */,
 				A6BE1B0F1CCEFAAC00FF6BF7 /* Layout */,
@@ -236,12 +243,22 @@
 		F8235CD71CE5B29200C95B26 /* Header */ = {
 			isa = PBXGroup;
 			children = (
+				F8D290501D279174002BFA65 /* RongIMKitExtensionModel.h */,
 				F8235CD81CE5B2A100C95B26 /* RCKitCommonDefine.h */,
 				F8235CD91CE5B2A100C95B26 /* RCloudImageLoader.h */,
 				F8235CDA1CE5B2A100C95B26 /* RCloudImageView.h */,
 				F8235CDB1CE5B2A100C95B26 /* RCUserInfoCacheManager.h */,
 			);
 			name = Header;
+			sourceTree = "<group>";
+		};
+		F8D290491D2790C1002BFA65 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				F8D2904A1D2790E3002BFA65 /* RCCallKitExtensionModel.h */,
+				F8D2904B1D2790E3002BFA65 /* RCCallKitExtensionModel.m */,
+			);
+			name = Extension;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -256,6 +273,7 @@
 				A6BE1B281CCEFAAC00FF6BF7 /* RCCallBaseViewController.h in Headers */,
 				A6EF9B971D0E640E00785C27 /* RCDVideoFrameObserver.h in Headers */,
 				F8235CDE1CE5B2A100C95B26 /* RCloudImageView.h in Headers */,
+				F8D290511D279174002BFA65 /* RongIMKitExtensionModel.h in Headers */,
 				A6BE1B2C1CCEFAAC00FF6BF7 /* RCCallSingleCallViewController.h in Headers */,
 				A6BE1B261CCEFAAC00FF6BF7 /* RCCallAudioMultiCallViewController.h in Headers */,
 				A6BE1B2E1CCEFAAC00FF6BF7 /* RCCallVideoMultiCallViewController.h in Headers */,
@@ -271,6 +289,7 @@
 				A6BE1B321CCEFAAC00FF6BF7 /* RCVideoMultiCallUserCollectionLayout.h in Headers */,
 				F8235CDF1CE5B2A100C95B26 /* RCUserInfoCacheManager.h in Headers */,
 				A6BE1B301CCEFAAC00FF6BF7 /* RCAudioMultiCallUserCollectionLayout.h in Headers */,
+				F8D2904C1D2790E3002BFA65 /* RCCallKitExtensionModel.h in Headers */,
 				A6BE1B221CCEFAAC00FF6BF7 /* RCCallSelectingMemberCell.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -371,6 +390,7 @@
 				A6BE1B391CCEFAAC00FF6BF7 /* RCCallFloatingBoard.m in Sources */,
 				A6BE1B2D1CCEFAAC00FF6BF7 /* RCCallSingleCallViewController.m in Sources */,
 				A68AFAEA1CCEFF5B00F16B3D /* RCCallDetailMessageCell.m in Sources */,
+				F8D2904D1D2790E3002BFA65 /* RCCallKitExtensionModel.m in Sources */,
 				A6BE1B291CCEFAAC00FF6BF7 /* RCCallBaseViewController.m in Sources */,
 				A68AFAEC1CCEFF5B00F16B3D /* RCCallTipMessageCell.m in Sources */,
 				A6BE1B211CCEFAAC00FF6BF7 /* RCCallMultiCallUserCell.m in Sources */,

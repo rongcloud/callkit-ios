@@ -278,58 +278,6 @@
   return [RCCallClient sharedRCCallClient].currentCallSession;
 }
 
-- (BOOL)didHoldReceivedMessageForKitUpdate:(RCMessage *)message {
-  if ([message.content isKindOfClass:[RCCallSummaryMessage class]]) {
-    return NO;
-  } else if ([message.objectName isEqualToString:@"RC:VoipAcceptMsg"] ||
-             [message.objectName isEqualToString:@"RC:VoipCallMsg"] ||
-             [message.objectName isEqualToString:@"RC:VoipFinishMsg"]) {
-    return YES;
-  } else {
-    return NO;
-  }
-}
-
-- (BOOL)didHoldReceivedMessageForForegroudAlert:(RCMessage *)message {
-  if ([message.content isKindOfClass:[RCCallSummaryMessage class]]) {
-    return YES;
-  } else if ([message.objectName isEqualToString:@"RC:VoipAcceptMsg"] ||
-             [message.objectName isEqualToString:@"RC:VoipCallMsg"] ||
-             [message.objectName isEqualToString:@"RC:VoipFinishMsg"]) {
-    return YES;
-  } else {
-    return NO;
-  }
-}
-
-- (BOOL)didHoldReceivedMessageForBackgroudNotification:(RCMessage *)message {
-  if ([message.content isKindOfClass:[RCCallSummaryMessage class]]) {
-    return YES;
-  } else if ([message.objectName isEqualToString:@"RC:VoipAcceptMsg"] ||
-             [message.objectName isEqualToString:@"RC:VoipCallMsg"] ||
-             [message.objectName isEqualToString:@"RC:VoipFinishMsg"]) {
-    return YES;
-  } else {
-    return NO;
-  }
-}
-
-- (Class)getRegisteredClassForMessageCell:(RCConversationType)conversationType {
-  if (conversationType == ConversationType_PRIVATE) {
-    return [RCCallDetailMessageCell class];
-  } else {
-    return [RCCallTipMessageCell class];
-  }
-}
-
-- (UIImage *)imageFromVoIPBundle:(NSString *)imageName {
-  return [RCCallKitUtility imageFromVoIPBundle:imageName];
-}
-
-- (Class)getSummaryMessageClass {
-  return [RCCallSummaryMessage class];
-}
-
 #pragma mark - receive call
 - (void)didReceiveCall:(RCCallSession *)callSession {
   if (callSession.conversationType == ConversationType_PRIVATE) {
