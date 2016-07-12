@@ -355,7 +355,7 @@
   }
 
   callNotification.userInfo = userDict;
-  callNotification.soundName = @"voip_call.caf";
+  callNotification.soundName = @"RongCloud.bundle/voip/voip_call.caf";
 
   // VoIP Push和接收消息的通话排重
   for (UILocalNotification *notification in self.locationNotificationList) {

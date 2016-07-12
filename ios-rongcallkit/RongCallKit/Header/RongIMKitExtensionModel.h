@@ -34,6 +34,10 @@ typedef void (^RCConversationPluginItemTapBlock)();
               messageContent:(RCMessageContent *)messageContent
           collectionViewSize:(CGSize)collectionViewSize;
 
+- (BOOL)isMessageCellPortraitDisplayed:(RCConversationType)conversationType
+                              targetId:(NSString *)targetId
+                        messageContent:(RCMessageContent *)messageContent;
+
 - (BOOL)didHoldMessageCellTapEvent:(RCConversationType)conversationType
                           targetId:(NSString *)targetId
                     messageContent:(RCMessageContent *)messageContent;

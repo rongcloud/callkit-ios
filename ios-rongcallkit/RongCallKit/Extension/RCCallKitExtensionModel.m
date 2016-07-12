@@ -70,6 +70,19 @@ static NSString *const rcVoIPCallSummaryMessageCellIndentifier = @"rcVoIPCallSum
     return CGSizeMake(0, 0);
 }
 
+- (BOOL)isMessageCellPortraitDisplayed:(RCConversationType)conversationType
+                              targetId:(NSString *)targetId
+                        messageContent:(RCMessageContent *)messageContent {
+  if ([messageContent isKindOfClass:[RCCallSummaryMessage class]]) {
+    if (conversationType == ConversationType_PRIVATE) {
+      return YES;
+    } else if (conversationType == ConversationType_GROUP || conversationType == ConversationType_DISCUSSION) {
+      return NO;
+    }
+  }
+  return NO;
+}
+
 - (BOOL)didHoldMessageCellTapEvent:(RCConversationType)conversationType
                           targetId:(NSString *)targetId
                     messageContent:(RCMessageContent *)messageContent {
