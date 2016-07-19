@@ -50,7 +50,7 @@ xcodebuild clean -configuration $configuration -sdk $TARGET_I386
 
 echo "***开始Build ${targetName} Framework ${configuration}****"
 echo "***开始build iphonesimulator文件***"
-xcodebuild OTHER_CFLAGS="-fembed-bitcode" -project ${PROJECT_NAME} -target "$targetName" -configuration $configuration  -sdk $TARGET_I386 build
+xcodebuild -project ${PROJECT_NAME} -target "$targetName" -configuration $configuration  -sdk $TARGET_I386 build
 echo "***开始build iphoneos文件***"
-xcodebuild OTHER_CFLAGS="-fembed-bitcode" -project ${PROJECT_NAME} -target "$targetName" -configuration $configuration  -sdk $TARGET_DECIVE build
+xcodebuild -project ${PROJECT_NAME} -target "$targetName" -configuration $configuration  -sdk $TARGET_DECIVE build
 echo "***完成Build ${targetName} Framework ${configuration}****"
