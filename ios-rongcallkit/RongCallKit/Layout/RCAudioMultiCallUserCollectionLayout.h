@@ -1,6 +1,6 @@
 //
-//  RCDCustomLayout.h
-//  RCloudMessage
+//  RCAudioMultiCallUserCollectionLayout.h
+//  RongCallKit
 //
 //  Created by litao on 16/3/18.
 //  Copyright © 2016年 RongCloud. All rights reserved.

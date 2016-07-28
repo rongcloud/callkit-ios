@@ -1,6 +1,6 @@
 //
 //  RCCallTipMessageCell.m
-//  RongVoIPKit
+//  RongCallKit
 //
 //  Created by 岑裕 on 16/3/20.
 //  Copyright © 2016年 RongCloud. All rights reserved.
@@ -49,8 +49,10 @@
                message.hangupReason == RCCallDisconnectReasonRemoteReject) {
       status = NSLocalizedStringFromTable(@"VoIPCallHasReject", @"RongCloudKit",
                                           nil);
-    } else if (message.hangupReason == RCCallDisconnectReasonCancel ||
-               message.hangupReason == RCCallDisconnectReasonRemoteCancel) {
+    } else if (message.hangupReason == RCCallDisconnectReasonCancel){
+      status = NSLocalizedStringFromTable(@"VoIPCallHasCancel",
+                                          @"RongCloudKit", nil);
+    } else if (message.hangupReason == RCCallDisconnectReasonRemoteCancel) {
       status = NSLocalizedStringFromTable(@"VoIPCallNoResponse",
                                           @"RongCloudKit", nil);
     } else {
