@@ -16,7 +16,7 @@ static NSString *const rcVoIPCallSummaryMessageCellIndentifier = @"rcVoIPCallSum
 
 @implementation RCCallKitExtensionModel
 
-+ (instancetype)initModel {
++ (instancetype)loadRongExtensionModel {
     [RCCall sharedRCCall];
     return [[RCCallKitExtensionModel alloc] init];
 }

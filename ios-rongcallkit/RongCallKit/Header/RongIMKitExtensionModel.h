@@ -13,7 +13,7 @@ typedef void (^RCConversationPluginItemTapBlock)();
 
 @protocol RongIMKitExtensionModel <NSObject>
 
-+ (instancetype)initModel;
++ (instancetype)loadRongExtensionModel;
 
 - (void)destroyModel;
 
