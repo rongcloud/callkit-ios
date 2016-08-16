@@ -117,6 +117,11 @@
 @property(nonatomic, assign, readonly) RCConversationType conversationType;
 
 /*!
+ 通话ID
+ */
+@property(nonatomic, strong, readonly) NSString *callId;
+
+/*!
  通话的目标会话ID
  */
 @property(nonatomic, strong, readonly) NSString *targetId;
