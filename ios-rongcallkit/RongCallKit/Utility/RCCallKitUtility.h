@@ -17,6 +17,11 @@
                    blue:((float)((rgbValue & 0x0000FF) >> 0)) / 255.0          \
                   alpha:1.0]
 
+#define RC_IOS_SYSTEM_VERSION_LESS_THAN(v)                                     \
+  ([[[UIDevice currentDevice] systemVersion]                                   \
+       compare:v                                                               \
+       options:NSNumericSearch] == NSOrderedAscending)
+
 #define RCCallHeaderLength 80.0f
 #define RCCallButtonLength 64.0f
 #define RCCallLabelHeight 25.0f

@@ -43,7 +43,6 @@
 		A6BE1B491CCEFBC700FF6BF7 /* RongIMLib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6BE1B471CCEFBC700FF6BF7 /* RongIMLib.framework */; };
 		A6EF9B971D0E640E00785C27 /* RCDVideoFrameObserver.h in Headers */ = {isa = PBXBuildFile; fileRef = A6EF9B951D0E640E00785C27 /* RCDVideoFrameObserver.h */; };
 		A6EF9B981D0E640E00785C27 /* RCDVideoFrameObserver.mm in Sources */ = {isa = PBXBuildFile; fileRef = A6EF9B961D0E640E00785C27 /* RCDVideoFrameObserver.mm */; };
-		F8235CDC1CE5B2A100C95B26 /* RCKitCommonDefine.h in Headers */ = {isa = PBXBuildFile; fileRef = F8235CD81CE5B2A100C95B26 /* RCKitCommonDefine.h */; };
 		F8235CDD1CE5B2A100C95B26 /* RCloudImageLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = F8235CD91CE5B2A100C95B26 /* RCloudImageLoader.h */; };
 		F8235CDE1CE5B2A100C95B26 /* RCloudImageView.h in Headers */ = {isa = PBXBuildFile; fileRef = F8235CDA1CE5B2A100C95B26 /* RCloudImageView.h */; };
 		F8235CDF1CE5B2A100C95B26 /* RCUserInfoCacheManager.h in Headers */ = {isa = PBXBuildFile; fileRef = F8235CDB1CE5B2A100C95B26 /* RCUserInfoCacheManager.h */; };
@@ -91,7 +90,6 @@
 		A6BE1B471CCEFBC700FF6BF7 /* RongIMLib.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RongIMLib.framework; path = framework/RongIMLib.framework; sourceTree = "<group>"; };
 		A6EF9B951D0E640E00785C27 /* RCDVideoFrameObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCDVideoFrameObserver.h; sourceTree = "<group>"; };
 		A6EF9B961D0E640E00785C27 /* RCDVideoFrameObserver.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RCDVideoFrameObserver.mm; sourceTree = "<group>"; };
-		F8235CD81CE5B2A100C95B26 /* RCKitCommonDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RCKitCommonDefine.h; path = Header/RCKitCommonDefine.h; sourceTree = "<group>"; };
 		F8235CD91CE5B2A100C95B26 /* RCloudImageLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RCloudImageLoader.h; path = Header/RCloudImageLoader.h; sourceTree = "<group>"; };
 		F8235CDA1CE5B2A100C95B26 /* RCloudImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RCloudImageView.h; path = Header/RCloudImageView.h; sourceTree = "<group>"; };
 		F8235CDB1CE5B2A100C95B26 /* RCUserInfoCacheManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RCUserInfoCacheManager.h; path = Header/RCUserInfoCacheManager.h; sourceTree = "<group>"; };
@@ -244,7 +242,6 @@
 			isa = PBXGroup;
 			children = (
 				F8D290501D279174002BFA65 /* RongIMKitExtensionModel.h */,
-				F8235CD81CE5B2A100C95B26 /* RCKitCommonDefine.h */,
 				F8235CD91CE5B2A100C95B26 /* RCloudImageLoader.h */,
 				F8235CDA1CE5B2A100C95B26 /* RCloudImageView.h */,
 				F8235CDB1CE5B2A100C95B26 /* RCUserInfoCacheManager.h */,
@@ -280,7 +277,6 @@
 				A6BE1B381CCEFAAC00FF6BF7 /* RCCallFloatingBoard.h in Headers */,
 				A6BE1B201CCEFAAC00FF6BF7 /* RCCallMultiCallUserCell.h in Headers */,
 				F8235CDD1CE5B2A100C95B26 /* RCloudImageLoader.h in Headers */,
-				F8235CDC1CE5B2A100C95B26 /* RCKitCommonDefine.h in Headers */,
 				A68AFAE91CCEFF5B00F16B3D /* RCCallDetailMessageCell.h in Headers */,
 				A68AFAEB1CCEFF5B00F16B3D /* RCCallTipMessageCell.h in Headers */,
 				A6BE1B341CCEFAAC00FF6BF7 /* RCCallUserCallInfoModel.h in Headers */,

@@ -9,7 +9,6 @@
 #import "RCCallDetailMessageCell.h"
 #import "RCCall.h"
 #import "RCCallKitUtility.h"
-#import "RCKitCommonDefine.h"
 
 @implementation RCCallDetailMessageCell
 
@@ -45,7 +44,7 @@
   [self.textLabel setLineBreakMode:NSLineBreakByWordWrapping];
   [self.textLabel setTextAlignment:NSTextAlignmentLeft];
   [self.textLabel setTextColor:[UIColor blackColor]];
-  if (IOS_FSystenVersion < 7.0) {
+  if (RC_IOS_SYSTEM_VERSION_LESS_THAN(@"7.0")) {
     [self.textLabel setBackgroundColor:[UIColor clearColor]];
   }
   UITapGestureRecognizer *textMessageTap = [[UITapGestureRecognizer alloc]
@@ -133,28 +132,7 @@
         imageFromVoIPBundle:@"voip/audio_receiver_up_right.png"];
   }
 
-  CGSize __textSize = CGSizeZero;
-  if (IOS_FSystenVersion < 7.0) {
-    __textSize = RC_MULTILINE_TEXTSIZE_LIOS7(
-        self.textLabel.text, [UIFont systemFontOfSize:Text_Message_Font_Size],
-        CGSizeMake(
-            self.baseContentView.bounds.size.width -
-                (10 + [RCIM sharedRCIM].globalMessagePortraitSize.width + 10) *
-                    2 -
-                5 - 35,
-            8000),
-        NSLineBreakByTruncatingTail);
-  } else {
-    __textSize = RC_MULTILINE_TEXTSIZE_GEIOS7(
-        self.textLabel.text, [UIFont systemFontOfSize:Text_Message_Font_Size],
-        CGSizeMake(
-            self.baseContentView.bounds.size.width -
-                (10 + [RCIM sharedRCIM].globalMessagePortraitSize.width + 10) *
-                    2 -
-                5 - 35,
-            8000));
-  }
-
+  CGSize __textSize = [RCKitUtility getTextDrawingSize:self.textLabel.text font:[UIFont systemFontOfSize:Text_Message_Font_Size] constrainedSize:CGSizeMake(self.baseContentView.bounds.size.width - (10 + [RCIM sharedRCIM].globalMessagePortraitSize.width + 10) * 2 - 5 - 35, 8000)];
   __textSize = CGSizeMake(ceilf(__textSize.width), ceilf(__textSize.height));
   float maxWidth =
       self.baseContentView.bounds.size.width -
@@ -203,7 +181,7 @@
     messageContentViewRect.size.height = __bubbleSize.height;
     messageContentViewRect.origin.x =
         self.baseContentView.bounds.size.width -
-        (messageContentViewRect.size.width + 9 +
+        (messageContentViewRect.size.width + 6 +
          [RCIM sharedRCIM].globalMessagePortraitSize.width + 10);
     self.messageContentView.frame = messageContentViewRect;
 

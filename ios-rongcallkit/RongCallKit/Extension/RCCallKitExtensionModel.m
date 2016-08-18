@@ -64,7 +64,7 @@ static NSString *const rcVoIPCallSummaryMessageCellIndentifier = @"rcVoIPCallSum
         if (conversationType == ConversationType_PRIVATE) {
             return CGSizeMake(collectionViewSize.width, 10 + [RCIM sharedRCIM].globalMessagePortraitSize.height + 10);
         } else if (conversationType == ConversationType_GROUP || conversationType == ConversationType_DISCUSSION) {
-            return CGSizeMake(collectionViewSize.width, 10 + 12.5 + 5 + 10);
+            return CGSizeMake(collectionViewSize.width, 10 + 17 +  6+ 10);
         }
     }
     return CGSizeMake(0, 0);

@@ -8,7 +8,6 @@
 
 #import "RCCallTipMessageCell.h"
 #import "RCCall.h"
-#import "RCKitCommonDefine.h"
 
 @implementation RCCallTipMessageCell
 
@@ -82,36 +81,10 @@
   }
 
   NSString *__text = self.messageLabel.text;
-  // ios 7
-  //    CGSize __textSize =
-  //        [__text boundingRectWithSize:CGSizeMake(maxMessageLabelWidth,
-  //        MAXFLOAT)
-  //                             options:NSStringDrawingTruncatesLastVisibleLine
-  //                             | NSStringDrawingUsesLineFragmentOrigin |
-  //                                     NSStringDrawingUsesFontLeading
-  //                          attributes:@{
-  //                              NSFontAttributeName : [UIFont
-  //                              systemFontOfSize:12.5f]
-  //                          } context:nil]
-  //            .size;
-
-  //    CGSize __textSize = RC_MULTILINE_TEXTSIZE(__text, [UIFont
-  //    systemFontOfSize:12.5f], CGSizeMake(maxMessageLabelWidth, MAXFLOAT),
-  //    NSLineBreakByTruncatingTail);
-  CGSize __textSize = CGSizeZero;
-  if (IOS_FSystenVersion < 7.0) {
-    __textSize =
-        RC_MULTILINE_TEXTSIZE_LIOS7(__text, [UIFont systemFontOfSize:12.5f],
-                                    CGSizeMake(maxMessageLabelWidth, MAXFLOAT),
-                                    NSLineBreakByTruncatingTail);
-  } else {
-    __textSize = RC_MULTILINE_TEXTSIZE_GEIOS7(
-        __text, [UIFont systemFontOfSize:12.5f],
-        CGSizeMake(maxMessageLabelWidth, MAXFLOAT));
-  }
-
+  
+  CGSize __textSize = [RCKitUtility getTextDrawingSize:__text font:[UIFont systemFontOfSize:14.f] constrainedSize:CGSizeMake(maxMessageLabelWidth, MAXFLOAT)];
   __textSize = CGSizeMake(ceilf(__textSize.width), ceilf(__textSize.height));
-  CGSize __labelSize = CGSizeMake(__textSize.width + 5, __textSize.height + 5);
+  CGSize __labelSize = CGSizeMake(__textSize.width + 5, __textSize.height + 6);
 
   self.messageLabel.frame = CGRectMake(
       (self.baseContentView.bounds.size.width - __labelSize.width) / 2.0f, 10,
