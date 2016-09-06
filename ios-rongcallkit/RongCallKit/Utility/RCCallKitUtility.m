@@ -153,4 +153,15 @@
   CGRect screenBounds = [UIScreen mainScreen].bounds;
   return screenBounds.size.width > screenBounds.size.height;
 }
+
++ (void)setScreenForceOn {
+  [[NSUserDefaults standardUserDefaults] setBool:[UIApplication sharedApplication].idleTimerDisabled forKey:@"RCCallIdleTimerDisabled"];
+  [UIApplication sharedApplication].idleTimerDisabled = YES;
+}
+
++ (void)clearScreenForceOnStatus {
+  BOOL oldStatus = [[NSUserDefaults standardUserDefaults] boolForKey:@"RCCallIdleTimerDisabled"];
+  [UIApplication sharedApplication].idleTimerDisabled = oldStatus;
+}
+
 @end

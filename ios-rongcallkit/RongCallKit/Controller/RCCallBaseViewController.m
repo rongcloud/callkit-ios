@@ -30,6 +30,7 @@
     _callSession = callSession;
     [self registerForegroudNotification];
     [_callSession setDelegate:self];
+    [RCCallKitUtility setScreenForceOn];
   }
   return self;
 }
@@ -47,6 +48,7 @@
                                                 sessionDelegate:self
                                                           extra:nil];
     [self registerForegroudNotification];
+    [RCCallKitUtility setScreenForceOn];
   }
   return self;
 }
@@ -1107,7 +1109,8 @@
  */
 - (void)callDidDisconnect {
   [self callWillDisconnect];
-
+  [RCCallKitUtility clearScreenForceOnStatus];
+  
   if (self.callSession.connectedTime > 0) {
     self.tipsLabel.text =
         NSLocalizedStringFromTable(@"VoIPCallEnd", @"RongCloudKit", nil);

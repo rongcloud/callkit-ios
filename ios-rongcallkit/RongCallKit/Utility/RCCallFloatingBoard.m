@@ -81,8 +81,7 @@ static NSString *RCVoipFloatingBoardPosY = @"RCVoipFloatingBoardPosY";
   long sec = [[NSDate date] timeIntervalSince1970] -
              self.callSession.connectedTime / 1000;
   if (self.callSession.callStatus == RCCallActive &&
-      (self.callSession.mediaType == RCCallMediaAudio ||
-       self.callSession.conversationType != ConversationType_PRIVATE)) {
+      ![self isVideoViewEnabledSession]) {
     [self.floatingButton
         setTitle:[RCCallKitUtility getReadableStringForTime:sec]
         forState:UIControlStateNormal];
@@ -110,7 +109,7 @@ static NSString *RCVoipFloatingBoardPosY = @"RCVoipFloatingBoardPosY";
     self.window.transform = CGAffineTransformMakeRotation(M_PI / 2);
     self.window.frame = CGRectMake(posX, posY, 64, 96);
     self.floatingButton.frame = CGRectMake(0, 0, 96, 64);
-    if (self.callSession.mediaType == RCCallMediaVideo) {
+    if ([self isVideoViewEnabledSession]) {
       self.videoView.frame = CGRectMake(0, 0, 96, 64);
     }
   } else if ([UIDevice currentDevice].orientation ==
@@ -119,7 +118,7 @@ static NSString *RCVoipFloatingBoardPosY = @"RCVoipFloatingBoardPosY";
     self.window.transform = CGAffineTransformMakeRotation(-M_PI / 2);
     self.window.frame = CGRectMake(posX, posY, 64, 96);
     self.floatingButton.frame = CGRectMake(0, 0, 96, 64);
-    if (self.callSession.mediaType == RCCallMediaVideo) {
+    if ([self isVideoViewEnabledSession]) {
       self.videoView.frame = CGRectMake(0, 0, 96, 64);
     }
   } else {
@@ -133,28 +132,12 @@ static NSString *RCVoipFloatingBoardPosY = @"RCVoipFloatingBoardPosY";
 
     self.window.frame = CGRectMake(posX, posY, 64, 96);
     self.floatingButton.frame = CGRectMake(0, 0, 64, 96);
-    if (self.callSession.mediaType == RCCallMediaVideo) {
+    if ([self isVideoViewEnabledSession]) {
       self.videoView.frame = CGRectMake(0, 0, 64, 96);
     }
   }
 
-  if (self.callSession.mediaType == RCCallMediaAudio ||
-      self.callSession.conversationType != ConversationType_PRIVATE) {
-    if (self.callSession.callStatus == RCCallActive) {
-      [self.floatingButton setBackgroundColor:[UIColor clearColor]];
-    } else if (self.callSession.callStatus == RCCallHangup) {
-      //            [self.floatingButton setBackgroundColor:[UIColor redColor]];
-      [self.floatingButton setTitle:NSLocalizedStringFromTable(
-                                        @"VoIPCallHasEnd", @"RongCloudKit", nil)
-                           forState:UIControlStateNormal];
-
-    } else {
-      //            [self.floatingButton setBackgroundColor:[UIColor
-      //            grayColor]];
-      //            [self.floatingButton setTitle:@"呼叫中"
-      //            forState:UIControlStateNormal];
-    }
-  } else {
+  if ([self isVideoViewEnabledSession]) {
     if (self.callSession.callStatus == RCCallActive) {
       [self.callSession setVideoView:self.videoView
                               userId:self.callSession.targetId];
@@ -170,17 +153,18 @@ static NSString *RCVoipFloatingBoardPosY = @"RCVoipFloatingBoardPosY";
           NSLocalizedStringFromTable(@"VoIPCallHasEnd", @"RongCloudKit", nil);
       videoStopTips.textColor = RongVoIPUIColorFromRGB(0x0195ff);
       [self.videoView addSubview:videoStopTips];
-      //            [self.floatingButton setBackgroundColor:[UIColor redColor]];
-      //            [self.floatingButton setTitle:@"通话结束"
-      //            forState:UIControlStateNormal];
-    } else {
-      //            [self.floatingButton setBackgroundColor:[UIColor
-      //            grayColor]];
-      //            [self.floatingButton setTitle:@"呼叫中"
-      //            forState:UIControlStateNormal];
+    }
+  } else {
+    if (self.callSession.callStatus == RCCallActive) {
+      [self.floatingButton setBackgroundColor:[UIColor clearColor]];
+    } else if (self.callSession.callStatus == RCCallHangup) {
+      [self.floatingButton setTitle:NSLocalizedStringFromTable(
+                                        @"VoIPCallHasEnd", @"RongCloudKit", nil)
+                           forState:UIControlStateNormal];
     }
   }
 }
+
 - (UIWindow *)window {
   if (!_window) {
     CGFloat posX = [[[NSUserDefaults standardUserDefaults]
@@ -395,6 +379,15 @@ static NSString *RCVoipFloatingBoardPosY = @"RCVoipFloatingBoardPosY";
       0, 0, -button.titleLabel.intrinsicContentSize.width);
 }
 
+- (BOOL)isVideoViewEnabledSession {
+  if (self.callSession.mediaType == RCCallMediaVideo &&
+      self.callSession.conversationType == ConversationType_PRIVATE) {
+    return YES;
+  } else {
+    return NO;
+  }
+}
+
 /*!
  通话已接通
  */
@@ -410,6 +403,7 @@ static NSString *RCVoipFloatingBoardPosY = @"RCVoipFloatingBoardPosY";
   [self performSelector:@selector(clearCallFloatingBoard)
              withObject:nil
              afterDelay:2];
+  [RCCallKitUtility clearScreenForceOnStatus];
 }
 
 /*!

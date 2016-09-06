@@ -9,6 +9,7 @@
 #import "RCCallMultiCallUserCell.h"
 #import "RCloudImageView.h"
 #import <RongIMKit/RongIMKit.h>
+#import "RCCallKitUtility.h"
 
 @interface RCCallMultiCallUserCell ()
 
@@ -34,6 +35,7 @@
     self.headerImageView.layer.borderColor = [UIColor whiteColor].CGColor;
     self.headerImageView.layer.cornerRadius = 4;
     self.headerImageView.layer.masksToBounds = YES;
+    self.headerImageView.backgroundColor = [[UIColor clearColor] colorWithAlphaComponent:1.0];
     // Define how the edges of the layer are rasterized for each of the four
     // edges
     // (left, right, bottom, top) if the corresponding bit is set the edge will
@@ -52,17 +54,13 @@
     self.nameLabel.textColor = [UIColor whiteColor];
     self.nameLabel.textAlignment = NSTextAlignmentCenter;
     self.nameLabel.backgroundColor = [UIColor clearColor];
-    self.nameLabel.font = [UIFont systemFontOfSize:16];
+    self.nameLabel.font = [UIFont systemFontOfSize:14];
     self.nameLabel.hidden = YES;
     [[self contentView] addSubview:self.nameLabel];
-
-    self.statusLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-    self.statusLabel.textColor = [UIColor whiteColor];
-    self.statusLabel.textAlignment = NSTextAlignmentCenter;
-    self.statusLabel.backgroundColor = [UIColor clearColor];
-    self.statusLabel.font = [UIFont systemFontOfSize:16];
-    self.statusLabel.hidden = YES;
-    [[self contentView] addSubview:self.statusLabel];
+    self.statusView = [[UIImageView alloc] initWithFrame:CGRectZero];
+    self.statusView.hidden = YES;
+    [[self contentView] addSubview:self.statusView];
+    
 
     self.contentView.backgroundColor = [UIColor clearColor];
   }
@@ -74,8 +72,8 @@
   _model = model;
   self.callStatus = callStatus;
 
-  CGFloat nameLabelHeight = 15;
-  CGFloat insideMargin = 1;
+  CGFloat nameLabelHeight = 16;
+  CGFloat insideMargin = 5;
 
   if (callStatus == RCCallIncoming || callStatus == RCCallRinging ||
       model.profile.mediaType == RCCallMediaVideo) {
@@ -87,7 +85,16 @@
   [self.headerImageView
       setImageURL:[NSURL URLWithString:model.userInfo.portraitUri]];
   [self.nameLabel setText:model.userInfo.name];
-  self.statusLabel.text = [self getStatusTips];
+  if (model.profile.callStatus == RCCallRinging ||
+      model.profile.callStatus == RCCallDialing) {
+    self.statusView.image =
+        [RCCallKitUtility imageFromVoIPBundle:@"voip/voip_connecting"];
+    self.headerImageView.alpha = 0.5;
+  } else {
+    self.statusView.image = nil;
+    self.statusView.hidden = YES;
+    self.headerImageView.alpha = 1.0;
+  }
 }
 
 - (void)resetLayout:(CGFloat)nameLabelHeight
@@ -109,39 +116,9 @@
     self.nameLabel.hidden = YES;
   }
 
-  self.statusLabel.frame =
-      CGRectMake(0, (self.headerImageView.frame.size.width - 30) / 2,
-                 self.bounds.size.width, 30);
-  self.statusLabel.hidden = NO;
-}
-
-- (NSString *)getStatusTips {
-  NSString *tips = nil;
-
-  switch (self.model.profile.callStatus) {
-  case RCCallIncoming:
-  case RCCallRinging:
-    if (self.callStatus == RCCallIncoming) {
-      break;
-    }
-  case RCCallDialing:
-    tips = NSLocalizedStringFromTable(@"VoIPMultiCallRemoteConnecting",
-                                      @"RongCloudKit", nil);
-    break;
-  case RCCallActive:
-    tips = @"";
-    break;
-  case RCCallHangup:
-    tips = NSLocalizedStringFromTable(@"VoIPMultiCallRemoteQuit",
-                                      @"RongCloudKit", nil);
-    break;
-
-  default:
-    tips = @"";
-    break;
-  }
-
-  return tips;
+  self.statusView.frame =
+      CGRectMake((self.bounds.size.width - 17) / 2, (self.headerImageView.frame.size.width - 4) / 2,17, 4);
+  self.statusView.hidden = NO;
 }
 
 @end

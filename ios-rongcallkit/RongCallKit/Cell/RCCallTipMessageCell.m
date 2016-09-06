@@ -11,6 +11,16 @@
 
 @implementation RCCallTipMessageCell
 
++ (CGSize)sizeForMessageModel:(RCMessageModel *)model
+      withCollectionViewWidth:(CGFloat)collectionViewWidth
+         referenceExtraHeight:(CGFloat)extraHeight {
+  CGFloat height = 17.5;
+  
+  height += extraHeight;
+  
+  return CGSizeMake(collectionViewWidth, height);
+}
+
 - (instancetype)initWithFrame:(CGRect)frame {
   self = [super initWithFrame:frame];
   if (self) {

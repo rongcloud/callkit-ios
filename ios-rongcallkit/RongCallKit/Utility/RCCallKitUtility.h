@@ -48,4 +48,8 @@
     (RCCallDisconnectReason)hangupReason;
 
 + (BOOL)isLandscape;
+
++ (void)setScreenForceOn;
++ (void)clearScreenForceOnStatus;
+
 @end

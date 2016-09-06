@@ -46,9 +46,8 @@
 		F8235CDD1CE5B2A100C95B26 /* RCloudImageLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = F8235CD91CE5B2A100C95B26 /* RCloudImageLoader.h */; };
 		F8235CDE1CE5B2A100C95B26 /* RCloudImageView.h in Headers */ = {isa = PBXBuildFile; fileRef = F8235CDA1CE5B2A100C95B26 /* RCloudImageView.h */; };
 		F8235CDF1CE5B2A100C95B26 /* RCUserInfoCacheManager.h in Headers */ = {isa = PBXBuildFile; fileRef = F8235CDB1CE5B2A100C95B26 /* RCUserInfoCacheManager.h */; };
-		F8D2904C1D2790E3002BFA65 /* RCCallKitExtensionModel.h in Headers */ = {isa = PBXBuildFile; fileRef = F8D2904A1D2790E3002BFA65 /* RCCallKitExtensionModel.h */; };
-		F8D2904D1D2790E3002BFA65 /* RCCallKitExtensionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F8D2904B1D2790E3002BFA65 /* RCCallKitExtensionModel.m */; };
-		F8D290511D279174002BFA65 /* RongIMKitExtensionModel.h in Headers */ = {isa = PBXBuildFile; fileRef = F8D290501D279174002BFA65 /* RongIMKitExtensionModel.h */; };
+		F8D2904C1D2790E3002BFA65 /* RCCallKitExtensionModule.h in Headers */ = {isa = PBXBuildFile; fileRef = F8D2904A1D2790E3002BFA65 /* RCCallKitExtensionModule.h */; };
+		F8D2904D1D2790E3002BFA65 /* RCCallKitExtensionModule.m in Sources */ = {isa = PBXBuildFile; fileRef = F8D2904B1D2790E3002BFA65 /* RCCallKitExtensionModule.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -93,9 +92,8 @@
 		F8235CD91CE5B2A100C95B26 /* RCloudImageLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RCloudImageLoader.h; path = Header/RCloudImageLoader.h; sourceTree = "<group>"; };
 		F8235CDA1CE5B2A100C95B26 /* RCloudImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RCloudImageView.h; path = Header/RCloudImageView.h; sourceTree = "<group>"; };
 		F8235CDB1CE5B2A100C95B26 /* RCUserInfoCacheManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RCUserInfoCacheManager.h; path = Header/RCUserInfoCacheManager.h; sourceTree = "<group>"; };
-		F8D2904A1D2790E3002BFA65 /* RCCallKitExtensionModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RCCallKitExtensionModel.h; path = Extension/RCCallKitExtensionModel.h; sourceTree = "<group>"; };
-		F8D2904B1D2790E3002BFA65 /* RCCallKitExtensionModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RCCallKitExtensionModel.m; path = Extension/RCCallKitExtensionModel.m; sourceTree = "<group>"; };
-		F8D290501D279174002BFA65 /* RongIMKitExtensionModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RongIMKitExtensionModel.h; path = Header/RongIMKitExtensionModel.h; sourceTree = "<group>"; };
+		F8D2904A1D2790E3002BFA65 /* RCCallKitExtensionModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RCCallKitExtensionModule.h; path = Extension/RCCallKitExtensionModule.h; sourceTree = "<group>"; };
+		F8D2904B1D2790E3002BFA65 /* RCCallKitExtensionModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RCCallKitExtensionModule.m; path = Extension/RCCallKitExtensionModule.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -241,7 +239,6 @@
 		F8235CD71CE5B29200C95B26 /* Header */ = {
 			isa = PBXGroup;
 			children = (
-				F8D290501D279174002BFA65 /* RongIMKitExtensionModel.h */,
 				F8235CD91CE5B2A100C95B26 /* RCloudImageLoader.h */,
 				F8235CDA1CE5B2A100C95B26 /* RCloudImageView.h */,
 				F8235CDB1CE5B2A100C95B26 /* RCUserInfoCacheManager.h */,
@@ -252,8 +249,8 @@
 		F8D290491D2790C1002BFA65 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
-				F8D2904A1D2790E3002BFA65 /* RCCallKitExtensionModel.h */,
-				F8D2904B1D2790E3002BFA65 /* RCCallKitExtensionModel.m */,
+				F8D2904A1D2790E3002BFA65 /* RCCallKitExtensionModule.h */,
+				F8D2904B1D2790E3002BFA65 /* RCCallKitExtensionModule.m */,
 			);
 			name = Extension;
 			sourceTree = "<group>";
@@ -270,7 +267,6 @@
 				A6BE1B281CCEFAAC00FF6BF7 /* RCCallBaseViewController.h in Headers */,
 				A6EF9B971D0E640E00785C27 /* RCDVideoFrameObserver.h in Headers */,
 				F8235CDE1CE5B2A100C95B26 /* RCloudImageView.h in Headers */,
-				F8D290511D279174002BFA65 /* RongIMKitExtensionModel.h in Headers */,
 				A6BE1B2C1CCEFAAC00FF6BF7 /* RCCallSingleCallViewController.h in Headers */,
 				A6BE1B261CCEFAAC00FF6BF7 /* RCCallAudioMultiCallViewController.h in Headers */,
 				A6BE1B2E1CCEFAAC00FF6BF7 /* RCCallVideoMultiCallViewController.h in Headers */,
@@ -285,7 +281,7 @@
 				A6BE1B321CCEFAAC00FF6BF7 /* RCVideoMultiCallUserCollectionLayout.h in Headers */,
 				F8235CDF1CE5B2A100C95B26 /* RCUserInfoCacheManager.h in Headers */,
 				A6BE1B301CCEFAAC00FF6BF7 /* RCAudioMultiCallUserCollectionLayout.h in Headers */,
-				F8D2904C1D2790E3002BFA65 /* RCCallKitExtensionModel.h in Headers */,
+				F8D2904C1D2790E3002BFA65 /* RCCallKitExtensionModule.h in Headers */,
 				A6BE1B221CCEFAAC00FF6BF7 /* RCCallSelectingMemberCell.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -368,7 +364,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "BIN_DIR=\"bin\"\nif [ ! -d \"$BIN_DIR\" ]; then\nmkdir -p \"$BIN_DIR\"\nfi\n\nBIN_DIR_TMP=\"bin_tmp\"\nif [ ! -d \"$BIN_DIR_TMP\" ]; then\nmkdir -p \"$BIN_DIR_TMP\"\nfi\n\nDST_DIR=\"./../ios-rongimdemo/framework\"\nif [ ! -d \"$DST_DIR\" ]; then\nmkdir -p \"$DST_DIR\"\nfi\n\nDST_DIR2=\"./../ios-hybrid/apicloud/development/UZApp/RongCloudLib\"\nif [ ! -d \"$DST_DIR2\" ]; then\nmkdir -p \"$DST_DIR2\"\nfi\n\nDST_DIR3=\"./../ios-hybrid/apicloud/module/RongCloud/RongCloudLib\"\nif [ ! -d \"$DST_DIR3\" ]; then\nmkdir -p \"$DST_DIR3\"\nfi\n\nDST_DIR4=\"./../ios-hybrid/cordova/Plugin/src/ios\"\nif [ ! -d \"$DST_DIR4\" ]; then\nmkdir -p \"$DST_DIR4\"\nfi\n\nDST_DIR5=\"./../ios-hybrid/cordova/CordovaDemo/platforms/ios/CordovaDemo/Plugins/com.RongCloud.lib\"\nif [ ! -d \"$DST_DIR5\" ]; then\nmkdir -p \"$DST_DIR5\"\nfi\n\n\ncp -af ${BUILT_PRODUCTS_DIR}/${TARGET_NAME}.framework/ ${BIN_DIR_TMP}/${PLATFORM_NAME}-${TARGET_NAME}.framework\ncp -af ${BUILT_PRODUCTS_DIR}/${TARGET_NAME}.framework/ ${BIN_DIR}/${TARGET_NAME}.framework\nlipo -create $BIN_DIR_TMP/*-${TARGET_NAME}.framework/${TARGET_NAME} -output ${BIN_DIR}/${TARGET_NAME}.framework/${TARGET_NAME}\n\n\ncp -af ${BIN_DIR}/* ${DST_DIR}/\ncp -af ${BIN_DIR}/* ${DST_DIR2}/\ncp -af ${BIN_DIR}/* ${DST_DIR3}/\ncp -af ${BIN_DIR}/* ${DST_DIR4}/\ncp -af ${BIN_DIR}/* ${DST_DIR5}/";
+			shellScript = "BIN_DIR=\"bin\"\nif [ ! -d \"$BIN_DIR\" ]; then\nmkdir -p \"$BIN_DIR\"\nfi\n\nBIN_DIR_TMP=\"bin_tmp\"\nif [ ! -d \"$BIN_DIR_TMP\" ]; then\nmkdir -p \"$BIN_DIR_TMP\"\nfi\n\nDST_DIR=\"./../ios-rongimdemo/framework\"\nif [ ! -d \"$DST_DIR\" ]; then\nmkdir -p \"$DST_DIR\"\nfi\n\nDST_DIR2=\"./../ios-hybrid/apicloud/development/UZApp/RongCloudLib\"\nif [ ! -d \"$DST_DIR2\" ]; then\nmkdir -p \"$DST_DIR2\"\nfi\n\nDST_DIR3=\"./../ios-hybrid/apicloud/module/RongCloud/RongCloudLib\"\nif [ ! -d \"$DST_DIR3\" ]; then\nmkdir -p \"$DST_DIR3\"\nfi\n\nDST_DIR4=\"./../ios-hybrid/cordova/Plugin/src/ios\"\nif [ ! -d \"$DST_DIR4\" ]; then\nmkdir -p \"$DST_DIR4\"\nfi\n\nDST_DIR5=\"./../ios-hybrid/cordova/CordovaDemo/platforms/ios/CordovaDemo/Plugins/cn.rongcloud.imlib\"\nif [ ! -d \"$DST_DIR5\" ]; then\nmkdir -p \"$DST_DIR5\"\nfi\n\n\ncp -af ${BUILT_PRODUCTS_DIR}/${TARGET_NAME}.framework/ ${BIN_DIR_TMP}/${PLATFORM_NAME}-${TARGET_NAME}.framework\ncp -af ${BUILT_PRODUCTS_DIR}/${TARGET_NAME}.framework/ ${BIN_DIR}/${TARGET_NAME}.framework\nlipo -create $BIN_DIR_TMP/*-${TARGET_NAME}.framework/${TARGET_NAME} -output ${BIN_DIR}/${TARGET_NAME}.framework/${TARGET_NAME}\n\n\ncp -af ${BIN_DIR}/* ${DST_DIR}/\ncp -af ${BIN_DIR}/* ${DST_DIR2}/\ncp -af ${BIN_DIR}/* ${DST_DIR3}/\ncp -af ${BIN_DIR}/* ${DST_DIR4}/\ncp -af ${BIN_DIR}/* ${DST_DIR5}/";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -386,7 +382,7 @@
 				A6BE1B391CCEFAAC00FF6BF7 /* RCCallFloatingBoard.m in Sources */,
 				A6BE1B2D1CCEFAAC00FF6BF7 /* RCCallSingleCallViewController.m in Sources */,
 				A68AFAEA1CCEFF5B00F16B3D /* RCCallDetailMessageCell.m in Sources */,
-				F8D2904D1D2790E3002BFA65 /* RCCallKitExtensionModel.m in Sources */,
+				F8D2904D1D2790E3002BFA65 /* RCCallKitExtensionModule.m in Sources */,
 				A6BE1B291CCEFAAC00FF6BF7 /* RCCallBaseViewController.m in Sources */,
 				A68AFAEC1CCEFF5B00F16B3D /* RCCallTipMessageCell.m in Sources */,
 				A6BE1B211CCEFAAC00FF6BF7 /* RCCallMultiCallUserCell.m in Sources */,

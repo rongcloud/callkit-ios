@@ -11,8 +11,9 @@
 #include <RongCallLib/IVideoFrameObserver.h>
 #import <UIKit/UIKit.h>
 #include <stdio.h>
+#import <AgoraRtcEngineKit/IAgoraMediaEngine.h>
 
-class RCDVideoFrameObserver : public RongCloud::media::IVideoFrameObserver {
+class RCDVideoFrameObserver : public agora::media::IVideoFrameObserver {
 public:
   static RCDVideoFrameObserver *sharedObserver();
   unsigned int m_width;
@@ -28,21 +29,10 @@ public:
   RCDVideoFrameObserver();
   void setYUV(unsigned char *yBuffer, unsigned char *uBuffer,
               unsigned char *vBuffer, int width, int height);
-  bool onCaptureVideoFrame(const unsigned char **yBuffer,
-                           const unsigned char **uBuffer,
-                           const unsigned char **vBuffer, unsigned int &width,
-                           unsigned int &height, unsigned int &yStride,
-                           unsigned int &uStride, unsigned int &vStride);
-  bool onRenderVideoFrame(const unsigned char **yBuffer,
-                          const unsigned char **uBuffer,
-                          const unsigned char **vBuffer, unsigned int &width,
-                          unsigned int &height, unsigned int &yStride,
-                          unsigned int &uStride, unsigned int &vStride);
-  bool onExternalVideoFrame(const unsigned char **yBuffer,
-                            const unsigned char **uBuffer,
-                            const unsigned char **vBuffer, unsigned int &width,
-                            unsigned int &height, unsigned int &yStride,
-                            unsigned int &uStride, unsigned int &vStride);
+  
+  bool onCaptureVideoFrame(VideoFrame& videoFrame) ;
+  bool onRenderVideoFrame(unsigned int uid, VideoFrame& videoFrame) ;
+  
   virtual ~RCDVideoFrameObserver();
 };
 #endif /* RCDVideoFrameObserver_hpp */

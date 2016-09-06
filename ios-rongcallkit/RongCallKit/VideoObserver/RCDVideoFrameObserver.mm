@@ -39,6 +39,51 @@ RCDVideoFrameObserver::~RCDVideoFrameObserver() {
   }
   s_lock = nil;
 }
+
+bool RCDVideoFrameObserver::onCaptureVideoFrame(agora::media::IVideoFrameObserver::VideoFrame& videoFrame)  {
+  if (!m_width) { //没有初始化内存，在这里初始化内存
+    m_height = videoFrame.height;
+    m_yStride = videoFrame.yStride;
+    m_uStride = videoFrame.uStride;
+    m_vStride = videoFrame.vStride;
+    
+    m_yBuffer = new unsigned char[m_yStride * m_height];
+    m_uBuffer = new unsigned char[m_height * m_uStride * m_uStride / m_yStride];
+    m_vBuffer = new unsigned char[m_height * m_vStride * m_vStride / m_yStride];
+    memset(m_yBuffer, 0, m_yStride * m_height);
+    memset(m_uBuffer, 0, m_height * m_uStride * m_uStride / m_yStride);
+    memset(m_vBuffer, 0, m_height * m_vStride * m_vStride / m_yStride);
+    
+    m_width = videoFrame.width;
+    
+    //画一个十字
+    for (int i = videoFrame.height / 2 - 2; i < videoFrame.height / 2 + 3; i++) {
+      for (int j = 0; j < videoFrame.width; j++) {
+        *(m_yBuffer + i * videoFrame.yStride + j) = 150;
+      }
+    }
+    
+    for (int i = 0; i < videoFrame.height; i++) {
+      for (int j = videoFrame.width / 2 - 2; j < videoFrame.width / 2 + 3; j++) {
+        *(m_yBuffer + i * videoFrame.yStride + j) = 50;
+      }
+    }
+    
+  } else { // copy内存到媒体engine中
+    [s_lock lock];
+    unsigned char *y = (unsigned char *)(videoFrame.yBuffer);
+    unsigned char *u = (unsigned char *)(videoFrame.uBuffer);
+    unsigned char *v = (unsigned char *)(videoFrame.vBuffer);
+    memcpy(y, m_yBuffer, m_yStride * m_height);
+    memcpy(u, m_uBuffer, m_height * m_uStride * m_uStride / m_yStride);
+    memcpy(v, m_vBuffer, m_height * m_uStride * m_uStride / m_yStride);
+    [s_lock unlock];
+  }
+  return true;
+}
+bool RCDVideoFrameObserver::onRenderVideoFrame(unsigned int uid, agora::media::IVideoFrameObserver::VideoFrame& videoFrame) {
+  return true;
+}
 void RCDVideoFrameObserver::setYUV(unsigned char *yBuffer,
                                    unsigned char *uBuffer,
                                    unsigned char *vBuffer, int width,
@@ -68,99 +113,4 @@ void RCDVideoFrameObserver::setYUV(unsigned char *yBuffer,
     }
     [s_lock unlock];
   }
-}
-
-bool RCDVideoFrameObserver::onCaptureVideoFrame(
-    const unsigned char **yBuffer, const unsigned char **uBuffer,
-    const unsigned char **vBuffer, unsigned int &width, unsigned int &height,
-    unsigned int &yStride, unsigned int &uStride, unsigned int &vStride) {
-
-  if (!m_width) { //没有初始化内存，在这里初始化内存
-    m_height = height;
-    m_yStride = yStride;
-    m_uStride = uStride;
-    m_vStride = vStride;
-
-    m_yBuffer = new unsigned char[m_yStride * m_height];
-    m_uBuffer = new unsigned char[m_height * m_uStride * m_uStride / m_yStride];
-    m_vBuffer = new unsigned char[m_height * m_vStride * m_vStride / m_yStride];
-    memset(m_yBuffer, 0, m_yStride * m_height);
-    memset(m_uBuffer, 0, m_height * m_uStride * m_uStride / m_yStride);
-    memset(m_vBuffer, 0, m_height * m_vStride * m_vStride / m_yStride);
-
-    m_width = width;
-
-    //画一个十字
-    for (int i = height / 2 - 2; i < height / 2 + 3; i++) {
-      for (int j = 0; j < width; j++) {
-        *(m_yBuffer + i * yStride + j) = 150;
-      }
-    }
-    for (int i = 0; i < height; i++) {
-      for (int j = width / 2 - 2; j < width / 2 + 3; j++) {
-        *(m_yBuffer + i * yStride + j) = 50;
-      }
-    }
-
-  } else { // copy内存到媒体engine中
-    [s_lock lock];
-    unsigned char *y = (unsigned char *)*yBuffer;
-    unsigned char *u = (unsigned char *)*uBuffer;
-    unsigned char *v = (unsigned char *)*vBuffer;
-    memcpy(y, m_yBuffer, m_yStride * m_height);
-    memcpy(u, m_uBuffer, m_height * m_uStride * m_uStride / m_yStride);
-    memcpy(v, m_vBuffer, m_height * m_uStride * m_uStride / m_yStride);
-    [s_lock unlock];
-  }
-  return true;
-}
-bool RCDVideoFrameObserver::onRenderVideoFrame(
-    const unsigned char **yBuffer, const unsigned char **uBuffer,
-    const unsigned char **vBuffer, unsigned int &width, unsigned int &height,
-    unsigned int &yStride, unsigned int &uStride, unsigned int &vStride) {
-  return true;
-}
-bool RCDVideoFrameObserver::onExternalVideoFrame(
-    const unsigned char **yBuffer, const unsigned char **uBuffer,
-    const unsigned char **vBuffer, unsigned int &width, unsigned int &height,
-    unsigned int &yStride, unsigned int &uStride, unsigned int &vStride) {
-  if (!m_width) { //没有初始化内存，在这里初始化内存
-    m_height = height;
-    m_yStride = yStride;
-    m_uStride = uStride;
-    m_vStride = vStride;
-
-    m_yBuffer = new unsigned char[m_yStride * m_height];
-    m_uBuffer = new unsigned char[m_height * m_uStride * m_uStride / m_yStride];
-    m_vBuffer = new unsigned char[m_height * m_vStride * m_vStride / m_yStride];
-    memset(m_yBuffer, 0, m_yStride * m_height);
-    memset(m_uBuffer, 0, m_height * m_uStride * m_uStride / m_yStride);
-    memset(m_vBuffer, 0, m_height * m_vStride * m_vStride / m_yStride);
-
-    m_width = width;
-
-    //画一个十字
-    for (int i = height / 2 - 2; i < height / 2 + 3; i++) {
-      for (int j = 0; j < width; j++) {
-        *(m_yBuffer + i * yStride + j) = 150;
-      }
-    }
-
-    for (int i = 0; i < height; i++) {
-      for (int j = width / 2 - 2; j < width / 2 + 3; j++) {
-        *(m_yBuffer + i * yStride + j) = 50;
-      }
-    }
-
-  } else { // copy内存到媒体engine中
-    [s_lock lock];
-    unsigned char *y = (unsigned char *)*yBuffer;
-    unsigned char *u = (unsigned char *)*uBuffer;
-    unsigned char *v = (unsigned char *)*vBuffer;
-    memcpy(y, m_yBuffer, m_yStride * m_height);
-    memcpy(u, m_uBuffer, m_height * m_uStride * m_uStride / m_yStride);
-    memcpy(v, m_vBuffer, m_height * m_uStride * m_uStride / m_yStride);
-    [s_lock unlock];
-  }
-  return true;
 }

@@ -12,6 +12,16 @@
 
 @implementation RCCallDetailMessageCell
 
++ (CGSize)sizeForMessageModel:(RCMessageModel *)model
+      withCollectionViewWidth:(CGFloat)collectionViewWidth
+         referenceExtraHeight:(CGFloat)extraHeight {
+  //当为单聊时，需要显示头像，且内容区域高度小于头像高度，所以内容区域高度就是头像高度，然后加上上下10padding。
+  CGFloat height = [RCIM sharedRCIM].globalMessagePortraitSize.height;
+  
+  height += extraHeight;
+  
+  return CGSizeMake(collectionViewWidth, height);
+}
 - (instancetype)initWithFrame:(CGRect)frame {
   self = [super initWithFrame:frame];
   if (self) {

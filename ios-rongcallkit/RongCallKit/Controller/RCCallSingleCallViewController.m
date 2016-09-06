@@ -239,7 +239,7 @@
   }
 }
 
-- (BOOL)isSupportOrientation:(UIInterfaceOrientationMask)orientation {
+- (BOOL)isSupportOrientation:(UIInterfaceOrientation)orientation {
   return [[UIApplication sharedApplication]
              supportedInterfaceOrientationsForWindow:[UIApplication
                                                          sharedApplication]

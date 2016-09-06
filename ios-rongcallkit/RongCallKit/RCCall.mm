@@ -45,8 +45,7 @@
       pRongVoIP.callWindows = [[NSMutableArray alloc] init];
       pRongVoIP.locationNotificationList = [[NSMutableArray alloc] init];
 
-      // RCRegisterVideoFrameObserver(RCDVideoFrameObserver::sharedObserver(),
-      // true, true);
+      //agoraRegisterVideoFrameObserver(RCDVideoFrameObserver::sharedObserver(), true, true);
     }
   });
   return pRongVoIP;
