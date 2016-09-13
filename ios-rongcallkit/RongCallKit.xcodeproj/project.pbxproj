@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A6253FFB1D86A9D000408F9D /* RCDAudioFrameObserver.mm in Sources */ = {isa = PBXBuildFile; fileRef = A6253FF91D86A9D000408F9D /* RCDAudioFrameObserver.mm */; };
+		A6253FFC1D86A9D000408F9D /* RCDAudioFrameObserver.h in Headers */ = {isa = PBXBuildFile; fileRef = A6253FFA1D86A9D000408F9D /* RCDAudioFrameObserver.h */; };
 		A68AFAE91CCEFF5B00F16B3D /* RCCallDetailMessageCell.h in Headers */ = {isa = PBXBuildFile; fileRef = A68AFAE51CCEFF5B00F16B3D /* RCCallDetailMessageCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A68AFAEA1CCEFF5B00F16B3D /* RCCallDetailMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A68AFAE61CCEFF5B00F16B3D /* RCCallDetailMessageCell.m */; };
 		A68AFAEB1CCEFF5B00F16B3D /* RCCallTipMessageCell.h in Headers */ = {isa = PBXBuildFile; fileRef = A68AFAE71CCEFF5B00F16B3D /* RCCallTipMessageCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -51,6 +53,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A6253FF91D86A9D000408F9D /* RCDAudioFrameObserver.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RCDAudioFrameObserver.mm; sourceTree = "<group>"; };
+		A6253FFA1D86A9D000408F9D /* RCDAudioFrameObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCDAudioFrameObserver.h; sourceTree = "<group>"; };
 		A68AFAE51CCEFF5B00F16B3D /* RCCallDetailMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCCallDetailMessageCell.h; sourceTree = "<group>"; };
 		A68AFAE61CCEFF5B00F16B3D /* RCCallDetailMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCCallDetailMessageCell.m; sourceTree = "<group>"; };
 		A68AFAE71CCEFF5B00F16B3D /* RCCallTipMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCCallTipMessageCell.h; sourceTree = "<group>"; };
@@ -110,6 +114,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A6253FF81D86A9AB00408F9D /* AudioObserver */ = {
+			isa = PBXGroup;
+			children = (
+				A6253FFA1D86A9D000408F9D /* RCDAudioFrameObserver.h */,
+				A6253FF91D86A9D000408F9D /* RCDAudioFrameObserver.mm */,
+			);
+			path = AudioObserver;
+			sourceTree = "<group>";
+		};
 		A6BE1A441CCE561200FF6BF7 = {
 			isa = PBXGroup;
 			children = (
@@ -130,6 +143,7 @@
 		A6BE1A501CCE561200FF6BF7 /* RongCallKit */ = {
 			isa = PBXGroup;
 			children = (
+				A6253FF81D86A9AB00408F9D /* AudioObserver */,
 				A6EF9B941D0E640E00785C27 /* VideoObserver */,
 				F8D290491D2790C1002BFA65 /* Extension */,
 				A6BE1AFB1CCEFAAC00FF6BF7 /* Cell */,
@@ -283,6 +297,7 @@
 				A6BE1B301CCEFAAC00FF6BF7 /* RCAudioMultiCallUserCollectionLayout.h in Headers */,
 				F8D2904C1D2790E3002BFA65 /* RCCallKitExtensionModule.h in Headers */,
 				A6BE1B221CCEFAAC00FF6BF7 /* RCCallSelectingMemberCell.h in Headers */,
+				A6253FFC1D86A9D000408F9D /* RCDAudioFrameObserver.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -389,6 +404,7 @@
 				A6BE1B351CCEFAAC00FF6BF7 /* RCCallUserCallInfoModel.m in Sources */,
 				A6BE1B311CCEFAAC00FF6BF7 /* RCAudioMultiCallUserCollectionLayout.m in Sources */,
 				A6BE1B2B1CCEFAAC00FF6BF7 /* RCCallSelectMemberViewController.m in Sources */,
+				A6253FFB1D86A9D000408F9D /* RCDAudioFrameObserver.mm in Sources */,
 				A6BE1B231CCEFAAC00FF6BF7 /* RCCallSelectingMemberCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

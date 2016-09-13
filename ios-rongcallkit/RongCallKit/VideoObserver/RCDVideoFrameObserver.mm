@@ -82,6 +82,8 @@ bool RCDVideoFrameObserver::onCaptureVideoFrame(agora::media::IVideoFrameObserve
   return true;
 }
 bool RCDVideoFrameObserver::onRenderVideoFrame(unsigned int uid, agora::media::IVideoFrameObserver::VideoFrame& videoFrame) {
+  NSString *userId = rcGetUserIdFromAgoraUID(uid);
+  NSLog(@"the user id is %@", userId);
   return true;
 }
 void RCDVideoFrameObserver::setYUV(unsigned char *yBuffer,

@@ -19,6 +19,7 @@
 #import "RCDVideoFrameObserver.h"
 #import "RCUserInfoCacheManager.h"
 #import <AVFoundation/AVFoundation.h>
+#import "RCDAudioFrameObserver.h"
 
 #define AlertWithoutConfirm 1000
 #define AlertWithConfirm 1001
@@ -45,7 +46,8 @@
       pRongVoIP.callWindows = [[NSMutableArray alloc] init];
       pRongVoIP.locationNotificationList = [[NSMutableArray alloc] init];
 
-      //agoraRegisterVideoFrameObserver(RCDVideoFrameObserver::sharedObserver(), true, true);
+//      agoraRegisterVideoFrameObserver(RCDVideoFrameObserver::sharedObserver(), true, true);
+//      agoraRegisterAudioFrameObserver(RCDAudioFrameObserver::sharedObserver());
     }
   });
   return pRongVoIP;
