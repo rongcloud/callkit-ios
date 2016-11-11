@@ -471,4 +471,13 @@
   [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
+//接口向后兼容 [[++
+- (id<RCCallGroupMemberDataSource>)groupMemberDataSource {
+  return [RCIM sharedRCIM].groupMemberDataSource;
+}
+- (void)setGroupMemberDataSource:(id<RCCallGroupMemberDataSource>)groupMemberDataSource {
+  [RCIM sharedRCIM].groupMemberDataSource = groupMemberDataSource;
+}
+//接口向后兼容 --]]
+
 @end

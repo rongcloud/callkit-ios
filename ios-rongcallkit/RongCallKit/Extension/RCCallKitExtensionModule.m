@@ -52,32 +52,32 @@
 
 - (NSArray<RCExtensionPluginItemInfo *> *)getPluginBoardItemInfoList:(RCConversationType)conversationType
                                                     targetId:(NSString *)targetId {
-  if (conversationType == ConversationType_PRIVATE) {
+  NSMutableArray *itemList = [[NSMutableArray alloc] init];
+  
+  if ([[RCCall sharedRCCall] isAudioCallEnabled:conversationType]) {
     RCExtensionPluginItemInfo *audioItem = [[RCExtensionPluginItemInfo alloc] init];
     audioItem.image = [RCCallKitUtility imageFromVoIPBundle:@"voip/actionbar_audio_call_icon.png"];
     audioItem.title = NSLocalizedStringFromTable(@"VoIPAudioCall", @"RongCloudKit", nil);
-    audioItem.tapBlock = ^(){[[RCCall sharedRCCall] startSingleCall:targetId mediaType:RCCallMediaAudio];};
-
+    if (conversationType == ConversationType_PRIVATE) {
+      audioItem.tapBlock = ^(){[[RCCall sharedRCCall] startSingleCall:targetId mediaType:RCCallMediaAudio];};
+    } else if (conversationType == ConversationType_GROUP || conversationType == ConversationType_DISCUSSION) {
+      audioItem.tapBlock = ^(){[[RCCall sharedRCCall] startMultiCall:conversationType targetId:targetId mediaType:RCCallMediaAudio];};
+    }
+    [itemList addObject:audioItem];
+  }
+  if ([[RCCall sharedRCCall] isVideoCallEnabled:conversationType]) {
     RCExtensionPluginItemInfo *videoItem = [[RCExtensionPluginItemInfo alloc] init];
     videoItem.image = [RCCallKitUtility imageFromVoIPBundle:@"voip/actionbar_video_call_icon.png"];
     videoItem.title = NSLocalizedStringFromTable(@"VoIPVideoCall", @"RongCloudKit", nil);
     videoItem.tapBlock = ^(){[[RCCall sharedRCCall] startSingleCall:targetId mediaType:RCCallMediaVideo];};
-
-    return @[audioItem, videoItem];
-  } else if (conversationType == ConversationType_GROUP || conversationType == ConversationType_DISCUSSION) {
-    RCExtensionPluginItemInfo *audioItem = [[RCExtensionPluginItemInfo alloc] init];
-    audioItem.image = [RCCallKitUtility imageFromVoIPBundle:@"voip/actionbar_audio_call_icon.png"];
-    audioItem.title = NSLocalizedStringFromTable(@"VoIPAudioCall", @"RongCloudKit", nil);
-    audioItem.tapBlock = ^(){[[RCCall sharedRCCall] startMultiCall:conversationType targetId:targetId mediaType:RCCallMediaAudio];};
-    
-    RCExtensionPluginItemInfo *vedioItem = [[RCExtensionPluginItemInfo alloc] init];
-    vedioItem.image = [RCCallKitUtility imageFromVoIPBundle:@"voip/actionbar_video_call_icon.png"];
-    vedioItem.title = NSLocalizedStringFromTable(@"VoIPVideoCall", @"RongCloudKit", nil);
-    vedioItem.tapBlock = ^(){[[RCCall sharedRCCall] startMultiCall:conversationType targetId:targetId mediaType:RCCallMediaVideo];};
-    
-    return @[audioItem, vedioItem];
+    if (conversationType == ConversationType_PRIVATE) {
+      videoItem.tapBlock = ^(){[[RCCall sharedRCCall] startSingleCall:targetId mediaType:RCCallMediaVideo];};
+    } else if (conversationType == ConversationType_GROUP || conversationType == ConversationType_DISCUSSION) {
+      videoItem.tapBlock = ^(){[[RCCall sharedRCCall] startMultiCall:conversationType targetId:targetId mediaType:RCCallMediaVideo];};
+    }
+    [itemList addObject:videoItem];
   }
-  return nil;
+  return [itemList copy];
 }
 
 - (void)onMessageReceived:(RCMessage *)message {

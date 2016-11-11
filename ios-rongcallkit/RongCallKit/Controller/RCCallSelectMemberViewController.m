@@ -11,6 +11,7 @@
 #import "RCCallKitUtility.h"
 #import "RCCallSelectingMemberCell.h"
 #import "RCUserInfoCacheManager.h"
+#import <RongIMKit/RongIMKit.h>
 
 #define FakeNavigationBarHeight 64
 
@@ -48,11 +49,11 @@ typedef void (^CompleteBlock)(NSArray *addUserIdList);
           }];
 
     } else if (conversationType == ConversationType_GROUP) {
-      if ([RCCall sharedRCCall].groupMemberDataSource &&
-          [[RCCall sharedRCCall]
+      if ([RCIM sharedRCIM].groupMemberDataSource &&
+          [[RCIM sharedRCIM]
                   .groupMemberDataSource
               respondsToSelector:@selector(getAllMembersOfGroup:result:)]) {
-        [[RCCall sharedRCCall]
+        [[RCIM sharedRCIM]
                 .groupMemberDataSource
             getAllMembersOfGroup:self.targetId
                           result:^(NSArray *userIdList) {
