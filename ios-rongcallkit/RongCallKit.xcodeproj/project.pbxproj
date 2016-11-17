@@ -379,7 +379,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "BIN_DIR=\"bin\"\nif [ ! -d \"$BIN_DIR\" ]; then\nmkdir -p \"$BIN_DIR\"\nfi\n\nBIN_DIR_TMP=\"bin_tmp\"\nif [ ! -d \"$BIN_DIR_TMP\" ]; then\nmkdir -p \"$BIN_DIR_TMP\"\nfi\n\nDST_DIR=\"./../ios-rongimdemo/framework\"\nif [ ! -d \"$DST_DIR\" ]; then\nmkdir -p \"$DST_DIR\"\nfi\n\nDST_DIR2=\"./../ios-hybrid/apicloud/development/UZApp/RongCloudLib\"\nif [ ! -d \"$DST_DIR2\" ]; then\nmkdir -p \"$DST_DIR2\"\nfi\n\nDST_DIR3=\"./../ios-hybrid/apicloud/module/RongCloud/RongCloudLib\"\nif [ ! -d \"$DST_DIR3\" ]; then\nmkdir -p \"$DST_DIR3\"\nfi\n\nDST_DIR4=\"./../ios-hybrid/cordova/Plugin/src/ios\"\nif [ ! -d \"$DST_DIR4\" ]; then\nmkdir -p \"$DST_DIR4\"\nfi\n\nDST_DIR5=\"./../ios-hybrid/cordova/CordovaDemo/platforms/ios/CordovaDemo/Plugins/cn.rongcloud.imlib\"\nif [ ! -d \"$DST_DIR5\" ]; then\nmkdir -p \"$DST_DIR5\"\nfi\n\n\ncp -af ${BUILT_PRODUCTS_DIR}/${TARGET_NAME}.framework/ ${BIN_DIR_TMP}/${PLATFORM_NAME}-${TARGET_NAME}.framework\ncp -af ${BUILT_PRODUCTS_DIR}/${TARGET_NAME}.framework/ ${BIN_DIR}/${TARGET_NAME}.framework\nlipo -create $BIN_DIR_TMP/*-${TARGET_NAME}.framework/${TARGET_NAME} -output ${BIN_DIR}/${TARGET_NAME}.framework/${TARGET_NAME}\n\n\ncp -af ${BIN_DIR}/* ${DST_DIR}/\ncp -af ${BIN_DIR}/* ${DST_DIR2}/\ncp -af ${BIN_DIR}/* ${DST_DIR3}/\ncp -af ${BIN_DIR}/* ${DST_DIR4}/\ncp -af ${BIN_DIR}/* ${DST_DIR5}/";
+			shellScript = "sh xcodebuild.sh";
 		};
 /* End PBXShellScriptBuildPhase section */
 
