@@ -59,9 +59,9 @@
     audioItem.image = [RCCallKitUtility imageFromVoIPBundle:@"voip/actionbar_audio_call_icon.png"];
     audioItem.title = NSLocalizedStringFromTable(@"VoIPAudioCall", @"RongCloudKit", nil);
     if (conversationType == ConversationType_PRIVATE) {
-      audioItem.tapBlock = ^(){[[RCCall sharedRCCall] startSingleCall:targetId mediaType:RCCallMediaAudio];};
+      audioItem.tapBlock = ^(RCChatSessionInputBarControl *chatSessionInputBar){[[RCCall sharedRCCall] startSingleCall:targetId mediaType:RCCallMediaAudio];};
     } else if (conversationType == ConversationType_GROUP || conversationType == ConversationType_DISCUSSION) {
-      audioItem.tapBlock = ^(){[[RCCall sharedRCCall] startMultiCall:conversationType targetId:targetId mediaType:RCCallMediaAudio];};
+      audioItem.tapBlock = ^(RCChatSessionInputBarControl *chatSessionInputBar){[[RCCall sharedRCCall] startMultiCall:conversationType targetId:targetId mediaType:RCCallMediaAudio];};
     }
     [itemList addObject:audioItem];
   }
@@ -69,11 +69,11 @@
     RCExtensionPluginItemInfo *videoItem = [[RCExtensionPluginItemInfo alloc] init];
     videoItem.image = [RCCallKitUtility imageFromVoIPBundle:@"voip/actionbar_video_call_icon.png"];
     videoItem.title = NSLocalizedStringFromTable(@"VoIPVideoCall", @"RongCloudKit", nil);
-    videoItem.tapBlock = ^(){[[RCCall sharedRCCall] startSingleCall:targetId mediaType:RCCallMediaVideo];};
+    videoItem.tapBlock = ^(RCChatSessionInputBarControl *chatSessionInputBar){[[RCCall sharedRCCall] startSingleCall:targetId mediaType:RCCallMediaVideo];};
     if (conversationType == ConversationType_PRIVATE) {
-      videoItem.tapBlock = ^(){[[RCCall sharedRCCall] startSingleCall:targetId mediaType:RCCallMediaVideo];};
+      videoItem.tapBlock = ^(RCChatSessionInputBarControl *chatSessionInputBar){[[RCCall sharedRCCall] startSingleCall:targetId mediaType:RCCallMediaVideo];};
     } else if (conversationType == ConversationType_GROUP || conversationType == ConversationType_DISCUSSION) {
-      videoItem.tapBlock = ^(){[[RCCall sharedRCCall] startMultiCall:conversationType targetId:targetId mediaType:RCCallMediaVideo];};
+      videoItem.tapBlock = ^(RCChatSessionInputBarControl *chatSessionInputBar){[[RCCall sharedRCCall] startMultiCall:conversationType targetId:targetId mediaType:RCCallMediaVideo];};
     }
     [itemList addObject:videoItem];
   }
@@ -86,6 +86,8 @@
 
 - (BOOL)handleAlertForMessageReceived:(RCMessage *)message {
   if ([message.content isKindOfClass:[RCCallSummaryMessage class]]) {
+    return YES;
+  } else if ([RCCall sharedRCCall].currentCallSession.callStatus == RCCallActive) {
     return YES;
   } else {
     return NO;
