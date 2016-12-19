@@ -14,7 +14,11 @@
 
 @implementation RCCallKitExtensionModule
 
-
+/*!
+ CallKit 插件生成方法
+ 
+ @warning IMKit会通过这个方法生成并加载CallKit，强烈建议不要删除其中的逻辑，否则肯能导致CallKit功能不正常。
+ */
 + (instancetype)loadRongExtensionModule {
   [RCCall sharedRCCall];
   return [[RCCallKitExtensionModule alloc] init];
