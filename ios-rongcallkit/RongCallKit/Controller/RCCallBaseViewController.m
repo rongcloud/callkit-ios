@@ -1279,6 +1279,16 @@
   //    (long)error];
 }
 
+/*!
+ 当前通话网络状态的回调，该回调方法每两秒触发一次
+ 
+ @param txQuality   上行网络质量
+ @param rxQuality   下行网络质量
+ */
+- (void)networkTxQuality:(RCCallQuality)txQuality rxQuality:(RCCallQuality)rxQuality {
+//  NSLog(@"networkTxQuality, %d, %d", txQuality, rxQuality);
+}
+
 #pragma mark - outside callback
 - (void)callWillConnect {
 }

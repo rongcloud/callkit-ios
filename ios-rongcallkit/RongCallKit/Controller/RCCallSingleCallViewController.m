@@ -88,6 +88,17 @@
   return _remoteNameLabel;
 }
 
+- (UIView *)mainVideoView {
+  if (!_mainVideoView) {
+    _mainVideoView = [[UIView alloc] initWithFrame:self.backgroundView.frame];
+    _mainVideoView.backgroundColor = RongVoIPUIColorFromRGB(0x262e42);
+    
+    [self.backgroundView addSubview:_mainVideoView];
+    _mainVideoView.hidden = YES;
+  }
+  return _mainVideoView;
+}
+
 - (UIView *)subVideoView {
   if (!_subVideoView) {
     _subVideoView = [[UIView alloc] init];
@@ -115,7 +126,7 @@
     [self.remotePortraitView
         setImageURL:[NSURL URLWithString:userInfo.portraitUri]];
 
-    [self.callSession setVideoView:self.backgroundView
+    [self.callSession setVideoView:self.mainVideoView
                             userId:self.remoteUserInfo.userId];
     [self.callSession setVideoView:self.subVideoView
                             userId:self.callSession.targetId];
@@ -132,7 +143,7 @@
     [self.remotePortraitView
         setImageURL:[NSURL URLWithString:userInfo.portraitUri]];
 
-    [self.callSession setVideoView:self.backgroundView
+    [self.callSession setVideoView:self.mainVideoView
                             userId:self.remoteUserInfo.userId];
     [self.callSession
         setVideoView:self.subVideoView
@@ -164,17 +175,23 @@
     self.remoteNameLabel.hidden = NO;
     self.remoteNameLabel.textAlignment = NSTextAlignmentCenter;
     self.tipsLabel.textAlignment = NSTextAlignmentCenter;
+    self.mainVideoView.hidden = YES;
     self.subVideoView.hidden = YES;
+    [self resetRemoteUserInfoIfNeed];
   } else {
     if (callStatus == RCCallDialing) {
+      self.mainVideoView.hidden = NO;
       [self.callSession
-          setVideoView:self.backgroundView
+          setVideoView:self.mainVideoView
                 userId:[RCIMClient sharedRCIMClient].currentUserInfo.userId];
       self.blurView.hidden = YES;
     } else if (callStatus == RCCallActive) {
-      [self.callSession setVideoView:self.backgroundView
+      self.mainVideoView.hidden = NO;
+      [self.callSession setVideoView:self.mainVideoView
                               userId:self.callSession.targetId];
       self.blurView.hidden = YES;
+    } else {
+      self.mainVideoView.hidden = YES;
     }
 
     if (callStatus == RCCallActive) {
@@ -236,6 +253,22 @@
     } else {
       self.subVideoView.hidden = YES;
     }
+  }
+}
+
+- (void)resetRemoteUserInfoIfNeed {
+  if (![self.remoteUserInfo.userId isEqualToString:self.callSession.targetId]) {
+    RCUserInfo *userInfo = [[RCUserInfoCacheManager sharedManager]
+                            getUserInfo:self.callSession.targetId];
+    if (!userInfo) {
+      userInfo = [[RCUserInfo alloc] initWithUserId:self.callSession.targetId
+                                               name:nil
+                                           portrait:nil];
+    }
+    self.remoteUserInfo = userInfo;
+    [self.remoteNameLabel setText:userInfo.name];
+    [self.remotePortraitView
+     setImageURL:[NSURL URLWithString:userInfo.portraitUri]];
   }
 }
 

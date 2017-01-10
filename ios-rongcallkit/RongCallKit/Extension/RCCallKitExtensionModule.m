@@ -106,4 +106,23 @@
     return NO;
   }
 }
+
+- (BOOL)isAudioHolding {
+  if ([RCCall sharedRCCall].currentCallSession) {
+    return YES;
+  } else {
+    return NO;
+  }
+}
+
+- (BOOL)isCameraHolding {
+  if ([RCCall sharedRCCall].currentCallSession
+      && [RCCall sharedRCCall].currentCallSession.mediaType == RCCallMediaVideo) {
+    return YES;
+  } else {
+    return NO;
+  }
+}
+
+
 @end
