@@ -17,8 +17,8 @@
 
 @property(nonatomic, strong) NSTimer *activeTimer;
 @property(nonatomic, strong) AVAudioPlayer *audioPlayer;
-@property(nonatomic, assign) BOOL needPlayingAlertAfterForegroud;
-@property(nonatomic, assign) BOOL needPlayingRingAfterForegroud;
+@property(nonatomic, assign) BOOL needPlayingAlertAfterForeground;
+@property(nonatomic, assign) BOOL needPlayingRingAfterForeground;
 
 @end
 
@@ -28,7 +28,7 @@
   self = [super init];
   if (self) {
     _callSession = callSession;
-    [self registerForegroudNotification];
+    [self registerForegroundNotification];
     [_callSession setDelegate:self];
     [RCCallKitUtility setScreenForceOn];
   }
@@ -47,7 +47,7 @@
                                                       mediaType:mediaType
                                                 sessionDelegate:self
                                                           extra:nil];
-    [self registerForegroudNotification];
+    [self registerForegroundNotification];
     [RCCallKitUtility setScreenForceOn];
   }
   return self;
@@ -57,13 +57,13 @@
   self = [super init];
   if (self) {
     _callSession = callSession;
-    [self registerForegroudNotification];
+    [self registerForegroundNotification];
     [_callSession setDelegate:self];
   }
   return self;
 }
 
-- (void)registerForegroudNotification {
+- (void)registerForegroundNotification {
   [[NSNotificationCenter defaultCenter]
       addObserver:self
          selector:@selector(appDidBecomeActive)
@@ -89,9 +89,9 @@
 }
 
 - (void)appDidBecomeActive {
-  if (self.needPlayingAlertAfterForegroud) {
+  if (self.needPlayingAlertAfterForeground) {
     [self shouldAlertForWaitingRemoteResponse];
-  } else if (self.needPlayingRingAfterForegroud) {
+  } else if (self.needPlayingRingAfterForeground) {
     [self shouldRingForIncomingCall];
   }
 }
@@ -1231,9 +1231,9 @@
         [[[NSBundle mainBundle] pathForResource:@"RongCloud" ofType:@"bundle"]
             stringByAppendingPathComponent:@"voip/voip_calling_ring.mp3"];
     [self startPlayRing:ringPath];
-    self.needPlayingAlertAfterForegroud = NO;
+    self.needPlayingAlertAfterForeground = NO;
   } else {
-    self.needPlayingAlertAfterForegroud = YES;
+    self.needPlayingAlertAfterForeground = YES;
   }
 }
 
@@ -1247,9 +1247,9 @@
         [[[NSBundle mainBundle] pathForResource:@"RongCloud" ofType:@"bundle"]
             stringByAppendingPathComponent:@"voip/voip_call.mp3"];
     [self startPlayRing:ringPath];
-    self.needPlayingRingAfterForegroud = NO;
+    self.needPlayingRingAfterForeground = NO;
   } else {
-    self.needPlayingRingAfterForegroud = YES;
+    self.needPlayingRingAfterForeground = YES;
   }
 }
 
@@ -1257,8 +1257,8 @@
  停止播放铃声(通话接通或挂断)
  */
 - (void)shouldStopAlertAndRing {
-  self.needPlayingRingAfterForegroud = NO;
-  self.needPlayingAlertAfterForegroud = NO;
+  self.needPlayingRingAfterForeground = NO;
+  self.needPlayingAlertAfterForeground = NO;
   [self stopPlayRing];
 }
 

@@ -336,7 +336,7 @@
                                                       @"RongCloudKit", nil)];
     } else {
       callNotification.alertBody = [NSString
-          stringWithFormat:@"[%@]", NSLocalizedStringFromTable(
+          stringWithFormat:@"%@", NSLocalizedStringFromTable(
                                         @"VoIPAudioCallIncomingWithoutUserName",
                                         @"RongCloudKit", nil)];
       ;
@@ -349,7 +349,7 @@
                                                       @"RongCloudKit", nil)];
     } else {
       callNotification.alertBody = [NSString
-          stringWithFormat:@"[%@]", NSLocalizedStringFromTable(
+          stringWithFormat:@"%@", NSLocalizedStringFromTable(
                                         @"VoIPVideoCallIncomingWithoutUserName",
                                         @"RongCloudKit", nil)];
     }
