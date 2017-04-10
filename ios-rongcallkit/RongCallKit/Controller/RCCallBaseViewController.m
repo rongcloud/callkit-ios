@@ -218,6 +218,7 @@
               [[RCCall sharedRCCall]
                   presentCallViewController:currentViewController];
             }];
+  [self stopActiveTimer];
   [[RCCall sharedRCCall] dismissCallViewController:self];
 }
 

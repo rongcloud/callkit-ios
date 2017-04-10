@@ -269,7 +269,7 @@
       [window resignKeyWindow];
       window.hidden = YES;
       [self.callWindows removeObject:window];
-      return;
+      break;
     }
   }
   [viewController dismissViewControllerAnimated:YES completion:nil];
