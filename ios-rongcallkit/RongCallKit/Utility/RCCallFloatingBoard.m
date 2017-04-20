@@ -13,7 +13,7 @@
 @interface RCCallFloatingBoard () <RCCallSessionDelegate>
 
 @property(nonatomic, strong) NSTimer *activeTimer;
-@property(nonatomic, strong) void (^touchedBlock)(RCCallSession *callSession);
+@property(nonatomic, copy) void (^touchedBlock)(RCCallSession *callSession);
 
 @end
 

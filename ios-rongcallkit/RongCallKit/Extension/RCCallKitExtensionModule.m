@@ -67,6 +67,7 @@
     } else if (conversationType == ConversationType_GROUP || conversationType == ConversationType_DISCUSSION) {
       audioItem.tapBlock = ^(RCChatSessionInputBarControl *chatSessionInputBar){[[RCCall sharedRCCall] startMultiCall:conversationType targetId:targetId mediaType:RCCallMediaAudio];};
     }
+    audioItem.tag = PLUGIN_BOARD_ITEM_VOIP_TAG;
     [itemList addObject:audioItem];
   }
   if ([[RCCall sharedRCCall] isVideoCallEnabled:conversationType]) {
@@ -79,6 +80,7 @@
     } else if (conversationType == ConversationType_GROUP || conversationType == ConversationType_DISCUSSION) {
       videoItem.tapBlock = ^(RCChatSessionInputBarControl *chatSessionInputBar){[[RCCall sharedRCCall] startMultiCall:conversationType targetId:targetId mediaType:RCCallMediaVideo];};
     }
+    videoItem.tag = PLUGIN_BOARD_ITEM_VIDEO_VOIP_TAG;
     [itemList addObject:videoItem];
   }
   return [itemList copy];

@@ -287,7 +287,7 @@
   RCUserInfo *updateUserInfo = userInfoDic[@"userInfo"];
 
   if ([updateUserId isEqualToString:self.remoteUserInfo.userId]) {
-    typeof(self) weakSelf = self;
+    __weak typeof(self) weakSelf = self;
     dispatch_async(dispatch_get_main_queue(), ^{
       weakSelf.remoteUserInfo = updateUserInfo;
       [weakSelf.remoteNameLabel setText:updateUserInfo.name];

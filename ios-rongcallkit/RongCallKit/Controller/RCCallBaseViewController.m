@@ -208,15 +208,11 @@
 - (void)minimizeButtonClicked {
   [self didTapMinimizeButton];
 
-  typeof(self) weakSelf = self;
   [RCCallFloatingBoard
       startCallFloatingBoard:self.callSession
             withTouchedBlock:^(RCCallSession *callSession) {
-              typeof(weakSelf) currentViewController =
-                  [[[weakSelf class] alloc] initWithActiveCall:callSession];
-
               [[RCCall sharedRCCall]
-                  presentCallViewController:currentViewController];
+                  presentCallViewController:[[[self class] alloc] initWithActiveCall:callSession]];
             }];
   [self stopActiveTimer];
   [[RCCall sharedRCCall] dismissCallViewController:self];

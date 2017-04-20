@@ -101,7 +101,7 @@
                              mediaType:(RCCallMediaType)mediaType {
   if (conversationType == ConversationType_DISCUSSION ||
       conversationType == ConversationType_GROUP) {
-    typeof(self) weakSelf = self;
+    __weak typeof(self) weakSelf = self;
     RCCallSelectMemberViewController *voipCallSelectViewController =
         [[RCCallSelectMemberViewController alloc]
             initWithConversationType:conversationType
