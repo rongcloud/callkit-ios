@@ -88,6 +88,10 @@
     hangupReasonString = NSLocalizedStringFromTable(@"VoIPCallRemoteNoResponse",
                                                     @"RongCloudKit", nil);
     break;
+  case RCCallDisconnectReasonAcceptByOtherClient:
+    hangupReasonString = NSLocalizedStringFromTable(@"VoIPCallAcceptByOtherClient",
+                                                          @"RongCloudKit", nil);
+    break;
 
   default:
     break;

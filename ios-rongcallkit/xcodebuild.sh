@@ -35,6 +35,11 @@ if [ ! -d "$DST_DIR5" ]; then
 mkdir -p "$DST_DIR5"
 fi
 
+DST_DIR6="./../ios-rongenterpriseapp/framework"
+if [ ! -d "$DST_DIR6" ]; then
+mkdir -p "$DST_DIR6"
+fi
+
 
 cp -af ${BUILT_PRODUCTS_DIR}/${TARGET_NAME}.framework/ ${BIN_DIR_TMP}/${PLATFORM_NAME}-${TARGET_NAME}.framework
 cp -af ${BUILT_PRODUCTS_DIR}/${TARGET_NAME}.framework/ ${BIN_DIR}/${TARGET_NAME}.framework
@@ -46,3 +51,4 @@ cp -af ${BIN_DIR}/* ${DST_DIR2}/
 cp -af ${BIN_DIR}/* ${DST_DIR3}/
 cp -af ${BIN_DIR}/* ${DST_DIR4}/
 cp -af ${BIN_DIR}/* ${DST_DIR5}/
+cp -af ${BIN_DIR}/* ${DST_DIR6}/
