@@ -9,11 +9,14 @@
 #import "RCCallFloatingBoard.h"
 #import "RCCallKitUtility.h"
 #import <UIKit/UIKit.h>
+#import <CoreTelephony/CTCallCenter.h>
+#import <CoreTelephony/CTCall.h>
 
 @interface RCCallFloatingBoard () <RCCallSessionDelegate>
 
 @property(nonatomic, strong) NSTimer *activeTimer;
 @property(nonatomic, copy) void (^touchedBlock)(RCCallSession *callSession);
+@property(nonatomic, strong) CTCallCenter *callCenter;
 
 @end
 
@@ -49,11 +52,22 @@ static NSString *RCVoipFloatingBoardPosY = @"RCVoipFloatingBoardPosY";
   [self updateActiveTimer];
   [self startActiveTimer];
   [self updateBoard];
+  [self registerTelephonyEvent];
   [[NSNotificationCenter defaultCenter]
       addObserver:self
          selector:@selector(onOrientationChanged:)
              name:UIApplicationDidChangeStatusBarOrientationNotification
            object:nil];
+}
+
+- (void)registerTelephonyEvent {
+  self.callCenter = [[CTCallCenter alloc] init];
+  __weak __typeof(self) weakSelf = self;
+  self.callCenter.callEventHandler = ^(CTCall *call) {
+    if ([call.callState isEqualToString:CTCallStateConnected]) {
+      [weakSelf.callSession hangup];
+    }
+  };
 }
 
 - (void)onOrientationChanged:(NSNotification *)notification {

@@ -12,6 +12,8 @@
 #import "RCCallKitUtility.h"
 #import "RCloudImageView.h"
 #import <AVFoundation/AVFoundation.h>
+#import <CoreTelephony/CTCallCenter.h>
+#import <CoreTelephony/CTCall.h>
 
 @interface RCCallBaseViewController ()
 
@@ -19,6 +21,7 @@
 @property(nonatomic, strong) AVAudioPlayer *audioPlayer;
 @property(nonatomic, assign) BOOL needPlayingAlertAfterForeground;
 @property(nonatomic, assign) BOOL needPlayingRingAfterForeground;
+@property(nonatomic, strong) CTCallCenter *callCenter;
 
 @end
 
@@ -140,6 +143,8 @@
          selector:@selector(onOrientationChanged:)
              name:UIApplicationDidChangeStatusBarOrientationNotification
            object:nil];
+  
+  [self registerTelephonyEvent];
 
   //    UIVisualEffect *blurEffect = [UIBlurEffect
   //    effectWithStyle:UIBlurEffectStyleDark];
@@ -156,7 +161,7 @@
 }
 - (void)viewWillAppear:(BOOL)animated {
   [super viewWillAppear:animated];
-
+    
   if (self.callSession.callStatus == RCCallActive) {
     [self updateActiveTimer];
     [self startActiveTimer];
@@ -165,6 +170,7 @@
         @"VoIPCallWaitingForRemoteAccept", @"RongCloudKit", nil);
   } else if (self.callSession.callStatus == RCCallIncoming ||
              self.callSession.callStatus == RCCallRinging) {
+      [self shouldRingForIncomingCall];
     if (self.callSession.mediaType == RCCallMediaAudio) {
       self.tipsLabel.text = NSLocalizedStringFromTable(@"VoIPAudioCallIncoming",
                                                        @"RongCloudKit", nil);
@@ -208,11 +214,12 @@
 - (void)minimizeButtonClicked {
   [self didTapMinimizeButton];
 
+  Class selfClass = [self class];
   [RCCallFloatingBoard
       startCallFloatingBoard:self.callSession
             withTouchedBlock:^(RCCallSession *callSession) {
               [[RCCall sharedRCCall]
-                  presentCallViewController:[[[self class] alloc] initWithActiveCall:callSession]];
+                  presentCallViewController:[[selfClass alloc] initWithActiveCall:callSession]];
             }];
   [self stopActiveTimer];
   [[RCCall sharedRCCall] dismissCallViewController:self];
@@ -1284,6 +1291,17 @@
  */
 - (void)networkTxQuality:(RCCallQuality)txQuality rxQuality:(RCCallQuality)rxQuality {
 //  NSLog(@"networkTxQuality, %d, %d", txQuality, rxQuality);
+}
+
+#pragma mark - telephony
+- (void)registerTelephonyEvent {
+  self.callCenter = [[CTCallCenter alloc] init];
+  __weak __typeof(self) weakSelf = self;
+  self.callCenter.callEventHandler = ^(CTCall *call) {
+    if ([call.callState isEqualToString:CTCallStateConnected]) {
+      [weakSelf.callSession hangup];
+    }
+  };
 }
 
 #pragma mark - outside callback
