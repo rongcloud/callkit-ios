@@ -19,6 +19,7 @@ public:
   static RCDAudioFrameObserver *sharedObserver();
   bool onRecordAudioFrame(agora::media::IAudioFrameObserver::AudioFrame& audioFrame);
   bool onPlaybackAudioFrame(agora::media::IAudioFrameObserver::AudioFrame& audioFrame);
+  bool onMixedAudioFrame(agora::media::IAudioFrameObserver::AudioFrame &audioFrame);
   bool onPlaybackAudioFrameBeforeMixing(unsigned int uid, agora::media::IAudioFrameObserver::AudioFrame& audioFrame);
 };
 
