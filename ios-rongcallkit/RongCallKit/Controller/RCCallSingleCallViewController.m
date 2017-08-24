@@ -143,12 +143,11 @@
     [self.remotePortraitView
         setImageURL:[NSURL URLWithString:userInfo.portraitUri]];
 
-    
+    [self.callSession setVideoView:self.mainVideoView
+                            userId:self.remoteUserInfo.userId];
     [self.callSession
         setVideoView:self.subVideoView
               userId:[RCIMClient sharedRCIMClient].currentUserInfo.userId];
-    [self.callSession setVideoView:self.mainVideoView
-                            userId:self.remoteUserInfo.userId];
   }
 }
 

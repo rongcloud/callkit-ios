@@ -145,7 +145,7 @@
            object:nil];
   
   [self registerTelephonyEvent];
-  [self addProximityMonitoringObserver];
+
   //    UIVisualEffect *blurEffect = [UIBlurEffect
   //    effectWithStyle:UIBlurEffectStyleDark];
   //    self.blurView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
@@ -1134,7 +1134,6 @@
                  dispatch_get_main_queue(), ^{
                    [[RCCall sharedRCCall] dismissCallViewController:self];
                  });
-  [self removeProximityMonitoringObserver];
 }
 
 /*!
@@ -1303,36 +1302,6 @@
       [weakSelf.callSession hangup];
     }
   };
-}
-
-#pragma mark - proximity
-- (void)addProximityMonitoringObserver {
-  [UIDevice currentDevice].proximityMonitoringEnabled = YES;
-  
-  [[NSNotificationCenter defaultCenter]
-   addObserver:self
-   selector:@selector(proximityStatueChanged:)
-   name:UIDeviceProximityStateDidChangeNotification
-   object:nil];
-}
-
-- (void)removeProximityMonitoringObserver {
-  [UIDevice currentDevice].proximityMonitoringEnabled = NO;
-  
-  [[NSNotificationCenter defaultCenter]
-   removeObserver:self
-   name:UIDeviceProximityStateDidChangeNotification
-   object:nil];
-}
-
-- (void)proximityStatueChanged:(NSNotificationCenter *)notification {
-  //    if ([UIDevice currentDevice].proximityState) {
-  //        [[AVAudioSession sharedInstance]
-  //        setCategory:AVAudioSessionCategoryPlayAndRecord error:nil];
-  //    } else {
-  //        [[AVAudioSession sharedInstance]
-  //        setCategory:AVAudioSessionCategoryPlayback error:nil];
-  //    }
 }
 
 #pragma mark - outside callback

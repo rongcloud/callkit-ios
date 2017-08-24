@@ -88,16 +88,22 @@
       self.mainModel = [self generateUserModel:self.callSession.inviter];
 
       self.subUserModelList = [[NSMutableArray alloc] init];
+      BOOL isContaitSelf = NO;
       for (RCCallUserProfile *userProfile in self.callSession.userProfileList) {
         if (![userProfile.userId isEqualToString:self.callSession.inviter]) {
           RCCallUserCallInfoModel *userModel =
               [self generateUserModel:userProfile.userId];
           [self.subUserModelList addObject:userModel];
         }
+        if ([userProfile.userId isEqualToString:currentUserId]) {
+          isContaitSelf = YES;
+        }
       }
-      RCCallUserCallInfoModel *userModel =
-          [self generateUserModel:currentUserId];
-      [self.subUserModelList addObject:userModel];
+      if (!isContaitSelf) {
+        RCCallUserCallInfoModel *userModel =
+        [self generateUserModel:currentUserId];
+        [self.subUserModelList addObject:userModel];
+      }
     }
   } else if (self.callSession.callStatus == RCCallDialing) {
     self.mainModel = [self generateUserModel:currentUserId];

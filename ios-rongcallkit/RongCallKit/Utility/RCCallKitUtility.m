@@ -119,9 +119,6 @@
     hangupReasonString = NSLocalizedStringFromTable(@"VoIPCallRemoteNoResponse",
                                                     @"RongCloudKit", nil);
     break;
-  case RCCallDisconnectReasonAddToBlackList:
-    hangupReasonString = NSLocalizedStringFromTable(@"VoIPCallHasReject", @"RongCloudKit", nil);
-    break;
   default:
     hangupReasonString = [self getGeneralReadableString:hangupReason];
     break;
@@ -148,9 +145,6 @@
   case RCCallDisconnectReasonRemoteBusyLine:
     hangupReasonString = NSLocalizedStringFromTable(
         @"VoIPCallRemoteBusyLineAndShowAdvice", @"RongCloudKit", nil);
-    break;
-  case RCCallDisconnectReasonAddToBlackList:
-    hangupReasonString = NSLocalizedStringFromTable(@"VoIP_Rejected_By_Blacklist", @"RongCloudKit", nil);
     break;
   default:
     hangupReasonString = [self getGeneralReadableString:hangupReason];

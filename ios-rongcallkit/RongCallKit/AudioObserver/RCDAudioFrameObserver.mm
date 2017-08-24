@@ -13,13 +13,11 @@ RCDAudioFrameObserver *RCDAudioFrameObserver::sharedObserver() {
   return &sharedObserver;
 }
 
+
 bool RCDAudioFrameObserver::onRecordAudioFrame(agora::media::IAudioFrameObserver::AudioFrame& audioFrame) {
   return true;
 }
 bool RCDAudioFrameObserver::onPlaybackAudioFrame(agora::media::IAudioFrameObserver::AudioFrame& audioFrame) {
-  return true;
-}
-bool RCDAudioFrameObserver::onMixedAudioFrame(agora::media::IAudioFrameObserver::AudioFrame &audioFrame) {
   return true;
 }
 bool RCDAudioFrameObserver::onPlaybackAudioFrameBeforeMixing(unsigned int uid, agora::media::IAudioFrameObserver::AudioFrame& audioFrame) {

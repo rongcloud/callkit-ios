@@ -235,13 +235,14 @@
   }
 }
 
-- (void)presentCallViewController:(UIViewController *)viewController{
+- (void)presentCallViewController:(UIViewController *)viewController {
   [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
   UIWindow *activityWindow =
-  [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+      [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
   activityWindow.windowLevel = UIWindowLevelAlert;
   activityWindow.rootViewController = viewController;
   [activityWindow makeKeyAndVisible];
+  [self addProximityMonitoringObserver];
   CATransition *animation = [CATransition animation];
   [animation setDuration:0.3];
   animation.type = kCATransitionMoveIn;     //可更改为其他方式
@@ -251,6 +252,9 @@
 }
 
 - (void)dismissCallViewController:(UIViewController *)viewController {
+  if (self.currentCallSession == nil) {
+    [self removeProximityMonitoringObserver];
+  }
 
   if ([viewController isKindOfClass:[RCCallBaseViewController class]]) {
     UIViewController *rootVC = viewController;
@@ -431,6 +435,36 @@
       otherButtonTitles:nil];
   alert.tag = AlertWithConfirm;
   [alert show];
+}
+
+#pragma mark - proximity
+- (void)addProximityMonitoringObserver {
+  [UIDevice currentDevice].proximityMonitoringEnabled = YES;
+
+  [[NSNotificationCenter defaultCenter]
+      addObserver:self
+         selector:@selector(proximityStatueChanged:)
+             name:UIDeviceProximityStateDidChangeNotification
+           object:nil];
+}
+
+- (void)removeProximityMonitoringObserver {
+  [UIDevice currentDevice].proximityMonitoringEnabled = NO;
+
+  [[NSNotificationCenter defaultCenter]
+      removeObserver:self
+                name:UIDeviceProximityStateDidChangeNotification
+              object:nil];
+}
+
+- (void)proximityStatueChanged:(NSNotificationCenter *)notification {
+  //    if ([UIDevice currentDevice].proximityState) {
+  //        [[AVAudioSession sharedInstance]
+  //        setCategory:AVAudioSessionCategoryPlayAndRecord error:nil];
+  //    } else {
+  //        [[AVAudioSession sharedInstance]
+  //        setCategory:AVAudioSessionCategoryPlayback error:nil];
+  //    }
 }
 
 - (void)dealloc {
