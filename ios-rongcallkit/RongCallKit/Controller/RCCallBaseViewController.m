@@ -145,7 +145,7 @@
            object:nil];
   
   [self registerTelephonyEvent];
-
+  [self addProximityMonitoringObserver];
   //    UIVisualEffect *blurEffect = [UIBlurEffect
   //    effectWithStyle:UIBlurEffectStyleDark];
   //    self.blurView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
@@ -155,7 +155,7 @@
 }
 
 - (void)onOrientationChanged:(NSNotification *)notification {
-  [self resetLayout:self.conversationType
+  [self resetLayout:self.callSession.isMultiCall
           mediaType:self.callSession.mediaType
          callStatus:self.callSession.callStatus];
 }
@@ -182,7 +182,7 @@
     [self callDidDisconnect];
   }
 
-  [self resetLayout:self.callSession.conversationType
+  [self resetLayout:self.callSession.isMultiCall
           mediaType:self.callSession.mediaType
          callStatus:self.callSession.callStatus];
 }
@@ -440,7 +440,7 @@
   if (!_cameraCloseButton) {
     _cameraCloseButton = [[UIButton alloc] init];
 
-    if (self.conversationType == ConversationType_PRIVATE) {
+    if (!self.callSession.isMultiCall) {
       [_cameraCloseButton
           setImage:[RCCallKitUtility imageFromVoIPBundle:@"voip/audio.png"]
           forState:UIControlStateNormal];
@@ -486,7 +486,7 @@
 - (void)cameraCloseButtonClicked {
   [self didTapCameraCloseButton];
 
-  if (self.conversationType == ConversationType_PRIVATE) {
+  if (!self.callSession.isMultiCall) {
     [self.callSession
         setVideoView:nil
               userId:[RCIMClient sharedRCIMClient].currentUserInfo.userId];
@@ -498,7 +498,7 @@
     }
 
     if ([self.callSession changeMediaType:RCCallMediaAudio]) {
-      [self resetLayout:self.callSession.conversationType
+      [self resetLayout:self.callSession.isMultiCall
               mediaType:RCCallMediaAudio
              callStatus:self.callSession.callStatus];
     }
@@ -512,7 +512,7 @@
   if (!_cameraSwitchButton) {
     _cameraSwitchButton = [[UIButton alloc] init];
 
-    if (self.conversationType == ConversationType_PRIVATE) {
+    if (!self.callSession.isMultiCall) {
       [_cameraSwitchButton
           setImage:[RCCallKitUtility imageFromVoIPBundle:@"voip/camera.png"]
           forState:UIControlStateNormal];
@@ -561,11 +561,11 @@
 }
 
 #pragma mark - layout
-- (void)resetLayout:(RCConversationType)conversationType
+- (void)resetLayout:(BOOL)isMultiCall
           mediaType:(RCCallMediaType)mediaType
          callStatus:(RCCallStatus)callStatus {
   if (mediaType == RCCallMediaAudio &&
-      conversationType == ConversationType_PRIVATE) {
+      !isMultiCall) {
     self.backgroundView.backgroundColor = RongVoIPUIColorFromRGB(0x262e42);
     self.backgroundView.hidden = NO;
 
@@ -686,7 +686,7 @@
     self.cameraSwitchButton.hidden = YES;
 
   } else if (mediaType == RCCallMediaVideo &&
-             conversationType == ConversationType_PRIVATE) {
+             !isMultiCall) {
     self.backgroundView.hidden = NO;
 
     self.blurView.hidden = YES;
@@ -824,7 +824,7 @@
     }
 
   } else if (mediaType == RCCallMediaAudio &&
-             conversationType != ConversationType_PRIVATE) {
+             isMultiCall) {
     self.backgroundView.backgroundColor = RongVoIPUIColorFromRGB(0x262e42);
     self.backgroundView.hidden = NO;
 
@@ -948,7 +948,7 @@
     self.cameraSwitchButton.hidden = YES;
 
   } else if (mediaType == RCCallMediaVideo &&
-             conversationType != ConversationType_PRIVATE) {
+             isMultiCall) {
     self.backgroundView.hidden = NO;
 
     self.blurView.hidden = YES;
@@ -1103,7 +1103,7 @@
 
   self.tipsLabel.text = @"";
   [self startActiveTimer];
-  [self resetLayout:self.callSession.conversationType
+  [self resetLayout:self.callSession.isMultiCall
           mediaType:self.callSession.mediaType
          callStatus:self.callSession.callStatus];
 }
@@ -1126,7 +1126,7 @@
   self.tipsLabel.textColor = [UIColor whiteColor];
 
   [self stopActiveTimer];
-  [self resetLayout:self.callSession.conversationType
+  [self resetLayout:self.callSession.isMultiCall
           mediaType:self.callSession.mediaType
          callStatus:self.callSession.callStatus];
 
@@ -1134,6 +1134,7 @@
                  dispatch_get_main_queue(), ^{
                    [[RCCall sharedRCCall] dismissCallViewController:self];
                  });
+  [self removeProximityMonitoringObserver];
 }
 
 /*!
@@ -1142,7 +1143,7 @@
  @param userId 对端的用户ID
  */
 - (void)remoteUserDidRing:(NSString *)userId {
-  [self resetLayout:self.callSession.conversationType
+  [self resetLayout:self.callSession.isMultiCall
           mediaType:self.callSession.mediaType
          callStatus:self.callSession.callStatus];
 }
@@ -1155,7 +1156,7 @@
  */
 - (void)remoteUserDidInvite:(NSString *)userId
                   mediaType:(RCCallMediaType)mediaType {
-  [self resetLayout:self.callSession.conversationType
+  [self resetLayout:self.callSession.isMultiCall
           mediaType:self.callSession.mediaType
          callStatus:self.callSession.callStatus];
 }
@@ -1168,7 +1169,7 @@
  */
 - (void)remoteUserDidJoin:(NSString *)userId
                 mediaType:(RCCallMediaType)mediaType {
-  [self resetLayout:self.callSession.conversationType
+  [self resetLayout:self.callSession.isMultiCall
           mediaType:self.callSession.mediaType
          callStatus:self.callSession.callStatus];
 }
@@ -1181,7 +1182,7 @@
  */
 - (void)remoteUserDidChangeMediaType:(NSString *)userId
                            mediaType:(RCCallMediaType)mediaType {
-  if (self.callSession.conversationType == ConversationType_PRIVATE) {
+  if (!self.callSession.isMultiCall) {
     if (mediaType == RCCallMediaAudio &&
         self.callSession.mediaType != RCCallMediaAudio) {
       if ([self.callSession changeMediaType:RCCallMediaAudio]) {
@@ -1189,7 +1190,7 @@
             setVideoView:nil
                   userId:[RCIMClient sharedRCIMClient].currentUserInfo.userId];
         [self.callSession setVideoView:nil userId:self.callSession.targetId];
-        [self resetLayout:self.callSession.conversationType
+        [self resetLayout:self.callSession.isMultiCall
                 mediaType:RCCallMediaAudio
                callStatus:self.callSession.callStatus];
       }
@@ -1207,7 +1208,7 @@
  @param muted     是否关闭camera
  */
 - (void)remoteUserDidDisableCamera:(BOOL)muted byUser:(NSString *)userId {
-  [self resetLayout:self.callSession.conversationType
+  [self resetLayout:self.callSession.isMultiCall
           mediaType:self.callSession.mediaType
          callStatus:self.callSession.callStatus];
 }
@@ -1220,7 +1221,7 @@
  */
 - (void)remoteUserDidLeft:(NSString *)userId
                    reason:(RCCallDisconnectReason)reason {
-  [self resetLayout:self.callSession.conversationType
+  [self resetLayout:self.callSession.isMultiCall
           mediaType:self.callSession.mediaType
          callStatus:self.callSession.callStatus];
 }
@@ -1302,6 +1303,36 @@
       [weakSelf.callSession hangup];
     }
   };
+}
+
+#pragma mark - proximity
+- (void)addProximityMonitoringObserver {
+  [UIDevice currentDevice].proximityMonitoringEnabled = YES;
+  
+  [[NSNotificationCenter defaultCenter]
+   addObserver:self
+   selector:@selector(proximityStatueChanged:)
+   name:UIDeviceProximityStateDidChangeNotification
+   object:nil];
+}
+
+- (void)removeProximityMonitoringObserver {
+  [UIDevice currentDevice].proximityMonitoringEnabled = NO;
+  
+  [[NSNotificationCenter defaultCenter]
+   removeObserver:self
+   name:UIDeviceProximityStateDidChangeNotification
+   object:nil];
+}
+
+- (void)proximityStatueChanged:(NSNotificationCenter *)notification {
+  //    if ([UIDevice currentDevice].proximityState) {
+  //        [[AVAudioSession sharedInstance]
+  //        setCategory:AVAudioSessionCategoryPlayAndRecord error:nil];
+  //    } else {
+  //        [[AVAudioSession sharedInstance]
+  //        setCategory:AVAudioSessionCategoryPlayback error:nil];
+  //    }
 }
 
 #pragma mark - outside callback

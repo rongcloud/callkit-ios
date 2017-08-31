@@ -266,7 +266,7 @@
   if (self.callSession.callStatus == RCCallActive) {
     self.isFullScreen = !self.isFullScreen;
 
-    [self resetLayout:self.callSession.conversationType
+    [self resetLayout:self.callSession.isMultiCall
             mediaType:self.callSession.mediaType
            callStatus:self.callSession.callStatus];
   }
@@ -360,8 +360,7 @@
 - (void)inviteUserButtonClicked {
   [self didTapInviteUserButton];
 
-  if (self.callSession.conversationType == ConversationType_DISCUSSION ||
-      self.callSession.conversationType) {
+  if (self.callSession.isMultiCall) {
     [self inviteNewUser];
   } else {
     NSLog(@"not support add user for conversation type %zd",
@@ -396,10 +395,10 @@
   });
 }
 
-- (void)resetLayout:(RCConversationType)conversationType
+- (void)resetLayout:(BOOL)isMultiCall
           mediaType:(RCCallMediaType)mediaType
          callStatus:(RCCallStatus)callStatus {
-  [super resetLayout:conversationType
+  [super resetLayout:isMultiCall
            mediaType:mediaType
           callStatus:callStatus];
 

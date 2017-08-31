@@ -58,6 +58,7 @@ static NSString *RCVoipFloatingBoardPosY = @"RCVoipFloatingBoardPosY";
          selector:@selector(onOrientationChanged:)
              name:UIApplicationDidChangeStatusBarOrientationNotification
            object:nil];
+  [self addProximityMonitoringObserver];
 }
 
 - (void)registerTelephonyEvent {
@@ -395,7 +396,7 @@ static NSString *RCVoipFloatingBoardPosY = @"RCVoipFloatingBoardPosY";
 
 - (BOOL)isVideoViewEnabledSession {
   if (self.callSession.mediaType == RCCallMediaVideo &&
-      self.callSession.conversationType == ConversationType_PRIVATE) {
+      !self.callSession.isMultiCall) {
     return YES;
   } else {
     return NO;
@@ -418,6 +419,7 @@ static NSString *RCVoipFloatingBoardPosY = @"RCVoipFloatingBoardPosY";
              withObject:nil
              afterDelay:2];
   [RCCallKitUtility clearScreenForceOnStatus];
+  [self removeProximityMonitoringObserver];
 }
 
 /*!
@@ -456,7 +458,7 @@ static NSString *RCVoipFloatingBoardPosY = @"RCVoipFloatingBoardPosY";
  */
 - (void)remoteUserDidChangeMediaType:(NSString *)userId
                            mediaType:(RCCallMediaType)mediaType {
-  if (self.callSession.conversationType == ConversationType_PRIVATE) {
+  if (!self.callSession.isMultiCall) {
     if (mediaType == RCCallMediaAudio &&
         self.callSession.mediaType != RCCallMediaAudio) {
       if ([self.callSession changeMediaType:RCCallMediaAudio]) {
@@ -512,5 +514,34 @@ static NSString *RCVoipFloatingBoardPosY = @"RCVoipFloatingBoardPosY";
  @warning 如果是不可恢复的错误，SDK会挂断电话并回调callDidDisconnect。
  */
 - (void)errorDidOccur:(RCCallErrorCode)error {
+}
+
+- (void)addProximityMonitoringObserver {
+  [UIDevice currentDevice].proximityMonitoringEnabled = YES;
+  
+  [[NSNotificationCenter defaultCenter]
+   addObserver:self
+   selector:@selector(proximityStatueChanged:)
+   name:UIDeviceProximityStateDidChangeNotification
+   object:nil];
+}
+
+- (void)removeProximityMonitoringObserver {
+  [UIDevice currentDevice].proximityMonitoringEnabled = NO;
+  
+  [[NSNotificationCenter defaultCenter]
+   removeObserver:self
+   name:UIDeviceProximityStateDidChangeNotification
+   object:nil];
+}
+
+- (void)proximityStatueChanged:(NSNotificationCenter *)notification {
+  //    if ([UIDevice currentDevice].proximityState) {
+  //        [[AVAudioSession sharedInstance]
+  //        setCategory:AVAudioSessionCategoryPlayAndRecord error:nil];
+  //    } else {
+  //        [[AVAudioSession sharedInstance]
+  //        setCategory:AVAudioSessionCategoryPlayback error:nil];
+  //    }
 }
 @end

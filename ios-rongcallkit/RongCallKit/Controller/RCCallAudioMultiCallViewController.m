@@ -323,8 +323,7 @@
 - (void)inviteUserButtonClicked {
   [self didTapInviteUserButton];
 
-  if (self.callSession.conversationType == ConversationType_DISCUSSION ||
-      self.callSession.conversationType == ConversationType_GROUP) {
+  if (self.callSession.isMultiCall) {
     [self inviteNewUser];
   } else {
     NSLog(@"not support add user for conversation type %zd",
@@ -340,7 +339,7 @@
   [existUserIdList addObject:currentUserId];
 
   __weak typeof(self) weakSelf = self;
-  RCCallSelectMemberViewController *selectViewController =
+  UIViewController *selectViewController =
       [[RCCallSelectMemberViewController alloc]
           initWithConversationType:self.conversationType
                           targetId:self.targetId
@@ -359,10 +358,10 @@
   });
 }
 
-- (void)resetLayout:(RCConversationType)conversationType
+- (void)resetLayout:(BOOL)isMultiCall
           mediaType:(RCCallMediaType)mediaType
          callStatus:(RCCallStatus)callStatus {
-  [super resetLayout:conversationType
+  [super resetLayout:isMultiCall
            mediaType:mediaType
           callStatus:callStatus];
 
