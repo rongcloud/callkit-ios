@@ -88,6 +88,16 @@
   return _remoteNameLabel;
 }
 
+- (UIImageView *)statusView {
+    if (!_statusView) {
+        _statusView = [[RCloudImageView alloc] init];
+        [self.view addSubview:_statusView];
+        _statusView.hidden = YES;
+        _statusView.image = [RCCallKitUtility imageFromVoIPBundle:@"voip/voip_connecting"];
+    }
+    return _statusView;
+}
+
 - (UIView *)mainVideoView {
   if (!_mainVideoView) {
     _mainVideoView = [[UIView alloc] initWithFrame:self.backgroundView.frame];
@@ -167,15 +177,29 @@
         RCCallVerticalMargin * 3, RCCallHeaderLength, RCCallHeaderLength);
     self.remotePortraitView.image = remoteHeaderImage;
     self.remotePortraitView.hidden = NO;
-
+    
     self.remoteNameLabel.frame = CGRectMake(
         RCCallHorizontalMargin,
         RCCallVerticalMargin * 3 + RCCallHeaderLength + RCCallInsideMargin,
         self.view.frame.size.width - RCCallHorizontalMargin * 2,
         RCCallLabelHeight);
     self.remoteNameLabel.hidden = NO;
+      
     self.remoteNameLabel.textAlignment = NSTextAlignmentCenter;
     self.tipsLabel.textAlignment = NSTextAlignmentCenter;
+      
+      self.statusView.frame = CGRectMake(
+                                         (self.view.frame.size.width - 17) / 2,
+                                         RCCallVerticalMargin * 3 + (RCCallHeaderLength - 4)/2, 17, 4);
+      
+      if (callStatus == RCCallRinging || callStatus == RCCallDialing || callStatus == RCCallIncoming) {
+          self.remotePortraitView.alpha = 0.5;
+          self.statusView.hidden = NO;
+      } else {
+          self.statusView.hidden = YES;
+          self.remotePortraitView.alpha = 1.0;
+      }
+      
     self.mainVideoView.hidden = YES;
     self.subVideoView.hidden = YES;
     [self resetRemoteUserInfoIfNeed];
@@ -254,6 +278,19 @@
     } else {
       self.subVideoView.hidden = YES;
     }
+      
+      self.remoteNameLabel.textAlignment = NSTextAlignmentCenter;
+      self.statusView.frame = CGRectMake(
+                                          (self.view.frame.size.width - 17) / 2,
+                                          RCCallVerticalMargin * 3 + (RCCallHeaderLength - 4)/2, 17, 4);
+      
+      if (callStatus == RCCallRinging || callStatus == RCCallDialing || callStatus == RCCallIncoming) {
+          self.remotePortraitView.alpha = 0.5;
+          self.statusView.hidden = NO;
+      } else {
+          self.statusView.hidden = YES;
+          self.remotePortraitView.alpha = 1.0;
+      }
   }
 }
 

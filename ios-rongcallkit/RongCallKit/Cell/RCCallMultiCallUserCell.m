@@ -86,7 +86,7 @@
       setImageURL:[NSURL URLWithString:model.userInfo.portraitUri]];
   [self.nameLabel setText:model.userInfo.name];
   if (model.profile.callStatus == RCCallRinging ||
-      model.profile.callStatus == RCCallDialing) {
+      model.profile.callStatus == RCCallDialing || model.profile.callStatus == RCCallIncoming) {
     self.statusView.image =
         [RCCallKitUtility imageFromVoIPBundle:@"voip/voip_connecting"];
     self.headerImageView.alpha = 0.5;
