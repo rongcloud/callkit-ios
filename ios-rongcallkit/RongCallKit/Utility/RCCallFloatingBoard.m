@@ -458,15 +458,17 @@ static NSString *RCVoipFloatingBoardPosY = @"RCVoipFloatingBoardPosY";
  */
 - (void)remoteUserDidChangeMediaType:(NSString *)userId
                            mediaType:(RCCallMediaType)mediaType {
-  if (!self.callSession.isMultiCall) {
-    if (mediaType == RCCallMediaAudio &&
-        self.callSession.mediaType != RCCallMediaAudio) {
-      if ([self.callSession changeMediaType:RCCallMediaAudio]) {
-        [self.videoView removeFromSuperview];
-        [self initBoard];
+  dispatch_async(dispatch_get_main_queue(), ^{
+    if (!self.callSession.isMultiCall) {
+      if (mediaType == RCCallMediaAudio &&
+          self.callSession.mediaType != RCCallMediaAudio) {
+        if ([self.callSession changeMediaType:RCCallMediaAudio]) {
+          [self.videoView removeFromSuperview];
+          [self initBoard];
+        }
       }
     }
-  }
+  });
 }
 
 /*!
