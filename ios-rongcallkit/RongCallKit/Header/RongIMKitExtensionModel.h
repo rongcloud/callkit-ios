@@ -48,7 +48,8 @@ typedef void (^RCConversationPluginItemTapBlock)();
 
 - (void)registerConversationPlugin:(RCConversationType)conversationType
                           targetId:(NSString *)targetId
-                             block:(void (^)(UIImage *image, NSString *title, RCConversationPluginItemTapBlock tapBlock))registerBlock;
+                             block:(void (^)(UIImage *image, NSString *title,
+                                             RCConversationPluginItemTapBlock tapBlock))registerBlock;
 
 - (BOOL)didHoldReceivedMessageForKitUpdate:(RCMessage *)message;
 

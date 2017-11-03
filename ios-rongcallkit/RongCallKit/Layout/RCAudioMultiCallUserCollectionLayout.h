@@ -13,7 +13,6 @@
 @property(nonatomic, assign) CGFloat itemMargin;
 @property(nonatomic, assign) CGFloat buttomPadding;
 
-- (instancetype)initWithItemMargin:(CGFloat)itemMargin
-                     buttomPadding:(CGFloat)buttomPadding;
+- (instancetype)initWithItemMargin:(CGFloat)itemMargin buttomPadding:(CGFloat)buttomPadding;
 
 @end

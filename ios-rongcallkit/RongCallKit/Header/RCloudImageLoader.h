@@ -39,14 +39,14 @@
 
 @protocol RCloudImageLoaderObserver;
 @interface RCloudImageLoader : NSObject /*<NSURLConnectionDelegate>*/ {
-@private
-  NSDictionary *_currentConnections;
-  NSMutableDictionary *currentConnections;
+  @private
+    NSDictionary *_currentConnections;
+    NSMutableDictionary *currentConnections;
 #if __EGOIL_USE_BLOCKS
-  dispatch_queue_t _operationQueue;
+    dispatch_queue_t _operationQueue;
 #endif
 
-  NSLock *connectionsLock;
+    NSLock *connectionsLock;
 }
 
 + (RCloudImageLoader *)sharedImageLoader;
@@ -54,25 +54,19 @@
 - (BOOL)isLoadingImageURL:(NSURL *)aURL;
 
 #if __EGOIL_USE_NOTIF
-- (void)loadImageForURL:(NSURL *)aURL
-               observer:(id<RCloudImageLoaderObserver>)observer;
-- (UIImage *)imageForURL:(NSURL *)aURL
-  shouldLoadWithObserver:(id<RCloudImageLoaderObserver>)observer;
+- (void)loadImageForURL:(NSURL *)aURL observer:(id<RCloudImageLoaderObserver>)observer;
+- (UIImage *)imageForURL:(NSURL *)aURL shouldLoadWithObserver:(id<RCloudImageLoaderObserver>)observer;
 
 - (void)removeObserver:(id<RCloudImageLoaderObserver>)observer;
-- (void)removeObserver:(id<RCloudImageLoaderObserver>)observer
-                forURL:(NSURL *)aURL;
+- (void)removeObserver:(id<RCloudImageLoaderObserver>)observer forURL:(NSURL *)aURL;
 #endif
 
 #if __EGOIL_USE_BLOCKS
-- (void)loadImageForURL:(NSURL *)aURL
-             completion:(void (^)(UIImage *image, NSURL *imageURL,
-                                  NSError *error))completion;
+- (void)loadImageForURL:(NSURL *)aURL completion:(void (^)(UIImage *image, NSURL *imageURL, NSError *error))completion;
 - (void)loadImageForURL:(NSURL *)aURL
                   style:(NSString *)style
                  styler:(UIImage * (^)(UIImage *image))styler
-             completion:(void (^)(UIImage *image, NSURL *imageURL,
-                                  NSError *error))completion;
+             completion:(void (^)(UIImage *image, NSURL *imageURL, NSError *error))completion;
 #endif
 
 - (BOOL)hasLoadedImageURL:(NSURL *)aURL;
@@ -86,12 +80,11 @@
 
 @protocol RCloudImageLoaderObserver <NSObject>
 @optional
-- (void)imageLoaderDidLoad:(NSNotification *)notification; // Object will be
-                                                           // EGOImageLoader,
-                                                           // userInfo will
-                                                           // contain imageURL
-                                                           // and image
-- (void)imageLoaderDidFailToLoad:
-    (NSNotification *)notification; // Object will be EGOImageLoader, userInfo
-                                    // will contain error
+- (void)imageLoaderDidLoad:(NSNotification *)notification;       // Object will be
+                                                                 // EGOImageLoader,
+                                                                 // userInfo will
+                                                                 // contain imageURL
+                                                                 // and image
+- (void)imageLoaderDidFailToLoad:(NSNotification *)notification; // Object will be EGOImageLoader, userInfo
+                                                                 // will contain error
 @end

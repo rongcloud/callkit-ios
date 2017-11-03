@@ -9,21 +9,22 @@
 #include "RCDAudioFrameObserver.h"
 
 RCDAudioFrameObserver *RCDAudioFrameObserver::sharedObserver() {
-  static RCDAudioFrameObserver sharedObserver;
-  return &sharedObserver;
+    static RCDAudioFrameObserver sharedObserver;
+    return &sharedObserver;
 }
 
-bool RCDAudioFrameObserver::onRecordAudioFrame(agora::media::IAudioFrameObserver::AudioFrame& audioFrame) {
-  return true;
+bool RCDAudioFrameObserver::onRecordAudioFrame(agora::media::IAudioFrameObserver::AudioFrame &audioFrame) {
+    return true;
 }
-bool RCDAudioFrameObserver::onPlaybackAudioFrame(agora::media::IAudioFrameObserver::AudioFrame& audioFrame) {
-  return true;
+bool RCDAudioFrameObserver::onPlaybackAudioFrame(agora::media::IAudioFrameObserver::AudioFrame &audioFrame) {
+    return true;
 }
 bool RCDAudioFrameObserver::onMixedAudioFrame(agora::media::IAudioFrameObserver::AudioFrame &audioFrame) {
-  return true;
+    return true;
 }
-bool RCDAudioFrameObserver::onPlaybackAudioFrameBeforeMixing(unsigned int uid, agora::media::IAudioFrameObserver::AudioFrame& audioFrame) {
-  NSString *userId = rcGetUserIdFromAgoraUID(uid);
-  NSLog(@"the user id is %@", userId);
-  return true;
+bool RCDAudioFrameObserver::onPlaybackAudioFrameBeforeMixing(
+    unsigned int uid, agora::media::IAudioFrameObserver::AudioFrame &audioFrame) {
+    NSString *userId = rcGetUserIdFromAgoraUID(uid);
+    NSLog(@"the user id is %@", userId);
+    return true;
 }

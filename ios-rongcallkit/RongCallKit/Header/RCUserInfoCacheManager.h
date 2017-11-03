@@ -15,8 +15,7 @@ FOUNDATION_EXPORT NSString *const RCKitDispatchUserInfoUpdateNotification;
 FOUNDATION_EXPORT NSString *const RCKitDispatchGroupUserInfoUpdateNotification;
 FOUNDATION_EXPORT NSString *const RCKitDispatchGroupInfoUpdateNotification;
 
-#define rcUserInfoWorkingDBHelper                                              \
-  ([RCUserInfoCacheManager sharedManager].workingDBHelper)
+#define rcUserInfoWorkingDBHelper ([RCUserInfoCacheManager sharedManager].workingDBHelper)
 #define rcUserInfoDBQueue ([RCUserInfoCacheManager sharedManager].dbQueue)
 
 @interface RCUserInfoCacheManager : NSObject
@@ -36,8 +35,7 @@ FOUNDATION_EXPORT NSString *const RCKitDispatchGroupInfoUpdateNotification;
 - (RCUserInfo *)getUserInfo:(NSString *)userId;
 
 //从cache和用户信息提供者取
-- (void)getUserInfo:(NSString *)userId
-           complete:(void (^)(RCUserInfo *userInfo))completeBlock;
+- (void)getUserInfo:(NSString *)userId complete:(void (^)(RCUserInfo *userInfo))completeBlock;
 
 //只获取当前cache中的用户信息，不进行任何回调
 - (RCUserInfo *)getUserInfoFromCacheOnly:(NSString *)userId;
@@ -60,15 +58,11 @@ FOUNDATION_EXPORT NSString *const RCKitDispatchGroupInfoUpdateNotification;
           inGroupId:(NSString *)groupId
            complete:(void (^)(RCUserInfo *userInfo))completeBlock;
 
-- (RCUserInfo *)getUserInfoFromCacheOnly:(NSString *)userId
-                               inGroupId:(NSString *)groupId;
+- (RCUserInfo *)getUserInfoFromCacheOnly:(NSString *)userId inGroupId:(NSString *)groupId;
 
-- (void)updateUserInfo:(RCUserInfo *)userInfo
-             forUserId:(NSString *)userId
-               inGroup:(NSString *)groupId;
+- (void)updateUserInfo:(RCUserInfo *)userInfo forUserId:(NSString *)userId inGroup:(NSString *)groupId;
 
-- (void)clearGroupUserInfoNetworkCacheOnly:(NSString *)userId
-                                   inGroup:(NSString *)groupId;
+- (void)clearGroupUserInfoNetworkCacheOnly:(NSString *)userId inGroup:(NSString *)groupId;
 
 - (void)clearGroupUserInfo:(NSString *)userId inGroup:(NSString *)groupId;
 
@@ -78,8 +72,7 @@ FOUNDATION_EXPORT NSString *const RCKitDispatchGroupInfoUpdateNotification;
 
 - (RCGroup *)getGroupInfo:(NSString *)groupId;
 
-- (void)getGroupInfo:(NSString *)groupId
-            complete:(void (^)(RCGroup *groupInfo))completeBlock;
+- (void)getGroupInfo:(NSString *)groupId complete:(void (^)(RCGroup *groupInfo))completeBlock;
 
 - (RCGroup *)getGroupInfoFromCacheOnly:(NSString *)groupId;
 

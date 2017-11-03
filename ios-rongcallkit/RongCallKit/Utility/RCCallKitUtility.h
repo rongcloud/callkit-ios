@@ -11,16 +11,14 @@
 #import <RongIMKit/RongIMKit.h>
 #import <UIKit/UIKit.h>
 
-#define RongVoIPUIColorFromRGB(rgbValue)                                       \
-  [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16)) / 255.0         \
-                  green:((float)((rgbValue & 0x00FF00) >> 8)) / 255.0          \
-                   blue:((float)((rgbValue & 0x0000FF) >> 0)) / 255.0          \
-                  alpha:1.0]
+#define RongVoIPUIColorFromRGB(rgbValue)                                                                               \
+    [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16)) / 255.0                                               \
+                    green:((float)((rgbValue & 0x00FF00) >> 8)) / 255.0                                                \
+                     blue:((float)((rgbValue & 0x0000FF) >> 0)) / 255.0                                                \
+                    alpha:1.0]
 
-#define RC_IOS_SYSTEM_VERSION_LESS_THAN(v)                                     \
-  ([[[UIDevice currentDevice] systemVersion]                                   \
-       compare:v                                                               \
-       options:NSNumericSearch] == NSOrderedAscending)
+#define RC_IOS_SYSTEM_VERSION_LESS_THAN(v)                                                                             \
+    ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedAscending)
 
 #define RCCallHeaderLength 80.0f
 #define RCCallButtonLength 64.0f
@@ -41,11 +39,9 @@
 
 + (UIImage *)getDefaultPortraitImage;
 
-+ (NSString *)getReadableStringForMessageCell:
-    (RCCallDisconnectReason)hangupReason;
++ (NSString *)getReadableStringForMessageCell:(RCCallDisconnectReason)hangupReason;
 
-+ (NSString *)getReadableStringForCallViewController:
-    (RCCallDisconnectReason)hangupReason;
++ (NSString *)getReadableStringForCallViewController:(RCCallDisconnectReason)hangupReason;
 
 + (BOOL)isLandscape;
 

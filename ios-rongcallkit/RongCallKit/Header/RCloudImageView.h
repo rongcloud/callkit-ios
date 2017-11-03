@@ -31,15 +31,14 @@
 
 @protocol RCloudImageViewDelegate;
 @interface RCloudImageView : UIImageView <RCloudImageLoaderObserver> {
-@private
-  NSURL *imageURL;
-  UIImage *placeholderImage;
-  id<RCloudImageViewDelegate> delegate;
+  @private
+    NSURL *imageURL;
+    UIImage *placeholderImage;
+    id<RCloudImageViewDelegate> delegate;
 }
 
 - (instancetype)initWithPlaceholderImage:(UIImage *)anImage; // delegate:nil
-- (instancetype)initWithPlaceholderImage:(UIImage *)anImage
-                                delegate:(id<RCloudImageViewDelegate>)aDelegate;
+- (instancetype)initWithPlaceholderImage:(UIImage *)anImage delegate:(id<RCloudImageViewDelegate>)aDelegate;
 
 - (void)cancelImageLoad;
 
@@ -54,6 +53,5 @@
 @protocol RCloudImageViewDelegate <NSObject>
 @optional
 - (void)imageViewLoadedImage:(RCloudImageView *)imageView;
-- (void)imageViewFailedToLoadImage:(RCloudImageView *)imageView
-                             error:(NSError *)error;
+- (void)imageViewFailedToLoadImage:(RCloudImageView *)imageView error:(NSError *)error;
 @end
