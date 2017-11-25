@@ -569,6 +569,7 @@
                            RCCallButtonLength);
             [self layoutTextUnderImageButton:self.speakerButton];
             self.speakerButton.hidden = NO;
+            [self.speakerButton setSelected:self.callSession.speakerEnabled];
         } else if (callStatus != RCCallHangup) {
             self.speakerButton.hidden = YES;
         }
