@@ -1,6 +1,7 @@
+//For Agora Only Begin
 //
 //  RCDVideoFrameObserver.mm
-//  RongCallLib
+//  RongCallKit
 //
 //  Created by litao on 16/5/16.
 //  Copyright © 2016年 Rong Cloud. All rights reserved.
@@ -115,3 +116,4 @@ void RCDVideoFrameObserver::setYUV(unsigned char *yBuffer, unsigned char *uBuffe
         [s_lock unlock];
     }
 }
+//For Agora Only End

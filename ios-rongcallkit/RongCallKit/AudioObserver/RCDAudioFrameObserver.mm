@@ -1,5 +1,6 @@
+//For Agora Only Begin
 //
-//  RCDAudioFrameObserver.cpp
+//  RCDAudioFrameObserver.mm
 //  RongCallKit
 //
 //  Created by litao on 16/9/12.
@@ -28,3 +29,4 @@ bool RCDAudioFrameObserver::onPlaybackAudioFrameBeforeMixing(
     NSLog(@"the user id is %@", userId);
     return true;
 }
+//For Agora Only End

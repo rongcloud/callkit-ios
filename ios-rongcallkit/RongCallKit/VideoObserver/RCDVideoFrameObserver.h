@@ -1,13 +1,14 @@
+//For Agora Only Begin
 //
 //  RCDVideoFrameObserver.h
-//  RongCallLib
+//  RongCallKit
 //
 //  Created by litao on 16/5/16.
 //  Copyright © 2016年 Rong Cloud. All rights reserved.
 //
 
-#ifndef RCDVideoFrameObserver_hpp
-#define RCDVideoFrameObserver_hpp
+#ifndef RCDVideoFrameObserver_h
+#define RCDVideoFrameObserver_h
 #import <AgoraRtcEngineKit/IAgoraMediaEngine.h>
 #include <RongCallLib/IVideoFrameObserver.h>
 #import <UIKit/UIKit.h>
@@ -34,4 +35,5 @@ class RCDVideoFrameObserver : public agora::media::IVideoFrameObserver {
 
     virtual ~RCDVideoFrameObserver();
 };
-#endif /* RCDVideoFrameObserver_hpp */
+#endif /* RCDVideoFrameObserver_h */
+//For Agora Only End

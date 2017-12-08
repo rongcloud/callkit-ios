@@ -1,6 +1,6 @@
 //
-//  EGOImageLoader.h
-//  EGOImageLoading
+//  RCloudImageLoader.h
+//  RongCallKit
 //
 //  Created by Shaun Harrison on 9/15/09.
 //  Copyright (c) 2009-2010 enormego

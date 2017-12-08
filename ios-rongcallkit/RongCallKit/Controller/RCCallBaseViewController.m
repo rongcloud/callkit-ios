@@ -101,8 +101,8 @@
 - (void)startPlayRing:(NSString *)ringPath {
     if (ringPath) {
         AVAudioSession *audioSession = [AVAudioSession sharedInstance];
-        //默认情况下扬声器播放
-        [audioSession setCategory:AVAudioSessionCategoryPlayback error:nil];
+        //默认情况按静音或者锁屏键会静音
+        [audioSession setCategory:AVAudioSessionCategorySoloAmbient error:nil];
         [audioSession setActive:YES error:nil];
 
         if (self.audioPlayer) {
@@ -125,6 +125,9 @@
     if (self.audioPlayer) {
         [self.audioPlayer stop];
         self.audioPlayer = nil;
+        //设置铃声停止后恢复其他app的声音
+        [[AVAudioSession sharedInstance] setActive:NO withOptions:AVAudioSessionSetActiveOptionNotifyOthersOnDeactivation
+                                             error:nil];
     }
 }
 

@@ -27,11 +27,22 @@ ENV_FLAG=$PPARAM
 elif [ $PFLAG == "-o" ]
 then
 VOIP_FLAG=$PPARAM
+elif [ $PFLAG == "-g" ]
+then
+VOIP_TYPE=$PPARAM
 fi
 done
 
 
 sed -i ""  -e '/CFBundleShortVersionString/{n;s/[0-9]\.[0-9]\.[0-9]\{1,2\}/'"$VER_FLAG"'/; }' ./RongCallKit/Info.plist
+
+if [ ${VOIP_TYPE} == "Blink" ]
+then
+sed -i '' -e '/For Agora Only Begin/,/For Agora Only End/d' ./RongCallKit/AudioObserver/RCDAudioFrameObserver.h
+sed -i '' -e '/For Agora Only Begin/,/For Agora Only End/d' ./RongCallKit/AudioObserver/RCDAudioFrameObserver.mm
+sed -i '' -e '/For Agora Only Begin/,/For Agora Only End/d' ./RongCallKit/VideoObserver/RCDVideoFrameObserver.h
+sed -i '' -e '/For Agora Only Begin/,/For Agora Only End/d' ./RongCallKit/VideoObserver/RCDVideoFrameObserver.mm
+fi
 
 if [ ${DEV_FLAG} == "debug" ]
 then

@@ -1,13 +1,14 @@
+//For Agora Only Begin
 //
-//  RCDAudioFrameObserver.hpp
+//  RCDAudioFrameObserver.h
 //  RongCallKit
 //
 //  Created by litao on 16/9/12.
 //  Copyright © 2016年 Rong Cloud. All rights reserved.
 //
 
-#ifndef RCDAudioFrameObserver_hpp
-#define RCDAudioFrameObserver_hpp
+#ifndef RCDAudioFrameObserver_h
+#define RCDAudioFrameObserver_h
 
 #import <AgoraRtcEngineKit/IAgoraMediaEngine.h>
 #import <RongCallLib/IVideoFrameObserver.h>
@@ -23,4 +24,5 @@ class RCDAudioFrameObserver : public agora::media::IAudioFrameObserver {
     bool onPlaybackAudioFrameBeforeMixing(unsigned int uid, agora::media::IAudioFrameObserver::AudioFrame &audioFrame);
 };
 
-#endif /* RCDAudioFrameObserver_hpp */
+#endif /* RCDAudioFrameObserver_h */
+//For Agora Only End

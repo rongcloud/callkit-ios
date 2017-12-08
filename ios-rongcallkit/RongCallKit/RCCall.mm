@@ -1,5 +1,5 @@
 //
-//  RCCall.m
+//  RCCall.mm
 //  RongCallKit
 //
 //  Created by 岑裕 on 16/3/11.
@@ -344,37 +344,6 @@
     [[UIApplication sharedApplication] presentLocalNotificationNow:callNotification];
 }
 
-#pragma mark - ringing
-- (void)startPlayRing:(NSString *)ringPath {
-    if (ringPath) {
-        AVAudioSession *audioSession = [AVAudioSession sharedInstance];
-        //默认情况下扬声器播放
-        [audioSession setCategory:AVAudioSessionCategoryPlayback error:nil];
-        [audioSession setActive:YES error:nil];
-
-        if (self.audioPlayer) {
-            [self stopPlayRing];
-        }
-
-        NSURL *url = [NSURL URLWithString:ringPath];
-        NSError *error = nil;
-        self.audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
-        if (!error) {
-            self.audioPlayer.numberOfLoops = -1;
-            self.audioPlayer.volume = 1.0;
-            [self.audioPlayer prepareToPlay];
-            [self.audioPlayer play];
-        }
-    }
-}
-
-- (void)stopPlayRing {
-    if (self.audioPlayer) {
-        [self.audioPlayer stop];
-        self.audioPlayer = nil;
-    }
-}
-
 #pragma mark - alert
 - (void)loadErrorAlertWithoutConfirm:(NSString *)title {
     UIAlertView *alert =
@@ -393,6 +362,7 @@
     if (alert.tag == AlertWithoutConfirm) {
         [alert dismissWithClickedButtonIndex:0 animated:NO];
     }
+    [[UIApplication sharedApplication].delegate.window makeKeyAndVisible];
 }
 
 - (void)loadErrorAlertWithConfirm:(NSString *)title message:(NSString *)message {
