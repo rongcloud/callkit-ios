@@ -180,8 +180,12 @@ typedef void (^CompleteBlock)(NSArray *addUserIdList);
     } else {
         [cell.selectedImageView setImage:[RCCallKitUtility imageFromVoIPBundle:@"voip/unselected.png"]];
     }
-
-    RCUserInfo *userInfo = [[RCUserInfoCacheManager sharedManager] getUserInfo:userId];
+    RCUserInfo *userInfo;
+    if (self.conversationType == ConversationType_GROUP) {
+        userInfo = [[RCUserInfoCacheManager sharedManager] getUserInfo:userId inGroupId:self.targetId];
+    }else{
+        userInfo = [[RCUserInfoCacheManager sharedManager] getUserInfo:userId];
+    }
     if (userInfo) {
         [cell.headerImageView setImageURL:[NSURL URLWithString:userInfo.portraitUri]];
         [cell.nameLabel setText:userInfo.name];
