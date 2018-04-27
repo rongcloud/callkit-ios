@@ -46,7 +46,8 @@
 - (void)didTapMessageCell:(RCMessageModel *)messageModel {
     if ([messageModel.content isKindOfClass:[RCCallSummaryMessage class]]) {
         RCCallSummaryMessage *callMessage = (RCCallSummaryMessage *)messageModel.content;
-        if (messageModel.conversationType == ConversationType_PRIVATE) {
+        //  其他端接听显示的消息不可点击
+        if (messageModel.conversationType == ConversationType_PRIVATE && callMessage.hangupReason != RCCallDisconnectReasonAcceptByOtherClient) {
             [[RCCall sharedRCCall] startSingleCall:messageModel.targetId mediaType:callMessage.mediaType];
         }
     }

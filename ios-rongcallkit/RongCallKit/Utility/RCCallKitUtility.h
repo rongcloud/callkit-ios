@@ -26,7 +26,15 @@
 #define RCCallVerticalMargin 32.0f
 #define RCCallHorizontalMargin 25.0f
 #define RCCallInsideMargin 5.0f
+#define RCCallFloatingBoardWidth 82
+#define RCCallFloatingBoardHeight 114
 
+#define RCCallTopGGradientHeight 100
+#define RCCallBottomGradientHeight (([UIScreen mainScreen].bounds.size.height == 812) ? 242.0f : 208.0f)
+//  判断是否为iphoneX，是iphoneX，底部按钮整体上移34
+#define RCCallExtraSpace (([UIScreen mainScreen].bounds.size.height == 812) ? 34.0f : 0.0f)
+// iphoneX顶部额外加上statusbar的30（实际刘海的高度）
+#define RCCallStatusBarHeight (([UIScreen mainScreen].bounds.size.height == 812) ? 30.0f : 0.0f)
 @interface RCCallKitUtility : NSObject
 
 + (NSString *)getReadableStringForTime:(long)sec;

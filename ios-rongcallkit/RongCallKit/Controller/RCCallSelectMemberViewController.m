@@ -206,13 +206,16 @@ typedef void (^CompleteBlock)(NSArray *addUserIdList);
     if (![self.existUserIdList containsObject:userId]) {
         if ([self.selectUserIds containsObject:userId]) {
             [self.selectUserIds removeObject:userId];
-        } else {
+        } else if (userId) {
             [self.selectUserIds addObject:userId];
         }
         [self updateRightButton];
     }
 
-    [self.tableView reloadRowsAtIndexPaths:@[ indexPath ] withRowAnimation:UITableViewRowAnimationAutomatic];
+    [UIView performWithoutAnimation:^{
+        [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+        
+    }];
 }
 
 - (void)updateRightButton {

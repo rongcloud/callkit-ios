@@ -382,7 +382,7 @@
 
     if (callStatus == RCCallActive) {
         self.mainNameLabel.frame =
-            CGRectMake(RCCallHorizontalMargin, RCCallVerticalMargin,
+            CGRectMake(RCCallHorizontalMargin, RCCallVerticalMargin + RCCallStatusBarHeight,
                        self.view.frame.size.width - RCCallHorizontalMargin * 2, RCCallLabelHeight);
         self.mainNameLabel.hidden = NO;
     } else {
@@ -393,7 +393,7 @@
                          (self.view.frame.size.height - RCCallLabelHeight) / 2);
     if (callStatus == RCCallIncoming || callStatus == RCCallRinging) {
         self.userCollectionTitleLabel.frame = CGRectMake(
-            RCCallHorizontalMargin, titleY, self.view.frame.size.width - RCCallHorizontalMargin * 2, RCCallLabelHeight);
+            RCCallHorizontalMargin, titleY - RCCallExtraSpace, self.view.frame.size.width - RCCallHorizontalMargin * 2, RCCallLabelHeight);
         self.userCollectionTitleLabel.hidden = NO;
     } else {
         self.userCollectionTitleLabel.hidden = YES;
@@ -401,7 +401,7 @@
 
     if (callStatus == RCCallIncoming || callStatus == RCCallRinging) {
         self.userCollectionView.frame = CGRectMake(
-            RCCallHorizontalMargin * 2.5, titleY + RCCallLabelHeight + RCCallInsideMargin,
+            RCCallHorizontalMargin * 2.5, titleY + RCCallLabelHeight + RCCallInsideMargin - RCCallExtraSpace,
             self.view.frame.size.width - RCCallHorizontalMargin * 5,
             self.view.frame.size.height - RCCallVerticalMargin - RCCallButtonLength - RCCallInsideMargin * 4 -
                 RCCallLabelHeight - (titleY + RCCallLabelHeight + RCCallInsideMargin));
@@ -416,7 +416,7 @@
         self.userCollectionView.hidden = NO;
     } else if (callStatus == RCCallDialing || (callStatus == RCCallActive && !self.isFullScreen)) {
         self.userCollectionView.frame = CGRectMake(
-            0, self.view.frame.size.height - RCCallVerticalMargin - RCCallButtonLength * 3.5 - RCCallInsideMargin * 2,
+            0, self.view.frame.size.height - RCCallVerticalMargin - RCCallButtonLength * 3.5 - RCCallInsideMargin * 2 - RCCallExtraSpace,
             self.view.frame.size.width, RCCallButtonLength * 2.5);
 
         if (self.userCollectionViewLayout) {
@@ -429,7 +429,7 @@
         self.userCollectionView.hidden = NO;
     } else if (callStatus == RCCallActive && self.isFullScreen) {
         self.userCollectionView.frame =
-            CGRectMake(0, self.view.frame.size.height - RCCallInsideMargin - RCCallButtonLength * 2.5,
+            CGRectMake(0, self.view.frame.size.height - RCCallInsideMargin - RCCallButtonLength * 2.5 - RCCallExtraSpace,
                        self.view.frame.size.width, RCCallButtonLength * 2.5);
         self.userCollectionView.hidden = NO;
     }

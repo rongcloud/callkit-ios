@@ -193,7 +193,7 @@
             self.remotePortraitView.hidden = YES;
 
             self.remoteNameLabel.frame =
-                CGRectMake(RCCallHorizontalMargin, RCCallVerticalMargin,
+                CGRectMake(RCCallHorizontalMargin, RCCallVerticalMargin + RCCallStatusBarHeight,
                            self.view.frame.size.width - RCCallHorizontalMargin * 2, RCCallLabelHeight);
             self.remoteNameLabel.hidden = NO;
             self.remoteNameLabel.textAlignment = NSTextAlignmentCenter;
@@ -231,7 +231,7 @@
             } else {
                 self.subVideoView.frame =
                     CGRectMake(self.view.frame.size.width - RCCallHeaderLength - RCCallHorizontalMargin / 2,
-                               RCCallVerticalMargin, RCCallHeaderLength, RCCallHeaderLength * 1.5);
+                               RCCallVerticalMargin + RCCallStatusBarHeight, RCCallHeaderLength, RCCallHeaderLength * 1.5);
             }
             [self.callSession setVideoView:self.subVideoView
                                     userId:[RCIMClient sharedRCIMClient].currentUserInfo.userId];

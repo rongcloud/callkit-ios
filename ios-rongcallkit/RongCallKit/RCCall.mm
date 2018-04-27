@@ -18,6 +18,7 @@
 #import "RCDAudioFrameObserver.h"
 #import "RCDVideoFrameObserver.h"
 #import "RCUserInfoCacheManager.h"
+#import "RCCXCall.h"
 #import <AVFoundation/AVFoundation.h>
 
 #define AlertWithoutConfirm 1000
@@ -132,6 +133,10 @@
                             targetId:(NSString *)targetId
                            mediaType:(RCCallMediaType)mediaType
                           userIdList:(NSArray *)userIdList {
+    if (userIdList.count == 0) {
+        NSLog(@"startMultiCallViewController userIdList is empty");
+        return;
+    }
     if (mediaType == RCCallMediaAudio) {
         UIViewController *audioCallViewController =
             [[RCCallAudioMultiCallViewController alloc] initWithOutgoingCall:conversationType
@@ -303,6 +308,14 @@
                                mediaType:(RCCallMediaType)mediaType
                               userIdList:(NSArray *)userIdList
                                 userDict:(NSDictionary *)userDict {
+    if (([UIDevice currentDevice].systemVersion.floatValue >= 10.0)) {
+        if (mediaType == RCCallMediaAudio) {
+            [[RCCXCall sharedInstance] reportIncomingCallWithInviter:inviterUserId
+                                                          userIdList:userIdList
+                                                             isVideo:NO];
+            return;
+        }
+    }
     UILocalNotification *callNotification = [[UILocalNotification alloc] init];
     callNotification.alertAction = NSLocalizedStringFromTable(@"LocalNotificationShow", @"RongCloudKit", nil);
 
@@ -316,7 +329,6 @@
             callNotification.alertBody =
                 [NSString stringWithFormat:@"%@", NSLocalizedStringFromTable(@"VoIPAudioCallIncomingWithoutUserName",
                                                                              @"RongCloudKit", nil)];
-            ;
         }
     } else {
         if (inviterUserName) {
