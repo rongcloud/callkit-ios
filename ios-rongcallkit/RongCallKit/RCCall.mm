@@ -15,8 +15,8 @@
 #import "RCCallSingleCallViewController.h"
 #import "RCCallTipMessageCell.h"
 #import "RCCallVideoMultiCallViewController.h"
-#import "RCDAudioFrameObserver.h"
-#import "RCDVideoFrameObserver.h"
+//#import "RCDAudioFrameObserver.h"
+//#import "RCDVideoFrameObserver.h"
 #import "RCUserInfoCacheManager.h"
 #import "RCCXCall.h"
 #import <AVFoundation/AVFoundation.h>
@@ -62,6 +62,8 @@
 }
 
 - (void)appDidBecomeActive {
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(triggerVibrateRCCall) object:nil];
+    [[AVAudioSession sharedInstance] setActive:NO withOptions:AVAudioSessionSetActiveOptionNotifyOthersOnDeactivation error:nil];
     for (UILocalNotification *notification in self.locationNotificationList) {
         if ([notification.userInfo[@"appData"][@"callId"] isEqualToString:self.currentCallSession.callId]) {
             [[UIApplication sharedApplication] cancelLocalNotification:notification];
@@ -133,10 +135,6 @@
                             targetId:(NSString *)targetId
                            mediaType:(RCCallMediaType)mediaType
                           userIdList:(NSArray *)userIdList {
-    if (userIdList.count == 0) {
-        NSLog(@"startMultiCallViewController userIdList is empty");
-        return;
-    }
     if (mediaType == RCCallMediaAudio) {
         UIViewController *audioCallViewController =
             [[RCCallAudioMultiCallViewController alloc] initWithOutgoingCall:conversationType
@@ -262,6 +260,9 @@
         }
     }
     [viewController dismissViewControllerAnimated:YES completion:nil];
+    
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(triggerVibrateRCCall) object:nil];
+    [[AVAudioSession sharedInstance] setActive:NO withOptions:AVAudioSessionSetActiveOptionNotifyOthersOnDeactivation error:nil];
 }
 
 - (RCCallSession *)currentCallSession {
@@ -308,6 +309,8 @@
                                mediaType:(RCCallMediaType)mediaType
                               userIdList:(NSArray *)userIdList
                                 userDict:(NSDictionary *)userDict {
+#ifdef PUBLIC
+#else
     if (([UIDevice currentDevice].systemVersion.floatValue >= 10.0)) {
         if (mediaType == RCCallMediaAudio) {
             [[RCCXCall sharedInstance] reportIncomingCallWithInviter:inviterUserId
@@ -316,6 +319,13 @@
             return;
         }
     }
+#endif
+    
+    //默认情况按静音或者锁屏键会静音
+    AVAudioSession *audioSession = [AVAudioSession sharedInstance];
+    [audioSession setCategory:AVAudioSessionCategorySoloAmbient error:nil];
+    [self triggerVibrateRCCall];
+    
     UILocalNotification *callNotification = [[UILocalNotification alloc] init];
     callNotification.alertAction = NSLocalizedStringFromTable(@"LocalNotificationShow", @"RongCloudKit", nil);
 
@@ -378,13 +388,30 @@
 }
 
 - (void)loadErrorAlertWithConfirm:(NSString *)title message:(NSString *)message {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title
-                                                    message:message
-                                                   delegate:nil
-                                          cancelButtonTitle:NSLocalizedStringFromTable(@"OK", @"RongCloudKit", nil)
-                                          otherButtonTitles:nil];
-    alert.tag = AlertWithConfirm;
-    [alert show];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title
+                                                        message:message
+                                                       delegate:nil
+                                              cancelButtonTitle:NSLocalizedStringFromTable(@"OK", @"RongCloudKit", nil)
+                                              otherButtonTitles:nil];
+        alert.tag = AlertWithConfirm;
+        [alert show];
+    });
+}
+
+- (void)triggerVibrateRCCall {
+    __weak typeof(self) weakSelf = self;
+    NSString *version = [UIDevice currentDevice].systemVersion;
+    if (version.doubleValue >= 9.0) {
+        AudioServicesPlaySystemSoundWithCompletion(kSystemSoundID_Vibrate, ^{
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [weakSelf performSelector:@selector(triggerVibrateRCCall) withObject:nil afterDelay:2];
+            });
+        });
+    }else{
+        AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+        [self performSelector:@selector(triggerVibrateRCCall) withObject:nil afterDelay:2];
+    }
 }
 
 - (void)dealloc {

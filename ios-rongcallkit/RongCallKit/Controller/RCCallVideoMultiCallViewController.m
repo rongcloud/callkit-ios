@@ -17,6 +17,7 @@
 #import "RCUserInfoCacheManager.h"
 #import "RCVideoMultiCallUserCollectionLayout.h"
 #import "RCloudImageView.h"
+#import "UICollectionView+BackgroundView.h"
 
 #define currentUserId ([RCIMClient sharedRCIMClient].currentUserInfo.userId)
 #define RongVoIPMultiVideoCellReuseID @"RongVoIPMultiVideoCellReuseID"
@@ -24,9 +25,9 @@
 @interface RCCallVideoMultiCallViewController () <UICollectionViewDataSource, UICollectionViewDelegate>
 
 @property(nonatomic, strong) RCCallUserCallInfoModel *mainModel;
-@property(nonatomic, strong) NSMutableArray *subUserModelList;
 
 @property(nonatomic, assign) BOOL isFullScreen;
+@property(nonatomic, strong) NSMutableDictionary *cellLabelDic;
 
 @end
 
@@ -68,15 +69,16 @@
         addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self
                                                                      action:@selector(backgroundViewClicked)]];
 
-    self.userCollectionView.userInteractionEnabled = YES;
-    [self.userCollectionView
-        addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self
-                                                                     action:@selector(backgroundViewClicked)]];
+//    self.userCollectionView.userInteractionEnabled = YES;
+//    [self.userCollectionView
+//        addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self
+//                                                                     action:@selector(backgroundViewClicked)]];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     self.isFullScreen = NO;
+    self.cellLabelDic = [NSMutableDictionary dictionary];
 }
 
 - (void)initAllUserModel {
@@ -88,26 +90,28 @@
 
             self.subUserModelList = [[NSMutableArray alloc] init];
             for (RCCallUserProfile *userProfile in self.callSession.userProfileList) {
-                if (![userProfile.userId isEqualToString:firstUserProfile.userId]) {
+                if (![userProfile.userId isEqualToString:firstUserProfile.userId] && userProfile.blinkUserType != 2) {
                     RCCallUserCallInfoModel *userModel = [self generateUserModel:userProfile.userId];
                     [self.subUserModelList addObject:userModel];
                 }
             }
             RCCallUserCallInfoModel *userModel = [self generateUserModel:currentUserId];
-            [self.subUserModelList addObject:userModel];
+            if (userModel.profile.blinkUserType != 2)
+                [self.subUserModelList addObject:userModel];
         } else {
             self.mainModel = [self generateUserModel:self.callSession.inviter];
             [self.callSession setVideoView:self.backgroundView userId:self.mainModel.userId];
 
             self.subUserModelList = [[NSMutableArray alloc] init];
             for (RCCallUserProfile *userProfile in self.callSession.userProfileList) {
-                if (![userProfile.userId isEqualToString:self.callSession.inviter]) {
+                if (![userProfile.userId isEqualToString:self.callSession.inviter] && userProfile.blinkUserType != 2) {
                     RCCallUserCallInfoModel *userModel = [self generateUserModel:userProfile.userId];
                     [self.subUserModelList addObject:userModel];
                 }
             }
             RCCallUserCallInfoModel *userModel = [self generateUserModel:currentUserId];
-            [self.subUserModelList addObject:userModel];
+            if (userModel.profile.blinkUserType != 2)
+                [self.subUserModelList addObject:userModel];
         }
     } else if (self.callSession.callStatus == RCCallDialing) {
         self.mainModel = [self generateUserModel:currentUserId];
@@ -115,8 +119,11 @@
 
         self.subUserModelList = [[NSMutableArray alloc] init];
         for (RCCallUserProfile *userProfile in self.callSession.userProfileList) {
-            RCCallUserCallInfoModel *userModel = [self generateUserModel:userProfile.userId];
-            [self.subUserModelList addObject:userModel];
+            if (userProfile.blinkUserType != 2)
+            {
+                RCCallUserCallInfoModel *userModel = [self generateUserModel:userProfile.userId];
+                [self.subUserModelList addObject:userModel];
+            }
         }
     } else if (self.callSession.callStatus == RCCallActive) {
         if ([self.callSession.inviter isEqualToString:currentUserId] || [self inviterHasHangup]) {
@@ -125,8 +132,11 @@
 
             self.subUserModelList = [[NSMutableArray alloc] init];
             for (RCCallUserProfile *userProfile in self.callSession.userProfileList) {
+                if (userProfile.blinkUserType != 2)
+                {
                 RCCallUserCallInfoModel *userModel = [self generateUserModel:userProfile.userId];
                 [self.subUserModelList addObject:userModel];
+                }
             }
         } else {
             self.mainModel = [self generateUserModel:self.callSession.inviter];
@@ -134,13 +144,14 @@
 
             self.subUserModelList = [[NSMutableArray alloc] init];
             for (RCCallUserProfile *userProfile in self.callSession.userProfileList) {
-                if (![userProfile.userId isEqualToString:self.callSession.inviter]) {
+                if (![userProfile.userId isEqualToString:self.callSession.inviter] && userProfile.blinkUserType != 2) {
                     RCCallUserCallInfoModel *userModel = [self generateUserModel:userProfile.userId];
                     [self.subUserModelList addObject:userModel];
                 }
             }
             RCCallUserCallInfoModel *userModel = [self generateUserModel:currentUserId];
-            [self.subUserModelList addObject:userModel];
+            if (userModel.profile.blinkUserType != 2)
+                [self.subUserModelList addObject:userModel];
         }
     }
 }
@@ -221,12 +232,16 @@
     if (model.userId && ![[self getAllUserIdInSubUserModel] containsObject:model.userId]) {
         NSInteger index = self.subUserModelList.count;
         NSIndexPath *indexPath = [NSIndexPath indexPathForItem:index inSection:0];
-        [self.subUserModelList addObject:model];
-        [self.userCollectionView insertItemsAtIndexPaths:[NSArray arrayWithObject:indexPath]];
+        if (model.profile.blinkUserType != 2) {
+            [self.subUserModelList addObject:model];
+            [self.userCollectionView insertItemsAtIndexPaths:[NSArray arrayWithObject:indexPath]];
+        }
     }
 }
 
 - (void)removeSubUserModel:(RCCallUserCallInfoModel *)model {
+    @synchronized(self)
+    {
     if (model) {
         NSInteger index = [self.subUserModelList indexOfObject:model];
         if (index != NSNotFound) {
@@ -234,6 +249,7 @@
             [self.subUserModelList removeObject:model];
             [self.userCollectionView deleteItemsAtIndexPaths:[NSArray arrayWithObject:indexPath]];
         }
+    }
     }
 }
 
@@ -280,8 +296,12 @@
         _mainNameLabel = [[UILabel alloc] init];
         _mainNameLabel.backgroundColor = [UIColor clearColor];
         _mainNameLabel.textColor = [UIColor whiteColor];
+        _mainNameLabel.layer.shadowOpacity = 0.8;
+        _mainNameLabel.layer.shadowRadius = 1.0;
+        _mainNameLabel.layer.shadowColor = [UIColor darkGrayColor].CGColor;
+        _mainNameLabel.layer.shadowOffset = CGSizeMake(0, 1);
         _mainNameLabel.font = [UIFont systemFontOfSize:18];
-        _mainNameLabel.textAlignment = NSTextAlignmentCenter;
+        _mainNameLabel.textAlignment = NSTextAlignmentLeft;
         _mainNameLabel.text = self.mainModel.userInfo.name;
 
         [self.view addSubview:_mainNameLabel];
@@ -318,6 +338,8 @@
                 [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:userCollectionViewLayout];
         }
         _userCollectionView.backgroundColor = [UIColor clearColor];
+        _userCollectionView.tag = 202;
+        [_userCollectionView setCallVideoMultiCallViewController:self];
 
         [self.view addSubview:_userCollectionView];
         _userCollectionView.hidden = YES;
@@ -382,8 +404,8 @@
 
     if (callStatus == RCCallActive) {
         self.mainNameLabel.frame =
-            CGRectMake(RCCallHorizontalMargin, RCCallVerticalMargin + RCCallStatusBarHeight,
-                       self.view.frame.size.width - RCCallHorizontalMargin * 2, RCCallLabelHeight);
+            CGRectMake(RCCallHorizontalMargin, RCCallVerticalMargin,
+                       (self.view.frame.size.width - RCCallHorizontalMargin * 2) / 2, RCCallLabelHeight);
         self.mainNameLabel.hidden = NO;
     } else {
         self.mainNameLabel.hidden = YES;
@@ -436,8 +458,11 @@
 
     if (callStatus == RCCallActive) {
         self.minimizeButton.hidden = self.isFullScreen;
+        self.handUpButton.hidden = self.isFullScreen;
+        self.whiteBoardButton.hidden = self.isFullScreen;
         self.cameraSwitchButton.hidden = self.isFullScreen;
-        self.inviteUserButton.hidden = self.isFullScreen;
+//        self.inviteUserButton.hidden = self.isFullScreen;
+        self.addButton.hidden = self.isFullScreen;
         self.muteButton.hidden = self.isFullScreen;
         self.hangupButton.hidden = self.isFullScreen;
         self.cameraCloseButton.hidden = self.isFullScreen;
@@ -567,6 +592,27 @@
     RCCallUserCallInfoModel *userModel = self.subUserModelList[indexPath.row];
     [cell setModel:userModel status:self.callSession.callStatus];
     [self.callSession setVideoView:(UIView *)cell.headerImageView userId:userModel.userId];
+    
+	//cell上显示名字
+    NSInteger item = [indexPath item];
+    UILabel *cellNameLabel = (UILabel *)self.cellLabelDic[@(item)];
+    if (!cellNameLabel)
+    {
+        cellNameLabel = [[UILabel alloc] init];
+        cellNameLabel.backgroundColor = [UIColor clearColor];
+        cellNameLabel.textColor = [UIColor whiteColor];
+        cellNameLabel.layer.shadowOpacity = 0.8;
+        cellNameLabel.layer.shadowRadius = 1.0;
+        cellNameLabel.layer.shadowColor = [UIColor darkGrayColor].CGColor;
+        cellNameLabel.layer.shadowOffset = CGSizeMake(0, 1);
+        cellNameLabel.font = [UIFont systemFontOfSize:14];
+        cellNameLabel.textAlignment = NSTextAlignmentCenter;
+        [self.cellLabelDic setObject:cellNameLabel forKey:@(item)];
+    }
+    cellNameLabel.frame = CGRectMake(0, cell.frame.size.height - 16, cell.frame.size.width, 16);
+    cellNameLabel.text = userModel.userInfo.name;
+    [cell addSubview:cellNameLabel];
+    
     return cell;
 }
 

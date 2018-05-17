@@ -26,8 +26,6 @@
 #define RCCallVerticalMargin 32.0f
 #define RCCallHorizontalMargin 25.0f
 #define RCCallInsideMargin 5.0f
-#define RCCallFloatingBoardWidth 82
-#define RCCallFloatingBoardHeight 114
 
 #define RCCallTopGGradientHeight 100
 #define RCCallBottomGradientHeight (([UIScreen mainScreen].bounds.size.height == 812) ? 242.0f : 208.0f)

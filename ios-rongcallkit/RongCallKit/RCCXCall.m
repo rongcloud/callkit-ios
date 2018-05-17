@@ -9,24 +9,35 @@
 #import "RCCXCall.h"
 #import "RCCall.h"
 #import "RCUserInfoCacheManager.h"
+
+#ifdef PUBLIC
+#else
 #import <CallKit/CallKit.h>
+#endif
+
 #import <AVFoundation/AVFoundation.h>
 #import "RCCallKitUtility.h"
 
 #define RCCXCallLocalizedName @"RongCloud"
 
+#ifdef PUBLIC
+@interface RCCXCall()
+@end
+#else
 @interface RCCXCall() <CXProviderDelegate>
 @property(nonatomic, strong) CXProvider *provider;
 @property(nonatomic, strong) NSUUID *currentUUID;
 @property(nonatomic, strong) CXCallController *controller;
 @end
+#endif
+
 
 @implementation RCCXCall
 
 + (instancetype)sharedInstance {
     static RCCXCall *pCall;
     static dispatch_once_t onceToken;
-    if (RC_IOS_SYSTEM_VERSION_LESS_THAN(@"10.0")) {
+    if (([UIDevice currentDevice].systemVersion.floatValue < 10.0)) {
         return nil;
     }
     dispatch_once(&onceToken, ^{
@@ -38,42 +49,46 @@
 }
 
 - (void)startCall:(NSString *)userId {
-    if (userId.length > 0) {
-        NSUUID *uuid = [NSUUID UUID];
-        self.currentUUID = uuid;
-        CXHandle *handle = [[CXHandle alloc] initWithType:CXHandleTypeGeneric value:[userId copy]];
-        CXStartCallAction *startAction = [[CXStartCallAction alloc] initWithCallUUID:uuid handle:handle];
-        NSArray *array = [userId componentsSeparatedByString:@":::"];
-        if (array.count == 1) {
-            startAction.contactIdentifier = [[RCUserInfoCacheManager sharedManager] getUserInfo:userId].name;
-        } else {
-            NSString *str = @"";
-            for (NSString *uId in array) {
-                NSString *name = [[RCUserInfoCacheManager sharedManager] getUserInfo:uId].name;
-                if (name.length > 0) {
-                    str = [str stringByAppendingFormat:@"%@、", name];
-                }
+#ifdef PUBLIC
+#else
+    NSUUID *uuid = [NSUUID UUID];
+    self.currentUUID = uuid;
+    CXHandle *handle = [[CXHandle alloc] initWithType:CXHandleTypeGeneric value:[userId copy]];
+    CXStartCallAction *startAction = [[CXStartCallAction alloc] initWithCallUUID:uuid handle:handle];
+    NSArray *array = [userId componentsSeparatedByString:@":::"];
+    if (array.count == 1) {
+        startAction.contactIdentifier = [[RCUserInfoCacheManager sharedManager] getUserInfo:userId].name;
+    } else {
+        NSString *str = @"";
+        for (NSString *uId in array) {
+            NSString *name = [[RCUserInfoCacheManager sharedManager] getUserInfo:uId].name;
+            if (name.length > 0) {
+                str = [str stringByAppendingFormat:@"%@、", name];
             }
-            if (str.length > 0) {
-                str = [str substringToIndex:str.length - 1];
-            }
-            startAction.contactIdentifier = str;
         }
-        CXTransaction *transaction = [[CXTransaction alloc] init];
-        [transaction addAction:startAction];
-        [self.controller requestTransaction:transaction completion:^(NSError * _Nullable error) {
-        }];
-        [self.provider reportOutgoingCallWithUUID:uuid startedConnectingAtDate:nil];
+        str = [str substringToIndex:str.length - 1];
+        startAction.contactIdentifier = str;
     }
+    CXTransaction *transaction = [[CXTransaction alloc] init];
+    [transaction addAction:startAction];
+    [self.controller requestTransaction:transaction completion:^(NSError * _Nullable error) {
+    }];
+    [self.provider reportOutgoingCallWithUUID:uuid startedConnectingAtDate:nil];
+#endif
 }
 
 - (void)reportOutgoingCallConnected {
+#ifdef PUBLIC
+#else
     [self.provider reportOutgoingCallWithUUID:self.currentUUID connectedAtDate:nil];
+#endif
 }
 
 - (void)reportIncomingCallWithInviter:(NSString *)inviterId
                            userIdList:(NSArray<NSString *> *)userIdList
                               isVideo:(BOOL)isVideo {
+#ifdef PUBLIC
+#else
     [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayAndRecord error:nil];
     NSUUID *uuid = [[NSUUID alloc] init];
     self.currentUUID = uuid;
@@ -102,9 +117,12 @@
                                           if (error == nil) {
                                           }
                                       }];
+#endif
 }
 
 - (void)endCXCall {
+#ifdef PUBLIC
+#else
     if (self.currentUUID) {
         CXEndCallAction *endAction = [[CXEndCallAction alloc] initWithCallUUID:self.currentUUID];
         CXTransaction *transaction = [[CXTransaction alloc] init];
@@ -113,17 +131,23 @@
             self.currentUUID = nil;
         }];
     }
+#endif
 }
 
 - (void)hangupIfNeedWithUUID:(NSString *)UUID {
+#ifdef PUBLIC
+#else
     if (UUID.length == 0) {
         return;
     }
     if (![UUID isEqualToString:self.currentUUID.UUIDString]) {
         [[RCCall sharedRCCall].currentCallSession hangup];
     }
+#endif
 }
 
+#ifdef PUBLIC
+#else
 - (void)provider:(CXProvider *)provider performAnswerCallAction:(CXAnswerCallAction *)action {
     if ([self.currentUUID.UUIDString isEqualToString:action.callUUID.UUIDString]) {
         [[RCCall sharedRCCall].currentCallSession accept:[RCCall sharedRCCall].currentCallSession.mediaType];
@@ -184,5 +208,6 @@
     }
     return _controller;
 }
+#endif
 
 @end

@@ -102,24 +102,24 @@ static NSString *RCVoipFloatingBoardPosY = @"RCVoipFloatingBoardPosY";
     posX = posX ? posX : 30;
     posY = posY ? posY : 30;
     CGRect screenBounds = [UIScreen mainScreen].bounds;
-    posX = (posX + RCCallFloatingBoardWidth) > screenBounds.size.width ? (screenBounds.size.width - RCCallFloatingBoardWidth - 2) : posX;
-    posY = (posY + RCCallFloatingBoardHeight) > screenBounds.size.height ? (screenBounds.size.height - RCCallFloatingBoardHeight - 2) : posY;
+    posX = (posX + 30) > screenBounds.size.width ? (screenBounds.size.width - 30) : posX;
+    posY = (posY + 48) > screenBounds.size.height ? (screenBounds.size.height - 48) : posY;
 
     if ([UIDevice currentDevice].orientation == UIDeviceOrientationLandscapeLeft &&
         [self isSupportOrientation:UIInterfaceOrientationLandscapeLeft]) {
         self.window.transform = CGAffineTransformMakeRotation(M_PI / 2);
-        self.window.frame = CGRectMake(posX, posY, RCCallFloatingBoardWidth, RCCallFloatingBoardHeight);
-        self.floatingButton.frame = CGRectMake(0, 0, RCCallFloatingBoardHeight, RCCallFloatingBoardWidth);
+        self.window.frame = CGRectMake(posX, posY, 64, 96);
+        self.floatingButton.frame = CGRectMake(0, 0, 96, 64);
         if ([self isVideoViewEnabledSession]) {
-            self.videoView.frame = CGRectMake(0, 0, RCCallFloatingBoardHeight, RCCallFloatingBoardWidth);
+            self.videoView.frame = CGRectMake(0, 0, 96, 64);
         }
     } else if ([UIDevice currentDevice].orientation == UIDeviceOrientationLandscapeRight &&
                [self isSupportOrientation:UIInterfaceOrientationLandscapeRight]) {
         self.window.transform = CGAffineTransformMakeRotation(-M_PI / 2);
-        self.window.frame = CGRectMake(posX, posY, RCCallFloatingBoardWidth, RCCallFloatingBoardHeight);
-        self.floatingButton.frame = CGRectMake(0, 0, RCCallFloatingBoardHeight, RCCallFloatingBoardWidth);
+        self.window.frame = CGRectMake(posX, posY, 64, 96);
+        self.floatingButton.frame = CGRectMake(0, 0, 96, 64);
         if ([self isVideoViewEnabledSession]) {
-            self.videoView.frame = CGRectMake(0, 0, RCCallFloatingBoardHeight, RCCallFloatingBoardWidth);
+            self.videoView.frame = CGRectMake(0, 0, 96, 64);
         }
     } else {
         if ([UIDevice currentDevice].orientation == UIDeviceOrientationPortraitUpsideDown &&
@@ -129,10 +129,10 @@ static NSString *RCVoipFloatingBoardPosY = @"RCVoipFloatingBoardPosY";
             self.window.transform = CGAffineTransformMakeRotation(0);
         }
 
-        self.window.frame = CGRectMake(posX, posY, RCCallFloatingBoardWidth, RCCallFloatingBoardHeight);
-        self.floatingButton.frame = CGRectMake(0, 0, RCCallFloatingBoardWidth, RCCallFloatingBoardHeight);
+        self.window.frame = CGRectMake(posX, posY, 64, 96);
+        self.floatingButton.frame = CGRectMake(0, 0, 64, 96);
         if ([self isVideoViewEnabledSession]) {
-            self.videoView.frame = CGRectMake(0, 0, RCCallFloatingBoardWidth, RCCallFloatingBoardHeight);
+            self.videoView.frame = CGRectMake(0, 0, 64, 96);
         }
     }
 
@@ -157,19 +157,18 @@ static NSString *RCVoipFloatingBoardPosY = @"RCVoipFloatingBoardPosY";
                                  forState:UIControlStateNormal];
         }
     }
-    [self layoutTextUnderImageButton:self.floatingButton];
 }
 
 - (UIWindow *)window {
     if (!_window) {
         CGFloat posX = [[[NSUserDefaults standardUserDefaults] objectForKey:RCVoipFloatingBoardPosX] floatValue];
         CGFloat posY = [[[NSUserDefaults standardUserDefaults] objectForKey:RCVoipFloatingBoardPosY] floatValue];
-        posX = posX ? posX : 30;
-        posY = posY ? posY : 30;
+        posX = (posX - 30) ? posX : 30;
+        posY = (posY - 48) ? posY : 48;
         CGRect screenBounds = [UIScreen mainScreen].bounds;
-        posX = (posX + RCCallFloatingBoardWidth) > screenBounds.size.width ? (screenBounds.size.width - RCCallFloatingBoardWidth - 2) : posX;
-        posY = (posY + RCCallFloatingBoardHeight) > screenBounds.size.height ? (screenBounds.size.height - RCCallFloatingBoardHeight - 2) : posY;
-        _window = [[UIWindow alloc] initWithFrame:CGRectMake(posX, posY, RCCallFloatingBoardWidth, RCCallFloatingBoardHeight)];
+        posX = (posX + 30) > screenBounds.size.width ? (screenBounds.size.width - 30) : posX;
+        posY = (posY + 48) > screenBounds.size.height ? (screenBounds.size.height - 48) : posY;
+        _window = [[UIWindow alloc] initWithFrame:CGRectMake(posX, posY, 64, 96)];
         _window.backgroundColor = [UIColor whiteColor];
         _window.windowLevel = UIWindowLevelAlert + 1;
         _window.layer.cornerRadius = 4;
@@ -189,7 +188,7 @@ static NSString *RCVoipFloatingBoardPosY = @"RCVoipFloatingBoardPosY";
 
 - (UIView *)videoView {
     if (!_videoView) {
-        _videoView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, RCCallFloatingBoardWidth, RCCallFloatingBoardHeight)];
+        _videoView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 64, 96)];
         _videoView.backgroundColor = [UIColor blackColor];
         CGRect windowFrame = self.window.frame;
         windowFrame.size.width = _videoView.frame.size.width;
@@ -216,7 +215,7 @@ static NSString *RCVoipFloatingBoardPosY = @"RCVoipFloatingBoardPosY";
         }
         [_floatingButton setTitle:@"" forState:UIControlStateNormal];
         _floatingButton.backgroundColor = [UIColor clearColor];
-        _floatingButton.frame = CGRectMake(0, 0, RCCallFloatingBoardWidth, RCCallFloatingBoardHeight);
+        _floatingButton.frame = CGRectMake(0, 0, 64, 96);
         CGRect windowFrame = self.window.frame;
         windowFrame.size.width = _floatingButton.frame.size.width;
         windowFrame.size.height = _floatingButton.frame.size.height;

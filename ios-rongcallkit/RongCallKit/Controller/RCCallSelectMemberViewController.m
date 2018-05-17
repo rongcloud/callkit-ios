@@ -125,18 +125,20 @@ typedef void (^CompleteBlock)(NSArray *addUserIdList);
 }
 
 - (void)done:(id)sender {
-    if ((self.selectUserIds.count + self.existUserIdList.count > [RCCall sharedRCCall].maxMultiAudioCallUserNumber) &&
-        self.mediaType == RCCallMediaAudio) {
-        [self loadErrorAlert:[NSString stringWithFormat:NSLocalizedStringFromTable(@"VoIPAudioCallMaxNumSelectMember",
-                                                                                   @"RongCloudKit", nil),
-                                                        [RCCall sharedRCCall].maxMultiAudioCallUserNumber]];
-    } else if ((self.selectUserIds.count + self.existUserIdList.count >
-                [RCCall sharedRCCall].maxMultiVideoCallUserNumber) &&
-               self.mediaType == RCCallMediaVideo) {
-        [self loadErrorAlert:[NSString stringWithFormat:NSLocalizedStringFromTable(@"VoIPVideoCallMaxNumSelectMember",
-                                                                                   @"RongCloudKit", nil),
-                                                        [RCCall sharedRCCall].maxMultiVideoCallUserNumber]];
-    } else {
+//    if ((self.selectUserIds.count + self.existUserIdList.count > [RCCall sharedRCCall].maxMultiAudioCallUserNumber) && self.mediaType == RCCallMediaAudio)
+//    {
+//        [self loadErrorAlert:[NSString stringWithFormat:NSLocalizedStringFromTable(@"VoIPAudioCallMaxNumSelectMember",
+//                                                                                   @"RongCloudKit", nil),
+//                                                        [RCCall sharedRCCall].maxMultiAudioCallUserNumber]];
+//    }
+//    else if ((self.selectUserIds.count + self.existUserIdList.count > [RCCall sharedRCCall].maxMultiVideoCallUserNumber) && self.mediaType == RCCallMediaVideo)
+//    {
+//        [self loadErrorAlert:[NSString stringWithFormat:NSLocalizedStringFromTable(@"VoIPVideoCallMaxNumSelectMember",
+//                                                                                   @"RongCloudKit", nil),
+//                                                        [RCCall sharedRCCall].maxMultiVideoCallUserNumber]];
+//    }
+//    else
+    {
         [[RCCall sharedRCCall] dismissCallViewController:self];
         if (self.successBlock) {
             self.successBlock(self.selectUserIds);
@@ -216,6 +218,20 @@ typedef void (^CompleteBlock)(NSArray *addUserIdList);
         [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
         
     }];
+    
+    NSInteger selectedBlinkNormalUserCount = 0;
+    for (RCCallUserProfile *userProfile in self.callSession.userProfileList) {
+        if (userProfile.blinkUserType == 1)
+            selectedBlinkNormalUserCount++;
+    }
+    
+    if (self.mediaType == RCCallMediaVideo && [self.selectUserIds count] + selectedBlinkNormalUserCount == 6)
+    {
+        UIAlertAction *okAlert = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {}];
+        UIAlertController *memberAlertController = [UIAlertController alertControllerWithTitle:@"" message:@"为了保证会议流畅, 后续用户只能以观众模式加入, 是否继续?" preferredStyle:UIAlertControllerStyleAlert];
+        [memberAlertController addAction:okAlert];
+        [self presentViewController:memberAlertController animated:YES completion:^{}];
+    }
 }
 
 - (void)updateRightButton {

@@ -71,6 +71,10 @@
         _remoteNameLabel = [[UILabel alloc] init];
         _remoteNameLabel.backgroundColor = [UIColor clearColor];
         _remoteNameLabel.textColor = [UIColor whiteColor];
+        _remoteNameLabel.layer.shadowOpacity = 0.8;
+        _remoteNameLabel.layer.shadowRadius = 1.0;
+        _remoteNameLabel.layer.shadowColor = [UIColor darkGrayColor].CGColor;
+        _remoteNameLabel.layer.shadowOffset = CGSizeMake(0, 1);
         _remoteNameLabel.font = [UIFont systemFontOfSize:18];
         _remoteNameLabel.textAlignment = NSTextAlignmentCenter;
 
@@ -193,7 +197,7 @@
             self.remotePortraitView.hidden = YES;
 
             self.remoteNameLabel.frame =
-                CGRectMake(RCCallHorizontalMargin, RCCallVerticalMargin + RCCallStatusBarHeight,
+                CGRectMake(RCCallHorizontalMargin, RCCallVerticalMargin,
                            self.view.frame.size.width - RCCallHorizontalMargin * 2, RCCallLabelHeight);
             self.remoteNameLabel.hidden = NO;
             self.remoteNameLabel.textAlignment = NSTextAlignmentCenter;
@@ -231,7 +235,7 @@
             } else {
                 self.subVideoView.frame =
                     CGRectMake(self.view.frame.size.width - RCCallHeaderLength - RCCallHorizontalMargin / 2,
-                               RCCallVerticalMargin + RCCallStatusBarHeight, RCCallHeaderLength, RCCallHeaderLength * 1.5);
+                               RCCallVerticalMargin, RCCallHeaderLength, RCCallHeaderLength * 1.5);
             }
             [self.callSession setVideoView:self.subVideoView
                                     userId:[RCIMClient sharedRCIMClient].currentUserInfo.userId];
