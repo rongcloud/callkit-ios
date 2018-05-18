@@ -30,6 +30,7 @@
 @property(nonatomic, strong) AVAudioPlayer *audioPlayer;
 @property(nonatomic, strong) NSMutableArray *callWindows;
 @property(nonatomic, strong) NSMutableArray *locationNotificationList;
+@property(nonatomic, assign) BOOL isCallVibrating;
 @end
 
 @implementation RCCall
@@ -45,6 +46,7 @@
             pRongVoIP.maxMultiVideoCallUserNumber = 9;
             pRongVoIP.callWindows = [[NSMutableArray alloc] init];
             pRongVoIP.locationNotificationList = [[NSMutableArray alloc] init];
+            pRongVoIP.isCallVibrating = NO;
 
             //      agoraRegisterVideoFrameObserver(RCDVideoFrameObserver::sharedObserver(), true, true);
             //      agoraRegisterAudioFrameObserver(RCDAudioFrameObserver::sharedObserver());
@@ -62,8 +64,7 @@
 }
 
 - (void)appDidBecomeActive {
-    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(triggerVibrateRCCall) object:nil];
-    [[AVAudioSession sharedInstance] setActive:NO withOptions:AVAudioSessionSetActiveOptionNotifyOthersOnDeactivation error:nil];
+    [self stopReceiveCallVibrate];
     for (UILocalNotification *notification in self.locationNotificationList) {
         if ([notification.userInfo[@"appData"][@"callId"] isEqualToString:self.currentCallSession.callId]) {
             [[UIApplication sharedApplication] cancelLocalNotification:notification];
@@ -260,9 +261,7 @@
         }
     }
     [viewController dismissViewControllerAnimated:YES completion:nil];
-    
-    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(triggerVibrateRCCall) object:nil];
-    [[AVAudioSession sharedInstance] setActive:NO withOptions:AVAudioSessionSetActiveOptionNotifyOthersOnDeactivation error:nil];
+    [self stopReceiveCallVibrate];
 }
 
 - (RCCallSession *)currentCallSession {
@@ -295,6 +294,8 @@
                           inviterUserId:(NSString *)inviterUserId
                               mediaType:(RCCallMediaType)mediaType
                              userIdList:(NSArray *)userIdList {
+    [self stopReceiveCallVibrate];
+    
     for (UILocalNotification *notification in self.locationNotificationList) {
         if ([notification.userInfo[@"appData"][@"callId"] isEqualToString:callId]) {
             [[UIApplication sharedApplication] cancelLocalNotification:notification];
@@ -321,10 +322,7 @@
     }
 #endif
     
-    //默认情况按静音或者锁屏键会静音
-    AVAudioSession *audioSession = [AVAudioSession sharedInstance];
-    [audioSession setCategory:AVAudioSessionCategorySoloAmbient error:nil];
-    [self triggerVibrateRCCall];
+    [self startReceiveCallVibrate];
     
     UILocalNotification *callNotification = [[UILocalNotification alloc] init];
     callNotification.alertAction = NSLocalizedStringFromTable(@"LocalNotificationShow", @"RongCloudKit", nil);
@@ -397,6 +395,25 @@
         alert.tag = AlertWithConfirm;
         [alert show];
     });
+}
+
+- (void)startReceiveCallVibrate
+{
+    self.isCallVibrating = YES;
+    //默认情况按静音或者锁屏键会静音
+    AVAudioSession *audioSession = [AVAudioSession sharedInstance];
+    [audioSession setCategory:AVAudioSessionCategorySoloAmbient error:nil];
+    [self triggerVibrateRCCall];
+}
+
+- (void)stopReceiveCallVibrate
+{
+    if (self.isCallVibrating)
+    {
+        [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(triggerVibrateRCCall) object:nil];
+        [[AVAudioSession sharedInstance] setActive:NO withOptions:AVAudioSessionSetActiveOptionNotifyOthersOnDeactivation error:nil];
+        self.isCallVibrating = NO;
+    }
 }
 
 - (void)triggerVibrateRCCall {
