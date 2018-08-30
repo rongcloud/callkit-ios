@@ -43,7 +43,7 @@
             pRongVoIP = [[RCCall alloc] init];
             [[RCCallClient sharedRCCallClient] setDelegate:pRongVoIP];
             pRongVoIP.maxMultiAudioCallUserNumber = 20;
-            pRongVoIP.maxMultiVideoCallUserNumber = 9;
+            pRongVoIP.maxMultiVideoCallUserNumber = 7;
             pRongVoIP.callWindows = [[NSMutableArray alloc] init];
             pRongVoIP.locationNotificationList = [[NSMutableArray alloc] init];
             pRongVoIP.isCallVibrating = NO;

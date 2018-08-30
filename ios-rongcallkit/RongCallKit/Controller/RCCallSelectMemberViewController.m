@@ -125,20 +125,18 @@ typedef void (^CompleteBlock)(NSArray *addUserIdList);
 }
 
 - (void)done:(id)sender {
-//    if ((self.selectUserIds.count + self.existUserIdList.count > [RCCall sharedRCCall].maxMultiAudioCallUserNumber) && self.mediaType == RCCallMediaAudio)
-//    {
-//        [self loadErrorAlert:[NSString stringWithFormat:NSLocalizedStringFromTable(@"VoIPAudioCallMaxNumSelectMember",
-//                                                                                   @"RongCloudKit", nil),
-//                                                        [RCCall sharedRCCall].maxMultiAudioCallUserNumber]];
-//    }
-//    else if ((self.selectUserIds.count + self.existUserIdList.count > [RCCall sharedRCCall].maxMultiVideoCallUserNumber) && self.mediaType == RCCallMediaVideo)
-//    {
-//        [self loadErrorAlert:[NSString stringWithFormat:NSLocalizedStringFromTable(@"VoIPVideoCallMaxNumSelectMember",
-//                                                                                   @"RongCloudKit", nil),
-//                                                        [RCCall sharedRCCall].maxMultiVideoCallUserNumber]];
-//    }
-//    else
-    {
+    if ((self.selectUserIds.count + self.existUserIdList.count > [RCCall sharedRCCall].maxMultiAudioCallUserNumber) &&
+        self.mediaType == RCCallMediaAudio) {
+        [self loadErrorAlert:[NSString stringWithFormat:NSLocalizedStringFromTable(@"VoIPAudioCallMaxNumSelectMember",
+                                                                                   @"RongCloudKit", nil),
+                                                        [RCCall sharedRCCall].maxMultiAudioCallUserNumber]];
+    } else if ((self.selectUserIds.count + self.existUserIdList.count >
+                [RCCall sharedRCCall].maxMultiVideoCallUserNumber) &&
+               self.mediaType == RCCallMediaVideo) {
+        [self loadErrorAlert:[NSString stringWithFormat:NSLocalizedStringFromTable(@"VoIPVideoCallMaxNumSelectMember",
+                                                                                   @"RongCloudKit", nil),
+                                                        [RCCall sharedRCCall].maxMultiVideoCallUserNumber]];
+    } else {
         [[RCCall sharedRCCall] dismissCallViewController:self];
         if (self.successBlock) {
             self.successBlock(self.selectUserIds);
@@ -219,6 +217,7 @@ typedef void (^CompleteBlock)(NSArray *addUserIdList);
         
     }];
     
+    /*
     NSInteger selectedBlinkNormalUserCount = 0;
     for (RCCallUserProfile *userProfile in self.callSession.userProfileList) {
         if (userProfile.blinkUserType == 1)
@@ -232,6 +231,7 @@ typedef void (^CompleteBlock)(NSArray *addUserIdList);
         [memberAlertController addAction:okAlert];
         [self presentViewController:memberAlertController animated:YES completion:^{}];
     }
+    */
 }
 
 - (void)updateRightButton {
