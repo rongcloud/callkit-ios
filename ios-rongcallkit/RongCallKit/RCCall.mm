@@ -310,17 +310,6 @@
                                mediaType:(RCCallMediaType)mediaType
                               userIdList:(NSArray *)userIdList
                                 userDict:(NSDictionary *)userDict {
-#ifdef PUBLIC
-#else
-    if (([UIDevice currentDevice].systemVersion.floatValue >= 10.0)) {
-        if (mediaType == RCCallMediaAudio) {
-            [[RCCXCall sharedInstance] reportIncomingCallWithInviter:inviterUserId
-                                                          userIdList:userIdList
-                                                             isVideo:NO];
-            return;
-        }
-    }
-#endif
     
     [self startReceiveCallVibrate];
     
