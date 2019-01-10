@@ -136,22 +136,29 @@
                             targetId:(NSString *)targetId
                            mediaType:(RCCallMediaType)mediaType
                           userIdList:(NSArray *)userIdList {
-    if (mediaType == RCCallMediaAudio) {
-        UIViewController *audioCallViewController =
-            [[RCCallAudioMultiCallViewController alloc] initWithOutgoingCall:conversationType
-                                                                    targetId:targetId
-                                                                  userIdList:userIdList];
-
-        [self presentCallViewController:audioCallViewController];
-    } else {
-        RCCallVideoMultiCallViewController *videoCallViewController =
-            [[RCCallVideoMultiCallViewController alloc] initWithOutgoingCall:conversationType
-                                                                    targetId:targetId
-                                                                   mediaType:mediaType
-                                                                  userIdList:userIdList];
-
-        [self presentCallViewController:videoCallViewController];
+    
+    if ([self preCheckForStartCall:mediaType]) {
+        [self checkSystemPermission:mediaType
+                            success:^{
+                                UIViewController* avCallVC = nil;
+                                if (mediaType == RCCallMediaAudio) {
+                                    avCallVC = [[RCCallAudioMultiCallViewController alloc]
+                                                    initWithOutgoingCall:conversationType
+                                                                targetId:targetId
+                                                              userIdList:userIdList];
+                                    
+                                } else {
+                                    avCallVC = [[RCCallVideoMultiCallViewController alloc]
+                                                    initWithOutgoingCall:conversationType
+                                                                targetId:targetId
+                                                               mediaType:mediaType
+                                                              userIdList:userIdList];
+                                    
+                                }
+                                [self presentCallViewController:avCallVC];
+                            }];
     }
+
 }
 
 - (void)checkSystemPermission:(RCCallMediaType)mediaType success:(void (^)(void))successBlock {
@@ -406,6 +413,9 @@
 }
 
 - (void)triggerVibrateRCCall {
+    if (!self.isCallVibrating)
+        return;
+    
     __weak typeof(self) weakSelf = self;
     NSString *version = [UIDevice currentDevice].systemVersion;
     if (version.doubleValue >= 9.0) {

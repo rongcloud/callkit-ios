@@ -610,7 +610,14 @@
         [self.cellLabelDic setObject:cellNameLabel forKey:@(item)];
     }
     cellNameLabel.frame = CGRectMake(0, cell.frame.size.height - 16, cell.frame.size.width, 16);
+    cellNameLabel.text = nil;
     cellNameLabel.text = userModel.userInfo.name;
+    for (UIView *view in cell.subviews) {
+        if ([view isKindOfClass:[UILabel class]]) {
+            [view removeFromSuperview];
+            break;
+        }
+    }
     [cell addSubview:cellNameLabel];
     
     return cell;
@@ -622,6 +629,7 @@
 
     self.mainModel = selectedModel;
     [self.callSession setVideoView:self.backgroundView userId:self.mainModel.userId];
+    self.mainNameLabel.text = nil;
     self.mainNameLabel.text = selectedModel.userInfo.name;
     [self.subUserModelList removeObject:selectedModel];
     [self.subUserModelList insertObject:tempModel atIndex:indexPath.row];

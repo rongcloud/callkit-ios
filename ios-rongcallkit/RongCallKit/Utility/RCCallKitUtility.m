@@ -87,6 +87,9 @@
 
 + (NSString *)getReadableStringForMessageCell:(RCCallDisconnectReason)hangupReason {
     NSString *hangupReasonString = nil;
+    if (hangupReason <= 0) {
+        hangupReason = 1;
+    }
     switch (hangupReason) {
     case RCCallDisconnectReasonBusyLine:
         hangupReasonString = NSLocalizedStringFromTable(@"VoIPCallNoResponse", @"RongCloudKit", nil);
