@@ -1284,7 +1284,8 @@
 }
 
 - (void)layoutTextUnderImageButton:(UIButton *)button {
-    [button.titleLabel setFont:[UIFont systemFontOfSize:12]];
+//    [button.titleLabel setFont:[UIFont systemFontOfSize:12]];
+    [button.titleLabel setFont:[UIFont fontWithName:@"PingFangSC-Regular" size:13]];
     [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
 
     button.titleEdgeInsets = UIEdgeInsetsMake(0, -button.imageView.frame.size.width,
@@ -1476,7 +1477,7 @@
  @param rxQuality   下行网络质量
  */
 - (void)networkTxQuality:(RCCallQuality)txQuality rxQuality:(RCCallQuality)rxQuality {
-    NSLog(@"networkTxQuality, %zd, %zd", txQuality, rxQuality);
+//    NSLog(@"networkTxQuality, %zd, %zd", txQuality, rxQuality);
     switch (txQuality)
     {
         case RCCall_Quality_Unknown:
