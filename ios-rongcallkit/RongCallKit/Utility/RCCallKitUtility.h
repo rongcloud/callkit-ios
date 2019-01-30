@@ -21,7 +21,7 @@
     ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedAscending)
 
 #define RCCallHeaderLength 80.0f
-#define RCCallButtonLength 64.0f
+#define RCCallButtonLength 65.0f
 #define RCCallLabelHeight 25.0f
 #define RCCallVerticalMargin 32.0f
 #define RCCallHorizontalMargin 25.0f

@@ -49,6 +49,7 @@
         [self registerForegroundNotification];
         [_callSession setDelegate:self];
         [RCCallKitUtility setScreenForceOn];
+        self.needPlayingRingAfterForeground = YES;
     }
     return self;
 }
@@ -1284,8 +1285,7 @@
 }
 
 - (void)layoutTextUnderImageButton:(UIButton *)button {
-//    [button.titleLabel setFont:[UIFont systemFontOfSize:12]];
-    [button.titleLabel setFont:[UIFont fontWithName:@"PingFangSC-Regular" size:13]];
+    [button.titleLabel setFont:[UIFont systemFontOfSize:12]];
     [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
 
     button.titleEdgeInsets = UIEdgeInsetsMake(0, -button.imageView.frame.size.width,
