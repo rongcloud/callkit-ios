@@ -240,8 +240,6 @@
 }
 
 - (void)removeSubUserModel:(RCCallUserCallInfoModel *)model {
-    @synchronized(self)
-    {
     if (model) {
         NSInteger index = [self.subUserModelList indexOfObject:model];
         if (index != NSNotFound) {
@@ -249,7 +247,6 @@
             [self.subUserModelList removeObject:model];
             [self.userCollectionView deleteItemsAtIndexPaths:[NSArray arrayWithObject:indexPath]];
         }
-    }
     }
 }
 

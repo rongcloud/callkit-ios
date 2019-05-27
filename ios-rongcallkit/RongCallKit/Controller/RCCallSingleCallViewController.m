@@ -51,6 +51,9 @@
     self.remoteUserInfo = userInfo;
     [self.remoteNameLabel setText:userInfo.name];
     [self.remotePortraitView setImageURL:[NSURL URLWithString:userInfo.portraitUri]];
+    
+    UITapGestureRecognizer * tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction:)];
+    [self.backgroundView addGestureRecognizer:tapGesture];
 }
 
 - (RCloudImageView *)remotePortraitView {
@@ -294,6 +297,20 @@
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+#pragma mark - Gesture Selector
+- (void)tapAction:(UITapGestureRecognizer*)gesture {
+    if (self.callSession.callStatus == RCCallActive &&
+        self.callSession.mediaType == RCCallMediaVideo) {
+        self.minimizeButton.hidden = !self.minimizeButton.hidden;
+        self.hangupButton.hidden = !self.hangupButton.hidden;
+        self.cameraSwitchButton.hidden = !self.cameraSwitchButton.hidden;
+        self.remoteNameLabel.hidden = !self.remoteNameLabel.hidden;
+        self.timeLabel.hidden = !self.timeLabel.hidden;
+        self.muteButton.hidden = !self.muteButton.hidden;
+        self.cameraCloseButton.hidden = !self.cameraCloseButton.hidden;
+    }
 }
 
 @end

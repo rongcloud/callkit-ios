@@ -202,6 +202,9 @@ typedef void (^CompleteBlock)(NSArray *addUserIdList);
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+
+    
     NSString *userId = self.listingUserIdList[indexPath.row];
     if (![self.existUserIdList containsObject:userId]) {
         if ([self.selectUserIds containsObject:userId]) {
@@ -211,12 +214,29 @@ typedef void (^CompleteBlock)(NSArray *addUserIdList);
         }
         [self updateRightButton];
     }
+    
+    if ((self.selectUserIds.count + self.existUserIdList.count > [RCCall sharedRCCall].maxMultiAudioCallUserNumber) &&
+        self.mediaType == RCCallMediaAudio) {
+        [self loadErrorAlert:[NSString stringWithFormat:NSLocalizedStringFromTable(@"VoIPAudioCallMaxNumSelectMember",
+                                                                                   @"RongCloudKit", nil),
+                              [RCCall sharedRCCall].maxMultiAudioCallUserNumber]];
+        [self.selectUserIds removeObject:userId];
+    } else if ((self.selectUserIds.count + self.existUserIdList.count >
+                [RCCall sharedRCCall].maxMultiVideoCallUserNumber) &&
+               self.mediaType == RCCallMediaVideo) {
+        [self loadErrorAlert:[NSString stringWithFormat:NSLocalizedStringFromTable(@"VoIPVideoCallMaxNumSelectMember",
+                                                                                   @"RongCloudKit", nil),
+                              [RCCall sharedRCCall].maxMultiVideoCallUserNumber]];
+        [self.selectUserIds removeObject:userId];
+    }
+    
 
     [UIView performWithoutAnimation:^{
         [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
         
     }];
     
+
     /*
     NSInteger selectedBlinkNormalUserCount = 0;
     for (RCCallUserProfile *userProfile in self.callSession.userProfileList) {

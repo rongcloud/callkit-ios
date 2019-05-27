@@ -106,6 +106,7 @@
 }
 
 - (void)dealloc {
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(triggerVibrate) object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
