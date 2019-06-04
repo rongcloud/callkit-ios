@@ -268,7 +268,8 @@
         }
     }
     [viewController dismissViewControllerAnimated:YES completion:nil];
-    [self stopReceiveCallVibrate];
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(triggerVibrateRCCall) object:nil];
+    [[AVAudioSession sharedInstance] setActive:NO withOptions:AVAudioSessionSetActiveOptionNotifyOthersOnDeactivation error:nil];
 }
 
 - (RCCallSession *)currentCallSession {
