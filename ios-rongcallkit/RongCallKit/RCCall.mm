@@ -256,6 +256,8 @@
             rootVC = rootVC.parentViewController;
         }
         viewController = rootVC;
+        [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(triggerVibrateRCCall) object:nil];
+        [[AVAudioSession sharedInstance] setActive:NO withOptions:AVAudioSessionSetActiveOptionNotifyOthersOnDeactivation error:nil];
     }
 
     for (UIWindow *window in self.callWindows) {
@@ -268,8 +270,6 @@
         }
     }
     [viewController dismissViewControllerAnimated:YES completion:nil];
-    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(triggerVibrateRCCall) object:nil];
-    [[AVAudioSession sharedInstance] setActive:NO withOptions:AVAudioSessionSetActiveOptionNotifyOthersOnDeactivation error:nil];
 }
 
 - (RCCallSession *)currentCallSession {
