@@ -217,7 +217,7 @@
 - (void)updateSubUserLayout:(RCCallUserCallInfoModel *)model {
     if (model) {
         NSInteger index = [self.subUserModelList indexOfObject:model];
-        if (index != NSNotFound) {
+        if (index != NSNotFound && [self.userCollectionView numberOfItemsInSection: 0] > index) {
             NSIndexPath *indexPath = [NSIndexPath indexPathForItem:index inSection:0];
             [self.userCollectionView reloadItemsAtIndexPaths:@[ indexPath ]];
         }
@@ -245,7 +245,9 @@
         if (index != NSNotFound) {
             NSIndexPath *indexPath = [NSIndexPath indexPathForItem:index inSection:0];
             [self.subUserModelList removeObject:model];
-            [self.userCollectionView deleteItemsAtIndexPaths:[NSArray arrayWithObject:indexPath]];
+            if ([self.userCollectionView numberOfItemsInSection:0] > index) {
+                [self.userCollectionView deleteItemsAtIndexPaths:[NSArray arrayWithObject:indexPath]];
+            }
         }
     }
 }

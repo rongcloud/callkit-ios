@@ -46,9 +46,14 @@ fi
 
 if [ ${DEV_FLAG} == "debug" ]
 then
-configuration="Debug"
+	echo "callkit autobuild debug"
+	configuration="Debug"
+elif [ ${DEV_FLAG} == "Public" ]; then
+	echo "callkit autobuild Public"
+	configuration="Public"
 else
-configuration="Release"
+	echo "callkit autobuild Release"
+	configuration="Release"
 fi
 
 PROJECT_NAME="RongCallKit.xcodeproj"

@@ -30,7 +30,8 @@
 @property(nonatomic, strong) AVAudioPlayer *audioPlayer;
 @property(nonatomic, strong) NSMutableArray *callWindows;
 @property(nonatomic, strong) NSMutableArray *locationNotificationList;
-@property(nonatomic, assign) BOOL isCallVibrating;
+@property (nonatomic, strong) NSTimer *timer;
+
 @end
 
 @implementation RCCall
@@ -46,7 +47,6 @@
             pRongVoIP.maxMultiVideoCallUserNumber = 7;
             pRongVoIP.callWindows = [[NSMutableArray alloc] init];
             pRongVoIP.locationNotificationList = [[NSMutableArray alloc] init];
-            pRongVoIP.isCallVibrating = NO;
 
             //      agoraRegisterVideoFrameObserver(RCDVideoFrameObserver::sharedObserver(), true, true);
             //      agoraRegisterAudioFrameObserver(RCDAudioFrameObserver::sharedObserver());
@@ -256,8 +256,6 @@
             rootVC = rootVC.parentViewController;
         }
         viewController = rootVC;
-        [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(triggerVibrateRCCall) object:nil];
-        [[AVAudioSession sharedInstance] setActive:NO withOptions:AVAudioSessionSetActiveOptionNotifyOthersOnDeactivation error:nil];
     }
 
     for (UIWindow *window in self.callWindows) {
@@ -396,7 +394,6 @@
 
 - (void)startReceiveCallVibrate
 {
-    self.isCallVibrating = YES;
     //默认情况按静音或者锁屏键会静音
     AVAudioSession *audioSession = [AVAudioSession sharedInstance];
     [audioSession setCategory:AVAudioSessionCategorySoloAmbient error:nil];
@@ -405,27 +402,23 @@
 
 - (void)stopReceiveCallVibrate
 {
-    if (self.isCallVibrating)
-    {
-        [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(triggerVibrateRCCall) object:nil];
-        [[AVAudioSession sharedInstance] setActive:NO withOptions:AVAudioSessionSetActiveOptionNotifyOthersOnDeactivation error:nil];
-        self.isCallVibrating = NO;
+    if (self.timer) {
+        [self.timer invalidate];
+        self.timer = nil;
     }
+    [[AVAudioSession sharedInstance] setActive:NO withOptions:AVAudioSessionSetActiveOptionNotifyOthersOnDeactivation error:nil];
 }
 
 - (void)triggerVibrateRCCall {
-    __weak typeof(self) weakSelf = self;
-    NSString *version = [UIDevice currentDevice].systemVersion;
-    if (version.doubleValue >= 9.0) {
-        AudioServicesPlaySystemSoundWithCompletion(kSystemSoundID_Vibrate, ^{
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [weakSelf performSelector:@selector(triggerVibrateRCCall) withObject:nil afterDelay:2];
-            });
-        });
-    }else{
-        AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
-        [self performSelector:@selector(triggerVibrateRCCall) withObject:nil afterDelay:2];
-    }
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:2.f repeats:YES block:^(NSTimer * _Nonnull timer) {
+        NSString *version = [UIDevice currentDevice].systemVersion;
+        if (version.doubleValue >= 9.0) {
+            AudioServicesPlaySystemSoundWithCompletion(kSystemSoundID_Vibrate, ^{});
+        }
+        else{
+            AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+        }
+    }];
 }
 
 - (void)dealloc {

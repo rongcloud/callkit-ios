@@ -152,7 +152,7 @@ FOUNDATION_EXPORT NSString *const RCKitDispatchMessageReceiptRequestNotification
  @param groupId     群组ID
  @param completion  获取群组信息完成之后需要执行的Block [groupInfo:该群组ID对应的群组信息]
 
- @discussion SDK通过此方法获取用户信息并显示，请在completion的block中返回该用户ID对应的用户信息。
+ @discussion SDK通过此方法获取群组信息并显示，请在completion的block中返回该群组ID对应的群组信息。
  在您设置了群组信息提供者之后，SDK在需要显示群组信息的时候，会调用此方法，向您请求群组信息用于显示。
  */
 - (void)getGroupInfoWithGroupId:(NSString *)groupId completion:(void (^)(RCGroup *groupInfo))completion;
@@ -313,6 +313,42 @@ FOUNDATION_EXPORT NSString *const RCKitDispatchMessageReceiptRequestNotification
 
 @end
 
+
+#pragma mark - 消息发送监听器
+
+/*!
+ IMKit消息发送监听器
+ 
+ @discussion 设置IMKit的消息发送监听器，可以监听消息发送前以及消息发送后的结果。
+ 
+ @warning 如果您使用IMKit，可以设置并实现此Delegate监听消息发送；
+ */
+@protocol RCIMSendMessageDelegate <NSObject>
+
+/*!
+ 准备发送消息的监听器
+ 
+ @param messageContent 消息内容
+ 
+ @return 修改后的消息内容
+ 
+ @discussion 此方法在消息准备向外发送时会执行，您可以在此方法中对消息内容进行过滤和修改等操作。如果此方法的返回值不为 nil，SDK 会对外发送返回的消息内容。如果您使用了RCConversationViewController 中的 willSendMessage: 方法，请不要重复使用此方法。选择其中一种方式实现您的需求即可。
+ */
+- (RCMessageContent *)willSendIMMessage:(RCMessageContent *)messageContent;
+
+/*!
+ 发送消息完成的监听器
+ 
+ @param messageContent   消息内容
+
+ @param status          发送状态，0表示成功，非0表示失败的错误码
+ 
+ @discussion 此方法在消息向外发送结束之后会执行。您可以通过此方法监听消息发送情况。如果您使用了 RCConversationViewController 中的 didSendMessage:content: 方法，请不要重复使用此方法。选择其中一种方式实现您的需求即可。
+ */
+- (void)didSendIMMessage:(RCMessageContent *)messageContent status:(NSInteger)status;
+
+@end
+
 #pragma mark - IMKit核心类
 
 /*!
@@ -454,6 +490,10 @@ FOUNDATION_EXPORT NSString *const RCKitDispatchMessageReceiptRequestNotification
  如果您使用IMLib，请使用RCIMClient中的同名方法注册自定义的消息类型，而不要使用此方法。
  */
 - (void)registerMessageType:(Class)messageClass;
+
+#pragma mark 消息发送监听
+
+@property(nonatomic, weak) id<RCIMSendMessageDelegate> sendMessageDelegate;
 
 #pragma mark 消息发送
 /*!
@@ -733,6 +773,13 @@ FOUNDATION_EXPORT NSString *const RCKitDispatchMessageReceiptRequestNotification
  */
 @property(nonatomic, assign) BOOL isExclusiveSoundPlayer;
 
+/*!
+ 选择媒体资源时，是否包含视频文件，默认值是NO
+ 
+ @discussion 默认是不包含
+ */
+@property(nonatomic, assign) BOOL isMediaSelectorContainVideo;
+
 #pragma mark - 讨论组相关操作
 
 /*!
@@ -989,9 +1036,23 @@ FOUNDATION_EXPORT NSString *const RCKitDispatchMessageReceiptRequestNotification
  */
 @property(nonatomic, weak) id<RCIMGroupMemberDataSource> groupMemberDataSource;
 
+#pragma mark 高质量语音消息自动下载
+
+/*!
+ 在线时是否自动下载高质量语音消息
+
+ @discussion 默认为 YES
+ */
+@property(nonatomic, assign) BOOL automaticDownloadHQVoiceMsgEnable;
+
 
 #pragma mark - 公众号信息提供者
 
+/*!
+ 公众号信息提供者
+ 
+ @discussion SDK需要通过您实现公众号信息提供者，获取公众号信息并显示。
+ */
 @property (nonatomic,weak) id <RCIMPublicServiceProfileDataSource> publicServiceInfoDataSource;
 
 #pragma mark 头像显示

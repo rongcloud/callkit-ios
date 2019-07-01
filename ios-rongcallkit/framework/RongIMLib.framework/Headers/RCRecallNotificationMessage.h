@@ -21,7 +21,7 @@
 /*!
  发起撤回操作的用户ID
  */
-@property(nonatomic, strong) NSString *operatorId;
+@property(nonatomic, copy) NSString *operatorId;
 
 /*!
  撤回的时间（毫秒）
@@ -31,6 +31,10 @@
 /*!
  原消息的消息类型名
  */
-@property(nonatomic, strong) NSString *originalObjectName;
+@property(nonatomic, copy) NSString *originalObjectName;
 
+/*!
+ 是否是管理员操作
+ */
+@property(nonatomic, assign) BOOL isAdmin;
 @end

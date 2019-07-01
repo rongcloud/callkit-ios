@@ -56,4 +56,10 @@
  @param UUID 系统来电 UUID
  */
 - (void)hangupIfNeedWithUUID:(NSString *)UUID;
+
+/**
+ 当苹果 Callkit 通话接通后，重新设置AVAudioSessionMode
+ */
+- (void)setAVAudioSessionMode;
+
 @end

@@ -126,8 +126,13 @@
                     [self.subUserModelList addObject:userModel];
                 }
             }
-            RCCallUserCallInfoModel *userModel = [self generateUserModel:currentUserId];
-            [self.subUserModelList addObject:userModel];
+            if (self.callSession.minimized) {
+                [self.subUserModelList addObject:self.mainModel];
+            }
+            else {
+                RCCallUserCallInfoModel *userModel = [self generateUserModel:currentUserId];
+                [self.subUserModelList addObject:userModel];
+            }
         }
     }
 }

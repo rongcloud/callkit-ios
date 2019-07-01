@@ -72,6 +72,19 @@
 + (CGSize)getTextDrawingSize:(NSString *)text font:(UIFont *)font constrainedSize:(CGSize)constrainedSize;
 
 /*!
+ 获取指定会话类型的消息内容的摘要
+ 
+ @param messageContent  消息内容
+ @param targetId  会话 Id
+ @param conversationType  会话类型
+ @return                消息内容的摘要
+ 
+ @discussion SDK默认的消息有内置的处理，
+ 自定义消息会调用RCMessageContent中RCMessageContentView协议的conversationDigest获取消息摘要。
+ */
++ (NSString *)formatMessage:(RCMessageContent *)messageContent targetId:(NSString *)targetId conversationType:(RCConversationType)conversationType;
+
+/*!
  获取消息内容的摘要
 
  @param messageContent  消息内容
@@ -238,4 +251,19 @@
  验证邮箱
  */
 + (BOOL)validateEmail:(NSString *)email;
+
+/**
+ 获取 AppDelegate window 的 safeAreaInsets
+
+ @return AppDelegate window 的 safeAreaInsets
+ */
++ (UIEdgeInsets)getWindowSafeAreaInsets;
+
+/**
+ 修正iOS系统图片的图片方向
+
+ @param image 需要修正的图片
+ @return 修正后的图片
+ */
++ (UIImage *)fixOrientation:(UIImage *)image;
 @end

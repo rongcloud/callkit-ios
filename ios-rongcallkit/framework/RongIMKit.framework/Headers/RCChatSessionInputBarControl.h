@@ -12,7 +12,7 @@
 #import <RongIMLib/RongIMLib.h>
 #import <UIKit/UIKit.h>
 
-#define RC_ChatSessionInputBar_Height 50.f
+#define RC_ChatSessionInputBar_Height 49.5f
 ///输入栏扩展输入的唯一标示
 #define INPUT_MENTIONED_SELECT_TAG 1000
 #define PLUGIN_BOARD_ITEM_ALBUM_TAG 1001
@@ -26,6 +26,8 @@
 #define PLUGIN_BOARD_ITEM_VOICE_INPUT_TAG 1105
 #define PLUGIN_BOARD_ITEM_PTT_TAG 1106
 #define PLUGIN_BOARD_ITEM_CARD_TAG 1107
+#define PLUGIN_BOARD_ITEM_REMOTE_CONTROL_TAG 1108
+#define PLUGIN_BOARD_ITEM_TRANSFER_TAG 1109
 
 /*!
  输入工具栏的显示布局
@@ -147,6 +149,11 @@ typedef NS_ENUM(NSInteger, KBottomBarStatus) {
  */
 @protocol RCChatSessionInputBarControlDataSource;
 
+/**
+ 图片编辑的协议
+ */
+@protocol RCPictureEditDelegate;
+
 /*!
  输入工具栏
  */
@@ -171,6 +178,11 @@ typedef NS_ENUM(NSInteger, KBottomBarStatus) {
  输入工具栏获取用户信息的回调
  */
 @property(weak, nonatomic) id<RCChatSessionInputBarControlDataSource> dataSource;
+
+/**
+ 点击编辑按钮会调用该代理的onClickEditPicture方法
+ */
+@property(weak, nonatomic) id<RCPictureEditDelegate> photoEditorDelegate;
 
 /*!
  公众服务菜单的容器View
@@ -256,6 +268,13 @@ typedef NS_ENUM(NSInteger, KBottomBarStatus) {
  文本输入框的高度
  */
 @property(assign, nonatomic) float inputTextview_height __deprecated_msg("已废弃，请勿使用。");
+
+/**
+ 输入框最大输入行数
+ 
+ @discussion 该变量设置范围为: 1~6, 超过该范围会自动调整为边界值
+ */
+@property(nonatomic, assign) NSInteger maxInputLines;
 
 /*!
  公众服务账号菜单
@@ -364,6 +383,13 @@ typedef NS_ENUM(NSInteger, KBottomBarStatus) {
  @discussion 当本view所在的view frame发生变化，需要重新计算本view的frame时，调用此方法
  */
 - (void)containerViewSizeChanged;
+
+/**
+ 内容区域大小发生变化。
+ 
+ @discussion 当本view所在的view frame发生变化，需要重新计算本view的frame时，调用此方法，无动画
+ */
+- (void)containerViewSizeChangedNoAnnimation;
 
 /*!
  设置默认的输入框类型
@@ -518,9 +544,11 @@ typedef NS_ENUM(NSInteger, KBottomBarStatus) {
 - (void)imageDidCapture:(UIImage *)image;
 
 /**
- 相机录制小视频
+ 相机录制小视频完成后调用
 
  @param url 小视频url
+ @param image 小视频首帧图片
+ @param duration 小视频时长 单位秒
  */
 - (void)sightDidFinishRecord:(NSString *)url thumbnail:(UIImage *)image duration:(NSUInteger)duration;
 
@@ -561,10 +589,11 @@ typedef NS_ENUM(NSInteger, KBottomBarStatus) {
 
 
 /**
- 选择某个文件时，是否允许被选中,默认返回 YES
+ 会话页面发送文件消息，在文件选择页面选择某个文件时调用该方法方法
 
  @param path 文件路径
- @return 返回 YES 允许选中，否则不允许选中
+ @return 返回 YES 允许文件被选中，否则不允许选中
+ @discussion 该方法默认返回YES，这个方法可以控制某些文件是否可以被选中。
  */
 - (BOOL)canBeSelectedAtFilePath:(NSString *)path;
 
@@ -595,3 +624,21 @@ typedef NS_ENUM(NSInteger, KBottomBarStatus) {
 - (RCUserInfo *)getSelectingUserInfo:(NSString *)userId;
 
 @end
+
+/**
+ 图片编辑的代理
+ */
+@protocol RCPictureEditDelegate <NSObject>
+
+/**
+ 点击编辑按钮时的回调，可以通过rootCtrl控制器进行页面的跳转，在源码中默认跳转到RCPictureEditViewController
+
+ @param rootCtrl 图片编辑根控制器，用于页面跳转
+ @param originalImage 原图片
+ @param editCompletion 编辑过的图片通过Block回传给SDK
+ */
+- (void)onClickEditPicture: (UIViewController *)rootCtrl originalImage: (UIImage *)originalImage editCompletion:(void (^)(UIImage *editedImage))editCompletion;
+
+@end
+
+

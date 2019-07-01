@@ -35,6 +35,7 @@
 @property(nonatomic, strong) UIView *topGradientView;
 @property(nonatomic, strong) UIView *bottomGradientView;
 @property(nonatomic, strong) UIAlertController *alertController;
+@property (nonatomic, strong) NSTimer *vibrateTimer;
 
 @end
 
@@ -49,6 +50,7 @@
         [self registerForegroundNotification];
         [_callSession setDelegate:self];
         [RCCallKitUtility setScreenForceOn];
+        [_callSession setMinimized:NO];
         self.needPlayingRingAfterForeground = YES;
     }
     return self;
@@ -82,6 +84,7 @@
         }
         [self registerForegroundNotification];
         [RCCallKitUtility setScreenForceOn];
+        [_callSession setMinimized:NO];
     }
     return self;
 }
@@ -94,6 +97,7 @@
         queue = dispatch_queue_create("AnswerQueue", DISPATCH_QUEUE_SERIAL);
         [self registerForegroundNotification];
         [_callSession setDelegate:self];
+        [_callSession setMinimized:YES];
     }
     return self;
 }
@@ -106,7 +110,7 @@
 }
 
 - (void)dealloc {
-    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(triggerVibrate) object:nil];
+    [self stopPlayRing];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
@@ -132,18 +136,15 @@
 }
 
 - (void)triggerVibrate {
-    __weak typeof(self) weakSelf = self;
-    NSString *version = [UIDevice currentDevice].systemVersion;
-    if (version.doubleValue >= 9.0) {
-        AudioServicesPlaySystemSoundWithCompletion(kSystemSoundID_Vibrate, ^{
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [weakSelf performSelector:@selector(triggerVibrate) withObject:nil afterDelay:2];
-            });
-        });
-    }else{
-        AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
-        [self performSelector:@selector(triggerVibrate) withObject:nil afterDelay:2];
-    }
+    self.vibrateTimer = [NSTimer scheduledTimerWithTimeInterval:2.f repeats:YES block:^(NSTimer * _Nonnull timer) {
+        NSString *version = [UIDevice currentDevice].systemVersion;
+        if (version.doubleValue >= 9.0) {
+            AudioServicesPlaySystemSoundWithCompletion(kSystemSoundID_Vibrate, ^{});
+        }
+        else{
+            AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+        }
+    }];
 }
 
 - (void)startPlayRing:(NSString *)ringPath {
@@ -175,7 +176,11 @@
 }
 
 - (void)stopPlayRing {
-    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(triggerVibrate) object:nil];
+    if (self.vibrateTimer) {
+        [self.vibrateTimer invalidate];
+        self.vibrateTimer = nil;
+    }
+    
     if (self.audioPlayer) {
         [self.audioPlayer stop];
         self.audioPlayer = nil;
@@ -426,9 +431,9 @@
     
     NSMutableArray *menuItems = [NSMutableArray new];
     [menuItems addObject:addMemberItem];
-    [menuItems addObject:whiteBoardItem];
-    if (self.callSession.blinkUserType == 2)
-        [menuItems addObject:handupItem];
+//    [menuItems addObject:whiteBoardItem];
+//    if (self.callSession.blinkUserType == 2)
+//        [menuItems addObject:handupItem];
     
     UIBarButtonItem *rightBarButton = self.navigationItem.rightBarButtonItems[1];
     CGRect targetFrame = rightBarButton.customView.frame;
@@ -1337,6 +1342,7 @@
 
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [[RCCall sharedRCCall] dismissCallViewController:self];
+        [[RCCall sharedRCCall] stopReceiveCallVibrate];
     });
     [self removeProximityMonitoringObserver];
 }
@@ -1374,6 +1380,8 @@
     [self resetLayout:self.callSession.isMultiCall
             mediaType:self.callSession.mediaType
            callStatus:self.callSession.callStatus];
+    
+    [[RCCXCall sharedInstance] setAVAudioSessionMode];
 }
 
 /*!
