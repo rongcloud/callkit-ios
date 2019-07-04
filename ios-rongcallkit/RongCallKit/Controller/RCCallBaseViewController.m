@@ -136,16 +136,20 @@
 }
 
 - (void)triggerVibrate {
-    self.vibrateTimer = [NSTimer scheduledTimerWithTimeInterval:2.f repeats:YES block:^(NSTimer * _Nonnull timer) {
-        NSString *version = [UIDevice currentDevice].systemVersion;
-        if (version.doubleValue >= 9.0) {
-            AudioServicesPlaySystemSoundWithCompletion(kSystemSoundID_Vibrate, ^{});
-        }
-        else{
-            AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
-        }
-    }];
+    self.vibrateTimer = [NSTimer scheduledTimerWithTimeInterval:2.f target:self selector:@selector(triggerVibrateAction) userInfo:nil repeats:YES];
 }
+
+- (void)triggerVibrateAction
+{
+    NSString *version = [UIDevice currentDevice].systemVersion;
+    if (version.doubleValue >= 9.0) {
+        AudioServicesPlaySystemSoundWithCompletion(kSystemSoundID_Vibrate, ^{});
+    }
+    else{
+        AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+    }
+}
+
 
 - (void)startPlayRing:(NSString *)ringPath {
     if (ringPath) {

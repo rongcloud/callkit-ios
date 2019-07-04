@@ -406,20 +406,27 @@
         [self.timer invalidate];
         self.timer = nil;
     }
-    [[AVAudioSession sharedInstance] setActive:NO withOptions:AVAudioSessionSetActiveOptionNotifyOthersOnDeactivation error:nil];
+    
+    if (self.currentCallSession.callStatus == RCCallIncoming || self.currentCallSession.callStatus == RCCallRinging) {
+        [[AVAudioSession sharedInstance] setActive:NO withOptions:AVAudioSessionSetActiveOptionNotifyOthersOnDeactivation error:nil];
+    }
 }
 
 - (void)triggerVibrateRCCall {
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:2.f repeats:YES block:^(NSTimer * _Nonnull timer) {
-        NSString *version = [UIDevice currentDevice].systemVersion;
-        if (version.doubleValue >= 9.0) {
-            AudioServicesPlaySystemSoundWithCompletion(kSystemSoundID_Vibrate, ^{});
-        }
-        else{
-            AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
-        }
-    }];
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:2.f target:self selector:@selector(triggerVibrateRCCallAction) userInfo:nil repeats:YES];
 }
+
+- (void)triggerVibrateRCCallAction
+{
+    NSString *version = [UIDevice currentDevice].systemVersion;
+    if (version.doubleValue >= 9.0) {
+        AudioServicesPlaySystemSoundWithCompletion(kSystemSoundID_Vibrate, ^{});
+    }
+    else{
+        AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+    }
+}
+
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
