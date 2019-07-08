@@ -48,4 +48,6 @@
 - (void)hangupIfNeedWithUUID:(NSString *)UUID {
 }
 
+- (void)setAVAudioSessionMode{
+}
 @end
