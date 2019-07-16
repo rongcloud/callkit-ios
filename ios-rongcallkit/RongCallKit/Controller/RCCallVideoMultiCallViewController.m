@@ -68,6 +68,10 @@
     [self.backgroundView
         addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self
                                                                      action:@selector(backgroundViewClicked)]];
+    [self.acceptButton setImage:[RCCallKitUtility imageFromVoIPBundle:@"voip/answervideo.png"]
+                   forState:UIControlStateNormal];
+    [self.acceptButton setImage:[RCCallKitUtility imageFromVoIPBundle:@"voip/answervideo_hover.png"]
+                   forState:UIControlStateHighlighted];
 
 //    self.userCollectionView.userInteractionEnabled = YES;
 //    [self.userCollectionView
@@ -75,10 +79,15 @@
 //                                                                     action:@selector(backgroundViewClicked)]];
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
     self.isFullScreen = NO;
     self.cellLabelDic = [NSMutableDictionary dictionary];
+    [RCCallKitUtility checkSystemPermission:self.callSession.mediaType success:^{
+        
+    } error:^{
+        [self hangupButtonClicked];
+    }];
 }
 
 - (void)initAllUserModel {
@@ -255,7 +264,7 @@
 - (void)backgroundViewClicked {
     if (self.callSession.callStatus == RCCallActive) {
         self.isFullScreen = !self.isFullScreen;
-
+        [[UIApplication sharedApplication] setStatusBarHidden:self.isFullScreen];
         [self resetLayout:self.callSession.isMultiCall
                 mediaType:self.callSession.mediaType
                callStatus:self.callSession.callStatus];
@@ -275,6 +284,20 @@
     return _inviterPortraitView;
 }
 
+- (RCloudImageView *)inviterPortraitBgView {
+    if (!_inviterPortraitBgView) {
+        _inviterPortraitBgView = [[RCloudImageView alloc] init];
+        
+        [self.view addSubview:_inviterPortraitBgView];
+        [self.view insertSubview:_inviterPortraitBgView aboveSubview:self.backgroundView];
+        _inviterPortraitBgView.hidden = YES;
+        [_inviterPortraitBgView setPlaceholderImage:[RCCallKitUtility getDefaultPortraitImage]];
+        _inviterPortraitBgView.layer.masksToBounds = YES;
+        _inviterPortraitBgView.contentMode = UIViewContentModeScaleAspectFill;
+    }
+    return _inviterPortraitBgView;
+}
+
 - (UILabel *)inviterNameLabel {
     if (!_inviterNameLabel) {
         _inviterNameLabel = [[UILabel alloc] init];
@@ -283,7 +306,10 @@
         _inviterNameLabel.font = [UIFont systemFontOfSize:18];
         _inviterNameLabel.textAlignment = NSTextAlignmentCenter;
         _inviterNameLabel.text = self.mainModel.userInfo.name;
-
+        _inviterNameLabel.layer.shadowOpacity = 0.8;
+        _inviterNameLabel.layer.shadowRadius = 3.0;
+        _inviterNameLabel.layer.shadowColor = [UIColor darkGrayColor].CGColor;
+        _inviterNameLabel.layer.shadowOffset = CGSizeMake(0, 1);
         [self.view addSubview:_inviterNameLabel];
         _inviterNameLabel.hidden = YES;
     }
@@ -296,13 +322,13 @@
         _mainNameLabel.backgroundColor = [UIColor clearColor];
         _mainNameLabel.textColor = [UIColor whiteColor];
         _mainNameLabel.layer.shadowOpacity = 0.8;
-        _mainNameLabel.layer.shadowRadius = 1.0;
+        _mainNameLabel.layer.shadowRadius = 3.0;
         _mainNameLabel.layer.shadowColor = [UIColor darkGrayColor].CGColor;
         _mainNameLabel.layer.shadowOffset = CGSizeMake(0, 1);
-        _mainNameLabel.font = [UIFont systemFontOfSize:18];
+        _mainNameLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size:18];
         _mainNameLabel.textAlignment = NSTextAlignmentLeft;
         _mainNameLabel.text = self.mainModel.userInfo.name;
-
+        _mainNameLabel.textAlignment = NSTextAlignmentCenter;
         [self.view addSubview:_mainNameLabel];
         _mainNameLabel.hidden = YES;
     }
@@ -314,11 +340,14 @@
         _userCollectionTitleLabel = [[UILabel alloc] init];
         _userCollectionTitleLabel.backgroundColor = [UIColor clearColor];
         _userCollectionTitleLabel.textColor = [UIColor whiteColor];
-        _userCollectionTitleLabel.font = [UIFont systemFontOfSize:18];
+        _userCollectionTitleLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size:16.0];
         _userCollectionTitleLabel.textAlignment = NSTextAlignmentCenter;
         _userCollectionTitleLabel.text =
             NSLocalizedStringFromTable(@"VoIPMultiCallUserCollectionTitle", @"RongCloudKit", nil);
-
+        _userCollectionTitleLabel.layer.shadowOpacity = 0.8;
+        _userCollectionTitleLabel.layer.shadowRadius = 3.0;
+        _userCollectionTitleLabel.layer.shadowColor = [UIColor darkGrayColor].CGColor;
+        _userCollectionTitleLabel.layer.shadowOffset = CGSizeMake(0, 1);
         [self.view addSubview:_userCollectionTitleLabel];
         _userCollectionTitleLabel.hidden = YES;
     }
@@ -368,32 +397,63 @@
     [existUserIdList addObject:currentUserId];
 
     __weak typeof(self) weakSelf = self;
-    RCCallSelectMemberViewController *selectViewController = [[RCCallSelectMemberViewController alloc]
-        initWithConversationType:self.conversationType
-                        targetId:self.targetId
-                       mediaType:self.mediaType
-                           exist:[existUserIdList copy]
-                         success:^(NSArray *addUserIdList) {
-                             [weakSelf.callSession inviteRemoteUsers:addUserIdList mediaType:weakSelf.mediaType];
-                         }];
+    BOOL useExternalSignalServer = (self.callSession.conversationType == 0 && self.callSession.targetId == nil);
+    if ([RCCall sharedRCCall].callInviteNewUserDelegate &&[[RCCall sharedRCCall].callInviteNewUserDelegate respondsToSelector:@selector(inviteNewUser:BaseOn:selectResult:)] && useExternalSignalServer) {
+        [[RCCall sharedRCCall].callInviteNewUserDelegate inviteNewUser:existUserIdList BaseOn:self selectResult:^(NSArray<NSString *> *userIdList) {
+            [weakSelf.callSession inviteRemoteUsers:userIdList mediaType:weakSelf.mediaType];
+        }];
+    } else {
+        RCCallSelectMemberViewController *selectViewController = [[RCCallSelectMemberViewController alloc]
+                                                                  initWithConversationType:self.conversationType
+                                                                  targetId:self.targetId
+                                                                  mediaType:self.mediaType
+                                                                  exist:[existUserIdList copy]
+                                                                  success:^(NSArray *addUserIdList) {
+                                                                      [weakSelf.callSession inviteRemoteUsers:addUserIdList mediaType:weakSelf.mediaType];
+                                                                  }];
+        UINavigationController* nav = [[UINavigationController alloc] initWithRootViewController:selectViewController];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [weakSelf presentViewController:nav animated:YES completion:nil];
+        });
+   }
+}
 
+- (void)inviteNewUserWithClickEvent {
+    NSMutableArray *existUserIdList = [[NSMutableArray alloc] init];
+    for (RCCallUserProfile *userProfile in self.callSession.userProfileList) {
+        [existUserIdList addObject:userProfile.userId];
+    }
+    [existUserIdList addObject:currentUserId];
+    
+    __weak typeof(self) weakSelf = self;
+    RCCallSelectMemberViewController *selectViewController = [[RCCallSelectMemberViewController alloc]
+                                                              initWithConversationType:self.conversationType
+                                                              targetId:self.targetId
+                                                              mediaType:self.mediaType
+                                                              exist:[existUserIdList copy]
+                                                              success:^(NSArray *addUserIdList) {
+                                                                  [weakSelf.callSession inviteRemoteUsers:addUserIdList mediaType:weakSelf.mediaType];
+                                                              }];
+    UINavigationController *rootVC = [[UINavigationController alloc] initWithRootViewController:selectViewController];
     dispatch_async(dispatch_get_main_queue(), ^{
-        [weakSelf presentViewController:selectViewController animated:YES completion:nil];
+        [weakSelf presentViewController:rootVC animated:YES completion:nil];
     });
 }
 
 - (void)resetLayout:(BOOL)isMultiCall mediaType:(RCCallMediaType)mediaType callStatus:(RCCallStatus)callStatus {
     [super resetLayout:isMultiCall mediaType:mediaType callStatus:callStatus];
+    self.blurView.hidden = YES;
 
     if (callStatus == RCCallIncoming || callStatus == RCCallRinging) {
         [self.inviterPortraitView setImageURL:[NSURL URLWithString:self.mainModel.userInfo.portraitUri]];
-        self.inviterPortraitView.frame = CGRectMake((self.view.frame.size.width - RCCallHeaderLength) / 2,
-                                                    RCCallVerticalMargin * 2, RCCallHeaderLength, RCCallHeaderLength);
+        self.inviterPortraitView.frame = CGRectMake((self.view.frame.size.width - RCCallHeaderLength) / 2, RCCallTopGGradientHeight+ RCCallStatusBarHeight, RCCallHeaderLength, RCCallHeaderLength);
         self.inviterPortraitView.hidden = NO;
 
+        [self.inviterPortraitBgView setImageURL:[NSURL URLWithString:self.mainModel.userInfo.portraitUri]];
+        self.inviterPortraitBgView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
         self.inviterNameLabel.text = self.mainModel.userInfo.name;
         self.inviterNameLabel.frame =
-            CGRectMake(RCCallHorizontalMargin, RCCallVerticalMargin * 2 + RCCallHeaderLength + RCCallInsideMargin,
+            CGRectMake(RCCallHorizontalMargin, RCCallTopGGradientHeight + RCCallHeaderLength + RCCallTopMargin + 2.0 + RCCallStatusBarHeight,
                        self.view.frame.size.width - RCCallHorizontalMargin * 2, RCCallLabelHeight);
         self.inviterNameLabel.hidden = NO;
     } else {
@@ -401,58 +461,92 @@
         self.inviterPortraitView.hidden = YES;
     }
 
-    if (callStatus == RCCallActive) {
+    if (callStatus == RCCallDialing) {
+        
+        [self.inviterPortraitBgView setImageURL:[NSURL URLWithString:self.mainModel.userInfo.portraitUri]];
+        self.inviterPortraitBgView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
+        
         self.mainNameLabel.frame =
-            CGRectMake(RCCallHorizontalMargin, RCCallVerticalMargin,
-                       (self.view.frame.size.width - RCCallHorizontalMargin * 2) / 2, RCCallLabelHeight);
+        CGRectMake(RCCallHorizontalMargin, RCCallMiniButtonTopMargin + RCCallStatusBarHeight,
+                   (self.view.frame.size.width - RCCallHorizontalMargin * 2), RCCallLabelHeight);
         self.mainNameLabel.hidden = NO;
+        
+    } else if (callStatus == RCCallActive) {
+        self.mainNameLabel.frame =
+            CGRectMake(RCCallHorizontalMargin, RCCallMiniButtonTopMargin + RCCallStatusBarHeight,
+                       (self.view.frame.size.width - RCCallHorizontalMargin * 2) , RCCallLabelHeight);
+        self.mainNameLabel.hidden = NO;
+        self.inviterPortraitBgView.hidden = YES;
+
     } else {
         self.mainNameLabel.hidden = YES;
     }
 
     CGFloat titleY = MAX(RCCallVerticalMargin * 2 + RCCallHeaderLength + RCCallInsideMargin * 3 + RCCallLabelHeight * 2,
                          (self.view.frame.size.height - RCCallLabelHeight) / 2);
+    CGFloat tipsLabelY = MIN(self.view.frame.size.height * 0.54,  self.view.frame.size.height - (RCCallButtonBottomMargin * 2 + RCCallButtonLength) - 95.0 - 23 - 16.0 - 40.0 - RCCallExtraSpace);
     if (callStatus == RCCallIncoming || callStatus == RCCallRinging) {
+        CGRect newFrame = self.tipsLabel.frame;
+        newFrame.origin.y = tipsLabelY;
+        self.tipsLabel.frame = newFrame;
+        
         self.userCollectionTitleLabel.frame = CGRectMake(
-            RCCallHorizontalMargin, titleY - RCCallExtraSpace, self.view.frame.size.width - RCCallHorizontalMargin * 2, RCCallLabelHeight);
+            RCCallHorizontalMargin, self.view.frame.size.height - (RCCallButtonBottomMargin * 2 + RCCallButtonLength) - 95.0 - 23 - 16.0 - RCCallExtraSpace, self.view.frame.size.width - RCCallHorizontalMargin * 2, RCCallLabelHeight);
         self.userCollectionTitleLabel.hidden = NO;
+        self.userCollectionTitleLabel.alpha = 0.4;
     } else {
+        self.userCollectionTitleLabel.alpha = 1.0;
         self.userCollectionTitleLabel.hidden = YES;
+        self.userCollectionTitleLabel.frame = CGRectMake(
+                                                         RCCallHorizontalMargin,  self.view.frame.size.height -RCCallButtonBottomMargin - RCCallCustomButtonLength * 4.5 - RCCallExtraSpace, self.view.frame.size.width - RCCallHorizontalMargin * 2, RCCallLabelHeight);
     }
 
     if (callStatus == RCCallIncoming || callStatus == RCCallRinging) {
         self.userCollectionView.frame = CGRectMake(
-            RCCallHorizontalMargin * 2.5, titleY + RCCallLabelHeight + RCCallInsideMargin - RCCallExtraSpace,
-            self.view.frame.size.width - RCCallHorizontalMargin * 5,
-            self.view.frame.size.height - RCCallVerticalMargin - RCCallButtonLength - RCCallInsideMargin * 4 -
-                RCCallLabelHeight - (titleY + RCCallLabelHeight + RCCallInsideMargin));
+            RCCallHorizontalMargin ,self.view.frame.size.height - (RCCallButtonBottomMargin * 2 + RCCallButtonLength) - 95.0 - RCCallExtraSpace,
+            self.view.frame.size.width - RCCallHorizontalMargin * 2,
+            55.0);
+        self.userCollectionView.contentInset = UIEdgeInsetsMake(0, 20.0, 0, 20.0);
 
         if (self.userCollectionViewLayout) {
             self.userCollectionView.collectionViewLayout = self.userCollectionViewLayout;
         } else {
-            RCAudioMultiCallUserCollectionLayout *userCollectionViewLayout =
-                [[RCAudioMultiCallUserCollectionLayout alloc] initWithItemMargin:5 buttomPadding:10];
+            UICollectionViewFlowLayout *userCollectionViewLayout = [[UICollectionViewFlowLayout alloc] init];
+            userCollectionViewLayout.itemSize = CGSizeMake(55, 55);
+            userCollectionViewLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+            userCollectionViewLayout.minimumLineSpacing = 10.0;
             [self.userCollectionView setCollectionViewLayout:userCollectionViewLayout animated:YES];
+            self.userCollectionView.showsHorizontalScrollIndicator = NO;
         }
         self.userCollectionView.hidden = NO;
     } else if (callStatus == RCCallDialing || (callStatus == RCCallActive && !self.isFullScreen)) {
+        CGFloat width = (UIScreen.mainScreen.bounds.size.width - 40.0 - 20.0) / 4.5;
+
         self.userCollectionView.frame = CGRectMake(
-            0, self.view.frame.size.height - RCCallVerticalMargin - RCCallButtonLength * 3.5 - RCCallInsideMargin * 2 - RCCallExtraSpace,
-            self.view.frame.size.width, RCCallButtonLength * 2.5);
+            0, self.view.frame.size.height - (RCCallButtonBottomMargin * 2 - 2.5 + RCCallButtonLength) - width * 4 / 3 - 40.0 - RCCallExtraSpace,
+            self.view.frame.size.width,width * 4 / 3);
+        self.userCollectionView.contentInset = UIEdgeInsetsMake(0, 20.0, 0, 20.0);
 
         if (self.userCollectionViewLayout) {
             self.userCollectionView.collectionViewLayout = self.userCollectionViewLayout;
         } else {
-            RCVideoMultiCallUserCollectionLayout *userCollectionViewLayout =
-                [[RCVideoMultiCallUserCollectionLayout alloc] initWithItemMargin:5];
+            UICollectionViewFlowLayout *userCollectionViewLayout = [[UICollectionViewFlowLayout alloc] init];
+            userCollectionViewLayout.itemSize = CGSizeMake(width, width * 4 / 3);
+            userCollectionViewLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+            userCollectionViewLayout.minimumLineSpacing = 10.0;
+            userCollectionViewLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
             [self.userCollectionView setCollectionViewLayout:userCollectionViewLayout animated:YES];
+            self.userCollectionView.showsHorizontalScrollIndicator = NO;
+            self.userCollectionViewLayout = userCollectionViewLayout;
         }
+        self.userCollectionView.showsHorizontalScrollIndicator = NO;
         self.userCollectionView.hidden = NO;
     } else if (callStatus == RCCallActive && self.isFullScreen) {
         self.userCollectionView.frame =
-            CGRectMake(0, self.view.frame.size.height - RCCallInsideMargin - RCCallButtonLength * 2.5 - RCCallExtraSpace,
+            CGRectMake(0, self.view.frame.size.height - RCCallButtonBottomMargin * 1 - RCCallButtonLength * 2.1  - RCCallExtraSpace,
                        self.view.frame.size.width, RCCallButtonLength * 2.5);
         self.userCollectionView.hidden = NO;
+        self.userCollectionView.showsHorizontalScrollIndicator = NO;
     }
 
     if (callStatus == RCCallActive) {
@@ -592,48 +686,29 @@
     [cell setModel:userModel status:self.callSession.callStatus];
     [self.callSession setVideoView:(UIView *)cell.headerImageView userId:userModel.userId];
     
-	//cell上显示名字
-    NSInteger item = [indexPath item];
-    UILabel *cellNameLabel = (UILabel *)self.cellLabelDic[@(item)];
-    if (!cellNameLabel)
-    {
-        cellNameLabel = [[UILabel alloc] init];
-        cellNameLabel.backgroundColor = [UIColor clearColor];
-        cellNameLabel.textColor = [UIColor whiteColor];
-        cellNameLabel.layer.shadowOpacity = 0.8;
-        cellNameLabel.layer.shadowRadius = 1.0;
-        cellNameLabel.layer.shadowColor = [UIColor darkGrayColor].CGColor;
-        cellNameLabel.layer.shadowOffset = CGSizeMake(0, 1);
-        cellNameLabel.font = [UIFont systemFontOfSize:14];
-        cellNameLabel.textAlignment = NSTextAlignmentCenter;
-        [self.cellLabelDic setObject:cellNameLabel forKey:@(item)];
+    if (self.callSession.callStatus == RCCallIncoming || self.callSession.callStatus == RCCallRinging) {
+        
+    }else{
+        cell.cellNameLabel.text = userModel.userInfo.name;
     }
-    cellNameLabel.frame = CGRectMake(0, cell.frame.size.height - 16, cell.frame.size.width, 16);
-    cellNameLabel.text = nil;
-    cellNameLabel.text = userModel.userInfo.name;
-    for (UIView *view in cell.subviews) {
-        if ([view isKindOfClass:[UILabel class]]) {
-            [view removeFromSuperview];
-            break;
-        }
-    }
-    [cell addSubview:cellNameLabel];
     
     return cell;
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    RCCallUserCallInfoModel *tempModel = self.mainModel;
-    RCCallUserCallInfoModel *selectedModel = self.subUserModelList[indexPath.row];
+    
+    if (self.callSession.callStatus == RCCallActive) {
+        RCCallUserCallInfoModel *tempModel = self.mainModel;
+        RCCallUserCallInfoModel *selectedModel = self.subUserModelList[indexPath.row];
 
-    self.mainModel = selectedModel;
-    [self.callSession setVideoView:self.backgroundView userId:self.mainModel.userId];
-    self.mainNameLabel.text = nil;
-    self.mainNameLabel.text = selectedModel.userInfo.name;
-    [self.subUserModelList removeObject:selectedModel];
-    [self.subUserModelList insertObject:tempModel atIndex:indexPath.row];
+        self.mainModel = selectedModel;
+        [self.callSession setVideoView:self.backgroundView userId:self.mainModel.userId];
+        self.mainNameLabel.text = selectedModel.userInfo.name;
+        [self.subUserModelList removeObject:selectedModel];
+        [self.subUserModelList insertObject:tempModel atIndex:indexPath.row];
 
-    [self updateSubUserLayout:tempModel];
+        [self updateSubUserLayout:tempModel];
+    }
 }
 
 #pragma mark - UserInfo Update

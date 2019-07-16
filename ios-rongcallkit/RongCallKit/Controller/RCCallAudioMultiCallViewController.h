@@ -20,6 +20,11 @@
 @property(nonatomic, strong) RCloudImageView *inviterPortraitView;
 
 /*!
+ 通话呼入时，大屏幕背景显示的邀请者头像View
+ */
+@property(nonatomic, strong) RCloudImageView *inviterPortraitBgView;
+
+/*!
  通话呼入时，最上方显示的邀请者名字Label
  */
 @property(nonatomic, strong) UILabel *inviterNameLabel;

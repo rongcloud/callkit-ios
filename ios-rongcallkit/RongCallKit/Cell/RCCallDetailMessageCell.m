@@ -47,11 +47,10 @@
     [self.bubbleBackgroundView addGestureRecognizer:longPress];
 
     self.textLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-    [self.textLabel setFont:[UIFont systemFontOfSize:Text_Message_Font_Size]];
+    [self.textLabel setFont:[UIFont systemFontOfSize:15]];
     self.textLabel.numberOfLines = 0;
     [self.textLabel setLineBreakMode:NSLineBreakByWordWrapping];
     [self.textLabel setTextAlignment:NSTextAlignmentLeft];
-    [self.textLabel setTextColor:[UIColor blackColor]];
     if (RC_IOS_SYSTEM_VERSION_LESS_THAN(@"7.0")) {
         [self.textLabel setBackgroundColor:[UIColor clearColor]];
     }
@@ -121,19 +120,19 @@
 
     CGSize __textSize = [RCKitUtility
         getTextDrawingSize:self.textLabel.text
-                      font:[UIFont systemFontOfSize:Text_Message_Font_Size]
+                      font:[UIFont systemFontOfSize:15]
            constrainedSize:CGSizeMake(self.baseContentView.bounds.size.width -
-                                          (10 + [RCIM sharedRCIM].globalMessagePortraitSize.width + 10) * 2 - 5 - 35,
+                                          (10 + [RCIM sharedRCIM].globalMessagePortraitSize.width + 10) * 2 - (14 + 20 + 7 + 10),
                                       8000)];
     __textSize = CGSizeMake(ceilf(__textSize.width), ceilf(__textSize.height));
     float maxWidth = self.baseContentView.bounds.size.width -
-                     (10 + [RCIM sharedRCIM].globalMessagePortraitSize.width + 10) * 2 - 5 - 35;
+                     (10 + [RCIM sharedRCIM].globalMessagePortraitSize.width + 10) * 2 - 5 - (14 + 20 + 7 + 10);
     if (__textSize.width > maxWidth) {
         __textSize.width = maxWidth;
     }
-    CGSize __labelSize = CGSizeMake(__textSize.width + 5, __textSize.height + 5);
+    CGSize __labelSize = CGSizeMake(__textSize.width, __textSize.height + 5);
 
-    CGFloat __bubbleWidth = __labelSize.width + 12 + 20 < 50 ? 50 : (__labelSize.width + 12 + 20);
+    CGFloat __bubbleWidth = __labelSize.width + (14 + 20 + 7 + 10) < 50 ? 50 : (__labelSize.width + (14 + 20 + 7 + 10));
     CGFloat __bubbleHeight = __labelSize.height + 5 + 5 < 40 ? 40 : (__labelSize.height + 5 + 5);
 
     CGSize __bubbleSize = CGSizeMake(__bubbleWidth, __bubbleHeight);
@@ -147,11 +146,12 @@
         messageContentViewRect.size.height = __bubbleSize.height;
         self.messageContentView.frame = messageContentViewRect;
 
-        self.bubbleBackgroundView.frame = CGRectMake(0, 0, __bubbleSize.width + 24, __bubbleSize.height);
+        self.bubbleBackgroundView.frame = CGRectMake(0, 0, __bubbleSize.width, __bubbleSize.height);
 
-        self.mediaTypeIcon.frame = CGRectMake(18, 8, 24, 24);
+        self.mediaTypeIcon.frame = CGRectMake(14, 10, 20, 20);
+        self.textLabel.textColor = RongVoIPUIColorFromRGB(0x939393);
         self.textLabel.frame =
-            CGRectMake(CGRectGetMaxX(self.mediaTypeIcon.frame) + 4, __bubbleHeight / 2 - __labelSize.height / 2,
+            CGRectMake(CGRectGetMaxX(self.mediaTypeIcon.frame) + 7, __bubbleHeight / 2 - __labelSize.height / 2,
                        __labelSize.width, __labelSize.height);
         self.bubbleBackgroundView.image = [RCKitUtility imageNamed:@"chat_from_bg_normal" ofBundle:@"RongCloud.bundle"];
         UIImage *image = self.bubbleBackgroundView.image;
@@ -159,16 +159,17 @@
             resizableImageWithCapInsets:UIEdgeInsetsMake(image.size.height * 0.8, image.size.width * 0.8,
                                                          image.size.height * 0.2, image.size.width * 0.2)];
     } else {
-        messageContentViewRect.size.width = __bubbleSize.width + 24;
+        messageContentViewRect.size.width = __bubbleSize.width;
         messageContentViewRect.size.height = __bubbleSize.height;
         messageContentViewRect.origin.x =
             self.baseContentView.bounds.size.width -
             (messageContentViewRect.size.width + 6 + [RCIM sharedRCIM].globalMessagePortraitSize.width + 10);
         self.messageContentView.frame = messageContentViewRect;
 
-        self.bubbleBackgroundView.frame = CGRectMake(0, 0, __bubbleSize.width + 24, __bubbleSize.height);
-        self.textLabel.frame = CGRectMake(12, 20 - __labelSize.height / 2, __labelSize.width, __labelSize.height);
-        self.mediaTypeIcon.frame = CGRectMake(CGRectGetMaxX(self.textLabel.frame), 8, 24, 24);
+        self.bubbleBackgroundView.frame = CGRectMake(0, 0, __bubbleSize.width, __bubbleSize.height);
+        self.textLabel.textColor = RongVoIPUIColorFromRGB(0x3f81bc);
+        self.textLabel.frame = CGRectMake(10, 20 - __labelSize.height / 2, __labelSize.width, __labelSize.height);
+        self.mediaTypeIcon.frame = CGRectMake(CGRectGetMaxX(self.textLabel.frame) + 7, 10, 20, 20);
         self.bubbleBackgroundView.image = [RCKitUtility imageNamed:@"chat_to_bg_normal" ofBundle:@"RongCloud.bundle"];
         UIImage *image = self.bubbleBackgroundView.image;
         CGRect statusFrame = self.statusContentView.frame;

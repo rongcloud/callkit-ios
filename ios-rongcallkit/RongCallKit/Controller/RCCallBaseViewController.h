@@ -46,7 +46,7 @@
 /*!
  蒙层View
  */
-@property(nonatomic, strong) UIVisualEffectView *blurView;
+@property(nonatomic, strong) UIView *blurView;
 
 /*!
  最小化Button

@@ -25,6 +25,12 @@
  */
 @property(nonatomic, strong) UILabel *nameLabel;
 
+
+/*!
+ 用户名字的Label
+ */
+@property(nonatomic, strong) UILabel *cellNameLabel;
+
 /*!
  用户状态的Label
  */

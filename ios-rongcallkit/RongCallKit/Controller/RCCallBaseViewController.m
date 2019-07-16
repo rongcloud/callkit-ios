@@ -18,13 +18,15 @@
 #import "WhiteBoardWebView.h"
 #import "KxCallMenu.h"
 
+NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessionCreation Notification";
+
 @interface RCCallBaseViewController ()
 {
     UIImage *signalImage0, *signalImage1, *signalImage2, *signalImage3, *signalImage4, *signalImage5;
     WhiteBoardWebView *whiteBoardWebView;
-    BOOL isOpenWhiteBoard;
     dispatch_semaphore_t sem;
     dispatch_queue_t queue;
+    BOOL hangupButtonClick;
 }
 
 @property(nonatomic, strong) NSTimer *activeTimer;
@@ -35,6 +37,7 @@
 @property(nonatomic, strong) UIView *topGradientView;
 @property(nonatomic, strong) UIView *bottomGradientView;
 @property(nonatomic, strong) UIAlertController *alertController;
+@property(nonatomic, assign) BOOL backCamera;
 @property (nonatomic, strong) NSTimer *vibrateTimer;
 
 @end
@@ -45,6 +48,8 @@
     self = [super init];
     if (self) {
         _callSession = callSession;
+        _backCamera = NO;
+        [[NSNotificationCenter defaultCenter] postNotificationName:RCCallNewSessionCreationNotification object:_callSession];
         sem = dispatch_semaphore_create(1);
         queue = dispatch_queue_create("AnswerQueue", DISPATCH_QUEUE_SERIAL);
         [self registerForegroundNotification];
@@ -52,6 +57,7 @@
         [RCCallKitUtility setScreenForceOn];
         [_callSession setMinimized:NO];
         self.needPlayingRingAfterForeground = YES;
+        hangupButtonClick = NO;
     }
     return self;
 }
@@ -62,12 +68,15 @@
                           userIdList:(NSArray *)userIdList {
     self = [super init];
     if (self) {
+        [self willChangeValueForKey:@"callSession"];
         _callSession = [[RCCallClient sharedRCCallClient] startCall:conversationType
                                                            targetId:targetId
                                                                  to:userIdList
                                                           mediaType:mediaType
                                                     sessionDelegate:self
                                                               extra:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:RCCallNewSessionCreationNotification object:_callSession];
+        [self didChangeValueForKey:@"callSession"];
         sem = dispatch_semaphore_create(1);
         queue = dispatch_queue_create("AnswerQueue", DISPATCH_QUEUE_SERIAL);
         if (mediaType == RCCallMediaAudio) {
@@ -85,6 +94,8 @@
         [self registerForegroundNotification];
         [RCCallKitUtility setScreenForceOn];
         [_callSession setMinimized:NO];
+        hangupButtonClick = NO;
+        
     }
     return self;
 }
@@ -98,6 +109,7 @@
         [self registerForegroundNotification];
         [_callSession setDelegate:self];
         [_callSession setMinimized:YES];
+        hangupButtonClick = NO;
     }
     return self;
 }
@@ -150,7 +162,6 @@
     }
 }
 
-
 - (void)startPlayRing:(NSString *)ringPath {
     if (ringPath) {
         if (self.audioPlayer) {
@@ -196,12 +207,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
-    self.backgroundView = [[UIView alloc] initWithFrame:self.view.bounds];
-    self.backgroundView.backgroundColor = RongVoIPUIColorFromRGB(0x262e42);
+    
+    self.backgroundView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
+    self.backgroundView.backgroundColor = [UIColor colorWithRed:20/255.0 green:28/255.0 blue:36/255.0 alpha:1/1.0];
     [self.view addSubview:self.backgroundView];
     self.backgroundView.hidden = NO;
-    isOpenWhiteBoard = NO;
 
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(onOrientationChanged:)
@@ -210,12 +220,18 @@
 
     [self registerTelephonyEvent];
     [self addProximityMonitoringObserver];
-    //    UIVisualEffect *blurEffect = [UIBlurEffect
-    //    effectWithStyle:UIBlurEffectStyleDark];
-    //    self.blurView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
-    //    self.blurView.frame = self.view.frame;
-    //    [self.view addSubview:self.blurView];
-    //    self.blurView.hidden = NO;
+
+    UIVisualEffect *blurEffect = [UIBlurEffect
+    effectWithStyle:UIBlurEffectStyleDark];
+//    self.blurView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
+    self.blurView = [[UIView alloc] init];
+    self.blurView.frame = self.view.frame;
+ 
+    self.blurView.backgroundColor = [UIColor colorWithRed:20/255.0 green:28/255.0 blue:36/255.0 alpha:1/1.0];
+    self.blurView.alpha = 0.9;
+    
+    [self.view addSubview:self.blurView];
+    self.blurView.hidden = YES;
 }
 
 - (void)onOrientationChanged:(NSNotification *)notification {
@@ -284,6 +300,7 @@
 
         [self.view addSubview:_minimizeButton];
         _minimizeButton.hidden = YES;
+        _minimizeButton.imageView.contentMode = UIViewContentModeScaleToFill;
     }
     return _minimizeButton;
 }
@@ -306,9 +323,9 @@
         _inviteUserButton =
             [[UIButton alloc] initWithFrame:CGRectMake(RCCallHorizontalMargin / 2, RCCallVerticalMargin / 2,
                                                        RCCallButtonLength, RCCallButtonLength)];
-        [_inviteUserButton setImage:[RCCallKitUtility imageFromVoIPBundle:@"voip/add.png"]
+        [_inviteUserButton setImage:[RCCallKitUtility imageFromVoIPBundle:@"voip/addmenu.png"]
                            forState:UIControlStateNormal];
-        [_inviteUserButton setImage:[RCCallKitUtility imageFromVoIPBundle:@"voip/add.png"]
+        [_inviteUserButton setImage:[RCCallKitUtility imageFromVoIPBundle:@"voip/addmenu.png"]
                            forState:UIControlStateHighlighted];
 
         [_inviteUserButton addTarget:self
@@ -331,10 +348,10 @@
         _timeLabel.backgroundColor = [UIColor clearColor];
         _timeLabel.textColor = [UIColor whiteColor];
         _timeLabel.layer.shadowOpacity = 0.8;
-        _timeLabel.layer.shadowRadius = 1.0;
-        _timeLabel.layer.shadowColor = [UIColor darkGrayColor].CGColor;
+        _timeLabel.layer.shadowRadius = 3.0;
+        _timeLabel.layer.shadowColor = [UIColor blackColor].CGColor;
         _timeLabel.layer.shadowOffset = CGSizeMake(0, 1);
-        _timeLabel.font = [UIFont systemFontOfSize:18];
+        _timeLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size:13];
         _timeLabel.textAlignment = NSTextAlignmentCenter;
 
         [self.view addSubview:_timeLabel];
@@ -360,13 +377,17 @@
 }
 
 - (void)updateActiveTimer {
-    long sec = [[NSDate date] timeIntervalSince1970] - self.callSession.connectedTime / 1000;
+    if (hangupButtonClick) return;
+    long sec = ([[NSDate date] timeIntervalSince1970] * 1000 - self.callSession.connectedTime) / 1000;
     self.timeLabel.text = [RCCallKitUtility getReadableStringForTime:sec];
     
     if (sec >= 3600 && self.timeLabel.frame.size.width != 80)
     {
-        self.timeLabel.frame = CGRectMake(RCCallHorizontalMargin, RCCallVerticalMargin + RCCallInsideMargin + RCCallLabelHeight, 80, RCCallLabelHeight);
-        self.signalImageView.frame = CGRectMake(RCCallHorizontalMargin + self.timeLabel.frame.size.width, RCCallVerticalMargin + RCCallInsideMargin + RCCallLabelHeight+2, RCCallLabelHeight-4, RCCallLabelHeight-4);
+        self.timeLabel.frame = CGRectMake(self.view.frame.size.width / 2 - 114.0 / 2, RCCallMiniButtonTopMargin + RCCallMiniLabelHeight + RCCallTimeTopMargin + RCCallStatusBarHeight,
+                                          100.0, RCCallTimeLabelHeight);
+        self.timeLabel.textAlignment = NSTextAlignmentRight;
+        self.signalImageView.frame = CGRectMake(self.timeLabel.frame.origin.x + self.timeLabel.frame.size.width + 4.0f,  self.timeLabel.frame.origin.y,
+                                                RCCallTopMargin - 5.0,  RCCallTimeLabelHeight);
     }
 }
 
@@ -377,7 +398,10 @@
         _tipsLabel.textColor = [UIColor whiteColor];
         _tipsLabel.font = [UIFont systemFontOfSize:18];
         _tipsLabel.textAlignment = NSTextAlignmentCenter;
-
+        _tipsLabel.layer.shadowOpacity = 0.8;
+        _tipsLabel.layer.shadowRadius = 3.0;
+        _tipsLabel.layer.shadowColor = [UIColor blackColor].CGColor;
+        _tipsLabel.layer.shadowOffset = CGSizeMake(0, 1);
         [self.view addSubview:_tipsLabel];
         _tipsLabel.hidden = YES;
     }
@@ -394,9 +418,13 @@
                      forState:UIControlStateSelected];
         [_muteButton setTitle:NSLocalizedStringFromTable(@"VoIPCallMute", @"RongCloudKit", nil)
                      forState:UIControlStateNormal];
-        [_muteButton setSelected:self.callSession.isMuted];
         [_muteButton addTarget:self action:@selector(muteButtonClicked) forControlEvents:UIControlEventTouchUpInside];
+        [_muteButton setSelected:self.callSession.isMuted];
 
+        _muteButton.titleLabel.layer.shadowOpacity = 0.8;
+        _muteButton.titleLabel.layer.shadowRadius = 3.0;
+        _muteButton.titleLabel.layer.shadowColor = [UIColor blackColor].CGColor;
+        _muteButton.titleLabel.layer.shadowOffset = CGSizeMake(0, 1);
         [self.view addSubview:_muteButton];
         _muteButton.hidden = YES;
     }
@@ -419,7 +447,7 @@
         [_addButton setImage:[RCCallKitUtility imageFromVoIPBundle:@"voip/addmenu.png"] forState:UIControlStateSelected];
         //        [_addButton setTitle:NSLocalizedStringFromTable(@"VoIPCallMute", @"RongCloudKit", nil) forState:UIControlStateNormal];
         //        [_addButton setSelected:self.callSession.isMuted];
-        [_addButton addTarget:self action:@selector(addButtonClicked) forControlEvents:UIControlEventTouchUpInside];
+        [_addButton addTarget:self action:@selector(inviteUserButtonClicked) forControlEvents:UIControlEventTouchUpInside];
         
         [self.view addSubview:_addButton];
         _addButton.hidden = YES;
@@ -475,7 +503,6 @@
 
 - (void)handUpButtonClicked
 {
-    [self.callSession handup];
 }
 
 - (UIButton *)whiteBoardButton
@@ -497,24 +524,6 @@
 
 - (void)whiteBoardButtonClicked
 {
-    if (!isOpenWhiteBoard)
-    {
-        if (!whiteBoardWebView)
-        {
-            whiteBoardWebView = [[WhiteBoardWebView alloc] initWithFrame:CGRectMake(0, self.timeLabel.frame.origin.y + self.timeLabel.frame.size.height + 10, [UIScreen mainScreen].bounds.size.width, 360)];
-            whiteBoardWebView.backgroundColor = [UIColor grayColor];
-            whiteBoardWebView.userInteractionEnabled = YES;
-            [self.view addSubview:whiteBoardWebView];
-        }
-        isOpenWhiteBoard = YES;
-        [self.callSession whiteBoard];
-    }
-    else
-    {
-        [whiteBoardWebView removeFromSuperview];
-        whiteBoardWebView = nil;
-        isOpenWhiteBoard = NO;
-    }
 }
 
 - (UIImageView *)signalImageView
@@ -545,12 +554,14 @@
                         forState:UIControlStateSelected];
         [_speakerButton setTitle:NSLocalizedStringFromTable(@"VoIPCallSpeaker", @"RongCloudKit", nil)
                         forState:UIControlStateNormal];
-        [_speakerButton setSelected:self.callSession.speakerEnabled];
 
         [_speakerButton addTarget:self
                            action:@selector(speakerButtonClicked)
                  forControlEvents:UIControlEventTouchUpInside];
-
+        _speakerButton.titleLabel.layer.shadowOpacity = 0.8;
+        _speakerButton.titleLabel.layer.shadowRadius = 3.0;
+        _speakerButton.titleLabel.layer.shadowColor = [UIColor blackColor].CGColor;
+        _speakerButton.titleLabel.layer.shadowOffset = CGSizeMake(0, 1);
         [self.view addSubview:_speakerButton];
         _speakerButton.hidden = YES;
     }
@@ -577,7 +588,11 @@
         [_acceptButton addTarget:self
                           action:@selector(acceptButtonClicked)
                 forControlEvents:UIControlEventTouchUpInside];
-
+        _acceptButton.titleLabel.layer.shadowOpacity = 0.8;
+        _acceptButton.titleLabel.layer.shadowRadius = 3.0;
+        _acceptButton.titleLabel.layer.shadowColor = [UIColor blackColor].CGColor;
+        _acceptButton.titleLabel.layer.shadowOffset = CGSizeMake(0, 1);
+        
         [self.view addSubview:_acceptButton];
         _acceptButton.hidden = YES;
     }
@@ -607,7 +622,10 @@
         [_hangupButton addTarget:self
                           action:@selector(hangupButtonClicked)
                 forControlEvents:UIControlEventTouchUpInside];
-
+        _hangupButton.titleLabel.layer.shadowOpacity = 0.8;
+        _hangupButton.titleLabel.layer.shadowRadius = 3.0;
+        _hangupButton.titleLabel.layer.shadowColor = [UIColor blackColor].CGColor;
+        _hangupButton.titleLabel.layer.shadowOffset = CGSizeMake(0, 1);
         [self.view addSubview:_hangupButton];
         _hangupButton.hidden = YES;
     }
@@ -615,6 +633,7 @@
 }
 
 - (void)hangupButtonClicked {
+    hangupButtonClick = YES;
     [self didTapHangupButton];
 
     if (!self.callSession) {
@@ -653,7 +672,11 @@
         [_cameraCloseButton addTarget:self
                                action:@selector(cameraCloseButtonClicked)
                      forControlEvents:UIControlEventTouchUpInside];
-
+        _cameraCloseButton.titleLabel.layer.shadowOpacity = 0.8;
+        _cameraCloseButton.titleLabel.layer.shadowRadius = 3.0;
+        _cameraCloseButton.titleLabel.layer.shadowColor = [UIColor blackColor].CGColor;
+        _cameraCloseButton.titleLabel.layer.shadowOffset = CGSizeMake(0, 1);
+        
         [self.view addSubview:_cameraCloseButton];
         _cameraCloseButton.hidden = YES;
     }
@@ -712,14 +735,19 @@
 
         [self.view addSubview:_cameraSwitchButton];
         _cameraSwitchButton.hidden = YES;
+        [_cameraSwitchButton setSelected:_backCamera];
     }
     return _cameraSwitchButton;
 }
 
 - (void)cameraSwitchButtonClicked {
     [self didTapCameraSwitchButton];
-
-    [self.callSession switchCameraMode];
+    
+    if ([self.callSession switchCameraMode])
+    {
+        _backCamera = !_backCamera;
+    }
+    [_cameraSwitchButton setSelected:_backCamera];
 }
 
 - (UIView *)topGradientView {
@@ -769,16 +797,18 @@
 #pragma mark - layout
 - (void)resetLayout:(BOOL)isMultiCall mediaType:(RCCallMediaType)mediaType callStatus:(RCCallStatus)callStatus {
     if (mediaType == RCCallMediaAudio && !isMultiCall) {
-        self.backgroundView.backgroundColor = RongVoIPUIColorFromRGB(0x262e42);
+        self.backgroundView.backgroundColor=[UIColor colorWithRed:20/255.0 green:28/255.0 blue:36/255.0 alpha:1/1.0];
         self.backgroundView.hidden = NO;
         self.topGradientView.hidden = YES;
         self.bottomGradientView.hidden = YES;
 
         self.blurView.hidden = NO;
 
-        if (callStatus == RCCallActive) {
-            self.minimizeButton.frame = CGRectMake(RCCallHorizontalMargin / 2, RCCallVerticalMargin + RCCallStatusBarHeight,
-                                                   RCCallButtonLength / 2, RCCallButtonLength / 2);
+        if (callStatus == RCCallDialing) {
+            self.minimizeButton.frame = CGRectMake(RCCallHorizontalMargin, RCCallMiniButtonTopMargin + RCCallStatusBarHeight, RCCallMiniButtonLength, RCCallMiniButtonLength);
+            self.minimizeButton.hidden = NO;
+        }else if (callStatus == RCCallActive) {
+            self.minimizeButton.frame = CGRectMake(RCCallHorizontalMargin, RCCallMiniButtonTopMargin + RCCallStatusBarHeight, RCCallMiniButtonLength, RCCallMiniButtonLength);
             self.minimizeButton.hidden = NO;
         } else if (callStatus != RCCallHangup) {
             self.minimizeButton.hidden = YES;
@@ -790,8 +820,8 @@
         if (callStatus == RCCallActive) {
             self.timeLabel.frame =
                 CGRectMake(RCCallHorizontalMargin,
-                           RCCallVerticalMargin * 3 + RCCallHeaderLength + RCCallInsideMargin * 2 + RCCallLabelHeight,
-                           self.view.frame.size.width - RCCallHorizontalMargin * 2, RCCallLabelHeight);
+                           RCCallTopGGradientHeight + RCCallHeaderLength + RCCallTopMargin + RCCallLabelHeight + RCCallTimeTopMargin + RCCallStatusBarHeight,
+                           self.view.frame.size.width - RCCallHorizontalMargin * 2, RCCallTimeLabelHeight);
             self.timeLabel.hidden = NO;
         } else if (callStatus != RCCallHangup) {
             self.timeLabel.hidden = YES;
@@ -800,34 +830,32 @@
         if (callStatus == RCCallHangup) {
             self.tipsLabel.frame =
                 CGRectMake(RCCallHorizontalMargin,
-                           self.view.frame.size.height - RCCallVerticalMargin - RCCallButtonLength -
-                               RCCallInsideMargin * 3 - RCCallLabelHeight - RCCallExtraSpace,
+                           self.view.frame.size.height - RCCallButtonBottomMargin * 5 - RCCallExtraSpace,
                            self.view.frame.size.width - RCCallHorizontalMargin * 2, RCCallLabelHeight);
         } else if (callStatus == RCCallActive) {
             self.tipsLabel.frame = CGRectMake(
                 RCCallHorizontalMargin,
-                MAX((self.view.frame.size.height - RCCallLabelHeight) / 2,
-                    RCCallVerticalMargin * 3 + RCCallHeaderLength + RCCallInsideMargin * 3 + RCCallLabelHeight * 2),
+                RCCallButtonLength - 3.0f + RCCallStatusBarHeight,
                 self.view.frame.size.width - RCCallHorizontalMargin * 2, RCCallLabelHeight);
         } else {
             self.tipsLabel.frame =
-                CGRectMake(RCCallHorizontalMargin,
-                           RCCallVerticalMargin * 3 + RCCallHeaderLength + RCCallInsideMargin * 2 + RCCallLabelHeight,
-                           self.view.frame.size.width - RCCallHorizontalMargin * 2, RCCallLabelHeight);
+            CGRectMake(RCCallHorizontalMargin,
+                       self.view.frame.size.height * 0.54,
+                       self.view.frame.size.width - RCCallHorizontalMargin * 2, RCCallLabelHeight);
         }
         self.tipsLabel.hidden = NO;
         
         if (callStatus == RCCallActive) {
-            self.muteButton.frame = CGRectMake(RCCallHorizontalMargin,
-                                               self.view.frame.size.height - RCCallVerticalMargin - RCCallButtonLength - RCCallExtraSpace,
-                                               RCCallButtonLength, RCCallButtonLength);
+            self.muteButton.frame = CGRectMake(RCCallHorizontalMiddleMargin,
+                                               self.view.frame.size.height - (RCCallButtonBottomMargin * 2 - RCCallInsideMargin * 2) - RCCallCustomButtonLength - RCCallExtraSpace,
+                                               RCCallCustomButtonLength, RCCallCustomButtonLength);
             [self layoutTextUnderImageButton:self.muteButton];
             self.muteButton.hidden = NO;
             self.muteButton.enabled = YES;
         } else if (callStatus == RCCallDialing) {
-            self.muteButton.frame = CGRectMake(RCCallHorizontalMargin,
-                                               self.view.frame.size.height - RCCallVerticalMargin - RCCallButtonLength - RCCallExtraSpace,
-                                               RCCallButtonLength, RCCallButtonLength);
+            self.muteButton.frame = CGRectMake(RCCallHorizontalMiddleMargin,
+                                               self.view.frame.size.height - (RCCallButtonBottomMargin * 2 - RCCallInsideMargin * 2) - RCCallCustomButtonLength - RCCallExtraSpace,
+                                               RCCallCustomButtonLength, RCCallCustomButtonLength);
             [self layoutTextUnderImageButton:self.muteButton];
             self.muteButton.hidden = NO;
             self.muteButton.enabled = NO;
@@ -835,14 +863,21 @@
             self.muteButton.hidden = YES;
         }
 
-        if (callStatus == RCCallActive || callStatus == RCCallDialing) {
+        if (callStatus == RCCallActive){
             self.speakerButton.frame =
-                CGRectMake(self.view.frame.size.width - RCCallHorizontalMargin - RCCallButtonLength,
-                           self.view.frame.size.height - RCCallVerticalMargin - RCCallButtonLength - RCCallExtraSpace, RCCallButtonLength,
-                           RCCallButtonLength);
+            CGRectMake(self.view.frame.size.width - RCCallHorizontalMiddleMargin - RCCallCustomButtonLength,
+                       self.view.frame.size.height - (RCCallButtonBottomMargin * 2 - RCCallInsideMargin * 2) - RCCallCustomButtonLength - RCCallExtraSpace, RCCallCustomButtonLength,
+                       RCCallCustomButtonLength);
             [self layoutTextUnderImageButton:self.speakerButton];
             self.speakerButton.hidden = NO;
             [self.speakerButton setSelected:self.callSession.speakerEnabled];
+        } else if (callStatus == RCCallDialing) {
+            self.speakerButton.frame =
+                CGRectMake(self.view.frame.size.width - RCCallHorizontalMiddleMargin - RCCallCustomButtonLength,
+                           self.view.frame.size.height - (RCCallButtonBottomMargin * 2 - RCCallInsideMargin * 2) - RCCallCustomButtonLength - RCCallExtraSpace, RCCallCustomButtonLength,
+                           RCCallCustomButtonLength);
+            [self layoutTextUnderImageButton:self.speakerButton];
+            self.speakerButton.hidden = NO;
         } else if (callStatus != RCCallHangup) {
             self.speakerButton.hidden = YES;
         }
@@ -850,31 +885,31 @@
         if (callStatus == RCCallDialing) {
             self.hangupButton.frame =
                 CGRectMake((self.view.frame.size.width - RCCallButtonLength) / 2,
-                           self.view.frame.size.height - RCCallVerticalMargin - RCCallButtonLength - RCCallExtraSpace, RCCallButtonLength,
+                           self.view.frame.size.height - (RCCallButtonBottomMargin * 2 - RCCallInsideMargin * 2 + RCCallCustomButtonLength / 2 + 1.25f) - RCCallButtonLength/2 - RCCallExtraSpace, RCCallButtonLength,
                            RCCallButtonLength);
-            [self layoutTextUnderImageButton:self.hangupButton];
+            [self layoutTextUnderBigImageButton:self.hangupButton];
             self.hangupButton.hidden = NO;
 
             self.acceptButton.hidden = YES;
         } else if (callStatus == RCCallIncoming || callStatus == RCCallRinging) {
             self.hangupButton.frame = CGRectMake(
-                RCCallHorizontalMargin, self.view.frame.size.height - RCCallVerticalMargin - RCCallButtonLength - RCCallExtraSpace,
+                RCCallHorizontalBigMargin, self.view.frame.size.height - (RCCallButtonBottomMargin * 2 - RCCallInsideMargin * 2 + RCCallCustomButtonLength / 2 + 1.25f) - RCCallButtonLength/2 - RCCallExtraSpace,
                 RCCallButtonLength, RCCallButtonLength);
             [self layoutTextUnderImageButton:self.hangupButton];
             self.hangupButton.hidden = NO;
 
             self.acceptButton.frame =
-                CGRectMake(self.view.frame.size.width - RCCallHorizontalMargin - RCCallButtonLength,
-                           self.view.frame.size.height - RCCallVerticalMargin - RCCallButtonLength - RCCallExtraSpace, RCCallButtonLength,
+                CGRectMake(self.view.frame.size.width - RCCallHorizontalBigMargin - RCCallButtonLength,
+                           self.view.frame.size.height - (RCCallButtonBottomMargin * 2 - RCCallInsideMargin * 2 + RCCallCustomButtonLength / 2 + 1.25f) - RCCallButtonLength/2 - RCCallExtraSpace, RCCallButtonLength,
                            RCCallButtonLength);
             [self layoutTextUnderImageButton:self.acceptButton];
             self.acceptButton.hidden = NO;
         } else if (callStatus == RCCallActive) {
             self.hangupButton.frame =
                 CGRectMake((self.view.frame.size.width - RCCallButtonLength) / 2,
-                           self.view.frame.size.height - RCCallVerticalMargin - RCCallButtonLength - RCCallExtraSpace, RCCallButtonLength,
+                           self.view.frame.size.height - (RCCallButtonBottomMargin * 2 - RCCallInsideMargin * 2 + RCCallCustomButtonLength / 2 + 1.25f) - RCCallButtonLength/2 - RCCallExtraSpace, RCCallButtonLength,
                            RCCallButtonLength);
-            [self layoutTextUnderImageButton:self.hangupButton];
+            [self layoutTextUnderBigImageButton:self.hangupButton];
             self.hangupButton.hidden = NO;
 
             self.acceptButton.hidden = YES;
@@ -886,11 +921,18 @@
     } else if (mediaType == RCCallMediaVideo && !isMultiCall) {
         self.backgroundView.hidden = NO;
 
-        self.blurView.hidden = YES;
-
-        if (callStatus == RCCallActive) {
-            self.minimizeButton.frame = CGRectMake(RCCallHorizontalMargin / 2, RCCallVerticalMargin + RCCallStatusBarHeight,
-                                                   RCCallButtonLength / 2, RCCallButtonLength / 2);
+        if (callStatus == RCCallDialing || callStatus == RCCallIncoming || callStatus == RCCallRinging  || callStatus == RCCallHangup) {
+            self.blurView.hidden = NO;
+        }else{
+            self.blurView.hidden = YES;
+        }
+        
+        if (callStatus == RCCallDialing) {
+            self.minimizeButton.frame = CGRectMake(RCCallHorizontalMargin, RCCallMiniButtonTopMargin + RCCallStatusBarHeight, RCCallMiniButtonLength, RCCallMiniButtonLength);
+            self.minimizeButton.hidden = NO;
+        }else if (callStatus == RCCallActive) {
+            self.minimizeButton.frame = CGRectMake(RCCallHorizontalMargin, RCCallMiniButtonTopMargin + RCCallStatusBarHeight,
+                                                   RCCallMiniButtonLength, RCCallMiniButtonLength);
             self.minimizeButton.hidden = NO;
             self.topGradientView.hidden = NO;
             self.bottomGradientView.hidden = NO;
@@ -904,8 +946,8 @@
 
         if (callStatus == RCCallActive) {
             self.timeLabel.frame =
-                CGRectMake(RCCallHorizontalMargin, RCCallVerticalMargin + RCCallInsideMargin + RCCallLabelHeight + RCCallStatusBarHeight,
-                           self.view.frame.size.width - RCCallHorizontalMargin * 2, RCCallLabelHeight);
+                CGRectMake(RCCallHorizontalMargin, RCCallMiniButtonTopMargin + RCCallMiniLabelHeight + RCCallTimeTopMargin + RCCallStatusBarHeight,
+                           self.view.frame.size.width - RCCallHorizontalMargin * 2,RCCallTimeLabelHeight);
             self.timeLabel.hidden = NO;
         } else if (callStatus != RCCallHangup) {
             self.timeLabel.hidden = YES;
@@ -915,77 +957,92 @@
         if (callStatus == RCCallActive) {
             self.tipsLabel.frame =
                 CGRectMake(RCCallHorizontalMargin,
-                           MAX((self.view.frame.size.height - RCCallLabelHeight) / 2,
-                               RCCallVerticalMargin + RCCallHeaderLength * 1.5 + RCCallInsideMargin * 3),
+                           self.view.frame.size.height - RCCallButtonBottomMargin * 3 - RCCallButtonLength -RCCallExtraSpace,
                            self.view.frame.size.width - RCCallHorizontalMargin * 2, RCCallLabelHeight);
         } else if (callStatus == RCCallDialing) {
-            self.tipsLabel.frame =
-                CGRectMake(RCCallHorizontalMargin,
-                           RCCallVerticalMargin * 3 + RCCallHeaderLength + RCCallInsideMargin * 2 + RCCallLabelHeight,
-                           self.view.frame.size.width - RCCallHorizontalMargin * 2, RCCallLabelHeight);
+            self.tipsLabel.frame = CGRectMake(RCCallHorizontalMargin,
+                                               self.view.frame.size.height * 0.54, self.view.frame.size.width - RCCallHorizontalMargin * 2 , RCCallLabelHeight);
+            
         } else if (callStatus == RCCallIncoming || callStatus == RCCallRinging) {
             self.tipsLabel.frame =
-                CGRectMake(RCCallHorizontalMargin,
-                           RCCallVerticalMargin * 3 + RCCallHeaderLength + RCCallInsideMargin * 2 + RCCallLabelHeight,
-                           self.view.frame.size.width - RCCallHorizontalMargin * 2, RCCallLabelHeight);
+            CGRectMake(RCCallHorizontalMargin,
+                        self.view.frame.size.height * 0.54,
+                       self.view.frame.size.width - RCCallHorizontalMargin * 2, RCCallLabelHeight);
         } else if (callStatus == RCCallHangup) {
             self.tipsLabel.frame = CGRectMake(
                 RCCallHorizontalMargin,
-                self.view.frame.size.height - RCCallVerticalMargin - RCCallButtonLength * 2 - RCCallInsideMargin * 8 - RCCallExtraSpace,
+                self.view.frame.size.height - RCCallButtonBottomMargin * 3 - RCCallButtonLength -RCCallExtraSpace,
                 self.view.frame.size.width - RCCallHorizontalMargin * 2, RCCallLabelHeight);
         }
         self.tipsLabel.hidden = NO;
 
-        if (callStatus == RCCallActive) {
-            self.muteButton.frame = CGRectMake(RCCallHorizontalMargin,
-                                               self.view.frame.size.height - RCCallVerticalMargin - RCCallButtonLength - RCCallExtraSpace,
-                                               RCCallButtonLength, RCCallButtonLength);
+        if (callStatus == RCCallDialing) {
+            self.muteButton.frame = CGRectMake(RCCallHorizontalMiddleMargin,
+                                               self.view.frame.size.height - (RCCallButtonBottomMargin * 2 - RCCallInsideMargin * 2) - RCCallCustomButtonLength - RCCallExtraSpace,
+                                               RCCallCustomButtonLength, RCCallCustomButtonLength);
             [self layoutTextUnderImageButton:self.muteButton];
             self.muteButton.hidden = NO;
-        } else if (callStatus != RCCallHangup) {
+            self.muteButton.enabled = NO;
+        }else if (callStatus == RCCallActive) {
+            self.muteButton.frame = CGRectMake(RCCallHorizontalMiddleMargin,
+                                               self.view.frame.size.height - (RCCallButtonBottomMargin * 2 - RCCallInsideMargin * 2) - RCCallCustomButtonLength - RCCallExtraSpace,
+                                               RCCallCustomButtonLength, RCCallCustomButtonLength);
+            [self layoutTextUnderImageButton:self.muteButton];
+            self.muteButton.hidden = NO;
+            self.muteButton.enabled = YES;
+        }else if (callStatus != RCCallHangup) {
             self.muteButton.hidden = YES;
+            self.muteButton.enabled = NO;
         }
 
-        self.speakerButton.hidden = YES;
+        if (callStatus == RCCallDialing) {
+            self.speakerButton.frame = CGRectMake(self.view.frame.size.width -RCCallHorizontalMiddleMargin - RCCallCustomButtonLength,
+                                               self.view.frame.size.height - (RCCallButtonBottomMargin * 2 - RCCallInsideMargin * 2) - RCCallCustomButtonLength - RCCallExtraSpace,
+                                               RCCallCustomButtonLength, RCCallCustomButtonLength);
+            [self layoutTextUnderImageButton:self.speakerButton];
+            self.speakerButton.hidden = NO;
+            [self setSpeakerEnable:NO];
+        }else if (callStatus != RCCallHangup) {
+            self.speakerButton.hidden = YES;
+        }
 
         if (callStatus == RCCallDialing) {
             self.hangupButton.frame =
-                CGRectMake((self.view.frame.size.width - RCCallButtonLength) / 2,
-                           self.view.frame.size.height - RCCallVerticalMargin - RCCallButtonLength - RCCallExtraSpace, RCCallButtonLength,
-                           RCCallButtonLength);
-            [self layoutTextUnderImageButton:self.hangupButton];
+            CGRectMake((self.view.frame.size.width - RCCallButtonLength) / 2,
+                       self.view.frame.size.height - (RCCallButtonBottomMargin * 2 - RCCallInsideMargin * 2 + RCCallCustomButtonLength / 2 + 1.25f) - RCCallButtonLength/2 - RCCallExtraSpace, RCCallButtonLength,
+                       RCCallButtonLength);
+            [self layoutTextUnderBigImageButton:self.hangupButton];
             self.hangupButton.hidden = NO;
 
             self.acceptButton.hidden = YES;
         } else if (callStatus == RCCallIncoming || callStatus == RCCallRinging) {
             self.hangupButton.frame = CGRectMake(
-                RCCallHorizontalMargin, self.view.frame.size.height - RCCallVerticalMargin - RCCallButtonLength - RCCallExtraSpace,
-                RCCallButtonLength, RCCallButtonLength);
+                                                 RCCallHorizontalBigMargin, self.view.frame.size.height - (RCCallButtonBottomMargin * 2 - RCCallInsideMargin * 2 + RCCallCustomButtonLength / 2 + 1.25f) - RCCallButtonLength/2 - RCCallExtraSpace,
+                                                 RCCallButtonLength, RCCallButtonLength);
             [self layoutTextUnderImageButton:self.hangupButton];
             self.hangupButton.hidden = NO;
 
             self.acceptButton.frame =
-                CGRectMake(self.view.frame.size.width - RCCallHorizontalMargin - RCCallButtonLength,
-                           self.view.frame.size.height - RCCallVerticalMargin - RCCallButtonLength - RCCallExtraSpace, RCCallButtonLength,
-                           RCCallButtonLength);
+            CGRectMake(
+                       self.view.frame.size.width - RCCallHorizontalBigMargin - RCCallButtonLength, self.view.frame.size.height - (RCCallButtonBottomMargin * 2 - RCCallInsideMargin * 2 + RCCallCustomButtonLength / 2 + 1.25f) - RCCallButtonLength/2 - RCCallExtraSpace,
+                       RCCallButtonLength, RCCallButtonLength);
             [self layoutTextUnderImageButton:self.acceptButton];
             self.acceptButton.hidden = NO;
         } else if (callStatus == RCCallActive) {
             self.hangupButton.frame =
-                CGRectMake((self.view.frame.size.width - RCCallButtonLength) / 2,
-                           self.view.frame.size.height - RCCallVerticalMargin - RCCallButtonLength - RCCallExtraSpace, RCCallButtonLength,
-                           RCCallButtonLength);
-            [self layoutTextUnderImageButton:self.hangupButton];
+            CGRectMake((self.view.frame.size.width - RCCallButtonLength) / 2,
+                       self.view.frame.size.height - (RCCallButtonBottomMargin * 2 - RCCallInsideMargin * 2 + RCCallCustomButtonLength / 2 + 1.25f) - RCCallButtonLength/2 - RCCallExtraSpace, RCCallButtonLength,
+                       RCCallButtonLength);
+            [self layoutTextUnderBigImageButton:self.hangupButton];
             self.hangupButton.hidden = NO;
 
             self.acceptButton.hidden = YES;
         }
 
         if (callStatus == RCCallActive) {
-            self.cameraSwitchButton.frame =
-                CGRectMake(self.view.frame.size.width - RCCallHorizontalMargin - RCCallButtonLength,
-                           self.view.frame.size.height - RCCallVerticalMargin - RCCallButtonLength - RCCallExtraSpace, RCCallButtonLength,
-                           RCCallButtonLength);
+            self.cameraSwitchButton.frame = CGRectMake(self.view.frame.size.width -RCCallHorizontalMiddleMargin - RCCallCustomButtonLength,
+                                                      self.view.frame.size.height - (RCCallButtonBottomMargin * 2 - RCCallInsideMargin * 2) - RCCallCustomButtonLength - RCCallExtraSpace,
+                                                      RCCallCustomButtonLength, RCCallCustomButtonLength);
             [self layoutTextUnderImageButton:self.cameraSwitchButton];
             self.cameraSwitchButton.hidden = NO;
         } else if (callStatus != RCCallHangup) {
@@ -993,27 +1050,27 @@
         }
 
         if (callStatus == RCCallActive) {
-            self.cameraCloseButton.frame = CGRectMake(
-                self.view.frame.size.width - RCCallHorizontalMargin - RCCallButtonLength,
-                self.view.frame.size.height - RCCallVerticalMargin - RCCallButtonLength * 2 - RCCallInsideMargin * 5 - RCCallExtraSpace,
-                RCCallButtonLength, RCCallButtonLength);
+            self.cameraCloseButton.frame =
+            CGRectMake(self.view.frame.size.width - RCCallHorizontalMiddleMargin - RCCallCustomButtonLength,
+                       self.view.frame.size.height - RCCallButtonBottomMargin * 4 - RCCallCustomButtonLength * 2 - RCCallHorizontalMargin - RCCallExtraSpace, RCCallCustomButtonLength,
+                       RCCallCustomButtonLength);
             [self layoutTextUnderImageButton:self.cameraCloseButton];
             self.cameraCloseButton.hidden = NO;
         } else if (callStatus != RCCallHangup) {
             self.cameraCloseButton.hidden = YES;
         }
-
     } else if (mediaType == RCCallMediaAudio && isMultiCall) {
-        self.backgroundView.backgroundColor = RongVoIPUIColorFromRGB(0x262e42);
+        self.backgroundView.backgroundColor = [UIColor colorWithRed:20/255.0 green:28/255.0 blue:36/255.0 alpha:1/1.0];
         self.backgroundView.hidden = NO;
         self.topGradientView.hidden = YES;
         self.bottomGradientView.hidden = YES;
+        self.blurView.hidden = YES;
 
-        self.blurView.hidden = NO;
-
-        if (callStatus == RCCallActive) {
-            self.minimizeButton.frame = CGRectMake(RCCallHorizontalMargin / 2, RCCallVerticalMargin + RCCallStatusBarHeight,
-                                                   RCCallButtonLength / 2, RCCallButtonLength / 2);
+        if (callStatus == RCCallDialing) {
+            self.minimizeButton.frame = CGRectMake(RCCallHorizontalMargin, RCCallMiniButtonTopMargin + RCCallStatusBarHeight, RCCallMiniButtonLength, RCCallMiniButtonLength);
+            self.minimizeButton.hidden = NO;
+        }else if (callStatus == RCCallActive) {
+            self.minimizeButton.frame = CGRectMake(RCCallHorizontalMargin, RCCallMiniButtonTopMargin + RCCallStatusBarHeight, RCCallMiniButtonLength, RCCallMiniButtonLength);
             self.minimizeButton.hidden = NO;
         } else if (callStatus != RCCallHangup) {
             self.minimizeButton.hidden = YES;
@@ -1021,8 +1078,8 @@
 
         if (callStatus == RCCallActive) {
             self.inviteUserButton.frame =
-                CGRectMake(self.view.frame.size.width - RCCallHorizontalMargin / 2 - RCCallButtonLength / 2,
-                           RCCallVerticalMargin + RCCallStatusBarHeight, RCCallButtonLength / 2, RCCallButtonLength / 2);
+                CGRectMake(self.view.frame.size.width - RCCallHorizontalMargin - RCCallMiniButtonLength,
+                            RCCallMiniButtonTopMargin +  + RCCallStatusBarHeight, RCCallMiniButtonLength, RCCallMiniButtonLength);
             self.inviteUserButton.hidden = NO;
         } else if (callStatus != RCCallHangup) {
             self.inviteUserButton.hidden = YES;
@@ -1030,8 +1087,8 @@
 
         if (callStatus == RCCallActive) {
             self.timeLabel.frame =
-                CGRectMake(RCCallHorizontalMargin, RCCallVerticalMargin + RCCallStatusBarHeight,
-                           self.view.frame.size.width - RCCallHorizontalMargin * 2, RCCallLabelHeight);
+                CGRectMake(RCCallHorizontalMargin,  RCCallMiniButtonTopMargin + RCCallMiniLabelHeight + RCCallTimeTopMargin + RCCallStatusBarHeight,
+                           self.view.frame.size.width - RCCallHorizontalMargin * 2, RCCallTimeLabelHeight);
             self.timeLabel.hidden = NO;
         } else if (callStatus != RCCallHangup) {
             self.timeLabel.hidden = YES;
@@ -1041,17 +1098,16 @@
         if (callStatus == RCCallIncoming || callStatus == RCCallRinging) {
             self.tipsLabel.frame =
                 CGRectMake(RCCallHorizontalMargin,
-                           RCCallVerticalMargin * 2 + RCCallHeaderLength + RCCallInsideMargin * 2 + RCCallLabelHeight,
+                            self.view.frame.size.height * 0.54 ,
                            self.view.frame.size.width - RCCallHorizontalMargin * 2, RCCallLabelHeight);
         } else if (callStatus == RCCallDialing) {
             self.tipsLabel.frame =
-                CGRectMake(RCCallHorizontalMargin, RCCallVerticalMargin + RCCallStatusBarHeight,
+                CGRectMake(RCCallHorizontalMargin,  self.view.frame.size.height * 0.54,
                            self.view.frame.size.width - RCCallHorizontalMargin * 2, RCCallLabelHeight);
         } else if (callStatus == RCCallHangup) {
             self.tipsLabel.frame =
             CGRectMake(RCCallHorizontalMargin,
-                       self.view.frame.size.height - RCCallVerticalMargin - RCCallButtonLength -
-                       RCCallInsideMargin * 3 - RCCallLabelHeight - RCCallExtraSpace,
+                       self.view.frame.size.height - RCCallButtonBottomMargin * 3 - RCCallButtonLength -RCCallExtraSpace,
                        self.view.frame.size.width - RCCallHorizontalMargin * 2, RCCallLabelHeight);
         } else {
             self.tipsLabel.frame =
@@ -1063,62 +1119,67 @@
         self.tipsLabel.hidden = NO;
 
         if (callStatus == RCCallActive) {
-            self.muteButton.frame = CGRectMake(RCCallHorizontalMargin,
-                                               self.view.frame.size.height - RCCallVerticalMargin - RCCallButtonLength - RCCallExtraSpace,
-                                               RCCallButtonLength, RCCallButtonLength);
+            self.muteButton.frame = CGRectMake(RCCallHorizontalMiddleMargin,
+                                               self.view.frame.size.height - (RCCallButtonBottomMargin * 2 - RCCallInsideMargin * 2) - RCCallCustomButtonLength - RCCallExtraSpace,
+                                               RCCallCustomButtonLength, RCCallCustomButtonLength);
             [self layoutTextUnderImageButton:self.muteButton];
             self.muteButton.hidden = NO;
             self.muteButton.enabled = YES;
         } else if (callStatus == RCCallDialing) {
-            self.muteButton.frame = CGRectMake(RCCallHorizontalMargin,
-                                               self.view.frame.size.height - RCCallVerticalMargin - RCCallButtonLength - RCCallExtraSpace,
-                                               RCCallButtonLength, RCCallButtonLength);
+            self.muteButton.frame = CGRectMake(RCCallHorizontalMiddleMargin,
+                                               self.view.frame.size.height - (RCCallButtonBottomMargin * 2 - RCCallInsideMargin * 2) - RCCallCustomButtonLength - RCCallExtraSpace,
+                                               RCCallCustomButtonLength, RCCallCustomButtonLength);
             [self layoutTextUnderImageButton:self.muteButton];
             self.muteButton.hidden = NO;
             self.muteButton.enabled = NO;
         } else if (callStatus != RCCallHangup) {
-            self.muteButton.hidden = YES;
+            self.muteButton.hidden = NO;
+            self.muteButton.enabled = NO;
         }
 
         if (callStatus == RCCallActive || callStatus == RCCallDialing) {
             self.speakerButton.frame =
-                CGRectMake(self.view.frame.size.width - RCCallHorizontalMargin - RCCallButtonLength,
-                           self.view.frame.size.height - RCCallVerticalMargin - RCCallButtonLength - RCCallExtraSpace, RCCallButtonLength,
-                           RCCallButtonLength);
+            CGRectMake(self.view.frame.size.width - RCCallHorizontalMiddleMargin - RCCallCustomButtonLength,
+                       self.view.frame.size.height - (RCCallButtonBottomMargin * 2 - RCCallInsideMargin * 2) - RCCallCustomButtonLength - RCCallExtraSpace, RCCallCustomButtonLength,
+                       RCCallCustomButtonLength);
             [self layoutTextUnderImageButton:self.speakerButton];
             self.speakerButton.hidden = NO;
         } else if (callStatus != RCCallHangup) {
             self.speakerButton.hidden = YES;
         }
+        
+        if (callStatus == RCCallActive) {
+            [self.speakerButton setSelected:self.callSession.speakerEnabled];
+        }
 
         if (callStatus == RCCallDialing) {
             self.hangupButton.frame =
-                CGRectMake((self.view.frame.size.width - RCCallButtonLength) / 2,
-                           self.view.frame.size.height - RCCallVerticalMargin - RCCallButtonLength - RCCallExtraSpace, RCCallButtonLength,
-                           RCCallButtonLength);
-            [self layoutTextUnderImageButton:self.hangupButton];
+            CGRectMake((self.view.frame.size.width - RCCallButtonLength) / 2,
+                       self.view.frame.size.height - (RCCallButtonBottomMargin * 2 - RCCallInsideMargin * 2 + RCCallCustomButtonLength / 2 + 1.25f) - RCCallButtonLength/2 - RCCallExtraSpace, RCCallButtonLength,
+                       RCCallButtonLength);
+            [self layoutTextUnderBigImageButton:self.hangupButton];
             self.hangupButton.hidden = NO;
 
             self.acceptButton.hidden = YES;
         } else if (callStatus == RCCallIncoming || callStatus == RCCallRinging) {
             self.hangupButton.frame = CGRectMake(
-                RCCallHorizontalMargin, self.view.frame.size.height - RCCallVerticalMargin - RCCallButtonLength - RCCallExtraSpace,
-                RCCallButtonLength, RCCallButtonLength);
+                                                 RCCallHorizontalBigMargin, self.view.frame.size.height - (RCCallButtonBottomMargin * 2 - RCCallInsideMargin * 2 + RCCallCustomButtonLength / 2 + 1.25f) - RCCallButtonLength/2 - RCCallExtraSpace,
+                                                 RCCallButtonLength, RCCallButtonLength);
             [self layoutTextUnderImageButton:self.hangupButton];
             self.hangupButton.hidden = NO;
 
             self.acceptButton.frame =
-                CGRectMake(self.view.frame.size.width - RCCallHorizontalMargin - RCCallButtonLength,
-                           self.view.frame.size.height - RCCallVerticalMargin - RCCallButtonLength - RCCallExtraSpace, RCCallButtonLength,
+                CGRectMake(self.view.frame.size.width - RCCallHorizontalBigMargin - RCCallButtonLength,
+                           self.view.frame.size.height - (RCCallButtonBottomMargin * 2 - RCCallInsideMargin * 2 + RCCallCustomButtonLength / 2 + 1.25f) - RCCallButtonLength/2 - RCCallExtraSpace, RCCallButtonLength,
                            RCCallButtonLength);
             [self layoutTextUnderImageButton:self.acceptButton];
             self.acceptButton.hidden = NO;
         } else if (callStatus == RCCallActive) {
             self.hangupButton.frame =
-                CGRectMake((self.view.frame.size.width - RCCallButtonLength) / 2,
-                           self.view.frame.size.height - RCCallVerticalMargin - RCCallButtonLength - RCCallExtraSpace, RCCallButtonLength,
-                           RCCallButtonLength);
-            [self layoutTextUnderImageButton:self.hangupButton];
+            CGRectMake((self.view.frame.size.width - RCCallButtonLength) / 2,
+                       self.view.frame.size.height - (RCCallButtonBottomMargin * 2 - RCCallInsideMargin * 2 + RCCallCustomButtonLength / 2 + 1.25f) - RCCallButtonLength/2 - RCCallExtraSpace, RCCallButtonLength,
+                       RCCallButtonLength);
+            [self layoutTextUnderBigImageButton:self.hangupButton];
             self.hangupButton.hidden = NO;
 
             self.acceptButton.hidden = YES;
@@ -1130,18 +1191,49 @@
     } else if (mediaType == RCCallMediaVideo && isMultiCall) {// 多人视频
         self.backgroundView.hidden = NO;
 
-        self.blurView.hidden = YES;
-
+        if (callStatus == RCCallDialing || callStatus == RCCallIncoming || callStatus == RCCallRinging  || callStatus == RCCallHangup) {
+            self.blurView.hidden = NO;
+        }else{
+            self.blurView.hidden = YES;
+        }
+        
         if (callStatus == RCCallActive) {
-//            if (self.callSession.blinkUserType == 2)
-//            {
-//                self.minimizeButton.frame = CGRectMake(self.view.frame.size.width - RCCallHorizontalMargin / 2 - RCCallButtonLength - RCCallButtonLength / 2 - RCCallButtonLength / 2 - RCCallButtonLength / 2 - RCCallInsideMargin * 4,
-//                                                       RCCallVerticalMargin, RCCallButtonLength / 2, RCCallButtonLength / 2);
-//            }
-//            else
-            {
-                self.minimizeButton.frame = CGRectMake(self.view.frame.size.width - RCCallHorizontalMargin / 2 - RCCallButtonLength - RCCallButtonLength / 2 - RCCallInsideMargin * 2, RCCallVerticalMargin, RCCallButtonLength / 2, RCCallButtonLength / 2);
-            }
+            self.muteButton.frame = CGRectMake(RCCallHorizontalMiddleMargin,
+                                               self.view.frame.size.height - (RCCallButtonBottomMargin * 2 - RCCallInsideMargin * 2) - RCCallCustomButtonLength - RCCallExtraSpace,
+                                               RCCallCustomButtonLength, RCCallCustomButtonLength);
+            [self layoutTextUnderImageButton:self.muteButton];
+            self.muteButton.hidden = NO;
+            self.muteButton.enabled = YES;
+        } else if (callStatus == RCCallDialing) {
+            self.muteButton.frame = CGRectMake(RCCallHorizontalMiddleMargin,
+                                               self.view.frame.size.height - (RCCallButtonBottomMargin * 2 - RCCallInsideMargin * 2) - RCCallCustomButtonLength - RCCallExtraSpace,
+                                               RCCallCustomButtonLength, RCCallCustomButtonLength);
+            [self layoutTextUnderImageButton:self.muteButton];
+            self.muteButton.hidden = YES;
+            self.muteButton.enabled = NO;
+        } else if (callStatus != RCCallHangup) {
+            self.muteButton.hidden = YES;
+            self.muteButton.enabled = NO;
+        }
+        
+        if (callStatus == RCCallDialing) {
+            self.speakerButton.frame =
+            CGRectMake(self.view.frame.size.width - RCCallHorizontalMiddleMargin - RCCallCustomButtonLength,
+                       self.view.frame.size.height - (RCCallButtonBottomMargin * 2 - RCCallInsideMargin * 2) - RCCallCustomButtonLength - RCCallExtraSpace, RCCallCustomButtonLength,
+                       RCCallCustomButtonLength);
+            [self layoutTextUnderImageButton:self.speakerButton];
+            self.speakerButton.hidden = YES;
+            [self setSpeakerEnable:NO];
+        } else if (callStatus != RCCallHangup) {
+            self.speakerButton.hidden = YES;
+        }
+        
+        
+        if (callStatus == RCCallDialing) {
+            self.minimizeButton.frame = CGRectMake(RCCallHorizontalMargin, RCCallMiniButtonTopMargin + RCCallStatusBarHeight, RCCallMiniButtonLength, RCCallMiniButtonLength);
+            self.minimizeButton.hidden = NO;
+        }else if (callStatus == RCCallActive) {
+            self.minimizeButton.frame = CGRectMake(RCCallHorizontalMargin, RCCallMiniButtonTopMargin + RCCallStatusBarHeight, RCCallMiniButtonLength, RCCallMiniButtonLength);
             self.minimizeButton.hidden = NO;
         } else if (callStatus != RCCallHangup) {
             self.minimizeButton.hidden = YES;
@@ -1168,8 +1260,8 @@
 
         if (callStatus == RCCallActive) {
             self.cameraSwitchButton.frame = CGRectMake(
-                                                       self.view.frame.size.width - RCCallHorizontalMargin / 2 - RCCallButtonLength - RCCallInsideMargin,
-                                                       RCCallVerticalMargin, RCCallButtonLength / 2, RCCallButtonLength / 2);
+                                                       self.view.frame.size.width - RCCallHeaderLength,
+                                                       RCCallMiniButtonLength + RCCallStatusBarHeight, RCCallMiniButtonLength, RCCallMiniButtonLength);
             self.cameraSwitchButton.hidden = NO;
         } else if (callStatus != RCCallHangup) {
             self.cameraSwitchButton.hidden = YES;
@@ -1186,8 +1278,8 @@
         
         if (callStatus == RCCallActive) {
             self.addButton.frame =
-            CGRectMake(self.view.frame.size.width - RCCallHorizontalMargin / 2 - RCCallButtonLength / 2,
-                       RCCallVerticalMargin, RCCallButtonLength / 2, RCCallButtonLength / 2);
+            CGRectMake(self.view.frame.size.width - RCCallHorizontalMargin - RCCallButtonLength / 2,
+                       RCCallMiniButtonLength + RCCallStatusBarHeight, RCCallButtonLength / 2, RCCallButtonLength / 2);
             self.addButton.hidden = NO;
         } else if (callStatus != RCCallHangup) {
             self.addButton.hidden = YES;
@@ -1195,8 +1287,8 @@
         
         if (callStatus == RCCallActive) {
             self.timeLabel.frame =
-            CGRectMake(RCCallHorizontalMargin, RCCallVerticalMargin + RCCallInsideMargin + RCCallLabelHeight,
-                       50, RCCallLabelHeight);
+            CGRectMake(self.view.frame.size.width / 2 - 49.0 / 2, RCCallMiniButtonTopMargin + RCCallMiniLabelHeight + RCCallTimeTopMargin + RCCallStatusBarHeight,
+                       35.0, RCCallTimeLabelHeight);
             self.timeLabel.textAlignment = NSTextAlignmentLeft;
             self.timeLabel.hidden = NO;
         } else if (callStatus != RCCallHangup) {
@@ -1205,8 +1297,8 @@
         
         if (callStatus == RCCallActive) {
             self.signalImageView.frame =
-            CGRectMake(RCCallHorizontalMargin + self.timeLabel.frame.size.width, RCCallVerticalMargin + RCCallInsideMargin + RCCallLabelHeight+2,
-                                                    RCCallLabelHeight-4, RCCallLabelHeight-4);
+            CGRectMake(self.timeLabel.frame.origin.x + self.timeLabel.frame.size.width + 4.0f,  self.timeLabel.frame.origin.y,
+                                                    RCCallTopMargin - 5.0,  RCCallTimeLabelHeight);
             self.signalImageView.hidden = NO;
         } else if (callStatus != RCCallHangup) {
             self.signalImageView.hidden = YES;
@@ -1215,17 +1307,16 @@
         if (callStatus == RCCallIncoming || callStatus == RCCallRinging) {
             self.tipsLabel.frame =
                 CGRectMake(RCCallHorizontalMargin,
-                           RCCallVerticalMargin * 2 + RCCallHeaderLength + RCCallInsideMargin * 2 + RCCallLabelHeight,
+                            self.view.frame.size.height * 0.54,
                            self.view.frame.size.width - RCCallHorizontalMargin * 2, RCCallLabelHeight);
         } else if (callStatus == RCCallDialing) {
             self.tipsLabel.frame =
-            CGRectMake(RCCallHorizontalMargin, RCCallVerticalMargin,
+            CGRectMake(RCCallHorizontalMargin, self.view.frame.size.height * 0.52,
                            self.view.frame.size.width - RCCallHorizontalMargin * 2, RCCallLabelHeight);
         } else if (callStatus == RCCallHangup) {
             self.tipsLabel.frame =
             CGRectMake(RCCallHorizontalMargin,
-                       self.view.frame.size.height - RCCallVerticalMargin - RCCallButtonLength * 3.5 -
-                       RCCallInsideMargin * 5 - RCCallLabelHeight - RCCallExtraSpace,
+                       self.view.frame.size.height - RCCallButtonLength - RCCallButtonBottomMargin * 2 - RCCallButtonInsideMargin - RCCallLabelHeight - RCCallExtraSpace,
                        self.view.frame.size.width - RCCallHorizontalMargin * 2, RCCallLabelHeight);
         }  else {
             self.tipsLabel.frame =
@@ -1236,46 +1327,35 @@
         }
         self.tipsLabel.hidden = NO;
 
-        if (callStatus == RCCallActive) {
-            self.muteButton.frame = CGRectMake(RCCallHorizontalMargin,
-                                               self.view.frame.size.height - RCCallVerticalMargin - RCCallButtonLength - RCCallExtraSpace,
-                                               RCCallButtonLength, RCCallButtonLength);
-            [self layoutTextUnderImageButton:self.muteButton];
-            self.muteButton.hidden = NO;
-        } else if (callStatus != RCCallHangup) {
-            self.muteButton.hidden = YES;
-        }
-
-        self.speakerButton.hidden = YES;
-
+  
         if (callStatus == RCCallDialing) {
             self.hangupButton.frame =
-                CGRectMake((self.view.frame.size.width - RCCallButtonLength) / 2,
-                           self.view.frame.size.height - RCCallVerticalMargin - RCCallButtonLength - RCCallExtraSpace, RCCallButtonLength,
-                           RCCallButtonLength);
-            [self layoutTextUnderImageButton:self.hangupButton];
+            CGRectMake((self.view.frame.size.width - RCCallButtonLength) / 2,
+                       self.view.frame.size.height - (RCCallButtonBottomMargin * 2 - RCCallInsideMargin * 2 + RCCallCustomButtonLength / 2 + 1.25f) - RCCallButtonLength/2 - RCCallExtraSpace, RCCallButtonLength,
+                       RCCallButtonLength);
+            [self layoutTextUnderBigImageButton:self.hangupButton];
             self.hangupButton.hidden = NO;
 
             self.acceptButton.hidden = YES;
         } else if (callStatus == RCCallIncoming || callStatus == RCCallRinging) {
             self.hangupButton.frame = CGRectMake(
-                RCCallHorizontalMargin, self.view.frame.size.height - RCCallVerticalMargin - RCCallButtonLength - RCCallExtraSpace,
-                RCCallButtonLength, RCCallButtonLength);
+                                                 RCCallHorizontalBigMargin, self.view.frame.size.height - (RCCallButtonBottomMargin * 2 - RCCallInsideMargin * 2 + RCCallCustomButtonLength / 2 + 1.25f) - RCCallButtonLength/2 - RCCallExtraSpace,
+                                                 RCCallButtonLength, RCCallButtonLength);
             [self layoutTextUnderImageButton:self.hangupButton];
             self.hangupButton.hidden = NO;
 
             self.acceptButton.frame =
-                CGRectMake(self.view.frame.size.width - RCCallHorizontalMargin - RCCallButtonLength,
-                           self.view.frame.size.height - RCCallVerticalMargin - RCCallButtonLength - RCCallExtraSpace, RCCallButtonLength,
+                CGRectMake(self.view.frame.size.width - RCCallHorizontalBigMargin - RCCallButtonLength,
+                           self.view.frame.size.height - (RCCallButtonBottomMargin * 2 - RCCallInsideMargin * 2 + RCCallCustomButtonLength / 2 + 1.25f) - RCCallButtonLength/2 - RCCallExtraSpace, RCCallButtonLength,
                            RCCallButtonLength);
             [self layoutTextUnderImageButton:self.acceptButton];
             self.acceptButton.hidden = NO;
         } else if (callStatus == RCCallActive) {
             self.hangupButton.frame =
                 CGRectMake((self.view.frame.size.width - RCCallButtonLength) / 2,
-                           self.view.frame.size.height - RCCallVerticalMargin - RCCallButtonLength - RCCallExtraSpace, RCCallButtonLength,
+                           self.view.frame.size.height - (RCCallButtonBottomMargin * 2 - RCCallInsideMargin * 2 + RCCallCustomButtonLength / 2 + 1.25f) - RCCallButtonLength/2 - RCCallExtraSpace, RCCallButtonLength,
                            RCCallButtonLength);
-            [self layoutTextUnderImageButton:self.hangupButton];
+            [self layoutTextUnderBigImageButton:self.hangupButton];
             self.hangupButton.hidden = NO;
 
             self.acceptButton.hidden = YES;
@@ -1283,9 +1363,9 @@
 
         if (callStatus == RCCallActive) {
             self.cameraCloseButton.frame =
-                CGRectMake(self.view.frame.size.width - RCCallHorizontalMargin - RCCallButtonLength,
-                           self.view.frame.size.height - RCCallVerticalMargin - RCCallButtonLength - RCCallExtraSpace, RCCallButtonLength + 4,
-                           RCCallButtonLength);
+            CGRectMake(self.view.frame.size.width - RCCallHorizontalMiddleMargin - (RCCallCustomButtonLength + RCCallInsideMargin),
+                       self.view.frame.size.height - (RCCallButtonBottomMargin * 2 - RCCallInsideMargin * 2) - RCCallCustomButtonLength - RCCallExtraSpace, RCCallCustomButtonLength + RCCallInsideMargin * 2,
+                       RCCallCustomButtonLength);
             [self layoutTextUnderImageButton:self.cameraCloseButton];
             self.cameraCloseButton.hidden = NO;
         } else if (callStatus != RCCallHangup) {
@@ -1295,13 +1375,33 @@
 }
 
 - (void)layoutTextUnderImageButton:(UIButton *)button {
-    [button.titleLabel setFont:[UIFont systemFontOfSize:12]];
+    [button.titleLabel setFont:[UIFont fontWithName:@"PingFangSC-Regular" size:13]];
     [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
 
     button.titleEdgeInsets = UIEdgeInsetsMake(0, -button.imageView.frame.size.width,
                                               -button.imageView.frame.size.height - RCCallInsideMargin, 0);
     button.imageEdgeInsets = UIEdgeInsetsMake(-button.titleLabel.intrinsicContentSize.height - RCCallInsideMargin, 0, 0,
                                               -button.titleLabel.intrinsicContentSize.width);
+}
+
+- (void)layoutTextUnderBigImageButton:(UIButton *)button {
+//    [button.titleLabel setFont:[UIFont systemFontOfSize:13]];
+    [button.titleLabel setFont:[UIFont fontWithName:@"PingFangSC-Regular" size:13]];
+    [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    
+    button.titleEdgeInsets = UIEdgeInsetsMake(0, -button.imageView.frame.size.width,
+                                              -button.imageView.frame.size.height - RCCallInsideMiniMargin , 0);
+    button.imageEdgeInsets = UIEdgeInsetsMake(-button.titleLabel.intrinsicContentSize.height - RCCallInsideMiniMargin, 0, 0, -button.titleLabel.intrinsicContentSize.width);
+}
+
+- (void)layoutTextUnderLargeImageButton:(UIButton *)button {
+    //    [button.titleLabel setFont:[UIFont systemFontOfSize:13]];
+    [button.titleLabel setFont:[UIFont fontWithName:@"PingFangSC-Regular" size:13]];
+    [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    
+    button.titleEdgeInsets = UIEdgeInsetsMake(0, -button.imageView.frame.size.width,
+                                              -button.imageView.frame.size.height - RCCallInsideMiniMargin , 0);
+    button.imageEdgeInsets = UIEdgeInsetsMake(-button.titleLabel.intrinsicContentSize.height - 13.0, 0, 0, -button.titleLabel.intrinsicContentSize.width);
 }
 
 #pragma mark - RCCallSessionDelegate
@@ -1519,149 +1619,11 @@
     }
 }
 
-- (void)onWhiteBoard:(NSString *)url
-{
-    NSLog(@"LLH......234 onWhiteBoard: %@", url);
-    if (!url || [url isEqualToString:@""] || !isOpenWhiteBoard)
-    {
-        NSLog(@"showWhiteBoardWithURL return");
-        [whiteBoardWebView removeFromSuperview];
-        whiteBoardWebView = nil;
-        return;
-    }
-    
-    NSURL *wburl = [NSURL URLWithString:url];
-    NSURLRequest *request = [NSURLRequest requestWithURL:wburl];
-    [whiteBoardWebView loadRequest:request];
-}
 
-- (void)onNotifyHostControlUserDevice:(NSString *)userId host:(NSString *)hostId deviceType:(NSInteger)dType open:(BOOL)isOpen
+- (void)setSpeakerEnable:(BOOL)enable
 {
-    if (isOpen) //邀请打开
-    {
-        if ([userId isEqualToString:[RCIMClient sharedRCIMClient].currentUserInfo.userId])
-        {
-            dispatch_async(queue, ^{
-                [self promptCapacity:userId deviceType:dType open:isOpen];
-                dispatch_semaphore_wait(sem, DISPATCH_TIME_FOREVER);
-            });
-        }
-    }
-    else //直接关闭
-    {
-        if (dType == 1)
-            [self cameraCloseButtonClicked];
-        else if (dType == 2)
-            [self muteButtonClicked];
-        
-        [self.callSession answerHostControlUserDevice:userId withDeviceType:dType open:isOpen status:YES];
-    }
-}
-
-- (void)onNotifyUpgradeObserverToNormalUser:(NSString *)userId
-{
-    UIAlertAction *okAlert = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
-        [self.callSession answerUpgradeObserverToNormalUser:userId status:YES];
-        [self.callSession setMuted:NO];
-        [self.muteButton setSelected:NO];
-        [self.callSession setCameraEnabled:YES];
-        [self.cameraCloseButton setSelected:NO];
-        dispatch_semaphore_signal(sem);
-    }];
-    
-    UIAlertAction *cancleAlert = [UIAlertAction actionWithTitle:@"取消" style:(UIAlertActionStyleCancel) handler:^(UIAlertAction * _Nonnull action) {
-        [self.callSession answerUpgradeObserverToNormalUser:userId status:NO];
-        dispatch_semaphore_signal(sem);
-    }];
-    
-    dispatch_async(queue, ^{
-        [self alertWith:@"邀请" withMessage:@"主持人邀请您参与讨论\n是否接受?" withOKAction:okAlert withCancleAction:cancleAlert];
-        dispatch_semaphore_wait(sem, DISPATCH_TIME_FOREVER);
-    });
-}
-
-- (void)onNotifyAnswerObserverRequestBecomeNormalUser:(NSString *)userId
-{
-    if ([[RCIMClient sharedRCIMClient].currentUserInfo.userId isEqualToString:userId]) {
-        [self.callSession setMuted:NO];
-        [self.muteButton setSelected:NO];
-    }
-}
-
-#pragma mark - private
-- (void)promptCapacity:(NSString *)userId deviceType:(NSInteger)dType open:(BOOL)isOpen
-{
-    NSString *message, *title;
-    switch (dType)
-    {
-        case 1:
-        {
-            title = @"摄像头";
-            message = @"主持人邀请您打开摄像头\n是否接受?";
-        }
-            break;
-        case 2:
-        {
-            title = @"麦克风";
-            message = @"主持人邀请您打开麦克风\n是否接受?";
-        }
-            break;
-        case 3:
-        {
-            title = @"摄像头+麦克风";
-            message = @"是否同意打开自己的摄像头+麦克风?";
-        }
-            break;
-        default:
-        {
-            title = @"打开";
-            message = @"是否将同意打开?";
-        }
-            break;
-    }
-    
-    UIAlertAction *okAlert = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
-        [self.callSession answerHostControlUserDevice:userId withDeviceType:dType open:isOpen status:YES];
-        if (dType == 1) {
-            [self cameraCloseButtonClicked];
-        } else if (dType == 2) {
-            [self muteButtonClicked];
-        }
-        
-        dispatch_semaphore_signal(sem);
-    }];
-    
-    UIAlertAction *cancleAlert = [UIAlertAction actionWithTitle:@"取消" style:(UIAlertActionStyleCancel) handler:^(UIAlertAction * _Nonnull action) {
-        [self.callSession answerHostControlUserDevice:userId withDeviceType:dType open:isOpen status:NO];
-        dispatch_semaphore_signal(sem);
-    }];
-    
-    dispatch_async(dispatch_get_main_queue(), ^{
-        switch (dType)
-        {
-            case 3:
-                [self alertWith:title withMessage:message withOKAction:okAlert withCancleAction:cancleAlert];
-                break;
-            case 2:
-                [self alertWith:title withMessage:message withOKAction:okAlert withCancleAction:cancleAlert];
-                break;
-            case 1:
-                [self alertWith:title withMessage:message withOKAction:okAlert withCancleAction:cancleAlert];
-                break;
-            default:
-                break;
-        }
-    });
-}
-
-- (void)alertWith:(NSString *)title withMessage:(NSString *)msg withOKAction:(UIAlertAction *)ok withCancleAction:(UIAlertAction *)cancel
-{
-    self.alertController = [UIAlertController alertControllerWithTitle:title message:msg preferredStyle:UIAlertControllerStyleAlert];
-    [self.alertController addAction:ok];
-    if (cancel)
-        [self.alertController addAction:cancel];
-    
-    [self presentViewController:self.alertController animated:YES completion:^{}];
+    [self.callSession setSpeakerEnabled:enable];
+    [self.speakerButton setSelected:enable];
 }
 
 #pragma mark - telephony
@@ -1676,30 +1638,44 @@
 
 #pragma mark - proximity
 - (void)addProximityMonitoringObserver {
-    [UIDevice currentDevice].proximityMonitoringEnabled = YES;
-
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(proximityStatueChanged:)
-                                                 name:UIDeviceProximityStateDidChangeNotification
-                                               object:nil];
+    if (self.callSession.mediaType == RCCallMediaAudio) {
+        [UIDevice currentDevice].proximityMonitoringEnabled = YES;
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(proximityStatueChanged:)
+                                                     name:UIDeviceProximityStateDidChangeNotification
+                                                   object:nil];
+    }
 }
 
 - (void)removeProximityMonitoringObserver {
     [UIDevice currentDevice].proximityMonitoringEnabled = NO;
-
     [[NSNotificationCenter defaultCenter] removeObserver:self
-                                                    name:UIDeviceProximityStateDidChangeNotification
-                                                  object:nil];
+                                                     name:UIDeviceProximityStateDidChangeNotification
+                                                   object:nil];
 }
 
 - (void)proximityStatueChanged:(NSNotificationCenter *)notification {
-    //    if ([UIDevice currentDevice].proximityState) {
-    //        [[AVAudioSession sharedInstance]
-    //        setCategory:AVAudioSessionCategoryPlayAndRecord error:nil];
-    //    } else {
-    //        [[AVAudioSession sharedInstance]
-    //        setCategory:AVAudioSessionCategoryPlayback error:nil];
-    //    }
+    
+    switch (self.mediaType)
+    {
+        case RCCallMediaAudio:
+        {
+        }
+            break;
+        case RCCallMediaVideo:
+        {
+            if (self.callSession.callStatus == RCCallActive)
+            {
+                if ([UIDevice currentDevice].proximityState)
+                    [self.callSession setSpeakerEnabled:NO];
+                else
+                    [self.callSession setSpeakerEnabled:YES];
+            }
+        }
+            break;
+        default:
+            break;
+    }
 }
 
 #pragma mark - outside callback

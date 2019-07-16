@@ -9,8 +9,12 @@
 #import <Foundation/Foundation.h>
 #import <RongCallLib/RongCallLib.h>
 #import <RongIMKit/RongIMKit.h>
+#import "RCMultiCallInviteNewUserDelegate.h"
 
 #define RCCallGroupMemberDataSource RCIMGroupMemberDataSource //接口向后兼容
+
+/// 新的 callsession 被创建时发出改通知
+UIKIT_EXTERN NSNotificationName const RCCallNewSessionCreationNotification;
 
 /*!
  融云CallKit核心类
@@ -36,6 +40,15 @@
  系统来电显示的 app 名字
  */
 @property(nonatomic, copy) NSString *appLocalizedName;
+
+/**
+ 多人音视频通话邀请用户代理
+ 
+ @discussion 如果实现该代理则多人音视频通话界面将有用户自己定义否则使用 RongCallKit 自带的选人界面
+ 
+ */
+@property(nonatomic, weak) id<RCMultiCallInviteNewUserDelegate> callInviteNewUserDelegate;
+
 
 /*!
  群组成员列表提供者

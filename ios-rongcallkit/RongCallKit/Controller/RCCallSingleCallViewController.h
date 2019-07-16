@@ -20,6 +20,11 @@
 @property(nonatomic, strong) RCloudImageView *remotePortraitView;
 
 /*!
+ 显示在大屏幕背景的对端头像View
+ */
+@property(nonatomic, strong) RCloudImageView *remotePortraitBgView;
+
+/*!
  对端的名字Label
  */
 @property(nonatomic, strong) UILabel *remoteNameLabel;

@@ -11,7 +11,10 @@
 #import "RCCallKitUtility.h"
 #import "RCUserInfoCacheManager.h"
 #import "RCloudImageView.h"
+#import "RCCallKitUtility.h"
+#import "RCCallUserCallInfoModel.h"
 
+#define currentUserId ([RCIMClient sharedRCIMClient].currentUserInfo.userId)
 @interface RCCallSingleCallViewController ()
 
 @property(nonatomic, strong) RCUserInfo *remoteUserInfo;
@@ -51,11 +54,15 @@
     self.remoteUserInfo = userInfo;
     [self.remoteNameLabel setText:userInfo.name];
     [self.remotePortraitView setImageURL:[NSURL URLWithString:userInfo.portraitUri]];
-    
-    UITapGestureRecognizer * tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction:)];
-    [self.backgroundView addGestureRecognizer:tapGesture];
 }
-
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    [RCCallKitUtility checkSystemPermission:self.callSession.mediaType success:^{
+        
+    } error:^{
+        [self hangupButtonClicked];
+    }];
+}
 - (RCloudImageView *)remotePortraitView {
     if (!_remotePortraitView) {
         _remotePortraitView = [[RCloudImageView alloc] init];
@@ -69,18 +76,31 @@
     return _remotePortraitView;
 }
 
+- (RCloudImageView *)remotePortraitBgView {
+    if (!_remotePortraitBgView) {
+        _remotePortraitBgView = [[RCloudImageView alloc] init];
+        
+        [self.view insertSubview:_remotePortraitBgView aboveSubview:self.backgroundView];
+        _remotePortraitBgView.hidden = YES;
+        [_remotePortraitBgView setPlaceholderImage:[RCCallKitUtility getDefaultPortraitImage]];
+//        _remotePortraitBgView.layer.cornerRadius = 4;
+        _remotePortraitBgView.layer.masksToBounds = YES;
+        _remotePortraitBgView.contentMode = UIViewContentModeScaleAspectFill;
+    }
+    return _remotePortraitBgView;
+}
+
 - (UILabel *)remoteNameLabel {
     if (!_remoteNameLabel) {
         _remoteNameLabel = [[UILabel alloc] init];
         _remoteNameLabel.backgroundColor = [UIColor clearColor];
         _remoteNameLabel.textColor = [UIColor whiteColor];
         _remoteNameLabel.layer.shadowOpacity = 0.8;
-        _remoteNameLabel.layer.shadowRadius = 1.0;
-        _remoteNameLabel.layer.shadowColor = [UIColor darkGrayColor].CGColor;
+        _remoteNameLabel.layer.shadowRadius = 3.0;
+        _remoteNameLabel.layer.shadowColor = [UIColor blackColor].CGColor;
         _remoteNameLabel.layer.shadowOffset = CGSizeMake(0, 1);
-        _remoteNameLabel.font = [UIFont systemFontOfSize:18];
+        _remoteNameLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size:18];
         _remoteNameLabel.textAlignment = NSTextAlignmentCenter;
-
         [self.view addSubview:_remoteNameLabel];
         _remoteNameLabel.hidden = YES;
     }
@@ -149,85 +169,167 @@
     }
 }
 
+- (void)didTapCameraCloseButton
+{
+    [self resetLayout:self.callSession.isMultiCall
+            mediaType:RCCallMediaAudio
+           callStatus:self.callSession.callStatus];
+}
+
+- (RCCallUserCallInfoModel *)generateUserModel:(NSString *)userId {
+    RCCallUserCallInfoModel *userModel = [[RCCallUserCallInfoModel alloc] init];
+    userModel.userId = userId;
+    userModel.userInfo = [[RCUserInfoCacheManager sharedManager] getUserInfo:userId];
+    
+    if ([userId isEqualToString:currentUserId]) {
+        userModel.profile = self.callSession.myProfile;
+    } else {
+        for (RCCallUserProfile *userProfile in self.callSession.userProfileList) {
+            if ([userProfile.userId isEqualToString:userId]) {
+                userModel.profile = userProfile;
+                break;
+            }
+        }
+    }
+    
+    return userModel;
+}
+
 - (void)resetLayout:(BOOL)isMultiCall mediaType:(RCCallMediaType)mediaType callStatus:(RCCallStatus)callStatus {
     [super resetLayout:isMultiCall mediaType:mediaType callStatus:callStatus];
 
     UIImage *remoteHeaderImage = self.remotePortraitView.image;
 
     if (mediaType == RCCallMediaAudio) {
+        [self.acceptButton setImage:[RCCallKitUtility imageFromVoIPBundle:@"voip/answer.png"]
+                           forState:UIControlStateNormal];
+        [self.acceptButton setImage:[RCCallKitUtility imageFromVoIPBundle:@"voip/answer_hover.png"]
+                           forState:UIControlStateHighlighted];
         self.remotePortraitView.frame = CGRectMake((self.view.frame.size.width - RCCallHeaderLength) / 2,
-                                                   RCCallVerticalMargin * 3, RCCallHeaderLength, RCCallHeaderLength);
+                                                   RCCallTopGGradientHeight + RCCallStatusBarHeight, RCCallHeaderLength, RCCallHeaderLength);
         self.remotePortraitView.image = remoteHeaderImage;
         self.remotePortraitView.hidden = NO;
+        self.remotePortraitBgView.image = remoteHeaderImage;
 
         self.remoteNameLabel.frame =
-            CGRectMake(RCCallHorizontalMargin, RCCallVerticalMargin * 3 + RCCallHeaderLength + RCCallInsideMargin,
-                       self.view.frame.size.width - RCCallHorizontalMargin * 2, RCCallLabelHeight);
+            CGRectMake(RCCallHorizontalMargin, RCCallTopGGradientHeight + RCCallHeaderLength + RCCallTopMargin + 2.0 + RCCallStatusBarHeight,
+                       self.view.frame.size.width - RCCallHorizontalMargin * 2, RCCallMiniLabelHeight);
         self.remoteNameLabel.hidden = NO;
 
         self.remoteNameLabel.textAlignment = NSTextAlignmentCenter;
         self.tipsLabel.textAlignment = NSTextAlignmentCenter;
-
+ 
         self.statusView.frame = CGRectMake((self.view.frame.size.width - 17) / 2,
-                                           RCCallVerticalMargin * 3 + (RCCallHeaderLength - 4) / 2, 17, 4);
+                                           RCCallTopGGradientHeight + (RCCallHeaderLength - 4) / 2, 17, 4);
 
-        if (callStatus == RCCallRinging || callStatus == RCCallDialing || callStatus == RCCallIncoming) {
+        
+        if (callStatus == RCCallDialing) {
+            self.remotePortraitView.alpha = 0.5;
+            self.blurView.hidden = NO;
+            self.statusView.hidden = NO;
+            self.remotePortraitBgView.frame =
+            CGRectMake(0, 0,
+                       self.view.frame.size.width, self.view.frame.size.height);
+            self.remotePortraitBgView.hidden = NO;
+        } else if (callStatus == RCCallRinging || callStatus == RCCallIncoming) {
+            self.blurView.hidden = NO;
             self.remotePortraitView.alpha = 0.5;
             self.statusView.hidden = NO;
-        } else {
+            self.remotePortraitBgView.frame =
+            CGRectMake(0, 0,
+                       self.view.frame.size.width, self.view.frame.size.height);
+            self.remotePortraitView.image = remoteHeaderImage;
+            self.remotePortraitBgView.hidden = NO;
+            
+        } else if (callStatus == RCCallActive) {
+            self.blurView.hidden = NO;
+            self.remotePortraitView.alpha = 0.5;
+            self.statusView.hidden = YES;
+            self.remotePortraitBgView.frame =
+            CGRectMake(0, 0,
+                       self.view.frame.size.width, self.view.frame.size.height);
+            self.remotePortraitView.image = remoteHeaderImage;
+            self.remotePortraitBgView.hidden = NO;
+            self.remotePortraitBgView.image = remoteHeaderImage;
+
+        }else {
             self.statusView.hidden = YES;
             self.remotePortraitView.alpha = 1.0;
+            self.remotePortraitView.image = remoteHeaderImage;
+            self.remotePortraitBgView.hidden = NO;
         }
 
         self.mainVideoView.hidden = YES;
         self.subVideoView.hidden = YES;
         [self resetRemoteUserInfoIfNeed];
     } else {
+        [self.acceptButton setImage:[RCCallKitUtility imageFromVoIPBundle:@"voip/answervideo.png"]
+                           forState:UIControlStateNormal];
+        [self.acceptButton setImage:[RCCallKitUtility imageFromVoIPBundle:@"voip/answervideo_hover.png"]
+                           forState:UIControlStateHighlighted];
+        
         if (callStatus == RCCallDialing) {
             self.mainVideoView.hidden = NO;
+            self.mainVideoView.frame = CGRectMake(0, RCCallStatusBarHeight, self.view.frame.size.width, self.view.frame.size.height - RCCallExtraSpace - RCCallStatusBarHeight);
             [self.callSession setVideoView:self.mainVideoView
-                                    userId:[RCIMClient sharedRCIMClient].currentUserInfo.userId];
-            self.blurView.hidden = YES;
+                                    userId:self.callSession.caller];
+
+            [self.callSession setVideoView:self.mainVideoView userId:self.callSession.targetId];
+
         } else if (callStatus == RCCallActive) {
             self.mainVideoView.hidden = NO;
             [self.callSession setVideoView:self.mainVideoView userId:self.callSession.targetId];
-            self.blurView.hidden = YES;
         } else {
             self.mainVideoView.hidden = YES;
         }
 
         if (callStatus == RCCallActive) {
+            self.remotePortraitBgView.hidden = YES;
             self.remotePortraitView.hidden = YES;
 
             self.remoteNameLabel.frame =
-                CGRectMake(RCCallHorizontalMargin, RCCallVerticalMargin,
-                           self.view.frame.size.width - RCCallHorizontalMargin * 2, RCCallLabelHeight);
+            CGRectMake(RCCallHorizontalMargin, RCCallMiniButtonTopMargin + RCCallStatusBarHeight,
+                           self.view.frame.size.width - RCCallHorizontalMargin * 2, RCCallMiniLabelHeight);
             self.remoteNameLabel.hidden = NO;
             self.remoteNameLabel.textAlignment = NSTextAlignmentCenter;
+            
+            [self.remoteNameLabel setText:self.remoteUserInfo.name];
         } else if (callStatus == RCCallDialing) {
-            self.remotePortraitView.frame =
-                CGRectMake((self.view.frame.size.width - RCCallHeaderLength) / 2, RCCallVerticalMargin * 3,
-                           RCCallHeaderLength, RCCallHeaderLength);
-            self.remotePortraitView.image = remoteHeaderImage;
-            self.remotePortraitView.hidden = NO;
+            self.remotePortraitBgView.frame =
+                CGRectMake(0, 0,
+                           self.view.frame.size.width, self.view.frame.size.height);
+//            self.remotePortraitView.image = remoteHeaderImage;
+            self.remotePortraitBgView.hidden = YES;
+            self.remotePortraitView.hidden = YES;
+
+            [self.remotePortraitBgView setImageURL:[NSURL URLWithString:[self generateUserModel:currentUserId].userInfo.portraitUri]];
 
             self.remoteNameLabel.frame =
-                CGRectMake(RCCallHorizontalMargin, RCCallVerticalMargin * 3 + RCCallHeaderLength + RCCallInsideMargin,
-                           self.view.frame.size.width - RCCallHorizontalMargin * 2, RCCallLabelHeight);
+                CGRectMake(RCCallHorizontalMargin, RCCallMiniButtonTopMargin - 2.5f + RCCallStatusBarHeight,
+                           self.view.frame.size.width - RCCallHorizontalMargin * 2, RCCallMiniLabelHeight);
+            [self.remoteNameLabel setText:[self generateUserModel:currentUserId].userInfo.name];
             self.remoteNameLabel.hidden = NO;
             self.remoteNameLabel.textAlignment = NSTextAlignmentCenter;
         } else if (callStatus == RCCallIncoming || callStatus == RCCallRinging) {
             self.remotePortraitView.frame =
-                CGRectMake((self.view.frame.size.width - RCCallHeaderLength) / 2, RCCallVerticalMargin * 3,
+                CGRectMake((self.view.frame.size.width - RCCallHeaderLength) / 2, RCCallTopGGradientHeight,
                            RCCallHeaderLength, RCCallHeaderLength);
             self.remotePortraitView.image = remoteHeaderImage;
             self.remotePortraitView.hidden = NO;
 
+            self.remotePortraitBgView.frame =
+            CGRectMake(0, 0,
+                       self.view.frame.size.width, self.view.frame.size.height);
+            self.remotePortraitBgView.image = remoteHeaderImage;
+            self.remotePortraitBgView.hidden = NO;
+ 
             self.remoteNameLabel.frame =
-                CGRectMake(RCCallHorizontalMargin, RCCallVerticalMargin * 3 + RCCallHeaderLength + RCCallInsideMargin,
-                           self.view.frame.size.width - RCCallHorizontalMargin * 2, RCCallLabelHeight);
+                CGRectMake(RCCallHorizontalMargin, RCCallTopGGradientHeight + RCCallHeaderLength + RCCallTopMargin + 2.0 + RCCallStatusBarHeight,
+                           self.view.frame.size.width - RCCallHorizontalMargin * 2, RCCallMiniLabelHeight);
             self.remoteNameLabel.hidden = NO;
             self.remoteNameLabel.textAlignment = NSTextAlignmentCenter;
+        }else{
+            self.remotePortraitBgView.hidden = YES;
         }
 
         if (callStatus == RCCallActive) {
@@ -243,19 +345,22 @@
             [self.callSession setVideoView:self.subVideoView
                                     userId:[RCIMClient sharedRCIMClient].currentUserInfo.userId];
             self.subVideoView.hidden = NO;
-        } else {
-            self.subVideoView.hidden = YES;
         }
 
         self.remoteNameLabel.textAlignment = NSTextAlignmentCenter;
         self.statusView.frame = CGRectMake((self.view.frame.size.width - 17) / 2,
                                            RCCallVerticalMargin * 3 + (RCCallHeaderLength - 4) / 2, 17, 4);
 
-        if (callStatus == RCCallRinging || callStatus == RCCallDialing || callStatus == RCCallIncoming) {
+        if (callStatus == RCCallDialing) {
+            self.statusView.hidden = YES;
+            self.blurView.hidden = YES;
+        }else if (callStatus == RCCallRinging || callStatus == RCCallDialing || callStatus == RCCallIncoming) {
             self.remotePortraitView.alpha = 0.5;
             self.statusView.hidden = NO;
+            self.blurView.hidden = NO;
         } else {
             self.statusView.hidden = YES;
+            self.blurView.hidden = YES;
             self.remotePortraitView.alpha = 1.0;
         }
     }
@@ -297,20 +402,6 @@
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
-
-#pragma mark - Gesture Selector
-- (void)tapAction:(UITapGestureRecognizer*)gesture {
-    if (self.callSession.callStatus == RCCallActive &&
-        self.callSession.mediaType == RCCallMediaVideo) {
-        self.minimizeButton.hidden = !self.minimizeButton.hidden;
-        self.hangupButton.hidden = !self.hangupButton.hidden;
-        self.cameraSwitchButton.hidden = !self.cameraSwitchButton.hidden;
-        self.remoteNameLabel.hidden = !self.remoteNameLabel.hidden;
-        self.timeLabel.hidden = !self.timeLabel.hidden;
-        self.muteButton.hidden = !self.muteButton.hidden;
-        self.cameraCloseButton.hidden = !self.cameraCloseButton.hidden;
-    }
 }
 
 @end

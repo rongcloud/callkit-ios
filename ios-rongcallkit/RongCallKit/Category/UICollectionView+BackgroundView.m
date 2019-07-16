@@ -23,7 +23,7 @@ static NSString *key = @"UICollectionView_BackgroundView";
         {
             return nil;
         }
-        
+
         if ([self.subviews count] > 0)
         {
             for (NSInteger i = ([self.subviews count] - 1); i >= 0; --i)
@@ -44,7 +44,7 @@ static NSString *key = @"UICollectionView_BackgroundView";
     {
         touchView = nil;
     }
-    
+
     return touchView;
 }
 
@@ -67,49 +67,35 @@ static NSString *key = @"UICollectionView_BackgroundView";
 {
     if (self.tag != 202)
         return NO;
-    
-    switch (count)
-    {
-        case 1:
-            if (point.x > 270 && point.y > 85)
-                return NO;
-            else
-                return YES;
-        case 2:
-            if (point.x > 190 && point.y > 85)
-                return NO;
-            else
-                return YES;
-        case 3:
-            if (point.x > 110 && point.y > 85)
-                return NO;
-            else
-                return YES;
-        case 4:
-            if (point.y > 85)
-                return NO;
-            else
-                return YES;
-        case 5:
-            if (point.x < 270 && point.y < 85)
-                return YES;
-            else
-                return NO;
-        case 6:
-            if (point.x < 190 && point.y < 85)
-                return YES;
-            else
-                return NO;
-        case 7:
-            if (point.x < 110 && point.y < 85)
-                return YES;
-            else
-                return NO;
-        case 8:
-            return NO;
+    switch (count) {
+        case 0:
+            return YES;
+            break;
         default:
-            return NO;
+        {
+            if (point.x <= 10.0 + 84 * count) {
+//                CGFloat nowWidth = 84.0 * count+ (10.0 * (count - 1)) + 20.0  ;
+//                if (nowWidth < UIScreen.mainScreen.bounds.size.width) {
+//                    if (point.x < UIScreen.mainScreen.bounds.size.width - nowWidth) {
+//                        return YES;
+//                    }else{
+//                        return NO;
+//                    }
+//                }else{
+//                    if (point.x < 20.0) {
+//                        return YES;
+//                    }else{
+//                        return NO;
+//                    }
+//                }
+                
+                return NO;
+            }else
+                return YES;
+        }
+            break;
     }
+    
     return NO;
 }
 

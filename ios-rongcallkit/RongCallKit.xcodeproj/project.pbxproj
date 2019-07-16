@@ -7,12 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0ADDC74A21B66A6300883EB5 /* RCMultiCallInviteNewUserDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 0ADDC74921B66A6200883EB5 /* RCMultiCallInviteNewUserDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		390467EF20738446007CE8DE /* UICollectionView+BackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 390467ED20738446007CE8DE /* UICollectionView+BackgroundView.m */; };
 		390467F020738446007CE8DE /* UICollectionView+BackgroundView.h in Headers */ = {isa = PBXBuildFile; fileRef = 390467EE20738446007CE8DE /* UICollectionView+BackgroundView.h */; };
 		3933DF5C206117A100C80615 /* KxCallMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 3933DF5A206117A100C80615 /* KxCallMenu.m */; };
 		3933DF5D206117A100C80615 /* KxCallMenu.h in Headers */ = {isa = PBXBuildFile; fileRef = 3933DF5B206117A100C80615 /* KxCallMenu.h */; };
 		398680B9205E84D700B12F15 /* WhiteBoardWebView.h in Headers */ = {isa = PBXBuildFile; fileRef = 398680B7205E84D600B12F15 /* WhiteBoardWebView.h */; };
 		398680BA205E84D700B12F15 /* WhiteBoardWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 398680B8205E84D600B12F15 /* WhiteBoardWebView.m */; };
+		983FBC4220BD41010084841D /* RCVideoCollectionViewLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = 983FBC4020BD41010084841D /* RCVideoCollectionViewLayout.h */; };
+		983FBC4320BD41010084841D /* RCVideoCollectionViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 983FBC4120BD41010084841D /* RCVideoCollectionViewLayout.m */; };
+		98A609D120B56EB200BB5158 /* RCCallToolBar.h in Headers */ = {isa = PBXBuildFile; fileRef = 98A609CF20B56EB200BB5158 /* RCCallToolBar.h */; };
+		98A609D220B56EB200BB5158 /* RCCallToolBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 98A609D020B56EB200BB5158 /* RCCallToolBar.m */; };
 		9CE36FD6200F5FDC0068263B /* RCCXCall.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CE36FD4200F5FDC0068263B /* RCCXCall.h */; };
 		9CE36FD7200F5FDC0068263B /* RCCXCall.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CE36FD5200F5FDC0068263B /* RCCXCall.m */; };
 		A68AFAE91CCEFF5B00F16B3D /* RCCallDetailMessageCell.h in Headers */ = {isa = PBXBuildFile; fileRef = A68AFAE51CCEFF5B00F16B3D /* RCCallDetailMessageCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -57,12 +62,17 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0ADDC74921B66A6200883EB5 /* RCMultiCallInviteNewUserDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCMultiCallInviteNewUserDelegate.h; sourceTree = "<group>"; };
 		390467ED20738446007CE8DE /* UICollectionView+BackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UICollectionView+BackgroundView.m"; sourceTree = "<group>"; };
 		390467EE20738446007CE8DE /* UICollectionView+BackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UICollectionView+BackgroundView.h"; sourceTree = "<group>"; };
 		3933DF5A206117A100C80615 /* KxCallMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KxCallMenu.m; sourceTree = "<group>"; };
 		3933DF5B206117A100C80615 /* KxCallMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KxCallMenu.h; sourceTree = "<group>"; };
 		398680B7205E84D600B12F15 /* WhiteBoardWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WhiteBoardWebView.h; sourceTree = "<group>"; };
 		398680B8205E84D600B12F15 /* WhiteBoardWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WhiteBoardWebView.m; sourceTree = "<group>"; };
+		983FBC4020BD41010084841D /* RCVideoCollectionViewLayout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCVideoCollectionViewLayout.h; sourceTree = "<group>"; };
+		983FBC4120BD41010084841D /* RCVideoCollectionViewLayout.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCVideoCollectionViewLayout.m; sourceTree = "<group>"; };
+		98A609CF20B56EB200BB5158 /* RCCallToolBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCCallToolBar.h; sourceTree = "<group>"; };
+		98A609D020B56EB200BB5158 /* RCCallToolBar.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCCallToolBar.m; sourceTree = "<group>"; };
 		9CE36FD4200F5FDC0068263B /* RCCXCall.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCCXCall.h; sourceTree = "<group>"; };
 		9CE36FD5200F5FDC0068263B /* RCCXCall.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCCXCall.m; sourceTree = "<group>"; };
 		A68AFAE51CCEFF5B00F16B3D /* RCCallDetailMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCCallDetailMessageCell.h; sourceTree = "<group>"; };
@@ -143,6 +153,8 @@
 		398680B6205E84D600B12F15 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				98A609CF20B56EB200BB5158 /* RCCallToolBar.h */,
+				98A609D020B56EB200BB5158 /* RCCallToolBar.m */,
 				398680B7205E84D600B12F15 /* WhiteBoardWebView.h */,
 				398680B8205E84D600B12F15 /* WhiteBoardWebView.m */,
 			);
@@ -183,6 +195,7 @@
 				A6BE1B181CCEFAAC00FF6BF7 /* RCCall.mm */,
 				9CE36FD4200F5FDC0068263B /* RCCXCall.h */,
 				9CE36FD5200F5FDC0068263B /* RCCXCall.m */,
+				0ADDC74921B66A6200883EB5 /* RCMultiCallInviteNewUserDelegate.h */,
 				A6BE1B3C1CCEFAB700FF6BF7 /* Support Files */,
 			);
 			path = RongCallKit;
@@ -227,6 +240,8 @@
 				A6BE1B111CCEFAAC00FF6BF7 /* RCAudioMultiCallUserCollectionLayout.m */,
 				A6BE1B121CCEFAAC00FF6BF7 /* RCVideoMultiCallUserCollectionLayout.h */,
 				A6BE1B131CCEFAAC00FF6BF7 /* RCVideoMultiCallUserCollectionLayout.m */,
+				983FBC4020BD41010084841D /* RCVideoCollectionViewLayout.h */,
+				983FBC4120BD41010084841D /* RCVideoCollectionViewLayout.m */,
 			);
 			path = Layout;
 			sourceTree = "<group>";
@@ -296,11 +311,14 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0ADDC74A21B66A6300883EB5 /* RCMultiCallInviteNewUserDelegate.h in Headers */,
 				A6BE1B361CCEFAAC00FF6BF7 /* RCCall.h in Headers */,
 				A6BE1B2A1CCEFAAC00FF6BF7 /* RCCallSelectMemberViewController.h in Headers */,
+				98A609D120B56EB200BB5158 /* RCCallToolBar.h in Headers */,
 				3933DF5D206117A100C80615 /* KxCallMenu.h in Headers */,
 				A6BE1B281CCEFAAC00FF6BF7 /* RCCallBaseViewController.h in Headers */,
 				F8235CDE1CE5B2A100C95B26 /* RCloudImageView.h in Headers */,
+				983FBC4220BD41010084841D /* RCVideoCollectionViewLayout.h in Headers */,
 				A6BE1B2C1CCEFAAC00FF6BF7 /* RCCallSingleCallViewController.h in Headers */,
 				A6BE1B261CCEFAAC00FF6BF7 /* RCCallAudioMultiCallViewController.h in Headers */,
 				A6BE1B2E1CCEFAAC00FF6BF7 /* RCCallVideoMultiCallViewController.h in Headers */,
@@ -421,6 +439,7 @@
 				398680BA205E84D700B12F15 /* WhiteBoardWebView.m in Sources */,
 				A68AFAEA1CCEFF5B00F16B3D /* RCCallDetailMessageCell.m in Sources */,
 				F8D2904D1D2790E3002BFA65 /* RCCallKitExtensionModule.m in Sources */,
+				98A609D220B56EB200BB5158 /* RCCallToolBar.m in Sources */,
 				A6BE1B291CCEFAAC00FF6BF7 /* RCCallBaseViewController.m in Sources */,
 				A68AFAEC1CCEFF5B00F16B3D /* RCCallTipMessageCell.m in Sources */,
 				A6BE1B211CCEFAAC00FF6BF7 /* RCCallMultiCallUserCell.m in Sources */,
@@ -429,6 +448,7 @@
 				390467EF20738446007CE8DE /* UICollectionView+BackgroundView.m in Sources */,
 				A6BE1B2B1CCEFAAC00FF6BF7 /* RCCallSelectMemberViewController.m in Sources */,
 				A6BE1B231CCEFAAC00FF6BF7 /* RCCallSelectingMemberCell.m in Sources */,
+				983FBC4320BD41010084841D /* RCVideoCollectionViewLayout.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -59,6 +59,10 @@
             status = NSLocalizedStringFromTable(@"VoIPCallHasCancel", @"RongCloudKit", nil);
         } else if (message.hangupReason == RCCallDisconnectReasonRemoteCancel) {
             status = NSLocalizedStringFromTable(@"VoIPCallNoResponse", @"RongCloudKit", nil);
+        } else if (message.hangupReason == RCCallDisconnectReasonAcceptByOtherClient) {
+            status = NSLocalizedStringFromTable(@"VoIPCallAcceptByOtherClient", @"RongCloudKit", nil);
+        } else if (message.hangupReason == RCCallDisconnectReasonRemoteBusyLine) {
+            status = NSLocalizedStringFromTable(@"VoIPCallRemoteBusyLine", @"RongCloudKit", nil);
         } else {
             status = NSLocalizedStringFromTable(@"VoIPCallNoResponse", @"RongCloudKit", nil);
         }

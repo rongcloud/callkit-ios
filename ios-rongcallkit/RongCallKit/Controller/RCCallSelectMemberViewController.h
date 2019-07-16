@@ -13,7 +13,7 @@
 /*!
  选择通话成员的ViewController
  */
-@interface RCCallSelectMemberViewController : UIViewController
+@interface RCCallSelectMemberViewController : UITableViewController
 
 /*!
  会话类型
@@ -61,5 +61,8 @@
                                mediaType:(RCCallMediaType)mediaType
                                    exist:(NSArray *)existUserIdList
                                  success:(void (^)(NSArray *addUserIdList))successBlock;
+
+
+- (void)done;
 
 @end

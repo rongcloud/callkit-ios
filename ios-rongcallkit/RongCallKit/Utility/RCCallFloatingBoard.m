@@ -148,6 +148,9 @@ static NSString *RCVoipFloatingBoardPosY = @"RCVoipFloatingBoardPosY";
             videoStopTips.text = NSLocalizedStringFromTable(@"VoIPCallHasEnd", @"RongCloudKit", nil);
             videoStopTips.textColor = RongVoIPUIColorFromRGB(0x0195ff);
             [self.videoView addSubview:videoStopTips];
+        }else {
+            [self.floatingButton setBackgroundColor:[UIColor clearColor]];
+            [self.videoView setBackgroundColor:[UIColor clearColor]];
         }
     } else {
         if (self.callSession.callStatus == RCCallActive) {
@@ -155,6 +158,8 @@ static NSString *RCVoipFloatingBoardPosY = @"RCVoipFloatingBoardPosY";
         } else if (self.callSession.callStatus == RCCallHangup) {
             [self.floatingButton setTitle:NSLocalizedStringFromTable(@"VoIPCallHasEnd", @"RongCloudKit", nil)
                                  forState:UIControlStateNormal];
+        }else {
+            [self.floatingButton setBackgroundColor:[UIColor clearColor]];
         }
     }
 }
@@ -326,7 +331,7 @@ static NSString *RCVoipFloatingBoardPosY = @"RCVoipFloatingBoardPosY";
 }
 
 - (void)layoutTextUnderImageButton:(UIButton *)button {
-    [button.titleLabel setFont:[UIFont systemFontOfSize:16]];
+    [button.titleLabel setFont:[UIFont systemFontOfSize:15]];
     [button setTitleColor:RongVoIPUIColorFromRGB(0x0195ff) forState:UIControlStateNormal];
 
     button.titleEdgeInsets = UIEdgeInsetsMake(0, -button.imageView.frame.size.width,
@@ -340,7 +345,7 @@ static NSString *RCVoipFloatingBoardPosY = @"RCVoipFloatingBoardPosY";
 }
 
 - (BOOL)isVideoViewEnabledSession {
-    if (self.callSession.mediaType == RCCallMediaVideo && !self.callSession.isMultiCall) {
+    if (self.callSession.mediaType != RCCallMediaAudio && !self.callSession.multiCall) {
         return YES;
     } else {
         return NO;
@@ -403,6 +408,7 @@ static NSString *RCVoipFloatingBoardPosY = @"RCVoipFloatingBoardPosY";
             if (mediaType == RCCallMediaAudio && self.callSession.mediaType != RCCallMediaAudio) {
                 if ([self.callSession changeMediaType:RCCallMediaAudio]) {
                     [self.videoView removeFromSuperview];
+                    [_floatingButton setImage:[RCCallKitUtility imageFromVoIPBundle:@"voip/audio_min.png"] forState:UIControlStateNormal];
                     [self initBoard];
                 }
             }
@@ -457,17 +463,17 @@ static NSString *RCVoipFloatingBoardPosY = @"RCVoipFloatingBoardPosY";
 }
 
 - (void)addProximityMonitoringObserver {
-    [UIDevice currentDevice].proximityMonitoringEnabled = YES;
-
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(proximityStatueChanged:)
-                                                 name:UIDeviceProximityStateDidChangeNotification
-                                               object:nil];
+    if (self.callSession.mediaType == RCCallMediaAudio) {
+        [UIDevice currentDevice].proximityMonitoringEnabled = YES;
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(proximityStatueChanged:)
+                                                     name:UIDeviceProximityStateDidChangeNotification
+                                                   object:nil];
+    }
 }
 
 - (void)removeProximityMonitoringObserver {
     [UIDevice currentDevice].proximityMonitoringEnabled = NO;
-
     [[NSNotificationCenter defaultCenter] removeObserver:self
                                                     name:UIDeviceProximityStateDidChangeNotification
                                                   object:nil];

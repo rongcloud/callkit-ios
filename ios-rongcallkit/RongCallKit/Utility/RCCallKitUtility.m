@@ -8,7 +8,7 @@
 
 #import "RCCallKitUtility.h"
 #import "RCCall.h"
-
+#import <AVFoundation/AVFoundation.h>
 @implementation RCCallKitUtility
 
 + (NSString *)getReadableStringForTime:(long)sec {
@@ -152,6 +152,80 @@
 + (void)clearScreenForceOnStatus {
     BOOL oldStatus = [[NSUserDefaults standardUserDefaults] boolForKey:@"RCCallIdleTimerDisabled"];
     [UIApplication sharedApplication].idleTimerDisabled = oldStatus;
+}
+
+
++ (void)checkSystemPermission:(RCCallMediaType)mediaType success:(void (^)(void))successBlock error:(void (^)(void))errorBlock{
+    if (mediaType == RCCallMediaVideo) {
+        [self checkCapturePermission:^(BOOL granted) {
+            if (granted) {
+                [self checkRecordPermission:^() {
+                    successBlock();
+                } error:errorBlock];
+            }
+        } error:errorBlock];
+        
+    } else if (mediaType == RCCallMediaAudio) {
+        [self checkRecordPermission:^() {
+            successBlock();
+        } error:errorBlock];
+    }
+}
++ (void)checkRecordPermission:(void (^)(void))successBlock error:(void (^)(void))errorBlock{
+    if ([[AVAudioSession sharedInstance] respondsToSelector:@selector(requestRecordPermission:)]) {
+        [[AVAudioSession sharedInstance] requestRecordPermission:^(BOOL granted) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (granted) {
+                    successBlock();
+                } else {
+                    [self
+                     loadErrorAlertWithConfirm:NSLocalizedStringFromTable(@"AccessRightTitle", @"RongCloudKit", nil)
+                     message:NSLocalizedStringFromTable(@"speakerAccessRight", @"RongCloudKit",
+                                                        nil)];
+                    if(errorBlock){
+                        errorBlock();
+                    }
+                }
+            });
+        }];
+    }
+}
+
++ (void)checkCapturePermission:(void (^)(BOOL granted))complete error:(void (^)(void))errorBlock{
+    AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
+    
+    if (authStatus == AVAuthorizationStatusDenied || authStatus == AVAuthorizationStatusRestricted) {
+        [self loadErrorAlertWithConfirm:NSLocalizedStringFromTable(@"AccessRightTitle", @"RongCloudKit", nil)
+                                message:NSLocalizedStringFromTable(@"cameraAccessRight", @"RongCloudKit", nil)];
+        complete(NO);
+        errorBlock();
+    } else if (authStatus == AVAuthorizationStatusNotDetermined) {
+        [AVCaptureDevice
+         requestAccessForMediaType:AVMediaTypeVideo
+         completionHandler:^(BOOL granted) {
+             if (!granted) {
+                 [self loadErrorAlertWithConfirm:NSLocalizedStringFromTable(@"AccessRightTitle",
+                                                                            @"RongCloudKit", nil)
+                                         message:NSLocalizedStringFromTable(@"cameraAccessRight",
+                                                                            @"RongCloudKit", nil)];
+                 errorBlock();
+             }
+             complete(granted);
+         }];
+    } else {
+        complete(YES);
+    }
+}
++ (void)loadErrorAlertWithConfirm:(NSString *)title message:(NSString *)message {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title
+                                                        message:message
+                                                       delegate:nil
+                                              cancelButtonTitle:NSLocalizedStringFromTable(@"OK", @"RongCloudKit", nil)
+                                              otherButtonTitles:nil];
+        alert.tag = 1002;
+        [alert show];
+    });
 }
 
 @end

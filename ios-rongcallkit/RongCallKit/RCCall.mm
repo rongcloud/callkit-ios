@@ -61,6 +61,10 @@
                                              selector:@selector(appDidBecomeActive)
                                                  name:UIApplicationDidBecomeActiveNotification
                                                object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(appDidResignActive)
+                                                 name:UIApplicationWillResignActiveNotification
+                                               object:nil];
 }
 
 - (void)appDidBecomeActive {
@@ -72,6 +76,10 @@
             break;
         }
     }
+}
+
+- (void)appDidResignActive {
+    [self stopReceiveCallVibrate];
 }
 
 - (BOOL)isAudioCallEnabled:(RCConversationType)conversationType {
@@ -127,8 +135,9 @@
                                                               mediaType:mediaType
                                                              userIdList:addUserIdList];
                              }];
-
-        [self presentCallViewController:voipCallSelectViewController];
+        
+        UINavigationController *rootVC = [[UINavigationController alloc] initWithRootViewController:voipCallSelectViewController];
+        [self presentCallViewController:rootVC];
     }
 }
 
@@ -158,7 +167,6 @@
                                 [self presentCallViewController:avCallVC];
                             }];
     }
-
 }
 
 - (void)checkSystemPermission:(RCCallMediaType)mediaType success:(void (^)(void))successBlock {
@@ -237,9 +245,10 @@
 - (void)presentCallViewController:(UIViewController *)viewController {
     [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
     UIWindow *activityWindow = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    activityWindow.windowLevel = UIWindowLevelAlert;
+    activityWindow.windowLevel = UIWindowLevelNormal;
     activityWindow.rootViewController = viewController;
     [activityWindow makeKeyAndVisible];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     CATransition *animation = [CATransition animation];
     [animation setDuration:0.3];
     animation.type = kCATransitionMoveIn;     //可更改为其他方式
@@ -250,6 +259,7 @@
 
 - (void)dismissCallViewController:(UIViewController *)viewController {
 
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
     if ([viewController isKindOfClass:[RCCallBaseViewController class]]) {
         UIViewController *rootVC = viewController;
         while (rootVC.parentViewController) {
@@ -278,21 +288,23 @@
 - (void)didReceiveCall:(RCCallSession *)callSession {
     if (!callSession.isMultiCall) {
         RCCallSingleCallViewController *singleCallViewController =
-            [[RCCallSingleCallViewController alloc] initWithIncomingCall:callSession];
-
+        [[RCCallSingleCallViewController alloc] initWithIncomingCall:callSession];
+        
         [self presentCallViewController:singleCallViewController];
+       
     } else {
         if (callSession.mediaType == RCCallMediaAudio) {
             RCCallAudioMultiCallViewController *multiCallViewController =
-                [[RCCallAudioMultiCallViewController alloc] initWithIncomingCall:callSession];
-
+            [[RCCallAudioMultiCallViewController alloc] initWithIncomingCall:callSession];
+            
             [self presentCallViewController:multiCallViewController];
         } else {
             RCCallVideoMultiCallViewController *multiCallViewController =
-                [[RCCallVideoMultiCallViewController alloc] initWithIncomingCall:callSession];
-
+            [[RCCallVideoMultiCallViewController alloc] initWithIncomingCall:callSession];
+            
             [self presentCallViewController:multiCallViewController];
         }
+        
     }
 }
 
