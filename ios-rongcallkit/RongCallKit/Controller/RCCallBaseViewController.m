@@ -169,7 +169,7 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
         }
         AVAudioSession *audioSession = [AVAudioSession sharedInstance];
         if (self.callSession.callStatus == RCCallDialing) {
-            [audioSession setCategory:AVAudioSessionCategoryPlayAndRecord error:nil];
+            [audioSession setCategory:AVAudioSessionCategoryPlayAndRecord withOptions:AVAudioSessionCategoryOptionAllowBluetooth | AVAudioSessionCategoryOptionAllowBluetoothA2DP error:nil];
         } else {
             //默认情况按静音或者锁屏键会静音
             [audioSession setCategory:AVAudioSessionCategorySoloAmbient error:nil];
@@ -747,7 +747,7 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
     {
         _backCamera = !_backCamera;
     }
-    [_cameraSwitchButton setSelected:_backCamera];
+    //[_cameraSwitchButton setSelected:_backCamera];
 }
 
 - (UIView *)topGradientView {
@@ -1416,7 +1416,7 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
         [[RCCXCall sharedInstance] reportOutgoingCallConnected];
     }
 
-    self.tipsLabel.text = @"";
+    self.tipsLabel.text = (self.callSession.mediaType == RCCallMediaVideo) ? NSLocalizedStringFromTable(@"Connecting...", @"RongCloudKit", nil) : @"";
     [self startActiveTimer];
     [self resetLayout:self.callSession.isMultiCall
             mediaType:self.callSession.mediaType
@@ -1590,35 +1590,67 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
  @param rxQuality   下行网络质量
  */
 - (void)networkTxQuality:(RCCallQuality)txQuality rxQuality:(RCCallQuality)rxQuality {
-//    NSLog(@"networkTxQuality, %zd, %zd", txQuality, rxQuality);
-    switch (txQuality)
-    {
-        case RCCall_Quality_Unknown:
-            self.signalImageView.image = signalImage0;
-            break;
-        case RCCall_Quality_Excellent:
-            self.signalImageView.image = signalImage5;
-            break;
-        case RCCall_Quality_Good:
-            self.signalImageView.image = signalImage4;
-            break;
-        case RCCall_Quality_Poor:
-            self.signalImageView.image = signalImage3;
-            break;
-        case RCCall_Quality_Bad:
-            self.signalImageView.image = signalImage2;
-            break;
-        case RCCall_Quality_VBad:
-            self.signalImageView.image = signalImage1;
-            break;
-        case RCCall_Quality_Down:
-            self.signalImageView.image = signalImage0;
-            break;
-        default:
-            break;
+    //    NSLog(@"networkTxQuality, %zd, %zd", txQuality, rxQuality);
+    dispatch_async(dispatch_get_main_queue(), ^{
+        switch (txQuality)
+        {
+            case RCCall_Quality_Unknown:
+                self.signalImageView.image = signalImage0;
+                break;
+            case RCCall_Quality_Excellent:
+                self.signalImageView.image = signalImage5;
+                break;
+            case RCCall_Quality_Good:
+                self.signalImageView.image = signalImage4;
+                break;
+            case RCCall_Quality_Poor:
+                self.signalImageView.image = signalImage3;
+                break;
+            case RCCall_Quality_Bad:
+                self.signalImageView.image = signalImage2;
+                break;
+            case RCCall_Quality_VBad:
+                self.signalImageView.image = signalImage1;
+                break;
+            case RCCall_Quality_Down:
+                self.signalImageView.image = signalImage0;
+                break;
+            default:
+                break;
+        }
+        if (txQuality > RCCall_Quality_VBad || rxQuality > RCCall_Quality_VBad) {
+            //[self playNetworkBadSounds];
+            self.tipsLabel.frame =
+                CGRectMake(RCCallHorizontalMargin,
+                           self.view.frame.size.height - RCCallButtonBottomMargin * 5 - RCCallExtraSpace,
+                           self.view.frame.size.width - RCCallHorizontalMargin * 2, RCCallLabelHeight);
+            self.tipsLabel.text = NSLocalizedStringFromTable(@"voip_network_bad", @"RongCloudKit", nil);
+        } else {
+            self.tipsLabel.text = nil;
+        }
+    });
+}
+
+- (void)playNetworkBadSounds {
+    static time_t prePlayTime = 0;
+    NSString *soundPath =
+        [[[NSBundle mainBundle] pathForResource:@"RongCloud" ofType:@"bundle"]
+            stringByAppendingPathComponent:@"voip/voip_network_error_sound.wav"];
+    if (soundPath.length > 0) {
+        NSURL* fileUrl = [NSURL fileURLWithPath:soundPath];
+        SystemSoundID soundId = 0;
+        OSStatus error =  AudioServicesCreateSystemSoundID((__bridge CFURLRef _Nonnull)(fileUrl), &soundId);
+        if (error == kAudioServicesNoError && time(nil) - prePlayTime > 5) {
+            prePlayTime = time(nil);
+            AudioServicesPlayAlertSound(soundId);
+        }
     }
 }
 
+- (void)receiveRemoteUserVideoFirstKeyFrame:(NSString *)userId
+{
+    self.tipsLabel.text = @"";
+}
 
 - (void)setSpeakerEnable:(BOOL)enable
 {
