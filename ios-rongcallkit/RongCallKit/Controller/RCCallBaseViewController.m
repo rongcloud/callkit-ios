@@ -38,7 +38,7 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
 @property(nonatomic, strong) UIView *bottomGradientView;
 @property(nonatomic, strong) UIAlertController *alertController;
 @property(nonatomic, assign) BOOL backCamera;
-@property (nonatomic, strong) NSTimer *vibrateTimer;
+@property(nonatomic, weak) NSTimer *vibrateTimer;
 
 @end
 
@@ -148,6 +148,9 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
 }
 
 - (void)triggerVibrate {
+    [self.vibrateTimer invalidate];
+    self.vibrateTimer = nil;
+    
     self.vibrateTimer = [NSTimer scheduledTimerWithTimeInterval:2.f target:self selector:@selector(triggerVibrateAction) userInfo:nil repeats:YES];
 }
 
