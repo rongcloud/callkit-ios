@@ -203,7 +203,7 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
         [self.audioPlayer stop];
         self.audioPlayer = nil;
         //设置铃声停止后恢复其他app的声音
-        [[AVAudioSession sharedInstance] setActive:NO withOptions:AVAudioSessionSetActiveOptionNotifyOthersOnDeactivation
+        [[AVAudioSession sharedInstance] setActive:YES withOptions:AVAudioSessionSetActiveOptionNotifyOthersOnDeactivation
                                              error:nil];
     }
 }
