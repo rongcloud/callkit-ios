@@ -98,7 +98,7 @@
         hangupReasonString = NSLocalizedStringFromTable(@"VoIPCallNoResponse", @"RongCloudKit", nil);
         break;
     case RCCallDisconnectReasonNetworkError:
-        hangupReasonString = NSLocalizedStringFromTable(@"VoIPCallNoResponse", @"RongCloudKit", nil);
+    	hangupReasonString = NSLocalizedStringFromTable(@"VoIPCallLocalNetworkError", @"RongCloudKit", nil);
         break;
     case RCCallDisconnectReasonRemoteNetworkError:
         hangupReasonString = NSLocalizedStringFromTable(@"VoIPCallRemoteNoResponse", @"RongCloudKit", nil);
@@ -226,6 +226,29 @@
         alert.tag = 1002;
         [alert show];
     });
+}
+
++ (NSInteger)compareVersion:(NSString *)version1 toVersion:(NSString *)version2
+{
+    NSArray *list1 = [version1 componentsSeparatedByString:@"."];
+    NSArray *list2 = [version2 componentsSeparatedByString:@"."];
+    for (int i = 0; i < list1.count || i < list2.count; i++)
+    {
+        NSInteger a = 0, b = 0;
+        if (i < list1.count) {
+            a = [list1[i] integerValue];
+        }
+        if (i < list2.count) {
+            b = [list2[i] integerValue];
+        }
+        if (a > b) {
+            return 1;//version1大于version2
+        } else if (a < b) {
+            return -1;//version1小于version2
+        }
+    }
+    return 0;//version1等于version2
+    
 }
 
 @end

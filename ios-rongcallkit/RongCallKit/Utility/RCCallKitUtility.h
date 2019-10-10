@@ -43,7 +43,7 @@
 #define RCCallCollectionCellWidth 55.0f
 
 #define RCCallTopGGradientHeight 100
-#define BOTTOMSAFEAREA (@available(iOS 11.0, *) ? [UIApplication sharedApplication].keyWindow.safeAreaInsets.bottom : UIEdgeInsetsZero.bottom)
+#define BOTTOMSAFEAREA (([RCCallKitUtility compareVersion:[UIDevice currentDevice].systemVersion toVersion:@"11.0"] >= 0) ? [UIApplication sharedApplication].keyWindow.safeAreaInsets.bottom : UIEdgeInsetsZero.bottom)
 #define RCCallBottomGradientHeight (BOTTOMSAFEAREA > 0 ? 242.0f : 208.0f)
 //  判断是否为iphoneX，是iphoneX，底部按钮整体上移34
 #define RCCallExtraSpace BOTTOMSAFEAREA
@@ -70,4 +70,6 @@
 + (void)setScreenForceOn;
 + (void)clearScreenForceOnStatus;
 + (void)checkSystemPermission:(RCCallMediaType)mediaType success:(void (^)(void))successBlock error:(void (^)(void))errorBlock;
++ (NSInteger)compareVersion:(NSString *)version1 toVersion:(NSString *)version2;
+
 @end

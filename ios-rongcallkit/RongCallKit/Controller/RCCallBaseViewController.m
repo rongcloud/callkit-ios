@@ -53,7 +53,7 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
         sem = dispatch_semaphore_create(1);
         queue = dispatch_queue_create("AnswerQueue", DISPATCH_QUEUE_SERIAL);
         [self registerForegroundNotification];
-        [_callSession setDelegate:self];
+        [_callSession addDelegate:self];
         [RCCallKitUtility setScreenForceOn];
         [_callSession setMinimized:NO];
         self.needPlayingRingAfterForeground = YES;
@@ -107,7 +107,7 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
         sem = dispatch_semaphore_create(1);
         queue = dispatch_queue_create("AnswerQueue", DISPATCH_QUEUE_SERIAL);
         [self registerForegroundNotification];
-        [_callSession setDelegate:self];
+        [_callSession addDelegate:self];
         [_callSession setMinimized:YES];
         hangupButtonClick = NO;
     }
@@ -119,6 +119,7 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
                                              selector:@selector(appDidBecomeActive)
                                                  name:UIApplicationDidBecomeActiveNotification
                                                object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleAudioRouteChange:) name:AVAudioSessionRouteChangeNotification object:nil];
 }
 
 - (void)dealloc {
@@ -156,8 +157,8 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
 
 - (void)triggerVibrateAction
 {
-    NSString *version = [UIDevice currentDevice].systemVersion;
-    if (version.doubleValue >= 9.0) {
+    NSInteger checker = [RCCallKitUtility compareVersion:[UIDevice currentDevice].systemVersion toVersion:@"9.0"];
+    if (checker >= 0) {
         AudioServicesPlaySystemSoundWithCompletion(kSystemSoundID_Vibrate, ^{});
     }
     else{
@@ -224,8 +225,7 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
     [self registerTelephonyEvent];
     [self addProximityMonitoringObserver];
 
-    UIVisualEffect *blurEffect = [UIBlurEffect
-    effectWithStyle:UIBlurEffectStyleDark];
+//    UIVisualEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
 //    self.blurView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
     self.blurView = [[UIView alloc] init];
     self.blurView.frame = self.view.frame;
@@ -364,6 +364,8 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
 }
 
 - (void)startActiveTimer {
+    [_activeTimer invalidate];
+    _activeTimer = nil;
     self.activeTimer = [NSTimer scheduledTimerWithTimeInterval:1
                                                         target:self
                                                       selector:@selector(updateActiveTimer)
@@ -466,24 +468,12 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
     
     NSMutableArray *menuItems = [NSMutableArray new];
     [menuItems addObject:addMemberItem];
-//    [menuItems addObject:whiteBoardItem];
-//    if (self.callSession.blinkUserType == 2)
-//        [menuItems addObject:handupItem];
     
     UIBarButtonItem *rightBarButton = self.navigationItem.rightBarButtonItems[1];
     CGRect targetFrame = rightBarButton.customView.frame;
     targetFrame.origin.y = targetFrame.origin.y + 15;
-    //    if (IOS_FSystenVersion >= 11.0) {
-    //        targetFrame.origin.x = self.view.bounds.size.width - targetFrame.size.width - 17;
-    //        targetFrame.origin.y += 11;
-    //    }
-    //    if([UIDevice isX])
-    //    {
-    //        targetFrame.origin.y = targetFrame.origin.y + 24;
-    //    }
     [KxCallMenu setTintColor:[UIColor blackColor]];
     [KxCallMenu setTitleFont:[UIFont systemFontOfSize:16]];
-//    [KxCallMenu showMenuInView:self.navigationController.navigationBar.superview fromRect:targetFrame menuItems:menuItems];
     [KxCallMenu showMenuInView:_addButton.superview fromRect:CGRectMake([UIScreen mainScreen].bounds.size.width - 80, 48, 0, 0) menuItems:menuItems];
 }
 
@@ -874,6 +864,8 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
             [self layoutTextUnderImageButton:self.speakerButton];
             self.speakerButton.hidden = NO;
             [self.speakerButton setSelected:self.callSession.speakerEnabled];
+            if ([self isHeadsetPluggedIn])
+                [self reloadSpeakerRoute:NO];
         } else if (callStatus == RCCallDialing) {
             self.speakerButton.frame =
                 CGRectMake(self.view.frame.size.width - RCCallHorizontalMiddleMargin - RCCallCustomButtonLength,
@@ -881,6 +873,8 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
                            RCCallCustomButtonLength);
             [self layoutTextUnderImageButton:self.speakerButton];
             self.speakerButton.hidden = NO;
+            if ([self isHeadsetPluggedIn])
+            [self reloadSpeakerRoute:NO];
         } else if (callStatus != RCCallHangup) {
             self.speakerButton.hidden = YES;
         }
@@ -1005,6 +999,8 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
             [self layoutTextUnderImageButton:self.speakerButton];
             self.speakerButton.hidden = NO;
             [self setSpeakerEnable:NO];
+            if ([self isHeadsetPluggedIn])
+                [self reloadSpeakerRoute:NO];
         }else if (callStatus != RCCallHangup) {
             self.speakerButton.hidden = YES;
         }
@@ -1147,12 +1143,16 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
                        RCCallCustomButtonLength);
             [self layoutTextUnderImageButton:self.speakerButton];
             self.speakerButton.hidden = NO;
+            if ([self isHeadsetPluggedIn])
+                [self reloadSpeakerRoute:NO];
         } else if (callStatus != RCCallHangup) {
             self.speakerButton.hidden = YES;
         }
         
         if (callStatus == RCCallActive) {
             [self.speakerButton setSelected:self.callSession.speakerEnabled];
+            if ([self isHeadsetPluggedIn])
+                [self reloadSpeakerRoute:NO];
         }
 
         if (callStatus == RCCallDialing) {
@@ -1227,6 +1227,8 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
             [self layoutTextUnderImageButton:self.speakerButton];
             self.speakerButton.hidden = YES;
             [self setSpeakerEnable:NO];
+            if ([self isHeadsetPluggedIn])
+                [self reloadSpeakerRoute:NO];
         } else if (callStatus != RCCallHangup) {
             self.speakerButton.hidden = YES;
         }
@@ -1241,25 +1243,6 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
         } else if (callStatus != RCCallHangup) {
             self.minimizeButton.hidden = YES;
         }
-        /*
-        //举手
-        if (callStatus == RCCallActive && self.callSession.blinkUserType == 2) {
-            self.handUpButton.frame = CGRectMake(self.view.frame.size.width - RCCallHorizontalMargin / 2 - RCCallButtonLength - RCCallButtonLength / 2 - RCCallButtonLength / 2 - RCCallInsideMargin * 3,
-                                                     RCCallVerticalMargin, RCCallButtonLength / 2, RCCallButtonLength / 2);
-            self.handUpButton.hidden = NO;
-        } else if (callStatus != RCCallHangup) {
-            self.handUpButton.hidden = YES;
-        }
-
-        //白板
-        if (callStatus == RCCallActive) {
-            self.whiteBoardButton.frame = CGRectMake(self.view.frame.size.width - RCCallHorizontalMargin / 2 - RCCallButtonLength - RCCallButtonLength / 2 - RCCallInsideMargin * 2,
-                                                     RCCallVerticalMargin, RCCallButtonLength / 2, RCCallButtonLength / 2);
-            self.whiteBoardButton.hidden = NO;
-        } else if (callStatus != RCCallHangup) {
-            self.whiteBoardButton.hidden = YES;
-        }
-        */
 
         if (callStatus == RCCallActive) {
             self.cameraSwitchButton.frame = CGRectMake(
@@ -1593,30 +1576,29 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
  @param rxQuality   下行网络质量
  */
 - (void)networkTxQuality:(RCCallQuality)txQuality rxQuality:(RCCallQuality)rxQuality {
-    //    NSLog(@"networkTxQuality, %zd, %zd", txQuality, rxQuality);
     dispatch_async(dispatch_get_main_queue(), ^{
         switch (txQuality)
         {
             case RCCall_Quality_Unknown:
-                self.signalImageView.image = signalImage0;
+                self.signalImageView.image = self->signalImage0;
                 break;
             case RCCall_Quality_Excellent:
-                self.signalImageView.image = signalImage5;
+                self.signalImageView.image = self->signalImage5;
                 break;
             case RCCall_Quality_Good:
-                self.signalImageView.image = signalImage4;
+                self.signalImageView.image = self->signalImage4;
                 break;
             case RCCall_Quality_Poor:
-                self.signalImageView.image = signalImage3;
+                self.signalImageView.image = self->signalImage3;
                 break;
             case RCCall_Quality_Bad:
-                self.signalImageView.image = signalImage2;
+                self.signalImageView.image = self->signalImage2;
                 break;
             case RCCall_Quality_VBad:
-                self.signalImageView.image = signalImage1;
+                self.signalImageView.image = self->signalImage1;
                 break;
             case RCCall_Quality_Down:
-                self.signalImageView.image = signalImage0;
+                self.signalImageView.image = self->signalImage0;
                 break;
             default:
                 break;
@@ -1711,6 +1693,63 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
         default:
             break;
     }
+}
+
+- (void)handleAudioRouteChange:(NSNotification*)notification
+{
+    NSInteger reason = [[[notification userInfo] objectForKey:AVAudioSessionRouteChangeReasonKey] integerValue];
+    AVAudioSessionRouteDescription *route = [AVAudioSession sharedInstance].currentRoute;
+    AVAudioSessionPortDescription *port = route.outputs.firstObject;
+    switch (reason)
+    {
+        case AVAudioSessionRouteChangeReasonUnknown:
+            break;
+        case AVAudioSessionRouteChangeReasonNewDeviceAvailable : //1
+            [self reloadSpeakerRoute:NO];
+            break;
+        case AVAudioSessionRouteChangeReasonOldDeviceUnavailable : //2
+            [self reloadSpeakerRoute:YES];
+            break;
+        case AVAudioSessionRouteChangeReasonCategoryChange : //3
+            break;
+        case AVAudioSessionRouteChangeReasonOverride : //4
+        {
+            if ([port.portType isEqualToString:AVAudioSessionPortBuiltInReceiver] || [port.portType isEqualToString: AVAudioSessionPortBuiltInSpeaker]){
+                [self reloadSpeakerRoute:YES];
+            }
+            else{
+                [self reloadSpeakerRoute:NO];
+            }
+        }
+            break;
+        case AVAudioSessionRouteChangeReasonWakeFromSleep : //6
+            break;
+        case AVAudioSessionRouteChangeReasonNoSuitableRouteForCategory : //7
+            break;
+        case AVAudioSessionRouteChangeReasonRouteConfigurationChange : //8
+            break;
+        default:
+            break;
+    }
+}
+
+- (void)reloadSpeakerRoute:(BOOL)enable
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        self.speakerButton.enabled = enable;
+    });
+}
+
+- (BOOL)isHeadsetPluggedIn
+{
+    AVAudioSessionRouteDescription *route = [[AVAudioSession sharedInstance] currentRoute];
+    for (AVAudioSessionPortDescription* desc in [route outputs])
+    {
+        NSString *outputer = desc.portType;
+        if ([outputer isEqualToString:AVAudioSessionPortHeadphones] || [outputer isEqualToString:AVAudioSessionPortBluetoothLE] || [outputer isEqualToString:AVAudioSessionPortBluetoothHFP] || [outputer isEqualToString:AVAudioSessionPortBluetoothA2DP])
+            return YES;
+    }
+    return NO;
 }
 
 #pragma mark - outside callback

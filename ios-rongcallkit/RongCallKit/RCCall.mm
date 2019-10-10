@@ -128,14 +128,14 @@
             initWithConversationType:conversationType
                             targetId:targetId
                            mediaType:mediaType
-                               exist:@[ [RCIMClient sharedRCIMClient].currentUserInfo.userId ]
+                               exist:@[[RCIMClient sharedRCIMClient].currentUserInfo.userId]
                              success:^(NSArray *addUserIdList) {
                                  [weakSelf startMultiCallViewController:conversationType
                                                                targetId:targetId
                                                               mediaType:mediaType
                                                              userIdList:addUserIdList];
                              }];
-        
+        voipCallSelectViewController.modalPresentationStyle = UIModalPresentationFullScreen;
         UINavigationController *rootVC = [[UINavigationController alloc] initWithRootViewController:voipCallSelectViewController];
         [self presentCallViewController:rootVC];
     }
@@ -247,6 +247,15 @@
     UIWindow *activityWindow = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     activityWindow.windowLevel = UIWindowLevelNormal;
     activityWindow.rootViewController = viewController;
+    
+    NSInteger checker = [RCCallKitUtility compareVersion:[UIDevice currentDevice].systemVersion toVersion:@"13.0"];
+    if (checker >= 0) {
+#ifdef __IPHONE_13_0
+        activityWindow.overrideUserInterfaceStyle = UIUserInterfaceStyleLight;
+        [activityWindow setWindowScene:[UIApplication sharedApplication].keyWindow.windowScene];
+#endif
+    }
+    
     [activityWindow makeKeyAndVisible];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     CATransition *animation = [CATransition animation];
@@ -430,8 +439,8 @@
 
 - (void)triggerVibrateRCCallAction
 {
-    NSString *version = [UIDevice currentDevice].systemVersion;
-    if (version.doubleValue >= 9.0) {
+    NSInteger checker = [RCCallKitUtility compareVersion:[UIDevice currentDevice].systemVersion toVersion:@"9.0"];
+    if (checker >= 0) {
         AudioServicesPlaySystemSoundWithCompletion(kSystemSoundID_Vibrate, ^{});
     }
     else{

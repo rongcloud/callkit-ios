@@ -32,7 +32,7 @@ static NSString *RCVoipFloatingBoardPosY = @"RCVoipFloatingBoardPosY";
               withTouchedBlock:(void (^)(RCCallSession *callSession))touchedBlock {
     staticBoard = [[RCCallFloatingBoard alloc] init];
     staticBoard.callSession = callSession;
-    [staticBoard.callSession setDelegate:staticBoard];
+    [staticBoard.callSession addDelegate:staticBoard];
     staticBoard.touchedBlock = touchedBlock;
     [staticBoard initBoard];
 }
@@ -408,7 +408,7 @@ static NSString *RCVoipFloatingBoardPosY = @"RCVoipFloatingBoardPosY";
             if (mediaType == RCCallMediaAudio && self.callSession.mediaType != RCCallMediaAudio) {
                 if ([self.callSession changeMediaType:RCCallMediaAudio]) {
                     [self.videoView removeFromSuperview];
-                    [_floatingButton setImage:[RCCallKitUtility imageFromVoIPBundle:@"voip/audio_min.png"] forState:UIControlStateNormal];
+                    [self->_floatingButton setImage:[RCCallKitUtility imageFromVoIPBundle:@"voip/audio_min.png"] forState:UIControlStateNormal];
                     [self initBoard];
                 }
             }

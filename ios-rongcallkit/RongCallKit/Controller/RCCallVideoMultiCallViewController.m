@@ -385,7 +385,7 @@
     if (self.callSession.isMultiCall) {
         [self inviteNewUser];
     } else {
-        NSLog(@"not support add user for conversation type %zd", self.callSession.conversationType);
+        RCLogI(@"not support add user for conversation type %zd", self.callSession.conversationType);
     }
 }
 
@@ -411,8 +411,8 @@
                                                                   success:^(NSArray *addUserIdList) {
                                                                       [weakSelf.callSession inviteRemoteUsers:addUserIdList mediaType:weakSelf.mediaType];
                                                                   }];
+        selectViewController.modalPresentationStyle = UIModalPresentationFullScreen;
         UINavigationController* nav = [[UINavigationController alloc] initWithRootViewController:selectViewController];
-        nav.modalPresentationStyle = UIModalPresentationFullScreen;
         dispatch_async(dispatch_get_main_queue(), ^{
             [weakSelf presentViewController:nav animated:YES completion:nil];
         });
@@ -435,8 +435,8 @@
                                                               success:^(NSArray *addUserIdList) {
                                                                   [weakSelf.callSession inviteRemoteUsers:addUserIdList mediaType:weakSelf.mediaType];
                                                               }];
+    selectViewController.modalPresentationStyle = UIModalPresentationFullScreen;
     UINavigationController *rootVC = [[UINavigationController alloc] initWithRootViewController:selectViewController];
-    rootVC.modalPresentationStyle = UIModalPresentationFullScreen;
     dispatch_async(dispatch_get_main_queue(), ^{
         [weakSelf presentViewController:rootVC animated:YES completion:nil];
     });
@@ -472,7 +472,6 @@
         CGRectMake(RCCallHorizontalMargin, RCCallMiniButtonTopMargin + RCCallStatusBarHeight,
                    (self.view.frame.size.width - RCCallHorizontalMargin * 2), RCCallLabelHeight);
         self.mainNameLabel.hidden = NO;
-        
     } else if (callStatus == RCCallActive) {
         self.mainNameLabel.frame =
             CGRectMake(RCCallHorizontalMargin, RCCallMiniButtonTopMargin + RCCallStatusBarHeight,

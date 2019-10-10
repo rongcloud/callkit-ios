@@ -114,7 +114,9 @@ typedef void (^CompleteBlock)(NSArray *addUserIdList);
     self.searchController.searchResultsUpdater = self;
     self.searchController.delegate = self;
     self.searchController.dimsBackgroundDuringPresentation = YES;
-    if (@available(iOS 9.1, *)) {
+
+    NSInteger checker = [RCCallKitUtility compareVersion:[UIDevice currentDevice].systemVersion toVersion:@"9.1"];
+    if (checker >= 0) {
         self.searchController.obscuresBackgroundDuringPresentation = YES;
     }
     self.searchController.hidesNavigationBarDuringPresentation = NO;
@@ -378,7 +380,8 @@ typedef void (^CompleteBlock)(NSArray *addUserIdList);
         _resultController.tableView.contentInset = UIEdgeInsetsMake(20, 0, 49, 0);
         _resultController.tableView.allowsSelection = YES;
 #if __IPHONE_OS_VERSION_MAX_ALLOWED > __IPHONE_10_3
-        if (@available(iOS 11.0, *)) {
+        NSInteger checker = [RCCallKitUtility compareVersion:[UIDevice currentDevice].systemVersion toVersion:@"11.0"];
+        if (checker >= 0) {
             _resultController.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
         }
 #endif

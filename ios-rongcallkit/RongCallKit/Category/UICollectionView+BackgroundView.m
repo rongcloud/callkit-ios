@@ -15,6 +15,10 @@ static NSString *key = @"UICollectionView_BackgroundView";
 
 - (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event
 {
+    if (self.tag != 202) {
+        return [super hitTest:point withEvent:event];
+    }
+    
     NSInteger userCellCount = [self.callVideoMultiCallViewController.subUserModelList count];
     UIView *touchView = self;
     if ([self pointInside:point withEvent:event] && self.alpha >= 0.01 && !self.hidden && self.isUserInteractionEnabled)
