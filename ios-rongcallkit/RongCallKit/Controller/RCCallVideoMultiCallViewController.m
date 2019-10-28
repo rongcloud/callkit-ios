@@ -108,7 +108,7 @@
             if (userModel.profile.blinkUserType != 2)
                 [self.subUserModelList addObject:userModel];
         } else {
-            self.mainModel = [self generateUserModel:self.callSession.inviter];
+            self.mainModel = [self generateUserModel:currentUserId];
             [self.callSession setVideoView:self.backgroundView userId:self.mainModel.userId];
 
             self.subUserModelList = [[NSMutableArray alloc] init];
@@ -118,7 +118,7 @@
                     [self.subUserModelList addObject:userModel];
                 }
             }
-            RCCallUserCallInfoModel *userModel = [self generateUserModel:currentUserId];
+            RCCallUserCallInfoModel *userModel = [self generateUserModel:self.callSession.inviter];
             if (userModel.profile.blinkUserType != 2)
                 [self.subUserModelList addObject:userModel];
         }
@@ -653,15 +653,21 @@
     if ([userId isEqualToString:self.mainModel.userId]) {
         if (self.callSession.callStatus == RCCallIncoming || self.callSession.callStatus == RCCallRinging ||
             self.callSession.callStatus == RCCallActive) {
-            RCCallUserCallInfoModel *tempModel = self.subUserModelList[0];
-            self.mainModel = tempModel;
+            
+            for (RCCallUserCallInfoModel *userModel in self.subUserModelList) {
+                if ([userModel.userId isEqualToString:currentUserId]) {
+                    [self removeSubUserModel:userModel];
+                    break;
+                }
+            }
+            
+            self.mainModel = [self generateUserModel:currentUserId];
             [self.callSession setVideoView:self.backgroundView userId:self.mainModel.userId];
-            self.mainNameLabel.text = tempModel.userInfo.name;
+            self.mainNameLabel.text = self.mainModel.userInfo.name;
             if (self.callSession.callStatus == RCCallIncoming || self.callSession.callStatus == RCCallRinging) {
-                self.inviterNameLabel.text = tempModel.userInfo.name;
+                self.inviterNameLabel.text = self.mainModel.userInfo.name;
             }
 
-            [self.subUserModelList removeObject:tempModel];
             [self updateAllSubUserLayout];
         }
     } else {
