@@ -180,6 +180,14 @@ static NSString *RCVoipFloatingBoardPosY = @"RCVoipFloatingBoardPosY";
         _window.layer.masksToBounds = YES;
         _window.layer.borderWidth = 1;
         _window.layer.borderColor = [RongVoIPUIColorFromRGB(0x0A88E1) CGColor];
+        
+        NSInteger checker = [RCCallKitUtility compareVersion:[UIDevice currentDevice].systemVersion toVersion:@"13.0"];
+        if (checker >= 0) {
+#ifdef __IPHONE_13_0
+            _window.overrideUserInterfaceStyle = UIUserInterfaceStyleLight;
+            [_window setWindowScene:[UIApplication sharedApplication].keyWindow.windowScene];
+#endif
+        }
         [_window makeKeyAndVisible]; //关键语句,显示window
 
         UIPanGestureRecognizer *panGestureRecognizer =
