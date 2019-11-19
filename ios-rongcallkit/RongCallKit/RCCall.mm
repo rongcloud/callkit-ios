@@ -135,8 +135,8 @@
                                                               mediaType:mediaType
                                                              userIdList:addUserIdList];
                              }];
-        voipCallSelectViewController.modalPresentationStyle = UIModalPresentationFullScreen;
         UINavigationController *rootVC = [[UINavigationController alloc] initWithRootViewController:voipCallSelectViewController];
+        rootVC.modalPresentationStyle = UIModalPresentationFullScreen;
         [self presentCallViewController:rootVC];
     }
 }
@@ -336,7 +336,16 @@
                            inviterUserId:(NSString *)inviterUserId
                                mediaType:(RCCallMediaType)mediaType
                               userIdList:(NSArray *)userIdList
-                                userDict:(NSDictionary *)userDict {
+                                userDict:(NSDictionary *)userDict{
+    [self didReceiveCallRemoteNotification:callId inviterUserId:inviterUserId mediaType:mediaType userIdList:userIdList userDict:userDict isVoIPPush:NO];
+}
+
+- (void)didReceiveCallRemoteNotification:(NSString *)callId
+                           inviterUserId:(NSString *)inviterUserId
+                               mediaType:(RCCallMediaType)mediaType
+                              userIdList:(NSArray *)userIdList
+                                userDict:(NSDictionary *)userDict
+                                    isVoIPPush:(BOOL)isVoIPPush{
     
     [self startReceiveCallVibrate];
     

@@ -411,8 +411,8 @@
                                                                   success:^(NSArray *addUserIdList) {
                                                                       [weakSelf.callSession inviteRemoteUsers:addUserIdList mediaType:weakSelf.mediaType];
                                                                   }];
-        selectViewController.modalPresentationStyle = UIModalPresentationFullScreen;
         UINavigationController* nav = [[UINavigationController alloc] initWithRootViewController:selectViewController];
+        nav.modalPresentationStyle = UIModalPresentationFullScreen;
         dispatch_async(dispatch_get_main_queue(), ^{
             [weakSelf presentViewController:nav animated:YES completion:nil];
         });
@@ -435,8 +435,8 @@
                                                               success:^(NSArray *addUserIdList) {
                                                                   [weakSelf.callSession inviteRemoteUsers:addUserIdList mediaType:weakSelf.mediaType];
                                                               }];
-    selectViewController.modalPresentationStyle = UIModalPresentationFullScreen;
     UINavigationController *rootVC = [[UINavigationController alloc] initWithRootViewController:selectViewController];
+    rootVC.modalPresentationStyle = UIModalPresentationFullScreen;
     dispatch_async(dispatch_get_main_queue(), ^{
         [weakSelf presentViewController:rootVC animated:YES completion:nil];
     });
