@@ -25,11 +25,11 @@
 @interface RCCallVideoMultiCallViewController () <UICollectionViewDataSource, UICollectionViewDelegate>
 
 @property(nonatomic, strong) RCCallUserCallInfoModel *mainModel;
-
 @property(nonatomic, assign) BOOL isFullScreen;
 @property(nonatomic, strong) NSMutableDictionary *cellLabelDic;
 
 @end
+
 
 @implementation RCCallVideoMultiCallViewController
 
@@ -72,11 +72,6 @@
                    forState:UIControlStateNormal];
     [self.acceptButton setImage:[RCCallKitUtility imageFromVoIPBundle:@"voip/answervideo_hover.png"]
                    forState:UIControlStateHighlighted];
-
-//    self.userCollectionView.userInteractionEnabled = YES;
-//    [self.userCollectionView
-//        addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self
-//                                                                     action:@selector(backgroundViewClicked)]];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -555,11 +550,13 @@
         self.handUpButton.hidden = self.isFullScreen;
         self.whiteBoardButton.hidden = self.isFullScreen;
         self.cameraSwitchButton.hidden = self.isFullScreen;
-//        self.inviteUserButton.hidden = self.isFullScreen;
         self.addButton.hidden = self.isFullScreen;
         self.muteButton.hidden = self.isFullScreen;
         self.hangupButton.hidden = self.isFullScreen;
         self.cameraCloseButton.hidden = self.isFullScreen;
+        self.mainNameLabel.hidden = self.isFullScreen;
+        self.timeLabel.hidden = self.isFullScreen;
+        self.signalImageView.hidden = self.isFullScreen;
     }
 }
 
@@ -699,6 +696,9 @@
         cell.cellNameLabel.text = userModel.userInfo.name;
     }
     
+    if (userModel.profile.callStatus == RCCallActive) {
+        cell.headerImageView.image = nil;
+    }
     return cell;
 }
 

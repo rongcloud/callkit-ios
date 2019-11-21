@@ -18,6 +18,7 @@
 @interface RCCallSingleCallViewController ()
 
 @property(nonatomic, strong) RCUserInfo *remoteUserInfo;
+@property(nonatomic, assign) BOOL isFullScreen;
 
 @end
 
@@ -54,15 +55,21 @@
     self.remoteUserInfo = userInfo;
     [self.remoteNameLabel setText:userInfo.name];
     [self.remotePortraitView setImageURL:[NSURL URLWithString:userInfo.portraitUri]];
+    self.backgroundView.userInteractionEnabled = YES;
+    [self.backgroundView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(backgroundSingleViewClicked)]];
 }
--(void)viewDidAppear:(BOOL)animated{
+
+- (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    
+    self.isFullScreen = NO;
     [RCCallKitUtility checkSystemPermission:self.callSession.mediaType success:^{
         
     } error:^{
         [self hangupButtonClicked];
     }];
 }
+
 - (RCloudImageView *)remotePortraitView {
     if (!_remotePortraitView) {
         _remotePortraitView = [[RCloudImageView alloc] init];
@@ -363,6 +370,20 @@
             self.blurView.hidden = YES;
             self.remotePortraitView.alpha = 1.0;
         }
+        
+        if (callStatus == RCCallActive) {
+            self.minimizeButton.hidden = self.isFullScreen;
+            self.handUpButton.hidden = self.isFullScreen;
+            self.whiteBoardButton.hidden = self.isFullScreen;
+            self.cameraSwitchButton.hidden = self.isFullScreen;
+            self.addButton.hidden = self.isFullScreen;
+            self.muteButton.hidden = self.isFullScreen;
+            self.hangupButton.hidden = self.isFullScreen;
+            self.cameraCloseButton.hidden = self.isFullScreen;
+            self.remoteNameLabel.hidden = self.isFullScreen;
+            self.timeLabel.hidden = self.isFullScreen;
+            self.signalImageView.hidden = self.isFullScreen;
+        }
     }
 }
 
@@ -397,6 +418,16 @@
             [weakSelf.remoteNameLabel setText:updateUserInfo.name];
             [weakSelf.remotePortraitView setImageURL:[NSURL URLWithString:updateUserInfo.portraitUri]];
         });
+    }
+}
+
+- (void)backgroundSingleViewClicked {
+    if (self.callSession.mediaType == RCCallMediaVideo && self.callSession.callStatus == RCCallActive) {
+        self.isFullScreen = !self.isFullScreen;
+        [[UIApplication sharedApplication] setStatusBarHidden:self.isFullScreen];
+        [self resetLayout:self.callSession.isMultiCall
+                mediaType:self.callSession.mediaType
+               callStatus:self.callSession.callStatus];
     }
 }
 

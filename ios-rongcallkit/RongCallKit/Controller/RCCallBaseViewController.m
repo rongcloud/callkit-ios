@@ -759,6 +759,7 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
     if (!_bottomGradientView) {
         _bottomGradientView = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - RCCallBottomGradientHeight, self.view.frame.size.width, RCCallBottomGradientHeight)];
         _bottomGradientView.backgroundColor = [UIColor clearColor];
+        _bottomGradientView.userInteractionEnabled = NO;
         [_bottomGradientView.layer insertSublayer:[self getGradientLayerWithFrame:CGRectMake(0, 0, self.view.frame.size.width, RCCallBottomGradientHeight) direction:NO] atIndex:0];
         
         [self.view insertSubview:_bottomGradientView aboveSubview:self.backgroundView];
