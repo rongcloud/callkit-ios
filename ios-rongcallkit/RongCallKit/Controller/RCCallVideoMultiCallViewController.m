@@ -696,7 +696,7 @@
         cell.cellNameLabel.text = userModel.userInfo.name;
     }
     
-    if (userModel.profile.callStatus == RCCallActive) {
+    if (self.callSession.callStatus == RCCallActive && userModel.profile.callStatus == RCCallActive) {
         cell.headerImageView.image = nil;
     }
     return cell;
@@ -707,7 +707,11 @@
     if (self.callSession.callStatus == RCCallActive) {
         RCCallUserCallInfoModel *tempModel = self.mainModel;
         RCCallUserCallInfoModel *selectedModel = self.subUserModelList[indexPath.row];
-
+        
+        if (selectedModel.profile.callStatus != RCCallActive) {
+            return;
+        }
+        
         self.mainModel = selectedModel;
         [self.callSession setVideoView:self.backgroundView userId:self.mainModel.userId];
         self.mainNameLabel.text = selectedModel.userInfo.name;
