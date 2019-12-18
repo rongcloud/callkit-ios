@@ -361,7 +361,7 @@
                 [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:userCollectionViewLayout];
         }
         _userCollectionView.backgroundColor = [UIColor clearColor];
-        _userCollectionView.tag = 202;
+        _userCollectionView.tag = 202872;
         [_userCollectionView setCallVideoMultiCallViewController:self];
 
         [self.view addSubview:_userCollectionView];

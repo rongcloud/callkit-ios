@@ -30,6 +30,8 @@
         self.headerImageView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
         self.headerImageView.contentMode = UIViewContentModeScaleAspectFill;
         self.headerImageView.clipsToBounds = YES;
+        self.headerImageView.layer.borderWidth = 1;
+        self.headerImageView.layer.borderColor = [[UIColor whiteColor] CGColor];
 
         // add a white frame around the image
        

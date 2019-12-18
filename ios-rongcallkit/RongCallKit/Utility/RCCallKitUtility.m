@@ -9,6 +9,28 @@
 #import "RCCallKitUtility.h"
 #import "RCCall.h"
 #import <AVFoundation/AVFoundation.h>
+
+UIColor* rgb(CGFloat red, CGFloat green, CGFloat blue) {
+    return [UIColor colorWithRed:red / 255.0f green:green / 255.0f blue:blue / 255.0f alpha:1];
+}
+
+UIColor* rgba(CGFloat red, CGFloat green, CGFloat blue, CGFloat alpha) {
+    return [UIColor colorWithRed:red / 255.0f green:green / 255.0f blue:blue / 255.0f alpha:alpha];
+}
+
+UIColor* hex_rgb(NSInteger hex_value) {
+    return [UIColor colorWithRed:((float)((hex_value & 0xFF0000) >> 16)) / 255.0
+                           green:((float)((hex_value & 0xFF00) >> 8)) / 255.0
+                            blue:((float)(hex_value & 0xFF)) / 255.0
+                           alpha:1.0];
+}
+
+UIColor* dynamic_color(NSInteger light_hex_value, NSInteger dark_hex_value) {
+    return [RCKitUtility generateDynamicColor:hex_rgb(light_hex_value)
+                                    darkColor:hex_rgb(dark_hex_value)];
+}
+
+
 @implementation RCCallKitUtility
 
 + (NSString *)getReadableStringForTime:(long)sec {
@@ -37,11 +59,7 @@
 }
 
 + (UIImage *)imageFromVoIPBundle:(NSString *)imageName {
-    NSString *imagePath = [[[NSBundle mainBundle] pathForResource:@"RongCloud" ofType:@"bundle"]
-        stringByAppendingPathComponent:imageName];
-
-    UIImage *bundleImage = [UIImage imageWithContentsOfFile:imagePath];
-    return bundleImage;
+    return [RCKitUtility imageNamed:imageName ofBundle:@"RongCloud.bundle"];
 }
 
 + (UIImage *)getDefaultPortraitImage {

@@ -15,7 +15,7 @@ static NSString *key = @"UICollectionView_BackgroundView";
 
 - (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event
 {
-    if (self.tag != 202) {
+    if (self.tag != 202872) {
         return [super hitTest:point withEvent:event];
     }
     
@@ -69,12 +69,11 @@ static NSString *key = @"UICollectionView_BackgroundView";
 
 - (BOOL)isTouchEnable:(NSInteger)count withPoint:(CGPoint)point
 {
-    if (self.tag != 202)
+    if (self.tag != 202872)
         return NO;
     switch (count) {
         case 0:
             return YES;
-            break;
         default:
         {
             if (point.x <= 10.0 + 84 * count) {
@@ -97,7 +96,6 @@ static NSString *key = @"UICollectionView_BackgroundView";
             }else
                 return YES;
         }
-            break;
     }
     
     return NO;

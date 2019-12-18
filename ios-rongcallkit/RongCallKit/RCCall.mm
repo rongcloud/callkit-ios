@@ -251,13 +251,11 @@
     NSInteger checker = [RCCallKitUtility compareVersion:[UIDevice currentDevice].systemVersion toVersion:@"13.0"];
     if (checker >= 0) {
 #ifdef __IPHONE_13_0
-        activityWindow.overrideUserInterfaceStyle = UIUserInterfaceStyleLight;
         [activityWindow setWindowScene:[UIApplication sharedApplication].keyWindow.windowScene];
 #endif
     }
     
     [activityWindow makeKeyAndVisible];
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     CATransition *animation = [CATransition animation];
     [animation setDuration:0.3];
     animation.type = kCATransitionMoveIn;     //可更改为其他方式

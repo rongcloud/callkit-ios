@@ -11,6 +11,11 @@
 #import <RongIMKit/RongIMKit.h>
 #import <UIKit/UIKit.h>
 
+UIColor* rgb(CGFloat red, CGFloat green, CGFloat blue);
+UIColor* rgba(CGFloat red, CGFloat green, CGFloat blue, CGFloat alpha);
+UIColor* hex_rgb(NSInteger hex_value);
+UIColor* dynamic_color(NSInteger light_hex_value, NSInteger dark_hex_value);
+
 #define RongVoIPUIColorFromRGB(rgbValue)                                                                               \
     [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16)) / 255.0                                               \
                     green:((float)((rgbValue & 0x00FF00) >> 8)) / 255.0                                                \

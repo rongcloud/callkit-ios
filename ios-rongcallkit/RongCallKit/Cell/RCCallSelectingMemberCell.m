@@ -31,6 +31,8 @@
         self.nameLabel = [[UILabel alloc] init];
         self.nameLabel.frame = CGRectMake(110, 5, self.bounds.size.width - 110, 45);
         [self.contentView addSubview:self.nameLabel];
+        self.backgroundColor = [RCKitUtility generateDynamicColor:hex_rgb(0xffffff)
+                                                        darkColor:[hex_rgb(0x1c1c1e) colorWithAlphaComponent:0.4]];
     }
     return self;
 }

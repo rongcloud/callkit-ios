@@ -14,6 +14,7 @@
 #import "RCCallToolBar.h"
 #import "RCCallBaseViewController.h"
 #import <RongIMKit/RongIMKit.h>
+#import "RCCallKitUtility.h"
 
 #define FakeNavigationBarHeight 64
 
@@ -89,19 +90,19 @@ typedef void (^CompleteBlock)(NSArray *addUserIdList);
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.view.backgroundColor = [UIColor whiteColor];
     self.definesPresentationContext = YES;
     self.tableView.backgroundColor = [UIColor whiteColor];
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 49.0, 0);
     self.tableView.tintColor = [UIColor colorWithRed:58/255.0 green:145/255.0 blue:243/255.0 alpha:1/1.0];
     self.tableView.tableFooterView = [[UIView alloc] init];
+    self.tableView.backgroundColor = dynamic_color(0xf0f0f6, 0x000000);
+    self.tableView.separatorColor = dynamic_color(0xdfdfdf, 0x1a1a1a);
     
     __weak RCCallSelectMemberViewController *weakVC = self;
     _toolBar = [[RCCallToolBar alloc] initWithFrame:CGRectMake(0, UIScreen.mainScreen.bounds.size.height - 49.0 - RCCallExtraSpace, self.view.frame.size.width, 49.0 + RCCallExtraSpace) withBlock:^{
         [weakVC done];
     }];
     
-    _toolBar.backgroundColor = [UIColor colorWithRed:250/255.0 green:250/255.0 blue:250/255.0 alpha:1/1.0];
     _toolBar.numberLabel.text = [NSString stringWithFormat:@"%@ %zi %@",NSLocalizedStringFromTable(@"bottom_result_view_choosed_person_prefix", @"RongCloudKit", nil),  self.selectUserIds.count, NSLocalizedStringFromTable(@"bottom_result_view_choosed_person_subfix", @"RongCloudKit", nil)];
     _toolBar.numberLabel.textColor = [UIColor colorWithRed:168/255.0 green:168/255.0 blue:168/255.0 alpha:1/1.0];
     
@@ -109,7 +110,8 @@ typedef void (^CompleteBlock)(NSArray *addUserIdList);
     [self.navigationController.view bringSubviewToFront:_toolBar];
     _toolBar.confirmButton.enabled = NO;
     
-    
+    UIView* backgroundView = [[UIView alloc] init];
+    self.tableView.backgroundView = backgroundView;
     self.searchController = [[UISearchController alloc] initWithSearchResultsController:self.resultController];
     self.searchController.searchResultsUpdater = self;
     self.searchController.delegate = self;
@@ -126,12 +128,21 @@ typedef void (^CompleteBlock)(NSArray *addUserIdList);
     self.searchController.searchBar.delegate = self;
     [self.searchController.searchBar sizeToFit];
     self.searchController.searchBar.placeholder = @"Search";
+
+    NSInteger checker_iOS13 = [RCCallKitUtility compareVersion:[UIDevice currentDevice].systemVersion toVersion:@"13.0"];
+    if (checker_iOS13 >= 0) {
+#ifdef __IPHONE_13_0
+        self.searchController.searchBar.searchTextField.backgroundColor =
+        [RCKitUtility generateDynamicColor:hex_rgb(0xffffff)
+                                 darkColor:[hex_rgb(0x1c1c1e) colorWithAlphaComponent:0.6]];
+#endif
+    }
     
+    //设置顶部搜索栏的背景色
+    self.searchController.searchBar.barTintColor = dynamic_color(0xf0f0f6, 0x000000);
+
     self.tableView.tableHeaderView = self.searchController.searchBar;
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
-    
-    UINavigationBar *navigationBar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 64)];
-    navigationBar.backgroundColor = [UIColor whiteColor];
     
     [self.navigationItem setTitle:NSLocalizedStringFromTable(@"VoIPCallSelectMember", @"RongCloudKit", nil) ];
     
@@ -295,12 +306,12 @@ typedef void (^CompleteBlock)(NSArray *addUserIdList);
 
     _toolBar.numberLabel.text = [NSString stringWithFormat:@"%@ %zi %@",NSLocalizedStringFromTable(@"bottom_result_view_choosed_person_prefix", @"RongCloudKit", nil),  self.selectUserIds.count, NSLocalizedStringFromTable(@"bottom_result_view_choosed_person_subfix", @"RongCloudKit", nil)];
     
-    if (self.selectUserIds.count) {
-        _toolBar.numberLabel.textColor = [UIColor colorWithRed:58/255.0 green:145/255.0 blue:243/255.0 alpha:1.0];
+    if (self.selectUserIds.count > 0) {
+        _toolBar.numberLabel.textColor = dynamic_color(0x3A91F3, 0x007acc);
         _toolBar.confirmButton.enabled = YES;
     }
     else {
-        _toolBar.numberLabel.textColor = [UIColor colorWithRed:168/255.0 green:168/255.0 blue:168/255.0 alpha:1/1.0];
+        _toolBar.numberLabel.textColor = dynamic_color(0xA8A8A8,0x666666);
         _toolBar.confirmButton.enabled = NO;
     }
 }
@@ -373,7 +384,6 @@ typedef void (^CompleteBlock)(NSArray *addUserIdList);
         _resultController = [[UITableViewController alloc] initWithStyle:UITableViewStyleGrouped];
         _resultController.tableView.dataSource = self;
         _resultController.tableView.delegate = self;
-        _resultController.tableView.backgroundColor = [UIColor whiteColor];
         _resultController.editing = NO;
         _resultController.automaticallyAdjustsScrollViewInsets = NO;
         _resultController.tableView.separatorInset = UIEdgeInsetsMake(0, 12, 0, 0);

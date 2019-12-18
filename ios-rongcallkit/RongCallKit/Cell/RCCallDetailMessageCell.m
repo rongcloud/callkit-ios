@@ -90,7 +90,7 @@
     [self setAutoLayout];
 }
 
-- (void)setAutoLayout {
+- (void)setAutoLayout {    
     RCCallSummaryMessage *callMessage = (RCCallSummaryMessage *)self.model.content;
     if (callMessage.duration > 0) {
         self.textLabel.text =
@@ -149,7 +149,7 @@
         self.bubbleBackgroundView.frame = CGRectMake(0, 0, __bubbleSize.width, __bubbleSize.height);
 
         self.mediaTypeIcon.frame = CGRectMake(14, 10, 20, 20);
-        self.textLabel.textColor = RongVoIPUIColorFromRGB(0x939393);
+        self.textLabel.textColor = dynamic_color(0x262626, 0xe0e0e0);
         self.textLabel.frame =
             CGRectMake(CGRectGetMaxX(self.mediaTypeIcon.frame) + 7, __bubbleHeight / 2 - __labelSize.height / 2,
                        __labelSize.width, __labelSize.height);
@@ -167,7 +167,7 @@
         self.messageContentView.frame = messageContentViewRect;
 
         self.bubbleBackgroundView.frame = CGRectMake(0, 0, __bubbleSize.width, __bubbleSize.height);
-        self.textLabel.textColor = RongVoIPUIColorFromRGB(0x3f81bc);
+        self.textLabel.textColor = dynamic_color(0x3f81bc,0xe0e0e0);
         self.textLabel.frame = CGRectMake(10, 20 - __labelSize.height / 2, __labelSize.width, __labelSize.height);
         self.mediaTypeIcon.frame = CGRectMake(CGRectGetMaxX(self.textLabel.frame) + 7, 10, 20, 20);
         self.bubbleBackgroundView.image = [RCKitUtility imageNamed:@"chat_to_bg_normal" ofBundle:@"RongCloud.bundle"];

@@ -184,7 +184,6 @@ static NSString *RCVoipFloatingBoardPosY = @"RCVoipFloatingBoardPosY";
         NSInteger checker = [RCCallKitUtility compareVersion:[UIDevice currentDevice].systemVersion toVersion:@"13.0"];
         if (checker >= 0) {
 #ifdef __IPHONE_13_0
-            _window.overrideUserInterfaceStyle = UIUserInterfaceStyleLight;
             [_window setWindowScene:[UIApplication sharedApplication].keyWindow.windowScene];
 #endif
         }
