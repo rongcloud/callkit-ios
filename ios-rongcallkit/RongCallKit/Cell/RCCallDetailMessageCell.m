@@ -90,7 +90,7 @@
     [self setAutoLayout];
 }
 
-- (void)setAutoLayout {    
+- (void)setAutoLayout {
     RCCallSummaryMessage *callMessage = (RCCallSummaryMessage *)self.model.content;
     if (callMessage.duration > 0) {
         self.textLabel.text =

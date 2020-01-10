@@ -14,6 +14,10 @@
 
 #define RCCXCallLocalizedName @"RongCloud"
 
+@interface RCCXCall()
+@property(nonatomic, strong) NSUUID *currentUUID;
+@end
+
 
 @implementation RCCXCall
 
@@ -32,6 +36,8 @@
 }
 
 - (void)startCall:(NSString *)userId {
+    NSUUID *uuid = [NSUUID UUID];
+    self.currentUUID = uuid;
 }
 
 - (void)reportOutgoingCallConnected {
@@ -43,9 +49,16 @@
 }
 
 - (void)endCXCall {
+    self.currentUUID = nil;
 }
 
 - (void)hangupIfNeedWithUUID:(NSString *)UUID {
+    if (UUID.length == 0) {
+        return;
+    }
+    if (![UUID isEqualToString:self.currentUUID.UUIDString]) {
+        [[RCCall sharedRCCall].currentCallSession hangup];
+    }
 }
 
 - (void)setAVAudioSessionMode{

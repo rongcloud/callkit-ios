@@ -1604,15 +1604,18 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
             default:
                 break;
         }
-        if (txQuality > RCCall_Quality_VBad || rxQuality > RCCall_Quality_VBad) {
-            //[self playNetworkBadSounds];
-            self.tipsLabel.frame =
+        
+        if (self.callSession.callStatus == RCCallActive) {
+            if (txQuality > RCCall_Quality_VBad || rxQuality > RCCall_Quality_VBad) {
+                //[self playNetworkBadSounds];
+                self.tipsLabel.frame =
                 CGRectMake(RCCallHorizontalMargin,
                            self.view.frame.size.height - RCCallButtonBottomMargin * 5 - RCCallExtraSpace,
                            self.view.frame.size.width - RCCallHorizontalMargin * 2, RCCallLabelHeight);
-            self.tipsLabel.text = NSLocalizedStringFromTable(@"voip_network_bad", @"RongCloudKit", nil);
-        } else {
-            self.tipsLabel.text = nil;
+                self.tipsLabel.text = NSLocalizedStringFromTable(@"voip_network_bad", @"RongCloudKit", nil);
+            } else {
+                self.tipsLabel.text = nil;
+            }
         }
     });
 }

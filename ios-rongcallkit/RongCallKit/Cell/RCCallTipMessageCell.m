@@ -75,13 +75,13 @@
         }
 
         if (message.mediaType == RCCallMediaAudio) {
-            [self.messageLabel setText:[NSString stringWithFormat:@" %@ %@ ",
+            [self.messageLabel setText:[NSString stringWithFormat:@" %@%@ ",
                                                                   NSLocalizedStringFromTable(@"VoIPAudioCall",
                                                                                              @"RongCloudKit", nil),
                                                                   status]
                    dataDetectorEnabled:NO];
         } else {
-            [self.messageLabel setText:[NSString stringWithFormat:@" %@ %@ ",
+            [self.messageLabel setText:[NSString stringWithFormat:@" %@%@ ",
                                                                   NSLocalizedStringFromTable(@"VoIPVideoCall",
                                                                                              @"RongCloudKit", nil),
                                                                   status]
