@@ -277,7 +277,7 @@
         
         if (callStatus == RCCallDialing) {
             self.mainVideoView.hidden = NO;
-            self.mainVideoView.frame = CGRectMake(0, RCCallStatusBarHeight, self.view.frame.size.width, self.view.frame.size.height - RCCallExtraSpace - RCCallStatusBarHeight);
+//            self.mainVideoView.frame = CGRectMake(0, RCCallStatusBarHeight, self.view.frame.size.width, self.view.frame.size.height - RCCallExtraSpace - RCCallStatusBarHeight);
             [self.callSession setVideoView:self.mainVideoView
                                     userId:self.callSession.caller];
 

@@ -329,6 +329,10 @@ typedef void (^CompleteBlock)(NSArray *addUserIdList);
 - (void)willDismissSearchController:(UISearchController *)searchController {
     self.tabBarController.tabBar.hidden = NO;
     self.edgesForExtendedLayout = UIRectEdgeBottom;
+    __weak typeof(self) weakSelf = self;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [weakSelf.tableView reloadData];
+    });
 }
 
 - (void)didDismissSearchController:(UISearchController *)searchController {
