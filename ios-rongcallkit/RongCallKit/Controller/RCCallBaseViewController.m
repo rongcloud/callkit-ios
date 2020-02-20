@@ -182,7 +182,7 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
         
         [audioSession setActive:YES error:nil];
 
-        NSURL *url = [NSURL URLWithString:ringPath];
+        NSURL *url = [NSURL fileURLWithPath:ringPath];
         NSError *error = nil;
         self.audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
         if (!error) {
