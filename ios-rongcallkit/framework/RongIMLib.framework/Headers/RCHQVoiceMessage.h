@@ -20,16 +20,16 @@ NS_ASSUME_NONNULL_BEGIN
 /*!
  语音消息的时长
  */
-@property(nonatomic, assign) long duration;
+@property (nonatomic, assign) long duration;
 
 /*!
  语音消息的附加信息
  */
-@property(nonatomic, copy) NSString *extra;
+@property (nonatomic, copy) NSString *extra;
 
 /*!
  初始化高清语音消息
- 
+
  @param localPath 语音的本地路径
  @return          语音消息对象
  */

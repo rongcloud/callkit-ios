@@ -27,76 +27,81 @@
 /*!
  会话类型
  */
-@property(nonatomic, assign) RCConversationType conversationType;
+@property (nonatomic, assign) RCConversationType conversationType;
 
 /*!
  目标会话ID
  */
-@property(nonatomic, copy) NSString *targetId;
+@property (nonatomic, copy) NSString *targetId;
 
 /*!
  消息的ID
 
  @discussion 本地存储的消息的唯一值（数据库索引唯一值）
  */
-@property(nonatomic, assign) long messageId;
+@property (nonatomic, assign) long messageId;
 
 /*!
  消息的方向
  */
-@property(nonatomic, assign) RCMessageDirection messageDirection;
+@property (nonatomic, assign) RCMessageDirection messageDirection;
 
 /*!
  消息的发送者ID
  */
-@property(nonatomic, copy) NSString *senderUserId;
+@property (nonatomic, copy) NSString *senderUserId;
 
 /*!
  消息的接收状态
  */
-@property(nonatomic, assign) RCReceivedStatus receivedStatus;
+@property (nonatomic, assign) RCReceivedStatus receivedStatus;
 
 /*!
  消息的发送状态
  */
-@property(nonatomic, assign) RCSentStatus sentStatus;
+@property (nonatomic, assign) RCSentStatus sentStatus;
 
 /*!
  消息的接收时间（Unix时间戳、毫秒）
  */
-@property(nonatomic, assign) long long receivedTime;
+@property (nonatomic, assign) long long receivedTime;
 
 /*!
  消息的发送时间（Unix时间戳、毫秒）
  */
-@property(nonatomic, assign) long long sentTime;
+@property (nonatomic, assign) long long sentTime;
 
 /*!
  消息的类型名
  */
-@property(nonatomic, copy) NSString *objectName;
+@property (nonatomic, copy) NSString *objectName;
 
 /*!
  消息的内容
  */
-@property(nonatomic, strong) RCMessageContent *content;
+@property (nonatomic, strong) RCMessageContent *content;
 
 /*!
  消息的附加字段
  */
-@property(nonatomic, copy) NSString *extra;
+@property (nonatomic, copy) NSString *extra;
 
 /*!
  全局唯一ID
 
  @discussion 服务器消息唯一ID（在同一个Appkey下全局唯一）
  */
-@property(nonatomic, copy) NSString *messageUId;
+@property (nonatomic, copy) NSString *messageUId;
 
 /*!
  阅读回执状态
  */
-@property(nonatomic, strong) RCReadReceiptInfo *readReceiptInfo;
+@property (nonatomic, strong) RCReadReceiptInfo *readReceiptInfo;
+
+/*!
+ 是否是离线消息，只在接收消息的回调方法中有效，如果消息为离线消息，则为 YES ，其他情况均为 NO
+ */
+@property(nonatomic, assign) BOOL isOffLine;
 
 /*!
  RCMessage初始化方法

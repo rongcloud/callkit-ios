@@ -24,24 +24,24 @@ typedef void (^clearHistory)(BOOL isSuccess);
 /*!
 当前会话的目标会话ID
 */
-@property(nonatomic, copy) NSString *targetId;
+@property (nonatomic, copy) NSString *targetId;
 
 /*!
  当前会话的会话类型
  */
-@property(nonatomic, assign) RCConversationType conversationType;
+@property (nonatomic, assign) RCConversationType conversationType;
 
 /*!
  清空会话中所有消息的回调
 
  @discussion 在清空消息的的回调中,您需要调用会话页面的reloadData进行刷新。
  */
-@property(nonatomic, copy) clearHistory clearHistoryCompletion;
+@property (nonatomic, copy) clearHistory clearHistoryCompletion;
 
 /*!
- 清空会话中所有消息的ActionSheet
+ 清空会话中所有消息的 AlertController
  */
-@property(nonatomic, readonly, strong) UIActionSheet *clearMsgHistoryActionSheet;
+@property (nonatomic, readonly, strong) UIAlertController *clearMsgHistoryAlertController;
 
 /*!
  清空会话中所有消息

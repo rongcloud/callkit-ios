@@ -16,7 +16,7 @@
 /*!
  Frame发生变化的回调
  */
-@property(nonatomic, copy) void (^eventBlock)(CGRect frame);
+@property (nonatomic, copy) void (^eventBlock)(CGRect frame);
 
 /*!
  注册Frame发生变化的回调

@@ -13,8 +13,8 @@
  */
 @interface RCPublicServiceListViewController : UITableViewController
 
-@property(nonatomic, strong) NSMutableDictionary *allFriends;
+@property (nonatomic, strong) NSMutableDictionary *allFriends;
 
-@property(nonatomic, strong) NSArray *allKeys;
+@property (nonatomic, strong) NSArray *allKeys;
 
 @end

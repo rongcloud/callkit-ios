@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @interface RCCustomerServiceGroupItem : NSObject
-@property(nonatomic, copy) NSString *groupId;
-@property(nonatomic, copy) NSString *name;
-@property(nonatomic, assign) BOOL online;
+@property (nonatomic, copy) NSString *groupId;
+@property (nonatomic, copy) NSString *name;
+@property (nonatomic, assign) BOOL online;
 @end

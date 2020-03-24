@@ -17,10 +17,10 @@
 /*!
  会话
  */
-@property(nonatomic, strong) RCConversation *conversation;
+@property (nonatomic, strong) RCConversation *conversation;
 
 /*
  匹配的条数
  */
-@property(nonatomic, assign) int matchCount;
+@property (nonatomic, assign) int matchCount;
 @end

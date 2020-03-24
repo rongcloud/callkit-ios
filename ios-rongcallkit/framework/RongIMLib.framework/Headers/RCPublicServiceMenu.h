@@ -31,7 +31,7 @@
 /*!
  菜单中包含的所有菜单项RCPublicServiceMenuItem数组
  */
-@property(nonatomic, strong) NSArray *menuItems;
+@property (nonatomic, strong) NSArray *menuItems;
 
 /*!
  将公众服务菜单下的所有菜单项解码（已废弃，请勿使用）

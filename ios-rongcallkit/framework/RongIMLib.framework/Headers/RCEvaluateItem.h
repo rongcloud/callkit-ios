@@ -9,6 +9,6 @@
 #import <Foundation/Foundation.h>
 
 @interface RCEvaluateItem : NSObject
-@property(nonatomic, copy) NSString *describe; // description
-@property(nonatomic) int value;
+@property (nonatomic, copy) NSString *describe; // description
+@property (nonatomic) int value;
 @end

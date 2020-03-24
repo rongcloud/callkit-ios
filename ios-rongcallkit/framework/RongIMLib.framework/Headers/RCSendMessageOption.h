@@ -13,9 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface RCSendMessageOption : NSObject
 
 /*
- 
 发送的消息，是否走 VOIP 推送
- 
 */
 @property (nonatomic, assign) BOOL isVoIPPush;
 

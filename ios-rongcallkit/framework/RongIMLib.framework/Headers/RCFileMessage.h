@@ -18,32 +18,32 @@
 /*!
  文件名
  */
-@property(nonatomic, copy) NSString *name;
+@property (nonatomic, copy) NSString *name;
 
 /*!
  文件大小，单位为Byte
  */
-@property(nonatomic, assign) long long size;
+@property (nonatomic, assign) long long size;
 
 /*!
  文件类型
  */
-@property(nonatomic, copy) NSString *type;
+@property (nonatomic, copy) NSString *type;
 
 /*!
  文件的网络地址
  */
-@property(nonatomic, copy) NSString *fileUrl;
+@property (nonatomic, copy) NSString *fileUrl;
 
 /*!
  文件的本地路径
  */
-@property(nonatomic, copy) NSString *localPath;
+@property (nonatomic, copy) NSString *localPath;
 
 /*!
  附加信息
  */
-@property(nonatomic, copy) NSString *extra;
+@property (nonatomic, copy) NSString *extra;
 
 /*!
  初始化文件消息

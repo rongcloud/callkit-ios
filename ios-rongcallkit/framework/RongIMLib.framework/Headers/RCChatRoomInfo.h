@@ -17,12 +17,12 @@
 /*!
  聊天室ID
  */
-@property(nonatomic, copy) NSString *targetId;
+@property (nonatomic, copy) NSString *targetId;
 
 /*!
  包含的成员信息类型
  */
-@property(nonatomic, assign) RCChatRoomMemberOrder memberOrder;
+@property (nonatomic, assign) RCChatRoomMemberOrder memberOrder;
 
 /*!
  聊天室中的部分成员信息RCChatRoomMemberInfo列表
@@ -31,11 +31,11 @@
  如果成员类型为RC_ChatRoom_Member_Asc，则为最早加入的成员列表，按成员加入时间升序排列；
  如果成员类型为RC_ChatRoom_Member_Desc，则为最晚加入的成员列表，按成员加入时间降序排列。
  */
-@property(nonatomic, strong) NSArray *memberInfoArray;
+@property (nonatomic, strong) NSArray *memberInfoArray;
 
 /*!
  当前聊天室的成员总数
  */
-@property(nonatomic, assign) int totalMemberCount;
+@property (nonatomic, assign) int totalMemberCount;
 
 @end

@@ -12,11 +12,11 @@
 
 @interface RCConversationDetailContentView : UIView
 
-@property(nonatomic, strong) UILabel *hightlineLabel;
+@property (nonatomic, strong) UILabel *hightlineLabel;
 
-@property(nonatomic, strong) UIImageView *sentStatusView;
+@property (nonatomic, strong) UIImageView *sentStatusView;
 
-@property(nonatomic, strong) UILabel *messageContentLabel;
+@property (nonatomic, strong) UILabel *messageContentLabel;
 
 - (void)updateContent:(RCConversationModel *)model;
 

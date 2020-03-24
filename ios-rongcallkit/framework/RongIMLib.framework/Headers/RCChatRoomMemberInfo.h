@@ -16,11 +16,11 @@
 /*!
  用户ID
  */
-@property(nonatomic, copy) NSString *userId;
+@property (nonatomic, copy) NSString *userId;
 
 /*!
  加入时间（Unix时间戳，毫秒）
  */
-@property(nonatomic, assign) long long joinTime;
+@property (nonatomic, assign) long long joinTime;
 
 @end

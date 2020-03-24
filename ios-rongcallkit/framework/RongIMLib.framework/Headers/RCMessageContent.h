@@ -121,16 +121,23 @@
  @discussion
  如果您使用IMKit，可以通过RCIM的enableMessageAttachUserInfo属性设置在每次发送消息中携带发送者的用户信息。
  */
-@property(nonatomic, strong) RCUserInfo *senderUserInfo;
+@property (nonatomic, strong) RCUserInfo *senderUserInfo;
 
 /*!
  消息中的@提醒信息
  */
-@property(nonatomic, strong) RCMentionedInfo *mentionedInfo;
+@property (nonatomic, strong) RCMentionedInfo *mentionedInfo;
+
+/**
+ 设置焚烧时间
+
+ @discussion 默认是 0，0 代表该消息非阅后即焚消息。
+ */
+@property (nonatomic, assign) NSUInteger destructDuration;
 
 /**
  将用户信息编码到字典中
- 
+
  @param userInfo 要编码的用户信息
  @return 存有用户信息的 Dictionary
  */
@@ -145,7 +152,7 @@
 
 /**
  将@提醒信息编码到字典中
- 
+
  @param mentionedInfo 要编码的@信息
  @return 存有@信息的 Dictionary
  */
@@ -164,7 +171,7 @@
  @discussion 此字段存放消息内容中未编码的json数据。
  SDK内置的消息，如果消息解码失败，默认会将消息的内容存放到此字段；如果编码和解码正常，此字段会置为nil。
  */
-@property(nonatomic, strong, setter=setRawJSONData:) NSData *rawJSONData;
+@property (nonatomic, strong, setter=setRawJSONData:) NSData *rawJSONData;
 
 @end
 #endif

@@ -12,13 +12,13 @@
 @interface RCPushProfile : NSObject
 
 //是否显示远程推送的内容
-@property(nonatomic, assign, readonly) BOOL isShowPushContent;
+@property (nonatomic, assign, readonly) BOOL isShowPushContent;
 
 //远程推送的语言
-@property(nonatomic, assign, readonly) RCPushLauguage pushLauguage;
+@property (nonatomic, assign, readonly) RCPushLauguage pushLauguage;
 
 //其他端在线时，手机是否接收远程推送(多个手机端登录，最后一个会接收)
-@property(nonatomic, assign, readonly) BOOL receiveStatus;
+@property (nonatomic, assign, readonly) BOOL receiveStatus;
 
 /**
  设置是否显示远程推送的内容
@@ -33,7 +33,7 @@
 
 /**
  设置推送内容的自然语言
- 
+
  @param pushLauguage      设置推送内容的自然语言 （目前只支持中文和英文）
  @param successBlock      成功回调
  @param errorBlock        失败回调
@@ -42,10 +42,9 @@
                 success:(void (^)(void))successBlock
                   error:(void (^)(RCErrorCode status))errorBlock;
 
-
 /**
  设置 Web 端在线时，手机端是否接收推送
- 
+
  @param receiveStatus     是否接收推送（ YES 接收 NO 不接收）
  @param successBlock      成功回调
  @param errorBlock        失败回调

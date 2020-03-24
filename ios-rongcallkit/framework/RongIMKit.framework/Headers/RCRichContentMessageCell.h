@@ -22,21 +22,21 @@
 /*!
  消息的背景View
  */
-@property(nonatomic, strong) UIImageView *bubbleBackgroundView;
+@property (nonatomic, strong) UIImageView *bubbleBackgroundView;
 
 /*!
  图片内容显示的View
  */
-@property(nonatomic, strong) RCloudImageView *richContentImageView;
+@property (nonatomic, strong) RCloudImageView *richContentImageView;
 
 /*!
  文本内容显示的Label
  */
-@property(nonatomic, strong) RCAttributedLabel *digestLabel;
+@property (nonatomic, strong) RCAttributedLabel *digestLabel;
 
 /*!
  标题显示的Label
  */
-@property(nonatomic, strong) RCAttributedLabel *titleLabel;
+@property (nonatomic, strong) RCAttributedLabel *titleLabel;
 
 @end

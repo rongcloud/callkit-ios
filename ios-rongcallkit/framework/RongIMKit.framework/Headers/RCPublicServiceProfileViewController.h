@@ -32,16 +32,16 @@
 /*!
  公众服务账号信息
  */
-@property(nonatomic, strong) RCPublicServiceProfile *serviceProfile;
+@property (nonatomic, strong) RCPublicServiceProfile *serviceProfile;
 
 /*!
  头像显示的形状
  */
-@property(nonatomic) RCUserAvatarStyle portraitStyle;
+@property (nonatomic) RCUserAvatarStyle portraitStyle;
 
 /*!
  当前界面的是否源于聊天会话页面
  */
-@property(nonatomic) BOOL fromConversation;
+@property (nonatomic) BOOL fromConversation;
 
 @end

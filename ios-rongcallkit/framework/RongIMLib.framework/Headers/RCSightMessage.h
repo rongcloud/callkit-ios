@@ -24,38 +24,37 @@
 /*!
  本地URL地址
  */
-@property(nonatomic, copy) NSString *localPath;
+@property (nonatomic, copy) NSString *localPath;
 
 /*!
  网络URL地址
  */
-@property(nonatomic, readonly) NSString *sightUrl;
+@property (nonatomic, readonly) NSString *sightUrl;
 
 /**
  视频时长，以秒为单位
  */
-@property(nonatomic, assign, readonly) NSUInteger duration;
+@property (nonatomic, assign, readonly) NSUInteger duration;
 
 /**
  小视频文件名
  */
-@property(nonatomic, copy) NSString *name;
+@property (nonatomic, copy) NSString *name;
 
 /**
  文件大小
  */
-@property(nonatomic, assign, readonly) long long size;
+@property (nonatomic, assign, readonly) long long size;
 
 /*!
  缩略图
  */
-@property(nonatomic, strong, readonly) UIImage *thumbnailImage;
+@property (nonatomic, strong, readonly) UIImage *thumbnailImage;
 
 /**
  开发者使用的扩展字段
  */
-@property(nonatomic, copy) NSString *extra;
-
+@property (nonatomic, copy) NSString *extra;
 
 /**
  创建小视频消息的便利构造方法
@@ -65,8 +64,6 @@
  @param duration 视频时长， 单位秒
  @return 视频消息实例变量
  */
-+ (instancetype)messageWithLocalPath:(NSString *)path
-                           thumbnail:(UIImage *)image
-                            duration:(NSUInteger)duration;
++ (instancetype)messageWithLocalPath:(NSString *)path thumbnail:(UIImage *)image duration:(NSUInteger)duration;
 
 @end

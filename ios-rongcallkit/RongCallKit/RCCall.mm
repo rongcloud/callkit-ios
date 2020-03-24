@@ -45,6 +45,7 @@
             [[RCCallClient sharedRCCallClient] setDelegate:pRongVoIP];
             pRongVoIP.maxMultiAudioCallUserNumber = 20;
             pRongVoIP.maxMultiVideoCallUserNumber = 7;
+            pRongVoIP.canIncomingCall = YES;
             pRongVoIP.callWindows = [[NSMutableArray alloc] init];
             pRongVoIP.locationNotificationList = [[NSMutableArray alloc] init];
 
@@ -293,12 +294,16 @@
 
 #pragma mark - receive call
 - (void)didReceiveCall:(RCCallSession *)callSession {
+    if (!self.canIncomingCall) {
+        [callSession hangup];
+        return;
+    }
+    
     if (!callSession.isMultiCall) {
         RCCallSingleCallViewController *singleCallViewController =
         [[RCCallSingleCallViewController alloc] initWithIncomingCall:callSession];
         
         [self presentCallViewController:singleCallViewController];
-       
     } else {
         if (callSession.mediaType == RCCallMediaAudio) {
             RCCallAudioMultiCallViewController *multiCallViewController =
@@ -311,7 +316,6 @@
             
             [self presentCallViewController:multiCallViewController];
         }
-        
     }
 }
 
@@ -344,6 +348,9 @@
                               userIdList:(NSArray *)userIdList
                                 userDict:(NSDictionary *)userDict
                                     isVoIPPush:(BOOL)isVoIPPush{
+    if (!self.canIncomingCall) {
+        return;
+    }
     
     [self startReceiveCallVibrate];
     

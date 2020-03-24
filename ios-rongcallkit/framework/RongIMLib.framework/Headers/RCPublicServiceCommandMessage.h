@@ -25,17 +25,17 @@
 /*!
  请求的名称
  */
-@property(nonatomic, copy) NSString *command;
+@property (nonatomic, copy) NSString *command;
 
 /*!
  请求的内容
  */
-@property(nonatomic, copy) NSString *data;
+@property (nonatomic, copy) NSString *data;
 
 /*!
  请求的扩展数据
  */
-@property(nonatomic, copy) NSString *extra;
+@property (nonatomic, copy) NSString *extra;
 
 /*!
  初始化公众服务请求消息

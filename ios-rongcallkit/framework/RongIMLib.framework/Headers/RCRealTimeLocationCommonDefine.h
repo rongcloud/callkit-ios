@@ -11,7 +11,7 @@
 
 /**
  坐标体系类型
- 
+
  - RCRealTimeLocationTypeWGS84: WGS-84
  - RCRealTimeLocationTypeGCJ02: GCJ-02
  - RCRealTimeLocationTypeBD09: BD-09

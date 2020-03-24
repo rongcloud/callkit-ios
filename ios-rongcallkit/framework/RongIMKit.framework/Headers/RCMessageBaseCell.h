@@ -52,42 +52,42 @@ UIKIT_EXTERN NSString *const KNotificationMessageBaseCellUpdateSendingStatus;
 /*!
  消息Cell点击回调
  */
-@property(nonatomic, weak) id<RCMessageCellDelegate> delegate;
+@property (nonatomic, weak) id<RCMessageCellDelegate> delegate;
 
 /*!
  显示时间的Label
  */
-@property(strong, nonatomic) RCTipLabel *messageTimeLabel;
+@property (strong, nonatomic) RCTipLabel *messageTimeLabel;
 
 /*!
  消息Cell的数据模型
  */
-@property(strong, nonatomic) RCMessageModel *model;
+@property (strong, nonatomic) RCMessageModel *model;
 
 /*!
  Cell显示的View
  */
-@property(strong, nonatomic) UIView *baseContentView;
+@property (strong, nonatomic) UIView *baseContentView;
 
 /*!
  消息的方向
  */
-@property(nonatomic) RCMessageDirection messageDirection;
+@property (nonatomic) RCMessageDirection messageDirection;
 
 /*!
  时间Label是否显示
  */
-@property(nonatomic, readonly) BOOL isDisplayMessageTime;
+@property (nonatomic, readonly) BOOL isDisplayMessageTime;
 
 /*!
  是否显示阅读状态
  */
-@property(nonatomic) BOOL isDisplayReadStatus;
+@property (nonatomic) BOOL isDisplayReadStatus;
 
 /*!
  是否允许选择
  */
-@property(nonatomic) BOOL allowsSelection;
+@property (nonatomic) BOOL allowsSelection;
 
 /*!
  初始化消息Cell

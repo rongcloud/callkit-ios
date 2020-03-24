@@ -15,7 +15,6 @@
 #import <AVFoundation/AVFoundation.h>
 #import <CoreTelephony/CTCall.h>
 #import <CoreTelephony/CTCallCenter.h>
-#import "WhiteBoardWebView.h"
 #import "KxCallMenu.h"
 
 NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessionCreation Notification";
@@ -23,7 +22,6 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
 @interface RCCallBaseViewController ()
 {
     UIImage *signalImage0, *signalImage1, *signalImage2, *signalImage3, *signalImage4, *signalImage5;
-    WhiteBoardWebView *whiteBoardWebView;
     dispatch_semaphore_t sem;
     dispatch_queue_t queue;
     BOOL hangupButtonClick;
@@ -1571,10 +1569,10 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
 }
 
 /*!
- 当前通话网络状态的回调，该回调方法每两秒触发一次
+ 当前通话网络状态的回调，该回调方法每秒触发一次
 
  @param txQuality   上行网络质量
- @param rxQuality   下行网络质量
+ @param rxQuality   下行网络质量, 接收到的所有远端用户网络质量的平均值
  */
 - (void)networkTxQuality:(RCCallQuality)txQuality rxQuality:(RCCallQuality)rxQuality {
     dispatch_async(dispatch_get_main_queue(), ^{

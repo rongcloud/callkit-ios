@@ -11,13 +11,14 @@
 #import "RCTextView.h"
 #import <RongIMLib/RongIMLib.h>
 #import <UIKit/UIKit.h>
-
+@class RCButton;
 #define RC_ChatSessionInputBar_Height 49.5f
 ///输入栏扩展输入的唯一标示
 #define INPUT_MENTIONED_SELECT_TAG 1000
 #define PLUGIN_BOARD_ITEM_ALBUM_TAG 1001
 #define PLUGIN_BOARD_ITEM_CAMERA_TAG 1002
 #define PLUGIN_BOARD_ITEM_LOCATION_TAG 1003
+#define PLUGIN_BOARD_ITEM_BURN_TAG 1004
 #define PLUGIN_BOARD_ITEM_FILE_TAG 1006
 #define PLUGIN_BOARD_ITEM_VOIP_TAG 1101
 #define PLUGIN_BOARD_ITEM_VIDEO_VOIP_TAG 1102
@@ -110,7 +111,11 @@ typedef NS_ENUM(NSInteger, RCChatSessionInputBarInputType) {
     /*!
      扩展输入模式
      */
-    RCChatSessionInputBarInputExtention = 2
+    RCChatSessionInputBarInputExtention = 2,
+    /*!
+     阅后即焚输入模式
+     */
+    RCChatSessionInputBarInputBurnMode = 3
 };
 
 /*!
@@ -126,17 +131,25 @@ typedef NS_ENUM(NSInteger, KBottomBarStatus) {
      */
     KBottomBarKeyboardStatus,
     /*!
-     功能板输入模式
+     功能板输入状态
      */
     KBottomBarPluginStatus,
     /*!
-     表情输入模式
+     表情输入状态
      */
     KBottomBarEmojiStatus,
     /*!
-     语音消息输入模式
+     语音消息输入状态
      */
-    KBottomBarRecordStatus
+    KBottomBarRecordStatus,
+    /*!
+     常用语输入状态
+     */
+    KBottomBarCommonPhrasesStatus,
+    /*!
+     阅后即焚输入状态
+     */
+    KBottomBarBurnStatus,
 };
 
 /*!
@@ -162,27 +175,27 @@ typedef NS_ENUM(NSInteger, KBottomBarStatus) {
 /*!
  当前的会话类型
  */
-@property(nonatomic, assign) RCConversationType conversationType;
+@property (nonatomic, assign) RCConversationType conversationType;
 
 /*!
  当前的会话ID
  */
-@property(nonatomic, strong) NSString *targetId;
+@property (nonatomic, strong) NSString *targetId;
 
 /*!
  输入工具栏的点击回调监听
  */
-@property(weak, nonatomic) id<RCChatSessionInputBarControlDelegate> delegate;
+@property (weak, nonatomic) id<RCChatSessionInputBarControlDelegate> delegate;
 
 /*!
  输入工具栏获取用户信息的回调
  */
-@property(weak, nonatomic) id<RCChatSessionInputBarControlDataSource> dataSource;
+@property (weak, nonatomic) id<RCChatSessionInputBarControlDataSource> dataSource;
 
 /**
  点击编辑按钮会调用该代理的onClickEditPicture方法
  */
-@property(weak, nonatomic) id<RCPictureEditDelegate> photoEditorDelegate;
+@property (weak, nonatomic) id<RCPictureEditDelegate> photoEditorDelegate;
 
 /*!
  公众服务菜单的容器View
@@ -190,121 +203,121 @@ typedef NS_ENUM(NSInteger, KBottomBarStatus) {
  @warning  **已废弃，请勿使用。**
  升级说明：如果您之前使用了此属性，可以直接替换为containerView属性，行为和实现完全一致。
  */
-@property(weak, nonatomic) UIView *clientView __deprecated_msg("已废弃，请勿使用。");
+@property (weak, nonatomic) UIView *clientView __deprecated_msg("已废弃，请勿使用。");
 
 /*!
  公众服务菜单切换的按钮
  */
-@property(strong, nonatomic) UIButton *pubSwitchButton;
+@property (strong, nonatomic) UIButton *pubSwitchButton;
 
 /*!
  客服机器人转人工切换的按钮
  */
-@property(strong, nonatomic) UIButton *robotSwitchButton;
+@property (strong, nonatomic) RCButton *robotSwitchButton;
 
 /*!
  容器View
  */
-@property(strong, nonatomic) UIView *inputContainerView;
+@property (strong, nonatomic) UIView *inputContainerView;
 
 /*!
  公众服务菜单的容器View
  */
-@property(strong, nonatomic) UIView *menuContainerView;
+@property (strong, nonatomic) UIView *menuContainerView;
 
 /*!
  语音与文本输入切换的按钮
  */
-@property(strong, nonatomic) UIButton *switchButton;
+@property (strong, nonatomic) RCButton *switchButton;
 
 /*!
  录制语音消息的按钮
  */
-@property(strong, nonatomic) UIButton *recordButton;
+@property (strong, nonatomic) RCButton *recordButton;
 
 /*!
  文本输入框
  */
-@property(strong, nonatomic) RCTextView *inputTextView;
+@property (strong, nonatomic) RCTextView *inputTextView;
 
 /*!
  表情的按钮
  */
-@property(strong, nonatomic) UIButton *emojiButton;
+@property (strong, nonatomic) RCButton *emojiButton;
 
 /*!
  扩展输入的按钮
  */
-@property(strong, nonatomic) UIButton *additionalButton;
+@property (strong, nonatomic) RCButton *additionalButton;
 
 /*!
  所处的会话页面View
  */
-@property(weak, nonatomic, readonly) UIView *containerView;
+@property (weak, nonatomic, readonly) UIView *containerView;
 
 /*!
  当前的输入状态
  */
-@property(nonatomic) KBottomBarStatus currentBottomBarStatus;
+@property (nonatomic) KBottomBarStatus currentBottomBarStatus;
 /*!
  所处的会话页面View
 
  @warning  **已废弃，请勿使用。**
  升级说明：如果您之前使用了此属性，可以直接替换为containerView属性，行为和实现完全一致。
  */
-@property(weak, nonatomic, readonly) UIView *contextView __deprecated_msg("已废弃，请勿使用。");
+@property (weak, nonatomic, readonly) UIView *contextView __deprecated_msg("已废弃，请勿使用。");
 
 /*!
  Frame现在的Y坐标
  */
-@property(assign, nonatomic) float currentPositionY __deprecated_msg("已废弃，请勿使用。");
+@property (assign, nonatomic) float currentPositionY __deprecated_msg("已废弃，请勿使用。");
 
 /*!
  Frame之前的Y坐标
  */
-@property(assign, nonatomic) float originalPositionY __deprecated_msg("已废弃，请勿使用。");
+@property (assign, nonatomic) float originalPositionY __deprecated_msg("已废弃，请勿使用。");
 
 /*!
  文本输入框的高度
  */
-@property(assign, nonatomic) float inputTextview_height __deprecated_msg("已废弃，请勿使用。");
+@property (assign, nonatomic) float inputTextview_height __deprecated_msg("已废弃，请勿使用。");
 
 /**
  输入框最大输入行数
- 
+
  @discussion 该变量设置范围为: 1~6, 超过该范围会自动调整为边界值
  */
-@property(nonatomic, assign) NSInteger maxInputLines;
+@property (nonatomic, assign) NSInteger maxInputLines;
 
 /*!
  公众服务账号菜单
  */
-@property(strong, nonatomic) RCPublicServiceMenu *publicServiceMenu;
+@property (strong, nonatomic) RCPublicServiceMenu *publicServiceMenu;
 
 /*!
  输入扩展功能板View
  */
-@property(nonatomic, strong) RCPluginBoardView *pluginBoardView;
+@property (nonatomic, strong) RCPluginBoardView *pluginBoardView;
 
 /*!
  表情View
  */
-@property(nonatomic, strong) RCEmojiBoardView *emojiBoardView;
+@property (nonatomic, strong) RCEmojiBoardView *emojiBoardView;
 
 /*!
  草稿
  */
-@property(nonatomic, strong) NSString *draft;
+@property (nonatomic, strong) NSString *draft;
 
 /*!
  @提醒信息
  */
-@property(nonatomic, strong, readonly) RCMentionedInfo *mentionedInfo;
+@property (nonatomic, strong, readonly) RCMentionedInfo *mentionedInfo;
 
 /*!
  是否允许@功能
  */
-@property(nonatomic, assign) BOOL isMentionedEnabled;
+@property (nonatomic, assign) BOOL isMentionedEnabled;
 
 /*!
  初始化输入工具栏
@@ -386,7 +399,7 @@ typedef NS_ENUM(NSInteger, KBottomBarStatus) {
 
 /**
  内容区域大小发生变化。
- 
+
  @discussion 当本view所在的view frame发生变化，需要重新计算本view的frame时，调用此方法，无动画
  */
 - (void)containerViewSizeChangedNoAnnimation;
@@ -434,6 +447,15 @@ typedef NS_ENUM(NSInteger, KBottomBarStatus) {
 - (void)openFileSelector;
 
 - (void)openDynamicFunction:(NSInteger)functionTag;
+
+/*!
+ 常用语列表设置
+
+ @param commonPhrasesList 您需要展示的常用语列表
+
+ @discussion 常用语条数需大于 0 条，每条内容最多可配置 30 个字，且只支持单聊。
+ */
+- (BOOL)setCommonPhrasesList:(NSArray<NSString *> *)commonPhrasesList;
 
 /*!
  更新输入框的Frame
@@ -522,6 +544,13 @@ typedef NS_ENUM(NSInteger, KBottomBarStatus) {
 - (void)emojiView:(RCEmojiBoardView *)emojiView didTouchSendButton:(UIButton *)sendButton;
 
 /*!
+ 点击常用语的回调
+
+ @param commonPhrases  常用语
+ */
+- (void)commonPhrasesViewDidTouch:(NSString *)commonPhrases;
+
+/*!
  开始录制语音消息
  */
 - (void)recordDidBegin;
@@ -587,7 +616,6 @@ typedef NS_ENUM(NSInteger, KBottomBarStatus) {
  */
 - (void)fileDidSelect:(NSArray *)filePathList;
 
-
 /**
  会话页面发送文件消息，在文件选择页面选择某个文件时调用该方法方法
 
@@ -637,8 +665,8 @@ typedef NS_ENUM(NSInteger, KBottomBarStatus) {
  @param originalImage 原图片
  @param editCompletion 编辑过的图片通过Block回传给SDK
  */
-- (void)onClickEditPicture: (UIViewController *)rootCtrl originalImage: (UIImage *)originalImage editCompletion:(void (^)(UIImage *editedImage))editCompletion;
+- (void)onClickEditPicture:(UIViewController *)rootCtrl
+             originalImage:(UIImage *)originalImage
+            editCompletion:(void (^)(UIImage *editedImage))editCompletion;
 
 @end
-
-

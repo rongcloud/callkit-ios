@@ -30,22 +30,22 @@ UIKIT_EXTERN NSString *const kNotificationStopVoicePlayer;
 /*!
  消息的背景View
  */
-@property(nonatomic, strong) UIImageView *bubbleBackgroundView;
+@property (nonatomic, strong) UIImageView *bubbleBackgroundView;
 
 /*!
  语音播放的View
  */
-@property(nonatomic, strong) UIImageView *playVoiceView;
+@property (nonatomic, strong) UIImageView *playVoiceView;
 
 /*!
  显示是否已播放的View
  */
-@property(nonatomic, strong) UIImageView *voiceUnreadTagView;
+@property (nonatomic, strong) UIImageView *voiceUnreadTagView;
 
 /*!
  显示语音时长的Label
  */
-@property(nonatomic, strong) UILabel *voiceDurationLabel;
+@property (nonatomic, strong) UILabel *voiceDurationLabel;
 
 /*!
  播放语音

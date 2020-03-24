@@ -29,22 +29,19 @@
 
  @param location    参与者的当前位置
  @param userId      位置发生变化的参与者的用户ID
- 
+
  @warning **已废弃，请改用 onReceiveLocation:type:fromUserId: 接口。**
  */
-- (void)onReceiveLocation:(CLLocation *)location
-               fromUserId:(NSString *)userId __deprecated_msg("已废弃，请勿使用。");
+- (void)onReceiveLocation:(CLLocation *)location fromUserId:(NSString *)userId __deprecated_msg("已废弃，请勿使用。");
 
 /*!
  参与者位置发生变化的回调
- 
+
  @param location    参与者的当前位置
  @param type        坐标体系类型
  @param userId      位置发生变化的参与者的用户ID
  */
-- (void)onReceiveLocation:(CLLocation *)location
-                     type:(RCRealTimeLocationType)type
-               fromUserId:(NSString *)userId;
+- (void)onReceiveLocation:(CLLocation *)location type:(RCRealTimeLocationType)type fromUserId:(NSString *)userId;
 
 /*!
  有参与者加入实时位置共享的回调

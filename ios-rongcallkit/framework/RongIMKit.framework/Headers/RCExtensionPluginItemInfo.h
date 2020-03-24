@@ -17,9 +17,9 @@ typedef void (^RCConversationPluginItemTapBlock)(RCChatSessionInputBarControl *c
  */
 @interface RCExtensionPluginItemInfo : NSObject
 
-@property(nonatomic, strong) UIImage *image;
-@property(nonatomic, strong) NSString *title;
-@property(nonatomic, copy) RCConversationPluginItemTapBlock tapBlock;
-@property(nonatomic, assign) NSInteger tag;
+@property (nonatomic, strong) UIImage *image;
+@property (nonatomic, strong) NSString *title;
+@property (nonatomic, copy) RCConversationPluginItemTapBlock tapBlock;
+@property (nonatomic, assign) NSInteger tag;
 
 @end

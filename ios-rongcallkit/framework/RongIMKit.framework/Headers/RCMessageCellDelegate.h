@@ -32,6 +32,15 @@
 - (void)didTapUrlInMessageCell:(NSString *)url model:(RCMessageModel *)model;
 
 /*!
+ 点击撤回消息Cell中重新编辑的回调
+
+ @param model 消息Cell的数据模型
+
+ @discussion 点击撤回消息Cell中重新编辑，会调用此回调，不会再触发didTapMessageCell:。
+ */
+- (void)didTapReedit:(RCMessageModel *)model;
+
+/*!
  点击Cell中电话号码的回调
 
  @param phoneNumber 点击的电话号码
@@ -87,6 +96,13 @@
  @discussion 仅支持取消文件消息的发送
  */
 - (void)didTapCancelUploadButton:(RCMessageModel *)model;
+
+/*!
+ 点击引用消息中被引用消息内容预览的回调
+
+ @param model 引用消息Cell的数据模型
+*/
+- (void)didTapReferencedContentView:(RCMessageModel *)model;
 
 #pragma mark - 客服机器人评价
 /*!

@@ -347,8 +347,7 @@
     [existUserIdList addObject:currentUserId];
 
     __weak typeof(self) weakSelf = self;
-    BOOL useExternalSignalServer = (self.callSession.conversationType == 0 && self.callSession.targetId == nil);
-    if ([RCCall sharedRCCall].callInviteNewUserDelegate &&[[RCCall sharedRCCall].callInviteNewUserDelegate respondsToSelector:@selector(inviteNewUser:BaseOn:selectResult:)] && self.callSession && useExternalSignalServer) {
+    if ([RCCall sharedRCCall].callInviteNewUserDelegate &&[[RCCall sharedRCCall].callInviteNewUserDelegate respondsToSelector:@selector(inviteNewUser:BaseOn:selectResult:)] && self.callSession) {
         [[RCCall sharedRCCall].callInviteNewUserDelegate inviteNewUser:existUserIdList BaseOn:self selectResult:^(NSArray<NSString *> *userIdList) {
             [weakSelf.callSession inviteRemoteUsers:userIdList mediaType:weakSelf.mediaType];
         }];

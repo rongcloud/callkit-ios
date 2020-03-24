@@ -42,6 +42,11 @@ UIKIT_EXTERN NSNotificationName const RCCallNewSessionCreationNotification;
 @property(nonatomic, copy) NSString *appLocalizedName;
 
 /**
+ 是否处理来电, 默认: YES 处理, 设置为 NO 时会直接挂断来电
+*/
+@property(nonatomic, assign) BOOL canIncomingCall;
+
+/**
  多人音视频通话邀请用户代理
  
  @discussion 如果实现该代理则多人音视频通话界面将有用户自己定义否则使用 RongCallKit 自带的选人界面

@@ -20,17 +20,17 @@
 /*!
  原始图片的View
  */
-@property(nonatomic, strong) UIImageView *originalImageView;
+@property (nonatomic, strong) UIImageView *originalImageView;
 
 /*!
  消息的数据模型
  */
-@property(nonatomic, strong) RCMessageModel *messageModel;
+@property (nonatomic, strong) RCMessageModel *messageModel;
 
 /*!
  图片消息进度的View
  */
-@property(nonatomic, strong) RCImageMessageProgressView *rcImageProressView;
+@property (nonatomic, strong) RCImageMessageProgressView *rcImageProressView;
 
 /*!
  取消按钮的点击事件

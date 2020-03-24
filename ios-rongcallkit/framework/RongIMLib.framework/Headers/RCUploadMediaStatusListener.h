@@ -21,12 +21,12 @@
 /*!
  上传的媒体文件消息的消息实体
  */
-@property(nonatomic, strong) RCMessage *currentMessage;
+@property (nonatomic, strong) RCMessage *currentMessage;
 
 /*!
  更新上传进度需要调用的block [progress:当前上传的进度，0 <= progress < 100]
  */
-@property(nonatomic, strong) void (^updateBlock)(int progress);
+@property (nonatomic, strong) void (^updateBlock)(int progress);
 
 /*!
  上传成功需要调用的block。
@@ -45,17 +45,17 @@
     successBlock(content);
  }
  */
-@property(nonatomic, strong) void (^successBlock)(RCMessageContent *content);
+@property (nonatomic, strong) void (^successBlock)(RCMessageContent *content);
 
 /*!
  上传成功需要调用的block [errorCode:上传失败的错误码，非0整数]
  */
-@property(nonatomic, strong) void (^errorBlock)(RCErrorCode errorCode);
+@property (nonatomic, strong) void (^errorBlock)(RCErrorCode errorCode);
 
 /*!
  上传取消需要调用的block
  */
-@property(nonatomic, strong) void (^cancelBlock)(void);
+@property (nonatomic, strong) void (^cancelBlock)(void);
 
 /*!
  初始化媒体文件上传进度更新的IMKit监听

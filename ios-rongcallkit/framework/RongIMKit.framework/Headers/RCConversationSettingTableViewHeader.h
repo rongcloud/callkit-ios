@@ -52,26 +52,26 @@
 /*!
  是否显示删除（减号）
  */
-@property(nonatomic, assign) BOOL showDeleteTip;
+@property (nonatomic, assign) BOOL showDeleteTip;
 
 /*!
  是否允许删除用户
  */
-@property(nonatomic, assign) BOOL isAllowedDeleteMember;
+@property (nonatomic, assign) BOOL isAllowedDeleteMember;
 
 /*!
  是否允许添加用户
  */
-@property(nonatomic, assign) BOOL isAllowedInviteMember;
+@property (nonatomic, assign) BOOL isAllowedInviteMember;
 
 /*!
  会话设置界面头像区域的点击回调
  */
-@property(weak, nonatomic) id<RCConversationSettingTableViewHeaderDelegate> settingTableViewHeaderDelegate;
+@property (weak, nonatomic) id<RCConversationSettingTableViewHeaderDelegate> settingTableViewHeaderDelegate;
 
 /*!
  用户信息RCUserInfo的列表
  */
-@property(strong, nonatomic) NSMutableArray *users;
+@property (strong, nonatomic) NSMutableArray *users;
 
 @end

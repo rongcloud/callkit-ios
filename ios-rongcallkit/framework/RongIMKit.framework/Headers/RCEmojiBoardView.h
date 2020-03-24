@@ -45,34 +45,34 @@
 /*!
  当前的会话类型
  */
-@property(nonatomic, assign) RCConversationType conversationType;
+@property (nonatomic, assign) RCConversationType conversationType;
 
 /*!
  当前的会话ID
  */
-@property(nonatomic, strong) NSString *targetId;
+@property (nonatomic, strong) NSString *targetId;
 
 /*!
  表情背景的View
  */
-@property(nonatomic, strong) UIScrollView *emojiBackgroundView;
+@property (nonatomic, strong) UIScrollView *emojiBackgroundView;
 
 /*!
  表情的Label(已废弃，请勿使用)
 
  @warning **已废弃，请勿使用。**
  */
-@property(nonatomic, strong) __deprecated_msg("已废弃，请勿使用。") UILabel *emojiLabel;
+@property (nonatomic, strong) __deprecated_msg("已废弃，请勿使用。") UILabel *emojiLabel;
 
 /*!
  表情输入的回调
  */
-@property(nonatomic, weak) id<RCEmojiViewDelegate> delegate;
+@property (nonatomic, weak) id<RCEmojiViewDelegate> delegate;
 
 /*!
  表情区域的大小
  */
-@property(nonatomic, assign, readonly) CGSize contentViewSize;
+@property (nonatomic, assign, readonly) CGSize contentViewSize;
 
 /**
  *  init

@@ -29,16 +29,16 @@ UIKIT_EXTERN NSString *const CONVERSATION_CELL_STATUS_SEND_READCOUNT; //已读�
 /*!
  消息ID
  */
-@property(nonatomic) long messageId;
+@property (nonatomic) long messageId;
 
 /*!
  更新的状态名
  */
-@property(strong, nonatomic) NSString *actionName;
+@property (strong, nonatomic) NSString *actionName;
 
 /*!
  进度
  */
-@property(nonatomic) NSInteger progress;
+@property (nonatomic) NSInteger progress;
 
 @end

@@ -30,39 +30,39 @@
 
  @discussion 发送方此字段为图片的本地路径，接收方此字段为网络URL地址。
  */
-@property(nonatomic, copy) NSString *imageUrl;
+@property (nonatomic, copy) NSString *imageUrl;
 
 /*!
  图片的本地路径
  */
-@property(nonatomic, copy) NSString *localPath;
+@property (nonatomic, copy) NSString *localPath;
 
 /*!
  图片消息的缩略图
  */
-@property(nonatomic, strong) UIImage *thumbnailImage;
+@property (nonatomic, strong) UIImage *thumbnailImage;
 
 /*!
  是否发送原图
 
  @discussion 在发送图片的时候，是否发送原图，默认值为NO。
  */
-@property(nonatomic, getter=isFull) BOOL full;
+@property (nonatomic, getter=isFull) BOOL full;
 
 /*!
  图片消息的附加信息
  */
-@property(nonatomic, copy) NSString *extra;
+@property (nonatomic, copy) NSString *extra;
 
 /*!
  图片消息的原始图片信息
  */
-@property(nonatomic, strong) UIImage *originalImage;
+@property (nonatomic, strong) UIImage *originalImage;
 
 /*!
  图片消息的原始图片信息
  */
-@property(nonatomic, strong, readonly) NSData *originalImageData;
+@property (nonatomic, strong, readonly) NSData *originalImageData;
 
 /*!
  初始化图片消息

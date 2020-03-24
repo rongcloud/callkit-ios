@@ -265,9 +265,22 @@
 
 /**
  URL 编码
- 
+
  @return 编码后的 URL
  */
 + (NSString *)encodeURL:(NSString *)url;
+
++ (NSData *)compressImage:(UIImage *)sourceImage;
+
+/**
+ 检查字符串是否符合聊天室属性名称的格式
+
+ @param key 聊天室属性名称
+ @return 是否符合聊天室属性名称的格式，YES 符合， NO 不符合
+
+ @discussion Key 支持大小写英文字母、数字、部分特殊符号 + = - _ 的组合方式
+ */
++ (BOOL)checkChatroomKey:(NSString *)key;
+
 @end
 #endif

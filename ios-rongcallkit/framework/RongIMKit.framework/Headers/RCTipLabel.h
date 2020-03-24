@@ -17,7 +17,7 @@
 /*!
  边缘间隙
  */
-@property(nonatomic, assign) UIEdgeInsets marginInsets;
+@property (nonatomic, assign) UIEdgeInsets marginInsets;
 
 /*!
  初始化灰条提示Label对象

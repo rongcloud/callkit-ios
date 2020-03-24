@@ -16,7 +16,7 @@
 /*!
  提示的Label
  */
-@property(strong, nonatomic) RCTipLabel *tipMessageLabel;
+@property (strong, nonatomic) RCTipLabel *tipMessageLabel;
 
 /*!
  设置当前消息Cell的数据模型

@@ -27,17 +27,16 @@
 /*!
  多图文消息的内容RCRichContentItem数组
  */
-@property(nonatomic, strong) NSArray *richContents;
+@property (nonatomic, strong) NSArray *richContents;
 
 /*!
  多图文消息的附加信息
  */
-@property(nonatomic, copy) NSString *extra;
-
+@property (nonatomic, copy) NSString *extra;
 
 /**
  多图文消息被选中的项的索引, -1 表示选中全部
  */
-@property (nonatomic,assign,readonly) NSInteger selectedItemIndex;
+@property (nonatomic, assign, readonly) NSInteger selectedItemIndex;
 
 @end

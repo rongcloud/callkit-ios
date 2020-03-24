@@ -23,43 +23,43 @@
 /*!
  讨论组ID
  */
-@property(nonatomic, copy) NSString *discussionId;
+@property (nonatomic, copy) NSString *discussionId;
 
 /*!
  讨论组名称
  */
-@property(nonatomic, copy) NSString *discussionName;
+@property (nonatomic, copy) NSString *discussionName;
 
 /*!
  讨论组的创建者的用户ID
  */
-@property(nonatomic, copy) NSString *creatorId;
+@property (nonatomic, copy) NSString *creatorId;
 
 /*!
  讨论组成员的用户ID列表
  */
-@property(nonatomic, strong) NSArray *memberIdList;
+@property (nonatomic, strong) NSArray *memberIdList;
 
 /*!
  讨论组是否开放加人权限
 
  @discussion 是否允许非创建者添加用户，0表示允许，1表示不允许，默认值为0。
  */
-@property(nonatomic, assign) int inviteStatus;
+@property (nonatomic, assign) int inviteStatus;
 
 /*!
  讨论组的会话类型（已废弃，请勿使用）
 
  @warning **已废弃，请勿使用。**
  */
-@property(nonatomic, assign) __deprecated_msg("已废弃，请勿使用。") int conversationType;
+@property (nonatomic, assign) __deprecated_msg("已废弃，请勿使用。") int conversationType;
 
 /*!
  讨论组是否允许消息提醒（已废弃，请勿使用）
 
  @warning **已废弃，请勿使用。**
  */
-@property(nonatomic, assign) __deprecated_msg("已废弃，请勿使用。") int pushMessageNotificationStatus;
+@property (nonatomic, assign) __deprecated_msg("已废弃，请勿使用。") int pushMessageNotificationStatus;
 
 /*!
  讨论组初始化方法

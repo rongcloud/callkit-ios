@@ -27,8 +27,8 @@
 
  @discussion 默认值为NO。
  */
-@property(nonatomic, assign) BOOL disableActionMenu;
+@property (nonatomic, assign) BOOL disableActionMenu;
 
-@property(nonatomic, weak) id<RCTextViewDelegate> textChangeDelegate;
+@property (nonatomic, weak) id<RCTextViewDelegate> textChangeDelegate;
 
 @end

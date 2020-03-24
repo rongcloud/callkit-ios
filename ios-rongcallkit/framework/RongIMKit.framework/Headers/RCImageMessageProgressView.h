@@ -16,12 +16,12 @@
 /*!
  显示进度的Label
  */
-@property(nonatomic, weak) UILabel *label;
+@property (nonatomic, weak) UILabel *label;
 
 /*!
  进度指示的View
  */
-@property(nonatomic, strong) UIActivityIndicatorView *indicatorView;
+@property (nonatomic, strong) UIActivityIndicatorView *indicatorView;
 
 /*!
  更新进度

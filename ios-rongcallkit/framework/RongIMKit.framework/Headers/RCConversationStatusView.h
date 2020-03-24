@@ -11,9 +11,9 @@
 
 @interface RCConversationStatusView : UIView
 
-@property(nonatomic, strong) UIImageView *conversationNotificationStatusView;
+@property (nonatomic, strong) UIImageView *conversationNotificationStatusView;
 
-@property(nonatomic, strong) UIImageView *messageReadStatusView;
+@property (nonatomic, strong) UIImageView *messageReadStatusView;
 
 - (void)updateReadStatus:(RCConversationModel *)model;
 

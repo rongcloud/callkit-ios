@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <RongIMLib/RongIMLib.h>
 #import <UIKit/UIKit.h>
+#import "RCMessageModel.h"
 
 @class RCConversationModel;
 
@@ -73,16 +74,18 @@
 
 /*!
  获取指定会话类型的消息内容的摘要
- 
+
  @param messageContent  消息内容
  @param targetId  会话 Id
  @param conversationType  会话类型
  @return                消息内容的摘要
- 
+
  @discussion SDK默认的消息有内置的处理，
  自定义消息会调用RCMessageContent中RCMessageContentView协议的conversationDigest获取消息摘要。
  */
-+ (NSString *)formatMessage:(RCMessageContent *)messageContent targetId:(NSString *)targetId conversationType:(RCConversationType)conversationType;
++ (NSString *)formatMessage:(RCMessageContent *)messageContent
+                   targetId:(NSString *)targetId
+           conversationType:(RCConversationType)conversationType;
 
 /*!
  获取消息内容的摘要
@@ -253,6 +256,13 @@
 + (BOOL)validateEmail:(NSString *)email;
 
 /**
+获取 keyWindow
+
+@return UIWindow
+*/
++ (UIWindow *)getKeyWindow;
+
+/**
  获取 AppDelegate window 的 safeAreaInsets
 
  @return AppDelegate window 的 safeAreaInsets
@@ -266,4 +276,46 @@
  @return 修正后的图片
  */
 + (UIImage *)fixOrientation:(UIImage *)image;
+
+/**
+判断当前设备是否是 iPad
+*/
++ (BOOL)currentDeviceIsIPad;
+
+/**
+在 controller 弹出弹窗
+
+@param title title
+@param message message
+@param style 弹窗的风格
+@param actions UIAlertAction 的数组
+@param controller 用哪个页面弹出
+*/
++ (void)showAlertController:(NSString *)title
+                    message:(NSString *)message
+             preferredStyle:(UIAlertControllerStyle)style
+                    actions:(NSArray<UIAlertAction *> *)actions
+           inViewController:(UIViewController *)controller;
+
+/**
+动态颜色设置
+
+ @param lightColor  亮色
+ @param darkColor  暗色
+ @return 修正后的图片
+*/
++ (UIColor *)generateDynamicColor:(UIColor *)lightColor darkColor:(UIColor *)darkColor;
+
+/**
+根据图片消息的 imageUrl 判断图片是否加载
+*/
++ (BOOL)hasLoadedImage:(NSString *)imageUrl;
+
+/**
+根据图片消息的 imageUrl 获取已下载的图片 data
+
+ @param imageUrl  图片消息的 imageUrl
+ @return 图片 data
+*/
++ (NSData *)getImageDataForURLString:(NSString *)imageUrl;
 @end

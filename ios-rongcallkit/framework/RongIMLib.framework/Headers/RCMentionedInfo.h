@@ -17,24 +17,24 @@
 /*!
  @提醒的类型
  */
-@property(nonatomic, assign) RCMentionedType type;
+@property (nonatomic, assign) RCMentionedType type;
 
 /*!
  @的用户ID列表
 
  @discussion 如果type是@所有人，则可以传nil
  */
-@property(nonatomic, strong) NSArray<NSString *> *userIdList;
+@property (nonatomic, strong) NSArray<NSString *> *userIdList;
 
 /*!
  包含@提醒的消息，本地通知和远程推送显示的内容
  */
-@property(nonatomic, copy) NSString *mentionedContent;
+@property (nonatomic, copy) NSString *mentionedContent;
 
 /*!
  是否@了我
  */
-@property(nonatomic, readonly) BOOL isMentionedMe;
+@property (nonatomic, readonly) BOOL isMentionedMe;
 
 /*!
  初始化@提醒信息

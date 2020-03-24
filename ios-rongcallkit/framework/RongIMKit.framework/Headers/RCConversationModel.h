@@ -39,114 +39,119 @@ typedef NS_ENUM(NSUInteger, RCConversationModelType) {
 /*!
  会话Cell数据模型的显示类型
  */
-@property(nonatomic, assign) RCConversationModelType conversationModelType;
+@property (nonatomic, assign) RCConversationModelType conversationModelType;
 
 /*!
  用户自定义的扩展数据
  */
-@property(nonatomic, strong) id extend;
+@property (nonatomic, strong) id extend;
 
 /*!
  会话类型
  */
-@property(nonatomic, assign) RCConversationType conversationType;
+@property (nonatomic, assign) RCConversationType conversationType;
 
 /*!
  目标会话ID
  */
-@property(nonatomic, copy) NSString *targetId;
+@property (nonatomic, copy) NSString *targetId;
 
 /*!
  会话的标题
  */
-@property(nonatomic, copy) NSString *conversationTitle;
+@property (nonatomic, copy) NSString *conversationTitle;
 
 /*!
  会话中的未读消息数
  */
-@property(nonatomic, assign) NSInteger unreadMessageCount;
+@property (nonatomic, assign) NSInteger unreadMessageCount;
 
 /*!
  当前会话是否置顶
  */
-@property(nonatomic, assign) BOOL isTop;
+@property (nonatomic, assign) BOOL isTop;
 
 /*!
  置顶Cell的背景颜色
  */
-@property(nonatomic, strong) UIColor *topCellBackgroundColor;
+@property (nonatomic, strong) UIColor *topCellBackgroundColor;
 
 /*!
  非置顶的Cell的背景颜色
  */
-@property(nonatomic, strong) UIColor *cellBackgroundColor;
+@property (nonatomic, strong) UIColor *cellBackgroundColor;
 
 /*!
  会话中最后一条消息的接收状态
  */
-@property(nonatomic, assign) RCReceivedStatus receivedStatus;
+@property (nonatomic, assign) RCReceivedStatus receivedStatus;
 
 /*!
  会话中最后一条消息的发送状态
  */
-@property(nonatomic, assign) RCSentStatus sentStatus;
+@property (nonatomic, assign) RCSentStatus sentStatus;
 
 /*!
  会话中最后一条消息的接收时间（Unix时间戳、毫秒）
  */
-@property(nonatomic, assign) long long receivedTime;
+@property (nonatomic, assign) long long receivedTime;
 
 /*!
  会话中最后一条消息的发送时间（Unix时间戳、毫秒）
  */
-@property(nonatomic, assign) long long sentTime;
+@property (nonatomic, assign) long long sentTime;
 
 /*!
  会话中存在的草稿
  */
-@property(nonatomic, copy) NSString *draft;
+@property (nonatomic, copy) NSString *draft;
 
 /*!
  会话中最后一条消息的类型名
  */
-@property(nonatomic, copy) NSString *objectName;
+@property (nonatomic, copy) NSString *objectName;
 
 /*!
  会话中最后一条消息的发送者用户ID
  */
-@property(nonatomic, copy) NSString *senderUserId;
+@property (nonatomic, copy) NSString *senderUserId;
 
 /*!
  会话中最后一条消息的发送者的用户名（已废弃，请勿使用）
 
  @warning **已废弃，请勿使用。**
  */
-@property(nonatomic, strong) __deprecated_msg("已废弃，请勿使用。") NSString *senderUserName;
+@property (nonatomic, strong) __deprecated_msg("已废弃，请勿使用。") NSString *senderUserName;
 
 /*!
  会话中最后一条消息的消息ID
  */
-@property(nonatomic, assign) long lastestMessageId;
+@property (nonatomic, assign) long lastestMessageId;
 
 /*!
  会话中最后一条消息的内容
  */
-@property(nonatomic, strong) RCMessageContent *lastestMessage;
+@property (nonatomic, strong) RCMessageContent *lastestMessage;
 
 /*!
  会话中最后一条消息的方向
  */
-@property(nonatomic, assign) RCMessageDirection lastestMessageDirection;
+@property (nonatomic, assign) RCMessageDirection lastestMessageDirection;
 
 /*!
  会话中最后一条消息的json Dictionary
  */
-@property(nonatomic, strong) NSDictionary *jsonDict;
+@property (nonatomic, strong) NSDictionary *jsonDict;
 
 /*!
  会话中有被提及的消息（有@你的消息）
  */
-@property(nonatomic, assign) BOOL hasUnreadMentioned;
+@property (nonatomic, assign, readonly) BOOL hasUnreadMentioned;
+
+/*!
+会话中有被@的消息数量
+*/
+@property (nonatomic, assign) int mentionedCount;
 
 /*!
  初始化会话Cell的数据模型（已废弃，请勿使用）

@@ -15,7 +15,7 @@
 #import "RCPluginBoardView.h"
 #import "RCThemeDefine.h"
 #import <UIKit/UIKit.h>
-
+#import "RCReferencingView.h"
 /*!
  客服服务状态
  */
@@ -60,19 +60,19 @@ typedef NS_ENUM(NSUInteger, RCCustomerServiceStatus) {
 /*!
  当前会话的会话类型
  */
-@property(nonatomic) RCConversationType conversationType;
+@property (nonatomic) RCConversationType conversationType;
 
 /*!
  目标会话ID
  */
-@property(nonatomic, copy) NSString *targetId;
+@property (nonatomic, copy) NSString *targetId;
 
 /*!
  当前的用户名称（已废弃，请勿使用）
 
  @warning **已废弃，请勿使用。**
  */
-@property(nonatomic, strong) __deprecated_msg("已废弃，请勿使用。") NSString *userName;
+@property (nonatomic, strong) __deprecated_msg("已废弃，请勿使用。") NSString *userName;
 
 #pragma mark - 会话页面属性
 /**
@@ -80,7 +80,7 @@ typedef NS_ENUM(NSUInteger, RCCustomerServiceStatus) {
 
  @discussion 用于消息搜索之后点击进入页面等场景
  */
-@property(nonatomic, assign) long long locatedMessageSentTime;
+@property (nonatomic, assign) long long locatedMessageSentTime;
 
 /*!
  聊天内容的消息Cell数据模型的数据源
@@ -88,14 +88,12 @@ typedef NS_ENUM(NSUInteger, RCCustomerServiceStatus) {
  @discussion 数据源中存放的元素为消息Cell的数据模型，即RCMessageModel对象。
  @warning 非线程安全，请在主线程操作该属性
  */
-@property(nonatomic, strong) NSMutableArray *conversationDataRepository;
+@property (nonatomic, strong) NSMutableArray *conversationDataRepository;
 
 /*!
  会话页面的CollectionView
  */
-@property(nonatomic, strong) UICollectionView *conversationMessageCollectionView;
-
-
+@property (nonatomic, strong) UICollectionView *conversationMessageCollectionView;
 
 #pragma mark 导航栏返回按钮中的未读消息数提示
 /*!
@@ -104,7 +102,7 @@ typedef NS_ENUM(NSUInteger, RCCustomerServiceStatus) {
  @discussion 此属性表明在导航栏的返回按钮中需要统计显示哪部分的会话类型的未读数。
  (需要将RCConversationType转为NSNumber构建Array)
  */
-@property(nonatomic, strong) NSArray *displayConversationTypeArray;
+@property (nonatomic, strong) NSArray *displayConversationTypeArray;
 
 /*!
  更新导航栏返回按钮中显示的未读消息数
@@ -121,24 +119,24 @@ typedef NS_ENUM(NSUInteger, RCCustomerServiceStatus) {
  开启该提示功能之后，当一个会话收到大量消息时（超过一个屏幕能显示的内容），
  进入该会话后，会在右上角提示用户上方存在的未读消息数，用户点击该提醒按钮，会跳转到最开始的未读消息。
  */
-@property(nonatomic, assign) BOOL enableUnreadMessageIcon;
+@property (nonatomic, assign) BOOL enableUnreadMessageIcon;
 
 /*!
  该会话的未读消息数
  */
-@property(nonatomic, assign) NSInteger unReadMessage;
+@property (nonatomic, assign) NSInteger unReadMessage;
 
 /*!
  右上角未读消息数提示的Label
 
  @discussion 当 unReadMessage > 10  右上角会显示未读消息数。
  */
-@property(nonatomic, strong) UILabel *unReadMessageLabel;
+@property (nonatomic, strong) UILabel *unReadMessageLabel;
 
 /*!
  右上角未读消息数提示的按钮
  */
-@property(nonatomic, strong) UIButton *unReadButton;
+@property (nonatomic, strong) UIButton *unReadButton;
 
 #pragma mark 右下角的未读消息数提示
 /*!
@@ -149,33 +147,39 @@ typedef NS_ENUM(NSUInteger, RCCustomerServiceStatus) {
  当用户停留在上方某个区域阅读时，此会话收到消息时，会在右下角显示未读消息提示，而不会自动滚动到最下方，
  用户点击该提醒按钮，会滚动到最下方。
  */
-@property(nonatomic, assign) BOOL enableNewComingMessageIcon;
+@property (nonatomic, assign) BOOL enableNewComingMessageIcon;
 
 /*!
  右下角未读消息数提示的Label
  */
-@property(nonatomic, strong) UILabel *unReadNewMessageLabel;
+@property (nonatomic, strong) UILabel *unReadNewMessageLabel;
 
 #pragma mark - 输入工具栏
 
 /*!
  会话页面下方的输入工具栏
  */
-@property(nonatomic, strong) RCChatSessionInputBarControl *chatSessionInputBarControl;
+@property (nonatomic, strong) RCChatSessionInputBarControl *chatSessionInputBarControl;
 
 /*!
  输入框的默认输入模式
 
  @discussion 默认值为RCChatSessionInputBarInputText，即文本输入模式。 请在[super viewWillAppear:animated]之后调用
  */
-@property(nonatomic) RCChatSessionInputBarInputType defaultInputType;
+@property (nonatomic) RCChatSessionInputBarInputType defaultInputType;
 
 /*!
  会话扩展显示区域
 
  @discussion 可以自定义显示会话页面的view。
  */
-@property(nonatomic, strong) UIView *extensionView;
+@property (nonatomic, strong) UIView *extensionView;
+
+/*!
+ 输入框上方引用内容显示View
+
+*/
+@property (nonatomic, strong) RCReferencingView *referencingView;
 
 /*!
  输入框中内容发生变化的回调
@@ -190,10 +194,10 @@ typedef NS_ENUM(NSUInteger, RCCustomerServiceStatus) {
 
 /*!
  输入工具栏尺寸（高度）发生变化的回调
- 
+
  @param chatInputBar 输入工具栏
  @param frame        输入工具栏最终需要显示的Frame
- 
+
  @discussion 如重写此方法，请先调用父类方法。
  */
 - (void)chatInputBar:(RCChatSessionInputBarControl *)chatInputBar shouldChangeFrame:(CGRect)frame;
@@ -224,7 +228,7 @@ typedef NS_ENUM(NSUInteger, RCCustomerServiceStatus) {
  @warning  **已废弃，请勿使用。**
  升级说明：如果您之前使用了此属性，可以直接替换为chatSessionInputBarControl的pluginBoardView属性，行为和实现完全一致。
  */
-@property(nonatomic, strong) __deprecated_msg("已废弃，请勿使用。") RCPluginBoardView *pluginBoardView;
+@property (nonatomic, strong) __deprecated_msg("已废弃，请勿使用。") RCPluginBoardView *pluginBoardView;
 
 /*!
  表情View
@@ -232,7 +236,7 @@ typedef NS_ENUM(NSUInteger, RCCustomerServiceStatus) {
  @warning  **已废弃，请勿使用。**
  升级说明：如果您之前使用了此属性，可以直接替换为chatSessionInputBarControl的emojiBoardView属性，行为和实现完全一致。
  */
-@property(nonatomic, strong) __deprecated_msg("已废弃，请勿使用。") RCEmojiBoardView *emojiBoardView;
+@property (nonatomic, strong) __deprecated_msg("已废弃，请勿使用。") RCEmojiBoardView *emojiBoardView;
 
 #pragma mark - 显示设置
 
@@ -242,7 +246,7 @@ typedef NS_ENUM(NSUInteger, RCCustomerServiceStatus) {
  @discussion 默认值为YES。
  您可以针对群聊、聊天室、单聊等不同场景，自己定制是否显示发送方的名字。
  */
-@property(nonatomic) BOOL displayUserNameInCell;
+@property (nonatomic) BOOL displayUserNameInCell;
 
 /*!
  设置进入聊天室需要获取的历史消息数量（仅在当前会话为聊天室时生效）
@@ -250,23 +254,23 @@ typedef NS_ENUM(NSUInteger, RCCustomerServiceStatus) {
  @discussion 此属性需要在viewDidLoad之前进行设置。
  -1表示不获取任何历史消息，0表示不特殊设置而使用SDK默认的设置（默认为获取10条），0<messageCount<=50为具体获取的消息数量,最大值为50。注：如果是7.x系统获取历史消息数量不要大于30
  */
-@property(nonatomic, assign) int defaultHistoryMessageCountOfChatRoom;
+@property (nonatomic, assign) int defaultHistoryMessageCountOfChatRoom;
 
 /*!
  已经选择的所有消息
  @discussion 只有在 allowsMessageCellSelection 为 YES,才会有有效值
  */
-@property(nonatomic, strong, readonly) NSArray<RCMessageModel *> *selectedMessages;
+@property (nonatomic, strong, readonly) NSArray<RCMessageModel *> *selectedMessages;
 
 /*!
  会话页面消息是否可编辑选择,如果为 YES,消息 cell 会变为多选样式,如果为 NO，页面恢复初始状态。
  */
-@property(nonatomic, assign) BOOL allowsMessageCellSelection;
+@property (nonatomic, assign) BOOL allowsMessageCellSelection;
 
 /*!
  消息编辑选择的状态下页面底部出现的工具视图
  */
-@property(nonatomic, strong) UIToolbar *messageSelectionToolbar;
+@property (nonatomic, strong) UIToolbar *messageSelectionToolbar;
 
 /*!
  提示用户信息并推出当前会话界面
@@ -556,6 +560,22 @@ typedef NS_ENUM(NSUInteger, RCCustomerServiceStatus) {
 - (void)willDisplayConversationTableCell:(RCMessageBaseCell *)cell
                              atIndexPath:(NSIndexPath *)indexPath __deprecated_msg("已废弃，请勿使用。");
 
+/*!
+多选模式时，消息将要被选择时的回调
+
+@param model 消息 Cell 的数据模型
+@return 是否继续执行选择操作，默认是YES
+*/
+- (BOOL)willSelectMessage:(RCMessageModel *)model;
+
+/*!
+多选模式时，消息将要被取消选择时的回调
+
+@param model 消息 Cell 的数据模型
+@return 是否继续执行取消选择操作，默认是YES
+*/
+- (BOOL)willCancelSelectMessage:(RCMessageModel *)model;
+
 #pragma mark - 自定义消息
 /*!
  注册自定义消息的Cell
@@ -592,7 +612,7 @@ typedef NS_ENUM(NSUInteger, RCCustomerServiceStatus) {
 
  @discussion 自定义消息如果需要显示，则必须先通过RCIM的registerMessageType:注册该自定义消息类型，
  并在会话页面中通过registerClass:forCellWithReuseIdentifier:注册该自定义消息的Cell，否则将此回调将不会被调用。
- 
+
  @warning  **已废弃，请勿使用。**
  升级说明：即将显示消息的回调统一使用 willDisplayMessageCell:atIndexPath: 方法。
  */
@@ -609,7 +629,7 @@ typedef NS_ENUM(NSUInteger, RCCustomerServiceStatus) {
 
  @discussion 自定义消息如果需要显示，则必须先通过RCIM的registerMessageType:注册该自定义消息类型，
  并在会话页面中通过registerClass:forCellWithReuseIdentifier:注册该自定义消息的Cell，否则将此回调将不会被调用。
- 
+
  @warning  **已废弃，请勿使用。**
  升级说明：请实现自定义消息 Cell 的 sizeForMessageModel:withCollectionViewWidth:referenceExtraHeight: 方法来设置 size。
  */
@@ -691,6 +711,22 @@ typedef NS_ENUM(NSUInteger, RCCustomerServiceStatus) {
 - (void)didTapUrlInMessageCell:(NSString *)url model:(RCMessageModel *)model;
 
 /*!
+ 点击撤回消息Cell中重新编辑的回调
+
+ @param model 消息Cell的数据模型
+
+ @discussion 点击撤回消息Cell中重新编辑，会调用此回调，不会再触发didTapMessageCell:。
+ */
+- (void)didTapReedit:(RCMessageModel *)model;
+
+/*!
+ 点击引用消息中被引用消息内容预览的回调
+
+ @param model 引用消息Cell的数据模型
+*/
+- (void)didTapReferencedContentView:(RCMessageModel *)model;
+
+/*!
  点击Cell中电话号码的回调
 
  @param phoneNumber 点击的电话号码
@@ -733,7 +769,7 @@ typedef NS_ENUM(NSUInteger, RCCustomerServiceStatus) {
 
  @discussion 如果设置为YES，在点击播放语音消息时，会将下面所有未播放过的语音消息依次播放。
  */
-@property(nonatomic, assign) BOOL enableContinuousReadUnreadVoice;
+@property (nonatomic, assign) BOOL enableContinuousReadUnreadVoice;
 
 /*!
  查看图片消息中的图片
@@ -749,7 +785,7 @@ typedef NS_ENUM(NSUInteger, RCCustomerServiceStatus) {
 
  @discussion 如果设置为YES，您需要在saveNewPhotoToLocalSystemAfterSendingSuccess:回调中自行保存。
  */
-@property(nonatomic, assign) BOOL enableSaveNewPhotoToLocalSystem;
+@property (nonatomic, assign) BOOL enableSaveNewPhotoToLocalSystem;
 
 /*!
  发送新拍照的图片完成之后，将图片在本地另行存储的回调
@@ -798,17 +834,18 @@ typedef NS_ENUM(NSUInteger, RCCustomerServiceStatus) {
 /*!
  用户的详细信息，此数据用于上传用户信息到客服后台，数据的nickName和portraitUrl必须填写。
  */
-@property(nonatomic, strong) RCCustomerServiceInfo *csInfo;
+@property (nonatomic, strong) RCCustomerServiceInfo *csInfo;
 
 /*!
 客服评价弹出时间，在客服页面停留超过这个时间，离开客服会弹出评价提示框，默认为60s
  */
-@property(nonatomic, assign) NSTimeInterval csEvaInterval;
+@property (nonatomic, assign) NSTimeInterval csEvaInterval;
 /*!
  评价客服服务,然后离开当前VC的。此方法有可能在离开客服会话页面触发，也可能是客服在后台推送评价触发，也可能用户点击机器人知识库评价触发。应用可以重写此方法来自定义客服评价界面。应用不要直接调用此方法。
 
  @param serviceStatus  当前的服务类型。
- @param commentId 评论ID。当是用户主动离开客服会话时，这个id是null；当客服在后台推送评价请求时，这个id是对话id；当用户点击机器人应答评价时，这个是机器人知识库id。
+ @param commentId
+ 评论ID。当是用户主动离开客服会话时，这个id是null；当客服在后台推送评价请求时，这个id是对话id；当用户点击机器人应答评价时，这个是机器人知识库id。
  @param isQuit         评价完成后是否离开
 
  @discussion
@@ -843,10 +880,10 @@ typedef NS_ENUM(NSUInteger, RCCustomerServiceStatus) {
 
 /*!
  客服通告
- 
+
  @param announceMsg  客服通告内容
  @param announceClickUrl  客服通告链接url
- 
+
  @discussion 此方法带回通告栏的展示内容及点击链接，须 App 自己实现
  */
 - (void)announceViewWillShow:(NSString *)announceMsg announceClickUrl:(NSString *)announceClickUrl;
@@ -862,4 +899,16 @@ typedef NS_ENUM(NSUInteger, RCCustomerServiceStatus) {
  */
 - (void)showChooseUserViewController:(void (^)(RCUserInfo *selectedUserInfo))selectedBlock
                               cancel:(void (^)(void))cancelBlock;
+
+/*!
+ 合并转发消息的回调
+
+ @param index            0 是逐条转发消息, 1 是合并转发消息。
+ @param completedBlock   返回需要转发到的会话的列表。
+
+ @discussion
+ 开发者如果想更换转发消息的选择会话界面，可以重写此方法，弹出自定义的选择会话界面，选择结束之后，调用completedBlock传入选中的会话即可。
+ */
+- (void)forwardMessage:(NSInteger)index completed:(void (^)(NSArray<RCConversation *> *conversationList))completedBlock;
+
 @end

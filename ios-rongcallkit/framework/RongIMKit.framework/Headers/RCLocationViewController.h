@@ -18,12 +18,12 @@
 /*!
  位置信息中的地理位置的二维坐标
  */
-@property(nonatomic, assign) CLLocationCoordinate2D location;
+@property (nonatomic, assign) CLLocationCoordinate2D location;
 
 /*!
  位置消息中的地理位置的名称
  */
-@property(nonatomic, copy) NSString *locationName;
+@property (nonatomic, copy) NSString *locationName;
 
 /*!
  返回按钮的点击事件

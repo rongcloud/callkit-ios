@@ -17,15 +17,15 @@
 /*!
  消息的背景View
  */
-@property(nonatomic, strong) UIImageView *bubbleBackgroundView __deprecated_msg("已废弃，请勿使用。");
+@property (nonatomic, strong) UIImageView *bubbleBackgroundView __deprecated_msg("已废弃，请勿使用。");
 /*!
  当前位置在地图中的概览图
  */
-@property(nonatomic, strong) UIImageView *pictureView;
+@property (nonatomic, strong) UIImageView *pictureView;
 
 /*!
  显示位置名称的Label
  */
-@property(nonatomic, strong) UILabel *locationNameLabel;
+@property (nonatomic, strong) UILabel *locationNameLabel;
 
 @end

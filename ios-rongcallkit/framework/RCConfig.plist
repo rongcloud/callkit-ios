@@ -19,9 +19,9 @@
 		<key>ImageQuality</key>
 		<real>0.85</real>
 		<key>ImageWidth</key>
-		<integer>960</integer>
+		<integer>1080</integer>
 		<key>ImageHeight</key>
-		<integer>960</integer>
+		<integer>1080</integer>
 	</dict>
 	<key>CustomerService</key>
 	<dict>

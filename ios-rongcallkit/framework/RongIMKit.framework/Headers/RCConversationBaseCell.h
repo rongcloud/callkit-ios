@@ -17,7 +17,7 @@
 /*!
  会话Cell的数据模型
  */
-@property(nonatomic, strong) RCConversationModel *model;
+@property (nonatomic, strong) RCConversationModel *model;
 
 /*!
  设置会话Cell的数据模型

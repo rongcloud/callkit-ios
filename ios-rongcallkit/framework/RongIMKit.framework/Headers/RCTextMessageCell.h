@@ -19,12 +19,12 @@
 /*!
  显示消息内容的Label
  */
-@property(strong, nonatomic) RCAttributedLabel *textLabel;
+@property (strong, nonatomic) RCAttributedLabel *textLabel;
 
 /*!
  消息的背景View
  */
-@property(nonatomic, strong) UIImageView *bubbleBackgroundView;
+@property (nonatomic, strong) UIImageView *bubbleBackgroundView;
 
 /*!
  设置当前消息Cell的数据模型

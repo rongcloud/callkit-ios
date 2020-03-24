@@ -12,8 +12,6 @@
 		390467F020738446007CE8DE /* UICollectionView+BackgroundView.h in Headers */ = {isa = PBXBuildFile; fileRef = 390467EE20738446007CE8DE /* UICollectionView+BackgroundView.h */; };
 		3933DF5C206117A100C80615 /* KxCallMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 3933DF5A206117A100C80615 /* KxCallMenu.m */; };
 		3933DF5D206117A100C80615 /* KxCallMenu.h in Headers */ = {isa = PBXBuildFile; fileRef = 3933DF5B206117A100C80615 /* KxCallMenu.h */; };
-		398680B9205E84D700B12F15 /* WhiteBoardWebView.h in Headers */ = {isa = PBXBuildFile; fileRef = 398680B7205E84D600B12F15 /* WhiteBoardWebView.h */; };
-		398680BA205E84D700B12F15 /* WhiteBoardWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 398680B8205E84D600B12F15 /* WhiteBoardWebView.m */; };
 		983FBC4220BD41010084841D /* RCVideoCollectionViewLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = 983FBC4020BD41010084841D /* RCVideoCollectionViewLayout.h */; };
 		983FBC4320BD41010084841D /* RCVideoCollectionViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 983FBC4120BD41010084841D /* RCVideoCollectionViewLayout.m */; };
 		98A609D120B56EB200BB5158 /* RCCallToolBar.h in Headers */ = {isa = PBXBuildFile; fileRef = 98A609CF20B56EB200BB5158 /* RCCallToolBar.h */; };
@@ -67,8 +65,6 @@
 		390467EE20738446007CE8DE /* UICollectionView+BackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UICollectionView+BackgroundView.h"; sourceTree = "<group>"; };
 		3933DF5A206117A100C80615 /* KxCallMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KxCallMenu.m; sourceTree = "<group>"; };
 		3933DF5B206117A100C80615 /* KxCallMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KxCallMenu.h; sourceTree = "<group>"; };
-		398680B7205E84D600B12F15 /* WhiteBoardWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WhiteBoardWebView.h; sourceTree = "<group>"; };
-		398680B8205E84D600B12F15 /* WhiteBoardWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WhiteBoardWebView.m; sourceTree = "<group>"; };
 		983FBC4020BD41010084841D /* RCVideoCollectionViewLayout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCVideoCollectionViewLayout.h; sourceTree = "<group>"; };
 		983FBC4120BD41010084841D /* RCVideoCollectionViewLayout.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCVideoCollectionViewLayout.m; sourceTree = "<group>"; };
 		98A609CF20B56EB200BB5158 /* RCCallToolBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCCallToolBar.h; sourceTree = "<group>"; };
@@ -155,8 +151,6 @@
 			children = (
 				98A609CF20B56EB200BB5158 /* RCCallToolBar.h */,
 				98A609D020B56EB200BB5158 /* RCCallToolBar.m */,
-				398680B7205E84D600B12F15 /* WhiteBoardWebView.h */,
-				398680B8205E84D600B12F15 /* WhiteBoardWebView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -326,7 +320,6 @@
 				A6BE1B201CCEFAAC00FF6BF7 /* RCCallMultiCallUserCell.h in Headers */,
 				9CE36FD6200F5FDC0068263B /* RCCXCall.h in Headers */,
 				F8235CDD1CE5B2A100C95B26 /* RCloudImageLoader.h in Headers */,
-				398680B9205E84D700B12F15 /* WhiteBoardWebView.h in Headers */,
 				A68AFAE91CCEFF5B00F16B3D /* RCCallDetailMessageCell.h in Headers */,
 				A6BE1B321CCEFAAC00FF6BF7 /* RCVideoMultiCallUserCollectionLayout.h in Headers */,
 				A68AFAEB1CCEFF5B00F16B3D /* RCCallTipMessageCell.h in Headers */,
@@ -384,6 +377,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 			);
 			mainGroup = A6BE1A441CCE561200FF6BF7;
@@ -436,7 +430,6 @@
 				A6BE1B391CCEFAAC00FF6BF7 /* RCCallFloatingBoard.m in Sources */,
 				9CE36FD7200F5FDC0068263B /* RCCXCall.m in Sources */,
 				A6BE1B2D1CCEFAAC00FF6BF7 /* RCCallSingleCallViewController.m in Sources */,
-				398680BA205E84D700B12F15 /* WhiteBoardWebView.m in Sources */,
 				A68AFAEA1CCEFF5B00F16B3D /* RCCallDetailMessageCell.m in Sources */,
 				F8D2904D1D2790E3002BFA65 /* RCCallKitExtensionModule.m in Sources */,
 				98A609D220B56EB200BB5158 /* RCCallToolBar.m in Sources */,
@@ -508,7 +501,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = YES;
-				DEFINES_MODULE = NO;
+				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -524,6 +517,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = staticlib;
+				MARKETING_VERSION = 2.10.5;
 				OTHER_CFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = cn.rongcloud.im;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -635,7 +629,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				DEFINES_MODULE = NO;
+				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -650,6 +644,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = staticlib;
+				MARKETING_VERSION = 2.10.5;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = cn.rongcloud.im;
@@ -669,7 +664,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = YES;
-				DEFINES_MODULE = NO;
+				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -685,6 +680,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = staticlib;
+				MARKETING_VERSION = 2.10.5;
 				OTHER_CFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = cn.rongcloud.im;
 				PRODUCT_NAME = "$(TARGET_NAME)";

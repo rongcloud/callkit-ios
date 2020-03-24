@@ -96,7 +96,7 @@ FOUNDATION_EXPORT NSString *const RCKitDispatchMessageReceiptRequestNotification
 @protocol RCIMUserInfoDataSource <NSObject>
 
 /*!
- 获取用户信息
+ SDK 的回调，用于向 App 获取用户信息
 
  @param userId      用户ID
  @param completion  获取用户信息完成之后需要执行的Block [userInfo:该用户ID对应的用户信息]
@@ -108,34 +108,31 @@ FOUNDATION_EXPORT NSString *const RCKitDispatchMessageReceiptRequestNotification
 
 @end
 
-
 /**
  公众号信息提供者
- 
+
  @discussion SDK 需要通过您实现的公众号信息提供者，获取公众号信息并显示。
  */
 @protocol RCIMPublicServiceProfileDataSource <NSObject>
 
-
 /**
- 获取公众号信息
+ SDK 的回调，用于向 App 获取公众号信息
 
  @param accountId 公众号 ID
  @param completion  获取公众号信息完成之后需要执行的 Block[profile: 该公众号 ID 对应的公众号信息]
- 
+
  @discussion SDK 通过此方法获取公众号信息并显示，请在 completion 中返回该公众号 ID 对应的公众号信息。
  在您设置了公众号信息提供者之后，SDK 在需要显示公众号信息的时候，会调用此方法，向您请求公众号信息用于显示。
  */
-- (void)getPublicServiceProfile:(NSString*)accountId completion:(void(^)(RCPublicServiceProfile* profile))completion;
-
+- (void)getPublicServiceProfile:(NSString *)accountId completion:(void (^)(RCPublicServiceProfile *profile))completion;
 
 /**
- 同步返回公众号信息
+ SDK 的回调，用于向 App 同步获取公众号信息
 
  @param accountId 公众号 ID
  @return 公众号信息
  */
-- (RCPublicServiceProfile*)publicServiceProfile:(NSString*)accountId;
+- (RCPublicServiceProfile *)publicServiceProfile:(NSString *)accountId;
 
 @end
 
@@ -147,7 +144,7 @@ FOUNDATION_EXPORT NSString *const RCKitDispatchMessageReceiptRequestNotification
 @protocol RCIMGroupInfoDataSource <NSObject>
 
 /*!
- 获取群组信息
+ SDK 的回调，用于向 App 获取群组信息
 
  @param groupId     群组ID
  @param completion  获取群组信息完成之后需要执行的Block [groupInfo:该群组ID对应的群组信息]
@@ -167,7 +164,7 @@ FOUNDATION_EXPORT NSString *const RCKitDispatchMessageReceiptRequestNotification
 @protocol RCIMGroupUserInfoDataSource <NSObject>
 
 /*!
- 获取用户在群组中的群名片信息
+ SDK 的回调，用于向 App 获取用户在群组中的群名片信息
 
  @param userId          用户ID
  @param groupId         群组ID
@@ -188,11 +185,11 @@ FOUNDATION_EXPORT NSString *const RCKitDispatchMessageReceiptRequestNotification
 @optional
 
 /*!
- 获取当前群组成员列表（需要实现用户信息提供者 RCIMUserInfoDataSource）
+ SDK 的回调，用于向 App 获取当前群组成员列表（需要实现用户信息提供者 RCIMUserInfoDataSource）
 
  @param groupId     群ID
  @param resultBlock 获取成功之后需要执行的Block [userIdList:群成员ID列表]
- 
+
  @discussion SDK通过此方法群组中的成员列表，请在resultBlock中返回该群组ID对应的群成员ID列表。
  在您设置了群组成员列表提供者之后，SDK在需要获取群组成员列表的时候，会调用此方法，向您请求群组成员用于显示。
  */
@@ -275,16 +272,16 @@ FOUNDATION_EXPORT NSString *const RCKitDispatchMessageReceiptRequestNotification
 
 /*!
  当 Kit 收到消息回调的方法
- 
+
  @param message 接收到的消息
  @return       YES 拦截, 不显示  NO: 不拦截, 显示此消息。
   此处只处理实时收到消息时，在界面上是否显示此消息。
   在重新加载会话页面时，不受此处逻辑控制。
   若要永久不显示此消息，需要从数据库删除该消息，在回调处理中调用 deleteMessages,
   否则在重新加载会话时会将此消息重新加载出来
- 
+
  @discussion 收到消息，会执行此方法。
- 
+
  */
 - (BOOL)interceptMessage:(RCMessage *)message;
 
@@ -313,37 +310,40 @@ FOUNDATION_EXPORT NSString *const RCKitDispatchMessageReceiptRequestNotification
 
 @end
 
-
 #pragma mark - 消息发送监听器
 
 /*!
  IMKit消息发送监听器
- 
+
  @discussion 设置IMKit的消息发送监听器，可以监听消息发送前以及消息发送后的结果。
- 
+
  @warning 如果您使用IMKit，可以设置并实现此Delegate监听消息发送；
  */
 @protocol RCIMSendMessageDelegate <NSObject>
 
 /*!
  准备发送消息的监听器
- 
+
  @param messageContent 消息内容
- 
+
  @return 修改后的消息内容
- 
- @discussion 此方法在消息准备向外发送时会执行，您可以在此方法中对消息内容进行过滤和修改等操作。如果此方法的返回值不为 nil，SDK 会对外发送返回的消息内容。如果您使用了RCConversationViewController 中的 willSendMessage: 方法，请不要重复使用此方法。选择其中一种方式实现您的需求即可。
+
+ @discussion 此方法在消息准备向外发送时会执行，您可以在此方法中对消息内容进行过滤和修改等操作。如果此方法的返回值不为
+ nil，SDK 会对外发送返回的消息内容。如果您使用了RCConversationViewController 中的 willSendMessage:
+ 方法，请不要重复使用此方法。选择其中一种方式实现您的需求即可。
  */
 - (RCMessageContent *)willSendIMMessage:(RCMessageContent *)messageContent;
 
 /*!
  发送消息完成的监听器
- 
+
  @param messageContent   消息内容
 
  @param status          发送状态，0表示成功，非0表示失败的错误码
- 
- @discussion 此方法在消息向外发送结束之后会执行。您可以通过此方法监听消息发送情况。如果您使用了 RCConversationViewController 中的 didSendMessage:content: 方法，请不要重复使用此方法。选择其中一种方式实现您的需求即可。
+
+ @discussion 此方法在消息向外发送结束之后会执行。您可以通过此方法监听消息发送情况。如果您使用了
+ RCConversationViewController 中的 didSendMessage:content:
+ 方法，请不要重复使用此方法。选择其中一种方式实现您的需求即可。
  */
 - (void)didSendIMMessage:(RCMessageContent *)messageContent status:(NSInteger)status;
 
@@ -413,6 +413,36 @@ FOUNDATION_EXPORT NSString *const RCKitDispatchMessageReceiptRequestNotification
           tokenIncorrect:(void (^)(void))tokenIncorrectBlock;
 
 /*!
+ 与融云服务器建立连接
+
+ @param token                   从您服务器端获取的token(用户身份令牌)
+ @param dbOpenedBlock                本地消息数据库打开的回调
+ @param successBlock            连接建立成功的回调 [userId:当前连接成功所用的用户ID
+ @param errorBlock              连接建立失败的回调 [status:连接失败的错误码]
+ @param tokenIncorrectBlock     token错误或者过期的回调
+
+ @discussion 在App整个生命周期，您只需要调用一次此方法与融云服务器建立连接。
+ 之后无论是网络出现异常或者App有前后台的切换等，SDK都会负责自动重连。
+ 除非您已经手动将连接断开，否则您不需要自己再手动重连。
+
+ tokenIncorrectBlock有两种情况：
+ 一是token错误，请您检查客户端初始化使用的AppKey和您服务器获取token使用的AppKey是否一致；
+ 二是token过期，是因为您在开发者后台设置了token过期时间，您需要请求您的服务器重新获取token并再次用新的token建立连接。
+
+ @warning 如果您使用IMKit，请使用此方法建立与融云服务器的连接；
+ 如果您使用IMLib，请使用RCIMClient中的同名方法建立与融云服务器的连接，而不要使用此方法。
+
+ 在tokenIncorrectBlock的情况下，您需要请求您的服务器重新获取token并建立连接，但是注意避免无限循环，以免影响App用户体验。
+
+ 此方法的回调并非为原调用线程，您如果需要进行UI操作，请注意切换到主线程。
+ */
+- (void)connectWithToken:(NSString *)token
+                dbOpened:(void (^)(RCDBErrorCode code))dbOpenedBlock
+                 success:(void (^)(NSString *userId))successBlock
+                   error:(void (^)(RCConnectErrorCode status))errorBlock
+          tokenIncorrect:(void (^)(void))tokenIncorrectBlock;
+
+/*!
  断开与融云服务器的连接
 
  @param isReceivePush   App在断开连接之后，是否还接收远程推送
@@ -468,7 +498,7 @@ FOUNDATION_EXPORT NSString *const RCKitDispatchMessageReceiptRequestNotification
  @warning 如果您使用IMKit，可以设置并实现此Delegate监听消息接收；
  如果您使用IMLib，请使用RCIMClient中的RCIMClientReceiveMessageDelegate监听消息接收，而不要使用此方法。
  */
-@property(nonatomic, weak) id<RCIMConnectionStatusDelegate> connectionStatusDelegate;
+@property (nonatomic, weak) id<RCIMConnectionStatusDelegate> connectionStatusDelegate;
 
 /*!
  获取当前SDK的连接状态
@@ -493,7 +523,7 @@ FOUNDATION_EXPORT NSString *const RCKitDispatchMessageReceiptRequestNotification
 
 #pragma mark 消息发送监听
 
-@property(nonatomic, weak) id<RCIMSendMessageDelegate> sendMessageDelegate;
+@property (nonatomic, weak) id<RCIMSendMessageDelegate> sendMessageDelegate;
 
 #pragma mark 消息发送
 /*!
@@ -674,7 +704,7 @@ FOUNDATION_EXPORT NSString *const RCKitDispatchMessageReceiptRequestNotification
  @warning 如果您使用IMKit，可以设置并实现此Delegate监听消息接收；
  如果您使用IMLib，请使用RCIMClient中的RCIMClientReceiveMessageDelegate监听消息接收，而不要使用此方法。
  */
-@property(nonatomic, weak) id<RCIMReceiveMessageDelegate> receiveMessageDelegate;
+@property (nonatomic, weak) id<RCIMReceiveMessageDelegate> receiveMessageDelegate;
 
 #pragma mark 消息通知提醒
 /*!
@@ -682,19 +712,19 @@ FOUNDATION_EXPORT NSString *const RCKitDispatchMessageReceiptRequestNotification
 
  @discussion 当App处于后台时，默认会弹出本地通知提示，您可以通过将此属性设置为YES，关闭所有的本地通知。
  */
-@property(nonatomic, assign) BOOL disableMessageNotificaiton;
+@property (nonatomic, assign) BOOL disableMessageNotificaiton;
 
 /*!
  是否关闭所有的前台消息提示音，默认值是NO
 
  @discussion 当App处于前台时，默认会播放消息提示音，您可以通过将此属性设置为YES，关闭所有的前台消息提示音。
  */
-@property(nonatomic, assign) BOOL disableMessageAlertSound;
+@property (nonatomic, assign) BOOL disableMessageAlertSound;
 
 /*!
- 是否开启发送输入状态，默认值是NO，开启之后在输入消息的时候对方可以看到正在输入的提示(目前只支持单聊)
+ 是否开启发送输入状态，默认值是 YES，开启之后在输入消息的时候对方可以看到正在输入的提示(目前只支持单聊)
  */
-@property(nonatomic, assign) BOOL enableTypingStatus;
+@property (nonatomic, assign) BOOL enableTypingStatus;
 
 /*!
  是否开启已读回执功能，默认值是NO
@@ -704,40 +734,50 @@ FOUNDATION_EXPORT NSString *const RCKitDispatchMessageReceiptRequestNotification
  @warning **已废弃，请勿使用。**
  升级说明:请使用enabledReadReceiptConversationTypeList，设置开启回执的会话类型
  */
-@property(nonatomic, assign) BOOL enableReadReceipt __deprecated_msg(
+@property (nonatomic, assign) BOOL enableReadReceipt __deprecated_msg(
     "已废弃，请使用enabledReadReceiptConversationTypeList，设置开启回执的会话类型。");
 
 /*!
- 开启已读回执功能的会话类型，默认为空
+ 开启已读回执功能的会话类型，默认为 单聊、群聊和讨论组
 
  @discussion 这些会话类型的消息在会话页面显示了之后会发送已读回执。目前仅支持单聊、群聊和讨论组。
+
+ OC 需转成 NSNumber 传入（例如 @[ @(ConversationType_PRIVATE) ]），
+ Swift 需获取到 rawValue 传入（例如 [ RCConversationType.ConversationType_PRIVATE.rawValue ]）。
  */
-@property(nonatomic, copy) NSArray *enabledReadReceiptConversationTypeList;
+@property (nonatomic, copy) NSArray *enabledReadReceiptConversationTypeList;
 
 /*!
- 是否开启多端同步未读状态的功能，默认值是NO
+ 设置群组、讨论组发送已读回执请求的有效时间，单位是秒，默认值是 120s。
+
+ @discussion 用户在群组或讨论组中发送消息，退出会话页面再次进入时，如果超过设置的时间，则不再显示已读回执的按钮。
+ */
+@property (nonatomic, assign) NSUInteger maxReadRequestDuration;
+
+/*!
+ 是否开启多端同步未读状态的功能，默认值是 YES
 
  @discussion 开启之后，用户在其他端上阅读过的消息，当前客户端会清掉该消息的未读数。目前仅支持单聊、群聊、讨论组。
  */
-@property(nonatomic, assign) BOOL enableSyncReadStatus;
+@property (nonatomic, assign) BOOL enableSyncReadStatus;
 
 /*!
- 是否开启消息@提醒功能（只支持群聊和讨论组, App需要实现群成员数据源groupMemberDataSource），默认值是NO。
+ 是否开启消息@提醒功能（只支持群聊和讨论组, App需要实现群成员数据源groupMemberDataSource），默认值是 YES。
  */
-@property(nonatomic, assign) BOOL enableMessageMentioned;
+@property (nonatomic, assign) BOOL enableMessageMentioned;
 
 /*!
- 是否开启消息撤回功能，默认值是NO。
+ 是否开启消息撤回功能，默认值是 YES。
  */
-@property(nonatomic, assign) BOOL enableMessageRecall;
+@property (nonatomic, assign) BOOL enableMessageRecall;
 
 /*!
  消息可撤回的最大时间，单位是秒，默认值是120s。
  */
-@property(nonatomic, assign) NSUInteger maxRecallDuration;
+@property (nonatomic, assign) NSUInteger maxRecallDuration;
 
 /*!
- 是否在会话页面和会话列表界面显示未注册的消息类型，默认值是NO
+ 是否在会话页面和会话列表界面显示未注册的消息类型，默认值是 YES
 
  @discussion App不断迭代开发，可能会在以后的新版本中不断增加某些自定义类型的消息，但是已经发布的老版本无法识别此类消息。
  针对这种情况，可以预先定义好未注册的消息的显示，以提升用户体验（如提示当前版本不支持，引导用户升级版本等）
@@ -745,7 +785,7 @@ FOUNDATION_EXPORT NSString *const RCKitDispatchMessageReceiptRequestNotification
  未注册的消息，可以通过RCConversationViewController中的rcUnkownConversationCollectionView:cellForItemAtIndexPath:和rcUnkownConversationCollectionView:layout:sizeForItemAtIndexPath:方法定制在会话页面的显示。
  未注册的消息，可以通过修改unknown_message_cell_tip字符串资源定制在会话列表界面的显示。
  */
-@property(nonatomic, assign) BOOL showUnkownMessage;
+@property (nonatomic, assign) BOOL showUnkownMessage;
 
 /*!
  未注册的消息类型是否显示本地通知，默认值是NO
@@ -754,15 +794,17 @@ FOUNDATION_EXPORT NSString *const RCKitDispatchMessageReceiptRequestNotification
  针对这种情况，可以预先定义好未注册的消息的显示，以提升用户体验（如提示当前版本不支持，引导用户升级版本等）
 
  未注册的消息，可以通过修改unknown_message_notification_tip字符串资源定制本地通知的显示。
+
+ @warning **已废弃，请勿使用。**
  */
-@property(nonatomic, assign) BOOL showUnkownMessageNotificaiton;
+@property (nonatomic, assign) BOOL showUnkownMessageNotificaiton __deprecated_msg("已废弃，请勿使用");
 
 /*!
  语音消息的最大长度
 
  @discussion 默认值是60s，有效值为不小于5秒，不大于60秒
  */
-@property(nonatomic, assign) NSUInteger maxVoiceDuration;
+@property (nonatomic, assign) NSUInteger maxVoiceDuration;
 
 /*!
  APP是否独占音频
@@ -771,14 +813,14 @@ FOUNDATION_EXPORT NSString *const RCKitDispatchMessageReceiptRequestNotification
  恢复其他后台APP播放的声音，如果设置成YES,不会调用 setActive:NO，这样不会中断当前APP播放的声音
  (如果当前APP 正在播放音频，这时候如果调用SDK 的录音，可以设置这里为YES)
  */
-@property(nonatomic, assign) BOOL isExclusiveSoundPlayer;
+@property (nonatomic, assign) BOOL isExclusiveSoundPlayer;
 
 /*!
  选择媒体资源时，是否包含视频文件，默认值是NO
- 
+
  @discussion 默认是不包含
  */
-@property(nonatomic, assign) BOOL isMediaSelectorContainVideo;
+@property (nonatomic, assign) BOOL isMediaSelectorContainVideo;
 
 #pragma mark - 讨论组相关操作
 
@@ -890,7 +932,7 @@ FOUNDATION_EXPORT NSString *const RCKitDispatchMessageReceiptRequestNotification
 
  @warning 如果传入的用户信息中的用户ID与当前登录的用户ID不匹配，则将会忽略。
  */
-@property(nonatomic, strong) RCUserInfo *currentUserInfo;
+@property (nonatomic, strong) RCUserInfo *currentUserInfo;
 
 /*!
  是否将用户信息和群组信息在本地持久化存储，默认值为NO
@@ -899,7 +941,7 @@ FOUNDATION_EXPORT NSString *const RCKitDispatchMessageReceiptRequestNotification
  如果设置为NO，则SDK在需要显示用户信息时，会调用用户信息提供者获取用户信息并缓存到Cache，此Cache在App生命周期结束时会被移除，下次启动时会再次通过用户信息提供者获取信息。
  如果设置为YES，则会将获取到的用户信息持久化存储在本地，App下次启动时Cache会仍然有效。
  */
-@property(nonatomic, assign) BOOL enablePersistentUserInfoCache;
+@property (nonatomic, assign) BOOL enablePersistentUserInfoCache;
 
 /*!
  是否在发送的所有消息中携带当前登录的用户信息，默认值为NO
@@ -910,7 +952,7 @@ FOUNDATION_EXPORT NSString *const RCKitDispatchMessageReceiptRequestNotification
 
  @warning 需要先设置当前登录用户的用户信息，参考RCIM的currentUserInfo。
  */
-@property(nonatomic, assign) BOOL enableMessageAttachUserInfo;
+@property (nonatomic, assign) BOOL enableMessageAttachUserInfo;
 
 #pragma mark 用户信息
 
@@ -919,7 +961,7 @@ FOUNDATION_EXPORT NSString *const RCKitDispatchMessageReceiptRequestNotification
 
  @discussion SDK需要通过您实现的用户信息提供者，获取用户信息并显示。
  */
-@property(nonatomic, weak) id<RCIMUserInfoDataSource> userInfoDataSource;
+@property (nonatomic, weak) id<RCIMUserInfoDataSource> userInfoDataSource;
 
 /*!
  更新SDK中的用户信息缓存
@@ -956,7 +998,7 @@ FOUNDATION_EXPORT NSString *const RCKitDispatchMessageReceiptRequestNotification
 
  @discussion SDK需要通过您实现的群组信息提供者，获取群组信息并显示。
  */
-@property(nonatomic, weak) id<RCIMGroupInfoDataSource> groupInfoDataSource;
+@property (nonatomic, weak) id<RCIMGroupInfoDataSource> groupInfoDataSource;
 
 /*!
  更新SDK中的群组信息缓存
@@ -994,7 +1036,7 @@ FOUNDATION_EXPORT NSString *const RCKitDispatchMessageReceiptRequestNotification
 
  @discussion 如果您使用了群名片功能，SDK需要通过您实现的群名片信息提供者，获取用户在群组中的名片信息并显示。
  */
-@property(nonatomic, weak) id<RCIMGroupUserInfoDataSource> groupUserInfoDataSource;
+@property (nonatomic, weak) id<RCIMGroupUserInfoDataSource> groupUserInfoDataSource;
 
 /*!
  获取SDK中缓存的群名片信息
@@ -1034,7 +1076,7 @@ FOUNDATION_EXPORT NSString *const RCKitDispatchMessageReceiptRequestNotification
 
  @discussion 如果您使用了@功能，SDK需要通过您实现的群用户成员提供者，获取群组中的用户列表。
  */
-@property(nonatomic, weak) id<RCIMGroupMemberDataSource> groupMemberDataSource;
+@property (nonatomic, weak) id<RCIMGroupMemberDataSource> groupMemberDataSource;
 
 #pragma mark 高质量语音消息自动下载
 
@@ -1043,17 +1085,16 @@ FOUNDATION_EXPORT NSString *const RCKitDispatchMessageReceiptRequestNotification
 
  @discussion 默认为 YES
  */
-@property(nonatomic, assign) BOOL automaticDownloadHQVoiceMsgEnable;
-
+@property (nonatomic, assign) BOOL automaticDownloadHQVoiceMsgEnable;
 
 #pragma mark - 公众号信息提供者
 
 /*!
  公众号信息提供者
- 
+
  @discussion SDK需要通过您实现公众号信息提供者，获取公众号信息并显示。
  */
-@property (nonatomic,weak) id <RCIMPublicServiceProfileDataSource> publicServiceInfoDataSource;
+@property (nonatomic, weak) id<RCIMPublicServiceProfileDataSource> publicServiceInfoDataSource;
 
 #pragma mark 头像显示
 
@@ -1062,35 +1103,35 @@ FOUNDATION_EXPORT NSString *const RCKitDispatchMessageReceiptRequestNotification
 
  @discussion 默认值为[UIColor whiteColor]
  */
-@property(nonatomic, strong) UIColor *globalNavigationBarTintColor;
+@property (nonatomic, strong) UIColor *globalNavigationBarTintColor;
 
 /*!
  SDK会话列表界面中显示的头像形状，矩形或者圆形
 
  @discussion 默认值为矩形，即RC_USER_AVATAR_RECTANGLE
  */
-@property(nonatomic) RCUserAvatarStyle globalConversationAvatarStyle;
+@property (nonatomic) RCUserAvatarStyle globalConversationAvatarStyle;
 
 /*!
  SDK会话列表界面中显示的头像大小，高度必须大于或者等于36
 
  @discussion 默认值为46*46
  */
-@property(nonatomic) CGSize globalConversationPortraitSize;
+@property (nonatomic) CGSize globalConversationPortraitSize;
 
 /*!
  SDK会话页面中显示的头像形状，矩形或者圆形
 
  @discussion 默认值为矩形，即RC_USER_AVATAR_RECTANGLE
  */
-@property(nonatomic) RCUserAvatarStyle globalMessageAvatarStyle;
+@property (nonatomic) RCUserAvatarStyle globalMessageAvatarStyle;
 
 /*!
  SDK会话页面中显示的头像大小
 
  @discussion 默认值为40*40
  */
-@property(nonatomic) CGSize globalMessagePortraitSize;
+@property (nonatomic) CGSize globalMessagePortraitSize;
 
 /*!
  SDK会话列表界面和会话页面的头像的圆角曲率半径
@@ -1098,7 +1139,7 @@ FOUNDATION_EXPORT NSString *const RCKitDispatchMessageReceiptRequestNotification
  @discussion 默认值为4，只有当头像形状设置为矩形时才会生效。
  参考RCIM的globalConversationAvatarStyle和globalMessageAvatarStyle。
  */
-@property(nonatomic) CGFloat portraitImageViewCornerRadius;
+@property (nonatomic) CGFloat portraitImageViewCornerRadius;
 
 #pragma mark - 网页展示模式
 /*!
@@ -1109,7 +1150,7 @@ FOUNDATION_EXPORT NSString *const RCKitDispatchMessageReceiptRequestNotification
  如果设置为NO，将优先使用SFSafariViewController，在iOS 8及之前的系统中使用WebView，在审核的时候不需要提供额外说明。
  更多内容可以参考：https://developer.apple.com/library/content/documentation/General/Reference/InfoPlistKeyReference/Articles/CocoaKeys.html#//apple_ref/doc/uid/TP40009251-SW55
  */
-@property(nonatomic, assign) BOOL embeddedWebViewPreferred;
+@property (nonatomic, assign) BOOL embeddedWebViewPreferred;
 
 #pragma mark - Extension module
 /*!
@@ -1118,7 +1159,7 @@ FOUNDATION_EXPORT NSString *const RCKitDispatchMessageReceiptRequestNotification
  @param moduleName  Extension module name
 
  @discussion
- 有些第三方扩展（比如红包）需要打开其他应用（比如使用支付宝进行支付），然后等待返回结果。因此首先要为第三方扩展设置一个URL
+ 有些第三方扩展需要打开其他应用（比如使用支付宝进行支付），然后等待返回结果。因此首先要为第三方扩展设置一个URL
  scheme并加入到info.plist中，然后再告诉该扩展模块scheme。
  */
 - (void)setScheme:(NSString *)scheme forExtensionModule:(NSString *)moduleName;
@@ -1130,4 +1171,39 @@ FOUNDATION_EXPORT NSString *const RCKitDispatchMessageReceiptRequestNotification
  @return        YES处理，NO未处理。
  */
 - (BOOL)openExtensionModuleUrl:(NSURL *)url;
+
+/**
+ GIF 消息自动下载的大小 size, 单位 KB
+ */
+@property (nonatomic, assign) NSInteger GIFMsgAutoDownloadSize;
+
+/*!
+ 是否开启合并转发功能，默认值是NO，开启之后可以合并转发消息(目前只支持单聊和群聊)
+ */
+@property (nonatomic, assign) BOOL enableSendCombineMessage;
+
+/*!
+ 是否开启阅后即焚功能，默认值是NO，开启之后可以在聊天页面扩展板中使用阅后即焚功能(目前只支持单聊)
+
+ @discussion 目前 IMKit 仅支持文本、语音、图片、小视频消息。
+ */
+@property (nonatomic, assign) BOOL enableBurnMessage;
+
+/*!
+是否支持暗黑模式，默认值是NO，开启之后 UI 支持暗黑模式，可以跟随系统切换
+*/
+@property (nonatomic, assign) BOOL enableDarkMode;
+
+/*!
+ 消息撤回后可重新编辑的时间，单位是秒，默认值是 300s。
+
+ @discussion 目前消息撤回后重新编辑仅为本地操作，卸载重装或者更换设备不会同步。
+ */
+@property (nonatomic, assign) NSUInteger reeditDuration;
+
+/*!
+是否支持消息引用功能，默认值是NO，开启之后，聊天页面长按消息支持引用（目前仅支持文本消息、文件消息、图文消息、图片消息、引用消息的引用）
+*/
+@property (nonatomic, assign) BOOL enableMessageReference;
+
 @end

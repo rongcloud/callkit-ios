@@ -27,17 +27,17 @@
 /*!
  wav格式的音频数据
  */
-@property(nonatomic, strong) NSData *wavAudioData;
+@property (nonatomic, strong) NSData *wavAudioData;
 
 /*!
  语音消息的时长
  */
-@property(nonatomic, assign) long duration;
+@property (nonatomic, assign) long duration;
 
 /*!
  语音消息的附加信息
  */
-@property(nonatomic, copy) NSString *extra;
+@property (nonatomic, copy) NSString *extra;
 
 /*!
  初始化语音消息

@@ -193,6 +193,14 @@
 
 - (void)whiteBoardButtonClicked;
 
+/*!
+ 点击接听按钮
+*/
+- (void)acceptButtonClicked;
+
+/*!
+ 点击挂断按钮
+*/
 - (void)hangupButtonClicked;
 
 #pragma mark - 初始化

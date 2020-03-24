@@ -103,19 +103,26 @@
             if (userModel.profile.blinkUserType != 2)
                 [self.subUserModelList addObject:userModel];
         } else {
-            self.mainModel = [self generateUserModel:currentUserId];
+            self.mainModel = [self generateUserModel:self.callSession.inviter];
             [self.callSession setVideoView:self.backgroundView userId:self.mainModel.userId];
 
             self.subUserModelList = [[NSMutableArray alloc] init];
+            BOOL isContaitSelf = NO;
             for (RCCallUserProfile *userProfile in self.callSession.userProfileList) {
                 if (![userProfile.userId isEqualToString:self.callSession.inviter] && userProfile.blinkUserType != 2) {
                     RCCallUserCallInfoModel *userModel = [self generateUserModel:userProfile.userId];
                     [self.subUserModelList addObject:userModel];
                 }
+                if ([userProfile.userId isEqualToString:currentUserId]) {
+                    isContaitSelf = YES;
+                }
             }
-            RCCallUserCallInfoModel *userModel = [self generateUserModel:self.callSession.inviter];
-            if (userModel.profile.blinkUserType != 2)
-                [self.subUserModelList addObject:userModel];
+            
+            if (!isContaitSelf) {
+                RCCallUserCallInfoModel *userModel = [self generateUserModel:currentUserId];
+                if (userModel.profile.blinkUserType != 2)
+                    [self.subUserModelList addObject:userModel];
+            }
         }
     } else if (self.callSession.callStatus == RCCallDialing) {
         self.mainModel = [self generateUserModel:currentUserId];
@@ -392,8 +399,7 @@
     [existUserIdList addObject:currentUserId];
 
     __weak typeof(self) weakSelf = self;
-    BOOL useExternalSignalServer = (self.callSession.conversationType == 0 && self.callSession.targetId == nil);
-    if ([RCCall sharedRCCall].callInviteNewUserDelegate &&[[RCCall sharedRCCall].callInviteNewUserDelegate respondsToSelector:@selector(inviteNewUser:BaseOn:selectResult:)] && useExternalSignalServer) {
+    if ([RCCall sharedRCCall].callInviteNewUserDelegate &&[[RCCall sharedRCCall].callInviteNewUserDelegate respondsToSelector:@selector(inviteNewUser:BaseOn:selectResult:)]) {
         [[RCCall sharedRCCall].callInviteNewUserDelegate inviteNewUser:existUserIdList BaseOn:self selectResult:^(NSArray<NSString *> *userIdList) {
             [weakSelf.callSession inviteRemoteUsers:userIdList mediaType:weakSelf.mediaType];
         }];

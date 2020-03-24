@@ -29,22 +29,22 @@
 /*!
  地理位置的二维坐标
  */
-@property(nonatomic, assign) CLLocationCoordinate2D location;
+@property (nonatomic, assign) CLLocationCoordinate2D location;
 
 /*!
  地理位置的名称
  */
-@property(nonatomic, copy) NSString *locationName;
+@property (nonatomic, copy) NSString *locationName;
 
 /*!
  地理位置的缩略图
  */
-@property(nonatomic, strong) UIImage *thumbnailImage;
+@property (nonatomic, strong) UIImage *thumbnailImage;
 
 /*!
  地理位置的附加信息
  */
-@property(nonatomic, copy) NSString *extra;
+@property (nonatomic, copy) NSString *extra;
 
 /*!
  初始化地理位置消息

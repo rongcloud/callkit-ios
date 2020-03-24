@@ -56,6 +56,9 @@
 - (NSArray<RCExtensionPluginItemInfo *> *)getPluginBoardItemInfoList:(RCConversationType)conversationType
                                                             targetId:(NSString *)targetId {
     NSMutableArray *itemList = [[NSMutableArray alloc] init];
+    if ([targetId isEqualToString:[RCIMClient sharedRCIMClient].currentUserInfo.userId]) {
+        return itemList;
+    }
 
     if ([[RCCall sharedRCCall] isAudioCallEnabled:conversationType]) {
         RCExtensionPluginItemInfo *audioItem = [[RCExtensionPluginItemInfo alloc] init];

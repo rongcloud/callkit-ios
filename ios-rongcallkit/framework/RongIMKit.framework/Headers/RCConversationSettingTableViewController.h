@@ -22,27 +22,27 @@
 
 @discussion 内置置顶聊天、新消息通、清除消息记录三个cell
 */
-@property(nonatomic, strong, readonly) NSArray *defaultCells;
+@property (nonatomic, strong, readonly) NSArray *defaultCells;
 
 /*!
  是否隐藏顶部视图
  */
-@property(nonatomic, assign) BOOL headerHidden;
+@property (nonatomic, assign) BOOL headerHidden;
 
 /*!
  是否将该会话置顶
  */
-@property(nonatomic, assign) BOOL switch_isTop;
+@property (nonatomic, assign) BOOL switch_isTop;
 
 /*!
  是否接收新通知提醒
  */
-@property(nonatomic, assign) BOOL switch_newMessageNotify;
+@property (nonatomic, assign) BOOL switch_newMessageNotify;
 
 /*!
  顶部视图显示的用户的用户信息RCUserInfo列表
  */
-@property(nonatomic, strong) NSArray *users;
+@property (nonatomic, strong) NSArray *users;
 
 /*!
  禁止删除用户

@@ -13,16 +13,16 @@
 /*!
  是否需要回执消息
  */
-@property(nonatomic, assign) BOOL isReceiptRequestMessage;
+@property (nonatomic, assign) BOOL isReceiptRequestMessage;
 
 /**
  *  是否已经发送回执
  */
-@property(nonatomic, assign) BOOL hasRespond;
+@property (nonatomic, assign) BOOL hasRespond;
 
 /*!
  发送回执的用户ID列表
  */
-@property(nonatomic, strong) NSMutableDictionary *userIdList;
+@property (nonatomic, strong) NSMutableDictionary *userIdList;
 
 @end

@@ -96,7 +96,9 @@ UIColor* dynamic_color(NSInteger light_hex_value, NSInteger dark_hex_value) {
     case RCCallDisconnectReasonAcceptByOtherClient:
         hangupReasonString = NSLocalizedStringFromTable(@"VoIPCallAcceptByOtherClient", @"RongCloudKit", nil);
         break;
-
+    case RCCallDisconnectReasonKickedByServer:
+        hangupReasonString = NSLocalizedStringFromTable(@"VoIPCallKickedByServer", @"RongCloudKit", nil);
+        break;
     default:
         break;
     }
@@ -119,7 +121,7 @@ UIColor* dynamic_color(NSInteger light_hex_value, NSInteger dark_hex_value) {
     	hangupReasonString = NSLocalizedStringFromTable(@"VoIPCallLocalNetworkError", @"RongCloudKit", nil);
         break;
     case RCCallDisconnectReasonRemoteNetworkError:
-        hangupReasonString = NSLocalizedStringFromTable(@"VoIPCallRemoteNoResponse", @"RongCloudKit", nil);
+        hangupReasonString = NSLocalizedStringFromTable(@"VoIPCallRemoteNetworkError", @"RongCloudKit", nil);
         break;
     case RCCallDisconnectReasonAddToBlackList:
         hangupReasonString = NSLocalizedStringFromTable(@"VoIPCallHasReject", @"RongCloudKit", nil);

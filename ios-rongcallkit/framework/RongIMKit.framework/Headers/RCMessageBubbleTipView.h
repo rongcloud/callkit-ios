@@ -58,63 +58,63 @@ typedef NS_ENUM(NSInteger, RCMessageBubbleTipViewAlignment) {
 /*!
  角标显示的文本
  */
-@property(nonatomic, copy) NSString *bubbleTipText;
+@property (nonatomic, copy) NSString *bubbleTipText;
 
 /*!
  角标的位置
 
  @discussion 默认值为RC_MESSAGE_BUBBLE_TIP_VIEW_ALIGNMENT_TOP_RIGHT，即右上。
  */
-@property(nonatomic, assign) RCMessageBubbleTipViewAlignment bubbleTipAlignment;
+@property (nonatomic, assign) RCMessageBubbleTipViewAlignment bubbleTipAlignment;
 
 /*!
  角标文本的颜色
  */
-@property(nonatomic, strong) UIColor *bubbleTipTextColor;
+@property (nonatomic, strong) UIColor *bubbleTipTextColor;
 
 /*!
  角标文本的阴影值
  */
-@property(nonatomic, assign) CGSize bubbleTipTextShadowOffset;
+@property (nonatomic, assign) CGSize bubbleTipTextShadowOffset;
 
 /*!
  角标文本的阴影颜色
  */
-@property(nonatomic, strong) UIColor *bubbleTipTextShadowColor;
+@property (nonatomic, strong) UIColor *bubbleTipTextShadowColor;
 
 /*!
  角标文本的字体
  */
-@property(nonatomic, strong) UIFont *bubbleTipTextFont;
+@property (nonatomic, strong) UIFont *bubbleTipTextFont;
 
 /*!
  角标的背景颜色
  */
-@property(nonatomic, strong) UIColor *bubbleTipBackgroundColor;
+@property (nonatomic, strong) UIColor *bubbleTipBackgroundColor;
 
 /*!
  角标的覆盖颜色（已废弃，请勿使用）
 
  @warning **已废弃，请勿使用。**
  */
-@property(nonatomic, strong) __deprecated_msg("已废弃，请勿使用。") UIColor *bubbleTipOverlayColor;
+@property (nonatomic, strong) __deprecated_msg("已废弃，请勿使用。") UIColor *bubbleTipOverlayColor;
 
 /*!
  角标View偏移的Rect
  */
-@property(nonatomic, assign) CGPoint bubbleTipPositionAdjustment;
+@property (nonatomic, assign) CGPoint bubbleTipPositionAdjustment;
 
 /*!
  角标依附于的View Rect
  */
-@property(nonatomic, assign) CGRect frameToPositionInRelationWith;
+@property (nonatomic, assign) CGRect frameToPositionInRelationWith;
 
 /*!
  角标是否显示数字
 
  @discussion 如果为NO，会显示红点，不显示具体数字。
  */
-@property(nonatomic) BOOL isShowNotificationNumber;
+@property (nonatomic) BOOL isShowNotificationNumber;
 
 /*!
  初始化角标View
