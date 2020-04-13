@@ -94,13 +94,13 @@
 
             self.subUserModelList = [[NSMutableArray alloc] init];
             for (RCCallUserProfile *userProfile in self.callSession.userProfileList) {
-                if (![userProfile.userId isEqualToString:firstUserProfile.userId] && userProfile.blinkUserType != 2) {
+                if (![userProfile.userId isEqualToString:firstUserProfile.userId] && userProfile.userType != 2) {
                     RCCallUserCallInfoModel *userModel = [self generateUserModel:userProfile.userId];
                     [self.subUserModelList addObject:userModel];
                 }
             }
             RCCallUserCallInfoModel *userModel = [self generateUserModel:currentUserId];
-            if (userModel.profile.blinkUserType != 2)
+            if (userModel.profile.userType != 2)
                 [self.subUserModelList addObject:userModel];
         } else {
             self.mainModel = [self generateUserModel:self.callSession.inviter];
@@ -109,7 +109,7 @@
             self.subUserModelList = [[NSMutableArray alloc] init];
             BOOL isContaitSelf = NO;
             for (RCCallUserProfile *userProfile in self.callSession.userProfileList) {
-                if (![userProfile.userId isEqualToString:self.callSession.inviter] && userProfile.blinkUserType != 2) {
+                if (![userProfile.userId isEqualToString:self.callSession.inviter] && userProfile.userType != 2) {
                     RCCallUserCallInfoModel *userModel = [self generateUserModel:userProfile.userId];
                     [self.subUserModelList addObject:userModel];
                 }
@@ -120,7 +120,7 @@
             
             if (!isContaitSelf) {
                 RCCallUserCallInfoModel *userModel = [self generateUserModel:currentUserId];
-                if (userModel.profile.blinkUserType != 2)
+                if (userModel.profile.userType != 2)
                     [self.subUserModelList addObject:userModel];
             }
         }
@@ -130,7 +130,7 @@
 
         self.subUserModelList = [[NSMutableArray alloc] init];
         for (RCCallUserProfile *userProfile in self.callSession.userProfileList) {
-            if (userProfile.blinkUserType != 2)
+            if (userProfile.userType != 2)
             {
                 RCCallUserCallInfoModel *userModel = [self generateUserModel:userProfile.userId];
                 [self.subUserModelList addObject:userModel];
@@ -143,7 +143,7 @@
 
             self.subUserModelList = [[NSMutableArray alloc] init];
             for (RCCallUserProfile *userProfile in self.callSession.userProfileList) {
-                if (userProfile.blinkUserType != 2)
+                if (userProfile.userType != 2)
                 {
                 RCCallUserCallInfoModel *userModel = [self generateUserModel:userProfile.userId];
                 [self.subUserModelList addObject:userModel];
@@ -155,13 +155,13 @@
 
             self.subUserModelList = [[NSMutableArray alloc] init];
             for (RCCallUserProfile *userProfile in self.callSession.userProfileList) {
-                if (![userProfile.userId isEqualToString:self.callSession.inviter] && userProfile.blinkUserType != 2) {
+                if (![userProfile.userId isEqualToString:self.callSession.inviter] && userProfile.userType != 2) {
                     RCCallUserCallInfoModel *userModel = [self generateUserModel:userProfile.userId];
                     [self.subUserModelList addObject:userModel];
                 }
             }
             RCCallUserCallInfoModel *userModel = [self generateUserModel:currentUserId];
-            if (userModel.profile.blinkUserType != 2)
+            if (userModel.profile.userType != 2)
                 [self.subUserModelList addObject:userModel];
         }
     }
@@ -243,7 +243,7 @@
     if (model.userId && ![[self getAllUserIdInSubUserModel] containsObject:model.userId]) {
         NSInteger index = self.subUserModelList.count;
         NSIndexPath *indexPath = [NSIndexPath indexPathForItem:index inSection:0];
-        if (model.profile.blinkUserType != 2) {
+        if (model.profile.userType != 2) {
             [self.subUserModelList addObject:model];
             [self.userCollectionView insertItemsAtIndexPaths:[NSArray arrayWithObject:indexPath]];
         }

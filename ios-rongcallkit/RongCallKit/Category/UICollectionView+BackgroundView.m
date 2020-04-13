@@ -21,31 +21,25 @@ static NSString *key = @"UICollectionView_BackgroundView";
     
     NSInteger userCellCount = [self.callVideoMultiCallViewController.subUserModelList count];
     UIView *touchView = self;
-    if ([self pointInside:point withEvent:event] && self.alpha >= 0.01 && !self.hidden && self.isUserInteractionEnabled)
-    {
-        if ([self isTouchEnable:userCellCount withPoint:point])
-        {
+    if ([self pointInside:point withEvent:event] && self.alpha >= 0.01 && !self.hidden && self.isUserInteractionEnabled) {
+        if ([self isTouchEnable:userCellCount withPoint:point]) {
             return nil;
         }
 
-        if ([self.subviews count] > 0)
-        {
-            for (NSInteger i = ([self.subviews count] - 1); i >= 0; --i)
-            {
+        if ([self.subviews count] > 0) {
+            for (NSInteger i = ([self.subviews count] - 1); i >= 0; --i) {
                 UIView *subView = self.subviews[i];
                 CGPoint subPoint = CGPointMake(point.x - subView.frame.origin.x,
                                                point.y - subView.frame.origin.y);
                 UIView *subTouchView = [subView hitTest:subPoint withEvent:event];
-                if (subTouchView)
-                {
+                if (subTouchView) {
                     touchView = subTouchView;
                     break;
                 }
             }
         }
     }
-    else
-    {
+    else {
         touchView = nil;
     }
 
@@ -71,31 +65,16 @@ static NSString *key = @"UICollectionView_BackgroundView";
 {
     if (self.tag != 202872)
         return NO;
-    switch (count) {
-        case 0:
-            return YES;
-        default:
-        {
-            if (point.x <= 10.0 + 84 * count) {
-//                CGFloat nowWidth = 84.0 * count+ (10.0 * (count - 1)) + 20.0  ;
-//                if (nowWidth < UIScreen.mainScreen.bounds.size.width) {
-//                    if (point.x < UIScreen.mainScreen.bounds.size.width - nowWidth) {
-//                        return YES;
-//                    }else{
-//                        return NO;
-//                    }
-//                }else{
-//                    if (point.x < 20.0) {
-//                        return YES;
-//                    }else{
-//                        return NO;
-//                    }
-//                }
-                
-                return NO;
-            }else
-                return YES;
-        }
+    
+    if (!count) {
+        return YES;
+    }
+    
+    if (point.x <= 10.0 + 84 * count) {
+        return NO;
+    }
+    else {
+        return YES;
     }
     
     return NO;
