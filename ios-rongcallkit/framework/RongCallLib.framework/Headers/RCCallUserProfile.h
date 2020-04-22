@@ -68,12 +68,17 @@
 @property(nonatomic, strong) UIView *videoView;
 
 /*!
- Blink音视频用户类型
+ 音视频用户类型
  */
-@property(nonatomic, assign) NSInteger blinkUserType;
+@property(nonatomic, assign) NSInteger blinkUserType DEPRECATED_MSG_ATTRIBUTE("即将废弃, 请使用 userType");
 
 /*!
- Blink音频主叫接通前声音输出 Yes:外放 NO:听筒
+ 音视频用户类型
+*/
+@property(nonatomic, assign) RCCallUserType userType;
+
+/*!
+ 音频主叫接通前声音输出 Yes:外放 NO:听筒
  */
 @property(nonatomic, assign) BOOL isSpeakerInAudioMode;
 
@@ -90,9 +95,12 @@
  @param mediaType  用户所使用的媒体类型
  @param callStatus 用户的通话状态
  @param startTime  收到通话呼入的时间
-
+ @discussion
+ 初始化用户的通话状态
+ 
+ @remarks 通话设置
  @return 用户的通话状态对象
- */
+*/
 - (instancetype)initWithUserId:(NSString *)userId
                        mediaId:(NSString *)mediaId
                      mediaType:(RCCallMediaType)mediaType

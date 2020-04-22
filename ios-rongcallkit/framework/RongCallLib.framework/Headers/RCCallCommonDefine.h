@@ -29,11 +29,12 @@ typedef NS_ENUM(NSInteger, RCCallEngineType) {
      Blink
      */
     RCCallEngineBlink = 3,
-	/*!
+    /*!
      RTC3.0
      */
     RCCallEngineRongRTC = 4
 };
+
 /*!
  媒体类型
  */
@@ -86,17 +87,17 @@ typedef NS_ENUM(NSUInteger, RCCallQuality) {
  视频显示模式
  */
 typedef NS_ENUM(NSInteger, RCCallRenderModel) {
-
+    
     /*!
      默认: 如果视频尺寸与显示视窗尺寸不一致，则视频流会按照显示视窗的比例进行周边裁剪或图像拉伸后填满视窗。
      */
     RCCallRenderModelHidden = 1,
-
+    
     /*!
      RenderFit: 如果视频尺寸与显示视窗尺寸不一致，在保持长宽比的前提下，将视频进行缩放后填满视窗。
      */
     RCCallRenderModelFit = 2,
-
+    
     /*!
      RenderAdaptive: 如果自己和对方都是竖屏，或者如果自己和对方都是横屏，使用
      RCCallRenderModelHidden；如果对方和自己一个竖屏一个横屏，则使用RCCallRenderModelFit。
@@ -156,7 +157,7 @@ typedef NS_ENUM(NSInteger, RCCallErrorCode) {
     RCCallMediaUnkownError = 10,
     /*!
      已被禁止通话
-    */
+     */
     RCCallMediaKickedByServerError = 11
 };
 
@@ -192,7 +193,6 @@ typedef NS_ENUM(NSInteger, RCCallDisconnectReason) {
      己方网络出错
      */
     RCCallDisconnectReasonNetworkError = 7,
-
     /*!
      对方取消已发出的通话请求
      */
@@ -223,7 +223,7 @@ typedef NS_ENUM(NSInteger, RCCallDisconnectReason) {
     RCCallDisconnectReasonRemoteNetworkError = 17,
     /*!
      己方其他端已接听
-    */
+     */
     RCCallDisconnectReasonAcceptByOtherClient = 18,
     /*!
      己方被加入黑名单
@@ -235,7 +235,7 @@ typedef NS_ENUM(NSInteger, RCCallDisconnectReason) {
     RCCallDisconnectReasonDegrade = 20,
     /*!
      已被禁止通话
-    */
+     */
     RCCallDisconnectReasonKickedByServer = 21
 };
 
@@ -245,7 +245,7 @@ typedef NS_ENUM(NSInteger, RCCallDisconnectReason) {
 typedef NS_ENUM(NSInteger, RCVideoProfile) {
     /*!
      176x144, 10fps, 150kbps
-    */
+     */
     RC_VIDEO_PROFILE_144P = 10,
     /*!
      256x144, 15fps, 350kbps
@@ -302,7 +302,7 @@ typedef NS_ENUM(NSInteger, RCCallStatus) {
     /*!
      初始状态
      */
-    //  RCCallIdle   = 0,
+    //RCCallIdle = 0,
     /*!
      正在呼出
      */

@@ -67,7 +67,7 @@
 
 /*!
  初始化通话摘要消息
-
+ 
  @param caller        通话的最初发起人
  @param inviter       邀请当前用户加入通话的邀请者
  @param mediaType     当前用户最后使用的媒体类型
@@ -76,7 +76,10 @@
  @param connectedTime 通话接通时间
  @param duration      通话总时长
  @param hangupReason  通话结束的原因
-
+ @discussion
+ 初始化通话摘要消息
+ 
+ @remarks 资源管理
  @return 通话摘要消息的对象
  */
 - (instancetype)initWithCaller:(NSString *)caller

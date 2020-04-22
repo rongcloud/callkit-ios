@@ -17,15 +17,19 @@
 @protocol RCCallSignalServerDelegate <NSObject>
 
 /*!
- 获取通话参与者的唯一媒体ID，必须保证每次电话会议的每个人的媒体ID都是全局唯一的。
+ 获取通话参与者的唯一媒体ID, 必须保证每次电话会议的每个人的媒体ID都是全局唯一的
 
  @param successBlock  为当前用户分配的媒体Id成功的回调
  @param errorBlcok    获取媒体Id失败的回调
+ @discussion
+ 获取通话参与者的唯一媒体ID, 必须保证每次电话会议的每个人的媒体ID都是全局唯一的
+ 
+ @remarks 代理
  */
 - (void)getUniqueMediaId:(void (^)(NSString *mediaId))successBlock error:(void (^)(int errorCode))errorBlcok;
 
 /*!
- 发送voip信令消息。
+ 发送 VoIP 信令消息
 
  @param messageContent  消息内容
  @param toUserIdList    接收者的Id
@@ -33,6 +37,10 @@
  @param pushData        pushData
  @param successBlock    成功的回调
  @param errorBlcok      失败的回调
+ @discussion
+ 发送 VoIP 信令消息
+ 
+ @remarks 代理
  */
 - (void)sendVoipSignalMessage:(RCMessageContent *)messageContent
                  toUserIdList:(NSArray<NSString *> *)toUserIdList
@@ -42,11 +50,16 @@
                         error:(void (^)(int errorCode))errorBlcok;
 
 /*!
- Voip通话结束返回的统计信息
-
+ VoIP 通话结束返回的统计信息
+ 
  @param summary  通话统计
+ @discussion
+ VoIP 通话结束返回的统计信息
+ 
+ @remarks 代理
  */
 - (void)onVoipCallSummary:(RCCallSummaryMessage *)summary;
+
 @end
 
 #endif /* RCCallClientSignalServer_h */

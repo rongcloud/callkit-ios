@@ -12,7 +12,7 @@
 #import <Foundation/Foundation.h>
 #import <AVFoundation/AVFoundation.h>
 
-#define kRongCallLibVersion @"V2.10.5_20200323165113_pub_dev_02c7e42"
+#define kRongCallLibVersion @"V2.10.5_20200410214115_pub_dev_6f68130"
 
 /*!
  CallLib全局通话呼入的监听器
@@ -23,6 +23,10 @@
  接收到通话呼入的回调
  
  @param callSession 呼入的通话实体
+ @discussion
+ 接收到通话呼入的回调
+ 
+ @remarks 代理
  */
 - (void)didReceiveCall:(RCCallSession *)callSession;
 
@@ -34,6 +38,10 @@
  @param mediaType     通话的媒体类型
  @param userIdList    被邀请者的UserId列表
  @param userDict      远程推送包含的其他扩展信息
+ @discussion
+ 接收到通话呼入的远程通知的回调
+ 
+ @remarks 代理
  */
 - (void)didReceiveCallRemoteNotification:(NSString *)callId
                            inviterUserId:(NSString *)inviterUserId
@@ -50,6 +58,10 @@
  @param userIdList    被邀请者的UserId列表
  @param userDict      远程推送包含的其他扩展信息
  @param isVoIPPush    是否 VoIP 推送
+ @discussion
+ 接收到通话呼入的远程通知的回调
+ 
+ @remarks 代理
  */
 - (void)didReceiveCallRemoteNotification:(NSString *)callId
                            inviterUserId:(NSString *)inviterUserId
@@ -65,6 +77,10 @@
  @param inviterUserId 通话邀请者的UserId
  @param mediaType     通话的媒体类型
  @param userIdList    被邀请者的UserId列表
+ @discussion
+ 接收到取消通话的远程通知的回调
+ 
+ @remarks 代理
  */
 - (void)didCancelCallRemoteNotification:(NSString *)callId
                           inviterUserId:(NSString *)inviterUserId
@@ -82,9 +98,11 @@
 /*!
  获取融云通话能力库 RCCallClient 的核心类单例
  
- @return 融云通话能力库 RCCallClient 的核心类单例
+ @discussion
+ 您可以通过此方法, 获取 RCCallClient 的单例，访问对象中的属性和方法
  
- @discussion 您可以通过此方法，获取 RCCallClient 的单例，访问对象中的属性和方法.
+ @remarks 通话设置
+ @return 融云通话能力库 RCCallClient 的核心类单例
  */
 + (instancetype)sharedRCCallClient;
 
@@ -92,6 +110,10 @@
  设置全局通话呼入的监听器
  
  @param delegate CallLib全局通话呼入的监听器
+ @discussion
+ 设置全局通话呼入的监听器
+ 
+ @remarks 通话设置
  */
 - (void)setDelegate:(id<RCCallReceiveDelegate>)delegate;
 
@@ -104,7 +126,10 @@
  @param type             发起的通话媒体类型
  @param delegate         通话监听
  @param extra            附件信息
+ @discussion
+ 发起一个通话
  
+ @remarks 通话管理
  @return 呼出的通话实体
  */
 - (RCCallSession *)startCall:(RCConversationType)conversationType
@@ -124,7 +149,10 @@
  @param type             发起的通话媒体类型
  @param delegate         通话监听
  @param extra            附件信息
+ @discussion
+ 发起一个通话
  
+ @remarks 通话管理
  @return 呼出的通话实体
  */
 - (RCCallSession *)startCall:(RCConversationType)conversationType
@@ -139,7 +167,10 @@
  当前会话类型是否支持音频通话
  
  @param conversationType 会话类型
+ @discussion
+ 当前会话类型是否支持音频通话
  
+ @remarks 通话设置
  @return 是否支持音频通话
  */
 - (BOOL)isAudioCallEnabled:(RCConversationType)conversationType;
@@ -148,44 +179,66 @@
  当前会话类型是否支持视频通话
  
  @param conversationType 会话类型
+ @discussion
+ 当前会话类型是否支持视频通话
  
+ @remarks 通话设置
  @return 是否支持视频通话
  */
 - (BOOL)isVideoCallEnabled:(RCConversationType)conversationType;
 
-/**
- 设置本地视频分辨率。
+/*!
+ 设置本地视频分辨率
  
  @param profile 通话视频分辨率
+ @discussion
+ 设置本地视频分辨率
+ 
+ @remarks 视频设置
  */
 - (void)setVideoProfile:(RCVideoProfile)profile;
 
-/**
- 设置本地视频属性，可用此接口设置本地视频方向
+/*!
+ 设置本地视频属性, 可用此接口设置本地视频方向
  
  @param orientation 视频方向, 默认: AVCaptureVideoOrientationPortrait
+ @discussion
+ 设置本地视频属性, 可用此接口设置本地视频方向
+ 
+ @remarks 视频设置
  */
 - (void)setVideoOrientation:(AVCaptureVideoOrientation)orientation;
 
-/**
+/*!
  设置码率
  
  @param rate 码率 单位 kbps
+ @discussion
+ 设置码率
+ 
+ @remarks 视频设置
  */
 - (void)setBitRate:(NSUInteger)rate;
 
-/**
+/*!
  本地视频上报开关
  
  @param enable YES:使用  NO:不使用(默认)
- @discussion 打开后, 本地摄像头采集的视频数据将通过 RCCallSessionDelegate 中的 - (CMSampleBufferRef)processVideoFrame:(CMSampleBufferRef)sampleBuffer 代理方法上报, 默认不上报本地视频数据
+ @discussion
+ 打开后, 本地摄像头采集的视频数据将通过 RCCallSessionDelegate 中的 - (CMSampleBufferRef)processVideoFrame:(CMSampleBufferRef)sampleBuffer 代理方法上报, 默认不上报本地视频数据
+ 
+ @remarks 视频设置
  */
 - (void)setEnableBeauty:(BOOL)enable;
 
-/**
+/*!
  设置视频编码方式
  
  @param type 视频编码类型
+ @discussion
+ 设置视频编码方式
+ 
+ @remarks 视频设置
  */
 - (void)setVideoCodecType:(RCVideoCodecType)type;
 
@@ -193,10 +246,12 @@
  设置外部信令服务器代理
  
  @param signalServerDelegate 外部信令服务器代理
- 
  @discussion
- 默认情况下 app 使用融云消息作为信令即可，不需要设置此代理，此时有个限制就是所有的通话必须在某一个会话中进行，比如群组。如果您需要摆脱会话的限制，请使用 server api 服务实现本代理，然后 startCall 时 conversationType 传 0，targetId 传 nil，calllib 会调用您设置的代理来发送消息。
- 请务必使用一个全局代理，确保在拨打和接听 VoIP 的时候代理对象都存活，这样才能确保正常通话。
+ 默认情况下 app 使用融云消息作为信令即可, 不需要设置此代理, 此时有个限制就是所有的通话必须在某一个会话中进行, 比如群组.
+ 如果您需要摆脱会话的限制, 请使用 server api 服务实现本代理, 然后 startCall 时 conversationType 传 0, targetId 传 nil, calllib 会调用您设置的代理来发送消息.
+ 请务必使用一个全局代理, 确保在拨打和接听 VoIP 的时候代理对象都存活, 这样才能确保正常通话.
+ 
+ @remarks 通话设置
  */
 - (void)setSignalServerDelegate:(id<RCCallSignalServerDelegate>)signalServerDelegate;
 
@@ -211,9 +266,15 @@
 @property(nonatomic, assign) BOOL enableCallSummary;
 
 /*!
- 是否打开苹果 PushKit 推送，该推送可以直接激活 App，注：iOS 13 以后 PushKit 必须结合苹果 CallKit.framework 进行使用，否则无法正常处理 VoIP 相关推送逻辑，如果设置为 NO 则使用普通 APNS 消息推送来处理音视频信令逻辑，默认关闭。打开之后 App 默认需要自行处理 VoIP 推送唤起 CallKit.framework 的逻辑。
+ 设置是否使用苹果 PushKit 推送
+ 
+ @param enable YES 使用, NO 不使用
+ @discussion
+ 是否打开苹果 PushKit 推送, 该推送可以直接激活 App, 注: iOS 13 以后 PushKit 必须结合苹果 CallKit.framework 进行使用, 否则无法正常处理 VoIP 相关推送逻辑,
+ 如果设置为 NO 则使用普通 APNS 消息推送来处理音视频信令逻辑, 默认关闭. 打开之后 App 默认需要自行处理 VoIP 推送唤起 CallKit.framework 的逻辑.
+ 
+ @remarks 通话设置
  */
 - (void)setApplePushKitEnable:(BOOL)enable;
-
 
 @end
