@@ -15,8 +15,6 @@
 #import "RCCallSingleCallViewController.h"
 #import "RCCallTipMessageCell.h"
 #import "RCCallVideoMultiCallViewController.h"
-//#import "RCDAudioFrameObserver.h"
-//#import "RCDVideoFrameObserver.h"
 #import "RCUserInfoCacheManager.h"
 #import "RCCXCall.h"
 #import <AVFoundation/AVFoundation.h>
@@ -48,9 +46,6 @@
             pRongVoIP.canIncomingCall = YES;
             pRongVoIP.callWindows = [[NSMutableArray alloc] init];
             pRongVoIP.locationNotificationList = [[NSMutableArray alloc] init];
-
-            //      agoraRegisterVideoFrameObserver(RCDVideoFrameObserver::sharedObserver(), true, true);
-            //      agoraRegisterAudioFrameObserver(RCDAudioFrameObserver::sharedObserver());
             [pRongVoIP registerNotification];
         }
     });
