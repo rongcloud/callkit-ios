@@ -18,16 +18,18 @@
  小视频消息类
 
  @discussion 小视频消息类，此消息会进行存储并计入未读消息数。
+ 
+ @remarks 内容类消息
  */
 @interface RCSightMessage : RCMediaMessageContent <NSCoding>
 
 /*!
- 本地URL地址
+ 本地 URL 地址
  */
 @property (nonatomic, copy) NSString *localPath;
 
 /*!
- 网络URL地址
+ 网络 URL 地址
  */
 @property (nonatomic, readonly) NSString *sightUrl;
 
@@ -61,7 +63,7 @@
 
  @param path 视频文件本地路径
  @param image 视频首帧缩略图
- @param duration 视频时长， 单位秒
+ @param duration 视频时长， 以秒为单位
  @return 视频消息实例变量
  */
 + (instancetype)messageWithLocalPath:(NSString *)path thumbnail:(UIImage *)image duration:(NSUInteger)duration;

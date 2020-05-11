@@ -30,7 +30,6 @@
 #define FwLogW(p, t, k, ...) [[RCFwLog getInstance] write:RC_Level_W type:p tag:t keys:k, ##__VA_ARGS__]
 #define FwLogI(p, t, k, ...) [[RCFwLog getInstance] write:RC_Level_I type:p tag:t keys:k, ##__VA_ARGS__]
 #define FwLogD(p, t, k, ...) [[RCFwLog getInstance] write:RC_Level_D type:p tag:t keys:k, ##__VA_ARGS__]
-#define FwLogV(p, t, k, ...) [[RCFwLog getInstance] write:RC_Level_V type:p tag:t keys:k, ##__VA_ARGS__]
 
 typedef NS_ENUM(NSUInteger, RCFwLogLevel) {
     RC_Level_N = 0,
@@ -79,4 +78,9 @@ typedef NS_OPTIONS(NSUInteger, RCLogType) {
           tag:(NSString *)tag
          keys:(NSString *)keys, ... NS_FORMAT_FUNCTION(4, 5);
 
+- (void)write:(RCFwLogLevel)level
+         type:(RCLogType)type
+          tag:(NSString *)tag
+         keys:(NSArray *)keys
+       values:(NSArray *)vals;
 @end

@@ -47,6 +47,8 @@ typedef NS_ENUM(NSInteger, RCDiscussionNotificationType) {
  讨论组通知消息类
 
  @discussion 讨论组通知消息类，此消息会进行存储，但不计入未读消息数。
+ 
+ @remarks 通知类消息
  */
 @interface RCDiscussionNotificationMessage : RCMessageContent <NSCoding>
 
@@ -56,7 +58,7 @@ typedef NS_ENUM(NSInteger, RCDiscussionNotificationType) {
 @property (nonatomic, assign) RCDiscussionNotificationType type;
 
 /*!
- 操作者的用户ID
+ 操作者的用户 ID
  */
 @property (nonatomic, copy) NSString *operatorId;
 
@@ -69,7 +71,7 @@ typedef NS_ENUM(NSInteger, RCDiscussionNotificationType) {
  初始化讨论组通知消息
 
  @param type        讨论组通知的扩展信息
- @param operatorId  操作者的用户ID
+ @param operatorId  操作者的用户 ID
  @param extension   讨论组通知的扩展信息
  @return            讨论组通知对象
  */

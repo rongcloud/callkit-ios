@@ -14,7 +14,12 @@ NS_ASSUME_NONNULL_BEGIN
  GIF 消息的类型名
  */
 #define RCGIFMessageTypeIdentifier @"RC:GIFMsg"
-
+/*!
+ GIF 消息
+ @discussion  GIF 消息类，此消息会进行存储并计入未读消息数。
+ 
+ @remarks 内容类消息
+ */
 @interface RCGIFMessage : RCMediaMessageContent
 
 /*!
@@ -44,7 +49,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param width           GIF 的宽
  @param height          GIF 的高
 
- @return                GIF消息对象
+ @return                GIF 消息对象
  */
 + (instancetype)messageWithGIFImageData:(NSData *)gifImageData width:(long)width height:(long)height;
 
@@ -55,7 +60,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param width           GIF 的宽
  @param height          GIF 的高
 
- @return                GIF消息对象
+ @return                GIF 消息对象
  */
 + (instancetype)messageWithGIFURI:(NSString *)gifURI width:(long)width height:(long)height;
 

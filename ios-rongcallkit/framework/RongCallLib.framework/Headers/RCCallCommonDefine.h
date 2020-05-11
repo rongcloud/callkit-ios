@@ -244,9 +244,9 @@ typedef NS_ENUM(NSInteger, RCCallDisconnectReason) {
  */
 typedef NS_ENUM(NSInteger, RCVideoProfile) {
     /*!
-     176x144, 10fps, 150kbps
+     176x132, 10fps, 150kbps
      */
-    RC_VIDEO_PROFILE_144P = 10,
+    RC_VIDEO_PROFILE_132P = 10,
     /*!
      256x144, 15fps, 350kbps
      */

@@ -40,22 +40,65 @@
                 mediaType:(RCMediaType)mediaType
                  targetId:(NSString *)targetId;
 
+/*!
+ 根据文件 URL 获取 MD5 key
+
+ @return  key
+ */
 + (NSString *)getFileKey:(NSString *)fileUri;
 
+/*!
+ 根据文件类型获取文件夹名称
+
+ @return 文件夹名称
+ */
 + (NSString *)getMediaDir:(RCMediaType)fileType;
 
+/*!
+ 根据会话类型获取存储的文件夹名称
+
+ @return 文件夹名称
+ */
 + (NSString *)getCateDir:(RCConversationType)categoryId;
 
+/*!
+ 文件是否存在
+
+ @return 是否存在
+*/
 + (BOOL)isFileExist:(NSString *)fileName;
 
+/*!
+ 存储数据到指定路径
+
+ @param filePath 文件存储路径
+ @param content  存储数据
+ @return 存储成功与否的结果
+ */
 + (BOOL)saveFile:(NSString *)filePath content:(NSData *)content;
 
+/*!
+ 文件唯一存储地址
+ */
 + (NSString *)getUniqueFileName:(NSString *)baseFileName;
 
+/*!
+ 根据文件名获取文件类型
+
+ @param fileName 文件名，需要带扩展名
+ */
 + (NSString *)getTypeName:(NSString *)fileName;
 
+/*!
+ 根据文件 URL 获取文件本地存储路径
+
+ @return 文件本地存储路径
+ */
 + (NSString *)getFileLocalPath:(NSString *)fileUri;
 
+/*!
+ 关联文件远端 URL 和本地路径
+ */
 + (void)setFileLocalPath:(NSString *)localPath fileUri:(NSString *)fileUri;
 @end
 #endif

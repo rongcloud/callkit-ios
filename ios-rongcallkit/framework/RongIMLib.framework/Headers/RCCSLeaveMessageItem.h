@@ -7,11 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
-//客服留言配置model
+//客服留言配置 model
 @interface RCCSLeaveMessageItem : NSObject
 //信息名
 @property (nonatomic, copy) NSString *title;
-//信息名对应的key值，在用户填了信息之后，需要把信息和此key对应构成字典
+//信息名对应的 key 值，在用户填了信息之后，需要把信息和此 key 对应构成字典
 @property (nonatomic, copy) NSString *name;
 //输入区域是单行还是多行：@"text" 单行；@"textarea":多行
 @property (nonatomic, copy) NSString *type;

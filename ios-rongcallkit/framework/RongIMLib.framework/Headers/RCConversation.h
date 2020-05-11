@@ -26,7 +26,7 @@
 @property (nonatomic, assign) RCConversationType conversationType;
 
 /*!
- 目标会话ID
+ 会话 ID
  */
 @property (nonatomic, copy) NSString *targetId;
 
@@ -41,10 +41,10 @@
 @property (nonatomic, assign) int unreadMessageCount;
 
 /*!
- 是否置顶，默认值为NO
+ 是否置顶，默认值为 NO
 
  @discussion
- 如果设置了置顶，在IMKit的RCConversationListViewController中会将此会话置顶显示。
+ 如果设置了置顶，在 IMKit 的 RCConversationListViewController 中会将此会话置顶显示。
  */
 @property (nonatomic, assign) BOOL isTop;
 
@@ -79,7 +79,7 @@
 @property (nonatomic, copy) NSString *objectName;
 
 /*!
- 会话中最后一条消息的发送者用户ID
+ 会话中最后一条消息的发送者用户 ID
  */
 @property (nonatomic, copy) NSString *senderUserId;
 
@@ -91,7 +91,7 @@
 @property (nonatomic, copy) NSString *senderUserName __deprecated_msg("已废弃，请勿使用。");
 
 /*!
- 会话中最后一条消息的消息ID
+ 会话中最后一条消息的消息 ID
  */
 @property (nonatomic, assign) long lastestMessageId;
 
@@ -106,38 +106,38 @@
 @property (nonatomic, assign) RCMessageDirection lastestMessageDirection;
 
 /*!
- 会话中最后一条消息的json Dictionary
+ 会话中最后一条消息的 json Dictionary
 
- @discussion 此字段存放最后一条消息内容中未编码的json数据。
- SDK内置的消息，如果消息解码失败，默认会将消息的内容存放到此字段；如果编码和解码正常，此字段会置为nil。
+ @discussion 此字段存放最后一条消息内容中未编码的 json 数据。
+ SDK 内置的消息，如果消息解码失败，默认会将消息的内容存放到此字段；如果编码和解码正常，此字段会置为 nil。
  */
 @property (nonatomic, strong) NSDictionary *jsonDict;
 
 /*!
- 最后一条消息的全局唯一ID
+ 最后一条消息的全局唯一 ID
 
- @discussion 服务器消息唯一ID（在同一个Appkey下全局唯一）
+ @discussion 服务器消息唯一 ID（在同一个Appkey下全局唯一）
  */
 @property (nonatomic, copy) NSString *lastestMessageUId;
 
 /*!
- 会话中是否存在被@的消息
+ 会话中是否存在被 @ 的消息
 
  @discussion 在清除会话未读数（clearMessagesUnreadStatus:targetId:）的时候，会将此状态置成 NO。
  */
 @property (nonatomic, assign, readonly) BOOL hasUnreadMentioned;
 
 /*!
-会话中@消息的个数
+会话中 @ 消息的个数
 
 @discussion 在清除会话未读数（clearMessagesUnreadStatus:targetId:）的时候，会将此值置成 0。
 */
 @property (nonatomic, assign) int mentionedCount;
 
 /*!
- RCConversation初始化方法（已废弃，请勿使用）
+ RCConversation 初始化方法（已废弃，请勿使用）
 
- @param json    会话的json Dictionary
+ @param json    会话的 json Dictionary
  @return        会话对象
 
  @warning **已废弃，请勿使用。**

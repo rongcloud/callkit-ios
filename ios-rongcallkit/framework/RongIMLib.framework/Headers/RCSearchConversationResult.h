@@ -15,12 +15,12 @@
 @interface RCSearchConversationResult : NSObject
 
 /*!
- 会话
+ 匹配的会话对象
  */
 @property (nonatomic, strong) RCConversation *conversation;
 
 /*
- 匹配的条数
+ 会话匹配的消息条数
  */
 @property (nonatomic, assign) int matchCount;
 @end

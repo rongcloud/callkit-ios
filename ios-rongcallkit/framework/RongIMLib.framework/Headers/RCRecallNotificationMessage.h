@@ -15,11 +15,14 @@
 
 /*!
  撤回通知消息类
+ @discussion 撤回通知消息，此消息会进行本地存储，但不计入未读消息数。
+ 
+ @remarks 通知类消息
  */
 @interface RCRecallNotificationMessage : RCMessageContent <NSCoding>
 
 /*!
- 发起撤回操作的用户ID
+ 发起撤回操作的用户 ID
  */
 @property (nonatomic, copy) NSString *operatorId;
 

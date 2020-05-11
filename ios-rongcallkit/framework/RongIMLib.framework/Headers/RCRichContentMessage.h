@@ -22,6 +22,8 @@
  图文消息类
 
  @discussion 图文消息类，此消息会进行存储并计入未读消息数。
+ 
+ @remarks 内容类消息
  */
 @interface RCRichContentMessage : RCMessageContent <NSCoding>
 
@@ -36,7 +38,7 @@
 @property (nonatomic, copy) NSString *digest;
 
 /*!
- 图文消息图片URL
+ 图文消息图片 URL
  */
 @property (nonatomic, copy) NSString *imageURL;
 

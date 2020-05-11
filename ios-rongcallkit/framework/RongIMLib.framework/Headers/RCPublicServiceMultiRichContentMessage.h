@@ -21,11 +21,13 @@
  公众服务的多图文消息类
 
  @discussion 公众服务的多图文消息类，此消息会进行存储并计入未读消息数。
+ 
+ @remarks 内容类消息
  */
 @interface RCPublicServiceMultiRichContentMessage : RCMessageContent <NSCoding>
 
 /*!
- 多图文消息的内容RCRichContentItem数组
+ 多图文消息的内容 RCRichContentItem 数组
  */
 @property (nonatomic, strong) NSArray *richContents;
 
@@ -34,7 +36,7 @@
  */
 @property (nonatomic, copy) NSString *extra;
 
-/**
+/*!
  多图文消息被选中的项的索引, -1 表示选中全部
  */
 @property (nonatomic, assign, readonly) NSInteger selectedItemIndex;

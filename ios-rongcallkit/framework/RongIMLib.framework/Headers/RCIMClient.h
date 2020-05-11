@@ -35,33 +35,38 @@
 #import "RCRemoteHistoryMsgOption.h"
 
 /*!
- @const 收到已读回执的Notification
+ @const 收到已读回执的 Notification
 
- @discussion 收到消息已读回执之后，IMLib会分发此通知。
+ @discussion 收到消息已读回执之后，IMLib 会分发此通知。
 
- Notification的object为nil，userInfo为NSDictionary对象，
- 其中key值分别为@"cType"、@"tId"、@"messageTime",
- 对应的value为会话类型的NSNumber对象、会话的targetId、已阅读的最后一条消息的sendTime。
+ Notification 的 object 为 nil，userInfo 为 NSDictionary 对象，
+ 其中 key 值分别为 @"cType"、@"tId"、@"messageTime",
+ 对应的 value 为会话类型的 NSNumber 对象 、会话的 targetId 、已阅读的最后一条消息的 sendTime。
  如：
  NSNumber *ctype = [notification.userInfo objectForKey:@"cType"];
  NSNumber *time = [notification.userInfo objectForKey:@"messageTime"];
  NSString *targetId = [notification.userInfo objectForKey:@"tId"];
  NSString *fromUserId = [notification.userInfo objectForKey:@"fId"];
 
- 收到这个消息之后可以更新这个会话中messageTime以前的消息UI为已读（底层数据库消息状态已经改为已读）。
+ 收到这个消息之后可以更新这个会话中 messageTime 以前的消息 UI 为已读（底层数据库消息状态已经改为已读）。
+ 
+ @remarks 事件监听
  */
 FOUNDATION_EXPORT NSString *const RCLibDispatchReadReceiptNotification;
 
 #pragma mark - 消息接收监听器
 
 /*!
- IMlib消息接收的监听器
+ IMlib 消息接收的监听器
 
  @discussion
- 设置IMLib的消息接收监听器请参考RCIMClient的setReceiveMessageDelegate:object:方法。
+ 设置 IMLib 的消息接收监听器请参考 RCIMClient 的 setReceiveMessageDelegate:object: 方法。
 
- @warning 如果您使用IMlib，可以设置并实现此Delegate监听消息接收；
- 如果您使用IMKit，请使用RCIM中的RCIMReceiveMessageDelegate监听消息接收，而不要使用此监听器，否则会导致IMKit中无法自动更新UI！
+ @warning 如果您使用 IMlib，可以设置并实现此 Delegate 监听消息接收；
+ 如果您使用 IMKit，请使用 RCIM 中的 RCIMReceiveMessageDelegate
+ 监听消息接收，而不要使用此监听器，否则会导致IMKit中无法自动更新 UI！
+ 
+ @remarks 事件监听
  */
 @protocol RCIMClientReceiveMessageDelegate <NSObject>
 
@@ -69,13 +74,16 @@ FOUNDATION_EXPORT NSString *const RCLibDispatchReadReceiptNotification;
  接收消息的回调方法
 
  @param message     当前接收到的消息
- @param nLeft       还剩余的未接收的消息数，left>=0
- @param object      消息监听设置的key值
+ @param nLeft       还剩余的未接收的消息数，nLeft >= 0
+ @param object      消息监听设置的 key 值
 
- @discussion 如果您设置了IMlib消息监听之后，SDK在接收到消息时候会执行此方法。
- 其中，left为还剩余的、还未接收的消息数量。比如刚上线一口气收到多条消息时，通过此方法，您可以获取到每条消息，left会依次递减直到0。
- 您可以根据left数量来优化您的App体验和性能，比如收到大量消息时等待left为0再刷新UI。
- object为您在设置消息接收监听时的key值。
+ @discussion 如果您设置了 IMlib 消息监听之后，SDK 在接收到消息时候会执行此方法。
+ 其中，nLeft 为还剩余的、还未接收的消息数量。比如刚上线一下收到多条消息时，通过此方法，您可以获取到每条消息，nLeft
+ 会依次递减直到 0 。
+ 您可以根据 nLeft 数量来优化您的 App 体验和性能，比如收到大量消息时等待 nLeft 为 0 再刷新 UI。
+ object 为您在设置 IMLib 的消息接收监听器 setReceiveMessageDelegate: object: 时传⼊的⾃定义数据对象。
+ 
+ @remarks 事件监听
  */
 - (void)onReceived:(RCMessage *)message left:(int)nLeft object:(id)object;
 
@@ -85,16 +93,20 @@ FOUNDATION_EXPORT NSString *const RCLibDispatchReadReceiptNotification;
  接收消息的回调方法
 
  @param message 当前接收到的消息
- @param nLeft 还剩余的未接收的消息数，left>=0
+ @param nLeft  还剩余的未接收的消息数，nLeft >= 0
  @param object 消息监听设置的key值
  @param offline 是否是离线消息
- @param hasPackage SDK 拉取服务器的消息以包(package)的形式批量拉取，有 package 存在就意味着远端服务器还有消息尚未被 SDK
+ @param hasPackage SDK 拉取服务器的消息以包 (package) 的形式批量拉取，有 package 存在就意味着远端服务器还有消息尚未被
+ SDK
  拉取
  @discussion 和上面的 - (void)onReceived:(RCMessage *)message left:(int)nLeft object:(id)object 功能完全一致，额外把
- offline 和 hasPackage 参数暴露，开发者可以根据 nLeft、offline、hasPackage 来决定何时的时机刷新 UI ；建议当 hasPackage=0
- 并且 nLeft=0 时刷新 UI
- @warning 如果使用此方法，那么就不能再使用 RCIM 中 - (void)onReceived:(RCMessage *)message left:(int)nLeft
- object:(id)object 的使用，否则会出现重复操作的情形
+ offline 和 hasPackage 参数暴露，开发者可以根据 nLeft、offline、hasPackage 来决定何时的时机刷新 UI ；建议当 hasPackage =
+ 0 并且 nLeft = 0 时刷新 UI
+ 
+ @warning 如果使用此方法，那么就不能再使用 RCIMClient 中的 - (void)onReceived:(RCMessage *)message left:(int)nLeft
+ object:(id)object ，否则会出现重复操作的情形
+ 
+ @remarks 事件监听
  */
 - (void)onReceived:(RCMessage *)message
               left:(int)nLeft
@@ -105,20 +117,24 @@ FOUNDATION_EXPORT NSString *const RCLibDispatchReadReceiptNotification;
 /*!
  消息被撤回的回调方法
 
- @param messageId 被撤回的消息ID
+ @param messageId 被撤回的消息 ID
 
- @discussion 被撤回的消息会变更为RCRecallNotificationMessage，App需要在UI上刷新这条消息。
+ @discussion 被撤回的消息会变更为 RCRecallNotificationMessage，App 需要在 UI 上刷新这条消息。
+ 
+ @remarks 事件监听
  */
 - (void)onMessageRecalled:(long)messageId;
 
 /*!
- 请求消息已读回执（收到需要阅读时发送回执的请求，收到此请求后在会话页面已经展示该 messageUId 对应的消息或者调用
+ 请求消息已读回执（收到需要在阅读时发送回执的请求，收到此请求后在会话页面已经展示该 messageUId 对应的消息或者调用
  getHistoryMessages 获取消息的时候，包含此 messageUId 的消息，需要调用 sendMessageReadReceiptResponse
  接口发送消息阅读回执）
 
- @param messageUId       请求已读回执的消息ID
- @param conversationType conversationType
- @param targetId         targetId
+ @param messageUId       请求已读回执的消息 ID
+ @param conversationType   会话类型
+ @param targetId         会话目标 ID
+ 
+ @remarks 事件监听
  */
 - (void)onMessageReceiptRequest:(RCConversationType)conversationType
                        targetId:(NSString *)targetId
@@ -126,10 +142,12 @@ FOUNDATION_EXPORT NSString *const RCLibDispatchReadReceiptNotification;
 
 /*!
  消息已读回执响应（收到阅读回执响应，可以按照 messageUId 更新消息的阅读数）
- @param messageUId       请求已读回执的消息ID
- @param conversationType conversationType
- @param targetId         targetId
- @param userIdList 已读userId列表
+ @param messageUId       请求已读回执的消息 ID
+ @param conversationType 会话类型
+ @param targetId         会话目标 ID
+ @param userIdList   已读 userId 列表
+ 
+ @remarks 事件监听
  */
 - (void)onMessageReceiptResponse:(RCConversationType)conversationType
                         targetId:(NSString *)targetId
@@ -141,22 +159,27 @@ FOUNDATION_EXPORT NSString *const RCLibDispatchReadReceiptNotification;
 #pragma mark - 连接状态监听器
 
 /*!
- IMLib连接状态的的监听器
+ IMLib 连接状态的的监听器
 
  @discussion
- 设置IMLib的连接状态监听器，请参考RCIMClient的setRCConnectionStatusChangeDelegate:方法。
+ 设置 IMLib 的连接状态监听器，请参考 RCIMClient 的 setRCConnectionStatusChangeDelegate: 方法。
 
- @warning 如果您使用IMLib，可以设置并实现此Delegate监听连接状态变化；
- 如果您使用IMKit，请使用RCIM中的RCIMConnectionStatusDelegate监听消息接收，而不要使用此监听器，否则会导致IMKit中无法自动更新UI！
+ @warning 如果您使用 IMLib，可以设置并实现此 Delegate 监听连接状态变化；
+ 如果您使用 IMKit，请使用 RCIM 中的 RCIMConnectionStatusDelegate 监听消息接收，而不要使用此监听器，否则会导致 IMKit
+ 中无法自动更新 UI！
+ 
+ @remarks 事件监听
  */
 @protocol RCConnectionStatusChangeDelegate <NSObject>
 
 /*!
- IMLib连接状态的的监听器
+ IMLib 连接状态的回调方法
 
- @param status  SDK与融云服务器的连接状态
+ @param status  SDK 与融云服务器的连接状态
 
- @discussion 如果您设置了IMLib消息监听之后，当SDK与融云服务器的连接状态发生变化时，会回调此方法。
+ @discussion 如果您设置了 IMLib 消息监听之后，当 SDK 与融云服务器的连接状态发生变化时，会回调此方法。
+ 
+ @remarks 事件监听
  */
 - (void)onConnectionStatusChanged:(RCConnectionStatus)status;
 
@@ -165,42 +188,52 @@ FOUNDATION_EXPORT NSString *const RCLibDispatchReadReceiptNotification;
 #pragma mark - 聊天室监听器
 
 /*!
- IMLib聊天室状态的的监听器
+ IMLib 聊天室状态的的监听器
 
  @discussion
- 设置IMLib的聊天室状态监听器，请参考RCIMClient的setChatRoomStatusDelegate:方法。
+ 设置 IMLib 的聊天室状态监听器，请参考 RCIMClient 的 setChatRoomStatusDelegate: 方法。
+ 
+ @remarks 事件监听
  */
 @protocol RCChatRoomStatusDelegate <NSObject>
 
 /*!
  开始加入聊天室的回调
 
- @param chatroomId 聊天室ID
+ @param chatroomId 聊天室 ID
+ 
+ @remarks 事件监听
  */
 - (void)onChatRoomJoining:(NSString *)chatroomId;
 
 /*!
  加入聊天室成功的回调
 
- @param chatroomId 聊天室ID
+ @param chatroomId 聊天室 ID
+ 
+ @remarks 事件监听
  */
 - (void)onChatRoomJoined:(NSString *)chatroomId;
 
 /*!
  加入聊天室失败的回调
 
- @param chatroomId 聊天室ID
+ @param chatroomId 聊天室 ID
  @param errorCode  加入失败的错误码
 
  @discussion
- 如果错误码是KICKED_FROM_CHATROOM或RC_CHATROOM_NOT_EXIST，则不会自动重新加入聊天室，App需要按照自己的逻辑处理。
+ 如果错误码是 KICKED_FROM_CHATROOM 或 RC_CHATROOM_NOT_EXIST，则不会自动重新加入聊天室，App 需要按照自己的逻辑处理。
+ 
+ @remarks 事件监听
  */
 - (void)onChatRoomJoinFailed:(NSString *)chatroomId errorCode:(RCErrorCode)errorCode;
 
 /*!
  退出聊天室成功的回调
 
- @param chatroomId 聊天室ID
+ @param chatroomId 聊天室 ID
+ 
+ @remarks 事件监听
  */
 - (void)onChatRoomQuited:(NSString *)chatroomId;
 
@@ -209,13 +242,15 @@ FOUNDATION_EXPORT NSString *const RCLibDispatchReadReceiptNotification;
 #pragma mark - 输入状态监听器
 
 /*!
- IMLib输入状态的的监听器
+ IMLib 输入状态的的监听器
 
- @discussion 设置IMLib的输入状态监听器，请参考RCIMClient的 setRCTypingStatusDelegate:方法。
+ @discussion 设置 IMLib 的输入状态监听器，请参考 RCIMClient 的 setRCTypingStatusDelegate: 方法。
 
  @warning
- 如果您使用IMLib，可以设置并实现此Delegate监听消息输入状态；如果您使用IMKit，请直接设置RCIM中的
- enableTypingStatus，而不要使用此监听器，否则会导致IMKit中无法自动更新UI！
+ 如果您使用 IMLib，可以设置并实现此 Delegate 监听消息输入状态；如果您使用 IMKit，请直接设置 RCIM 中的
+ enableTypingStatus，而不要使用此监听器，否则会导致 IMKit 中无法自动更新 UI！
+ 
+ @remarks 事件监听
  */
 @protocol RCTypingStatusDelegate <NSObject>
 
@@ -223,13 +258,15 @@ FOUNDATION_EXPORT NSString *const RCLibDispatchReadReceiptNotification;
  用户输入状态变化的回调
 
  @param conversationType        会话类型
- @param targetId                会话目标ID
- @param userTypingStatusList 正在输入的RCUserTypingStatus列表（nil标示当前没有用户正在输入）
+ @param targetId                会话目标 ID
+ @param userTypingStatusList 正在输入的 RCUserTypingStatus 列表（nil 表示当前没有用户正在输入）
 
  @discussion
- 当客户端收到用户输入状态的变化时，会回调此接口，通知发生变化的会话以及当前正在输入的RCUserTypingStatus列表。
+ 当客户端收到用户输入状态的变化时，会回调此接口，通知发生变化的会话以及当前正在输入的 RCUserTypingStatus 列表。
 
  @warning 目前仅支持单聊。
+ 
+ @remarks 事件监听
  */
 - (void)onTypingStatusChanged:(RCConversationType)conversationType
                      targetId:(NSString *)targetId
@@ -239,19 +276,23 @@ FOUNDATION_EXPORT NSString *const RCLibDispatchReadReceiptNotification;
 
 #pragma mark - 日志监听器
 /*!
- IMLib日志的监听器
+ IMLib 日志的监听器
 
  @discussion
- 设置IMLib日志的监听器，请参考RCIMClient的setRCLogInfoDelegate:方法。
+ 设置 IMLib 日志的监听器，请参考 RCIMClient 的 setRCLogInfoDelegate: 方法。
 
- @discussion 您可以通过logLevel来控制日志的级别。
+ @discussion 您可以通过 logLevel 来控制日志的级别。
+ 
+ @remarks 事件监听
  */
 @protocol RCLogInfoDelegate <NSObject>
 
 /*!
- IMLib日志的回调
+ IMLib 日志的回调
 
  @param logInfo 日志信息
+ 
+ @remarks 事件监听
  */
 - (void)didOccurLog:(NSString *)logInfo;
 
@@ -260,8 +301,10 @@ FOUNDATION_EXPORT NSString *const RCLibDispatchReadReceiptNotification;
 #pragma mark - 阅后即焚
 
 /**
- IMLib阅后即焚监听器
+ IMLib 阅后即焚监听器
  @discussion 设置代理请参考 RCIMClient 的 setRCMessageDestructDelegate: 方法。
+ 
+ @remarks 事件监听
  */
 @protocol RCMessageDestructDelegate <NSObject>
 
@@ -270,69 +313,76 @@ FOUNDATION_EXPORT NSString *const RCLibDispatchReadReceiptNotification;
 
  @param message 消息对象
  @param remainDuration 剩余焚烧时间
+ 
+ @remarks 事件监听
  */
 - (void)onMessageDestructing:(RCMessage *)message remainDuration:(long long)remainDuration;
 
 @end
 
-#pragma mark - IMLib核心类
+#pragma mark - IMLib 核心类
 
 /*!
- 融云IMLib核心类
+ 融云 IMLib 核心类
 
- @discussion 您需要通过sharedRCIMClient方法，获取单例对象。
+ @discussion 您需要通过 sharedRCIMClient 方法，获取单例对象。
  */
 @interface RCIMClient : NSObject
 
 /*!
- 获取融云通讯能力库IMLib的核心类单例
+ 获取融云通讯能力库 IMLib 的核心类单例
 
- @return 融云通讯能力库IMLib的核心类单例
+ @return 融云通讯能力库 IMLib 的核心单例类
 
- @discussion 您可以通过此方法，获取IMLib的单例，访问对象中的属性和方法.
+ @discussion 您可以通过此方法，获取 IMLib 的单例，访问对象中的属性和方法.
  */
 + (instancetype)sharedRCIMClient;
 
 #pragma mark - SDK初始化
 
 /*!
- 初始化融云SDK
+ 初始化融云 SDK
 
- @param appKey  从融云开发者平台创建应用后获取到的App Key
+ @param appKey  从融云开发者平台创建应用后获取到的 App Key
 
  @discussion
- 您在使用融云SDK所有功能(包括显示SDK中或者继承于SDK的View)之前，您必须先调用此方法初始化SDK。
- 在App整个生命周期中，您只需要执行一次初始化。
+ 您在使用融云 SDK 所有功能 ( 包括显示 SDK 中或者继承于 SDK 的 View )之前，您必须先调用此方法初始化 SDK。
+ 在 App 整个生命周期中，您只需要执行一次初始化。
 
- @warning 如果您使用IMLib，请使用此方法初始化SDK；
- 如果您使用IMKit，请使用RCIM中的initWithAppKey:方法初始化，而不要使用此方法。
+ @warning 如果您使用 IMLib，请使用此方法初始化 SDK；
+ 如果您使用 IMKit，请使用 RCIM 中的 initWithAppKey: 方法初始化，而不要使用此方法。
 
  @warning **已废弃，请勿使用。**
- 升级说明:从2.4.1版本开始，为了兼容Swift的风格与便于使用，将此方法升级为initWithAppKey:方法，方法的功能和使用均不变。**
+ 升级说明:从2.4.1版本开始，为了兼容 Swift 的风格与便于使用，将此方法升级为 initWithAppKey:
+ 方法，方法的功能和使用均不变。**
+ 
+ @remarks 连接
  */
 - (void)init:(NSString *)appKey __deprecated_msg("已废弃，请勿使用。");
 
 /*!
- 初始化融云SDK
+ 初始化融云 SDK
 
- @param appKey  从融云开发者平台创建应用后获取到的App Key
-
+ @param appKey  从融云开发者平台创建应用后获取到的 App Key
+ @discussion 初始化后，SDK 会监听 app 生命周期， 用于判断应用处于前台、后台，根据前后台状态调整链接心跳
  @discussion
- 您在使用融云SDK所有功能（包括显示SDK中或者继承于SDK的View）之前，您必须先调用此方法初始化SDK。
- 在App整个生命周期中，您只需要执行一次初始化。
+ 您在使用融云 SDK 所有功能（ 包括显示 SDK 中或者继承于 SDK 的 View ）之前，您必须先调用此方法初始化 SDK。
+ 在 App 整个生命周期中，您只需要执行一次初始化。
 
  **升级说明:**
- **从2.4.1版本开始，为了兼容Swift的风格与便于使用，将原有的init:方法升级为此方法，方法的功能和使用均不变。**
+ **从2.4.1版本开始，为了兼容 Swift 的风格与便于使用，将原有的 init: 方法升级为此方法，方法的功能和使用均不变。**
 
- @warning 如果您使用IMLib，请使用此方法初始化SDK；
- 如果您使用IMKit，请使用RCIM中的同名方法初始化，而不要使用此方法。
+ @warning 如果您使用 IMLib，请使用此方法初始化 SDK；
+ 如果您使用 IMKit，请使用 RCIM 中的同名方法初始化，而不要使用此方法。
+ 
+ @remarks 连接
  */
 - (void)initWithAppKey:(NSString *)appKey;
 
 /*!
 设置 deviceToken（已兼容 iOS 13），用于远程推送
 
-@param deviceTokenData     从系统获取到的设备号 deviceTokenData (不需要处理)
+@param deviceTokenData     从系统获取到的设备号 deviceTokenData  (不需要处理)
 
 @discussion
 deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远程推送必须使用的设备唯一值。
@@ -344,21 +394,21 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
    didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
        [[RCIMClient sharedRCIMClient] setDeviceTokenData:deviceToken];
    }
-
+@remarks 功能设置
 */
 - (void)setDeviceTokenData:(NSData *)deviceTokenData;
 
 /*!
- 设置deviceToken，用于远程推送
+ 设置 deviceToken，用于远程推送
 
- @param deviceToken     从系统获取到的设备号deviceToken(需要去掉空格和尖括号)
+ @param deviceToken     从系统获取到的设备号 deviceToken
 
  @discussion
- deviceToken是系统提供的，从苹果服务器获取的，用于APNs远程推送必须使用的设备唯一值。
- 您需要将-application:didRegisterForRemoteNotificationsWithDeviceToken:获取到的deviceToken，转为NSString类型，并去掉其中的空格和尖括号，作为参数传入此方法。
-
+ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远程推送必须使用的设备唯一值。
+ 您需要将 -application:didRegisterForRemoteNotificationsWithDeviceToken: 获取到的 deviceToken，转换成十六进制字符串，作为参数传入此方法。
+ 
  如:
-
+ 
     - (void)application:(UIApplication *)application
     didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
         NSString *token = [self getHexStringForData:deviceToken];
@@ -374,7 +424,8 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
         }
         return hexString;
      }
-
+ 
+ @remarks 功能设置
  */
 - (void)setDeviceToken:(NSString *)deviceToken;
 
@@ -385,14 +436,19 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
 
  @param naviServer     导航服务器地址，具体的格式参考下面的说明
  @param fileServer     文件服务器地址，具体的格式参考下面的说明
- @return               是否设置成功
+ @return            是否设置成功
 
- @warning 仅限独立数据中心使用，使用前必须先联系商务开通。必须在SDK init之前进行设置。
+ @warning 仅限独立数据中心使用，使用前必须先联系商务开通。必须在 SDK init 之前进行设置。
  @discussion
- naviServer必须为有效的服务器地址，fileServer如果想使用默认的，可以传nil。
- naviServer和fileServer的格式说明：
- 1、如果使用https，则设置为https://cn.xxx.com:port或https://cn.xxx.com格式，其中域名部分也可以是IP，如果不指定端口，将默认使用443端口。
- 2、如果使用http，则设置为cn.xxx.com:port或cn.xxx.com格式，其中域名部分也可以是IP，如果不指定端口，将默认使用80端口。
+ naviServer 必须为有效的服务器地址，fileServer 如果想使用默认的，可以传 nil。
+ naviServer 和 fileServer 的格式说明：
+ 1、如果使用 https，则设置为 https://cn.xxx.com:port 或 https://cn.xxx.com 格式，其中域名部分也可以是
+ IP，如果不指定端口，将默认使用 443 端口。
+ 2、如果使用 http，则设置为 cn.xxx.com:port 或 cn.xxx.com 格式，其中域名部分也可以是 IP，如果不指定端口，将默认使用 80
+ 端口。（iOS 默认只能使⽤ HTTPS 协议。如果您使⽤ http 协议，请参考 iOS 开发
+ ⽂档中的 ATS 设置说明。链接如下：https://support.rongcloud.cn/ks/OTQ1 ）
+ 
+ @remarks 功能设置
  */
 - (BOOL)setServerInfo:(NSString *)naviServer fileServer:(NSString *)fileServer;
 
@@ -402,12 +458,17 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  @param statisticServer 统计服务器地址，具体的格式参考下面的说明
  @return 是否设置成功
 
- @warning 仅限独立数据中心使用，使用前必须先联系商务开通。必须在SDK init和setDeviceToken之前进行设置。
+ @warning 仅限独立数据中心使用，使用前必须先联系商务开通。必须在 SDK init 和 setDeviceToken 之前进行设置。
  @discussion
- statisticServer必须为有效的服务器地址，否则会造成推送等业务不能正常使用。
+ statisticServer 必须为有效的服务器地址，否则会造成推送等业务不能正常使用。
  格式说明：
- 1、如果使用https，则设置为https://cn.xxx.com:port或https://cn.xxx.com格式，其中域名部分也可以是IP，如果不指定端口，将默认使用443端口。
- 2、如果使用http，则设置为cn.xxx.com:port或cn.xxx.com格式，其中域名部分也可以是IP，如果不指定端口，将默认使用80端口。
+ 1、如果使用 https，则设置为 https://cn.xxx.com:port 或 https://cn.xxx.com 格式，其中域名部分也可以是
+ IP，如果不指定端口，将默认使用 443 端口。
+ 2、如果使用 http，则设置为 cn.xxx.com:port 或 cn.xxx.com 格式，其中域名部分也可以是 IP，如果不指定端口，将默认使用 80
+ 端口。（iOS 默认只能使⽤ HTTPS 协议。如果您使⽤ http 协议，请参考 iOS 开发
+ ⽂档中的 ATS 设置说明。链接如下：https://support.rongcloud.cn/ks/OTQ1 ）
+ 
+ @remarks 功能设置
  */
 - (BOOL)setStatisticServer:(NSString *)statisticServer;
 
@@ -416,26 +477,31 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
 /*!
  与融云服务器建立连接
 
- @param token                   从您服务器端获取的token(用户身份令牌)
+ @param token                            从您服务器端获取的 token (用户身份令牌)
  @param successBlock            连接建立成功的回调
- [userId:当前连接成功所用的用户ID]
- @param errorBlock              连接建立失败的回调 [status:连接失败的错误码]
+ [ userId: 当前连接成功所用的用户 ID ]
+ @param errorBlock                 连接建立失败的回调 [ status: 连接失败的错误码]
  @param tokenIncorrectBlock     token错误或者过期的回调
 
- @discussion 在App整个生命周期，您只需要调用一次此方法与融云服务器建立连接。
- 之后无论是网络出现异常或者App有前后台的切换等，SDK都会负责自动重连。
- 除非您已经手动将连接断开，否则您不需要自己再手动重连。
+ @discussion 在 App 整个生命周期，您只需要调用一次此方法与融云服务器建立连接。
+ 之后无论是网络出现异常或者 App 有前后台的切换等，SDK 都会负责自动重连。
+ 除非您已经手动将连接断开，否则您不需要自己再手动重连。详细参考文档 https://docs.rongcloud.cn/im/imkit/ios/quick-start/connect/
+ @discussion 如果调用此接口遇到连接失败，SDK 会自动启动重连机制。
+ 
+ tokenIncorrectBlock 有两种情况：
+ 一是 token 错误，请您检查客户端初始化使用的 AppKey 和您服务器获取 token 使用的 AppKey 是否一致；
+ 二是 token 过期，是因为您在开发者后台设置了 token 过期时间，您需要请求您的服务器重新获取 token 并再次用新的 token
+ 建立连接。
 
- tokenIncorrectBlock有两种情况：
- 一是token错误，请您检查客户端初始化使用的AppKey和您服务器获取token使用的AppKey是否一致；
- 二是token过期，是因为您在开发者后台设置了token过期时间，您需要请求您的服务器重新获取token并再次用新的token建立连接。
+ @warning 如果您使用 IMLib，请使用此方法建立与融云服务器的连接；
+ 如果您使用 IMKit，请使用 RCIM 中的同名方法建立与融云服务器的连接，而不要使用此方法。
 
- @warning 如果您使用IMLib，请使用此方法建立与融云服务器的连接；
- 如果您使用IMKit，请使用RCIM中的同名方法建立与融云服务器的连接，而不要使用此方法。
+ 在 tokenIncorrectBlock 的情况下，您需要请求您的服务器重新获取 token 并建立连接，但是注意避免无限循环，以免影响 App
+ 用户体验。
 
- 在tokenIncorrectBlock的情况下，您需要请求您的服务器重新获取token并建立连接，但是注意避免无限循环，以免影响App用户体验。
-
- 此方法的回调并非为原调用线程，您如果需要进行UI操作，请注意切换到主线程。
+ 此方法的回调并非为原调用线程，您如果需要进行 UI 操作，请注意切换到主线程。
+ 
+ @remarks 连接
  */
 - (void)connectWithToken:(NSString *)token
                  success:(void (^)(NSString *userId))successBlock
@@ -449,23 +515,27 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  @param dbOpenedBlock                本地消息数据库打开的回调
  @param successBlock            连接建立成功的回调
  [userId:当前连接成功所用的用户ID]
- @param errorBlock              连接建立失败的回调 [status:连接失败的错误码]
- @param tokenIncorrectBlock     token错误或者过期的回调
+ @param errorBlock              连接建立失败的回调  [ status: 连接失败的错误码]
+ @param tokenIncorrectBlock     token 错误或者过期的回调
 
- @discussion 在App整个生命周期，您只需要调用一次此方法与融云服务器建立连接。
- 之后无论是网络出现异常或者App有前后台的切换等，SDK都会负责自动重连。
- 除非您已经手动将连接断开，否则您不需要自己再手动重连。
+ @discussion 在 App 整个生命周期，您只需要调用一次此方法与融云服务器建立连接。
+ 之后无论是网络出现异常或者 App 有前后台的切换等，SDK 都会负责自动重连。
+ 除非您已经手动将连接断开，否则您不需要自己再手动重连。详细参考文档 https://docs.rongcloud.cn/im/imkit/ios/quick-start/connect/
+ 
+ tokenIncorrectBlock 有两种情况：
+ 一是 token 错误，请您检查客户端初始化使用的 AppKey 和您服务器获取 token 使用的 AppKey 是否一致；
+ 二是 token 过期，是因为您在开发者后台设置了 token 过期时间，您需要请求您的服务器重新获取 token 并再次用新的 token
+ 建立连接。
 
- tokenIncorrectBlock有两种情况：
- 一是token错误，请您检查客户端初始化使用的AppKey和您服务器获取token使用的AppKey是否一致；
- 二是token过期，是因为您在开发者后台设置了token过期时间，您需要请求您的服务器重新获取token并再次用新的token建立连接。
+ @warning 如果您使用 IMLib，请使用此方法建立与融云服务器的连接；
+ 如果您使用 IMKit，请使用 RCIM 中的同名方法建立与融云服务器的连接，而不要使用此方法。
 
- @warning 如果您使用IMLib，请使用此方法建立与融云服务器的连接；
- 如果您使用IMKit，请使用RCIM中的同名方法建立与融云服务器的连接，而不要使用此方法。
+ 在 tokenIncorrectBlock 的情况下，您需要请求您的服务器重新获取 token 并建立连接，但是注意避免无限循环，以免影响 App
+ 用户体验。
 
- 在tokenIncorrectBlock的情况下，您需要请求您的服务器重新获取token并建立连接，但是注意避免无限循环，以免影响App用户体验。
-
- 此方法的回调并非为原调用线程，您如果需要进行UI操作，请注意切换到主线程。
+ 此方法的回调并非为原调用线程，您如果需要进行 UI 操作，请注意切换到主线程。
+ 
+ @remarks 连接
  */
 - (void)connectWithToken:(NSString *)token
                 dbOpened:(void (^)(RCDBErrorCode code))dbOpenedBlock
@@ -476,21 +546,23 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
 /*!
  断开与融云服务器的连接
 
- @param isReceivePush   App在断开连接之后，是否还接收远程推送
+ @param isReceivePush   App 在断开连接之后，是否还接收远程推送
 
  @discussion
- 因为SDK在前后台切换或者网络出现异常都会自动重连，会保证连接的可靠性。
- 所以除非您的App逻辑需要登出，否则一般不需要调用此方法进行手动断开。
+ 因为 SDK 在前后台切换或者网络出现异常都会自动重连，会保证连接的可靠性。
+ 所以除非您的 App 逻辑需要登出，否则一般不需要调用此方法进行手动断开。
 
- @warning 如果您使用IMLib，请使用此方法断开与融云服务器的连接；
- 如果您使用IMKit，请使用RCIM中的同名方法断开与融云服务器的连接，而不要使用此方法。
+ @warning 如果您使用 IMLib，请使用此方法断开与融云服务器的连接；
+ 如果您使用 IMKit，请使用 RCIM 中的同名方法断开与融云服务器的连接，而不要使用此方法。
 
- isReceivePush指断开与融云服务器的连接之后，是否还接收远程推送。
- [[RCIMClient sharedRCIMClient] disconnect:YES]与[[RCIMClient sharedRCIMClient]
- disconnect]完全一致；
- [[RCIMClient sharedRCIMClient] disconnect:NO]与[[RCIMClient sharedRCIMClient]
- logout]完全一致。
- 您只需要按照您的需求，使用disconnect:与disconnect以及logout三个接口其中一个即可。
+ isReceivePush 指断开与融云服务器的连接之后，是否还接收远程推送。
+ [[RCIMClient sharedRCIMClient] disconnect:YES] 与 [[RCIMClient sharedRCIMClient]
+ disconnect] 完全一致；
+ [[RCIMClient sharedRCIMClient] disconnect:NO] 与[ [RCIMClient sharedRCIMClient]
+ logout] 完全一致。
+ 您只需要按照您的需求，使用 disconnect: 与 disconnect 以及 logout 三个接口其中一个即可。
+ 
+ @remarks 连接
  */
 - (void)disconnect:(BOOL)isReceivePush;
 
@@ -498,17 +570,19 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  断开与融云服务器的连接，但仍然接收远程推送
 
  @discussion
- 因为SDK在前后台切换或者网络出现异常都会自动重连，会保证连接的可靠性。
- 所以除非您的App逻辑需要登出，否则一般不需要调用此方法进行手动断开。
+ 因为 SDK 在前后台切换或者网络出现异常都会自动重连，会保证连接的可靠性。
+ 所以除非您的 App 逻辑需要登出，否则一般不需要调用此方法进行手动断开。
 
- @warning 如果您使用IMLib，请使用此方法断开与融云服务器的连接；
- 如果您使用IMKit，请使用RCIM中的同名方法断开与融云服务器的连接，而不要使用此方法。
+ @warning 如果您使用 IMLib，请使用此方法断开与融云服务器的连接；
+ 如果您使用 IMKit，请使用 RCIM 中的同名方法断开与融云服务器的连接，而不要使用此方法。
 
- [[RCIMClient sharedRCIMClient] disconnect:YES]与[[RCIMClient sharedRCIMClient]
- disconnect]完全一致；
- [[RCIMClient sharedRCIMClient] disconnect:NO]与[[RCIMClient sharedRCIMClient]
- logout]完全一致。
- 您只需要按照您的需求，使用disconnect:与disconnect以及logout三个接口其中一个即可。
+ [[RCIMClient sharedRCIMClient] disconnect:YES] 与 [[RCIMClient sharedRCIMClient]
+ disconnect] 完全一致；
+ [[RCIMClient sharedRCIMClient] disconnect:NO] 与 [[RCIMClient sharedRCIMClient]
+ logout] 完全一致。
+ 您只需要按照您的需求，使用 disconnect: 与 disconnect 以及 logout 三个接口其中一个即可。
+ 
+ @remarks 连接
  */
 - (void)disconnect;
 
@@ -516,22 +590,24 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  断开与融云服务器的连接，并不再接收远程推送
 
  @discussion
- 因为SDK在前后台切换或者网络出现异常都会自动重连，会保证连接的可靠性。
- 所以除非您的App逻辑需要登出，否则一般不需要调用此方法进行手动断开。
+ 因为 SDK 在前后台切换或者网络出现异常都会自动重连，会保证连接的可靠性。
+ 所以除非您的 App 逻辑需要登出，否则一般不需要调用此方法进行手动断开。
 
- @warning 如果您使用IMKit，请使用此方法断开与融云服务器的连接；
- 如果您使用IMLib，请使用RCIMClient中的同名方法断开与融云服务器的连接，而不要使用此方法。
+ @warning 如果您使用 IMKit，请使用此方法断开与融云服务器的连接；
+ 如果您使用 IMLib，请使用 RCIMClient 中的同名方法断开与融云服务器的连接，而不要使用此方法。
 
- [[RCIMClient sharedRCIMClient] disconnect:YES]与[[RCIMClient sharedRCIMClient]
- disconnect]完全一致；
- [[RCIMClient sharedRCIMClient] disconnect:NO]与[[RCIMClient sharedRCIMClient]
- logout]完全一致。
- 您只需要按照您的需求，使用disconnect:与disconnect以及logout三个接口其中一个即可。
+ [[RCIMClient sharedRCIMClient] disconnect:YES] 与 [[RCIMClient sharedRCIMClient]
+ disconnect] 完全一致；
+ [[RCIMClient sharedRCIMClient] disconnect:NO] 与 [[RCIMClient sharedRCIMClient]
+ logout] 完全一致。
+ 您只需要按照您的需求，使用 disconnect: 与 disconnect 以及 logout 三个接口其中一个即可。
+ 
+ @remarks 连接
  */
 - (void)logout;
 
 /**
- 设置断线重连时是否踢出重连设备
+ 设置断线重连时是否踢出当前正在重连的设备
 
  @discussion
  用户没有开通多设备登录功能的前提下，同一个账号在一台新设备上登录的时候，会把这个账号在之前登录的设备上踢出。
@@ -543,25 +619,32 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  设置 enable 为 YES 时，SDK 重连的时候发现此时已有别的设备连接成功，不再强行踢出已有设备，而是踢出重连设备。
 
  @param enable 是否踢出重连设备
+ 
+ @remarks 功能设置
  */
 - (void)setReconnectKickEnable:(BOOL)enable;
 
 #pragma mark - 连接状态监听
 
 /*!
- 设置IMLib的连接状态监听器
+ 设置 IMLib 的连接状态监听器
 
- @param delegate    IMLib连接状态监听器
+ @param delegate    IMLib 连接状态监听器
 
- @warning 如果您使用IMLib，可以设置并实现此Delegate监听连接状态变化；
- 如果您使用IMKit，请使用RCIM中的connectionStatusDelegate监听连接状态变化，而不要使用此方法，否则会导致IMKit中无法自动更新UI！
+ @warning 如果您使用 IMLib，可以设置并实现此 Delegate 监听连接状态变化；
+ 如果您使用 IMKit，请使用 RCIM 中的 connectionStatusDelegate 监听连接状态变化，而不要使用此方法，否则会导致 IMKit
+ 中无法自动更新 UI！
+ 
+ @remarks 功能设置
  */
 - (void)setRCConnectionStatusChangeDelegate:(id<RCConnectionStatusChangeDelegate>)delegate;
 
 /*!
- 获取当前SDK的连接状态
+ 获取当前 SDK 的连接状态
 
- @return 当前SDK的连接状态
+ @return 当前 SDK 的连接状态
+ 
+ @remarks 数据获取
  */
 - (RCConnectionStatus)getConnectionStatus;
 
@@ -569,29 +652,37 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  获取当前的网络状态
 
  @return 当前的网路状态
+ 
+ @remarks 数据获取
  */
 - (RCNetworkStatus)getCurrentNetworkStatus;
 
 /*!
- SDK当前所处的运行状态
+ SDK 当前所处的运行状态
+ 
+ @remarks 数据获取
  */
 @property (nonatomic, assign, readonly) RCSDKRunningMode sdkRunningMode;
 
-#pragma mark - Apple Watch状态监听
+#pragma mark - Apple Watch 状态监听
 
 /*!
- 用于Apple Watch的IMLib事务监听器
+ 用于 Apple Watch 的 IMLib 事务监听器
+ 
+ @remarks 功能设置
  */
 @property (nonatomic, strong) id<RCWatchKitStatusDelegate> watchKitStatusDelegate;
 
 #pragma mark - 阅后即焚监听
 
 /**
- 设置IMLib的阅后即焚监听器
+ 设置 IMLib 的阅后即焚监听器
 
  @param delegate 阅后即焚监听器
  @discussion 可以设置并实现此 Delegate 监听消息焚烧
- @warning 如果您使用IMKit，请不要使用此监听器，否则会导致IMKit中无法自动更新UI！
+ @warning 如果您使用 IMKit，请不要使用此监听器，否则会导致 IMKit 中无法自动更新 UI！
+ 
+ @remarks 功能设置
  */
 - (void)setRCMessageDestructDelegate:(id<RCMessageDestructDelegate>)delegate;
 
@@ -602,21 +693,25 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
 
  @discussion 用于与融云服务器建立连接之后，设置当前用户的用户信息。
 
- @warning 如果传入的用户信息中的用户ID与当前登录的用户ID不匹配，则将会忽略。
- 如果您使用IMLib，请使用此字段设置当前登录用户的用户信息；
- 如果您使用IMKit，请使用RCIM中的currentUserInfo设置当前登录用户的用户信息，而不要使用此字段。
+ @warning 如果传入的用户信息中的用户 ID 与当前登录的用户 ID 不匹配，则将会忽略。
+ 如果您使用 IMLib，请使用此字段设置当前登录用户的用户信息；
+ 如果您使用 IMKit，请使用 RCIM 中的 currentUserInfo 设置当前登录用户的用户信息，而不要使用此字段。
+ 
+ @remarks 数据获取
  */
 @property (nonatomic, strong) RCUserInfo *currentUserInfo;
 
 /*!
  从融云服务器获取用户信息（已废弃，请勿使用）
 
- @param userId                      用户ID
+ @param userId                      用户 ID
  @param successBlock                获取用户信息成功的回调
  [userInfo:获取到的用户信息]
  @param errorBlock                  获取用户信息失败的回调 [status:失败的错误码]
 
  @warning **已废弃，请勿使用。**
+ 
+ @remarks 数据获取
  */
 - (void)getUserInfo:(NSString *)userId
             success:(void (^)(RCUserInfo *userInfo))successBlock
@@ -627,13 +722,16 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
 /*!
  注册自定义的消息类型
 
- @param messageClass    自定义消息的类，该自定义消息需要继承于RCMessageContent
+ @param messageClass    自定义消息的类，该自定义消息需要继承于 RCMessageContent
 
  @discussion
- 如果您需要自定义消息，必须调用此方法注册该自定义消息的消息类型，否则SDK将无法识别和解析该类型消息。
+ 如果您需要自定义消息，必须调用此方法注册该自定义消息的消息类型，否则 SDK 将无法识别和解析该类型消息。
+ @discussion 请在初始化 appkey 之后，token 连接之前调用该方法注册自定义消息
 
- @warning 如果您使用IMLib，请使用此方法注册自定义的消息类型；
- 如果您使用IMKit，请使用RCIM中的同名方法注册自定义的消息类型，而不要使用此方法。
+ @warning 如果您使用 IMLib，请使用此方法注册自定义的消息类型；
+ 如果您使用 IMKit，请使用 RCIM 中的同名方法注册自定义的消息类型，而不要使用此方法。
+ 
+ @remarks 消息操作
  */
 - (void)registerMessageType:(Class)messageClass;
 
@@ -643,29 +741,31 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  发送消息
 
  @param conversationType    发送消息的会话类型
- @param targetId            发送消息的目标会话ID
+ @param targetId            发送消息的会话 ID
  @param content             消息的内容
  @param pushContent         接收方离线时需要显示的远程推送内容
  @param pushData            接收方离线时需要在远程推送中携带的非显示数据
- @param successBlock        消息发送成功的回调 [messageId:消息的ID]
- @param errorBlock          消息发送失败的回调 [nErrorCode:发送失败的错误码,
+ @param successBlock        消息发送成功的回调 [messageId: 消息的 ID]
+ @param errorBlock          消息发送失败的回调 [nErrorCode: 发送失败的错误码,
  messageId:消息的ID]
  @return                    发送的消息实体
 
  @discussion 当接收方离线并允许远程推送时，会收到远程推送。
- 远程推送中包含两部分内容，一是pushContent，用于显示；二是pushData，用于携带不显示的数据。
+ 远程推送中包含两部分内容，一是 pushContent ，用于显示；二是 pushData ，用于携带不显示的数据。
 
- SDK内置的消息类型，如果您将pushContent和pushData置为nil，会使用默认的推送格式进行远程推送。
- 自定义类型的消息，需要您自己设置pushContent和pushData来定义推送内容，否则将不会进行远程推送。
+ SDK 内置的消息类型，如果您将 pushContent 和 pushData 置为 nil ，会使用默认的推送格式进行远程推送。
+ 自定义类型的消息，需要您自己设置 pushContent 和 pushData 来定义推送内容，否则将不会进行远程推送。
 
- 如果您使用此方法发送图片消息，需要您自己实现图片的上传，构建一个RCImageMessage对象，
- 并将RCImageMessage中的imageUrl字段设置为上传成功的URL地址，然后使用此方法发送。
+ 如果您使用此方法发送图片消息，需要您自己实现图片的上传，构建一个 RCImageMessage 对象，
+ 并将 RCImageMessage 中的 imageUrl 字段设置为上传成功的 URL 地址，然后使用此方法发送。
 
- 如果您使用此方法发送文件消息，需要您自己实现文件的上传，构建一个RCFileMessage对象，
- 并将RCFileMessage中的fileUrl字段设置为上传成功的URL地址，然后使用此方法发送。
+ 如果您使用此方法发送文件消息，需要您自己实现文件的上传，构建一个 RCFileMessage 对象，
+ 并将 RCFileMessage 中的 fileUrl 字段设置为上传成功的 URL 地址，然后使用此方法发送。
 
- @warning 如果您使用IMLib，可以使用此方法发送消息；
- 如果您使用IMKit，请使用RCIM中的同名方法发送消息，否则不会自动更新UI。
+ @warning 如果您使用 IMLib，可以使用此方法发送消息；
+ 如果您使用 IMKit，请使用 RCIM 中的同名方法发送消息，否则不会自动更新 UI。
+ 
+ @remarks 消息操作
  */
 - (RCMessage *)sendMessage:(RCConversationType)conversationType
                   targetId:(NSString *)targetId
@@ -679,30 +779,32 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  发送消息
 
  @param conversationType    发送消息的会话类型
- @param targetId            发送消息的目标会话ID
+ @param targetId            发送消息的会话 ID
  @param content             消息的内容
  @param pushContent         接收方离线时需要显示的远程推送内容
  @param pushData            接收方离线时需要在远程推送中携带的非显示数据
  @param option              消息的相关配置
- @param successBlock        消息发送成功的回调 [messageId:消息的ID]
- @param errorBlock          消息发送失败的回调 [nErrorCode:发送失败的错误码,
- messageId:消息的ID]
+ @param successBlock        消息发送成功的回调 [messageId: 消息的 ID]
+ @param errorBlock          消息发送失败的回调 [nErrorCode: 发送失败的错误码,
+ messageId: 消息的 ID]
  @return                    发送的消息实体
 
  @discussion 当接收方离线并允许远程推送时，会收到远程推送。
- 远程推送中包含两部分内容，一是pushContent，用于显示；二是pushData，用于携带不显示的数据。
+ 远程推送中包含两部分内容，一是 pushContent，用于显示；二是 pushData，用于携带不显示的数据。
 
- SDK内置的消息类型，如果您将pushContent和pushData置为nil，会使用默认的推送格式进行远程推送。
- 自定义类型的消息，需要您自己设置pushContent和pushData来定义推送内容，否则将不会进行远程推送。
+ SDK 内置的消息类型，如果您将 pushContent 和 pushData 置为 nil，会使用默认的推送格式进行远程推送。
+ 自定义类型的消息，需要您自己设置 pushContent 和 pushData 来定义推送内容，否则将不会进行远程推送。
 
- 如果您使用此方法发送图片消息，需要您自己实现图片的上传，构建一个RCImageMessage对象，
- 并将RCImageMessage中的imageUrl字段设置为上传成功的URL地址，然后使用此方法发送。
+ 如果您使用此方法发送图片消息，需要您自己实现图片的上传，构建一个 RCImageMessage 对象，
+ 并将 RCImageMessage 中的 imageUrl 字段设置为上传成功的 URL 地址，然后使用此方法发送。
 
- 如果您使用此方法发送文件消息，需要您自己实现文件的上传，构建一个RCFileMessage对象，
- 并将RCFileMessage中的fileUrl字段设置为上传成功的URL地址，然后使用此方法发送。
+ 如果您使用此方法发送文件消息，需要您自己实现文件的上传，构建一个 RCFileMessage 对象，
+ 并将 RCFileMessage 中的 fileUrl 字段设置为上传成功的 URL 地址，然后使用此方法发送。
 
- @warning 如果您使用IMLib，可以使用此方法发送消息；
- 如果您使用IMKit，请使用RCIM中的同名方法发送消息，否则不会自动更新UI。
+ @warning 如果您使用 IMLib，可以使用此方法发送消息；
+ 如果您使用 IMKit，请使用 RCIM 中的同名方法发送消息，否则不会自动更新 UI。
+ 
+ @remarks 消息操作
  */
 - (RCMessage *)sendMessage:(RCConversationType)conversationType
                   targetId:(NSString *)targetId
@@ -717,36 +819,38 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  发送媒体消息（图片消息或文件消息）
 
  @param conversationType    发送消息的会话类型
- @param targetId            发送消息的目标会话ID
+ @param targetId            发送消息的会话 ID
  @param content             消息的内容
  @param pushContent         接收方离线时需要显示的远程推送内容
  @param pushData            接收方离线时需要在远程推送中携带的非显示数据
  @param progressBlock       消息发送进度更新的回调 [progress:当前的发送进度, 0
- <= progress <= 100, messageId:消息的ID]
- @param successBlock        消息发送成功的回调 [messageId:消息的ID]
+ <= progress <= 100, messageId:消息的 ID]
+ @param successBlock        消息发送成功的回调 [messageId:消息的 ID]
  @param errorBlock          消息发送失败的回调 [errorCode:发送失败的错误码,
- messageId:消息的ID]
- @param cancelBlock         用户取消了消息发送的回调 [messageId:消息的ID]
+ messageId:消息的 ID]
+ @param cancelBlock         用户取消了消息发送的回调 [messageId:消息的 ID]
  @return                    发送的消息实体
 
  @discussion 当接收方离线并允许远程推送时，会收到远程推送。
- 远程推送中包含两部分内容，一是pushContent，用于显示；二是pushData，用于携带不显示的数据。
+ 远程推送中包含两部分内容，一是 pushContent，用于显示；二是 pushData，用于携带不显示的数据。
 
- SDK内置的消息类型，如果您将pushContent和pushData置为nil，会使用默认的推送格式进行远程推送。
- 自定义类型的消息，需要您自己设置pushContent和pushData来定义推送内容，否则将不会进行远程推送。
+ SDK 内置的消息类型，如果您将 pushContent 和 pushData 置为 nil，会使用默认的推送格式进行远程推送。
+ 自定义类型的消息，需要您自己设置 pushContent 和 pushData 来定义推送内容，否则将不会进行远程推送。
 
- 如果您需要上传图片到自己的服务器，需要构建一个RCImageMessage对象，
- 并将RCImageMessage中的imageUrl字段设置为上传成功的URL地址，然后使用RCIMClient的
+ 如果您需要上传图片到自己的服务器，需要构建一个 RCImageMessage 对象，
+ 并将 RCImageMessage 中的 imageUrl 字段设置为上传成功的 URL 地址，然后使用 RCIMClient 的
  sendMessage:targetId:content:pushContent:pushData:success:error:方法
- 或sendMessage:targetId:content:pushContent:success:error:方法进行发送，不要使用此方法。
+ 或 sendMessage:targetId:content:pushContent:success:error:方法进行发送，不要使用此方法。
 
- 如果您需要上传文件到自己的服务器，构建一个RCFileMessage对象，
- 并将RCFileMessage中的fileUrl字段设置为上传成功的URL地址，然后使用RCIMClient的
+ 如果您需要上传文件到自己的服务器，构建一个 RCFileMessage 对象，
+ 并将 RCFileMessage 中的 fileUrl 字段设置为上传成功的 URL 地址，然后使用 RCIMClient 的
  sendMessage:targetId:content:pushContent:pushData:success:error:方法
- 或sendMessage:targetId:content:pushContent:success:error:方法进行发送，不要使用此方法。
+ 或 sendMessage:targetId:content:pushContent:success:error:方法进行发送，不要使用此方法。
 
- @warning 如果您使用IMLib，可以使用此方法发送媒体消息；
- 如果您使用IMKit，请使用RCIM中的同名方法发送媒体消息，否则不会自动更新UI。
+ @warning 如果您使用 IMLib，可以使用此方法发送媒体消息；
+ 如果您使用 IMKit，请使用 RCIM 中的同名方法发送媒体消息，否则不会自动更新 UI。
+ 
+ @remarks 消息操作
  */
 - (RCMessage *)sendMediaMessage:(RCConversationType)conversationType
                        targetId:(NSString *)targetId
@@ -762,30 +866,32 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  发送媒体消息(上传图片或文件等媒体信息到指定的服务器)
 
  @param conversationType    发送消息的会话类型
- @param targetId            发送消息的目标会话ID
+ @param targetId            发送消息的会话 ID
  @param content             消息的内容
  @param pushContent         接收方离线时需要显示的远程推送内容
  @param pushData            接收方离线时需要在远程推送中携带的非显示数据
- @param uploadPrepareBlock  媒体文件上传进度更新的IMKit监听
- [uploadListener:当前的发送进度监听，SDK通过此监听更新IMKit UI]
+ @param uploadPrepareBlock  媒体文件上传进度更新的 IMKit 监听
+ [uploadListener:当前的发送进度监听，SDK 通过此监听更新 IMKit UI]
  @param progressBlock       消息发送进度更新的回调 [progress:当前的发送进度, 0
  <= progress <= 100, messageId:消息的ID]
- @param successBlock        消息发送成功的回调 [messageId:消息的ID]
+ @param successBlock        消息发送成功的回调 [messageId:消息的 ID]
  @param errorBlock          消息发送失败的回调 [errorCode:发送失败的错误码,
- messageId:消息的ID]
- @param cancelBlock         用户取消了消息发送的回调 [messageId:消息的ID]
+ messageId:消息的 ID]
+ @param cancelBlock         用户取消了消息发送的回调 [messageId:消息的 ID]
  @return                    发送的消息实体
 
- @discussion 此方法仅用于IMKit。
- 如果您需要上传图片到自己的服务器并使用IMLib，构建一个RCImageMessage对象，
- 并将RCImageMessage中的imageUrl字段设置为上传成功的URL地址，然后使用RCIMClient的
+ @discussion 此方法仅用于 IMKit。
+ 如果您需要上传图片到自己的服务器并使用 IMLib，构建一个 RCImageMessage 对象，
+ 并将 RCImageMessage 中的 imageUrl 字段设置为上传成功的 URL 地址，然后使用 RCIMClient 的
  sendMessage:targetId:content:pushContent:pushData:success:error:方法
- 或sendMessage:targetId:content:pushContent:success:error:方法进行发送，不要使用此方法。
+ 或 sendMessage:targetId:content:pushContent:success:error:方法进行发送，不要使用此方法。
 
- 如果您需要上传文件到自己的服务器并使用IMLib，构建一个RCFileMessage对象，
- 并将RCFileMessage中的fileUrl字段设置为上传成功的URL地址，然后使用RCIMClient的
+ 如果您需要上传文件到自己的服务器并使用 IMLib，构建一个 RCFileMessage 对象，
+ 并将 RCFileMessage 中的 fileUrl 字段设置为上传成功的 URL 地址，然后使用 RCIMClient 的
  sendMessage:targetId:content:pushContent:pushData:success:error:方法
- 或sendMessage:targetId:content:pushContent:success:error:方法进行发送，不要使用此方法。
+ 或 sendMessage:targetId:content:pushContent:success:error:方法进行发送，不要使用此方法。
+ 
+ @remarks 消息操作
  */
 - (RCMessage *)sendMediaMessage:(RCConversationType)conversationType
                        targetId:(NSString *)targetId
@@ -801,26 +907,31 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
 /*!
  取消发送中的媒体信息
 
- @param messageId           媒体消息的messageId
+ @param messageId           媒体消息的 messageId
 
- @return YES表示取消成功，NO表示取消失败，即已经发送成功或者消息不存在。
+ @return YES 表示取消成功，NO 表示取消失败，即已经发送成功或者消息不存在。
+ 
+ @remarks 消息操作
  */
 - (BOOL)cancelSendMediaMessage:(long)messageId;
 
 /*!
- 插入消息
+ 插入消息（该消息只插入本地数据库，实际不会发送给服务器和对方）
 
  @param conversationType    会话类型
- @param targetId            目标会话ID
- @param senderUserId        消息发送者的用户ID
+ @param targetId            会话 ID
+ @param senderUserId        消息发送者的用户 ID
  @param sendStatus          发送状态
  @param content             消息的内容
- @return                    插入的消息实体
+ @return             插入的消息实体
 
  @discussion 此方法不支持聊天室的会话类型。目前仅支持插入向外发送的消息，不支持插入接收的消息。
 
  @warning **已废弃，请勿使用。**
- 升级说明：如果您之前使用了此接口，可以直接替换为insertOutgoingMessage:targetId:sentStatus:content:接口，行为和实现完全一致。
+ 升级说明：如果您之前使用了此接口，可以直接替换为
+ insertOutgoingMessage:targetId:sentStatus:content:接口，行为和实现完全一致。
+ 
+ @remarks 消息操作
  */
 - (RCMessage *)insertMessage:(RCConversationType)conversationType
                     targetId:(NSString *)targetId
@@ -829,15 +940,17 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
                      content:(RCMessageContent *)content __deprecated_msg("已废弃，请勿使用。");
 
 /*!
- 插入向外发送的消息
+ 插入向外发送的消息（该消息只插入本地数据库，实际不会发送给服务器和对方）
 
  @param conversationType    会话类型
- @param targetId            目标会话ID
+ @param targetId            会话 ID
  @param sentStatus          发送状态
  @param content             消息的内容
- @return                    插入的消息实体
+ @return             插入的消息实体
 
  @discussion 此方法不支持聊天室的会话类型。
+ 
+ @remarks 消息操作
  */
 - (RCMessage *)insertOutgoingMessage:(RCConversationType)conversationType
                             targetId:(NSString *)targetId
@@ -845,15 +958,18 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
                              content:(RCMessageContent *)content;
 /*!
  插入向外发送的、指定时间的消息（此方法如果 sentTime 有问题会影响消息排序，慎用！！）
-
+（该消息只插入本地数据库，实际不会发送给服务器和对方）
+ 
  @param conversationType    会话类型
- @param targetId            目标会话ID
+ @param targetId            会话 ID
  @param sentStatus          发送状态
  @param content             消息的内容
- @param sentTime            消息发送的Unix时间戳，单位为毫秒（传 0 会按照本地时间插入）
+ @param sentTime            消息发送的 Unix 时间戳，单位为毫秒（传 0 会按照本地时间插入）
  @return                    插入的消息实体
 
- @discussion 此方法不支持聊天室的会话类型。如果sentTime<=0，则被忽略，会以插入时的时间为准。
+ @discussion 此方法不支持聊天室的会话类型。如果 sentTime<=0，则被忽略，会以插入时的时间为准。
+ 
+ @remarks 消息操作
  */
 - (RCMessage *)insertOutgoingMessage:(RCConversationType)conversationType
                             targetId:(NSString *)targetId
@@ -862,16 +978,18 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
                             sentTime:(long long)sentTime;
 
 /*!
- 插入接收的消息
+ 插入接收的消息（该消息只插入本地数据库，实际不会发送给服务器和对方）
 
  @param conversationType    会话类型
- @param targetId            目标会话ID
- @param senderUserId        发送者ID
+ @param targetId            会话 ID
+ @param senderUserId        发送者 ID
  @param receivedStatus      接收状态
  @param content             消息的内容
  @return                    插入的消息实体
 
  @discussion 此方法不支持聊天室的会话类型。
+ 
+ @remarks 消息操作
  */
 - (RCMessage *)insertIncomingMessage:(RCConversationType)conversationType
                             targetId:(NSString *)targetId
@@ -880,17 +998,19 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
                              content:(RCMessageContent *)content;
 
 /*!
- 插入接收的消息（此方法如果 sentTime 有问题会影响消息排序，慎用！！）
+ 插入接收的消息（此方法如果 sentTime 有问题会影响消息排序，慎用！！）（该消息只插入本地数据库，实际不会发送给服务器和对方）
 
  @param conversationType    会话类型
- @param targetId            目标会话ID
- @param senderUserId        发送者ID
+ @param targetId            会话 ID
+ @param senderUserId        发送者 ID
  @param receivedStatus      接收状态
  @param content             消息的内容
- @param sentTime            消息发送的Unix时间戳，单位为毫秒 （传 0 会按照本地时间插入）
+ @param sentTime            消息发送的 Unix 时间戳，单位为毫秒 （传 0 会按照本地时间插入）
  @return                    插入的消息实体
 
  @discussion 此方法不支持聊天室的会话类型。
+ 
+ @remarks 消息操作
  */
 - (RCMessage *)insertIncomingMessage:(RCConversationType)conversationType
                             targetId:(NSString *)targetId
@@ -900,17 +1020,19 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
                             sentTime:(long long)sentTime;
 
 /*!
- 根据文件URL地址下载文件内容
+ 根据文件 URL 地址下载文件内容
 
  @param fileName            指定的文件名称 需要开发者指定文件后缀 (例如 rongCloud.mov)
- @param mediaUrl            文件的URL地址
+ @param mediaUrl            文件的 URL 地址
  @param progressBlock       文件下载进度更新的回调 [progress:当前的下载进度, 0 <= progress <= 100]
  @param successBlock        下载成功的回调[mediaPath:下载成功后本地存放的文件路径 文件路径为文件消息的默认地址]
  @param errorBlock          下载失败的回调[errorCode:下载失败的错误码]
- 
- @warning  **已废弃，请勿使用。**
- 升级说明：如果您之前使用了此接口，可以直接替换为downloadMediaFile:mediaUrl:progress:success:error:cancel:接口 行为和实现完全一致。
 
+ @warning  **已废弃，请勿使用。**
+ 升级说明：如果您之前使用了此接口，可以直接替换为 downloadMediaFile:mediaUrl:progress:success:error:cancel:接口
+ 行为和实现完全一致。
+
+ @remarks 多媒体下载
   */
 - (void)downloadMediaFile:(NSString *)fileName
                  mediaUrl:(NSString *)mediaUrl
@@ -922,18 +1044,19 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  下载消息内容中的媒体信息
 
  @param conversationType    消息的会话类型
- @param targetId            消息的目标会话ID
+ @param targetId            消息的会话 ID
  @param mediaType           消息内容中的多媒体文件类型，目前仅支持图片
- @param mediaUrl            多媒体文件的网络URL
- @param progressBlock       消息下载进度更新的回调 [progress:当前的下载进度, 0
- <= progress <= 100]
+ @param mediaUrl            多媒体文件的网络 URL
+ @param progressBlock       消息下载进度更新的回调 [progress:当前的下载进度, 0 <= progress <= 100]
  @param successBlock        下载成功的回调
  [mediaPath:下载成功后本地存放的文件路径]
  @param errorBlock          下载失败的回调[errorCode:下载失败的错误码]
- 
- @warning  **已废弃，请勿使用。**
- 升级说明：如果您之前使用了此接口，可以直接替换为downloadMediaFile:targetId:mediaType:mediaUrl:progress:success:error:cancel:接口 行为和实现完全一致。
 
+ @warning  **已废弃，请勿使用。**
+ 升级说明：如果您之前使用了此接口，可以直接替换为
+ downloadMediaFile:targetId:mediaType:mediaUrl:progress:success:error: 接口 行为和实现完全一致。
+ 
+ @remarks 多媒体下载
  */
 - (void)downloadMediaFile:(RCConversationType)conversationType
                  targetId:(NSString *)targetId
@@ -944,15 +1067,18 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
                     error:(void (^)(RCErrorCode errorCode))errorBlock __deprecated_msg("已废弃，请勿使用。");
 
 /*!
- 根据文件URL地址下载文件内容
+ 根据文件 URL 地址下载文件内容
 
  @param fileName            指定的文件名称 需要开发者指定文件后缀 (例如 rongCloud.mov)
- @param mediaUrl            文件的URL地址
+ @param mediaUrl            文件的 URL 地址
  @param progressBlock       文件下载进度更新的回调 [progress:当前的下载进度, 0 <= progress <= 100]
  @param successBlock        下载成功的回调[mediaPath:下载成功后本地存放的文件路径 文件路径为文件消息的默认地址]
  @param errorBlock          下载失败的回调[errorCode:下载失败的错误码]
  @param cancelBlock         用户取消了下载的回调
-
+ 
+ @discussion 用来获取媒体原文件时调用。如果本地缓存中包含此文件，则从本地缓存中直接获取，否则将从服务器端下载。
+ 
+ @remarks 多媒体下载
 */
 - (void)downloadMediaFile:(NSString *)fileName
                  mediaUrl:(NSString *)mediaUrl
@@ -965,9 +1091,9 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  下载消息内容中的媒体信息
 
  @param conversationType    消息的会话类型
- @param targetId            消息的目标会话ID
+ @param targetId            消息的会话 ID
  @param mediaType           消息内容中的多媒体文件类型，目前仅支持图片
- @param mediaUrl            多媒体文件的网络URL
+ @param mediaUrl            多媒体文件的网络 URL
  @param progressBlock       消息下载进度更新的回调 [progress:当前的下载进度, 0
  <= progress <= 100]
  @param successBlock        下载成功的回调
@@ -975,6 +1101,8 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  @param errorBlock          下载失败的回调[errorCode:下载失败的错误码]
  @param cancelBlock         用户取消了下载的回调
 
+ @discussion 用来获取媒体原文件时调用。如果本地缓存中包含此文件，则从本地缓存中直接获取，否则将从服务器端下载。
+ @remarks 多媒体下载
  */
 - (void)downloadMediaFile:(RCConversationType)conversationType
                  targetId:(NSString *)targetId
@@ -988,11 +1116,15 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
 /*!
  下载消息内容中的媒体信息
 
- @param messageId           媒体消息的messageId
+ @param messageId           媒体消息的 messageId
  @param progressBlock       消息下载进度更新的回调 [progress:当前的下载进度, 0 <= progress <= 100]
  @param successBlock        下载成功的回调[mediaPath:下载成功后本地存放的文件路径]
  @param errorBlock          下载失败的回调[errorCode:下载失败的错误码]
  @param cancelBlock         用户取消了下载的回调
+ 
+ @discussion 用来获取媒体原文件时调用。如果本地缓存中包含此文件，则从本地缓存中直接获取，否则将从服务器端下载。
+ 
+ @remarks 多媒体下载
  */
 - (void)downloadMediaMessage:(long)messageId
                     progress:(void (^)(int progress))progressBlock
@@ -1005,16 +1137,20 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
 
  @param messageId 媒体消息的messageId
 
- @return YES表示取消成功，NO表示取消失败，即已经下载完成或者消息不存在。
+ @return YES 表示取消成功，NO表示取消失败，即已经下载完成或者消息不存在。
+ 
+ @remarks 多媒体下载
  */
 - (BOOL)cancelDownloadMediaMessage:(long)messageId;
 
 /*!
-取消下载中的媒体信息
+ 取消下载中的媒体信息
 
-@param mediaUrl 媒体消息Url
+ @param mediaUrl 媒体消息 Url
 
-@return YES表示取消成功，NO表示取消失败，即已经下载完成或者消息不存在。
+ @return YES 表示取消成功，NO 表示取消失败，即已经下载完成或者消息不存在。
+ 
+ @remarks 多媒体下载
 */
 - (BOOL)cancelDownloadMediaUrl:(NSString *)mediaUrl;
 
@@ -1022,7 +1158,7 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
 // 发送状态消息
 //
 // @param conversationType    会话类型
-// @param targetId            目标会话ID
+// @param targetId            会话 ID
 // @param content             消息内容
 // @param successBlock        发送消息成功的回调 [messageId:消息的ID]
 // @param errorBlock          发送消息失败的回调 [nErrorCode:发送失败的错误码,
@@ -1032,7 +1168,8 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
 // 如果接收方不在线，则不会收到远程推送，再上线也不会收到此消息。
 //
 // @warning **已废弃，请勿使用。**
-// 升级说明：如果您之前使用了此接口，可以直接替换为sendMessage:targetId:content:pushContent:pushData:success:error:接口（pushContent和pushData传为nil），行为和实现完全一致。
+// 升级说明：如果您之前使用了此接口，可以直接替换为
+// sendMessage:targetId:content:pushContent:pushData:success:error:接口（pushContent和pushData传为nil），行为和实现完全一致。
 // */
 //- (RCMessage *)sendStatusMessage:(RCConversationType)conversationType
 //                        targetId:(NSString *)targetId
@@ -1046,7 +1183,7 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  发送消息
 
  @param conversationType    发送消息的会话类型
- @param targetId            发送消息的目标会话ID
+ @param targetId            发送消息的会话 ID
  @param content             消息的内容
  @param pushContent         接收方离线时需要显示的远程推送内容
  @param successBlock        消息发送成功的回调 [messageId:消息的ID]
@@ -1055,22 +1192,25 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  @return                    发送的消息实体
 
  @discussion 当接收方离线并允许远程推送时，会收到远程推送。
- 远程推送中包含两部分内容，一是pushContent，用于显示；二是pushData，用于携带不显示的数据。
+ 远程推送中包含两部分内容，一是 pushContent，用于显示；二是 pushData，用于携带不显示的数据。
 
- SDK内置的消息类型，如果您将pushContent和pushData置为nil，会使用默认的推送格式进行远程推送。
- 自定义类型的消息，需要您自己设置pushContent和pushData来定义推送内容，否则将不会进行远程推送。
+ SDK 内置的消息类型，如果您将 pushContent 和 pushData 置为 nil，会使用默认的推送格式进行远程推送。
+ 自定义类型的消息，需要您自己设置 pushContent 和 pushData 来定义推送内容，否则将不会进行远程推送。
 
- 使此方法会将pushData设置为nil，如果需要设置pushData可以使用RCIMClient的
+ 使此方法会将 pushData 设置为 nil，如果需要设置 pushData 可以使用 RCIMClient 的
  sendMessage:targetId:content:pushContent:pushData:success:error:方法。
 
- 如果您使用此方法发送图片消息，需要您自己实现图片的上传，然后构建一个RCImageMessage对象，
- 并将RCImageMessage中的imageUrl字段设置为最终上传的地址，使用此方法发送。
+ 如果您使用此方法发送图片消息，需要您自己实现图片的上传，然后构建一个 RCImageMessage 对象，
+ 并将 RCImageMessage 中的 imageUrl 字段设置为最终上传的地址，使用此方法发送。
 
- 如果您使用IMLib，可以使用此方法发送消息；
- 如果您使用IMKit，请使用RCIM中的同名方法发送消息，否则不会自动更新UI。
+ 如果您使用 IMLib，可以使用此方法发送消息；
+ 如果您使用 IMKit，请使用 RCIM 中的同名方法发送消息，否则不会自动更新 UI。
 
  @warning  **已废弃，请勿使用。**
- 升级说明：如果您之前使用了此接口，可以直接替换为sendMessage:targetId:content:pushContent:pushData:success:error:接口（pushData传为nil），行为和实现完全一致。
+ 升级说明：如果您之前使用了此接口，可以直接替换为
+ sendMessage:targetId:content:pushContent:pushData:success:error:接口（pushData传为 nil），行为和实现完全一致。
+ 
+ @remarks 消息操作
  */
 - (RCMessage *)sendMessage:(RCConversationType)conversationType
                   targetId:(NSString *)targetId
@@ -1084,35 +1224,38 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  发送图片消息
 
  @param conversationType    发送消息的会话类型
- @param targetId            发送消息的目标会话ID
+ @param targetId            发送消息的会话 ID
  @param content             消息的内容
  @param pushContent         接收方离线时需要显示的远程推送内容
  @param progressBlock       消息发送进度更新的回调 [progress:当前的发送进度, 0
- <= progress <= 100, messageId:消息的ID]
- @param successBlock        消息发送成功的回调 [messageId:消息的ID]
+ <= progress <= 100, messageId:消息的 ID]
+ @param successBlock        消息发送成功的回调 [messageId:消息的 ID]
  @param errorBlock          消息发送失败的回调 [errorCode:发送失败的错误码,
- messageId:消息的ID]
+ messageId:消息的 ID]
  @return                    发送的消息实体
 
  @discussion 当接收方离线并允许远程推送时，会收到远程推送。
- 远程推送中包含两部分内容，一是pushContent，用于显示；二是pushData，用于携带不显示的数据。
+ 远程推送中包含两部分内容，一是 pushContent，用于显示；二是 pushData，用于携带不显示的数据。
 
- SDK内置的消息类型，如果您将pushContent和pushData置为nil，会使用默认的推送格式进行远程推送。
- 自定义类型的消息，需要您自己设置pushContent和pushData来定义推送内容，否则将不会进行远程推送。
+ SDK 内置的消息类型，如果您将 pushContent 和 pushDat a置为 nil，会使用默认的推送格式进行远程推送。
+ 自定义类型的消息，需要您自己设置 pushContent 和 pushData 来定义推送内容，否则将不会进行远程推送。
 
- 使此方法会将pushData设置为nil，如果需要设置pushData可以使用RCIMClient的
+ 使此方法会将 pushData 设置为 nil，如果需要设置 pushData 可以使用 RCIMClient 的
  sendImageMessage:targetId:content:pushContent:pushData:progress:success:error:方法。
 
- 如果您需要上传图片到自己的服务器并使用IMLib，构建一个RCImageMessage对象，
- 并将RCImageMessage中的imageUrl字段设置为上传成功的URL地址，然后使用RCIMClient的
+ 如果您需要上传图片到自己的服务器并使用 IMLib，构建一个 RCImageMessage 对象，
+ 并将 RCImageMessage 中的 imageUrl 字段设置为上传成功的 URL 地址，然后使用 RCIMClient 的
  sendMessage:targetId:content:pushContent:pushData:success:error:方法
- 或sendMessage:targetId:content:pushContent:success:error:方法进行发送，不要使用此方法。
+ 或 sendMessage:targetId:content:pushContent:success:error:方法进行发送，不要使用此方法。
 
- 如果您使用IMLib，可以使用此方法发送图片消息；
- 如果您使用IMKit，请使用RCIM中的同名方法发送图片消息，否则不会自动更新UI。
+ 如果您使用 IMLib，可以使用此方法发送图片消息；
+ 如果您使用 IMKit，请使用 RCIM 中的同名方法发送图片消息，否则不会自动更新 UI。
 
  @warning **已废弃，请勿使用。**
- 升级说明：如果您之前使用了此接口，可以直接替换为sendMediaMessage:targetId:content:pushContent:pushData:progress:success:error:cancel:接口（pushData传为nil），行为和实现完全一致。
+ 升级说明：如果您之前使用了此接口，可以直接替换为
+ sendMediaMessage:targetId:content:pushContent:pushData:progress:success:error:cancel:接口（pushData传为nil），行为和实现完全一致。
+ 
+ @remarks 消息操作
  */
 - (RCMessage *)sendImageMessage:(RCConversationType)conversationType
                        targetId:(NSString *)targetId
@@ -1127,33 +1270,36 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  发送图片消息
 
  @param conversationType    发送消息的会话类型
- @param targetId            发送消息的目标会话ID
+ @param targetId            发送消息的会话 ID
  @param content             消息的内容
  @param pushContent         接收方离线时需要显示的远程推送内容
  @param pushData            接收方离线时需要在远程推送中携带的非显示数据
  @param progressBlock       消息发送进度更新的回调 [progress:当前的发送进度, 0
- <= progress <= 100, messageId:消息的ID]
- @param successBlock        消息发送成功的回调 [messageId:消息的ID]
+ <= progress <= 100, messageId:消息的 ID]
+ @param successBlock        消息发送成功的回调 [messageId:消息的 ID]
  @param errorBlock          消息发送失败的回调 [errorCode:发送失败的错误码,
- messageId:消息的ID]
+ messageId:消息的 ID]
  @return                    发送的消息实体
 
  @discussion 当接收方离线并允许远程推送时，会收到远程推送。
- 远程推送中包含两部分内容，一是pushContent，用于显示；二是pushData，用于携带不显示的数据。
+ 远程推送中包含两部分内容，一是 pushContent，用于显示；二是 pushData，用于携带不显示的数据。
 
- SDK内置的消息类型，如果您将pushContent和pushData置为nil，会使用默认的推送格式进行远程推送。
- 自定义类型的消息，需要您自己设置pushContent和pushData来定义推送内容，否则将不会进行远程推送。
+ SDK 内置的消息类型，如果您将 pushContent 和 pushData 置为 nil，会使用默认的推送格式进行远程推送。
+ 自定义类型的消息，需要您自己设置 pushContent 和 pushData 来定义推送内容，否则将不会进行远程推送。
 
- 如果您需要上传图片到自己的服务器，构建一个RCImageMessage对象，
- 并将RCImageMessage中的imageUrl字段设置为上传成功的URL地址，然后使用RCIMClient的
+ 如果您需要上传图片到自己的服务器，构建一个 RCImageMessage 对象，
+ 并将 RCImageMessage 中的 imageUrl 字段设置为上传成功的 URL 地址，然后使用 RCIMClient 的
  sendMessage:targetId:content:pushContent:pushData:success:error:方法
- 或sendMessage:targetId:content:pushContent:success:error:方法进行发送，不要使用此方法。
+ 或 sendMessage:targetId:content:pushContent:success:error:方法进行发送，不要使用此方法。
 
- 如果您使用IMLib，可以使用此方法发送图片消息；
- 如果您使用IMKit，请使用RCIM中的同名方法发送图片消息，否则不会自动更新UI。
+ 如果您使用 IMLib，可以使用此方法发送图片消息；
+ 如果您使用 IMKit，请使用 RCIM 中的同名方法发送图片消息，否则不会自动更新 UI。
 
  @warning **已废弃，请勿使用。**
- 升级说明：如果您之前使用了此接口，可以直接替换为sendMediaMessage:targetId:content:pushContent:pushData:progress:success:error:cancel:接口，行为和实现完全一致。
+ 升级说明：如果您之前使用了此接口，可以直接替换为
+ sendMediaMessage:targetId:content:pushContent:pushData:progress:success:error:cancel:接口，行为和实现完全一致。
+ 
+ @remarks 消息操作
  */
 - (RCMessage *)sendImageMessage:(RCConversationType)conversationType
                        targetId:(NSString *)targetId
@@ -1169,27 +1315,30 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  发送图片消息(上传图片到指定的服务器)
 
  @param conversationType    发送消息的会话类型
- @param targetId            发送消息的目标会话ID
+ @param targetId            发送消息的会话 ID
  @param content             消息的内容
  @param pushContent         接收方离线时需要显示的远程推送内容
  @param pushData            接收方离线时需要在远程推送中携带的非显示数据
- @param uploadPrepareBlock  图片上传进度更新的IMKit监听
- [uploadListener:当前的发送进度监听，SDK通过此监听更新IMKit UI]
+ @param uploadPrepareBlock  图片上传进度更新的 IMKit 监听
+ [uploadListener:当前的发送进度监听，SDK 通过此监听更新 IMKit UI]
  @param progressBlock       消息发送进度更新的回调 [progress:当前的发送进度, 0
- <= progress <= 100, messageId:消息的ID]
- @param successBlock        消息发送成功的回调 [messageId:消息的ID]
+ <= progress <= 100, messageId:消息的 ID]
+ @param successBlock        消息发送成功的回调 [messageId:消息的 ID]
  @param errorBlock          消息发送失败的回调 [errorCode:发送失败的错误码,
- messageId:消息的ID]
+ messageId:消息的 ID]
  @return                    发送的消息实体
 
- @discussion 此方法仅用于IMKit。
- 如果您需要上传图片到自己的服务器并使用IMLib，构建一个RCImageMessage对象，
- 并将RCImageMessage中的imageUrl字段设置为上传成功的URL地址，然后使用RCIMClient的
+ @discussion 此方法仅用于 IMKit。
+ 如果您需要上传图片到自己的服务器并使用 IMLib，构建一个 RCImageMessage 对象，
+ 并将 RCImageMessage 中的 imageUrl 字段设置为上传成功的 URL 地址，然后使用 RCIMClient 的
  sendMessage:targetId:content:pushContent:pushData:success:error:方法
- 或sendMessage:targetId:content:pushContent:success:error:方法进行发送，不要使用此方法。
+ 或 sendMessage:targetId:content:pushContent:success:error:方法进行发送，不要使用此方法。
 
  @warning **已废弃，请勿使用。**
- 升级说明：如果您之前使用了此接口，可以直接替换为sendMediaMessage:targetId:content:pushContent:pushData:uploadPrepare:progress:success:error:cancel:接口，行为和实现完全一致。
+ 升级说明：如果您之前使用了此接口，可以直接替换为
+ sendMediaMessage:targetId:content:pushContent:pushData:uploadPrepare:progress:success:error:cancel:接口，行为和实现完全一致。
+ 
+ @remarks 消息操作
  */
 - (RCMessage *)sendImageMessage:(RCConversationType)conversationType
                        targetId:(NSString *)targetId
@@ -1206,7 +1355,7 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  发送定向消息
 
  @param conversationType 发送消息的会话类型
- @param targetId         发送消息的目标会话 ID
+ @param targetId         发送消息的会话 ID
  @param userIdList       接收消息的用户 ID 列表
  @param content          消息的内容
  @param pushContent      接收方离线时需要显示的远程推送内容
@@ -1222,6 +1371,8 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  如果您使用 IMKit，请使用 RCIM 中的同名方法发送定向消息，否则不会自动更新 UI。
 
  @warning 此方法目前仅支持群组和讨论组。
+ 
+ @remarks 消息操作
  */
 - (RCMessage *)sendDirectionalMessage:(RCConversationType)conversationType
                              targetId:(NSString *)targetId
@@ -1234,19 +1385,21 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
 
 #pragma mark 消息接收监听
 /*!
- 设置IMlib的消息接收监听器
+ 设置 IMlib 的消息接收监听器
 
- @param delegate    IMLib消息接收监听器
- @param userData    用户自定义的监听器Key值，可以为nil
+ @param delegate    IMLib 消息接收监听器
+ @param userData    用户自定义的监听器 Key 值，可以为 nil
 
  @discussion
- 设置IMLib的消息接收监听器请参考RCIMClient的setReceiveMessageDelegate:object:方法。
+ 设置 IMLib 的消息接收监听器请参考 RCIMClient 的 setReceiveMessageDelegate:object:方法。
 
- userData为您自定义的任意数据，SDK会在回调的onReceived:left:object:方法中传入作为object参数。
- 您如果有设置多个监听，会只有最终的一个监听器起作用，您可以通过该userData值区分您设置的监听器。如果不需要直接设置为nil就可以。
+ userData 为您自定义的任意数据，SDK 会在回调的 onReceived:left:object:方法中传入作为 object 参数。
+ 您如果有设置多个监听，会只有最终的一个监听器起作用，您可以通过该 userData 值区分您设置的监听器。如果不需要直接设置为 nil 就可以。
 
- @warning 如果您使用IMlib，可以设置并实现此Delegate监听消息接收；
- 如果您使用IMKit，请使用RCIM中的receiveMessageDelegate监听消息接收，而不要使用此方法，否则会导致IMKit中无法自动更新UI！
+ @warning 如果您使用 IMlib，可以设置并实现此 Delegate 监听消息接收；
+ 如果您使用 IMKit，请使用 RCIM 中的 receiveMessageDelegate 监听消息接收，而不要使用此方法，否则会导致 IMKit 中无法自动更新 UI！
+ 
+ @remarks 功能设置
  */
 - (void)setReceiveMessageDelegate:(id<RCIMClientReceiveMessageDelegate>)delegate object:(id)userData;
 
@@ -1256,16 +1409,18 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  发送某个会话中消息阅读的回执
 
  @param conversationType    会话类型
- @param targetId            目标会话ID
+ @param targetId            会话 ID
  @param timestamp           该会话中已阅读的最后一条消息的发送时间戳
  @param successBlock        发送成功的回调
  @param errorBlock          发送失败的回调[nErrorCode: 失败的错误码]
 
- @discussion 此接口只支持单聊, 如果使用Lib 可以注册监听
- RCLibDispatchReadReceiptNotification 通知,使用kit 直接设置RCIM.h
- 中的enabledReadReceiptConversationTypeList。
+ @discussion 此接口只支持单聊, 如果使用 IMLib 可以注册监听
+ RCLibDispatchReadReceiptNotification 通知,使用 IMKit 直接设置RCIM.h
+ 中的 enabledReadReceiptConversationTypeList。
 
  @warning 目前仅支持单聊。
+ 
+ @remarks 高级功能
  */
 - (void)sendReadReceiptMessage:(RCConversationType)conversationType
                       targetId:(NSString *)targetId
@@ -1281,6 +1436,8 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  @param errorBlock   请求失败的回调[nErrorCode: 失败的错误码]
 
  @discussion 通过此接口，可以要求阅读了这条消息的用户发送阅读回执。
+ 
+ @remarks 高级功能
  */
 - (void)sendReadReceiptRequest:(RCMessage *)message
                        success:(void (^)(void))successBlock
@@ -1290,12 +1447,14 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  发送阅读回执
 
  @param conversationType 会话类型
- @param targetId         会话ID
+ @param targetId         会话 ID
  @param messageList      已经阅读了的消息列表
  @param successBlock     发送成功的回调
  @param errorBlock       发送失败的回调[nErrorCode: 失败的错误码]
 
  @discussion 当用户阅读了需要阅读回执的消息，可以通过此接口发送阅读回执，消息的发送方即可直接知道那些人已经阅读。
+ 
+ @remarks 高级功能
  */
 - (void)sendReadReceiptResponse:(RCConversationType)conversationType
                        targetId:(NSString *)targetId
@@ -1304,13 +1463,15 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
                           error:(void (^)(RCErrorCode nErrorCode))errorBlock;
 
 /*!
- 同步会话阅读状态
+ 同步会话阅读状态（把指定会话里所有发送时间早于 timestamp 的消息置为已读）
 
  @param conversationType 会话类型
- @param targetId         会话ID
- @param timestamp        已经阅读的最后一条消息的Unix时间戳(毫秒)
+ @param targetId         会话 ID
+ @param timestamp        已经阅读的最后一条消息的 Unix 时间戳(毫秒)
  @param successBlock     同步成功的回调
  @param errorBlock       同步失败的回调[nErrorCode: 失败的错误码]
+ 
+ @remarks 高级功能
  */
 - (void)syncConversationReadStatus:(RCConversationType)conversationType
                           targetId:(NSString *)targetId
@@ -1318,15 +1479,19 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
                            success:(void (^)(void))successBlock
                              error:(void (^)(RCErrorCode nErrorCode))errorBlock;
 
+#pragma mark - 消息撤回
+
 /*!
  撤回消息
 
  @param message      需要撤回的消息
  @param pushContent 当下发 push 消息时，在通知栏里会显示这个字段。如果不设置该字段，无法接受到 push 推送。
- @param successBlock 撤回成功的回调 [messageId:撤回的消息ID，该消息已经变更为新的消息]
+ @param successBlock 撤回成功的回调 [messageId:撤回的消息 ID，该消息已经变更为新的消息]
  @param errorBlock   撤回失败的回调 [errorCode:撤回失败错误码]
 
  @warning 仅支持单聊、群组和讨论组。
+ 
+ @remarks 高级功能
  */
 - (void)recallMessage:(RCMessage *)message
           pushContent:(NSString *)pushContent
@@ -1337,8 +1502,9 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  撤回消息
 
  @param message      需要撤回的消息
- @param successBlock 撤回成功的回调 [messageId:撤回的消息ID，该消息已经变更为新的消息]
+ @param successBlock 撤回成功的回调 [messageId:撤回的消息 ID，该消息已经变更为新的消息]
  @param errorBlock   撤回失败的回调 [errorCode:撤回失败错误码]
+ @remarks 高级功能
  */
 - (void)recallMessage:(RCMessage *)message
               success:(void (^)(long messageId))successBlock
@@ -1350,13 +1516,15 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  获取某个会话中指定数量的最新消息实体
 
  @param conversationType    会话类型
- @param targetId            目标会话ID
+ @param targetId            会话 ID
  @param count               需要获取的消息数量
- @return                    消息实体RCMessage对象列表
+ @return                    消息实体 RCMessage 对象列表
 
  @discussion
  此方法会获取该会话中指定数量的最新消息实体，返回的消息实体按照时间从新到旧排列。
- 如果会话中的消息数量小于参数count的值，会将该会话中的所有消息返回。
+ 如果会话中的消息数量小于参数 count 的值，会将该会话中的所有消息返回。
+ 
+ @remarks 消息操作
  */
 - (NSArray *)getLatestMessages:(RCConversationType)conversationType targetId:(NSString *)targetId count:(int)count;
 
@@ -1364,16 +1532,18 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  获取会话中，从指定消息之前、指定数量的最新消息实体
 
  @param conversationType    会话类型
- @param targetId            目标会话ID
- @param oldestMessageId     截止的消息ID
+ @param targetId            会话 ID
+ @param oldestMessageId     截止的消息 ID
  @param count               需要获取的消息数量
- @return                    消息实体RCMessage对象列表
+ @return                    消息实体 RCMessage 对象列表
 
  @discussion
- 此方法会获取该会话中，oldestMessageId之前的、指定数量的最新消息实体，返回的消息实体按照时间从新到旧排列。
- 返回的消息中不包含oldestMessageId对应那条消息，如果会话中的消息数量小于参数count的值，会将该会话中的所有消息返回。
+ 此方法会获取该会话中，oldestMessageId 之前的、指定数量的最新消息实体，返回的消息实体按照时间从新到旧排列。
+ 返回的消息中不包含 oldestMessageId 对应那条消息，如果会话中的消息数量小于参数 count 的值，会将该会话中的所有消息返回。
  如：
- oldestMessageId为10，count为2，会返回messageId为9和8的RCMessage对象列表。
+ oldestMessageId 为 10，count 为 2，会返回 messageId 为 9 和 8 的 RCMessage 对象列表。
+ 
+ @remarks 消息操作
  */
 - (NSArray *)getHistoryMessages:(RCConversationType)conversationType
                        targetId:(NSString *)targetId
@@ -1384,17 +1554,18 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  获取会话中，从指定消息之前、指定数量的、指定消息类型的最新消息实体
 
  @param conversationType    会话类型
- @param targetId            目标会话ID
+ @param targetId            会话 ID
  @param objectName          消息内容的类型名，如果想取全部类型的消息请传 nil
- @param oldestMessageId     截止的消息ID
+ @param oldestMessageId     截止的消息 ID
  @param count               需要获取的消息数量
- @return                    消息实体RCMessage对象列表
+ @return                    消息实体 RCMessage 对象列表
 
  @discussion
- 此方法会获取该会话中，oldestMessageId之前的、指定数量和消息类型的最新消息实体，返回的消息实体按照时间从新到旧排列。
- 返回的消息中不包含oldestMessageId对应的那条消息，如果会话中的消息数量小于参数count的值，会将该会话中的所有消息返回。
- 如：
- oldestMessageId为10，count为2，会返回messageId为9和8的RCMessage对象列表。
+ 此方法会获取该会话中，oldestMessageId 之前的、指定数量和消息类型的最新消息实体，返回的消息实体按照时间从新到旧排列。
+ 返回的消息中不包含 oldestMessageId 对应的那条消息，如果会话中的消息数量小于参数 count 的值，会将该会话中的所有消息返回。
+ 如：oldestMessageId 为 10，count 为 2，会返回 messageId 为 9 和 8 的 RCMessage 对象列表。
+ 
+ @remarks 消息操作
  */
 - (NSArray *)getHistoryMessages:(RCConversationType)conversationType
                        targetId:(NSString *)targetId
@@ -1406,16 +1577,18 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  获取会话中，指定消息、指定数量、指定消息类型、向前或向后查找的消息实体列表
 
  @param conversationType    会话类型
- @param targetId            目标会话ID
+ @param targetId            会话 ID
  @param objectName          消息内容的类型名，如果想取全部类型的消息请传 nil
- @param baseMessageId       当前的消息ID
- @param isForward           查询方向 true为向前，false为向后
+ @param baseMessageId       当前的消息 ID
+ @param isForward           查询方向 true 为向前，false 为向后
  @param count               需要获取的消息数量
- @return                    消息实体RCMessage对象列表
+ @return                    消息实体 RCMessage 对象列表
 
  @discussion
- 此方法会获取该会话中，baseMessageId之前或之后的、指定数量、消息类型和查询方向的最新消息实体，返回的消息实体按照时间从新到旧排列。
- 返回的消息中不包含baseMessageId对应的那条消息，如果会话中的消息数量小于参数count的值，会将该会话中的所有消息返回。
+ 此方法会获取该会话中，baseMessageId 之前或之后的、指定数量、消息类型和查询方向的最新消息实体，返回的消息实体按照时间从新到旧排列。
+ 返回的消息中不包含 baseMessageId 对应的那条消息，如果会话中的消息数量小于参数 count 的值，会将该会话中的所有消息返回。
+ 
+ @remarks 消息操作
  */
 - (NSArray *)getHistoryMessages:(RCConversationType)conversationType
                        targetId:(NSString *)targetId
@@ -1428,16 +1601,18 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  获取会话中，指定时间、指定数量、指定消息类型（多个）、向前或向后查找的消息实体列表
 
  @param conversationType    会话类型
- @param targetId            目标会话ID
+ @param targetId            会话 ID
  @param objectNames         消息内容的类型名称列表
  @param sentTime            当前的消息时间戳
- @param isForward           查询方向 true为向前，false为向后
+ @param isForward           查询方向 true 为向前，false 为向后
  @param count               需要获取的消息数量
- @return                    消息实体RCMessage对象列表
+ @return                    消息实体 RCMessage 对象列表
 
  @discussion
- 此方法会获取该会话中，sentTime之前或之后的、指定数量、指定消息类型（多个）的消息实体列表，返回的消息实体按照时间从新到旧排列。
- 返回的消息中不包含sentTime对应的那条消息，如果会话中的消息数量小于参数count的值，会将该会话中的所有消息返回。
+ 此方法会获取该会话中，sentTime 之前或之后的、指定数量、指定消息类型（多个）的消息实体列表，返回的消息实体按照时间从新到旧排列。
+ 返回的消息中不包含 sentTime 对应的那条消息，如果会话中的消息数量小于参数 count 的值，会将该会话中的所有消息返回。
+ 
+ @remarks 消息操作
  */
 - (NSArray *)getHistoryMessages:(RCConversationType)conversationType
                        targetId:(NSString *)targetId
@@ -1451,14 +1626,16 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  数量的消息。返回的消息列表中会包含指定的消息。消息列表时间顺序从新到旧。
 
  @param conversationType    会话类型
- @param targetId            目标会话ID
+ @param targetId            会话 ID
  @param sentTime            消息的发送时间
  @param beforeCount         指定消息的前部分消息数量
  @param afterCount          指定消息的后部分消息数量
- @return                    消息实体RCMessage对象列表
+ @return                    消息实体 RCMessage 对象列表
 
  @discussion
  获取该会话的这条消息及这条消息前 beforeCount 条和后 afterCount 条消息,如前后消息不够则返回实际数量的消息。
+ 
+ @remarks 消息操作
  */
 - (NSArray *)getHistoryMessages:(RCConversationType)conversationType
                        targetId:(NSString *)targetId
@@ -1470,7 +1647,7 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  从服务器端清除历史消息
 
  @param conversationType    会话类型
- @param targetId            目标会话ID
+ @param targetId            会话 ID
  @param recordTime          清除消息时间戳，【0 <= recordTime <= 当前会话最后一条消息的 sentTime,0
  清除所有消息，其他值清除小于等于 recordTime 的消息】
  @param successBlock        获取成功的回调
@@ -1479,6 +1656,8 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  @discussion
  此方法从服务器端清除历史消息，但是必须先开通历史消息云存储功能。
  例如，您不想从服务器上获取更多的历史消息，通过指定 recordTime 清除成功后只能获取该时间戳之后的历史消息。
+ 
+ @remarks 消息操作
  */
 - (void)clearRemoteHistoryMessages:(RCConversationType)conversationType
                           targetId:(NSString *)targetId
@@ -1490,18 +1669,20 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  清除历史消息
 
  @param conversationType    会话类型
- @param targetId            目标会话ID
+ @param targetId            会话 ID
  @param recordTime          清除消息时间戳，【0 <= recordTime <= 当前会话最后一条消息的 sentTime,0
  清除所有消息，其他值清除小于等于 recordTime 的消息】
  @param clearRemote         是否同时删除服务端消息
  @param successBlock        获取成功的回调
- @param errorBlock          获取失败的回调 [status:清除失败的错误码]
+ @param errorBlock          获取失败的回调 [ status:清除失败的错误码]
 
  @discussion
  此方法可以清除服务器端历史消息和本地消息，如果清除服务器端消息必须先开通历史消息云存储功能。
  例如，您不想从服务器上获取更多的历史消息，通过指定 recordTime 并设置 clearRemote 为 YES
  清除消息，成功后只能获取该时间戳之后的历史消息。如果 clearRemote 传 NO，
  只会清除本地消息。
+ 
+ @remarks 消息操作
  */
 - (void)clearHistoryMessages:(RCConversationType)conversationType
                     targetId:(NSString *)targetId
@@ -1514,7 +1695,7 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  从服务器端获取之前的历史消息
 
  @param conversationType    会话类型
- @param targetId            目标会话ID
+ @param targetId            会话 ID
  @param recordTime          截止的消息发送时间戳，毫秒
  @param count               需要获取的消息数量， 0 < count <= 20
  @param successBlock        获取成功的回调 [messages:获取到的历史消息数组, isRemaining 是否还有剩余消息 YES
@@ -1523,7 +1704,11 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
 
  @discussion
  此方法从服务器端获取之前的历史消息，但是必须先开通历史消息云存储功能。
- 例如，本地会话中有10条消息，您想拉取更多保存在服务器的消息的话，recordTime应传入最早的消息的发送时间戳，count传入1~20之间的数值。
+ 例如，本地会话中有10条消息，您想拉取更多保存在服务器的消息的话，recordTime 应传入最早的消息的发送时间戳，count 传入 1~20 之间的数值。
+ 
+ @discussion 本地数据库可以查到的消息，该接口不会再返回，所以建议先用 getHistoryMessages 相关接口取本地历史消息，本地消息取完之后再通过该接口获取远端历史消息
+ 
+ @remarks 消息操作
  */
 - (void)getRemoteHistoryMessages:(RCConversationType)conversationType
                         targetId:(NSString *)targetId
@@ -1536,7 +1721,7 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  从服务器端获取之前的历史消息
 
  @param conversationType    会话类型
- @param targetId            目标会话ID
+ @param targetId            会话 ID
  @param option              可配置的参数
  @param successBlock        获取成功的回调 [messages:获取到的历史消息数组, isRemaining 是否还有剩余消息 YES
  表示还有剩余，NO 表示无剩余]
@@ -1544,7 +1729,9 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
 
  @discussion
  此方法从服务器端获取之前的历史消息，但是必须先开通历史消息云存储功能。
- 例如，本地会话中有10条消息，您想拉取更多保存在服务器的消息的话，recordTime应传入最早的消息的发送时间戳，count传入1~20之间的数值。
+ 例如，本地会话中有 10 条消息，您想拉取更多保存在服务器的消息的话，recordTime 应传入最早的消息的发送时间戳，count 传入 1~20 之间的数值。
+ 
+ @remarks 消息操作
  */
 - (void)getRemoteHistoryMessages:(RCConversationType)conversationType
                         targetId:(NSString *)targetId
@@ -1554,7 +1741,7 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
 
 /*!
  从服务器端获取聊天室的历史消息
- @param targetId            聊天室ID
+ @param targetId            聊天室 ID
  @param recordTime          起始的消息发送时间戳，毫秒
  @param count               需要获取的消息数量， 0 < count <= 200
  @param order               拉取顺序，RC_Timestamp_Desc:倒序，RC_Timestamp_ASC:正序
@@ -1563,8 +1750,10 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
 
  @discussion
  此方法从服务器端获取聊天室的历史消息，但是必须先开通聊天室消息云存储功能。
- 指定开始时间,比如2016年9月1日10点(1472695200000),
+ 指定开始时间,比如 2016 年 9 月 1 日 10 点(1472695200000),
  默认是0(正序:从存储的第一条消息开始拉取,倒序:从存储的最后一条消息开始拉取)
+ 
+ @remarks 消息操作
  */
 - (void)getRemoteChatroomHistoryMessages:(NSString *)targetId
                               recordTime:(long long)recordTime
@@ -1577,35 +1766,44 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  获取会话中@提醒自己的消息
 
  @param conversationType    会话类型
- @param targetId            目标会话ID
+ @param targetId            会话 ID
 
  @discussion
- 此方法从本地获取被@提醒的消息(最多返回10条信息)
+ 此方法从本地获取被@提醒的消息(最多返回 10 条信息)
  @warning 使用 IMKit 注意在进入会话页面前调用，否则在进入会话清除未读数的接口 clearMessagesUnreadStatus: targetId:
  以及 设置消息接收状态接口 setMessageReceivedStatus:receivedStatus:会同步清除被提示信息状态。
+ 
+ @remarks 高级功能
  */
 - (NSArray *)getUnreadMentionedMessages:(RCConversationType)conversationType targetId:(NSString *)targetId;
-/*!
- 获取消息的发送时间（Unix时间戳、毫秒）
 
- @param messageId   消息ID
- @return            消息的发送时间（Unix时间戳、毫秒）
+/*!
+ 获取消息的发送时间（Unix 时间戳、毫秒）
+
+ @param messageId   消息 ID
+ @return            消息的发送时间（Unix 时间戳、毫秒）
+ 
+ @remarks 消息操作
  */
 - (long long)getMessageSendTime:(long)messageId;
 
 /*!
- 通过messageId获取消息实体
+ 通过 messageId 获取消息实体
 
- @param messageId   消息ID（数据库索引唯一值）
- @return            通过消息ID获取到的消息实体，当获取失败的时候，会返回nil。
+ @param messageId   消息 ID（数据库索引唯一值）
+ @return            通过消息 ID 获取到的消息实体，当获取失败的时候，会返回 nil。
+ 
+ @remarks 消息操作
  */
 - (RCMessage *)getMessage:(long)messageId;
 
 /*!
- 通过全局唯一ID获取消息实体
+ 通过全局唯一 ID 获取消息实体
 
- @param messageUId   全局唯一ID（服务器消息唯一ID）
- @return 通过全局唯一ID获取到的消息实体，当获取失败的时候，会返回nil。
+ @param messageUId   全局唯一 ID（服务器消息唯一 ID）
+ @return 通过全局唯一ID获取到的消息实体，当获取失败的时候，会返回 nil。
+ 
+ @remarks 消息操作
  */
 - (RCMessage *)getMessageByUId:(NSString *)messageUId;
 
@@ -1613,16 +1811,19 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  * 获取会话里第一条未读消息。
  *
  * @param conversationType 会话类型
- * @param targetId   会话 Id
+ * @param targetId   会话 ID
  * @return 第一条未读消息的实体。
+ * @remarks 消息操作
  */
 - (RCMessage *)getFirstUnreadMessage:(RCConversationType)conversationType targetId:(NSString *)targetId;
 
 /*!
  删除消息
 
- @param messageIds  消息ID的列表，元素需要为 NSNumber 类型
+ @param messageIds  消息 ID 的列表，元素需要为 NSNumber 类型
  @return            是否删除成功
+ 
+ @remarks 消息操作
  */
 - (BOOL)deleteMessages:(NSArray<NSNumber *> *)messageIds;
 
@@ -1630,11 +1831,13 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  删除某个会话中的所有消息
 
  @param conversationType    会话类型，不支持聊天室
- @param targetId            目标会话ID
+ @param targetId            会话 ID
  @param successBlock        成功的回调
  @param errorBlock          失败的回调
 
  @discussion 此方法删除数据库中该会话的消息记录，同时会整理压缩数据库，减少占用空间
+ 
+ @remarks 消息操作
  */
 - (void)deleteMessages:(RCConversationType)conversationType
               targetId:(NSString *)targetId
@@ -1653,6 +1856,8 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  @discussion 此方法会同时删除远端和本地消息。
  一次批量操作仅支持删除属于同一个会话的消息，请确保消息列表中的所有消息来自同一会话
  一次最多删除 100 条消息。
+ 
+ @remarks 消息操作
  */
 - (void)deleteRemoteMessage:(RCConversationType)conversationType
                    targetId:(NSString *)targetId
@@ -1664,35 +1869,49 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  删除某个会话中的所有消息
 
  @param conversationType    会话类型
- @param targetId            目标会话ID
+ @param targetId            会话 ID
  @return                    是否删除成功
+ 
+ @remarks 消息操作
  */
 - (BOOL)clearMessages:(RCConversationType)conversationType targetId:(NSString *)targetId;
 
 /*!
  设置消息的附加信息
 
- @param messageId   消息ID
- @param value       附加信息
+ @param messageId   消息 ID
+ @param value       附加信息，最大 1024 字节
  @return            是否设置成功
+ 
+ @discussion 用于扩展消息的使用场景。只能用于本地使用，无法同步到远端。
+ 
+ @remarks 消息操作
  */
 - (BOOL)setMessageExtra:(long)messageId value:(NSString *)value;
 
 /*!
  设置消息的接收状态
 
- @param messageId       消息ID
+ @param messageId       消息 ID
  @param receivedStatus  消息的接收状态
  @return                是否设置成功
+ 
+ @discussion 用于 UI 展示消息为已读，已下载等状态。
+ 
+ @remarks 消息操作
  */
 - (BOOL)setMessageReceivedStatus:(long)messageId receivedStatus:(RCReceivedStatus)receivedStatus;
 
 /*!
  设置消息的发送状态
 
- @param messageId       消息ID
+ @param messageId       消息 ID
  @param sentStatus      消息的发送状态
  @return                是否设置成功
+ 
+ @discussion 用于 UI 展示消息为正在发送，对方已接收等状态。
+ 
+ @remarks 消息操作
  */
 - (BOOL)setMessageSentStatus:(long)messageId sentStatus:(RCSentStatus)sentStatus;
 
@@ -1701,6 +1920,8 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
 
  @param message 消息类
  @discussion 仅限接收方调用
+ 
+ @remarks 高级功能
  */
 - (void)messageBeginDestruct:(RCMessage *)message;
 
@@ -1709,6 +1930,8 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
 
  @param message 消息类
  @discussion 仅限接收方调用
+ 
+ @remarks 高级功能
  */
 - (void)messageStopDestruct:(RCMessage *)message;
 
@@ -1716,24 +1939,29 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
 /*!
  获取会话列表
 
- @param conversationTypeList 会话类型的数组(需要将RCConversationType转为NSNumber构建Array)
- @return                        会话RCConversation的列表
+ @param conversationTypeList   会话类型的数组(需要将 RCConversationType 转为 NSNumber 构建 NSArray)
+ @return                        会话 RCConversation 的列表
 
  @discussion 此方法会从本地数据库中，读取会话列表。
  返回的会话列表按照时间从前往后排列，如果有置顶的会话，则置顶的会话会排列在前面。
+ @discussion 当您的会话较多且没有清理机制的时候，强烈建议您使用 getConversationList: count: startTime: 分页拉取会话列表,否则有可能造成内存过大。
+ 
+ @remarks 会话列表
  */
 - (NSArray *)getConversationList:(NSArray *)conversationTypeList;
 
 /*!
  分页获取会话列表
 
- @param conversationTypeList 会话类型的数组(需要将RCConversationType转为NSNumber构建Array)
- @param count                获取的数量
+ @param conversationTypeList 会话类型的数组(需要将 RCConversationType 转为 NSNumber 构建 NSArray)
+ @param count                获取的数量（当实际取回的会话数量小于 count 值时，表明已取完数据）
  @param startTime            会话的时间戳（获取这个时间戳之前的会话列表，0表示从最新开始获取）
- @return                     会话RCConversation的列表
+ @return                     会话 RCConversation 的列表
 
  @discussion 此方法会从本地数据库中，读取会话列表。
  返回的会话列表按照时间从前往后排列，如果有置顶的会话，则置顶的会话会排列在前面。
+ 
+ @remarks 会话列表
  */
 - (NSArray *)getConversationList:(NSArray *)conversationTypeList count:(int)count startTime:(long long)startTime;
 
@@ -1741,8 +1969,10 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  获取单个会话数据
 
  @param conversationType    会话类型
- @param targetId            目标会话ID
+ @param targetId            会话 ID
  @return                    会话的对象
+ 
+ @remarks 会话
  */
 - (RCConversation *)getConversation:(RCConversationType)conversationType targetId:(NSString *)targetId;
 
@@ -1750,20 +1980,24 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  获取会话中的消息数量
 
  @param conversationType    会话类型
- @param targetId            目标会话ID
+ @param targetId            会话 ID
  @return                    会话中的消息数量
 
- @discussion -1表示获取消息数量出错。
+ @discussion -1 表示获取消息数量出错。
+ 
+ @remarks 会话
  */
 - (int)getMessageCount:(RCConversationType)conversationType targetId:(NSString *)targetId;
 
 /*!
  删除指定类型的会话
 
- @param conversationTypeList 会话类型的数组(需要将RCConversationType转为NSNumber构建Array)
+ @param conversationTypeList 会话类型的数组(需要将 RCConversationType 转为 NSNumber 构建 NSArray)
  @return                        是否删除成功
 
  @discussion 此方法会从本地存储中删除该会话，同时删除会话中的消息。
+ 
+ @remarks 会话
  */
 - (BOOL)clearConversations:(NSArray *)conversationTypeList;
 
@@ -1771,10 +2005,12 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  从本地存储中删除会话
 
  @param conversationType    会话类型
- @param targetId            目标会话ID
+ @param targetId            会话 ID
  @return                    是否删除成功
 
- @discussion 此方法会从本地存储中删除该会话，但是不会删除会话中的消息。
+ @discussion 此方法会从本地存储中删除该会话，但是不会删除会话中的消息。如果此会话中有新的消息，该会话将重新在会话列表中显示，并显示最近的历史消息。
+ 
+ @remarks 会话
  */
 - (BOOL)removeConversation:(RCConversationType)conversationType targetId:(NSString *)targetId;
 
@@ -1782,93 +2018,116 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  设置会话的置顶状态
 
  @param conversationType    会话类型
- @param targetId            目标会话ID
+ @param targetId            会话 ID
  @param isTop               是否置顶
  @return                    设置是否成功
+ 
+ @discussion 会话不存在时设置置顶，会在会话列表生成会话。
+ @discussion 设置置顶之后删除会话，置顶设置自动失效
+ 
+ @remarks 会话
  */
 - (BOOL)setConversationToTop:(RCConversationType)conversationType targetId:(NSString *)targetId isTop:(BOOL)isTop;
 
 /*!
  获取置顶的会话列表
 
- @param conversationTypeList 会话类型的数组(需要将RCConversationType转为NSNumber构建Array)
- @return                     置顶的会话RCConversation的列表
+ @param conversationTypeList 会话类型的数组(需要将 RCConversationType 转为 NSNumber 构建 NSArray)
+ @return                     置顶的会话 RCConversation 的列表
 
  @discussion 此方法会从本地数据库中，读取置顶的会话列表。
+ 
+ @remarks 会话列表
  */
 - (NSArray<RCConversation *> *)getTopConversationList:(NSArray *)conversationTypeList;
 
 #pragma mark 会话中的草稿操作
 /*!
- 获取会话中的草稿信息
+ 获取会话中的草稿信息（用户输入但未发送的暂存消息）
 
  @param conversationType    会话类型
- @param targetId            会话目标ID
+ @param targetId            会话目标 ID
  @return                    该会话中的草稿
+ 
+ @remarks 会话
  */
 - (NSString *)getTextMessageDraft:(RCConversationType)conversationType targetId:(NSString *)targetId;
 
 /*!
- 保存草稿信息
+ 保存草稿信息（用户输入但未发送的暂存消息）
 
  @param conversationType    会话类型
- @param targetId            会话目标ID
+ @param targetId            会话目标 ID
  @param content             草稿信息
  @return                    是否保存成功
+ 
+ @remarks 会话
  */
 - (BOOL)saveTextMessageDraft:(RCConversationType)conversationType
                     targetId:(NSString *)targetId
                      content:(NSString *)content;
 
 /*!
- 删除会话中的草稿信息
+ 删除会话中的草稿信息（用户输入但未发送的暂存消息）
 
  @param conversationType    会话类型
- @param targetId            会话目标ID
+ @param targetId            会话目标 ID
  @return                    是否删除成功
+ 
+ @remarks 会话
  */
 - (BOOL)clearTextMessageDraft:(RCConversationType)conversationType targetId:(NSString *)targetId;
 
 #pragma mark 未读消息数
 
 /*!
- 获取所有的未读消息数
+ 获取所有的未读消息数（聊天室会话除外）
 
  @return    所有的未读消息数
+ 
+ @remarks 会话
  */
 - (int)getTotalUnreadCount;
 
 /*!
- 获取某个会话内的未读消息数
+ 获取某个会话内的未读消息数（聊天室会话除外）
 
  @param conversationType    会话类型
- @param targetId            会话目标ID
+ @param targetId            会话目标 ID
  @return                    该会话内的未读消息数
+ 
+ @remarks 会话
  */
 - (int)getUnreadCount:(RCConversationType)conversationType targetId:(NSString *)targetId;
 
 /*!
- 获取某些会话的总未读消息数
+ 获取某些会话的总未读消息数 （聊天室会话除外）
 
- @param conversations       会话列表 （RCConversation 对象只需要 conversationType 和 targetId ）
+ @param conversations       会话列表 （ RCConversation 对象只需要 conversationType 和 targetId ）
  @return                    传入会话列表的未读消息数
+ 
+ @remarks 会话
  */
 - (int)getTotalUnreadCount:(NSArray<RCConversation *> *)conversations;
 
 /**
- 获取某些类型的会话中所有的未读消息数
+ 获取某些类型的会话中所有的未读消息数 （聊天室会话除外）
 
  @param conversationTypes   会话类型的数组
  @param isContain           是否包含免打扰消息的未读数
  @return                    该类型的会话中所有的未读消息数
+ 
+ @remarks 会话
  */
 - (int)getUnreadCount:(NSArray *)conversationTypes containBlocked:(bool)isContain;
 
 /*!
- 获取某个类型的会话中所有的未读消息数
+ 获取某个类型的会话中所有的未读消息数（聊天室会话除外）
 
  @param conversationTypes   会话类型的数组
  @return                    该类型的会话中所有的未读消息数
+ 
+ @remarks 会话
  */
 - (int)getUnreadCount:(NSArray *)conversationTypes;
 
@@ -1877,6 +2136,8 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
 
  @param conversationTypes   会话类型的数组
  @return                    该类型的会话中所有未读的被@的消息数
+ 
+ @remarks 会话
  */
 - (int)getUnreadMentionedCount:(NSArray *)conversationTypes;
 
@@ -1884,37 +2145,44 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  清除某个会话中的未读消息数
 
  @param conversationType    会话类型，不支持聊天室
- @param targetId            目标会话ID
+ @param targetId            会话 ID
  @return                    是否清除成功
+ 
+ @remarks 会话
  */
 - (BOOL)clearMessagesUnreadStatus:(RCConversationType)conversationType targetId:(NSString *)targetId;
 
 /*!
- 清除某个会话中的未读消息数
+ 清除某个会话中的未读消息数（该会话在时间戳 timestamp 之前的消息将被置成已读。）
 
  @param conversationType    会话类型，不支持聊天室
- @param targetId            目标会话ID
+ @param targetId            会话 ID
  @param timestamp           该会话已阅读的最后一条消息的发送时间戳
  @return                    是否清除成功
+ 
+ @remarks 会话
  */
 - (BOOL)clearMessagesUnreadStatus:(RCConversationType)conversationType
                          targetId:(NSString *)targetId
                              time:(long long)timestamp;
 
-#pragma mark 会话的消息提醒
+
+#pragma mark - 会话的消息提醒
 
 /*!
  设置会话的消息提醒状态
 
  @param conversationType            会话类型
- @param targetId                    目标会话ID
+ @param targetId                    会话 ID
  @param isBlocked                   是否屏蔽消息提醒
  @param successBlock                设置成功的回调
  [nStatus:会话设置的消息提醒状态]
  @param errorBlock                  设置失败的回调 [status:设置失败的错误码]
 
  @discussion
- 如果您使用IMLib，此方法会屏蔽该会话的远程推送；如果您使用IMKit，此方法会屏蔽该会话的所有提醒（远程推送、本地通知、前台提示音）,该接口不支持聊天室。
+ 如果您使用 IMLib，此方法会屏蔽该会话的远程推送；如果您使用IMKit，此方法会屏蔽该会话的所有提醒（远程推送、本地通知、前台提示音）,该接口不支持聊天室。
+ 
+ @remarks 会话
  */
 - (void)setConversationNotificationStatus:(RCConversationType)conversationType
                                  targetId:(NSString *)targetId
@@ -1925,10 +2193,12 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
 /*!
  查询会话的消息提醒状态
 
- @param conversationType    会话类型
- @param targetId            目标会话ID
+ @param conversationType    会话类型（不支持聊天室，聊天室是不接受会话消息提醒的）
+ @param targetId            会话 ID
  @param successBlock        查询成功的回调 [nStatus:会话设置的消息提醒状态]
  @param errorBlock          查询失败的回调 [status:设置失败的错误码]
+ 
+ @remarks 会话
  */
 - (void)getConversationNotificationStatus:(RCConversationType)conversationType
                                  targetId:(NSString *)targetId
@@ -1936,27 +2206,31 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
                                     error:(void (^)(RCErrorCode status))errorBlock;
 
 /*!
- 获取屏蔽消息提醒的会话列表
+ 获取消息免打扰会话列表
 
- @param conversationTypeList 会话类型的数组(需要将RCConversationType转为NSNumber构建Array)
- @return                     屏蔽消息提醒的会话RCConversation的列表
+ @param conversationTypeList 会话类型的数组(需要将 RCConversationType 转为 NSNumber 构建 NSArray)
+ @return                     消息免打扰会话 RCConversation 的列表
 
- @discussion 此方法会从本地数据库中，读取屏蔽消息提醒的会话列表。
+ @discussion 此方法会从本地数据库中，读取消息免打扰会话列表。
+ 
+ @remarks 会话列表
  */
 - (NSArray<RCConversation *> *)getBlockedConversationList:(NSArray *)conversationTypeList;
 
-#pragma mark 全局消息提醒
+#pragma mark - 全局消息提醒
 
 /*!
  全局屏蔽某个时间段的消息提醒
 
- @param startTime       开始屏蔽消息提醒的时间，格式为HH:MM:SS
- @param spanMins        需要屏蔽消息提醒的分钟数，0 < spanMins < 1440
+ @param startTime       开始消息免打扰时间，格式为 HH:MM:SS
+ @param spanMins        需要消息免打扰分钟数，0 < spanMins < 1440（ 比如，您设置的起始时间是 00：00， 结束时间为 23：59，则 spanMins 为 23 * 60 + 59 = 1339 分钟。）
  @param successBlock    屏蔽成功的回调
  @param errorBlock      屏蔽失败的回调 [status:屏蔽失败的错误码]
 
  @discussion 此方法设置的屏蔽时间会在每天该时间段时生效。
- 如果您使用IMLib，此方法会屏蔽该会话在该时间段的远程推送；如果您使用IMKit，此方法会屏蔽该会话在该时间段的所有提醒（远程推送、本地通知、前台提示音）。
+ 如果您使用 IMLib，此方法会屏蔽该会话在该时间段的远程推送；如果您使用 IMKit，此方法会屏蔽该会话在该时间段的所有提醒（远程推送、本地通知、前台提示音）。
+ 
+ @remarks 会话
  */
 - (void)setNotificationQuietHours:(NSString *)startTime
                          spanMins:(int)spanMins
@@ -1968,6 +2242,8 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
 
  @param successBlock    删除屏蔽成功的回调
  @param errorBlock      删除屏蔽失败的回调 [status:失败的错误码]
+ 
+ @remarks 会话
  */
 - (void)removeNotificationQuietHours:(void (^)(void))successBlock error:(void (^)(RCErrorCode status))errorBlock;
 
@@ -1977,6 +2253,8 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  @param successBlock    屏蔽成功的回调 [startTime:已设置的屏蔽开始时间,
  spansMin:已设置的屏蔽时间分钟数，0 < spansMin < 1440]
  @param errorBlock      查询失败的回调 [status:查询失败的错误码]
+ 
+ @remarks 会话
  */
 - (void)getNotificationQuietHours:(void (^)(NSString *startTime, int spansMin))successBlock
                             error:(void (^)(RCErrorCode status))errorBlock;
@@ -1984,16 +2262,18 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
 /*!
  全局屏蔽某个时间段的消息提醒
 
- @param startTime       开始屏蔽消息提醒的时间，格式为HH:MM:SS
- @param spanMins        需要屏蔽消息提醒的分钟数，0 < spanMins < 1440
+ @param startTime       开始消息免打扰时间，格式为 HH:MM:SS
+ @param spanMins        需要消息免打扰分钟数，0 < spanMins < 1440
  @param successBlock    屏蔽成功的回调
  @param errorBlock      屏蔽失败的回调 [status:屏蔽失败的错误码]
 
  @discussion 此方法设置的屏蔽时间会在每天该时间段时生效。
- 如果您使用IMLib，此方法会屏蔽该会话在该时间段的远程推送；如果您使用IMKit，此方法会屏蔽该会话在该时间段的所有提醒（远程推送、本地通知、前台提示音）。
+ 如果您使用 IMLib，此方法会屏蔽该会话在该时间段的远程推送；如果您使用IMKit，此方法会屏蔽该会话在该时间段的所有提醒（远程推送、本地通知、前台提示音）。
 
  @warning **已废弃，请勿使用。**
- 升级说明：如果您之前使用了此接口，可以直接替换为setNotificationQuietHours:spanMins:success:error:接口，行为和实现完全一致。
+ 升级说明：如果您之前使用了此接口，可以直接替换为 setNotificationQuietHours:spanMins:success:error:接口，行为和实现完全一致。
+ 
+ @remarks 会话
  */
 - (void)setConversationNotificationQuietHours:(NSString *)startTime
                                      spanMins:(int)spanMins
@@ -2008,7 +2288,9 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  @param errorBlock      删除屏蔽失败的回调 [status:失败的错误码]
 
  @warning **已废弃，请勿使用。**
- 升级说明：如果您之前使用了此接口，可以直接替换为removeNotificationQuietHours:error:接口，行为和实现完全一致。
+ 升级说明：如果您之前使用了此接口，可以直接替换为 removeNotificationQuietHours:error:接口，行为和实现完全一致。
+ 
+ @remarks 会话
  */
 - (void)removeConversationNotificationQuietHours:(void (^)(void))successBlock
                                            error:(void (^)(RCErrorCode status))errorBlock
@@ -2019,9 +2301,11 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
 /*!
  设置输入状态的监听器
 
- @param delegate IMLib输入状态的的监听器
+ @param delegate         IMLib 输入状态的的监听器
 
- @warning 目前仅支持单聊。
+ @warning           目前仅支持单聊。
+ 
+ @remarks 功能设置
  */
 - (void)setRCTypingStatusDelegate:(id<RCTypingStatusDelegate>)delegate;
 
@@ -2029,14 +2313,16 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  向会话中发送正在输入的状态
 
  @param conversationType    会话类型
- @param targetId            会话目标ID
+ @param targetId            会话目标  ID
  @param objectName         正在输入的消息的类型名
 
  @discussion
- contentType为用户当前正在编辑的消息类型名，即RCMessageContent中getObjectName的返回值。
+ contentType 为用户当前正在编辑的消息类型名，即 RCMessageContent 中 getObjectName 的返回值。
  如文本消息，应该传类型名"RC:TxtMsg"。
 
  @warning 目前仅支持单聊。
+ 
+ @remarks 高级功能
  */
 - (void)sendTypingStatus:(RCConversationType)conversationType
                 targetId:(NSString *)targetId
@@ -2047,9 +2333,13 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
 /*!
  将某个用户加入黑名单
 
- @param userId          需要加入黑名单的用户ID
+ @param userId          需要加入黑名单的用户 ID
  @param successBlock    加入黑名单成功的回调
  @param errorBlock      加入黑名单失败的回调 [status:失败的错误码]
+ 
+ @discussion 将对方加入黑名单后，对方再发消息时，就会提示“您的消息已经发出, 但被对方拒收”。但您仍然可以给对方发送消息。
+ 
+ @remarks 高级功能
  */
 - (void)addToBlacklist:(NSString *)userId
                success:(void (^)(void))successBlock
@@ -2058,9 +2348,11 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
 /*!
  将某个用户移出黑名单
 
- @param userId          需要移出黑名单的用户ID
+ @param userId          需要移出黑名单的用户 ID
  @param successBlock    移出黑名单成功的回调
  @param errorBlock      移出黑名单失败的回调[status:失败的错误码]
+ 
+ @remarks 高级功能
  */
 - (void)removeFromBlacklist:(NSString *)userId
                     success:(void (^)(void))successBlock
@@ -2069,10 +2361,12 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
 /*!
  查询某个用户是否已经在黑名单中
 
- @param userId          需要查询的用户ID
+ @param userId          需要查询的用户 ID
  @param successBlock    查询成功的回调
- [bizStatus:该用户是否在黑名单中。0表示已经在黑名单中，101表示不在黑名单中]
+ [bizStatus:该用户是否在黑名单中。0 表示已经在黑名单中，101 表示不在黑名单中]
  @param errorBlock      查询失败的回调 [status:失败的错误码]
+ 
+ @remarks 高级功能
  */
 - (void)getBlacklistStatus:(NSString *)userId
                    success:(void (^)(int bizStatus))successBlock
@@ -2082,48 +2376,54 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  查询已经设置的黑名单列表
 
  @param successBlock    查询成功的回调
- [blockUserIds:已经设置的黑名单中的用户ID列表]
+ [blockUserIds:已经设置的黑名单中的用户 ID 列表]
  @param errorBlock      查询失败的回调 [status:失败的错误码]
+ 
+ @remarks 高级功能
  */
 - (void)getBlacklist:(void (^)(NSArray *blockUserIds))successBlock error:(void (^)(RCErrorCode status))errorBlock;
 
-#pragma mark - 讨论组操作
+#pragma mark - 讨论组操作（已废弃，请勿使用）
 
 /*!
  创建讨论组
 
  @param name            讨论组名称
- @param userIdList      用户ID的列表
+ @param userIdList      用户 ID 的列表
  @param successBlock    创建讨论组成功的回调
  [discussion:创建成功返回的讨论组对象]
  @param errorBlock      创建讨论组失败的回调 [status:创建失败的错误码]
+ 
+ @remarks 会话
  */
 - (void)createDiscussion:(NSString *)name
               userIdList:(NSArray *)userIdList
                  success:(void (^)(RCDiscussion *discussion))successBlock
-                   error:(void (^)(RCErrorCode status))errorBlock;
+                   error:(void (^)(RCErrorCode status))errorBlock __deprecated_msg("已废弃，请勿使用。");
 
 /*!
  讨论组加人，将用户加入讨论组
 
- @param discussionId    讨论组ID
- @param userIdList      需要加入的用户ID列表
+ @param discussionId    讨论组 ID
+ @param userIdList      需要加入的用户 ID 列表
  @param successBlock    讨论组加人成功的回调
  [discussion:讨论组加人成功返回的讨论组对象]
  @param errorBlock      讨论组加人失败的回调 [status:讨论组加人失败的错误码]
 
- @discussion 设置的讨论组名称长度不能超过40个字符，否则将会截断为前40个字符。
+ @discussion 设置的讨论组名称长度不能超过 40 个字符，否则将会截断为前 40 个字符。
+ 
+ @remarks 会话
  */
 - (void)addMemberToDiscussion:(NSString *)discussionId
                    userIdList:(NSArray *)userIdList
                       success:(void (^)(RCDiscussion *discussion))successBlock
-                        error:(void (^)(RCErrorCode status))errorBlock;
+                        error:(void (^)(RCErrorCode status))errorBlock __deprecated_msg("已废弃，请勿使用。");
 
 /*!
  讨论组踢人，将用户移出讨论组
 
- @param discussionId    讨论组ID
- @param userId          需要移出的用户ID
+ @param discussionId    讨论组 ID
+ @param userId          需要移出的用户 ID
  @param successBlock    讨论组踢人成功的回调
  [discussion:讨论组踢人成功返回的讨论组对象]
  @param errorBlock      讨论组踢人失败的回调 [status:讨论组踢人失败的错误码]
@@ -2133,96 +2433,110 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
 
  @warning 不能使用此接口将自己移除，否则会返回错误。
  如果您需要退出该讨论组，可以使用-quitDiscussion:success:error:方法。
+ 
+ @remarks 会话
  */
 - (void)removeMemberFromDiscussion:(NSString *)discussionId
                             userId:(NSString *)userId
                            success:(void (^)(RCDiscussion *discussion))successBlock
-                             error:(void (^)(RCErrorCode status))errorBlock;
+                             error:(void (^)(RCErrorCode status))errorBlock __deprecated_msg("已废弃，请勿使用。");
 
 /*!
  退出当前讨论组
 
- @param discussionId    讨论组ID
+ @param discussionId    讨论组 ID
  @param successBlock    退出成功的回调 [discussion:退出成功返回的讨论组对象]
  @param errorBlock      退出失败的回调 [status:退出失败的错误码]
+ 
+ @remarks 会话
  */
 - (void)quitDiscussion:(NSString *)discussionId
                success:(void (^)(RCDiscussion *discussion))successBlock
-                 error:(void (^)(RCErrorCode status))errorBlock;
+                 error:(void (^)(RCErrorCode status))errorBlock __deprecated_msg("已废弃，请勿使用。");
 
 /*!
  获取讨论组的信息
 
- @param discussionId    需要获取信息的讨论组ID
+ @param discussionId    需要获取信息的讨论组 ID
  @param successBlock    获取讨论组信息成功的回调 [discussion:获取的讨论组信息]
  @param errorBlock      获取讨论组信息失败的回调
  [status:获取讨论组信息失败的错误码]
+ 
+ @remarks 会话
  */
 - (void)getDiscussion:(NSString *)discussionId
               success:(void (^)(RCDiscussion *discussion))successBlock
-                error:(void (^)(RCErrorCode status))errorBlock;
+                error:(void (^)(RCErrorCode status))errorBlock __deprecated_msg("已废弃，请勿使用。");
 
 /*!
  设置讨论组名称
 
- @param discussionId            需要设置的讨论组ID
- @param discussionName          需要设置的讨论组名称，discussionName长度<=40
+ @param discussionId            需要设置的讨论组 ID
+ @param discussionName          需要设置的讨论组名称，discussionName 长度<=40
  @param successBlock            设置成功的回调
  @param errorBlock              设置失败的回调 [status:设置失败的错误码]
 
- @discussion 设置的讨论组名称长度不能超过40个字符，否则将会截断为前40个字符。
+ @discussion 设置的讨论组名称长度不能超过 40 个字符，否则将会截断为前 40 个字符。
+ 
+ @remarks 会话
  */
 - (void)setDiscussionName:(NSString *)discussionId
                      name:(NSString *)discussionName
                   success:(void (^)(void))successBlock
-                    error:(void (^)(RCErrorCode status))errorBlock;
+                    error:(void (^)(RCErrorCode status))errorBlock __deprecated_msg("已废弃，请勿使用。");
 
 /*!
  设置讨论组是否开放加人权限
 
- @param discussionId    讨论组ID
+ @param discussionId    讨论组 ID
  @param isOpen          是否开放加人权限
  @param successBlock    设置成功的回调
  @param errorBlock      设置失败的回调[status:设置失败的错误码]
 
  @discussion 讨论组默认开放加人权限，即所有成员都可以加人。
  如果关闭加人权限之后，只有讨论组的创建者有加人权限。
+ 
+ @remarks 会话
  */
 - (void)setDiscussionInviteStatus:(NSString *)discussionId
                            isOpen:(BOOL)isOpen
                           success:(void (^)(void))successBlock
-                            error:(void (^)(RCErrorCode status))errorBlock;
+                            error:(void (^)(RCErrorCode status))errorBlock __deprecated_msg("已废弃，请勿使用。");
 
 #pragma mark - 群组操作（已废弃，请勿使用）
 
 /*!
- 同步当前用户所在的群组列表信息(已废弃，建议您通过您的App Server进行群组操作)
+ 同步当前用户所在的群组列表信息(已废弃，建议您通过您的 App Server 进行群组操作)
 
- @param groupList               群组信息RCGroup的列表
+ @param groupList               群组信息 RCGroup 的列表
  @param successBlock            同步成功的回调
  @param errorBlock              同步失败的回调 [status:同步失败的错误码]
 
- @discussion 此方法已废弃，建议您通过您的App Server进行群组操作。
+ @discussion 此方法已废弃，建议您通过您的 App Server 进行群组操作。
  群组操作的流程，可以参考：http://support.rongcloud.cn/kb/MzY5
 
  @warning **已废弃，请勿使用。**
+ 
+ @remarks 会话
  */
 - (void)syncGroups:(NSArray *)groupList
            success:(void (^)(void))successBlock
              error:(void (^)(RCErrorCode status))errorBlock __deprecated_msg("已废弃，请勿使用。");
 
 /*!
- 加入群组(已废弃，建议您通过您的App Server进行群组操作)
+ 加入群组(已废弃，建议您通过您的 App Server 进行群组操作)
 
- @param groupId                 要加入的群组ID
+ @param groupId                 要加入的群组 ID
  @param groupName               群组的名称
  @param successBlock            加入成功的回调
  @param errorBlock              加入失败的回调 [status:加入失败的错误码]
 
- @discussion 此方法已废弃，建议您通过您的App Server进行群组操作。
+ @discussion 此方法已废弃，建议您通过您的 App Server 进行群组操作。
  群组操作的流程，可以参考：http://support.rongcloud.cn/kb/MzY5
 
  @warning **已废弃，请勿使用。**
+ 
+ @remarks 会话
  */
 - (void)joinGroup:(NSString *)groupId
         groupName:(NSString *)groupName
@@ -2240,6 +2554,8 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  群组操作的流程，可以参考：http://support.rongcloud.cn/kb/MzY5
 
  @warning **已废弃，请勿使用。**
+ 
+ @remarks 会话
  */
 - (void)quitGroup:(NSString *)groupId
           success:(void (^)(void))successBlock
@@ -2260,6 +2576,8 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  可以通过传入的 messageCount 设置加入聊天室成功之后需要获取的历史消息数量。
  -1 表示不获取任何历史消息，0 表示不特殊设置而使用SDK默认的设置（默认为获取 10 条），0 < messageCount <= 50
  为具体获取的消息数量,最大值为 50。注：如果是 7.x 系统获取历史消息数量不要大于 30
+ 
+ @remarks 聊天室
  */
 - (void)joinChatRoom:(NSString *)targetId
         messageCount:(int)messageCount
@@ -2284,6 +2602,8 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  可以通过传入的 messageCount 设置加入聊天室成功之后，需要获取的历史消息数量。
  -1 表示不获取任何历史消息，0 表示不特殊设置而使用SDK默认的设置（默认为获取 10 条），0 < messageCount <= 50
  为具体获取的消息数量，最大值为 50。
+ 
+ @remarks 聊天室
  */
 - (void)joinExistChatRoom:(NSString *)targetId
              messageCount:(int)messageCount
@@ -2293,10 +2613,12 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
 /*!
  退出聊天室
 
- @param targetId                聊天室ID
+ @param targetId                聊天室 ID
  @param successBlock            退出聊天室成功的回调
  @param errorBlock              退出聊天室失败的回调
  [status:退出聊天室失败的错误码]
+ 
+ @remarks 聊天室
  */
 - (void)quitChatRoom:(NSString *)targetId
              success:(void (^)(void))successBlock
@@ -2305,15 +2627,17 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
 /*!
  获取聊天室的信息（包含部分成员信息和当前聊天室中的成员总数）
 
- @param targetId     聊天室ID
- @param count 需要获取的成员信息的数量（目前获取到的聊天室信息中仅包含不多于20人的成员信息，即0 <= count <=
- 20，传入0获取到的聊天室信息将或仅包含成员总数，不包含具体的成员列表）
+ @param targetId     聊天室 ID
+ @param count 需要获取的成员信息的数量（目前获取到的聊天室信息中仅包含不多于 20 人的成员信息，即 0 <= count <=
+ 20，传入 0 获取到的聊天室信息将或仅包含成员总数，不包含具体的成员列表）
  @param order        需要获取的成员列表的顺序（最早加入或是最晚加入的部分成员）
  @param successBlock 获取成功的回调 [chatRoomInfo:聊天室信息]
  @param errorBlock   获取失败的回调 [status:获取失败的错误码]
 
  @discussion
- 因为聊天室一般成员数量巨大，权衡效率和用户体验，目前返回的聊天室信息仅包含不多于20人的成员信息和当前成员总数。如果您使用RC_ChatRoom_Member_Asc升序方式查询，将返回最早加入的成员信息列表，按加入时间从旧到新排列；如果您使用RC_ChatRoom_Member_Desc降序方式查询，将返回最晚加入的成员信息列表，按加入时间从新到旧排列。
+ 因为聊天室一般成员数量巨大，权衡效率和用户体验，目前返回的聊天室信息仅包含不多于 20 人的成员信息和当前成员总数。如果您使用 RC_ChatRoom_Member_Asc 升序方式查询，将返回最早加入的成员信息列表，按加入时间从旧到新排列；如果您使用 RC_ChatRoom_Member_Desc 降序方式查询，将返回最晚加入的成员信息列表，按加入时间从新到旧排列。
+ 
+ @remarks 聊天室
  */
 - (void)getChatRoomInfo:(NSString *)targetId
                   count:(int)count
@@ -2322,9 +2646,11 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
                   error:(void (^)(RCErrorCode status))errorBlock;
 
 /*!
- 设置IMLib的聊天室状态监听器
+ 设置 IMLib 的聊天室状态监听器
 
- @param delegate IMLib聊天室状态监听器
+ @param delegate IMLib 聊天室状态监听器
+ 
+ @remarks 聊天室
  */
 - (void)setChatRoomStatusDelegate:(id<RCChatRoomStatusDelegate>)delegate;
 
@@ -2336,8 +2662,10 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  @param searchType                  查找匹配方式
  @param searchKey                   查找关键字
  @param successBlock                查找成功的回调
- [accounts:查找到的公众服务账号信息RCPublicServiceProfile的数组]
+ [accounts:查找到的公众服务账号信息 RCPublicServiceProfile 的数组]
  @param errorBlock                  查找失败的回调 [status:失败的错误码]
+ 
+ @remarks 公众号
  */
 - (void)searchPublicService:(RCSearchType)searchType
                   searchKey:(NSString *)searchKey
@@ -2351,8 +2679,10 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  @param searchType                  查找匹配方式
  @param searchKey                   查找关键字
  @param successBlock                查找成功的回调
- [accounts:查找到的公众服务账号信息RCPublicServiceProfile的数组]
+ [accounts:查找到的公众服务账号信息 RCPublicServiceProfile 的数组]
  @param errorBlock                  查找失败的回调 [status:失败的错误码]
+ 
+ @remarks 公众号
  */
 - (void)searchPublicServiceByType:(RCPublicServiceType)publicServiceType
                        searchType:(RCSearchType)searchType
@@ -2364,9 +2694,11 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  关注公众服务账号
 
  @param publicServiceType       公众服务账号的类型
- @param publicServiceId         公众服务的账号ID
+ @param publicServiceId         公众服务的账号 ID
  @param successBlock            关注成功的回调
  @param errorBlock              关注失败的回调 [status:失败的错误码]
+ 
+ @remarks 公众号
  */
 - (void)subscribePublicService:(RCPublicServiceType)publicServiceType
                publicServiceId:(NSString *)publicServiceId
@@ -2377,9 +2709,11 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  取消关注公众服务账号
 
  @param publicServiceType       公众服务账号的类型
- @param publicServiceId         公众服务的账号ID
+ @param publicServiceId         公众服务的账号 ID
  @param successBlock            取消关注成功的回调
  @param errorBlock              取消关注失败的回调 [status:失败的错误码]
+ 
+ @remarks 公众号
  */
 - (void)unsubscribePublicService:(RCPublicServiceType)publicServiceType
                  publicServiceId:(NSString *)publicServiceId
@@ -2389,7 +2723,9 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
 /*!
  查询已关注的公众服务账号
 
- @return 公众服务信息RCPublicServiceProfile列表
+ @return 公众服务信息 RCPublicServiceProfile 列表
+ 
+ @remarks 公众号
  */
 - (NSArray *)getPublicServiceList;
 
@@ -2397,10 +2733,12 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  获取公众服务账号信息
 
  @param publicServiceType       公众服务账号的类型
- @param publicServiceId         公众服务的账号ID
+ @param publicServiceId         公众服务的账号 ID
  @return                        公众服务账号的信息
 
  @discussion 此方法会从本地缓存中获取公众服务账号信息
+ 
+ @remarks 公众号
  */
 - (RCPublicServiceProfile *)getPublicServiceProfile:(RCPublicServiceType)publicServiceType
                                     publicServiceId:(NSString *)publicServiceId;
@@ -2408,13 +2746,15 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
 /*!
  获取公众服务账号信息
 
- @param targetId                        公众服务的账号ID
+ @param targetId                        公众服务的账号 ID
  @param type                            公众服务账号的类型
  @param onSuccess                       获取成功的回调
  [serviceProfile:获取到的公众账号信息]
  @param onError                         获取失败的回调 [error:失败的错误码]
 
  @discussion 此方法会从服务器获取公众服务账号信息
+ 
+ @remarks 公众号
  */
 - (void)getPublicServiceProfile:(NSString *)targetId
                conversationType:(RCConversationType)type
@@ -2422,14 +2762,16 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
                         onError:(void (^)(NSError *error))onError;
 
 /*!
- 获取公众服务使用的WebView Controller
+ 获取公众服务使用的 WebView Controller
 
- @param URLString   准备打开的URL
- @return            公众服务使用的WebView Controller
+ @param URLString   准备打开的 URL
+ @return            公众服务使用的 WebView Controller
 
  @discussion
- 如果您选在用WebView打开URL连接，则您需要在App的Info.plist的NSAppTransportSecurity中增加NSAllowsArbitraryLoadsInWebContent和NSAllowsArbitraryLoads字段，并在苹果审核的时候提供额外的说明。
+ 如果您选在用 WebView 打开 URL 连接，则您需要在 App 的 Info.plist 的 NSAppTransportSecurity 中增加 NSAllowsArbitraryLoadsInWebContent 和 NSAllowsArbitraryLoads 字段，并在苹果审核的时候提供额外的说明。
  更多内容可以参考：https://developer.apple.com/library/content/documentation/General/Reference/InfoPlistKeyReference/Articles/CocoaKeys.html#//apple_ref/doc/uid/TP40009251-SW55
+ 
+ @remarks 公众号
  */
 - (UIViewController *)getPublicServiceWebViewController:(NSString *)URLString;
 
@@ -2441,8 +2783,10 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  @param launchOptions   App的启动附加信息
 
  @discussion 此方法用于统计融云推送服务的点击率。
- 如果您需要统计推送服务的点击率，只需要在AppDelegate的-application:didFinishLaunchingWithOptions:中，
- 调用此方法并将launchOptions传入即可。
+ 如果您需要统计推送服务的点击率，只需要在 AppDelegate 的-application:didFinishLaunchingWithOptions:中，
+ 调用此方法并将 launchOptions  传入即可。
+ 
+ @remarks 高级功能
  */
 - (void)recordLaunchOptionsEvent:(NSDictionary *)launchOptions;
 
@@ -2452,10 +2796,15 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  @param notification   本体通知的内容
 
  @discussion 此方法用于统计融云推送服务的点击率。
- 如果您需要统计推送服务的点击率，只需要在AppDelegate的-application:didReceiveLocalNotification:中，
- 调用此方法并将launchOptions传入即可。
+ 如果您需要统计推送服务的点击率，只需要在AppDelegate 的-application:didReceiveLocalNotification:中，
+ 调用此方法并将 launchOptions 传入即可。
+ 
+ @remarks 高级功能
  */
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
 - (void)recordLocalNotificationEvent:(UILocalNotification *)notification;
+#pragma clang diagnostic pop
 
 /*!
  统计远程推送的事件
@@ -2463,18 +2812,22 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  @param userInfo    远程推送的内容
 
  @discussion 此方法用于统计融云推送服务的点击率。
- 如果您需要统计推送服务的点击率，只需要在AppDelegate的-application:didReceiveRemoteNotification:中，
- 调用此方法并将launchOptions传入即可。
+ 如果您需要统计推送服务的点击率，只需要在 AppDelegate 的-application:didReceiveRemoteNotification:中，
+ 调用此方法并将 launchOptions 传入即可。
+ 
+ @remarks 高级功能
  */
 - (void)recordRemoteNotificationEvent:(NSDictionary *)userInfo;
 
 /*!
  获取点击的启动事件中，融云推送服务的扩展字段
 
- @param launchOptions   App的启动附加信息
- @return 收到的融云推送服务的扩展字段，nil表示该启动事件不包含来自融云的推送服务
+ @param launchOptions   App 的启动附加信息
+ @return 收到的融云推送服务的扩展字段，nil 表示该启动事件不包含来自融云的推送服务
 
  @discussion 此方法仅用于获取融云推送服务的扩展字段。
+ 
+ @remarks 高级功能
  */
 - (NSDictionary *)getPushExtraFromLaunchOptions:(NSDictionary *)launchOptions;
 
@@ -2482,18 +2835,22 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  获取点击的远程推送中，融云推送服务的扩展字段
 
  @param userInfo    远程推送的内容
- @return 收到的融云推送服务的扩展字段，nil表示该远程推送不包含来自融云的推送服务
+ @return 收到的融云推送服务的扩展字段，nil 表示该远程推送不包含来自融云的推送服务
 
  @discussion 此方法仅用于获取融云推送服务的扩展字段。
+ 
+ @remarks 高级功能
  */
 - (NSDictionary *)getPushExtraFromRemoteNotification:(NSDictionary *)userInfo;
 
 #pragma mark - 工具类方法
 
 /*!
- 获取当前IMLib SDK的版本号
+ 获取当前 IMLib SDK的版本号
 
- @return 当前IMLib SDK的版本号，如: @"2.0.0"
+ @return 当前 IMLib SDK 的版本号，如: @"2.0.0"
+ 
+ @remarks 数据获取
  */
 - (NSString *)getSDKVersion;
 
@@ -2501,59 +2858,72 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  获取当前手机与服务器的时间差
 
  @return 时间差
+ @discussion 消息发送成功后，SDK 会与服务器同步时间，消息所在数据库中存储的时间就是服务器时间。
+ 
+ @remarks 数据获取
  */
 - (long long)getDeltaTime;
 
 /*!
- 将AMR格式的音频数据转化为WAV格式的音频数据，数据开头携带WAVE文件头
+ 将AMR格式的音频数据转化为 WAV 格式的音频数据，数据开头携带 WAVE 文件头
 
- @param data    AMR格式的音频数据，必须是AMR-NB的格式
- @return        WAV格式的音频数据
+ @param data    AMR 格式的音频数据，必须是 AMR-NB 的格式
+ @return        WAV 格式的音频数据
+ 
+ @remarks 数据获取
  */
 - (NSData *)decodeAMRToWAVE:(NSData *)data;
 
 /*!
- 将AMR格式的音频数据转化为WAV格式的音频数据，数据开头不携带WAVE文件头
+ 将 AMR 格式的音频数据转化为 WAV 格式的音频数据，数据开头不携带 WAV 文件头
 
- @param data    AMR格式的音频数据，必须是AMR-NB的格式
- @return        WAV格式的音频数据
+ @param data    AMR 格式的音频数据，必须是 AMR-NB 的格式
+ @return        WAV 格式的音频数据
+ 
+ @remarks 数据获取
  */
 - (NSData *)decodeAMRToWAVEWithoutHeader:(NSData *)data;
 
 /*!
- 将WAV格式的音频数据转化为AMR格式的音频数据（8KHz采样）
+ 将 WAV 格式的音频数据转化为 AMR 格式的音频数据（8KHz采样）
 
- @param data            WAV格式的音频数据
+ @param data            WAV 格式的音频数据
  @param nChannels       声道数
  @param nBitsPerSample  采样位数（精度）
- @return                AMR-NB格式的音频数据
+ @return                AMR-NB 格式的音频数据
 
  @discussion
- 此方法为工具类方法，您可以使用此方法将任意WAV音频转换为AMR-NB格式的音频。
+ 此方法为工具类方法，您可以使用此方法将任意 WAV 音频转换为 AMR-NB 格式的音频。
 
  @warning
- 如果您想和SDK自带的语音消息保持一致和互通，考虑到跨平台和传输的原因，SDK对于WAV音频有所限制.
- 具体可以参考RCVoiceMessage中的音频参数说明(nChannels为1，nBitsPerSample为16)。
+ 如果您想和 SDK 自带的语音消息保持一致和互通，考虑到跨平台和传输的原因，SDK 对于 WAV 音频有所限制.
+ 具体可以参考 RCVoiceMessage 中的音频参数说明(nChannels 为1，nBitsPerSample 为 16)。
+ 
+ @remarks 数据获取
  */
 - (NSData *)encodeWAVEToAMR:(NSData *)data channel:(int)nChannels nBitsPerSample:(int)nBitsPerSample;
 
 #pragma mark - 语音消息设置
 /**
- 语音消息采样率，默认8KHz
+ 语音消息采样率，默认 8KHz
 
  @discussion
  2.9.12 之前的版本只支持 8KHz。如果设置为 16KHz，老版本将无法播放 16KHz 的语音消息。
  客服会话只支持 8KHz。
+ 
+ @remarks 功能设置
  */
 @property (nonatomic, assign) RCSampleRate sampleRate __deprecated_msg("已废弃，请勿使用。");
 
 /**
-  语音消息类型，默认RCVoiceMessageTypeOrdinary
+  语音消息类型，默认 RCVoiceMessageTypeOrdinary
 
   @discussion 老版本 SDK 不兼容新版本语音消息
   2.9.19 之前的版本无法播放高音质语音消息；
   2.9.19 及之后的版本可以同时兼容普通音质语音消息和高音质语音消息；
   客服会话类型 (ConversationType_CUSTOMERSERVICE) 不支持高音质语音消息。
+ 
+  @remarks 功能设置
   */
 @property (nonatomic, assign) RCVoiceMessageType voiceMsgType;
 
@@ -2561,19 +2931,21 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
 /*!
  发起客服聊天
 
- @param kefuId       客服ID
+ @param kefuId       客服 ID
  @param csInfo       客服信息
  @param successBlock            发起客服会话成功的回调
  @param errorBlock              发起客服会话失败的回调 [errorCode:失败的错误码 errMsg:错误信息]
  @param modeTypeBlock           客服模式变化
  @param pullEvaluationBlock     客服请求评价
  @param selectGroupBlock        客服分组选择
- @param quitBlock 客服被动结束。如果主动调用stopCustomerService，则不会调用到该block
+ @param quitBlock 客服被动结束。如果主动调用 stopCustomerService，则不会调用到该 block
 
  @discussion
- 有些客服提供商可能会主动邀请评价，有些不会，所以用lib开发客服需要注意对pullEvaluationBlock的处理。在pullEvaluationBlock里应该弹出评价。如果pullEvaluationBlock没有被调用到，需要在结束客服时（之前之后都可以）弹出评价框并评价。如果客服有分组，selectGroupBlock会被回调，此时必须让用户选择分组然后调用selectCustomerServiceGroup:withGroupId:。
+ 有些客服提供商可能会主动邀请评价，有些不会，所以用lib开发客服需要注意对 pullEvaluationBlock 的处理。在 pullEvaluationBlock 里应该弹出评价。如果 pullEvaluationBlock 没有被调用到，需要在结束客服时（之前之后都可以）弹出评价框并评价。如果客服有分组，selectGroupBlock 会被回调，此时必须让用户选择分组然后调用 selectCustomerServiceGroup:withGroupId:。
 
- @warning 如果你使用IMKit，请不要使用此方法。RCConversationViewController默认已经做了处理。
+ @warning 如果你使用 IMKit，请不要使用此方法。RCConversationViewController 默认已经做了处理。
+ 
+ @remarks 客服
  */
 - (void)startCustomerService:(NSString *)kefuId
                         info:(RCCustomerServiceInfo *)csInfo
@@ -2589,60 +2961,70 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
 
  @param evaConfigBlock       客服配置回调
 
- @discussion 此方法依赖startCustomerService方法，只有调用成功以后才有效。
- @warning 如果你使用的lib，或者使用kit但想要自定义评价弹窗，可以参考相关配置绘制评价UI
+ @discussion 此方法依赖 startCustomerService 方法，只有调用成功以后才有效。
+ @warning 如果你使用的 IMLib，或者使用kit但想要自定义评价弹窗，可以参考相关配置绘制评价 UI
+ 
+ @remarks 客服
  */
 - (void)getHumanEvaluateCustomerServiceConfig:(void (^)(NSDictionary *evaConfig))evaConfigBlock;
 
 /*!
  结束客服聊天
 
- @param kefuId       客服ID
+ @param kefuId       客服 ID
 
- @discussion 此方法依赖startCustomerService方法，只有调用成功以后才有效。
+ @discussion 此方法依赖 startCustomerService 方法，只有调用成功以后才有效。
  @warning
- 如果你使用IMKit，请不要使用此方法。RCConversationViewController默认已经做了处理。
+ 如果你使用 IMKit，请不要使用此方法。RCConversationViewController 默认已经做了处理。
+ 
+ @remarks 客服
  */
 - (void)stopCustomerService:(NSString *)kefuId;
 
 /*!
  选择客服分组模式
 
- @param kefuId       客服ID
- @param groupId       选择的客服分组id
- @discussion 此方法依赖startCustomerService方法，只有调用成功以后才有效。
+ @param kefuId       客服 ID
+ @param groupId       选择的客服分组 id
+ @discussion 此方法依赖 startCustomerService 方法，只有调用成功以后才有效。
  @warning
- 如果你使用IMKit，请不要使用此方法。RCConversationViewController默认已经做了处理。
+ 如果你使用 IMKit，请不要使用此方法。RCConversationViewController 默认已经做了处理。
+ 
+ @remarks 客服
  */
 - (void)selectCustomerServiceGroup:(NSString *)kefuId withGroupId:(NSString *)groupId;
 
 /*!
  切换客服模式
 
- @param kefuId       客服ID
+ @param kefuId       客服 ID
 
  @discussion
- 此方法依赖startCustomerService方法，而且只有当前客服模式为机器人优先才可调用。
+ 此方法依赖 startCustomerService 方法，而且只有当前客服模式为机器人优先才可调用。
  @warning
- 如果你使用IMKit，请不要使用此方法。RCConversationViewController默认已经做了处理。
+ 如果你使用 IMKit，请不要使用此方法。RCConversationViewController 默认已经做了处理。
+ 
+ @remarks 客服
  */
 - (void)switchToHumanMode:(NSString *)kefuId;
 
 /*!
  评价机器人客服，用于对单条机器人应答的评价。
 
- @param kefuId                客服ID
- @param knownledgeId          知识点ID
+ @param kefuId                客服 ID
+ @param knownledgeId          知识点 ID
  @param isRobotResolved       是否解决问题
  @param suggest                客户建议
 
- @discussion 此方法依赖startCustomerService方法。可在客服结束之前或之后调用。
+ @discussion 此方法依赖 startCustomerService 方法。可在客服结束之前或之后调用。
  @discussion
- 有些客服服务商需要对机器人回答的词条进行评价，机器人回答的文本消息的extra带有{“robotEva”:”1”,
- “sid”:”xxx”}字段，当用户对这一条消息评价后调用本函数同步到服务器，knownledgedID为extra中的sid。若是离开会话触发的评价或者在加号扩展中主动触发的评价，knownledgedID填nil
+ 有些客服服务商需要对机器人回答的词条进行评价，机器人回答的文本消息的 extra 带有{“robotEva”:”1”,
+ “sid”:”xxx”}字段，当用户对这一条消息评价后调用本函数同步到服务器，knownledgedID为extra 中的 sid。若是离开会话触发的评价或者在加号扩展中主动触发的评价，knownledgedID 填 nil
 
  @warning
  如果你使用IMKit，请不要使用此方法。RCConversationViewController默认已经做了处理。
+ 
+ @remarks 客服
  */
 - (void)evaluateCustomerService:(NSString *)kefuId
                    knownledgeId:(NSString *)knownledgeId
@@ -2652,21 +3034,23 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
 /*!
  评价人工客服。
 
- @param kefuId                客服ID
- @param dialogId              对话ID，客服请求评价的对话ID
- @param value                 分数，取值范围1-5
+ @param kefuId                客服 ID
+ @param dialogId              对话 ID，客服请求评价的对话 ID
+ @param value                 分数，取值范围 1-5
  @param suggest               客户建议
 
- @discussion 此方法依赖startCustomerService方法。可在客服结束之前或之后调用。
+ @discussion 此方法依赖 startCustomerService 方法。可在客服结束之前或之后调用。
  @discussion
- 有些客服服务商会主动邀请评价，pullEvaluationBlock会被调用到，当评价完成后调用本函数同步到服务器，dialogId填pullEvaluationBlock返回的dialogId。若是离开会话触发的评价或者在加号扩展中主动触发的评价，dialogID为nil
+ 有些客服服务商会主动邀请评价，pullEvaluationBlock 会被调用到，当评价完成后调用本函数同步到服务器，dialogId 填 pullEvaluationBlock 返回的 dialogId。若是离开会话触发的评价或者在加号扩展中主动触发的评价，dialogID 为 nil
 
  @warning
- 如果你使用IMKit，请不要使用此方法。RCConversationViewController默认已经做了处理。
+ 如果你使用 IMKit，请不要使用此方法。RCConversationViewController 默认已经做了处理。
 
  @warning **已废弃，请勿使用。**
- 升级说明：如果您之前使用了此接口，可以直接替换为evaluateCustomerService:dialogId:starValue:suggest:resolveStatus:tagText:extra:
+ 升级说明：如果您之前使用了此接口，可以直接替换为 evaluateCustomerService:dialogId:starValue:suggest:resolveStatus:tagText:extra:
  接口，行为和实现完全一致。
+ 
+ @remarks 客服
  */
 - (void)evaluateCustomerService:(NSString *)kefuId
                        dialogId:(NSString *)dialogId
@@ -2676,20 +3060,22 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
 /*!
  评价人工客服。
 
- @param kefuId                客服ID
- @param dialogId              对话ID，客服请求评价的对话ID
- @param value                 分数，取值范围1-5
+ @param kefuId                客服 ID
+ @param dialogId              对话 ID，客服请求评价的对话 ID
+ @param value                 分数，取值范围 1-5
  @param suggest               客户建议
- @param resolveStatus         解决状态，如果没有解决状态，这里可以随意赋值，SDK不会处理
+ @param resolveStatus         解决状态，如果没有解决状态，这里可以随意赋值，SDK 不会处理
  @param tagText               客户评价的标签
  @param extra                 扩展内容
 
- @discussion 此方法依赖startCustomerService方法。可在客服结束之前或之后调用。
+ @discussion 此方法依赖 startCustomerService 方法。可在客服结束之前或之后调用。
  @discussion
- 有些客服服务商会主动邀请评价，pullEvaluationBlock会被调用到，当评价完成后调用本函数同步到服务器，dialogId填pullEvaluationBlock返回的dialogId。若是离开会话触发的评价或者在加号扩展中主动触发的评价，dialogID为nil
+ 有些客服服务商会主动邀请评价，pullEvaluationBlock 会被调用到，当评价完成后调用本函数同步到服务器，dialogId 填 pullEvaluationBlock 返回的 dialogId。若是离开会话触发的评价或者在加号扩展中主动触发的评价，dialogID 为 nil
 
  @warning
- 如果你使用IMKit，请不要使用此方法。RCConversationViewController默认已经做了处理。
+ 如果你使用 IMKit，请不要使用此方法。RCConversationViewController 默认已经做了处理。
+ 
+ @remarks 客服
  */
 - (void)evaluateCustomerService:(NSString *)kefuId
                        dialogId:(NSString *)dialogId
@@ -2702,16 +3088,18 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
 /*!
  通用客服评价，不区分机器人人工
 
- @param kefuId                客服ID
- @param dialogId              对话ID，客服请求评价的对话ID
- @param value                 分数，取值范围1-5
+ @param kefuId                客服 ID
+ @param dialogId              对话 ID，客服请求评价的对话 ID
+ @param value                 分数，取值范围 1-5
  @param suggest               客户建议
- @param resolveStatus         解决状态，如果没有解决状态，这里可以随意赋值，SDK不会处理
- @discussion 此方法依赖startCustomerService方法。可在客服结束之前或之后调用。
+ @param resolveStatus         解决状态，如果没有解决状态，这里可以随意赋值，SDK不 会处理
+ @discussion 此方法依赖 startCustomerService 方法。可在客服结束之前或之后调用。
  @discussion
- 有些客服服务商会主动邀请评价，pullEvaluationBlock会被调用到，当评价完成后调用本函数同步到服务器，dialogId填pullEvaluationBlock返回的dialogId。若是离开会话触发的评价或者在加号扩展中主动触发的评价，dialogID为nil
+ 有些客服服务商会主动邀请评价，pullEvaluationBlock 会被调用到，当评价完成后调用本函数同步到服务器，dialogId 填 pullEvaluationBlock 返回的 dialogId。若是离开会话触发的评价或者在加号扩展中主动触发的评价，dialogID 为 nil
  @warning
- 如果你使用IMKit，请不要使用此方法。RCConversationViewController默认已经做了处理。
+ 如果你使用 IMKit，请不要使用此方法。RCConversationViewController 默认已经做了处理。
+ 
+ @remarks 客服
  */
 - (void)evaluateCustomerService:(NSString *)kefuId
                        dialogId:(NSString *)dialogId
@@ -2722,14 +3110,16 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
 /*!
  客服留言
 
- @param kefuId                客服ID
- @param leaveMessageDic       客服留言信息字典，根据RCCSLeaveMessageItem中关于留言的配置存储对应的key-value
+ @param kefuId                客服 ID
+ @param leaveMessageDic       客服留言信息字典，根据 RCCSLeaveMessageItem 中关于留言的配置存储对应的 key-value
  @param successBlock          成功回调
  @param failureBlock          失败回调
- @discussion 此方法依赖startCustomerService方法。可在客服结束之前或之后调用。
- @discussion 如果一些值没有，可以传nil
+ @discussion 此方法依赖 startCustomerService 方法。可在客服结束之前或之后调用。
+ @discussion 如果一些值没有，可以传 nil
  @warning
- 如果你使用IMKit，请不要使用此方法。RCConversationViewController默认已经做了处理。
+ 如果你使用 IMKit，请不要使用此方法。RCConversationViewController 默认已经做了处理。
+ 
+ @remarks 客服
  */
 - (void)leaveMessageCustomerService:(NSString *)kefuId
                     leaveMessageDic:(NSDictionary *)leaveMessageDic
@@ -2741,12 +3131,14 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  根据关键字搜索指定会话中的消息
 
  @param conversationType 会话类型
- @param targetId         会话ID
+ @param targetId         会话 ID
  @param keyword          关键字
  @param count            最大的查询数量
  @param startTime        查询 startTime 之前的消息（传 0 表示不限时间）
 
  @return 匹配的消息列表
+ 
+ @remarks 消息操作
  */
 - (NSArray<RCMessage *> *)searchMessages:(RCConversationType)conversationType
                                 targetId:(NSString *)targetId
@@ -2758,12 +3150,14 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  按用户 ID 搜索指定会话中的消息
 
  @param conversationType 会话类型
- @param targetId         会话ID
- @param userId           搜索用户ID
+ @param targetId         会话 ID
+ @param userId           搜索用户 ID
  @param count            最大的查询数量
  @param startTime        查询 startTime 之前的消息（传 0 表示不限时间）
 
  @return 匹配的消息列表
+ 
+ @remarks 消息操作
  */
 - (NSArray<RCMessage *> *)searchMessages:(RCConversationType)conversationType
                                 targetId:(NSString *)targetId
@@ -2775,13 +3169,15 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  根据关键字搜索会话
 
  @param conversationTypeList 需要搜索的会话类型列表
- @param objectNameList       需要搜索的消息类型名列表(即每个消息类方法getObjectName的返回值)
+ @param objectNameList       需要搜索的消息类型名列表(即每个消息类方法 getObjectName 的返回值)
  @param keyword              关键字
 
  @return 匹配的会话搜索结果列表
 
- @discussion 目前，SDK内置的文本消息、文件消息、图文消息支持搜索。
- 自定义的消息必须要实现RCMessageContent的getSearchableWords接口才能进行搜索。
+ @discussion 目前，SDK 内置的文本消息、文件消息、图文消息支持搜索。
+ 自定义的消息必须要实现 RCMessageContent 的 getSearchableWords 接口才能进行搜索。
+ 
+ @remarks 消息操作
  */
 - (NSArray<RCSearchConversationResult *> *)searchConversations:(NSArray<NSNumber *> *)conversationTypeList
                                                    messageType:(NSArray<NSString *> *)objectNameList
@@ -2791,15 +3187,19 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
 
 /*!
  设置日志级别
+ 
+ @remarks 高级功能
  */
 @property (nonatomic, assign) RCLogLevel logLevel;
 
 /*!
- 设置IMLib日志的监听器
+ 设置 IMLib 日志的监听器
 
- @param delegate IMLib日志的监听器
+ @param delegate IMLib 日志的监听器
 
- @discussion 您可以通过logLevel来控制日志的级别。
+ @discussion 您可以通过 logLevel 来控制日志的级别。
+ 
+ @remarks 功能设置
  */
 - (void)setRCLogInfoDelegate:(id<RCLogInfoDelegate>)delegate;
 
@@ -2808,7 +3208,9 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
 /*!
  文件消息下载路径
 
- @discussion 默认值为沙盒下的Documents/MyFile目录。您可以通过修改RCConfig.plist中的RelativePath来修改该路径。
+ @discussion 默认值为沙盒下的 Documents/MyFile 目录。您可以通过修改 RCConfig.plist 中的 RelativePath 来修改该路径。
+ 
+ @remarks 数据获取
  */
 @property (nonatomic, strong, readonly) NSString *fileStoragePath;
 
@@ -2818,11 +3220,15 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
 
  @param  successBlock 成功回调
  @param  errorBlock   失败回调
+ 
+ @remarks 数据获取
  */
 - (void)getVendorToken:(void (^)(NSString *vendorToken))successBlock error:(void (^)(RCErrorCode nErrorCode))errorBlock;
 
 /**
  远程推送相关设置
+ 
+ @remarks 功能设置
  */
 @property (nonatomic, strong, readonly) RCPushProfile *pushProfile;
 
@@ -2833,6 +3239,8 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  @param duration      存储时间，范围【1~7天】
  @param  successBlock 成功回调
  @param  errorBlock   失败回调
+ 
+ @remarks 功能设置
  */
 - (void)setOfflineMessageDuration:(int)duration
                           success:(void (^)(void))successBlock
@@ -2842,13 +3250,17 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  获取离线消息时间 （以天为单位）
 
  @return 离线消息存储时间
+ 
+ @remarks 数据获取
  */
 - (int)getOfflineMessageDuration;
 
 /**
- 设置集成 sdk 的用户 App 版本信息。便于融云排查问题时，作为分析依据，属于自愿行为。
+ 设置集成 SDK 的用户 App 版本信息。便于融云排查问题时，作为分析依据，属于自愿行为。
 
  @param  appVer   用户 APP 的版本信息。
+ 
+ @remarks 功能设置
  */
 - (void)setAppVer:(NSString *)appVer;
 
@@ -2856,6 +3268,8 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  GIF 消息大小限制，以 KB 为单位，超过这个大小的 GIF 消息不能被发送
 
  @return GIF 消息大小，以 KB 为单位
+ 
+ @remarks 数据获取
  */
 - (NSInteger)getGIFLimitSize;
 
@@ -2863,7 +3277,7 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
 /**
  设置聊天室自定义属性
 
- @param chatroomId   聊天室 Id
+ @param chatroomId   聊天室 ID
  @param key 聊天室属性名称，Key 支持大小写英文字母、数字、部分特殊符号 + = - _ 的组合方式，最大长度 128 个字符
  @param value 聊天室属性对应的值，最大长度 4096 个字符
  @param sendNotification   是否需要发送通知，如果发送通知，聊天室中的其他用户会接收到 RCChatroomKVNotificationMessage
@@ -2876,6 +3290,8 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  @discussion 必须先开通聊天室状态存储功能
  设置聊天室自定义属性，当 key 不存在时，代表增加属性； 当 key 已经存在时，代表更新属性的值，且只有 key
  的创建者可以更新属性的值。
+ 
+ @remarks 聊天室
  */
 - (void)setChatRoomEntry:(NSString *)chatroomId
                      key:(NSString *)key
@@ -2889,7 +3305,7 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
 /**
  强制设置聊天室自定义属性
 
- @param chatroomId   聊天室 Id
+ @param chatroomId   聊天室 ID
  @param key 聊天室属性名称，Key 支持大小写英文字母、数字、部分特殊符号 + = - _ 的组合方式，最大长度 128 个字符
  @param value 聊天室属性对应的值，最大长度 4096 个字符
  @param sendNotification   是否需要发送通知，如果发送通知，聊天室中的其他用户会接收到 RCChatroomKVNotificationMessage
@@ -2901,6 +3317,8 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
 
  @discussion 必须先开通聊天室状态存储功能
  强制设置聊天室自定义属性，当 key 不存在时，代表增加属性； 当 key 已经存在时，代表更新属性的值。
+ 
+ @remarks 聊天室
  */
 - (void)forceSetChatRoomEntry:(NSString *)chatroomId
                           key:(NSString *)key
@@ -2914,12 +3332,14 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
 /**
  获取聊天室单个属性
 
- @param chatroomId 聊天室 Id
+ @param chatroomId 聊天室 ID
  @param key 聊天室属性名称
  @param successBlock 成功回调
  @param errorBlock 失败回调
 
  @discussion 必须先开通聊天室状态存储功能
+ 
+ @remarks 聊天室
  */
 - (void)getChatRoomEntry:(NSString *)chatroomId
                      key:(NSString *)key
@@ -2929,11 +3349,13 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
 /**
  获取聊天室所有自定义属性
 
- @param chatroomId 聊天室 Id
+ @param chatroomId 聊天室 ID
  @param successBlock 成功回调
  @param errorBlock 失败回调
 
  @discussion 必须先开通聊天室状态存储功能
+ 
+ @remarks 聊天室
  */
 - (void)getAllChatRoomEntries:(NSString *)chatroomId
                       success:(void (^)(NSDictionary *entry))successBlock
@@ -2942,7 +3364,7 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
 /**
  删除聊天室自定义属性
 
- @param chatroomId 聊天室 Id
+ @param chatroomId 聊天室 ID
  @param key 聊天室属性名称
  @param sendNotification   是否需要发送通知，如果发送通知，聊天室中的其他用户会接收到 RCChatroomKVNotificationMessage
  通知消息，消息内容中包含操作类型(type)、属性名称(key)、属性名称对应的值(value)和自定义字段(extra)
@@ -2952,6 +3374,8 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
 
  @discussion 必须先开通聊天室状态存储功能
  删除聊天室自定义属性，只有自己设置的属性可以被删除。
+ 
+ @remarks 聊天室
  */
 - (void)removeChatRoomEntry:(NSString *)chatroomId
                         key:(NSString *)key
@@ -2963,7 +3387,7 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
 /**
  强制删除聊天室自定义属性
 
- @param chatroomId 聊天室 Id
+ @param chatroomId 聊天室 ID
  @param key 聊天室属性名称
  @param sendNotification   是否需要发送通知，如果发送通知，聊天室中的其他用户会接收到 RCChatroomKVNotificationMessage
  通知消息，消息内容中包含操作类型(type)、属性名称(key)、属性名称对应的值(value)和自定义字段(extra)
@@ -2973,6 +3397,8 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
 
  @discussion 必须先开通聊天室状态存储功能
  强制删除聊天室自定义属性。
+ 
+ @remarks 聊天室
  */
 - (void)forceRemoveChatRoomEntry:(NSString *)chatroomId
                              key:(NSString *)key

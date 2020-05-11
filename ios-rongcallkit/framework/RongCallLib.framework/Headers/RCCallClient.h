@@ -12,7 +12,7 @@
 #import <Foundation/Foundation.h>
 #import <AVFoundation/AVFoundation.h>
 
-#define kRongCallLibVersion @"V2.10.5_20200410214115_pub_dev_6f68130"
+#define kRongCallLibVersion @"V2.10.6_20200509113552_pub_dev_362b130"
 
 /*!
  CallLib全局通话呼入的监听器

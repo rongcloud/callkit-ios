@@ -30,6 +30,9 @@ typedef NS_ENUM(NSInteger, RCChatroomKVNotificationType) {
 聊天室自定义属性通知消息
 
 @discussion 不要随意构造此类消息发送，调用设置或者删除接口时会自动构建。
+@discussion 此消息不存储不计入未读消息数。
+ 
+@remarks 通知类消息
 */
 @interface RCChatroomKVNotificationMessage : RCMessageContent
 

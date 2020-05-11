@@ -30,12 +30,12 @@
 @property (nonatomic, copy) NSString *digest;
 
 /*!
- 图文信息条目的图片URL
+ 图文信息条目的图片 URL
  */
 @property (nonatomic, copy) NSString *imageURL;
 
 /*!
- 图文信息条目中包含的需要跳转到的URL
+ 图文信息条目中包含的需要跳转到的 URL
  */
 @property (nonatomic, copy) NSString *url;
 
@@ -49,7 +49,7 @@
 
  @param title       图文信息条目的标题
  @param digest      图文信息条目的内容摘要
- @param imageURL    图文信息条目的图片URL
+ @param imageURL    图文信息条目的图片 URL
  @param extra       图文信息条目的扩展信息
  @return            图文信息条目对象
  */

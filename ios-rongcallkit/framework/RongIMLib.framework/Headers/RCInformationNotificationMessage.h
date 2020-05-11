@@ -21,6 +21,8 @@
  通知消息类
 
  @discussion 通知消息类，此消息会进行存储，但不计入未读消息数。
+ 
+ @remarks 通知类消息
  */
 @interface RCInformationNotificationMessage : RCMessageContent <NSCoding>
 

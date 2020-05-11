@@ -18,7 +18,7 @@
 @interface RCGroup : NSObject <NSCoding>
 
 /*!
- 群组ID
+ 群组 ID
  */
 @property (nonatomic, copy) NSString *groupId;
 
@@ -28,16 +28,16 @@
 @property (nonatomic, copy) NSString *groupName;
 
 /*!
- 群组头像的URL
+ 群组头像的 URL
  */
 @property (nonatomic, copy) NSString *portraitUri;
 
 /*!
  群组信息的初始化方法
 
- @param groupId         群组ID
+ @param groupId         群组 ID
  @param groupName       群组名称
- @param portraitUri     群组头像的URL
+ @param portraitUri     群组头像的 URL
  @return                群组信息对象
  */
 - (instancetype)initWithGroupId:(NSString *)groupId groupName:(NSString *)groupName portraitUri:(NSString *)portraitUri;

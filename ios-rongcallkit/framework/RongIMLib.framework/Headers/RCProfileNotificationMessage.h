@@ -21,16 +21,18 @@
  公众服务账号信息变更消息类
 
  @discussion 公众服务账号信息变更消息类，此消息会进行存储，但不计入未读消息数。
+ 
+ @remarks 通知类消息
  */
 @interface RCProfileNotificationMessage : RCMessageContent <NSCoding>
 
 /*!
-公众服务账号信息变更的操作名
-*/
+ 公众服务账号信息变更的操作名
+ */
 @property (nonatomic, copy) NSString *operation;
 
 /*!
- 信息变更的数据，可以为任意格式，如json数据。
+ 信息变更的数据，可以为任意格式，如 json 数据。
  */
 @property (nonatomic, copy) NSString *data;
 

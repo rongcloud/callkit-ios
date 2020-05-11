@@ -28,7 +28,7 @@
  参与者位置发生变化的回调
 
  @param location    参与者的当前位置
- @param userId      位置发生变化的参与者的用户ID
+ @param userId      位置发生变化的参与者的用户 ID
 
  @warning **已废弃，请改用 onReceiveLocation:type:fromUserId: 接口。**
  */
@@ -39,21 +39,21 @@
 
  @param location    参与者的当前位置
  @param type        坐标体系类型
- @param userId      位置发生变化的参与者的用户ID
+ @param userId      位置发生变化的参与者的用户 ID
  */
 - (void)onReceiveLocation:(CLLocation *)location type:(RCRealTimeLocationType)type fromUserId:(NSString *)userId;
 
 /*!
  有参与者加入实时位置共享的回调
 
- @param userId      加入实时位置共享的参与者的用户ID
+ @param userId      加入实时位置共享的参与者的用户 ID
  */
 - (void)onParticipantsJoin:(NSString *)userId;
 
 /*!
  有参与者退出实时位置共享的回调
 
- @param userId      退出实时位置共享的参与者的用户ID
+ @param userId      退出实时位置共享的参与者的用户 ID
  */
 - (void)onParticipantsQuit:(NSString *)userId;
 
@@ -67,7 +67,7 @@
 /*!
  发起实时位置共享失败后执行
 
- @param messageId   发起失败的消息ID
+ @param messageId   发起失败的消息 ID
  */
 - (void)onStartRealTimeLocationFailed:(long)messageId;
 

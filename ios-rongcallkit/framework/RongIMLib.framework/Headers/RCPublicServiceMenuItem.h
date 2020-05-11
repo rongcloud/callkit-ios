@@ -19,7 +19,7 @@
 @interface RCPublicServiceMenuItem : NSObject
 
 /*!
- 菜单的ID
+ 菜单的 ID
  */
 @property (nonatomic, copy) NSString *id;
 
@@ -29,7 +29,7 @@
 @property (nonatomic, copy) NSString *name;
 
 /*!
- 菜单的URL链接
+ 菜单的 URL 链接
  */
 @property (nonatomic, copy) NSString *url;
 
@@ -43,7 +43,7 @@
 
  @discussion 子菜单为RCPublicServiceMenuItem的数组
  */
-@property (nonatomic, strong) NSArray *subMenuItems;
+@property (nonatomic, strong) NSArray <RCPublicServiceMenuItem *> *subMenuItems;
 
 /*!
  将菜单项的json数组解码（已废弃，请勿使用）

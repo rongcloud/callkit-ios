@@ -12,7 +12,13 @@
  文件消息的类型名
  */
 #define RCFileMessageTypeIdentifier @"RC:FileMsg"
-
+/*!
+ 文件消息类
+ 
+ @discussion 文件消息类，此消息会进行存储并计入未读消息数。
+ 
+ @remarks 内容类消息
+ */
 @interface RCFileMessage : RCMediaMessageContent <NSCoding>
 
 /*!
@@ -21,7 +27,7 @@
 @property (nonatomic, copy) NSString *name;
 
 /*!
- 文件大小，单位为Byte
+ 文件大小，单位为 Byte
  */
 @property (nonatomic, assign) long long size;
 

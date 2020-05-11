@@ -17,6 +17,8 @@
  实时位置共享的结束消息类
 
  @discussion 实时位置共享的结束消息类，此消息会进行存储并计入未读消息数。
+ 
+ @remarks 信令类消息
  */
 @interface RCRealTimeLocationEndMessage : RCMessageContent
 

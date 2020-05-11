@@ -16,7 +16,9 @@
  命令消息类
 
  @discussion 命令消息类，此消息不存储不计入未读消息数。
- 与RCCommandNotificationMessage的区别是，此消息不存储，也不会在界面上显示。
+ 与 RCCommandNotificationMessage 的区别是，此消息不存储，也不会在界面上显示。
+ 
+ @remarks 通知类消息
  */
 @interface RCCommandMessage : RCMessageContent <NSCoding>
 

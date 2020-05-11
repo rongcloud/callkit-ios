@@ -14,7 +14,7 @@
 @interface RCUserTypingStatus : NSObject
 
 /*!
- 当前正在输入的用户ID
+ 当前正在输入的用户 ID
  */
 @property (nonatomic, copy) NSString *userId;
 
@@ -22,7 +22,7 @@
  当前正在输入的消息类型名
 
  @discussion
- contentType为用户当前正在编辑的消息类型名，即RCMessageContent中getObjectName的返回值。
+ contentType 为用户当前正在编辑的消息类型名，即 RCMessageContent 中 getObjectName 的返回值。
  如文本消息，应该传类型名"RC:TxtMsg"。
  */
 @property (nonatomic, copy) NSString *contentType;

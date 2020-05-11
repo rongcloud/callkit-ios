@@ -16,12 +16,12 @@
 @property (nonatomic, assign) BOOL isReceiptRequestMessage;
 
 /**
- *  是否已经发送回执
+ 是否已经发送回执
  */
 @property (nonatomic, assign) BOOL hasRespond;
 
 /*!
- 发送回执的用户ID列表
+ 发送回执的用户 ID 列表
  */
 @property (nonatomic, strong) NSMutableDictionary *userIdList;
 

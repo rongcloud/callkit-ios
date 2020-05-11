@@ -109,9 +109,9 @@
 /*!
  消息内容的基类
 
- @discussion 此类为消息实体类RCMessage中的消息内容content的基类。
- 所有的消息内容均为此类的子类，包括SDK自带的消息（如RCTextMessage、RCImageMessage等）和用户自定义的消息。
- 所有的自定义消息必须继承此类，并实现RCMessageCoding和RCMessagePersistentCompatible、RCMessageContentView协议。
+ @discussion 此类为消息实体类 RCMessage 中的消息内容 content 的基类。
+ 所有的消息内容均为此类的子类，包括 SDK 自带的消息（如 RCTextMessage、RCImageMessage 等）和用户自定义的消息。
+ 所有的自定义消息必须继承此类，并实现 RCMessageCoding 和 RCMessagePersistentCompatible、RCMessageContentView 协议。
  */
 @interface RCMessageContent : NSObject <RCMessageCoding, RCMessagePersistentCompatible, RCMessageContentView>
 
@@ -124,7 +124,7 @@
 @property (nonatomic, strong) RCUserInfo *senderUserInfo;
 
 /*!
- 消息中的@提醒信息
+ 消息中的 @ 提醒信息
  */
 @property (nonatomic, strong) RCMentionedInfo *mentionedInfo;
 

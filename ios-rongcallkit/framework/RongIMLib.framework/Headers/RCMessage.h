@@ -30,12 +30,12 @@
 @property (nonatomic, assign) RCConversationType conversationType;
 
 /*!
- 目标会话ID
+ 会话 ID
  */
 @property (nonatomic, copy) NSString *targetId;
 
 /*!
- 消息的ID
+ 消息的 ID
 
  @discussion 本地存储的消息的唯一值（数据库索引唯一值）
  */
@@ -47,7 +47,7 @@
 @property (nonatomic, assign) RCMessageDirection messageDirection;
 
 /*!
- 消息的发送者ID
+ 消息的发送者 ID
  */
 @property (nonatomic, copy) NSString *senderUserId;
 
@@ -62,12 +62,12 @@
 @property (nonatomic, assign) RCSentStatus sentStatus;
 
 /*!
- 消息的接收时间（Unix时间戳、毫秒）
+ 消息的接收时间（Unix 时间戳、毫秒）
  */
 @property (nonatomic, assign) long long receivedTime;
 
 /*!
- 消息的发送时间（Unix时间戳、毫秒）
+ 消息的发送时间（Unix 时间戳、毫秒）
  */
 @property (nonatomic, assign) long long sentTime;
 
@@ -87,9 +87,9 @@
 @property (nonatomic, copy) NSString *extra;
 
 /*!
- 全局唯一ID
+ 全局唯一 ID
 
- @discussion 服务器消息唯一ID（在同一个Appkey下全局唯一）
+ @discussion 服务器消息唯一 ID（在同一个 Appkey 下全局唯一）
  */
 @property (nonatomic, copy) NSString *messageUId;
 
@@ -107,9 +107,9 @@
  RCMessage初始化方法
 
  @param  conversationType    会话类型
- @param  targetId            目标会话ID
+ @param  targetId            会话 ID
  @param  messageDirection    消息的方向
- @param  messageId           消息的ID
+ @param  messageId           消息的 ID
  @param  content             消息的内容
  */
 - (instancetype)initWithType:(RCConversationType)conversationType
@@ -119,9 +119,9 @@
                      content:(RCMessageContent *)content;
 
 /*!
- RCMessage初始化方法（已废弃，请勿使用）
+ RCMessage 初始化方法（已废弃，请勿使用）
 
- @param jsonData    消息的JSON Dictionary
+ @param jsonData    消息的 JSON Dictionary
  @return            消息实体对象
 
  @warning **已废弃，请勿使用。**

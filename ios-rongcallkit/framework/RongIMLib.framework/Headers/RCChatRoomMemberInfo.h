@@ -14,12 +14,12 @@
 @interface RCChatRoomMemberInfo : NSObject
 
 /*!
- 用户ID
+ 用户 ID
  */
 @property (nonatomic, copy) NSString *userId;
 
 /*!
- 加入时间（Unix时间戳，毫秒）
+ 用户加入聊天室时间（Unix 时间戳，毫秒）
  */
 @property (nonatomic, assign) long long joinTime;
 

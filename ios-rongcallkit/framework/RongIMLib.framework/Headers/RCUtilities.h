@@ -22,22 +22,22 @@
 @interface RCUtilities : NSObject
 
 /*!
- 将base64编码的字符串解码并转换为NSData数据
+ 将 base64 编码的字符串解码并转换为 NSData 数据
 
- @param string      base64编码的字符串
- @return            解码后的NSData数据
+ @param string      base64 编码的字符串
+ @return            解码后的 NSData 数据
 
- @discussion 此方法主要用于iOS6解码base64。
+ @discussion 此方法主要用于 iOS6 解码 base64。
  */
 + (NSData *)dataWithBase64EncodedString:(NSString *)string;
 
 /*!
- 将NSData数据转化并编码为base64的字符串
+ 将 NSData 数据转化并编码为 base64 的字符串
 
- @param data    未编码的NSData数据
- @return        编码后的base64字符串
+ @param data    未编码的 NSData 数据
+ @return        编码后的 base64 字符串
 
- @discussion 此方法主要用于iOS6编码base64。
+ @discussion 此方法主要用于 iOS6 编码 base64。
  */
 + (NSString *)base64EncodedStringFrom:(NSData *)data;
 
@@ -120,7 +120,7 @@
 
  @return 文字显示的尺寸
 
- @discussion 该方法在计算iOS 7以下系统显示的时候默认使用NSLineBreakByTruncatingTail模式。
+ @discussion 该方法在计算 iOS 7 以下系统显示的时候默认使用 NSLineBreakByTruncatingTail 模式。
  */
 + (CGSize)getTextDrawingSize:(NSString *)text font:(UIFont *)font constrainedSize:(CGSize)constrainedSize;
 
@@ -166,23 +166,23 @@
 + (BOOL)excludeBackupKeyForURL:(NSURL *)storageURL;
 
 /*!
- 获取App的文件存放路径
+ 获取 App 的文件存放路径
 
- @return    App的文件存放路径
+ @return    App 的文件存放路径
  */
 + (NSString *)applicationDocumentsDirectory;
 
 /*!
- 获取融云SDK的文件存放路径
+ 获取融云 SDK 的文件存放路径
 
- @return    融云SDK的文件存放路径
+ @return    融云 SDK 的文件存放路径
  */
 + (NSString *)rongDocumentsDirectory;
 
 /*!
- 获取融云SDK的缓存路径
+ 获取融云 SDK 的缓存路径
 
- @return    融云SDK的缓存路径
+ @return    融云 SDK 的缓存路径
  */
 + (NSString *)rongImageCacheDirectory;
 
@@ -251,7 +251,7 @@
  获取消息内容对应的媒体类型
 
  @param content 消息内容
- @return 媒体类型，如果是不支持的媒体类型或者消息，将返回-1
+ @return 媒体类型，如果是不支持的媒体类型或者消息，将返回 -1
  */
 + (RCMediaType)getMediaType:(RCMessageContent *)content;
 
@@ -282,5 +282,34 @@
  */
 + (BOOL)checkChatroomKey:(NSString *)key;
 
+/**
+生成 22 位的 UUID
+
+@return 22 位的 UUID
+*/
++ (NSString *)get22bBitUUID;
+
+/**
+生成 UUID
+
+@return UUID
+*/
++ (NSString *)getUUID;
+
+/**
+生成 DeviceId
+
+@return DeviceId 连接改造使用的
+ */
++ (NSString *)getDeviceId:(NSString *)appKey;
+
+/**
+获取手机型号
+
+@return  手机型号
+ */
++ (NSString *)iphoneType;
+
 @end
+
 #endif

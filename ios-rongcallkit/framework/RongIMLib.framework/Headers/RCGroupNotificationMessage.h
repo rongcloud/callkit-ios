@@ -42,6 +42,8 @@
  群组通知消息类
 
  @discussion 群组通知消息类，此消息会进行存储，但不计入未读消息数。
+ 
+ @remarks 通知类消息
  */
 @interface RCGroupNotificationMessage : RCMessageContent <NSCoding>
 
@@ -55,7 +57,7 @@
 @property (nonatomic, copy) NSString *operation;
 
 /*!
- 当前操作发起用户的用户ID
+ 当前操作发起用户的用户 ID
  */
 @property (nonatomic, copy) NSString *operatorUserId;
 
@@ -63,7 +65,7 @@
  当前操作的目标对象
 
  @discussion
- 当前操作的目标对象，如被当前操作目标用户的用户ID或变更后的群主名称等。
+ 当前操作的目标对象，如被当前操作目标用户的用户 ID 或变更后的群主名称等。
  */
 @property (nonatomic, copy) NSString *data;
 
@@ -81,7 +83,7 @@
  初始化群组通知消息
 
  @param operation       群组通知的当前操作名
- @param operatorUserId  当前操作发起用户的用户ID
+ @param operatorUserId  当前操作发起用户的用户 ID
  @param data            当前操作的目标对象
  @param message         当前操作的消息内容
  @param extra           当前操作的附加信息

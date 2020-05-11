@@ -31,12 +31,12 @@
 @property (nonatomic, copy) NSString *introduction;
 
 /*!
- 公众服务账号的ID
+ 公众服务账号的 ID
  */
 @property (nonatomic, copy) NSString *publicServiceId;
 
 /*!
- 公众服务账号头像URL
+ 公众服务账号头像 URL
  */
 @property (nonatomic, copy) NSString *portraitUrl;
 
@@ -48,7 +48,7 @@
 @property (nonatomic, copy) NSString *owner;
 
 /*!
- 公众服务账号所有者的URL
+ 公众服务账号所有者的 URL
 
  @discussion 当前版本暂不支持。
  */
@@ -105,7 +105,7 @@
 @property (nonatomic, getter=isGlobal) BOOL global;
 
 /*!
- 公众服务账号信息的json数据
+ 公众服务账号信息的 json 数据
  */
 @property (nonatomic, strong) NSDictionary *jsonDict;
 
@@ -122,7 +122,7 @@
 /*!
  初始化公众服务账号信息
 
- @param jsonContent    公众账号信息的json数据
+ @param jsonContent    公众账号信息的 json 数据
  */
 - (void)initContent:(NSString *)jsonContent;
 

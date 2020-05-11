@@ -8,14 +8,14 @@
 
 #import "RCStatusDefine.h"
 #import <Foundation/Foundation.h>
-
+#import "RCChatRoomMemberInfo.h"
 /*!
  聊天室信息类
  */
 @interface RCChatRoomInfo : NSObject
 
 /*!
- 聊天室ID
+ 聊天室 ID
  */
 @property (nonatomic, copy) NSString *targetId;
 
@@ -25,13 +25,13 @@
 @property (nonatomic, assign) RCChatRoomMemberOrder memberOrder;
 
 /*!
- 聊天室中的部分成员信息RCChatRoomMemberInfo列表
+ 聊天室中的部分成员信息 RCChatRoomMemberInfo 列表
 
  @discussion
  如果成员类型为RC_ChatRoom_Member_Asc，则为最早加入的成员列表，按成员加入时间升序排列；
  如果成员类型为RC_ChatRoom_Member_Desc，则为最晚加入的成员列表，按成员加入时间降序排列。
  */
-@property (nonatomic, strong) NSArray *memberInfoArray;
+@property (nonatomic, strong) NSArray <RCChatRoomMemberInfo *> *memberInfoArray;
 
 /*!
  当前聊天室的成员总数

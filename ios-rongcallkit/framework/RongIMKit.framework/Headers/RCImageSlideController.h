@@ -23,6 +23,11 @@
  */
 @property (nonatomic, strong) RCImageMessage *currentPreviewImage;
 
+/*!
+ 是否只预览当前图片消息，默认为 NO，支持当前会话图片消息滑动预览，如果设置为 YES， 只预览当前图片消息
+ */
+@property (nonatomic, assign) BOOL onlyPreviewCurrentMessage;
+
 /**
  长按图片内容的回调
 

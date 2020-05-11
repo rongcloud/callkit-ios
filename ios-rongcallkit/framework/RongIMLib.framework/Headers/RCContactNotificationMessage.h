@@ -21,10 +21,12 @@
  请求添加好友
  */
 #define ContactNotificationMessage_ContactOperationRequest @"Request"
+
 /*!
  同意添加好友的请求
  */
 #define ContactNotificationMessage_ContactOperationAcceptResponse @"AcceptResponse"
+
 /*!
  拒绝添加好友的请求
  */
@@ -34,6 +36,8 @@
  好友请求消息类
 
  @discussion 好友请求消息类，此消息会进行存储，但不计入未读消息数。
+ 
+ @remarks 通知类消息
  */
 @interface RCContactNotificationMessage : RCMessageContent <NSCoding>
 
@@ -47,12 +51,12 @@
 @property (nonatomic, copy) NSString *operation;
 
 /*!
- 当前操作发起用户的用户ID
+ 当前操作发起用户的用户 ID
  */
 @property (nonatomic, copy) NSString *sourceUserId;
 
 /*!
- 当前操作目标用户的用户ID
+ 当前操作目标用户的用户 ID
  */
 @property (nonatomic, copy) NSString *targetUserId;
 
@@ -72,14 +76,14 @@
  初始化好友请求消息
 
  @param operation       好友请求当前的操作名
- @param sourceUserId    当前操作发起用户的用户ID
- @param targetUserId    当前操作目标用户的用户ID
+ @param sourceUserId    当前操作发起用户的用户 ID
+ @param targetUserId    当前操作目标用户的用户 ID
  @param message         当前操作的消息内容
  @param extra           当前操作的附加信息
  @return                好友请求消息对象
 
  @discussion 融云不介入您的好友关系，所有的好友关系都由您的服务器自己维护。
- 所以好友请求的操作名和消息内容、扩展信息您均可以自己定制，只要您发送方和接收方针对具体字段内容做好UI显示即可。
+ 所以好友请求的操作名和消息内容、扩展信息您均可以自己定制，只要您发送方和接收方针对具体字段内容做好 UI 显示即可。
  */
 + (instancetype)notificationWithOperation:(NSString *)operation
                              sourceUserId:(NSString *)sourceUserId

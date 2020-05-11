@@ -7,7 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-
+/*!
+ 进入客服会话的用户信息类
+ */
 @interface RCCustomerServiceInfo : NSObject
 @property (nonatomic, copy) NSString *userId;      //用户唯一标识
 @property (nonatomic, copy) NSString *nickName;    //用户昵称
