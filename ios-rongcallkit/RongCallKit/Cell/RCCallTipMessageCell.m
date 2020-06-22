@@ -87,6 +87,11 @@
                                                                   status]
                    dataDetectorEnabled:NO];
         }
+
+        if (message.hangupReason == RCCallDisconnectReasonMediaServerClosed
+            || message.hangupReason == RCCallDisconnectReasonRemoteEngineUnsupported) {
+            [self.messageLabel setText:NSLocalizedStringFromTable(@"VoIPCallMediaServerClosed", @"RongCloudKit", nil)];
+        }
     }
 
     NSString *__text = self.messageLabel.text;

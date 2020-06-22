@@ -218,9 +218,10 @@
         self.remotePortraitView.hidden = NO;
         self.remotePortraitBgView.image = remoteHeaderImage;
 
-        self.remoteNameLabel.frame =
-            CGRectMake(RCCallHorizontalMargin, RCCallTopGGradientHeight + RCCallHeaderLength + RCCallTopMargin + 2.0 + RCCallStatusBarHeight,
-                       self.view.frame.size.width - RCCallHorizontalMargin * 2, RCCallMiniLabelHeight);
+        self.remoteNameLabel.frame = CGRectMake((self.view.frame.size.width - RCCallNameLabelWidth) / 2,
+                                                RCCallTopGGradientHeight + RCCallHeaderLength + RCCallTopMargin + RCCallStatusBarHeight,
+                                                RCCallNameLabelWidth,
+                                                RCCallMiniLabelHeight);
         self.remoteNameLabel.hidden = NO;
 
         self.remoteNameLabel.textAlignment = NSTextAlignmentCenter;
@@ -294,9 +295,10 @@
             self.remotePortraitBgView.hidden = YES;
             self.remotePortraitView.hidden = YES;
 
-            self.remoteNameLabel.frame =
-            CGRectMake(RCCallHorizontalMargin, RCCallMiniButtonTopMargin + RCCallStatusBarHeight,
-                           self.view.frame.size.width - RCCallHorizontalMargin * 2, RCCallMiniLabelHeight);
+            self.remoteNameLabel.frame = CGRectMake((self.view.frame.size.width - RCCallNameLabelWidth) / 2,
+                                                    RCCallMiniButtonTopMargin + RCCallStatusBarHeight,
+                                                    RCCallNameLabelWidth,
+                                                    RCCallMiniLabelHeight);
             self.remoteNameLabel.hidden = NO;
             self.remoteNameLabel.textAlignment = NSTextAlignmentCenter;
             
@@ -311,9 +313,11 @@
 
             [self.remotePortraitBgView setImageURL:[NSURL URLWithString:[self generateUserModel:currentUserId].userInfo.portraitUri]];
 
-            self.remoteNameLabel.frame =
-                CGRectMake(RCCallHorizontalMargin, RCCallMiniButtonTopMargin - 2.5f + RCCallStatusBarHeight,
-                           self.view.frame.size.width - RCCallHorizontalMargin * 2, RCCallMiniLabelHeight);
+            self.remoteNameLabel.frame = CGRectMake((self.view.frame.size.width - RCCallNameLabelWidth) / 2,
+                                                    RCCallMiniButtonTopMargin + RCCallStatusBarHeight,
+                                                    RCCallNameLabelWidth,
+                                                    RCCallMiniLabelHeight);
+            
             [self.remoteNameLabel setText:[self generateUserModel:currentUserId].userInfo.name];
             self.remoteNameLabel.hidden = NO;
             self.remoteNameLabel.textAlignment = NSTextAlignmentCenter;
@@ -330,9 +334,10 @@
             self.remotePortraitBgView.image = remoteHeaderImage;
             self.remotePortraitBgView.hidden = NO;
  
-            self.remoteNameLabel.frame =
-                CGRectMake(RCCallHorizontalMargin, RCCallTopGGradientHeight + RCCallHeaderLength + RCCallTopMargin + 2.0 + RCCallStatusBarHeight,
-                           self.view.frame.size.width - RCCallHorizontalMargin * 2, RCCallMiniLabelHeight);
+            self.remoteNameLabel.frame = CGRectMake((self.view.frame.size.width - RCCallNameLabelWidth) / 2,
+                                                    RCCallTopGGradientHeight + RCCallHeaderLength + RCCallTopMargin + RCCallStatusBarHeight,
+                                                    RCCallNameLabelWidth,
+                                                    RCCallMiniLabelHeight);
             self.remoteNameLabel.hidden = NO;
             self.remoteNameLabel.textAlignment = NSTextAlignmentCenter;
         }else{

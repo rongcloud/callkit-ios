@@ -48,7 +48,7 @@ UIColor* dynamic_color(NSInteger light_hex_value, NSInteger dark_hex_value) {
     } else {
         [image drawInRect:CGRectMake(0, (size.height - size.width) / 2, size.width, size.width)];
     }
-
+    
     UIImage *scaledImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     return scaledImage;
@@ -69,38 +69,42 @@ UIColor* dynamic_color(NSInteger light_hex_value, NSInteger dark_hex_value) {
 + (NSString *)getGeneralReadableString:(RCCallDisconnectReason)hangupReason {
     NSString *hangupReasonString = nil;
     switch (hangupReason) {
-    case RCCallDisconnectReasonCancel:
-        hangupReasonString = NSLocalizedStringFromTable(@"VoIPCallHasCancel", @"RongCloudKit", nil);
-        break;
-    case RCCallDisconnectReasonReject:
-        hangupReasonString = NSLocalizedStringFromTable(@"VoIPCallHasReject", @"RongCloudKit", nil);
-        break;
-    case RCCallDisconnectReasonHangup:
-        hangupReasonString = NSLocalizedStringFromTable(@"VoIPCallHasHangup", @"RongCloudKit", nil);
-        break;
-    case RCCallDisconnectReasonRemoteCancel:
-        hangupReasonString = NSLocalizedStringFromTable(@"VoIPCallRemoteCancel", @"RongCloudKit", nil);
-        break;
-    case RCCallDisconnectReasonRemoteReject:
-        hangupReasonString = NSLocalizedStringFromTable(@"VoIPCallRemoteReject", @"RongCloudKit", nil);
-        break;
-    case RCCallDisconnectReasonRemoteHangup:
-        hangupReasonString = NSLocalizedStringFromTable(@"VoIPCallRemoteHangup", @"RongCloudKit", nil);
-        break;
-    case RCCallDisconnectReasonRemoteBusyLine:
-        hangupReasonString = NSLocalizedStringFromTable(@"VoIPCallRemoteBusyLine", @"RongCloudKit", nil);
-        break;
-    case RCCallDisconnectReasonRemoteNoResponse:
-        hangupReasonString = NSLocalizedStringFromTable(@"VoIPCallRemoteNoResponse", @"RongCloudKit", nil);
-        break;
-    case RCCallDisconnectReasonAcceptByOtherClient:
-        hangupReasonString = NSLocalizedStringFromTable(@"VoIPCallAcceptByOtherClient", @"RongCloudKit", nil);
-        break;
-    case RCCallDisconnectReasonKickedByServer:
-        hangupReasonString = NSLocalizedStringFromTable(@"VoIPCallKickedByServer", @"RongCloudKit", nil);
-        break;
-    default:
-        break;
+        case RCCallDisconnectReasonCancel:
+            hangupReasonString = NSLocalizedStringFromTable(@"VoIPCallHasCancel", @"RongCloudKit", nil);
+            break;
+        case RCCallDisconnectReasonReject:
+            hangupReasonString = NSLocalizedStringFromTable(@"VoIPCallHasReject", @"RongCloudKit", nil);
+            break;
+        case RCCallDisconnectReasonHangup:
+            hangupReasonString = NSLocalizedStringFromTable(@"VoIPCallHasHangup", @"RongCloudKit", nil);
+            break;
+        case RCCallDisconnectReasonRemoteCancel:
+            hangupReasonString = NSLocalizedStringFromTable(@"VoIPCallRemoteCancel", @"RongCloudKit", nil);
+            break;
+        case RCCallDisconnectReasonRemoteReject:
+            hangupReasonString = NSLocalizedStringFromTable(@"VoIPCallRemoteReject", @"RongCloudKit", nil);
+            break;
+        case RCCallDisconnectReasonRemoteHangup:
+            hangupReasonString = NSLocalizedStringFromTable(@"VoIPCallRemoteHangup", @"RongCloudKit", nil);
+            break;
+        case RCCallDisconnectReasonRemoteBusyLine:
+            hangupReasonString = NSLocalizedStringFromTable(@"VoIPCallRemoteBusyLine", @"RongCloudKit", nil);
+            break;
+        case RCCallDisconnectReasonRemoteNoResponse:
+            hangupReasonString = NSLocalizedStringFromTable(@"VoIPCallRemoteNoResponse", @"RongCloudKit", nil);
+            break;
+        case RCCallDisconnectReasonAcceptByOtherClient:
+            hangupReasonString = NSLocalizedStringFromTable(@"VoIPCallAcceptByOtherClient", @"RongCloudKit", nil);
+            break;
+        case RCCallDisconnectReasonKickedByServer:
+            hangupReasonString = NSLocalizedStringFromTable(@"VoIPCallKickedByServer", @"RongCloudKit", nil);
+            break;
+        case RCCallDisconnectReasonMediaServerClosed:
+        case RCCallDisconnectReasonRemoteEngineUnsupported:
+            hangupReasonString = NSLocalizedStringFromTable(@"VoIPCallMediaServerClosed", @"RongCloudKit", nil);
+            break;
+        default:
+            break;
     }
     return hangupReasonString;
 }
@@ -111,24 +115,24 @@ UIColor* dynamic_color(NSInteger light_hex_value, NSInteger dark_hex_value) {
         hangupReason = 1;
     }
     switch (hangupReason) {
-    case RCCallDisconnectReasonBusyLine:
-        hangupReasonString = NSLocalizedStringFromTable(@"VoIPCallNoResponse", @"RongCloudKit", nil);
-        break;
-    case RCCallDisconnectReasonNoResponse:
-        hangupReasonString = NSLocalizedStringFromTable(@"VoIPCallNoResponse", @"RongCloudKit", nil);
-        break;
-    case RCCallDisconnectReasonNetworkError:
-    	hangupReasonString = NSLocalizedStringFromTable(@"VoIPCallLocalNetworkError", @"RongCloudKit", nil);
-        break;
-    case RCCallDisconnectReasonRemoteNetworkError:
-        hangupReasonString = NSLocalizedStringFromTable(@"VoIPCallRemoteNetworkError", @"RongCloudKit", nil);
-        break;
-    case RCCallDisconnectReasonAddToBlackList:
-        hangupReasonString = NSLocalizedStringFromTable(@"VoIPCallHasReject", @"RongCloudKit", nil);
-        break;
-    default:
-        hangupReasonString = [self getGeneralReadableString:hangupReason];
-        break;
+        case RCCallDisconnectReasonBusyLine:
+            hangupReasonString = NSLocalizedStringFromTable(@"VoIPCallNoResponse", @"RongCloudKit", nil);
+            break;
+        case RCCallDisconnectReasonNoResponse:
+            hangupReasonString = NSLocalizedStringFromTable(@"VoIPCallNoResponse", @"RongCloudKit", nil);
+            break;
+        case RCCallDisconnectReasonNetworkError:
+            hangupReasonString = NSLocalizedStringFromTable(@"VoIPCallLocalNetworkError", @"RongCloudKit", nil);
+            break;
+        case RCCallDisconnectReasonRemoteNetworkError:
+            hangupReasonString = NSLocalizedStringFromTable(@"VoIPCallRemoteNetworkError", @"RongCloudKit", nil);
+            break;
+        case RCCallDisconnectReasonAddToBlackList:
+            hangupReasonString = NSLocalizedStringFromTable(@"VoIPCallHasReject", @"RongCloudKit", nil);
+            break;
+        default:
+            hangupReasonString = [self getGeneralReadableString:hangupReason];
+            break;
     }
     return hangupReasonString;
 }
@@ -136,24 +140,24 @@ UIColor* dynamic_color(NSInteger light_hex_value, NSInteger dark_hex_value) {
 + (NSString *)getReadableStringForCallViewController:(RCCallDisconnectReason)hangupReason {
     NSString *hangupReasonString = nil;
     switch (hangupReason) {
-    case RCCallDisconnectReasonNoResponse:
-        hangupReasonString = NSLocalizedStringFromTable(@"VoIPCallNoResponse", @"RongCloudKit", nil);
-        break;
-    case RCCallDisconnectReasonNetworkError:
-        hangupReasonString = NSLocalizedStringFromTable(@"VoIPCallLocalNetworkError", @"RongCloudKit", nil);
-        break;
-    case RCCallDisconnectReasonRemoteNetworkError:
-        hangupReasonString = NSLocalizedStringFromTable(@"VoIPCallRemoteNetworkError", @"RongCloudKit", nil);
-        break;
-    case RCCallDisconnectReasonRemoteBusyLine:
-        hangupReasonString = NSLocalizedStringFromTable(@"VoIPCallRemoteBusyLineAndShowAdvice", @"RongCloudKit", nil);
-        break;
-    case RCCallDisconnectReasonAddToBlackList:
-        hangupReasonString = NSLocalizedStringFromTable(@"VoIP_Rejected_By_Blacklist", @"RongCloudKit", nil);
-        break;
-    default:
-        hangupReasonString = [self getGeneralReadableString:hangupReason];
-        break;
+        case RCCallDisconnectReasonNoResponse:
+            hangupReasonString = NSLocalizedStringFromTable(@"VoIPCallNoResponse", @"RongCloudKit", nil);
+            break;
+        case RCCallDisconnectReasonNetworkError:
+            hangupReasonString = NSLocalizedStringFromTable(@"VoIPCallLocalNetworkError", @"RongCloudKit", nil);
+            break;
+        case RCCallDisconnectReasonRemoteNetworkError:
+            hangupReasonString = NSLocalizedStringFromTable(@"VoIPCallRemoteNetworkError", @"RongCloudKit", nil);
+            break;
+        case RCCallDisconnectReasonRemoteBusyLine:
+            hangupReasonString = NSLocalizedStringFromTable(@"VoIPCallRemoteBusyLineAndShowAdvice", @"RongCloudKit", nil);
+            break;
+        case RCCallDisconnectReasonAddToBlackList:
+            hangupReasonString = NSLocalizedStringFromTable(@"VoIP_Rejected_By_Blacklist", @"RongCloudKit", nil);
+            break;
+        default:
+            hangupReasonString = [self getGeneralReadableString:hangupReason];
+            break;
     }
     return hangupReasonString;
 }
@@ -223,15 +227,15 @@ UIColor* dynamic_color(NSInteger light_hex_value, NSInteger dark_hex_value) {
         [AVCaptureDevice
          requestAccessForMediaType:AVMediaTypeVideo
          completionHandler:^(BOOL granted) {
-             if (!granted) {
-                 [self loadErrorAlertWithConfirm:NSLocalizedStringFromTable(@"AccessRightTitle",
-                                                                            @"RongCloudKit", nil)
-                                         message:NSLocalizedStringFromTable(@"cameraAccessRight",
-                                                                            @"RongCloudKit", nil)];
-                 errorBlock();
-             }
-             complete(granted);
-         }];
+            if (!granted) {
+                [self loadErrorAlertWithConfirm:NSLocalizedStringFromTable(@"AccessRightTitle",
+                                                                           @"RongCloudKit", nil)
+                                        message:NSLocalizedStringFromTable(@"cameraAccessRight",
+                                                                           @"RongCloudKit", nil)];
+                errorBlock();
+            }
+            complete(granted);
+        }];
     } else {
         complete(YES);
     }

@@ -455,9 +455,10 @@
         [self.inviterPortraitBgView setImageURL:[NSURL URLWithString:self.mainModel.userInfo.portraitUri]];
         self.inviterPortraitBgView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
         self.inviterNameLabel.text = self.mainModel.userInfo.name;
-        self.inviterNameLabel.frame =
-            CGRectMake(RCCallHorizontalMargin, RCCallTopGGradientHeight + RCCallHeaderLength + RCCallTopMargin + 2.0 + RCCallStatusBarHeight,
-                       self.view.frame.size.width - RCCallHorizontalMargin * 2, RCCallLabelHeight);
+        self.inviterNameLabel.frame = CGRectMake((self.view.frame.size.width - RCCallNameLabelWidth) / 2,
+                                                 RCCallTopGGradientHeight + RCCallHeaderLength + RCCallTopMargin + RCCallStatusBarHeight,
+                                                 RCCallNameLabelWidth,
+                                                 RCCallLabelHeight);
         self.inviterNameLabel.hidden = NO;
     } else {
         self.inviterNameLabel.hidden = YES;
@@ -469,14 +470,16 @@
         [self.inviterPortraitBgView setImageURL:[NSURL URLWithString:self.mainModel.userInfo.portraitUri]];
         self.inviterPortraitBgView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
         
-        self.mainNameLabel.frame =
-        CGRectMake(RCCallHorizontalMargin, RCCallMiniButtonTopMargin + RCCallStatusBarHeight,
-                   (self.view.frame.size.width - RCCallHorizontalMargin * 2), RCCallLabelHeight);
+        self.mainNameLabel.frame = CGRectMake((self.view.frame.size.width - RCCallNameLabelWidth) / 2,
+                                              RCCallMiniButtonTopMargin + RCCallStatusBarHeight,
+                                              RCCallNameLabelWidth,
+                                              RCCallLabelHeight);
         self.mainNameLabel.hidden = NO;
     } else if (callStatus == RCCallActive) {
-        self.mainNameLabel.frame =
-            CGRectMake(RCCallHorizontalMargin, RCCallMiniButtonTopMargin + RCCallStatusBarHeight,
-                       (self.view.frame.size.width - RCCallHorizontalMargin * 2) , RCCallLabelHeight);
+        self.mainNameLabel.frame = CGRectMake((self.view.frame.size.width - RCCallNameLabelWidth) / 2,
+                                              RCCallMiniButtonTopMargin + RCCallStatusBarHeight,
+                                              RCCallNameLabelWidth,
+                                              RCCallLabelHeight);
         self.mainNameLabel.hidden = NO;
         self.inviterPortraitBgView.hidden = YES;
 

@@ -92,7 +92,7 @@
 
 - (void)setAutoLayout {    
     RCCallSummaryMessage *callMessage = (RCCallSummaryMessage *)self.model.content;
-    if (callMessage.duration > 0) {
+    if (callMessage.duration > 1000) {
         self.textLabel.text =
             [NSString stringWithFormat:@"%@ %@", NSLocalizedStringFromTable(@"VoIPCallTotalTime", @"RongCloudKit", nil),
                                        [RCCallKitUtility getReadableStringForTime:(long)(callMessage.duration / 1000)]];

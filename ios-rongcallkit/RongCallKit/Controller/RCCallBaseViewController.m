@@ -1415,6 +1415,7 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
     [self callWillDisconnect];
     [[RCCXCall sharedInstance] endCXCall];
     [RCCallKitUtility clearScreenForceOnStatus];
+    [[UIApplication sharedApplication] setStatusBarHidden:NO];
 
     if (self.callSession.connectedTime > 0) {
         self.tipsLabel.text = NSLocalizedStringFromTable(@"VoIPCallEnd", @"RongCloudKit", nil);

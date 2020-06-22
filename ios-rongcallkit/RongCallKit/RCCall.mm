@@ -320,6 +320,7 @@
                              userIdList:(NSArray *)userIdList {
     [self stopReceiveCallVibrate];
     
+    [[RCCXCall sharedInstance] endCXCall];
     for (UILocalNotification *notification in self.locationNotificationList) {
         if ([notification.userInfo[@"appData"][@"callId"] isEqualToString:callId]) {
             [[UIApplication sharedApplication] cancelLocalNotification:notification];

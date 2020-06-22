@@ -405,9 +405,10 @@
         self.inviterPortraitBgView.hidden = YES;
         
         self.inviterNameLabel.text = self.mainModel.userInfo.name;
-        self.inviterNameLabel.frame =
-            CGRectMake(RCCallHorizontalMargin, RCCallTopGGradientHeight + RCCallHeaderLength + RCCallTopMargin + 2.0 + RCCallStatusBarHeight,
-                       self.view.frame.size.width - RCCallHorizontalMargin * 2, RCCallLabelHeight);
+        self.inviterNameLabel.frame = CGRectMake((self.view.frame.size.width - RCCallNameLabelWidth) / 2,
+                                                 RCCallTopGGradientHeight + RCCallHeaderLength + RCCallTopMargin + RCCallStatusBarHeight,
+                                                 RCCallNameLabelWidth,
+                                                 RCCallLabelHeight);
         self.inviterNameLabel.hidden = NO;
 
     }else if (callStatus == RCCallDialing){
