@@ -375,20 +375,6 @@
             self.blurView.hidden = YES;
             self.remotePortraitView.alpha = 1.0;
         }
-        
-        if (callStatus == RCCallActive) {
-            self.minimizeButton.hidden = self.isFullScreen;
-            self.handUpButton.hidden = self.isFullScreen;
-            self.whiteBoardButton.hidden = self.isFullScreen;
-            self.cameraSwitchButton.hidden = self.isFullScreen;
-            self.addButton.hidden = self.isFullScreen;
-            self.muteButton.hidden = self.isFullScreen;
-            self.hangupButton.hidden = self.isFullScreen;
-            self.cameraCloseButton.hidden = self.isFullScreen;
-            self.remoteNameLabel.hidden = self.isFullScreen;
-            self.timeLabel.hidden = self.isFullScreen;
-            self.signalImageView.hidden = self.isFullScreen;
-        }
     }
 }
 
@@ -430,9 +416,21 @@
     if (self.callSession.mediaType == RCCallMediaVideo && self.callSession.callStatus == RCCallActive) {
         self.isFullScreen = !self.isFullScreen;
         [[UIApplication sharedApplication] setStatusBarHidden:self.isFullScreen];
-        [self resetLayout:self.callSession.isMultiCall
-                mediaType:self.callSession.mediaType
-               callStatus:self.callSession.callStatus];
+        
+        if (self.callSession.mediaType == RCCallMediaVideo
+            && self.callSession.callStatus == RCCallActive) {
+            self.minimizeButton.hidden = self.isFullScreen;
+            self.handUpButton.hidden = self.isFullScreen;
+            self.whiteBoardButton.hidden = self.isFullScreen;
+            self.cameraSwitchButton.hidden = self.isFullScreen;
+            self.addButton.hidden = self.isFullScreen;
+            self.muteButton.hidden = self.isFullScreen;
+            self.hangupButton.hidden = self.isFullScreen;
+            self.cameraCloseButton.hidden = self.isFullScreen;
+            self.remoteNameLabel.hidden = self.isFullScreen;
+            self.timeLabel.hidden = self.isFullScreen;
+            self.signalImageView.hidden = self.isFullScreen;
+        }
     }
 }
 
