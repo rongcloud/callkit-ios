@@ -2,7 +2,7 @@
 //  RCCallCommonDefine.h
 //  RongCallLib
 //
-//  Created by 岑裕 on 16/2/28.
+//  Created by RongCloud on 16/2/28.
 //  Copyright © 2016年 RongCloud. All rights reserved.
 //
 
@@ -158,7 +158,11 @@ typedef NS_ENUM(NSInteger, RCCallErrorCode) {
     /*!
      已被禁止通话
      */
-    RCCallMediaKickedByServerError = 11
+    RCCallMediaKickedByServerError = 11,
+    /*!
+     音视频服务已关闭
+     */
+    RCCallMediaServerClosedError = 12
 };
 
 /*!
@@ -236,7 +240,11 @@ typedef NS_ENUM(NSInteger, RCCallDisconnectReason) {
     /*!
      已被禁止通话
      */
-    RCCallDisconnectReasonKickedByServer = 21
+    RCCallDisconnectReasonKickedByServer = 21,
+    /*!
+     音视频服务已关闭
+     */
+    RCCallDisconnectReasonMediaServerClosed = 22
 };
 
 /*!

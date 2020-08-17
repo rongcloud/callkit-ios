@@ -2,7 +2,7 @@
 //  RCCallClientSignalServer.h
 //  RongCallLib
 //
-//  Created by Tao Li on 2017/7/25.
+//  Created by RongCloud on 2017/7/25.
 //  Copyright © 2017年 Rong Cloud. All rights reserved.
 //
 

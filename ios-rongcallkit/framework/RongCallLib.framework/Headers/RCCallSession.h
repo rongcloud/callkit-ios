@@ -2,7 +2,7 @@
 //  RCCallSession.h
 //  RongCallLib
 //
-//  Created by 岑裕 on 16/2/29.
+//  Created by RongCloud on 16/2/29.
 //  Copyright © 2016年 RongCloud. All rights reserved.
 //
 
@@ -232,9 +232,7 @@
  
  @param sampleBuffer   本地视频数据
  @discussion
- 当前通话本地视频数据, 用于GPU滤镜处理, 同步返回处理后的同一 sampleBuffer 对象,
- 需要本地视频数据时首先调用 RCCallClient.h 中 - (void)setEnableBeauty:(BOOL)enable方法设置为打开, 该方法默认为NO
- 若设置setEnableBeauty为Yes, 但未实现 processVideoFrame: 则使用采集的原始视频显示和发送
+ 当前视频通话本地视频数据, 用于GPU滤镜处理, 同步返回处理后的同一 sampleBuffer 对象
  
  @remarks 代理
  @return 处理后的本地视频数据
@@ -271,6 +269,11 @@
  通话的目标会话ID
  */
 @property(nonatomic, strong, readonly) NSString *targetId;
+
+/*!
+ RTC会话唯一标识, 用于 Server API
+ */
+@property(nonatomic, strong, readonly) NSString *sessionId;
 
 /*!
  是否是多方通话

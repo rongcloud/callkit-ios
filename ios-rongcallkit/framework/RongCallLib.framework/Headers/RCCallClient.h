@@ -2,7 +2,7 @@
 //  RCCallClient.h
 //  RongCallLib
 //
-//  Created by 岑裕 on 16/2/28.
+//  Created by RongCloud on 16/2/28.
 //  Copyright © 2016年 RongCloud. All rights reserved.
 //
 
@@ -12,7 +12,7 @@
 #import <Foundation/Foundation.h>
 #import <AVFoundation/AVFoundation.h>
 
-#define kRongCallLibVersion @"V2.10.6_20200509113552_pub_dev_362b130"
+#define kRongCallLibVersion @"V4.0.1.1_20200808201316_release_9067fe6"
 
 /*!
  CallLib全局通话呼入的监听器
@@ -219,28 +219,6 @@
  @remarks 视频设置
  */
 - (void)setBitRate:(NSUInteger)rate;
-
-/*!
- 本地视频上报开关
- 
- @param enable YES:使用  NO:不使用(默认)
- @discussion
- 打开后, 本地摄像头采集的视频数据将通过 RCCallSessionDelegate 中的 - (CMSampleBufferRef)processVideoFrame:(CMSampleBufferRef)sampleBuffer 代理方法上报, 默认不上报本地视频数据
- 
- @remarks 视频设置
- */
-- (void)setEnableBeauty:(BOOL)enable;
-
-/*!
- 设置视频编码方式
- 
- @param type 视频编码类型
- @discussion
- 设置视频编码方式
- 
- @remarks 视频设置
- */
-- (void)setVideoCodecType:(RCVideoCodecType)type;
 
 /*!
  设置外部信令服务器代理

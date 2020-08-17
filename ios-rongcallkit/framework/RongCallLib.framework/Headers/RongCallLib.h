@@ -2,7 +2,7 @@
 //  RongCallLib.h
 //  RongCallLib
 //
-//  Created by litao on 16/4/25.
+//  Created by RongCloud on 16/4/25.
 //  Copyright © 2016年 Rong Cloud. All rights reserved.
 //
 
