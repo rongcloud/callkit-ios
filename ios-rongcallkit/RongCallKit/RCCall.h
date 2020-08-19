@@ -24,12 +24,12 @@ UIKIT_EXTERN NSNotificationName const RCCallNewSessionCreationNotification;
 /*!
  当前的通话会话实体
  */
-@property(nonatomic, strong, readonly) RCCallSession *currentCallSession;
+@property (nonatomic, strong, readonly) RCCallSession *currentCallSession;
 
 /*!
  音频通话支持的最大通话人数
  */
-@property(nonatomic, assign) int maxMultiAudioCallUserNumber;
+@property (nonatomic, assign) int maxMultiAudioCallUserNumber;
 
 /*!
  视频通话支持的最大通话人数
@@ -39,12 +39,12 @@ UIKIT_EXTERN NSNotificationName const RCCallNewSessionCreationNotification;
 /**
  系统来电显示的 app 名字
  */
-@property(nonatomic, copy) NSString *appLocalizedName;
+@property (nonatomic, copy) NSString *appLocalizedName;
 
 /**
  是否处理来电, 默认: YES 处理, 设置为 NO 时会直接挂断来电
 */
-@property(nonatomic, assign) BOOL canIncomingCall;
+@property (nonatomic, assign) BOOL canIncomingCall;
 
 /**
  多人音视频通话邀请用户代理
@@ -52,7 +52,7 @@ UIKIT_EXTERN NSNotificationName const RCCallNewSessionCreationNotification;
  @discussion 如果实现该代理则多人音视频通话界面将有用户自己定义否则使用 RongCallKit 自带的选人界面
  
  */
-@property(nonatomic, weak) id<RCMultiCallInviteNewUserDelegate> callInviteNewUserDelegate;
+@property (nonatomic, weak) id<RCMultiCallInviteNewUserDelegate> callInviteNewUserDelegate;
 
 
 /*!
@@ -61,7 +61,7 @@ UIKIT_EXTERN NSNotificationName const RCCallNewSessionCreationNotification;
  @warning  **已废弃，请勿使用。**
  升级说明：如果您之前使用了此属性，可以直接替换为[RCIM sharedRCIM]的groupMemberDataSource属性，行为和实现完全一致。
  */
-@property(nonatomic, weak) id<RCCallGroupMemberDataSource> groupMemberDataSource __deprecated_msg("已废弃，请勿使用。");
+@property (nonatomic, weak) id<RCCallGroupMemberDataSource> groupMemberDataSource __deprecated_msg("已废弃，请勿使用。");
 
 /*!
  获取融云通话界面组件CallKit的核心类单例

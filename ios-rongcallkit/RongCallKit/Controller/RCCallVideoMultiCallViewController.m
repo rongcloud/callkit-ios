@@ -397,10 +397,15 @@
         [existUserIdList addObject:userProfile.userId];
     }
     [existUserIdList addObject:currentUserId];
-
+    
     __weak typeof(self) weakSelf = self;
-    if ([RCCall sharedRCCall].callInviteNewUserDelegate &&[[RCCall sharedRCCall].callInviteNewUserDelegate respondsToSelector:@selector(inviteNewUser:BaseOn:selectResult:)]) {
-        [[RCCall sharedRCCall].callInviteNewUserDelegate inviteNewUser:existUserIdList BaseOn:self selectResult:^(NSArray<NSString *> *userIdList) {
+    if ([RCCall sharedRCCall].callInviteNewUserDelegate
+        && [[RCCall sharedRCCall].callInviteNewUserDelegate respondsToSelector:@selector(inviteNewUser:targetId:mediaType:baseOn:selectResult:)]) {
+        [[RCCall sharedRCCall].callInviteNewUserDelegate inviteNewUser:existUserIdList
+                                                              targetId:self.targetId
+                                                             mediaType:self.mediaType
+                                                                baseOn:self
+                                                          selectResult:^(NSArray<NSString *> *userIdList) {
             [weakSelf.callSession inviteRemoteUsers:userIdList mediaType:weakSelf.mediaType];
         }];
     } else {
@@ -417,7 +422,7 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             [weakSelf presentViewController:nav animated:YES completion:nil];
         });
-   }
+    }
 }
 
 - (void)inviteNewUserWithClickEvent {
