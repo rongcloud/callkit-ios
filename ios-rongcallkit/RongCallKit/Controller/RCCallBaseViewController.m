@@ -86,7 +86,7 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
                     str = [str stringByAppendingFormat:@"%@:::", userId];
                 }
                 str = [str substringToIndex:str.length - 3];
-                [[RCCXCall sharedInstance] startCall:[str copy]];
+                [[RCCXCall sharedInstance] startCall:str];
             }
         }
         [self registerForegroundNotification];

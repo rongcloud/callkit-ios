@@ -95,7 +95,7 @@
         videoItem.tag = PLUGIN_BOARD_ITEM_VIDEO_VOIP_TAG;
         [itemList addObject:videoItem];
     }
-    return [itemList copy];
+    return itemList;
 }
 
 - (void)onMessageReceived:(RCMessage *)message {

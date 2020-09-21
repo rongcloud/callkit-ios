@@ -192,7 +192,7 @@
         [userIdList addObject:userModel.userId];
     }
     if (userIdList.count > 0) {
-        return [userIdList copy];
+        return userIdList;
     } else {
         return nil;
     }
@@ -437,7 +437,7 @@
                                                               initWithConversationType:self.conversationType
                                                               targetId:self.targetId
                                                               mediaType:self.mediaType
-                                                              exist:[existUserIdList copy]
+                                                              exist:existUserIdList
                                                               success:^(NSArray *addUserIdList) {
                                                                   [weakSelf.callSession inviteRemoteUsers:addUserIdList mediaType:weakSelf.mediaType];
                                                               }];
