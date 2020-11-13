@@ -21,106 +21,8 @@
 /*!
  建立连接返回的错误码
 
- @discussion
- 开发者仅需要关注以下几种连接错误码，其余错误码 SDK 均会进行自动重连，开发者无须处理。
- RC_CONN_ID_REJECT, RC_CONN_TOKEN_INCORRECT, RC_CONN_NOT_AUTHRORIZED,
- RC_CONN_PACKAGE_NAME_INVALID, RC_CONN_APP_BLOCKED_OR_DELETED,
- RC_CONN_USER_BLOCKED,
- RC_DISCONN_KICK, RC_CLIENT_NOT_INIT, RC_INVALID_PARAMETER, RC_INVALID_ARGUMENT
  */
 typedef NS_ENUM(NSInteger, RCConnectErrorCode) {
-
-    /*!
-     连接已被释放
-
-     @discussion 连接相关的错误码，SDK 会做好自动重连，开发者无须处理。
-     */
-    RC_NET_CHANNEL_INVALID = 30001,
-
-    /*!
-     连接不可用
-
-     @discussion 连接相关的错误码，SDK 会做好自动重连，开发者无须处理。
-     */
-    RC_NET_UNAVAILABLE = 30002,
-
-    /*!
-     导航 HTTP 发送失败
-
-     @discussion 如果是偶尔出现此错误，SDK 会做好自动重连，开发者无须处理。如果一直是这个错误，应该是您没有设置好ATS。
-     ATS 默认只使用 HTTPS 协议，当 HTTP 协议被禁止时 SDK 会一直 30004 错误。您可以参考 iOS 开发文档中的 ATS 设置说明。链接如下：https://support.rongcloud.cn/ks/OTQ1
-     */
-    RC_NAVI_REQUEST_FAIL = 30004,
-
-    /*!
-     导航 HTTP 请求失败
-
-     @discussion 连接相关的错误码，SDK 会做好自动重连，开发者无须处理。
-     */
-    RC_NAVI_RESPONSE_ERROR = 30007,
-
-    /*!
-     导航 HTTP 返回数据格式错误
-
-     @discussion 连接相关的错误码，SDK 会做好自动重连，开发者无须处理。
-     */
-    RC_NODE_NOT_FOUND = 30008,
-
-    /*!
-     创建 Socket 连接失败
-
-     @discussion 连接相关的错误码，SDK 会做好自动重连，开发者无须处理。
-     */
-    RC_SOCKET_NOT_CONNECTED = 30010,
-
-    /*!
-     Socket 断开
-
-     @discussion 连接相关的错误码，SDK 会做好自动重连，开发者无须处理。
-     */
-    RC_SOCKET_DISCONNECTED = 30011,
-
-    /*!
-     PING 失败
-
-     @discussion 连接相关的错误码，SDK 会做好自动重连，开发者无须处理。
-     */
-    RC_PING_SEND_FAIL = 30012,
-
-    /*!
-     PING 超时
-
-     @discussion 连接相关的错误码，SDK 会做好自动重连，开发者无须处理。
-     */
-    RC_PONG_RECV_FAIL = 30013,
-
-    /*!
-     信令发送失败
-
-     @discussion 连接相关的错误码，SDK 会做好自动重连，开发者无须处理。
-     */
-    RC_MSG_SEND_FAIL = 30014,
-
-    /*!
-     连接过于频繁
-
-     @discussion 连接相关的错误码，SDK 会做好自动重连，开发者无须处理。
-     */
-    RC_CONN_OVERFREQUENCY = 30015,
-
-    /*!
-     连接 ACK 超时
-
-     @discussion 连接相关的错误码，SDK 会做好自动重连，开发者无须处理。
-     */
-    RC_CONN_ACK_TIMEOUT = 31000,
-
-    /*!
-     信令版本错误
-
-     @discussion 连接相关的错误码，SDK 会做好自动重连，开发者无须处理。
-     */
-    RC_CONN_PROTO_VERSION_ERROR = 31001,
 
     /*!
      AppKey 错误
@@ -130,18 +32,12 @@ typedef NS_ENUM(NSInteger, RCConnectErrorCode) {
     RC_CONN_ID_REJECT = 31002,
 
     /*!
-     服务器当前不可用（预留）
-
-     @discussion 连接相关的错误码，SDK 会做好自动重连，开发者无须处理。
-     */
-    RC_CONN_SERVER_UNAVAILABLE = 31003,
-
-    /*!
      Token 无效
 
      @discussion Token 无效一般有以下两种原因。
      一是 token 错误，请您检查客户端初始化使用的 AppKey 和您服务器获取 token 使用的 AppKey 是否一致；
-     二是 token 过期，是因为您在开发者后台设置了 token 过期时间，您需要请求您的服务器重新获取 token 并再次用新的 token 建立连接。
+     二是 token 过期，是因为您在开发者后台设置了 token 过期时间，您需要请求您的服务器重新获取 token 并再次用新的 token
+     建立连接。
      */
     RC_CONN_TOKEN_INCORRECT = 31004,
 
@@ -149,18 +45,13 @@ typedef NS_ENUM(NSInteger, RCConnectErrorCode) {
      AppKey 与 Token 不匹配
 
      @discussion
-     请检查您使用的 AppKey 与 Token 是否正确，是否匹配。一般有以下两种原因。
+     请检查您使用的 AppKey 与 Token 是否正确，是否匹配。一般有以下三种原因。
      一是 token 错误，请您检查客户端初始化使用的 AppKey 和您服务器获取 token 使用的 AppKey 是否一致；
-     二是 token 过期，是因为您在开发者后台设置了 token 过期时间，您需要请求您的服务器重新获取 token 并再次用新的 token 建立连接。
+     二是 token 过期，是因为您在开发者后台设置了 token 过期时间，您需要请求您的服务器重新获取 token 并再次用新的 token
+     三是 App 校验未通过，是因为您在开发者后台设置了 App 校验
+     建立连接。
      */
     RC_CONN_NOT_AUTHRORIZED = 31005,
-
-    /*!
-     连接重定向
-
-     @discussion 连接相关的错误码，SDK 会做好自动重连，开发者无须处理。
-     */
-    RC_CONN_REDIRECTED = 31006,
 
     /*!
      BundleID 不正确
@@ -196,13 +87,11 @@ typedef NS_ENUM(NSInteger, RCConnectErrorCode) {
       @discussion 重连过程中当前用户在其它设备上登录
      */
     RC_CONN_OTHER_DEVICE_LOGIN = 31023,
-
+    
     /*!
-     连接被拒绝
-
-     @discussion 连接相关的错误码，SDK 会做好自动重连，开发者无须处理。
+     连接超过并发限定值
      */
-    RC_CONN_REFUSED = 32061,
+    CONCURRENT_LIMIT_ERROR = 31024,
 
     /*!
      SDK 没有初始化
@@ -222,7 +111,8 @@ typedef NS_ENUM(NSInteger, RCConnectErrorCode) {
      Connection 已经存在
 
      @discussion
-     调用过connect之后，只有在 token 错误或者被踢下线或者用户 logout 的情况下才需要再次调用 connect。SDK 会自动重连，不需要应用多次调用 connect 来保证连接性。
+     调用过connect之后，只有在 token 错误或者被踢下线或者用户 logout 的情况下才需要再次调用 connect。其它情况下 SDK
+     会自动重连，不需要应用多次调用 connect 来保持连接。
      */
     RC_CONNECTION_EXIST = 34001,
 
@@ -232,6 +122,13 @@ typedef NS_ENUM(NSInteger, RCConnectErrorCode) {
      @discussion 融云公有云 SDK 无法连接到私有云环境。请确认需要连接的环境，使用正确 SDK 版本。
      */
     RC_ENVIRONMENT_ERROR = 34005,
+
+    /*!
+     连接超时。
+
+    @discussion 当调用 connectWithToken:timeLimit:dbOpened:success:error:  接口，timeLimit 为有效值时，SDK 在 timeLimit 时间内还没连接成功返回此错误。
+    */
+    RC_CONNECT_TIMEOUT = 34006,
 
     /*!
      开发者接口调用时传入的参数错误
@@ -265,6 +162,13 @@ typedef NS_ENUM(NSInteger, RCErrorCode) {
      发送消息频率过高，1 秒钟最多只允许发送 5 条消息
      */
     SEND_MSG_FREQUENCY_OVERRUN = 20604,
+    
+    /*!
+    请求超出了调用频率限制，请稍后再试
+
+    @discussion 接口调用过于频繁，请稍后再试。
+    */
+    RC_REQUEST_OVERFREQUENCY = 20607,
 
     /*!
      当前用户不在该讨论组中
@@ -341,6 +245,11 @@ typedef NS_ENUM(NSInteger, RCErrorCode) {
      聊天室状态值不存在
     */
     RC_KEY_NOT_EXIST = 23427,
+    
+    /*!
+     操作跟服务端同步时出现问题，有可能是操作过于频繁所致。如果出现该错误，请延时 0.5s 再试
+    */
+    RC_SETTING_SYNC_FAILED = 26002,
 
     /*!
      聊天室状态未同步完成
@@ -389,11 +298,67 @@ typedef NS_ENUM(NSInteger, RCErrorCode) {
      历史消息云存储业务未开通。可以在融云开发者后台中开启该服务。
      */
     MSG_ROAMING_SERVICE_UNAVAILABLE = 33007,
+    
+    /*!
+     公众号非法类型，针对会话类型：ConversationType_APPSERVICE
+     */
+    RC_APP_PUBLICSERVICE_ERROR_TYPE = 29201,
 
     /*!
-     无效的公众号。(由会话类型和 Id 所标识的公众号会话是无效的)
+     公众号默认已关注，针对会话类型：ConversationType_APPSERVICE
+     */
+    RC_APP_PUBLICSERVICE_DEFFOLLOWED = 29102,
+    
+    /*!
+     公众号已关注，针对会话类型：ConversationType_APPSERVICE
+     */
+    RC_APP_PUBLICSERVICE_FOLLOWED = 29103,
+    
+    /*!
+     公众号默认已取消关注，针对会话类型：ConversationType_APPSERVICE
+     */
+    RC_APP_PUBLICSERVICE_DEFUNFOLLOWED = 29104,
+    
+    /*!
+     公众号已经取消关注，针对会话类型：ConversationType_APPSERVICE
+     */
+    RC_APP_PUBLICSERVICE_UNFOLLOWED = 29105,
+    
+    /*!
+     公众号未关注，针对会话类型：ConversationType_APPSERVICE
+     */
+    RC_APP_PUBLICSERVICE_UNFOLLOW = 29106,
+
+    /*!
+     公众号非法类型，针对会话类型：ConversationType_PUBLICSERVICE
      */
     INVALID_PUBLIC_NUMBER = 29201,
+
+    /*!
+     公众号默认已关注，针对会话类型：ConversationType_PUBLICSERVICE
+     */
+    RC_PUBLICSERVICE_DEFFOLLOWED = 29202,
+    
+    /*!
+     公众号已关注，针对会话类型：ConversationType_PUBLICSERVICE
+     */
+    RC_PUBLICSERVICE_FOLLOWED = 29203,
+    
+    /*!
+     公众号默认已取消关注，针对会话类型：ConversationType_PUBLICSERVICE
+     */
+    RC_PUBLICSERVICE_DEFUNFOLLOWED = 29204,
+    
+    /*!
+     公众号已经取消关注，针对会话类型：ConversationType_PUBLICSERVICE
+     */
+    RC_PUBLICSERVICE_UNFOLLOWED = 29205,
+    
+    /*!
+     公众号未关注，针对会话类型：ConversationType_PUBLICSERVICE
+     */
+    RC_PUBLICSERVICE_UNFOLLOW = 29206,
+    
     /*!
       消息大小超限，消息体（序列化成 json 格式之后的内容）最大 128k bytes。
      */
@@ -438,7 +403,34 @@ typedef NS_ENUM(NSInteger, RCErrorCode) {
      GIF 消息文件大小超出限制， 默认 GIF 文件大小上限是 2 MB
      */
     RC_GIF_MSG_SIZE_LIMIT_EXCEED = 34003,
+    
+    /**
+     * 查询的公共服务信息不存在。
+     * <p>请确认查询的公共服务的类型和公共服务 id 是否匹配。</p>
+     */
+    RC_PUBLIC_SERVICE_PROFILE_NOT_EXIST = 34007,
+    
+    /**
+    * 消息不能被扩展。
+    * <p>消息在发送时，RCMessage 对象的属性 canIncludeExpansion 置为 YES 才能进行扩展。</p>
+    */
+    RC_MESSAGE_CANT_EXPAND = 34008,
 
+    /**
+    * 消息扩展失败。
+    * <p>一般是网络原因导致的，请确保网络状态良好，并且融云 SDK 连接正常</p>
+    */
+    RC_MESSAGE_EXPAND_FAIL = 34009,
+    
+    /*!
+     消息扩展大小超出限制， 默认消息扩展字典 key 长度不超过 32 ，value 长度不超过 64 ，单次设置扩展数量最大为 20，消息的扩展总数不能超过 300
+     */
+    RC_MSG_EXPANSION_SIZE_LIMIT_EXCEED = 34010,
+    
+    /*!
+     媒体消息媒体文件 http  上传失败
+     */
+    RC_FILE_UPLOAD_FAILED = 34011,
 };
 
 typedef NS_ENUM(NSInteger, RCDBErrorCode) {
@@ -451,12 +443,6 @@ typedef NS_ENUM(NSInteger, RCDBErrorCode) {
 #pragma mark RCConnectionStatus - 网络连接状态码
 /*!
  网络连接状态码
-
- @discussion 开发者仅需要关注以下几种连接状态，其余状态SDK均会进行自动重连。
- ConnectionStatus_Connected, ConnectionStatus_Connecting,
- ConnectionStatus_Unconnected,
- ConnectionStatus_SignUp, ConnectionStatus_KICKED_OFFLINE_BY_OTHER_CLIENT,
- ConnectionStatus_TOKEN_INCORRECT
  */
 typedef NS_ENUM(NSInteger, RCConnectionStatus) {
     /*!
@@ -472,65 +458,16 @@ typedef NS_ENUM(NSInteger, RCConnectionStatus) {
     ConnectionStatus_Connected = 0,
 
     /*!
-     当前设备网络不可用
+     连接过程中，当前设备网络不可用
 
-     @discussion 建立连接的临时状态，SDK 会做好自动重连，开发者无须处理。
+     @discussion 当网络恢复可用时，SDK 会做好自动重连，开发者无须处理。
      */
     ConnectionStatus_NETWORK_UNAVAILABLE = 1,
-
-    /*!
-     当前设备切换到飞行模式
-
-     @discussion 建立连接的临时状态，SDK 会做好自动重连，开发者无须处理。
-     */
-    ConnectionStatus_AIRPLANE_MODE = 2,
-
-    /*!
-     当前设备切换到 2G（GPRS、EDGE）低速网络
-
-     @discussion 建立连接的临时状态，SDK 会做好自动重连，开发者无须处理。
-     */
-    ConnectionStatus_Cellular_2G = 3,
-
-    /*!
-     当前设备切换到 3G 或 4G 高速网络
-
-     @discussion 建立连接的临时状态，SDK 会做好自动重连，开发者无须处理。
-     */
-    ConnectionStatus_Cellular_3G_4G = 4,
-
-    /*!
-     当前设备切换到 WIFI 网络
-
-     @discussion 建立连接的临时状态，SDK 会做好自动重连，开发者无须处理。
-     */
-    ConnectionStatus_WIFI = 5,
 
     /*!
      当前用户在其他设备上登录，此设备被踢下线
      */
     ConnectionStatus_KICKED_OFFLINE_BY_OTHER_CLIENT = 6,
-
-    /*!
-     当前用户在 Web 端登录
-
-     @discussion 建立连接的临时状态，SDK 会做好自动重连，开发者无须处理。
-     */
-    ConnectionStatus_LOGIN_ON_WEB = 7,
-
-    /*!
-     服务器异常
-
-     @discussion 建立连接的临时状态，SDK 会做好自动重连，开发者无须处理。
-     */
-    ConnectionStatus_SERVER_INVALID = 8,
-
-    /*!
-     连接验证异常
-
-     @discussion 建立连接的临时状态，SDK 会做好自动重连，开发者无须处理。
-     */
-    ConnectionStatus_VALIDATE_INVALID = 9,
 
     /*!
      连接中
@@ -545,13 +482,25 @@ typedef NS_ENUM(NSInteger, RCConnectionStatus) {
     /*!
      已注销
      */
-    ConnectionStatus_SignUp = 12,
+    ConnectionStatus_SignOut = 12,
 
     /*!
-     Token 无效
+     连接暂时挂起（多是由于网络问题导致），SDK 会在合适时机进行自动重连
+    */
+    ConnectionStatus_Suspend = 13,
+
+    /*!
+     自动连接超时，SDK 将不会继续连接，用户需要做超时处理，再自行调用 connectWithToken 接口进行连接
+    */
+    ConnectionStatus_Timeout = 14,
+
+    /*!
+     Token无效
 
      @discussion
-     Token 无效一般有两种原因。一是 token 错误，请您检查客户端初始化使用的 AppKey 和您服务器获取 token 使用的 AppKey 是否一致；二是 token 过期，是因为您在开发者后台设置了 token 过期时间，您需要请求您的服务器重新获取 token 并再次用新的 token 建立连接。
+     Token 无效一般有两种原因。一是 token 错误，请您检查客户端初始化使用的 AppKey 和您服务器获取 token 使用的 AppKey
+     是否一致；二是 token 过期，是因为您在开发者后台设置了 token 过期时间，您需要请求您的服务器重新获取 token
+     并再次用新的 token 建立连接。
      */
     ConnectionStatus_TOKEN_INCORRECT = 31004,
 
@@ -836,12 +785,14 @@ typedef NS_ENUM(NSUInteger, RCReceivedStatus) {
     ReceivedStatus_DOWNLOADED = 4,
 
     /*!
-     该消息已经被其他登录的多端收取过。（即该消息已经被其他端收取过后。当前端才登录，并重新拉取了这条消息。客户可以通过这个状态更新 UI，比如不再提示）。
+     该消息已经被其他登录的多端收取过。（即该消息已经被其他端收取过后。当前端才登录，并重新拉取了这条消息。客户可以通过这个状态更新
+     UI，比如不再提示）。
      */
     ReceivedStatus_RETRIEVED = 8,
 
     /*!
-     该消息是被多端同时收取的。（即其他端正同时登录，一条消息被同时发往多端。客户可以通过这个状态值更新自己的某些 UI 状态）。
+     该消息是被多端同时收取的。（即其他端正同时登录，一条消息被同时发往多端。客户可以通过这个状态值更新自己的某些 UI
+     状态）。
      */
     ReceivedStatus_MULTIPLERECEIVE = 16,
 
@@ -1176,7 +1127,11 @@ typedef NS_ENUM(NSUInteger, RCPushLauguage) {
     /*!
      中文
      */
-    RCPushLauguage_ZH_CN
+    RCPushLauguage_ZH_CN = 2,
+    /*!
+     阿拉伯文
+     */
+    RCPushLauguage_AR_SA
 };
 
 #endif

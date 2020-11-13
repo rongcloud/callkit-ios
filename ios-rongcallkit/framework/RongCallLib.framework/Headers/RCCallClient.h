@@ -11,14 +11,16 @@
 #import "RCCallClientSignalServer.h"
 #import <Foundation/Foundation.h>
 #import <AVFoundation/AVFoundation.h>
+#import <RongIMLib/RongIMLib.h>
 
-#define kRongCallLibVersion @"V4.0.1.1_20200808201316_release_9067fe6"
+#define kRongCallLibVersion @"V4.0.4_20201112193748_release_aae5735"
 
 /*!
  CallLib全局通话呼入的监听器
  */
 @protocol RCCallReceiveDelegate <NSObject>
 
+@required
 /*!
  接收到通话呼入的回调
  
@@ -29,6 +31,69 @@
  @remarks 代理
  */
 - (void)didReceiveCall:(RCCallSession *)callSession;
+
+/*!
+
+接收到通话呼入的远程通知的回调
+ @param callId        呼入通话的唯一值
+ @param inviterUserId 通话邀请者的UserId
+ @param mediaType     通话的媒体类型
+ @param userIdList    被邀请者的UserId列表
+ @param userDict      远程推送包含的其他扩展信息
+ @param isVoIPPush    是否 VoIP 推送
+ @param pushConfig    推送配置
+
+ @discussion
+ 接收到通话呼入的远程通知的回调
+ 
+ @remarks 代理
+ */
+- (void)didReceiveCallRemoteNotification:(NSString *)callId
+                           inviterUserId:(NSString *)inviterUserId
+                               mediaType:(RCCallMediaType)mediaType
+                              userIdList:(NSArray *)userIdList
+                                userDict:(NSDictionary *)userDict
+                              isVoIPPush:(BOOL)isVoIPPush
+                              pushConfig:(RCMessagePushConfig*) pushConfig;
+
+/*!
+ 接收到取消通话的远程通知的回调
+ 
+ @param callId        呼入通话的唯一值
+ @param inviterUserId 通话邀请者的UserId
+ @param mediaType     通话的媒体类型
+ @param userIdList    被邀请者的UserId列表
+ @param pushConfig    推送配置
+ @param isRemoteCancel  是否为远端取消呼叫
+ @discussion
+ 接收到取消通话的远程通知的回调
+ 
+ @remarks 代理
+ */
+-(void)didCancelCallRemoteNotification:(NSString *)callId
+                         inviterUserId:(NSString *)inviterUserId
+                             mediaType:(RCCallMediaType)mediaType
+                            userIdList:(NSArray *)userIdList
+                            pushConfig:(RCMessagePushConfig*) pushConfig
+                        isRemoteCancel:(BOOL)isRemoteCancel;
+
+@optional
+/*!
+ 接收到取消通话的远程通知的回调
+ 
+ @param callId        呼入通话的唯一值
+ @param inviterUserId 通话邀请者的UserId
+ @param mediaType     通话的媒体类型
+ @param userIdList    被邀请者的UserId列表
+ @discussion
+ 接收到取消通话的远程通知的回调
+ 
+ @remarks 代理
+ */
+- (void)didCancelCallRemoteNotification:(NSString *)callId
+                          inviterUserId:(NSString *)inviterUserId
+                              mediaType:(RCCallMediaType)mediaType
+                             userIdList:(NSArray *)userIdList API_DEPRECATED_WITH_REPLACEMENT("didCancelCallRemoteNotification: inviterUserId:mediaType:userIdList:message:isRemoteCancel:", ios(8.0, 13.0));
 
 /*!
  接收到通话呼入的远程通知的回调
@@ -47,7 +112,7 @@
                            inviterUserId:(NSString *)inviterUserId
                                mediaType:(RCCallMediaType)mediaType
                               userIdList:(NSArray *)userIdList
-                                userDict:(NSDictionary *)userDict;
+                                userDict:(NSDictionary *)userDict API_DEPRECATED_WITH_REPLACEMENT("didReceiveCallRemoteNotification:inviterUserId:mediaType:userIdList:userDict:isVoIPPush:message:", ios(8.0, 13.0));
 
 /*!
  接收到通话呼入的远程通知的回调
@@ -68,32 +133,22 @@
                                mediaType:(RCCallMediaType)mediaType
                               userIdList:(NSArray *)userIdList
                                 userDict:(NSDictionary *)userDict
-                              isVoIPPush:(BOOL)isVoIPPush;
-
-/*!
- 接收到取消通话的远程通知的回调
- 
- @param callId        呼入通话的唯一值
- @param inviterUserId 通话邀请者的UserId
- @param mediaType     通话的媒体类型
- @param userIdList    被邀请者的UserId列表
- @discussion
- 接收到取消通话的远程通知的回调
- 
- @remarks 代理
- */
-- (void)didCancelCallRemoteNotification:(NSString *)callId
-                          inviterUserId:(NSString *)inviterUserId
-                              mediaType:(RCCallMediaType)mediaType
-                             userIdList:(NSArray *)userIdList;
+                              isVoIPPush:(BOOL)isVoIPPush  API_DEPRECATED_WITH_REPLACEMENT("didReceiveCallRemoteNotification:inviterUserId:mediaType:userIdList:userDict:isVoIPPush:message:", ios(8.0, 13.0));
 
 @end
 
+@class RCMessagePushConfig;
 
 /*!
  融云CallLib核心类
  */
 @interface RCCallClient : NSObject
+
+/// 自定义push消息. 应在startCall之前调用
+@property(nonatomic, strong)RCMessagePushConfig *invitePushConfig;
+
+/// 自定义push消息. 应在startCall之前调用
+@property(nonatomic, strong)RCMessagePushConfig *hangupPushConfig;
 
 /*!
  获取融云通话能力库 RCCallClient 的核心类单例
@@ -162,6 +217,7 @@
                    mediaType:(RCCallMediaType)type
              sessionDelegate:(id<RCCallSessionDelegate>)delegate
                        extra:(NSString *)extra;
+
 
 /*!
  当前会话类型是否支持音频通话
@@ -236,12 +292,12 @@
 /*!
  当前的通话会话实体
  */
-@property(nonatomic, strong, readonly) RCCallSession *currentCallSession;
+@property (nonatomic, strong, readonly) RCCallSession *currentCallSession;
 
 /*!
  是否生成通话记录消息，默认为YES
  */
-@property(nonatomic, assign) BOOL enableCallSummary;
+@property (nonatomic, assign) BOOL enableCallSummary;
 
 /*!
  设置是否使用苹果 PushKit 推送

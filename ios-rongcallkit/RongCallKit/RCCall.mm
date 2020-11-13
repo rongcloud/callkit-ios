@@ -17,7 +17,15 @@
 #import "RCCallVideoMultiCallViewController.h"
 #import "RCUserInfoCacheManager.h"
 #import "RCCXCall.h"
+#import <RongIMKit/RongIMKit.h>
 #import <AVFoundation/AVFoundation.h>
+
+#if __IPHONE_10_0
+#import <UserNotifications/UserNotifications.h>
+#endif
+
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
 
 #define AlertWithoutConfirm 1000
 #define AlertWithConfirm 1001
@@ -27,8 +35,8 @@
 @property(nonatomic, strong) NSMutableDictionary *alertInfoDic;
 @property(nonatomic, strong) AVAudioPlayer *audioPlayer;
 @property(nonatomic, strong) NSMutableArray *callWindows;
-@property(nonatomic, strong) NSMutableArray *locationNotificationList;
-@property (nonatomic, strong) NSTimer *timer;
+@property(nonatomic, strong) NSTimer *timer;
+@property(nonatomic, strong) NSMutableDictionary *locationNotificationMap;
 
 @end
 
@@ -45,7 +53,7 @@
             pRongVoIP.maxMultiVideoCallUserNumber = 7;
             pRongVoIP.canIncomingCall = YES;
             pRongVoIP.callWindows = [[NSMutableArray alloc] init];
-            pRongVoIP.locationNotificationList = [[NSMutableArray alloc] init];
+            pRongVoIP.locationNotificationMap = [[NSMutableDictionary alloc] init];
             [pRongVoIP registerNotification];
         }
     });
@@ -65,13 +73,6 @@
 
 - (void)appDidBecomeActive {
     [self stopReceiveCallVibrate];
-    for (UILocalNotification *notification in self.locationNotificationList) {
-        if ([notification.userInfo[@"appData"][@"callId"] isEqualToString:self.currentCallSession.callId]) {
-            [[UIApplication sharedApplication] cancelLocalNotification:notification];
-            [self.locationNotificationList removeObject:notification];
-            break;
-        }
-    }
 }
 
 - (void)appDidResignActive {
@@ -314,28 +315,19 @@
     }
 }
 
-- (void)didCancelCallRemoteNotification:(NSString *)callId
-                          inviterUserId:(NSString *)inviterUserId
-                              mediaType:(RCCallMediaType)mediaType
-                             userIdList:(NSArray *)userIdList {
+-(void)didCancelCallRemoteNotification:(NSString *)callId
+                         inviterUserId:(NSString *)inviterUserId
+                             mediaType:(RCCallMediaType)mediaType
+                            userIdList:(NSArray *)userIdList
+                            pushConfig:(RCMessagePushConfig*) pushConfig
+                        isRemoteCancel:(BOOL)isRemoteCancel {
     [self stopReceiveCallVibrate];
     
     [[RCCXCall sharedInstance] endCXCall];
-    for (UILocalNotification *notification in self.locationNotificationList) {
-        if ([notification.userInfo[@"appData"][@"callId"] isEqualToString:callId]) {
-            [[UIApplication sharedApplication] cancelLocalNotification:notification];
-            [self.locationNotificationList removeObject:notification];
-            break;
-        }
+    
+    if (pushConfig && isRemoteCancel) {
+        [self postLocalNotification:pushConfig userInfo:nil hasSound:NO ];
     }
-}
-
-- (void)didReceiveCallRemoteNotification:(NSString *)callId
-                           inviterUserId:(NSString *)inviterUserId
-                               mediaType:(RCCallMediaType)mediaType
-                              userIdList:(NSArray *)userIdList
-                                userDict:(NSDictionary *)userDict{
-    [self didReceiveCallRemoteNotification:callId inviterUserId:inviterUserId mediaType:mediaType userIdList:userIdList userDict:userDict isVoIPPush:NO];
 }
 
 - (void)didReceiveCallRemoteNotification:(NSString *)callId
@@ -343,51 +335,72 @@
                                mediaType:(RCCallMediaType)mediaType
                               userIdList:(NSArray *)userIdList
                                 userDict:(NSDictionary *)userDict
-                                    isVoIPPush:(BOOL)isVoIPPush{
+                              isVoIPPush:(BOOL)isVoIPPush
+                                 pushConfig:(RCMessagePushConfig *)pushConfig {
     if (!self.canIncomingCall) {
         return;
     }
-    
+
     [self startReceiveCallVibrate];
+
+    [self postLocalNotification:pushConfig userInfo:userDict hasSound:YES];
+}
+
+- (void)postLocalNotification:(RCMessagePushConfig *)pushConfig userInfo:(NSDictionary*)userInfo hasSound:(BOOL)hasSound{
+    NSString* pushContent = NSLocalizedStringFromTable(@"receive_new_message", @"RongCloudKit", nil);
+    NSString *title = @"";
+    NSString* soundName = @"RongCloud.bundle/voip/voip_call.caf";
     
-    UILocalNotification *callNotification = [[UILocalNotification alloc] init];
-    callNotification.alertAction = NSLocalizedStringFromTable(@"LocalNotificationShow", @"RongCloudKit", nil);
-
-    NSString *inviterUserName = [[RCUserInfoCacheManager sharedManager] getUserInfo:inviterUserId].name;
-    if (mediaType == RCCallMediaAudio) {
-        if (inviterUserName) {
-            callNotification.alertBody =
-                [NSString stringWithFormat:@"%@%@", inviterUserName,
-                                           NSLocalizedStringFromTable(@"VoIPAudioCallIncoming", @"RongCloudKit", nil)];
-        } else {
-            callNotification.alertBody =
-                [NSString stringWithFormat:@"%@", NSLocalizedStringFromTable(@"VoIPAudioCallIncomingWithoutUserName",
-                                                                             @"RongCloudKit", nil)];
+    if ([RCIMClient sharedRCIMClient].pushProfile.isShowPushContent || (pushConfig && pushConfig.forceShowDetailContent)) {
+        if (pushConfig && pushConfig.pushTitle && pushConfig.pushTitle.length != 0) {
+            title = pushConfig.pushTitle;
         }
-    } else {
-        if (inviterUserName) {
-            callNotification.alertBody =
-                [NSString stringWithFormat:@"%@%@", inviterUserName,
-                                           NSLocalizedStringFromTable(@"VoIPVideoCallIncoming", @"RongCloudKit", nil)];
-        } else {
-            callNotification.alertBody =
-                [NSString stringWithFormat:@"%@", NSLocalizedStringFromTable(@"VoIPVideoCallIncomingWithoutUserName",
-                                                                             @"RongCloudKit", nil)];
+        if (pushConfig && pushConfig.pushContent && pushConfig.pushContent.length != 0) {
+            pushContent = pushConfig.pushContent;
         }
     }
-
-    callNotification.userInfo = userDict;
-    callNotification.soundName = @"RongCloud.bundle/voip/voip_call.caf";
-
-    // VoIP Push和接收消息的通话排重
-    for (UILocalNotification *notification in self.locationNotificationList) {
-        if ([notification.userInfo[@"appData"][@"callId"] isEqualToString:callId]) {
-            return;
-        }
+    NSString *requestWithIdentifier = [NSUUID UUID].UUIDString;
+    if (pushConfig && pushConfig.iOSConfig && pushConfig.iOSConfig.apnsCollapseId && pushConfig.iOSConfig.apnsCollapseId.length > 0) {
+        requestWithIdentifier = pushConfig.iOSConfig.apnsCollapseId;
     }
+    
+    if(@available(iOS 10.0, *)){
+        UNMutableNotificationContent *content = [[UNMutableNotificationContent alloc] init];
+        content.title = title;
+        content.body = pushContent;
+        content.userInfo = userInfo;
+        if(hasSound){
+            content.sound = [UNNotificationSound soundNamed:soundName];
+        }
+        if (pushConfig && pushConfig.iOSConfig && pushConfig.iOSConfig.threadId) {
+            content.threadIdentifier = pushConfig.iOSConfig.threadId;
+        }
+        [[UNUserNotificationCenter currentNotificationCenter] removeDeliveredNotificationsWithIdentifiers:@[requestWithIdentifier]];
+        UNNotificationRequest *request = [UNNotificationRequest requestWithIdentifier:requestWithIdentifier content:content trigger:nil];
+        [[UNUserNotificationCenter currentNotificationCenter] addNotificationRequest:request withCompletionHandler:^(NSError * _Nullable error) {}];
+        
+    }else{
+        UILocalNotification *callNotification = [[UILocalNotification alloc] init];
+        callNotification.alertAction = NSLocalizedStringFromTable(@"LocalNotificationShow", @"RongCloudKit", nil);
+        
+        if (@available(iOS 8.2, *)) {
+            callNotification.alertTitle = title;
+        }
+        callNotification.alertBody = pushContent;
+        callNotification.userInfo = userInfo;
+        if (hasSound) {
+            [callNotification setSoundName:soundName];
+        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            UILocalNotification *notification = [self.locationNotificationMap objectForKey:requestWithIdentifier];
+            if (notification) {
+                [[UIApplication sharedApplication] cancelLocalNotification:notification];
+            }
+            [self.locationNotificationMap setObject:callNotification forKey:requestWithIdentifier];
+            [[UIApplication sharedApplication] presentLocalNotificationNow:callNotification];
+        });
 
-    [self.locationNotificationList addObject:callNotification];
-    [[UIApplication sharedApplication] presentLocalNotificationNow:callNotification];
+    }
 }
 
 #pragma mark - alert
@@ -466,6 +479,7 @@
 - (id<RCCallGroupMemberDataSource>)groupMemberDataSource {
     return [RCIM sharedRCIM].groupMemberDataSource;
 }
+
 - (void)setGroupMemberDataSource:(id<RCCallGroupMemberDataSource>)groupMemberDataSource {
     [RCIM sharedRCIM].groupMemberDataSource = groupMemberDataSource;
 }

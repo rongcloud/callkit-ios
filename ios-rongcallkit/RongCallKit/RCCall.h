@@ -13,7 +13,7 @@
 
 #define RCCallGroupMemberDataSource RCIMGroupMemberDataSource //接口向后兼容
 
-/// 新的 callsession 被创建时发出改通知
+/// 新的 callsession 被创建时发出该通知
 UIKIT_EXTERN NSNotificationName const RCCallNewSessionCreationNotification;
 
 /*!

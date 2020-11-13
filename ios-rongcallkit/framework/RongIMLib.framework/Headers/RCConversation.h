@@ -135,6 +135,11 @@
 @property (nonatomic, assign) int mentionedCount;
 
 /*!
+会话是否是免打扰状态
+*/
+@property (nonatomic, assign) RCConversationNotificationStatus blockStatus;
+
+/*!
  RCConversation 初始化方法（已废弃，请勿使用）
 
  @param json    会话的 json Dictionary

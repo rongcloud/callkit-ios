@@ -90,6 +90,17 @@
                isAllMessage:(BOOL)isAllMessage;
 
 /*!
+ 获取消息通知时需展示的内容摘要
+
+ @param message  消息
+ @return                消息内容的摘要
+
+ @discussion SDK默认的消息有内置的处理，自定义消息会调用 RCMessageContent 中 RCMessageContentView 协议的
+ conversationDigest 获取消息摘要。
+*/
++ (NSString *)formatLocalNotification:(RCMessage *)message;
+
+/*!
  获取指定会话类型的消息内容的摘要
 
  @param messageContent  消息内容

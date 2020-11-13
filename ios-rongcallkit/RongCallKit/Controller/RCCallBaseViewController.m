@@ -15,7 +15,11 @@
 #import <AVFoundation/AVFoundation.h>
 #import <CoreTelephony/CTCall.h>
 #import <CoreTelephony/CTCallCenter.h>
+#import <RongCallLib/RongCallLib.h>
+#import <RongIMLib/RongIMLib.h>
 #import "KxCallMenu.h"
+#import "RCUserInfoCacheManager.h"
+
 
 NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessionCreation Notification";
 
@@ -37,6 +41,7 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
 @property(nonatomic, strong) UIAlertController *alertController;
 @property(nonatomic, assign) BOOL backCamera;
 @property(nonatomic, weak) NSTimer *vibrateTimer;
+@property(nonatomic, strong, readonly) NSString *reportDesc;
 
 @end
 
@@ -49,6 +54,7 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
         _backCamera = NO;
         [[NSNotificationCenter defaultCenter] postNotificationName:RCCallNewSessionCreationNotification object:_callSession];
         sem = dispatch_semaphore_create(1);
+        _reportDesc = @"RCCallSessionDelegate";
         queue = dispatch_queue_create("AnswerQueue", DISPATCH_QUEUE_SERIAL);
         [self registerForegroundNotification];
         [_callSession addDelegate:self];
@@ -67,6 +73,42 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
     self = [super init];
     if (self) {
         [self willChangeValueForKey:@"callSession"];
+        NSString *invitePushContent = [NSString stringWithFormat:@"%@ 邀请你进行%@聊天",[RCIMClient sharedRCIMClient].currentUserInfo.name, mediaType == RCCallMediaVideo?@"视频":@"语音"];
+        NSString *hangupPushContent = @"[结束通话]";
+        
+        RCMessagePushConfig *invitePushConfig = [self getPushConfig];
+        RCMessagePushConfig *hangupPushConfig = [self getPushConfig];
+        if (conversationType == ConversationType_PRIVATE) {
+            if (!invitePushConfig.pushTitle || invitePushConfig.pushTitle.length == 0) {
+                invitePushConfig.pushTitle = [RCIMClient sharedRCIMClient].currentUserInfo.name;
+            }
+            if (!invitePushConfig.pushContent || invitePushConfig.pushContent.length == 0) {
+                invitePushConfig.pushContent = invitePushContent;
+            }
+            if (!hangupPushConfig.pushTitle || hangupPushConfig.pushTitle.length == 0) {
+                hangupPushConfig.pushTitle = [RCIMClient sharedRCIMClient].currentUserInfo.name;
+            }
+            if (!hangupPushConfig.pushContent || hangupPushConfig.pushContent.length == 0) {
+                hangupPushConfig.pushContent = hangupPushContent;
+            }
+        } else {
+            RCGroup *groupInfo = [[RCUserInfoCacheManager sharedManager] getGroupInfo:targetId];
+            if (!invitePushConfig.pushTitle || invitePushConfig.pushTitle.length == 0) {
+                invitePushConfig.pushTitle = groupInfo.groupName;
+            }
+            if (!invitePushConfig.pushContent || invitePushConfig.pushContent.length == 0) {
+                invitePushConfig.pushContent = invitePushContent;
+            }
+            if (!hangupPushConfig.pushTitle || hangupPushConfig.pushTitle.length == 0) {
+                hangupPushConfig.pushTitle = groupInfo.groupName;
+            }
+            if (!hangupPushConfig.pushContent || hangupPushConfig.pushContent.length == 0) {
+                hangupPushConfig.pushContent = hangupPushContent;
+            }
+        }
+        [[RCCallClient sharedRCCallClient] setInvitePushConfig:invitePushConfig];
+        [[RCCallClient sharedRCCallClient] setHangupPushConfig:hangupPushConfig];
+        
         _callSession = [[RCCallClient sharedRCCallClient] startCall:conversationType
                                                            targetId:targetId
                                                                  to:userIdList
@@ -172,6 +214,7 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
         AVAudioSession *audioSession = [AVAudioSession sharedInstance];
         if (self.callSession.callStatus == RCCallDialing) {
             [audioSession setCategory:AVAudioSessionCategoryPlayAndRecord withOptions:AVAudioSessionCategoryOptionAllowBluetooth | AVAudioSessionCategoryOptionAllowBluetoothA2DP error:nil];
+            
         } else {
             //默认情况按静音或者锁屏键会静音
             [audioSession setCategory:AVAudioSessionCategorySoloAmbient error:nil];
@@ -873,7 +916,7 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
             [self layoutTextUnderImageButton:self.speakerButton];
             self.speakerButton.hidden = NO;
             if ([self isHeadsetPluggedIn])
-            [self reloadSpeakerRoute:NO];
+                [self reloadSpeakerRoute:NO];
         } else if (callStatus != RCCallHangup) {
             self.speakerButton.hidden = YES;
         }
@@ -997,7 +1040,6 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
                                                RCCallCustomButtonLength, RCCallCustomButtonLength);
             [self layoutTextUnderImageButton:self.speakerButton];
             self.speakerButton.hidden = NO;
-            [self setSpeakerEnable:NO];
             if ([self isHeadsetPluggedIn])
                 [self reloadSpeakerRoute:NO];
         }else if (callStatus != RCCallHangup) {
@@ -1149,7 +1191,6 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
         }
         
         if (callStatus == RCCallActive) {
-            [self.speakerButton setSelected:self.callSession.speakerEnabled];
             if ([self isHeadsetPluggedIn])
                 [self reloadSpeakerRoute:NO];
         }
@@ -1225,14 +1266,12 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
                        RCCallCustomButtonLength);
             [self layoutTextUnderImageButton:self.speakerButton];
             self.speakerButton.hidden = YES;
-            [self setSpeakerEnable:NO];
             if ([self isHeadsetPluggedIn])
                 [self reloadSpeakerRoute:NO];
         } else if (callStatus != RCCallHangup) {
             self.speakerButton.hidden = YES;
         }
-        
-        
+
         if (callStatus == RCCallDialing) {
             self.minimizeButton.frame = CGRectMake(RCCallHorizontalMargin, RCCallMiniButtonTopMargin + RCCallStatusBarHeight, RCCallMiniButtonLength, RCCallMiniButtonLength);
             self.minimizeButton.hidden = NO;
@@ -1395,7 +1434,6 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
  */
 - (void)callDidConnect {
     [self callWillConnect];
-    
     if (self.callSession.mediaType == RCCallMediaAudio &&
         [self.callSession.caller isEqualToString:[RCIMClient sharedRCIMClient].currentUserInfo.userId]) {
         [[RCCXCall sharedInstance] reportOutgoingCallConnected];
@@ -1646,6 +1684,26 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
     [self.speakerButton setSelected:enable];
 }
 
+#pragma mark - testPushConfig
+
+-(RCMessagePushConfig*)getPushConfig{
+    
+    RCMessagePushConfig* config = [[RCMessagePushConfig alloc] init];
+    NSUserDefaults *defauts = [NSUserDefaults standardUserDefaults];
+    config.pushTitle = [defauts objectForKey:@"pushConfig-title"];
+    config.pushContent = [defauts objectForKey:@"pushConfig-content"];
+    config.pushData = [defauts objectForKey:@"pushConfig-data"];
+    config.forceShowDetailContent =[[defauts objectForKey:@"pushConfig-forceShowDetailContent"] boolValue];
+    config.iOSConfig.threadId = [defauts objectForKey:@"pushConfig-threadId"];
+    config.iOSConfig.apnsCollapseId = [defauts objectForKey:@"pushConfig-apnsCollapseId"];
+    config.androidConfig.notificationId = [defauts objectForKey:@"pushConfig-android-id"];
+    config.androidConfig.channelIdMi = [defauts objectForKey:@"pushConfig-android-mi"];
+    config.androidConfig.channelIdHW = [defauts objectForKey:@"pushConfig-android-hw"];
+    config.androidConfig.channelIdOPPO = [defauts objectForKey:@"pushConfig-android-oppo"];
+    config.androidConfig.typeVivo = [defauts objectForKey:@"pushConfig-android-vivo"];
+    return config;
+}
+
 #pragma mark - telephony
 - (void)registerTelephonyEvent {
     self.callCenter = [[CTCallCenter alloc] init];
@@ -1707,17 +1765,13 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
     {
         case AVAudioSessionRouteChangeReasonUnknown:
             break;
-        case AVAudioSessionRouteChangeReasonNewDeviceAvailable : //1
-            [self reloadSpeakerRoute:NO];
-            break;
-        case AVAudioSessionRouteChangeReasonOldDeviceUnavailable : //2
-            [self reloadSpeakerRoute:YES];
-            break;
         case AVAudioSessionRouteChangeReasonCategoryChange : //3
             break;
+        case AVAudioSessionRouteChangeReasonNewDeviceAvailable : //1
+        case AVAudioSessionRouteChangeReasonOldDeviceUnavailable : //2
         case AVAudioSessionRouteChangeReasonOverride : //4
         {
-            if ([port.portType isEqualToString:AVAudioSessionPortBuiltInReceiver] || [port.portType isEqualToString: AVAudioSessionPortBuiltInSpeaker]){
+            if ([port.portType isEqualToString: AVAudioSessionPortBuiltInSpeaker]){
                 [self reloadSpeakerRoute:YES];
             }
             else{

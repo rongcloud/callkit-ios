@@ -249,6 +249,7 @@
 
 @end
 
+@class RCMessagePushConfig;
 
 /*!
  通话实体
@@ -258,79 +259,78 @@
 /*!
  通话的会话类型
  */
-@property(nonatomic, assign, readonly) RCConversationType conversationType;
+@property (nonatomic, assign, readonly) RCConversationType conversationType;
 
 /*!
  通话ID
  */
-@property(nonatomic, strong, readonly) NSString *callId;
-
+@property (nonatomic, strong, readonly) NSString *callId;
 /*!
  通话的目标会话ID
  */
-@property(nonatomic, strong, readonly) NSString *targetId;
+@property (nonatomic, strong, readonly) NSString *targetId;
 
 /*!
  RTC会话唯一标识, 用于 Server API
  */
-@property(nonatomic, strong, readonly) NSString *sessionId;
+@property (nonatomic, strong, readonly) NSString *sessionId;
 
 /*!
  是否是多方通话
  */
-@property(nonatomic, assign, readonly, getter=isMultiCall) BOOL multiCall;
+@property (nonatomic, assign, readonly, getter = isMultiCall) BOOL multiCall;
 
 /*!
  通话的扩展信息
  */
-@property(nonatomic, strong, readonly) NSString *extra;
+@property (nonatomic, strong, readonly) NSString *extra;
 
 /*!
  通话的当前状态
  */
-@property(nonatomic, assign, readonly) RCCallStatus callStatus;
+@property (nonatomic, assign, readonly) RCCallStatus callStatus;
 
 /*!
  通话的最初发起人
  */
-@property(nonatomic, strong, readonly) NSString *caller;
+@property (nonatomic, strong, readonly) NSString *caller;
 
 /*!
  邀请当前用户加入通话的邀请者
  */
-@property(nonatomic, strong, readonly) NSString *inviter;
+@property (nonatomic, strong, readonly) NSString *inviter;
 
 /*!
  当前的用户列表
  */
-@property(nonatomic, strong, readonly) NSArray *userProfileList;
+@property (nonatomic, strong, readonly) NSArray *userProfileList;
 
 /*!
  自己的状态
  */
-@property(nonatomic, strong, readonly) RCCallUserProfile *myProfile;
+@property (nonatomic, strong, readonly) RCCallUserProfile *myProfile;
 
 /*!
  当前用户使用的媒体类型
  */
-@property(nonatomic, assign, readonly) RCCallMediaType mediaType;
+@property (nonatomic, assign, readonly) RCCallMediaType mediaType;
 
 /*!
  通话开始的时间
 
  @discussion 如果是用户呼出的通话，则startTime为通话呼出时间；如果是呼入的通话，则startTime为通话呼入时间。
  */
-@property(nonatomic, assign, readonly) long long startTime;
+@property (nonatomic, assign, readonly) long long startTime;
 
 /*!
  通话接通时间
  */
-@property(nonatomic, assign, readonly) long long connectedTime;
+@property (nonatomic, assign, readonly) long long connectedTime;
 
 /*!
  通话挂断原因
  */
-@property(nonatomic, assign) RCCallDisconnectReason disconnectReason;
+@property (nonatomic, assign) RCCallDisconnectReason disconnectReason;
 
 /*!
  设置通话状态变化的监听器
@@ -413,7 +413,7 @@
  
  @remarks 资源管理
  */
-- (void)publishMediaResource:(RCCallMediaType)mediaType complete:(void(^)(BOOL isSuccess, NSInteger code))block;
+- (void)publishMediaResource:(RCCallMediaType)mediaType complete:(void (^)(BOOL isSuccess, NSInteger code))block;
 
 /*!
  正常身份用户, 取消发布自己的音视频资源
@@ -427,7 +427,7 @@
  
  @remarks 资源管理
  */
-- (void)unPublishMediaResource:(void(^)(BOOL isSuccess, NSInteger code))block;
+- (void)unPublishMediaResource:(void (^)(BOOL isSuccess, NSInteger code))block;
 
 /*!
  邀请用户加入通话
@@ -493,7 +493,7 @@
 /*!
  静音状态
  */
-@property(nonatomic, readonly) BOOL isMuted;
+@property (nonatomic, readonly) BOOL isMuted;
 
 /*!
  设置静音状态
@@ -510,7 +510,7 @@
 /*!
  是否有最小化窗口
  */
-@property(nonatomic, readonly) BOOL minimized;
+@property (nonatomic, readonly) BOOL minimized;
 
 /*!
  设置是否有最小化窗口状态
@@ -526,9 +526,9 @@
 /*!
  扬声器状态，是否开启扬声器
 
- @discussion 音频通话的默认值为NO，视频通话的默认值为YES。
+ @discussion 默认值为NO。
  */
-@property(nonatomic, readonly) BOOL speakerEnabled;
+@property (nonatomic, readonly) BOOL speakerEnabled;
 
 /*!
  设置扬声器状态
@@ -545,7 +545,7 @@
 /*!
  摄像头状态，是否开启摄像头
  */
-@property(nonatomic, readonly) BOOL cameraEnabled;
+@property (nonatomic, readonly) BOOL cameraEnabled;
 
 /*!
  设置摄像头状态
@@ -558,7 +558,6 @@
  @return 是否设置成功
  */
 - (BOOL)setCameraEnabled:(BOOL)cameraEnabled;
-
 
 /*!
  切换前后摄像头

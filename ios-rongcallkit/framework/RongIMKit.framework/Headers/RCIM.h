@@ -36,28 +36,6 @@ FOUNDATION_EXPORT NSString *const RCKitDispatchMessageNotification;
 FOUNDATION_EXPORT NSString *const RCKitDispatchRecallMessageNotification;
 
 /*!
- @const 收到已读回执的Notification
-
- @discussion 收到消息已读回执之后 IMLib 更新消息状态之后，IMKit会分发此通知。
-
- Notification的object为nil，userInfo为NSDictionary对象，
- 其中key值分别为@"cType"、@"tId"、@"messageTime",
- 对应的value为会话类型的NSNumber对象、会话的targetId、已阅读的最后一条消息的sendTime。
- 如：
- NSNumber *ctype = [notification.userInfo objectForKey:@"cType"];
- NSNumber *time = [notification.userInfo objectForKey:@"messageTime"];
- NSString *targetId = [notification.userInfo objectForKey:@"tId"];
- NSString *fromUserId = [notification.userInfo objectForKey:@"fId"];
-
- 收到这个消息之后可以更新这个会话中messageTime以前的消息UI为已读（底层数据库消息状态已经改为已读）。
-
- @warning  **已废弃，请勿使用。**
- 升级说明：如果您之前使用了此通知，可以直接替换为RCLibDispatchReadReceiptNotification通知，行为和内容完全一致。
- */
-FOUNDATION_EXPORT NSString *const
-    RCKitDispatchReadReceiptNotification __deprecated_msg("已废弃，请使用RCLibDispatchReadReceiptNotification通知。");
-
-/*!
  @const 连接状态变化的Notification
 
  @discussion SDK连接状态发生变化时，SDK会分发此通知。
@@ -85,6 +63,20 @@ FOUNDATION_EXPORT NSString *const RCKitDispatchMessageReceiptResponseNotificatio
  @"messageUId": messageUId};
  */
 FOUNDATION_EXPORT NSString *const RCKitDispatchMessageReceiptRequestNotification;
+
+/*!
+@const 收到会话状态同步的 Notification。
+
+@discussion 收到会话状态同步之后，IMLib 会分发此通知。
+
+Notification 的 object 是 RCConversationStatusInfo 对象的数组 ，userInfo 为 nil，
+
+收到这个消息之后可以更新您的会话的状态。
+
+@remarks 事件监听
+*/
+
+FOUNDATION_EXPORT NSString *const RCKitDispatchConversationStatusChangeNotification;
 
 #pragma mark - 用户信息提供者、群组信息提供者、群名片信息提供者
 
@@ -385,62 +377,64 @@ FOUNDATION_EXPORT NSString *const RCKitDispatchMessageReceiptRequestNotification
 #pragma mark - 连接与断开服务器
 
 /*!
- 与融云服务器建立连接
+与融云服务器建立连接
 
- @param token                   从您服务器端获取的token(用户身份令牌)
- @param successBlock            连接建立成功的回调 [userId:当前连接成功所用的用户ID
- @param errorBlock              连接建立失败的回调 [status:连接失败的错误码]
- @param tokenIncorrectBlock     token错误或者过期的回调
+@param token                   从您服务器端获取的 token (用户身份令牌)
+@param dbOpenedBlock                本地消息数据库打开的回调
+@param successBlock            连接建立成功的回调 [ userId: 当前连接成功所用的用户 ID]
+@param errorBlock              连接建立失败的回调，触发该回调代表 SDK 无法继续重连 [errorCode: 连接失败的错误码]
 
- @discussion 在App整个生命周期，您只需要调用一次此方法与融云服务器建立连接。
- 之后无论是网络出现异常或者App有前后台的切换等，SDK都会负责自动重连。
- 除非您已经手动将连接断开，否则您不需要自己再手动重连。
+@discussion 调用该接口，SDK 会在连接失败之后尝试重连，直到连接成功或者出现 SDK 无法处理的错误（如 token 非法）。
+如果您不想一直进行重连，可以使用 connectWithToken:timeLimit:dbOpened:success:error: 接口并设置连接超时时间 timeLimit。
 
- tokenIncorrectBlock有两种情况：
- 一是token错误，请您检查客户端初始化使用的AppKey和您服务器获取token使用的AppKey是否一致；
- 二是token过期，是因为您在开发者后台设置了token过期时间，您需要请求您的服务器重新获取token并再次用新的token建立连接。
+@discussion 连接成功后，SDK 将接管所有的重连处理。当因为网络原因断线的情况下，SDK 会不停重连直到连接成功为止，不需要您做额外的连接操作。
 
- @warning 如果您使用IMKit，请使用此方法建立与融云服务器的连接；
- 如果您使用IMLib，请使用RCIMClient中的同名方法建立与融云服务器的连接，而不要使用此方法。
+对于 errorBlock 需要特定关心 tokenIncorrect 的情况：
+一是 token 错误，请您检查客户端初始化使用的 AppKey 和您服务器获取 token 使用的 AppKey 是否一致；
+二是 token 过期，是因为您在开发者后台设置了 token 过期时间，您需要请求您的服务器重新获取 token 并再次用新的 token 建立连接。
+在此种情况下，您需要请求您的服务器重新获取 token 并建立连接，但是注意避免无限循环，以免影响 App 用户体验。
 
- 在tokenIncorrectBlock的情况下，您需要请求您的服务器重新获取token并建立连接，但是注意避免无限循环，以免影响App用户体验。
+@warning 如果您使用 IMKit，请使用该方法建立与融云服务器的连接。
 
- 此方法的回调并非为原调用线程，您如果需要进行UI操作，请注意切换到主线程。
- */
+此方法的回调并非为原调用线程，您如果需要进行 UI 操作，请注意切换到主线程。
+*/
 - (void)connectWithToken:(NSString *)token
+                dbOpened:(void (^)(RCDBErrorCode code))dbOpenedBlock
                  success:(void (^)(NSString *userId))successBlock
-                   error:(void (^)(RCConnectErrorCode status))errorBlock
-          tokenIncorrect:(void (^)(void))tokenIncorrectBlock;
+                   error:(void (^)(RCConnectErrorCode errorCode))errorBlock;
 
 /*!
  与融云服务器建立连接
 
- @param token                   从您服务器端获取的token(用户身份令牌)
+ @param token                   从您服务器端获取的 token (用户身份令牌)
+ @param timeLimit                 SDK 连接的超时时间，单位: 秒
+                         timeLimit <= 0，SDK 会一直连接，直到连接成功或者出现 SDK 无法处理的错误（如 token 非法）。
+                         timeLimit > 0，SDK 最多连接 timeLimit 秒，超时时返回 RC_CONNECT_TIMEOUT 错误，并不再重连。
  @param dbOpenedBlock                本地消息数据库打开的回调
- @param successBlock            连接建立成功的回调 [userId:当前连接成功所用的用户ID
- @param errorBlock              连接建立失败的回调 [status:连接失败的错误码]
- @param tokenIncorrectBlock     token错误或者过期的回调
+ @param successBlock            连接建立成功的回调 [ userId: 当前连接成功所用的用户 ID]
+ @param errorBlock              连接建立失败的回调，触发该回调代表 SDK 无法继续重连 [errorCode: 连接失败的错误码]
 
- @discussion 在App整个生命周期，您只需要调用一次此方法与融云服务器建立连接。
- 之后无论是网络出现异常或者App有前后台的切换等，SDK都会负责自动重连。
- 除非您已经手动将连接断开，否则您不需要自己再手动重连。
+ @discussion 调用该接口，SDK 会在 timeLimit 秒内尝试重连，直到出现下面三种情况之一：
+ 第一、连接成功，回调 successBlock(userId)。
+ 第二、超时，回调 errorBlock(RC_CONNECT_TIMEOUT)。
+ 第三、出现 SDK 无法处理的错误，回调 errorBlock(errorCode)（如 token 非法）。
+ 
+ @discussion 连接成功后，SDK 将接管所有的重连处理。当因为网络原因断线的情况下，SDK 会不停重连直到连接成功为止，不需要您做额外的连接操作。
 
- tokenIncorrectBlock有两种情况：
- 一是token错误，请您检查客户端初始化使用的AppKey和您服务器获取token使用的AppKey是否一致；
- 二是token过期，是因为您在开发者后台设置了token过期时间，您需要请求您的服务器重新获取token并再次用新的token建立连接。
+ 对于 errorBlock 需要特定关心 tokenIncorrect 的情况：
+ 一是 token 错误，请您检查客户端初始化使用的 AppKey 和您服务器获取 token 使用的 AppKey 是否一致；
+ 二是 token 过期，是因为您在开发者后台设置了 token 过期时间，您需要请求您的服务器重新获取 token 并再次用新的 token 建立连接。
+ 在此种情况下，您需要请求您的服务器重新获取 token 并建立连接，但是注意避免无限循环，以免影响 App 用户体验。
 
- @warning 如果您使用IMKit，请使用此方法建立与融云服务器的连接；
- 如果您使用IMLib，请使用RCIMClient中的同名方法建立与融云服务器的连接，而不要使用此方法。
+ @warning 如果您使用 IMKit，请使用 RCIM 中的同名方法建立与融云服务器的连接。
 
- 在tokenIncorrectBlock的情况下，您需要请求您的服务器重新获取token并建立连接，但是注意避免无限循环，以免影响App用户体验。
-
- 此方法的回调并非为原调用线程，您如果需要进行UI操作，请注意切换到主线程。
- */
+ 此方法的回调并非为原调用线程，您如果需要进行 UI 操作，请注意切换到主线程。
+*/
 - (void)connectWithToken:(NSString *)token
+               timeLimit:(int)timeLimit
                 dbOpened:(void (^)(RCDBErrorCode code))dbOpenedBlock
                  success:(void (^)(NSString *userId))successBlock
-                   error:(void (^)(RCConnectErrorCode status))errorBlock
-          tokenIncorrect:(void (^)(void))tokenIncorrectBlock;
+                   error:(void (^)(RCConnectErrorCode errorCode))errorBlock;
 
 /*!
  断开与融云服务器的连接
@@ -556,6 +550,33 @@ FOUNDATION_EXPORT NSString *const RCKitDispatchMessageReceiptRequestNotification
                      error:(void (^)(RCErrorCode nErrorCode, long messageId))errorBlock;
 
 /*!
+ 发送消息(除图片消息、文件消息外的所有消息)，会自动更新UI
+ 
+ @param message             将要发送的消息实体（需要保证 message 中的 conversationType，targetId，messageContent 是有效值)
+ @param pushContent         接收方离线时需要显示的远程推送内容
+ @param pushData            接收方离线时需要在远程推送中携带的非显示数据
+ @param successBlock        消息发送成功的回调 [successMessage: 消息实体]
+ @param errorBlock          消息发送失败的回调 [nErrorCode: 发送失败的错误码, errorMessage:消息实体]
+ @return                    发送的消息实体
+ 
+ @discussion 当接收方离线并允许远程推送时，会收到远程推送。
+ 远程推送中包含两部分内容，一是pushContent，用于显示；二是pushData，用于携带不显示的数据。
+
+ SDK内置的消息类型，如果您将pushContent和pushData置为nil，会使用默认的推送格式进行远程推送。
+ 自定义类型的消息，需要您自己设置pushContent和pushData来定义推送内容，否则将不会进行远程推送。
+ 
+ @warning 如果您使用IMKit，使用此方法发送消息SDK会自动更新UI；
+ 如果您使用IMLib，请使用RCIMClient中的同名方法发送消息，不会自动更新UI。
+ 
+ @remarks 消息操作
+ */
+- (RCMessage *)sendMessage:(RCMessage *)message
+               pushContent:(NSString *)pushContent
+                  pushData:(NSString *)pushData
+              successBlock:(void (^)(RCMessage *successMessage))successBlock
+                errorBlock:(void (^)(RCErrorCode nErrorCode, RCMessage *errorMessage))errorBlock;
+
+/*!
  发送媒体文件消息，会自动更新UI
 
  @param conversationType    发送消息的会话类型
@@ -587,6 +608,35 @@ FOUNDATION_EXPORT NSString *const RCKitDispatchMessageReceiptRequestNotification
                         success:(void (^)(long messageId))successBlock
                           error:(void (^)(RCErrorCode errorCode, long messageId))errorBlock
                          cancel:(void (^)(long messageId))cancelBlock;
+
+/*!
+ 发送媒体文件消息，会自动更新UI
+ 
+ @param message             将要发送的消息实体（需要保证 message 中的 conversationType，targetId，messageContent 是有效值)
+ @param pushContent         接收方离线时需要显示的远程推送内容
+ @param pushData            接收方离线时需要在远程推送中携带的非显示数据
+ @param progressBlock       消息发送进度更新的回调 [progress:当前的发送进度, 0 <= progress <= 100, progressMessage:消息实体]
+ @param successBlock        消息发送成功的回调 [successMessage:消息实体]
+ @param errorBlock          消息发送失败的回调 [nErrorCode:发送失败的错误码, errorMessage:消息实体]
+ @param cancelBlock         用户取消了消息发送的回调 [cancelMessage:消息实体]
+ @return                    发送的消息实体
+ 
+ @discussion 当接收方离线并允许远程推送时，会收到远程推送。
+ 远程推送中包含两部分内容，一是pushContent，用于显示；二是pushData，用于携带不显示的数据。
+ 
+ SDK内置的消息类型，如果您将pushContent和pushData置为nil，会使用默认的推送格式进行远程推送。
+ 自定义类型的消息，需要您自己设置pushContent和pushData来定义推送内容，否则将不会进行远程推送。
+ 
+ @warning 如果您使用IMKit，使用此方法发送媒体文件消息SDK会自动更新UI；
+ 如果您使用IMLib，请使用RCIMClient中的同名方法发送媒体文件消息，不会自动更新UI。
+ */
+- (RCMessage *)sendMediaMessage:(RCMessage *)message
+                    pushContent:(NSString *)pushContent
+                       pushData:(NSString *)pushData
+                       progress:(void (^)(int progress, RCMessage *progressMessage))progressBlock
+                   successBlock:(void (^)(RCMessage *successMessage))successBlock
+                     errorBlock:(void (^)(RCErrorCode nErrorCode, RCMessage *errorMessage))errorBlock
+                         cancel:(void (^)(RCMessage *cancelMessage))cancelBlock;
 
 /*!
  取消发送中的媒体信息
@@ -622,41 +672,6 @@ FOUNDATION_EXPORT NSString *const RCKitDispatchMessageReceiptRequestNotification
  @return YES表示取消成功，NO表示取消失败，即已经下载完成或者消息不存在。
  */
 - (BOOL)cancelDownloadMediaMessage:(long)messageId;
-
-/*!
- 发送图片消息，会自动更新UI
-
- @param conversationType    发送消息的会话类型
- @param targetId            发送消息的目标会话ID
- @param content             消息的内容
- @param pushContent         接收方离线时需要显示的远程推送内容
- @param pushData            接收方离线时需要在远程推送中携带的非显示数据
- @param progressBlock       消息发送进度更新的回调 [progress:当前的发送进度, 0 <= progress <= 100, messageId:消息的ID]
- @param successBlock        消息发送成功的回调 [messageId:消息的ID]
- @param errorBlock          消息发送失败的回调 [errorCode:发送失败的错误码, messageId:消息的ID]
- @return                    发送的消息实体
-
- @discussion 当接收方离线并允许远程推送时，会收到远程推送。
- 远程推送中包含两部分内容，一是pushContent，用于显示；二是pushData，用于携带不显示的数据。
-
- SDK内置的消息类型，如果您将pushContent和pushData置为nil，会使用默认的推送格式进行远程推送。
- 自定义类型的消息，需要您自己设置pushContent和pushData来定义推送内容，否则将不会进行远程推送。
-
- 如果您使用IMKit，使用此方法发送图片消息SDK会自动更新UI；
- 如果您使用IMLib，请使用RCIMClient中的同名方法发送图片消息，不会自动更新UI。
-
- @warning  **已废弃，请勿使用。**
- 升级说明：如果您之前使用了此接口，可以直接替换为sendMediaMessage:targetId:content:pushContent:pushData:success:error:cancel:接口，行为和实现完全一致。
- */
-- (RCMessage *)sendImageMessage:(RCConversationType)conversationType
-                       targetId:(NSString *)targetId
-                        content:(RCMessageContent *)content
-                    pushContent:(NSString *)pushContent
-                       pushData:(NSString *)pushData
-                       progress:(void (^)(int progress, long messageId))progressBlock
-                        success:(void (^)(long messageId))successBlock
-                          error:(void (^)(RCErrorCode errorCode, long messageId))errorBlock
-    __deprecated_msg("已废弃，请使用sendMediaMessage函数。");
 
 /*!
  发送定向消息，会自动更新UI
@@ -725,17 +740,6 @@ FOUNDATION_EXPORT NSString *const RCKitDispatchMessageReceiptRequestNotification
  是否开启发送输入状态，默认值是 YES，开启之后在输入消息的时候对方可以看到正在输入的提示(目前只支持单聊)
  */
 @property (nonatomic, assign) BOOL enableTypingStatus;
-
-/*!
- 是否开启已读回执功能，默认值是NO
-
- @discussion 开启后会在会话页面消息显示之后会发送已读回执给对方。
-
- @warning **已废弃，请勿使用。**
- 升级说明:请使用enabledReadReceiptConversationTypeList，设置开启回执的会话类型
- */
-@property (nonatomic, assign) BOOL enableReadReceipt __deprecated_msg(
-    "已废弃，请使用enabledReadReceiptConversationTypeList，设置开启回执的会话类型。");
 
 /*!
  开启已读回执功能的会话类型，默认为 单聊、群聊和讨论组
@@ -1202,7 +1206,8 @@ FOUNDATION_EXPORT NSString *const RCKitDispatchMessageReceiptRequestNotification
 @property (nonatomic, assign) NSUInteger reeditDuration;
 
 /*!
- 是否支持消息引用功能，默认值是YES ，聊天页面长按消息支持引用（目前仅支持文本消息、文件消息、图文消息、图片消息、引用消息的引用）
+ 是否支持消息引用功能，默认值是YES
+ ，聊天页面长按消息支持引用（目前仅支持文本消息、文件消息、图文消息、图片消息、引用消息的引用）
 */
 @property (nonatomic, assign) BOOL enableMessageReference;
 

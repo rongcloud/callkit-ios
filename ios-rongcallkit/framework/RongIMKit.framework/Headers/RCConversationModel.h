@@ -72,6 +72,11 @@ typedef NS_ENUM(NSUInteger, RCConversationModelType) {
 @property (nonatomic, assign) BOOL isTop;
 
 /*!
+当前会话是否是免打扰状态
+*/
+@property (nonatomic, assign) RCConversationNotificationStatus blockStatus;
+
+/*!
  置顶Cell的背景颜色
  */
 @property (nonatomic, strong) UIColor *topCellBackgroundColor;

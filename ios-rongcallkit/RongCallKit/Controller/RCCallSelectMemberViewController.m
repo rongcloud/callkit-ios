@@ -154,6 +154,11 @@ typedef void (^CompleteBlock)(NSArray *addUserIdList);
     self.navigationItem.leftBarButtonItem = leftBarButtonItem;
 }
 
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    self.toolBar.frame = CGRectMake(0, UIScreen.mainScreen.bounds.size.height - 49.0 - RCCallExtraSpace, self.view.frame.size.width, 49.0 + RCCallExtraSpace);
+}
+
 - (UIStatusBarStyle)preferredStatusBarStyle {
     UIViewController *rootVC = [self.navigationController presentingViewController];
     if ([rootVC isKindOfClass:[RCCallBaseViewController class]]) {

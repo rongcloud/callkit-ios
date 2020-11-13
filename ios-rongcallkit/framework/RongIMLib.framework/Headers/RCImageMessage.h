@@ -23,6 +23,8 @@
 
  @discussion 图片消息类，此消息会进行存储并计入未读消息数。
  
+ @discussion 如果想发送原图，请设置属性 full 为 YES。
+ 
  @remarks 内容类消息
  */
 @interface RCImageMessage : RCMediaMessageContent <NSCoding>
@@ -69,6 +71,8 @@
 /*!
  初始化图片消息
 
+ @discussion 如果想发送原图，请设置属性 full 为 YES。
+ 
  @param image   原始图片
  @return        图片消息对象
  */
@@ -76,6 +80,8 @@
 
 /*!
  初始化图片消息
+ 
+ @discussion 如果想发送原图，请设置属性 full 为 YES。
 
  @param imageURI    图片的本地路径
  @return            图片消息对象
@@ -84,6 +90,8 @@
 
 /*!
  初始化图片消息
+ 
+ @discussion 如果想发送原图，请设置属性 full 为 YES。
 
  @param imageData    图片的原始数据
  @return            图片消息对象

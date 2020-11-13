@@ -57,6 +57,10 @@ FOUNDATION_EXPORT const unsigned char RongIMLibVersionString[];
 #import <RongIMLib/RCSightMessage.h>
 #import <RongIMLib/RCChatroomKVNotificationMessage.h>
 #import <RongIMLib/RCReferenceMessage.h>
+#import <RongIMLib/RCMessageConfig.h>
+#import <RongIMLib/RCMessagePushConfig.h>
+#import <RongIMLib/RCiOSConfig.h>
+#import <RongIMLib/RCAndroidConfig.h>
 /// 工具类
 #import <RongIMLib/RCAMRDataConverter.h>
 #import <RongIMLib/RCTSMutableDictionary.h>
@@ -85,6 +89,7 @@ FOUNDATION_EXPORT const unsigned char RongIMLibVersionString[];
 #import <RongIMLib/RCFileUtility.h>
 #import <RongIMLib/RCReadReceiptInfo.h>
 #import <RongIMLib/RCUserOnlineStatusInfo.h>
+#import <RongIMLib/RCConversationStatusInfo.h>
 
 // log
 #import <RongIMLib/RCFwLog.h>
