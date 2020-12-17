@@ -2,7 +2,7 @@
 //  RCCallKitUtility.m
 //  RongCallKit
 //
-//  Created by 岑裕 on 16/3/12.
+//  Created by RongCloud on 16/3/12.
 //  Copyright © 2016年 RongCloud. All rights reserved.
 //
 
@@ -59,49 +59,50 @@ UIColor* dynamic_color(NSInteger light_hex_value, NSInteger dark_hex_value) {
 }
 
 + (UIImage *)imageFromVoIPBundle:(NSString *)imageName {
-    return [RCKitUtility imageNamed:imageName ofBundle:@"RongCloud.bundle"];
+    return [RCKitUtility imageNamed:imageName ofBundle:@"RongCallKit.bundle"];
 }
 
+
 + (UIImage *)getDefaultPortraitImage {
-    return [RCKitUtility imageNamed:@"default_portrait_msg" ofBundle:@"RongCloud.bundle"];
+    return [self imageFromVoIPBundle:@"default_portrait_msg"];
 }
 
 + (NSString *)getGeneralReadableString:(RCCallDisconnectReason)hangupReason {
     NSString *hangupReasonString = nil;
     switch (hangupReason) {
         case RCCallDisconnectReasonCancel:
-            hangupReasonString = NSLocalizedStringFromTable(@"VoIPCallHasCancel", @"RongCloudKit", nil);
+            hangupReasonString = RCCallKitLocalizedString(@"VoIPCallHasCancel" );
             break;
         case RCCallDisconnectReasonReject:
-            hangupReasonString = NSLocalizedStringFromTable(@"VoIPCallHasReject", @"RongCloudKit", nil);
+            hangupReasonString = RCCallKitLocalizedString(@"VoIPCallHasReject" );
             break;
         case RCCallDisconnectReasonHangup:
-            hangupReasonString = NSLocalizedStringFromTable(@"VoIPCallHasHangup", @"RongCloudKit", nil);
+            hangupReasonString = RCCallKitLocalizedString(@"VoIPCallHasHangup" );
             break;
         case RCCallDisconnectReasonRemoteCancel:
-            hangupReasonString = NSLocalizedStringFromTable(@"VoIPCallRemoteCancel", @"RongCloudKit", nil);
+            hangupReasonString = RCCallKitLocalizedString(@"VoIPCallRemoteCancel" );
             break;
         case RCCallDisconnectReasonRemoteReject:
-            hangupReasonString = NSLocalizedStringFromTable(@"VoIPCallRemoteReject", @"RongCloudKit", nil);
+            hangupReasonString = RCCallKitLocalizedString(@"VoIPCallRemoteReject" );
             break;
         case RCCallDisconnectReasonRemoteHangup:
-            hangupReasonString = NSLocalizedStringFromTable(@"VoIPCallRemoteHangup", @"RongCloudKit", nil);
+            hangupReasonString = RCCallKitLocalizedString(@"VoIPCallRemoteHangup" );
             break;
         case RCCallDisconnectReasonRemoteBusyLine:
-            hangupReasonString = NSLocalizedStringFromTable(@"VoIPCallRemoteBusyLine", @"RongCloudKit", nil);
+            hangupReasonString = RCCallKitLocalizedString(@"VoIPCallRemoteBusyLine" );
             break;
         case RCCallDisconnectReasonRemoteNoResponse:
-            hangupReasonString = NSLocalizedStringFromTable(@"VoIPCallRemoteNoResponse", @"RongCloudKit", nil);
+            hangupReasonString = RCCallKitLocalizedString(@"VoIPCallRemoteNoResponse" );
             break;
         case RCCallDisconnectReasonAcceptByOtherClient:
-            hangupReasonString = NSLocalizedStringFromTable(@"VoIPCallAcceptByOtherClient", @"RongCloudKit", nil);
+            hangupReasonString = RCCallKitLocalizedString(@"VoIPCallAcceptByOtherClient" );
             break;
         case RCCallDisconnectReasonKickedByServer:
-            hangupReasonString = NSLocalizedStringFromTable(@"VoIPCallKickedByServer", @"RongCloudKit", nil);
+            hangupReasonString = RCCallKitLocalizedString(@"VoIPCallKickedByServer" );
             break;
         case RCCallDisconnectReasonMediaServerClosed:
         case RCCallDisconnectReasonRemoteEngineUnsupported:
-            hangupReasonString = NSLocalizedStringFromTable(@"VoIPCallMediaServerClosed", @"RongCloudKit", nil);
+            hangupReasonString = RCCallKitLocalizedString(@"VoIPCallMediaServerClosed" );
             break;
         default:
             break;
@@ -116,19 +117,19 @@ UIColor* dynamic_color(NSInteger light_hex_value, NSInteger dark_hex_value) {
     }
     switch (hangupReason) {
         case RCCallDisconnectReasonBusyLine:
-            hangupReasonString = NSLocalizedStringFromTable(@"VoIPCallNoResponse", @"RongCloudKit", nil);
+            hangupReasonString = RCCallKitLocalizedString(@"VoIPCallNoResponse" );
             break;
         case RCCallDisconnectReasonNoResponse:
-            hangupReasonString = NSLocalizedStringFromTable(@"VoIPCallNoResponse", @"RongCloudKit", nil);
+            hangupReasonString = RCCallKitLocalizedString(@"VoIPCallNoResponse" );
             break;
         case RCCallDisconnectReasonNetworkError:
-            hangupReasonString = NSLocalizedStringFromTable(@"VoIPCallLocalNetworkError", @"RongCloudKit", nil);
+            hangupReasonString = RCCallKitLocalizedString(@"VoIPCallLocalNetworkError" );
             break;
         case RCCallDisconnectReasonRemoteNetworkError:
-            hangupReasonString = NSLocalizedStringFromTable(@"VoIPCallRemoteNetworkError", @"RongCloudKit", nil);
+            hangupReasonString = RCCallKitLocalizedString(@"VoIPCallRemoteNetworkError" );
             break;
         case RCCallDisconnectReasonAddToBlackList:
-            hangupReasonString = NSLocalizedStringFromTable(@"VoIPCallHasReject", @"RongCloudKit", nil);
+            hangupReasonString = RCCallKitLocalizedString(@"VoIPCallHasReject" );
             break;
         default:
             hangupReasonString = [self getGeneralReadableString:hangupReason];
@@ -141,19 +142,19 @@ UIColor* dynamic_color(NSInteger light_hex_value, NSInteger dark_hex_value) {
     NSString *hangupReasonString = nil;
     switch (hangupReason) {
         case RCCallDisconnectReasonNoResponse:
-            hangupReasonString = NSLocalizedStringFromTable(@"VoIPCallNoResponse", @"RongCloudKit", nil);
+            hangupReasonString = RCCallKitLocalizedString(@"VoIPCallNoResponse" );
             break;
         case RCCallDisconnectReasonNetworkError:
-            hangupReasonString = NSLocalizedStringFromTable(@"VoIPCallLocalNetworkError", @"RongCloudKit", nil);
+            hangupReasonString = RCCallKitLocalizedString(@"VoIPCallLocalNetworkError" );
             break;
         case RCCallDisconnectReasonRemoteNetworkError:
-            hangupReasonString = NSLocalizedStringFromTable(@"VoIPCallRemoteNetworkError", @"RongCloudKit", nil);
+            hangupReasonString = RCCallKitLocalizedString(@"VoIPCallRemoteNetworkError" );
             break;
         case RCCallDisconnectReasonRemoteBusyLine:
-            hangupReasonString = NSLocalizedStringFromTable(@"VoIPCallRemoteBusyLineAndShowAdvice", @"RongCloudKit", nil);
+            hangupReasonString = RCCallKitLocalizedString(@"VoIPCallRemoteBusyLineAndShowAdvice" );
             break;
         case RCCallDisconnectReasonAddToBlackList:
-            hangupReasonString = NSLocalizedStringFromTable(@"VoIP_Rejected_By_Blacklist", @"RongCloudKit", nil);
+            hangupReasonString = RCCallKitLocalizedString(@"VoIP_Rejected_By_Blacklist" );
             break;
         default:
             hangupReasonString = [self getGeneralReadableString:hangupReason];
@@ -203,9 +204,8 @@ UIColor* dynamic_color(NSInteger light_hex_value, NSInteger dark_hex_value) {
                     successBlock();
                 } else {
                     [self
-                     loadErrorAlertWithConfirm:NSLocalizedStringFromTable(@"AccessRightTitle", @"RongCloudKit", nil)
-                     message:NSLocalizedStringFromTable(@"speakerAccessRight", @"RongCloudKit",
-                                                        nil)];
+                     loadErrorAlertWithConfirm:RCCallKitLocalizedString(@"AccessRightTitle" )
+                     message:RCCallKitLocalizedString(@"speakerAccessRight")];
                     if(errorBlock){
                         errorBlock();
                     }
@@ -219,8 +219,8 @@ UIColor* dynamic_color(NSInteger light_hex_value, NSInteger dark_hex_value) {
     AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
     
     if (authStatus == AVAuthorizationStatusDenied || authStatus == AVAuthorizationStatusRestricted) {
-        [self loadErrorAlertWithConfirm:NSLocalizedStringFromTable(@"AccessRightTitle", @"RongCloudKit", nil)
-                                message:NSLocalizedStringFromTable(@"cameraAccessRight", @"RongCloudKit", nil)];
+        [self loadErrorAlertWithConfirm:RCCallKitLocalizedString(@"AccessRightTitle" )
+                                message:RCCallKitLocalizedString(@"cameraAccessRight" )];
         complete(NO);
         errorBlock();
     } else if (authStatus == AVAuthorizationStatusNotDetermined) {
@@ -228,10 +228,7 @@ UIColor* dynamic_color(NSInteger light_hex_value, NSInteger dark_hex_value) {
          requestAccessForMediaType:AVMediaTypeVideo
          completionHandler:^(BOOL granted) {
             if (!granted) {
-                [self loadErrorAlertWithConfirm:NSLocalizedStringFromTable(@"AccessRightTitle",
-                                                                           @"RongCloudKit", nil)
-                                        message:NSLocalizedStringFromTable(@"cameraAccessRight",
-                                                                           @"RongCloudKit", nil)];
+                [self loadErrorAlertWithConfirm:RCCallKitLocalizedString(@"AccessRightTitle")message:RCCallKitLocalizedString(@"cameraAccessRight")];
                 errorBlock();
             }
             complete(granted);
@@ -245,7 +242,7 @@ UIColor* dynamic_color(NSInteger light_hex_value, NSInteger dark_hex_value) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title
                                                         message:message
                                                        delegate:nil
-                                              cancelButtonTitle:NSLocalizedStringFromTable(@"OK", @"RongCloudKit", nil)
+                                              cancelButtonTitle:RCCallKitLocalizedString(@"OK" )
                                               otherButtonTitles:nil];
         alert.tag = 1002;
         [alert show];
@@ -274,5 +271,19 @@ UIColor* dynamic_color(NSInteger light_hex_value, NSInteger dark_hex_value) {
     return 0;//version1等于version2
     
 }
+
++ (NSBundle *)callKitBundle{
+//    NSString *bundlePath = [NSBundle mainBundle].resourcePath;
+//    NSString *privateFrameworksPath = [[NSBundle mainBundle].privateFrameworksPath stringByAppendingPathComponent:@"RongCallKit.framework"];
+    //注意:podfile 文件里面使用 user_framework 时 bundle 路径会改变,以下方法做了适配
+//    BOOL user_framework = [[NSFileManager defaultManager] fileExistsAtPath:privateFrameworksPath];
+//    if (user_framework) {
+//        bundlePath = privateFrameworksPath;
+//    }
+//    return [NSBundle bundleWithPath:bundlePath];
+    return [NSBundle mainBundle];
+}
+
+
 
 @end

@@ -2,7 +2,7 @@
 //  RCCallKitExtensionModule.m
 //  RongCallKit
 //
-//  Created by 岑裕 on 16/7/2.
+//  Created by RongCloud on 16/7/2.
 //  Copyright © 2016年 Rong Cloud. All rights reserved.
 //
 
@@ -63,7 +63,8 @@
     if ([[RCCall sharedRCCall] isAudioCallEnabled:conversationType]) {
         RCExtensionPluginItemInfo *audioItem = [[RCExtensionPluginItemInfo alloc] init];
         audioItem.image = [RCCallKitUtility imageFromVoIPBundle:@"voip/actionbar_audio_call_icon.png"];
-        audioItem.title = NSLocalizedStringFromTable(@"VoIPAudioCall", @"RongCloudKit", nil);
+        audioItem.title = RCCallKitLocalizedString(@"VoIPAudioCall");
+        
         if (conversationType == ConversationType_PRIVATE) {
             audioItem.tapBlock = ^(RCChatSessionInputBarControl *chatSessionInputBar) {
                 [[RCCall sharedRCCall] startSingleCall:targetId mediaType:RCCallMediaAudio];
@@ -79,7 +80,7 @@
     if ([[RCCall sharedRCCall] isVideoCallEnabled:conversationType]) {
         RCExtensionPluginItemInfo *videoItem = [[RCExtensionPluginItemInfo alloc] init];
         videoItem.image = [RCCallKitUtility imageFromVoIPBundle:@"voip/actionbar_video_call_icon.png"];
-        videoItem.title = NSLocalizedStringFromTable(@"VoIPVideoCall", @"RongCloudKit", nil);
+        videoItem.title = RCCallKitLocalizedString(@"VoIPVideoCall");
         videoItem.tapBlock = ^(RCChatSessionInputBarControl *chatSessionInputBar) {
             [[RCCall sharedRCCall] startSingleCall:targetId mediaType:RCCallMediaVideo];
         };

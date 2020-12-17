@@ -2,7 +2,7 @@
 //  RCCallBaseViewController.m
 //  RongCallKit
 //
-//  Created by 岑裕 on 16/3/17.
+//  Created by RongCloud on 16/3/17.
 //  Copyright © 2016年 RongCloud. All rights reserved.
 //
 
@@ -73,8 +73,13 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
     self = [super init];
     if (self) {
         [self willChangeValueForKey:@"callSession"];
-        NSString *invitePushContent = [NSString stringWithFormat:@"%@ 邀请你进行%@聊天",[RCIMClient sharedRCIMClient].currentUserInfo.name, mediaType == RCCallMediaVideo?@"视频":@"语音"];
-        NSString *hangupPushContent = @"[结束通话]";
+        NSString *mediaTypeStr = (mediaType == RCCallMediaVideo? RCCallKitLocalizedString(@"VoIPCall_Video"):
+            RCCallKitLocalizedString(@"VoIPCall_Audio"));
+        NSString *invitePushContent = [NSString stringWithFormat:RCCallKitLocalizedString(@"VoIPCall_invite_push_Content")
+            ,[RCIMClient sharedRCIMClient].currentUserInfo.name
+            ,mediaTypeStr];
+        NSString *hangupPushContent = RCCallKitLocalizedString(@"VoIPCall_hangup_PushContent");
+        
         
         RCMessagePushConfig *invitePushConfig = [self getPushConfig];
         RCMessagePushConfig *hangupPushConfig = [self getPushConfig];
@@ -220,7 +225,6 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
             [audioSession setCategory:AVAudioSessionCategorySoloAmbient error:nil];
             [self triggerVibrate];
         }
-        
         [audioSession setActive:YES error:nil];
 
         NSURL *url = [NSURL fileURLWithPath:ringPath];
@@ -287,8 +291,13 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
 - (void)checkApplicationStateAndAlert {
     if (self.callSession.callStatus == RCCallDialing) {
         if ([UIApplication sharedApplication].applicationState == UIApplicationStateActive) {
-            NSString *ringPath = [[[NSBundle mainBundle] pathForResource:@"RongCloud" ofType:@"bundle"]
+            NSString *ringPath = [[[NSBundle mainBundle] pathForResource:@"RongCallKit" ofType:@"bundle"]
                                   stringByAppendingPathComponent:@"voip/voip_calling_ring.mp3"];
+            if (self.callSession.mediaType == RCCallMediaVideo) {
+                [self setSpeakerEnable:YES];
+            } else {
+                [self setSpeakerEnable:NO];
+            }
             [self startPlayRing:ringPath];
             self.needPlayingAlertAfterForeground = NO;
         } else {
@@ -308,15 +317,15 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
         [self updateActiveTimer];
         [self startActiveTimer];
     } else if (self.callSession.callStatus == RCCallDialing) {
-        self.tipsLabel.text = NSLocalizedStringFromTable(@"VoIPCallWaitingForRemoteAccept", @"RongCloudKit", nil);
+        self.tipsLabel.text = RCCallKitLocalizedString(@"VoIPCallWaitingForRemoteAccept");
     } else if (self.callSession.callStatus == RCCallIncoming || self.callSession.callStatus == RCCallRinging) {
         if (self.needPlayingRingAfterForeground) {
             [self shouldRingForIncomingCall];
         }
         if (self.callSession.mediaType == RCCallMediaAudio) {
-            self.tipsLabel.text = NSLocalizedStringFromTable(@"VoIPAudioCallIncoming", @"RongCloudKit", nil);
+            self.tipsLabel.text = RCCallKitLocalizedString(@"VoIPAudioCallIncoming");
         } else {
-            self.tipsLabel.text = NSLocalizedStringFromTable(@"VoIPVideoCallIncoming", @"RongCloudKit", nil);
+            self.tipsLabel.text = RCCallKitLocalizedString(@"VoIPVideoCallIncoming");
         }
     } else if (self.callSession.callStatus == RCCallHangup) {
         [self callDidDisconnect];
@@ -462,7 +471,7 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
                      forState:UIControlStateHighlighted];
         [_muteButton setImage:[RCCallKitUtility imageFromVoIPBundle:@"voip/mute_hover.png"]
                      forState:UIControlStateSelected];
-        [_muteButton setTitle:NSLocalizedStringFromTable(@"VoIPCallMute", @"RongCloudKit", nil)
+        [_muteButton setTitle:RCCallKitLocalizedString(@"VoIPCallMute")
                      forState:UIControlStateNormal];
         [_muteButton addTarget:self action:@selector(muteButtonClicked) forControlEvents:UIControlEventTouchUpInside];
         [_muteButton setSelected:self.callSession.isMuted];
@@ -491,7 +500,7 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
         [_addButton setImage:[RCCallKitUtility imageFromVoIPBundle:@"voip/addmenu.png"] forState:UIControlStateNormal];
         [_addButton setImage:[RCCallKitUtility imageFromVoIPBundle:@"voip/addmenu.png"] forState:UIControlStateHighlighted];
         [_addButton setImage:[RCCallKitUtility imageFromVoIPBundle:@"voip/addmenu.png"] forState:UIControlStateSelected];
-        //        [_addButton setTitle:NSLocalizedStringFromTable(@"VoIPCallMute", @"RongCloudKit", nil) forState:UIControlStateNormal];
+        //        [_addButton setTitle:RCCallKitLocalizedString(@"VoIPCallMute") forState:UIControlStateNormal];
         //        [_addButton setSelected:self.callSession.isMuted];
         [_addButton addTarget:self action:@selector(inviteUserButtonClicked) forControlEvents:UIControlEventTouchUpInside];
         
@@ -503,9 +512,10 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
 
 - (void)addButtonClicked
 {
-    KxCallMenuItem *addMemberItem = [KxCallMenuItem menuItem:@"添加成员" image:[RCCallKitUtility imageFromVoIPBundle:@"voip/add.png"] target:self action:@selector(inviteUserButtonClicked)];
-    KxCallMenuItem *whiteBoardItem = [KxCallMenuItem menuItem:@"白板" image:[RCCallKitUtility imageFromVoIPBundle:@"voip/whiteboard.png"] target:self action:@selector(whiteBoardButtonClicked)];
-    KxCallMenuItem *handupItem = [KxCallMenuItem menuItem:@"举手发言" image:[RCCallKitUtility imageFromVoIPBundle:@"voip/handup.png"] target:self action:@selector(handUpButtonClicked)];
+    KxCallMenuItem *addMemberItem = [KxCallMenuItem menuItem:RCCallKitLocalizedString(@"VoIPCall_addMembers") image:[RCCallKitUtility imageFromVoIPBundle:@"voip/add.png"] target:self action:@selector(inviteUserButtonClicked)];
+    KxCallMenuItem *whiteBoardItem = [KxCallMenuItem menuItem:RCCallKitLocalizedString(@"VoIPCall_whiteBoard") image:[RCCallKitUtility imageFromVoIPBundle:@"voip/whiteboard.png"] target:self action:@selector(whiteBoardButtonClicked)];
+    KxCallMenuItem *handupItem = [KxCallMenuItem menuItem:RCCallKitLocalizedString(@"VoIPCall_hand_raise") image:[RCCallKitUtility imageFromVoIPBundle:@"voip/handup.png"] target:self action:@selector(handUpButtonClicked)];
+    
     
     NSMutableArray *menuItems = [NSMutableArray new];
     [menuItems addObject:addMemberItem];
@@ -525,7 +535,7 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
         [_handUpButton setImage:[RCCallKitUtility imageFromVoIPBundle:@"voip/handup.png"] forState:UIControlStateNormal];
         [_handUpButton setImage:[RCCallKitUtility imageFromVoIPBundle:@"voip/handup.png"] forState:UIControlStateHighlighted];
         [_handUpButton setImage:[RCCallKitUtility imageFromVoIPBundle:@"voip/handup.png"] forState:UIControlStateSelected];
-//        [_handUpButton setTitle:NSLocalizedStringFromTable(@"VoIPCallMute", @"RongCloudKit", nil) forState:UIControlStateNormal];
+//        [_handUpButton setTitle:RCCallKitLocalizedString(@"VoIPCallMute") forState:UIControlStateNormal];
 //        [_handUpButton setSelected:self.callSession.isMuted];
         [_handUpButton addTarget:self action:@selector(handUpButtonClicked) forControlEvents:UIControlEventTouchUpInside];
         
@@ -546,7 +556,7 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
         [_whiteBoardButton setImage:[RCCallKitUtility imageFromVoIPBundle:@"voip/whiteboard.png"] forState:UIControlStateNormal];
         [_whiteBoardButton setImage:[RCCallKitUtility imageFromVoIPBundle:@"voip/whiteboard.png"] forState:UIControlStateHighlighted];
         [_whiteBoardButton setImage:[RCCallKitUtility imageFromVoIPBundle:@"voip/whiteboard.png"] forState:UIControlStateSelected];
-//        [_whiteBoardButton setTitle:NSLocalizedStringFromTable(@"VoIPCallMute", @"RongCloudKit", nil) forState:UIControlStateNormal];
+//        [_whiteBoardButton setTitle:RCCallKitLocalizedString(@"VoIPCallMute") forState:UIControlStateNormal];
         //        [_whiteBoardButton setSelected:self.callSession.isMuted];
         [_whiteBoardButton addTarget:self action:@selector(whiteBoardButtonClicked) forControlEvents:UIControlEventTouchUpInside];
         
@@ -586,7 +596,7 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
                         forState:UIControlStateHighlighted];
         [_speakerButton setImage:[RCCallKitUtility imageFromVoIPBundle:@"voip/handfree_hover.png"]
                         forState:UIControlStateSelected];
-        [_speakerButton setTitle:NSLocalizedStringFromTable(@"VoIPCallSpeaker", @"RongCloudKit", nil)
+        [_speakerButton setTitle:RCCallKitLocalizedString(@"VoIPCallSpeaker")
                         forState:UIControlStateNormal];
 
         [_speakerButton addTarget:self
@@ -616,7 +626,7 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
                        forState:UIControlStateNormal];
         [_acceptButton setImage:[RCCallKitUtility imageFromVoIPBundle:@"voip/answer_hover.png"]
                        forState:UIControlStateHighlighted];
-        [_acceptButton setTitle:NSLocalizedStringFromTable(@"VoIPCallAccept", @"RongCloudKit", nil)
+        [_acceptButton setTitle:RCCallKitLocalizedString(@"VoIPCallAccept")
                        forState:UIControlStateNormal];
 
         [_acceptButton addTarget:self
@@ -650,7 +660,7 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
                        forState:UIControlStateNormal];
         [_hangupButton setImage:[RCCallKitUtility imageFromVoIPBundle:@"voip/hang_up_hover.png"]
                        forState:UIControlStateHighlighted];
-        [_hangupButton setTitle:NSLocalizedStringFromTable(@"VoIPCallHangup", @"RongCloudKit", nil)
+        [_hangupButton setTitle:RCCallKitLocalizedString(@"VoIPCallHangup")
                        forState:UIControlStateNormal];
 
         [_hangupButton addTarget:self
@@ -687,7 +697,7 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
             [_cameraCloseButton setImage:[RCCallKitUtility imageFromVoIPBundle:@"voip/audio.png"]
                                 forState:UIControlStateHighlighted];
             [_cameraCloseButton
-                setTitle:NSLocalizedStringFromTable(@"VoIPVideoCallTurnToAudioCall", @"RongCloudKit", nil)
+                setTitle:RCCallKitLocalizedString(@"VoIPVideoCallTurnToAudioCall")
                 forState:UIControlStateNormal];
         } else {
             [_cameraCloseButton setImage:[RCCallKitUtility imageFromVoIPBundle:@"voip/video.png"]
@@ -696,9 +706,9 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
                                 forState:UIControlStateHighlighted];
             [_cameraCloseButton setImage:[RCCallKitUtility imageFromVoIPBundle:@"voip/video_hover.png"]
                                 forState:UIControlStateSelected];
-            [_cameraCloseButton setTitle:NSLocalizedStringFromTable(@"VoIPVideoCallCloseCamera", @"RongCloudKit", nil)
+            [_cameraCloseButton setTitle:RCCallKitLocalizedString(@"VoIPVideoCallCloseCamera")
                                 forState:UIControlStateNormal];
-            [_cameraCloseButton setTitle:NSLocalizedStringFromTable(@"VoIPVideoCallOpenCamera", @"RongCloudKit", nil)
+            [_cameraCloseButton setTitle:RCCallKitLocalizedString(@"VoIPVideoCallOpenCamera")
                                 forState:UIControlStateSelected];
         }
 
@@ -750,9 +760,9 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
                                  forState:UIControlStateHighlighted];
             [_cameraSwitchButton setImage:[RCCallKitUtility imageFromVoIPBundle:@"voip/camera_hover.png"]
                                  forState:UIControlStateSelected];
-            [_cameraSwitchButton setTitle:NSLocalizedStringFromTable(@"VoIPAudioCallCamera", @"RongCloudKit", nil)
+            [_cameraSwitchButton setTitle:RCCallKitLocalizedString(@"VoIPAudioCallCamera")
                                  forState:UIControlStateNormal];
-            [_cameraSwitchButton setTitle:NSLocalizedStringFromTable(@"VoIPAudioCallCamera", @"RongCloudKit", nil)
+            [_cameraSwitchButton setTitle:RCCallKitLocalizedString(@"VoIPAudioCallCamera")
                                  forState:UIControlStateSelected];
         } else {
             [_cameraSwitchButton setImage:[RCCallKitUtility imageFromVoIPBundle:@"voip/switchcamera.png"]
@@ -1439,7 +1449,7 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
         [[RCCXCall sharedInstance] reportOutgoingCallConnected];
     }
 
-    self.tipsLabel.text = (self.callSession.mediaType == RCCallMediaVideo) ? NSLocalizedStringFromTable(@"Connecting...", @"RongCloudKit", nil) : @"";
+    self.tipsLabel.text = (self.callSession.mediaType == RCCallMediaVideo) ? RCCallKitLocalizedString(@"Connecting...") : @"";
     [self startActiveTimer];
     [self resetLayout:self.callSession.isMultiCall
             mediaType:self.callSession.mediaType
@@ -1456,7 +1466,7 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
 
     if (self.callSession.connectedTime > 0) {
-        self.tipsLabel.text = NSLocalizedStringFromTable(@"VoIPCallEnd", @"RongCloudKit", nil);
+        self.tipsLabel.text = RCCallKitLocalizedString(@"VoIPCallEnd");
     } else {
         self.tipsLabel.text =
             [RCCallKitUtility getReadableStringForCallViewController:self.callSession.disconnectReason];
@@ -1572,7 +1582,7 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
  */
 - (void)shouldRingForIncomingCall {
     if ([UIApplication sharedApplication].applicationState == UIApplicationStateActive) {
-        NSString *ringPath = [[[NSBundle mainBundle] pathForResource:@"RongCloud" ofType:@"bundle"]
+        NSString *ringPath = [[[NSBundle mainBundle] pathForResource:@"RongCallKit" ofType:@"bundle"]
             stringByAppendingPathComponent:@"voip/voip_call.mp3"];
         [self startPlayRing:ringPath];
         self.needPlayingRingAfterForeground = NO;
@@ -1649,7 +1659,7 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
                 CGRectMake(RCCallHorizontalMargin,
                            self.view.frame.size.height - RCCallButtonBottomMargin * 5 - RCCallExtraSpace,
                            self.view.frame.size.width - RCCallHorizontalMargin * 2, RCCallLabelHeight);
-                self.tipsLabel.text = NSLocalizedStringFromTable(@"voip_network_bad", @"RongCloudKit", nil);
+                self.tipsLabel.text = RCCallKitLocalizedString(@"voip_network_bad");
             } else {
                 self.tipsLabel.text = nil;
             }
@@ -1660,7 +1670,7 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
 - (void)playNetworkBadSounds {
     static time_t prePlayTime = 0;
     NSString *soundPath =
-        [[[NSBundle mainBundle] pathForResource:@"RongCloud" ofType:@"bundle"]
+        [[[NSBundle mainBundle] pathForResource:@"RongCallKit" ofType:@"bundle"]
             stringByAppendingPathComponent:@"voip/voip_network_error_sound.wav"];
     if (soundPath.length > 0) {
         NSURL* fileUrl = [NSURL fileURLWithPath:soundPath];
@@ -1771,7 +1781,7 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
         case AVAudioSessionRouteChangeReasonOldDeviceUnavailable : //2
         case AVAudioSessionRouteChangeReasonOverride : //4
         {
-            if ([port.portType isEqualToString: AVAudioSessionPortBuiltInSpeaker]){
+            if ([port.portType isEqualToString:AVAudioSessionPortBuiltInReceiver] || [port.portType isEqualToString: AVAudioSessionPortBuiltInSpeaker]){
                 [self reloadSpeakerRoute:YES];
             }
             else{

@@ -2,7 +2,7 @@
 //  RCCall.mm
 //  RongCallKit
 //
-//  Created by 岑裕 on 16/3/11.
+//  Created by RongCloud on 16/3/11.
 //  Copyright © 2016年 RongCloud. All rights reserved.
 //
 
@@ -191,9 +191,8 @@
                     successBlock();
                 } else {
                     [self
-                        loadErrorAlertWithConfirm:NSLocalizedStringFromTable(@"AccessRightTitle", @"RongCloudKit", nil)
-                                          message:NSLocalizedStringFromTable(@"speakerAccessRight", @"RongCloudKit",
-                                                                             nil)];
+                        loadErrorAlertWithConfirm:RCCallKitLocalizedString(@"AccessRightTitle")
+                     message:RCCallKitLocalizedString(@"speakerAccessRight")];
                 }
             });
         }];
@@ -204,18 +203,15 @@
     AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
 
     if (authStatus == AVAuthorizationStatusDenied || authStatus == AVAuthorizationStatusRestricted) {
-        [self loadErrorAlertWithConfirm:NSLocalizedStringFromTable(@"AccessRightTitle", @"RongCloudKit", nil)
-                                message:NSLocalizedStringFromTable(@"cameraAccessRight", @"RongCloudKit", nil)];
+        [self loadErrorAlertWithConfirm:RCCallKitLocalizedString(@"AccessRightTitle" )
+                                message:RCCallKitLocalizedString(@"cameraAccessRight" )];
         complete(NO);
     } else if (authStatus == AVAuthorizationStatusNotDetermined) {
         [AVCaptureDevice
             requestAccessForMediaType:AVMediaTypeVideo
                     completionHandler:^(BOOL granted) {
                         if (!granted) {
-                            [self loadErrorAlertWithConfirm:NSLocalizedStringFromTable(@"AccessRightTitle",
-                                                                                       @"RongCloudKit", nil)
-                                                    message:NSLocalizedStringFromTable(@"cameraAccessRight",
-                                                                                       @"RongCloudKit", nil)];
+                            [self loadErrorAlertWithConfirm:RCCallKitLocalizedString(@"AccessRightTitle")message:RCCallKitLocalizedString(@"cameraAccessRight")];
                         }
                         complete(granted);
                     }];
@@ -227,12 +223,10 @@
 - (BOOL)preCheckForStartCall:(RCCallMediaType)mediaType {
     RCCallSession *currentCallSession = [RCCall sharedRCCall].currentCallSession;
     if (currentCallSession && currentCallSession.mediaType == RCCallMediaAudio) {
-        [self loadErrorAlertWithoutConfirm:NSLocalizedStringFromTable(@"VoIPAudioCallExistedWarning", @"RongCloudKit",
-                                                                      nil)];
+        [self loadErrorAlertWithoutConfirm:RCCallKitLocalizedString(@"VoIPAudioCallExistedWarning")];
         return NO;
     } else if (currentCallSession && currentCallSession.mediaType == RCCallMediaVideo) {
-        [self loadErrorAlertWithoutConfirm:NSLocalizedStringFromTable(@"VoIPVideoCallExistedWarning", @"RongCloudKit",
-                                                                      nil)];
+        [self loadErrorAlertWithoutConfirm:RCCallKitLocalizedString(@"VoIPVideoCallExistedWarning")];
         return NO;
     } else {
         return YES;
@@ -347,9 +341,9 @@
 }
 
 - (void)postLocalNotification:(RCMessagePushConfig *)pushConfig userInfo:(NSDictionary*)userInfo hasSound:(BOOL)hasSound{
-    NSString* pushContent = NSLocalizedStringFromTable(@"receive_new_message", @"RongCloudKit", nil);
+    NSString* pushContent = @"";
     NSString *title = @"";
-    NSString* soundName = @"RongCloud.bundle/voip/voip_call.caf";
+    NSString* soundName = @"RongCallKit.bundle/voip/voip_call.caf";
     
     if ([RCIMClient sharedRCIMClient].pushProfile.isShowPushContent || (pushConfig && pushConfig.forceShowDetailContent)) {
         if (pushConfig && pushConfig.pushTitle && pushConfig.pushTitle.length != 0) {
@@ -358,6 +352,8 @@
         if (pushConfig && pushConfig.pushContent && pushConfig.pushContent.length != 0) {
             pushContent = pushConfig.pushContent;
         }
+    } else {
+        pushContent = RCCallKitLocalizedString(@"receive_new_message");
     }
     NSString *requestWithIdentifier = [NSUUID UUID].UUIDString;
     if (pushConfig && pushConfig.iOSConfig && pushConfig.iOSConfig.apnsCollapseId && pushConfig.iOSConfig.apnsCollapseId.length > 0) {
@@ -381,7 +377,7 @@
         
     }else{
         UILocalNotification *callNotification = [[UILocalNotification alloc] init];
-        callNotification.alertAction = NSLocalizedStringFromTable(@"LocalNotificationShow", @"RongCloudKit", nil);
+        callNotification.alertAction = RCCallKitLocalizedString(@"LocalNotificationShow" );
         
         if (@available(iOS 8.2, *)) {
             callNotification.alertTitle = title;
@@ -429,7 +425,7 @@
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title
                                                         message:message
                                                        delegate:nil
-                                              cancelButtonTitle:NSLocalizedStringFromTable(@"OK", @"RongCloudKit", nil)
+                                              cancelButtonTitle:RCCallKitLocalizedString(@"OK" )
                                               otherButtonTitles:nil];
         alert.tag = AlertWithConfirm;
         [alert show];

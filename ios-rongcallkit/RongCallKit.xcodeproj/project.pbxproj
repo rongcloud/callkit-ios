@@ -12,6 +12,9 @@
 		390467F020738446007CE8DE /* UICollectionView+BackgroundView.h in Headers */ = {isa = PBXBuildFile; fileRef = 390467EE20738446007CE8DE /* UICollectionView+BackgroundView.h */; };
 		3933DF5C206117A100C80615 /* KxCallMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 3933DF5A206117A100C80615 /* KxCallMenu.m */; };
 		3933DF5D206117A100C80615 /* KxCallMenu.h in Headers */ = {isa = PBXBuildFile; fileRef = 3933DF5B206117A100C80615 /* KxCallMenu.h */; };
+		397C7A07258AFC3D00FE9D9F /* RongIMKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 397C7A04258AFC3D00FE9D9F /* RongIMKit.framework */; };
+		397C7A08258AFC3D00FE9D9F /* RongIMLib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 397C7A05258AFC3D00FE9D9F /* RongIMLib.framework */; };
+		397C7A09258AFC3E00FE9D9F /* RongCallLib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 397C7A06258AFC3D00FE9D9F /* RongCallLib.framework */; };
 		983FBC4220BD41010084841D /* RCVideoCollectionViewLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = 983FBC4020BD41010084841D /* RCVideoCollectionViewLayout.h */; };
 		983FBC4320BD41010084841D /* RCVideoCollectionViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 983FBC4120BD41010084841D /* RCVideoCollectionViewLayout.m */; };
 		98A609D120B56EB200BB5158 /* RCCallToolBar.h in Headers */ = {isa = PBXBuildFile; fileRef = 98A609CF20B56EB200BB5158 /* RCCallToolBar.h */; };
@@ -22,7 +25,6 @@
 		A68AFAEA1CCEFF5B00F16B3D /* RCCallDetailMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A68AFAE61CCEFF5B00F16B3D /* RCCallDetailMessageCell.m */; };
 		A68AFAEB1CCEFF5B00F16B3D /* RCCallTipMessageCell.h in Headers */ = {isa = PBXBuildFile; fileRef = A68AFAE71CCEFF5B00F16B3D /* RCCallTipMessageCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A68AFAEC1CCEFF5B00F16B3D /* RCCallTipMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A68AFAE81CCEFF5B00F16B3D /* RCCallTipMessageCell.m */; };
-		A68AFAEE1CCF06C300F16B3D /* RongIMKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A68AFAED1CCF06C200F16B3D /* RongIMKit.framework */; };
 		A6BE1A521CCE561200FF6BF7 /* RongCallKit.h in Headers */ = {isa = PBXBuildFile; fileRef = A6BE1A511CCE561200FF6BF7 /* RongCallKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6BE1B201CCEFAAC00FF6BF7 /* RCCallMultiCallUserCell.h in Headers */ = {isa = PBXBuildFile; fileRef = A6BE1AFE1CCEFAAC00FF6BF7 /* RCCallMultiCallUserCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6BE1B211CCEFAAC00FF6BF7 /* RCCallMultiCallUserCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A6BE1AFF1CCEFAAC00FF6BF7 /* RCCallMultiCallUserCell.m */; };
@@ -50,8 +52,6 @@
 		A6BE1B391CCEFAAC00FF6BF7 /* RCCallFloatingBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = A6BE1B1B1CCEFAAC00FF6BF7 /* RCCallFloatingBoard.m */; };
 		A6BE1B3A1CCEFAAC00FF6BF7 /* RCCallKitUtility.h in Headers */ = {isa = PBXBuildFile; fileRef = A6BE1B1C1CCEFAAC00FF6BF7 /* RCCallKitUtility.h */; };
 		A6BE1B3B1CCEFAAC00FF6BF7 /* RCCallKitUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = A6BE1B1D1CCEFAAC00FF6BF7 /* RCCallKitUtility.m */; };
-		A6BE1B481CCEFBC700FF6BF7 /* RongCallLib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6BE1B461CCEFBC700FF6BF7 /* RongCallLib.framework */; };
-		A6BE1B491CCEFBC700FF6BF7 /* RongIMLib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6BE1B471CCEFBC700FF6BF7 /* RongIMLib.framework */; };
 		F8235CDD1CE5B2A100C95B26 /* RCloudImageLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = F8235CD91CE5B2A100C95B26 /* RCloudImageLoader.h */; };
 		F8235CDE1CE5B2A100C95B26 /* RCloudImageView.h in Headers */ = {isa = PBXBuildFile; fileRef = F8235CDA1CE5B2A100C95B26 /* RCloudImageView.h */; };
 		F8235CDF1CE5B2A100C95B26 /* RCUserInfoCacheManager.h in Headers */ = {isa = PBXBuildFile; fileRef = F8235CDB1CE5B2A100C95B26 /* RCUserInfoCacheManager.h */; };
@@ -65,6 +65,12 @@
 		390467EE20738446007CE8DE /* UICollectionView+BackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UICollectionView+BackgroundView.h"; sourceTree = "<group>"; };
 		3933DF5A206117A100C80615 /* KxCallMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KxCallMenu.m; sourceTree = "<group>"; };
 		3933DF5B206117A100C80615 /* KxCallMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KxCallMenu.h; sourceTree = "<group>"; };
+		397C7A04258AFC3D00FE9D9F /* RongIMKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RongIMKit.framework; path = framework/RongIMKit.framework; sourceTree = "<group>"; };
+		397C7A05258AFC3D00FE9D9F /* RongIMLib.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RongIMLib.framework; path = framework/RongIMLib.framework; sourceTree = "<group>"; };
+		397C7A06258AFC3D00FE9D9F /* RongCallLib.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RongCallLib.framework; path = framework/RongCallLib.framework; sourceTree = "<group>"; };
+		5AAE73282570E42300D76BE1 /* RongCallKit.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = RongCallKit.bundle; sourceTree = "<group>"; };
+		5AC79E5A256F5A5900B06789 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/RongCallKit.strings"; sourceTree = "<group>"; };
+		5AC79E5B256F5A5900B06789 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/RongCallKit.strings; sourceTree = "<group>"; };
 		983FBC4020BD41010084841D /* RCVideoCollectionViewLayout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCVideoCollectionViewLayout.h; sourceTree = "<group>"; };
 		983FBC4120BD41010084841D /* RCVideoCollectionViewLayout.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCVideoCollectionViewLayout.m; sourceTree = "<group>"; };
 		98A609CF20B56EB200BB5158 /* RCCallToolBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCCallToolBar.h; sourceTree = "<group>"; };
@@ -75,7 +81,6 @@
 		A68AFAE61CCEFF5B00F16B3D /* RCCallDetailMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCCallDetailMessageCell.m; sourceTree = "<group>"; };
 		A68AFAE71CCEFF5B00F16B3D /* RCCallTipMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCCallTipMessageCell.h; sourceTree = "<group>"; };
 		A68AFAE81CCEFF5B00F16B3D /* RCCallTipMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCCallTipMessageCell.m; sourceTree = "<group>"; };
-		A68AFAED1CCF06C200F16B3D /* RongIMKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RongIMKit.framework; path = framework/RongIMKit.framework; sourceTree = "<group>"; };
 		A6BE1A4E1CCE561200FF6BF7 /* RongCallKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RongCallKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A6BE1A511CCE561200FF6BF7 /* RongCallKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RongCallKit.h; sourceTree = "<group>"; };
 		A6BE1A531CCE561200FF6BF7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -105,8 +110,6 @@
 		A6BE1B1B1CCEFAAC00FF6BF7 /* RCCallFloatingBoard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCCallFloatingBoard.m; sourceTree = "<group>"; };
 		A6BE1B1C1CCEFAAC00FF6BF7 /* RCCallKitUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCCallKitUtility.h; sourceTree = "<group>"; };
 		A6BE1B1D1CCEFAAC00FF6BF7 /* RCCallKitUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCCallKitUtility.m; sourceTree = "<group>"; };
-		A6BE1B461CCEFBC700FF6BF7 /* RongCallLib.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RongCallLib.framework; path = framework/RongCallLib.framework; sourceTree = "<group>"; };
-		A6BE1B471CCEFBC700FF6BF7 /* RongIMLib.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RongIMLib.framework; path = framework/RongIMLib.framework; sourceTree = "<group>"; };
 		F8235CD91CE5B2A100C95B26 /* RCloudImageLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RCloudImageLoader.h; path = Header/RCloudImageLoader.h; sourceTree = "<group>"; };
 		F8235CDA1CE5B2A100C95B26 /* RCloudImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RCloudImageView.h; path = Header/RCloudImageView.h; sourceTree = "<group>"; };
 		F8235CDB1CE5B2A100C95B26 /* RCUserInfoCacheManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RCUserInfoCacheManager.h; path = Header/RCUserInfoCacheManager.h; sourceTree = "<group>"; };
@@ -119,9 +122,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A6BE1B491CCEFBC700FF6BF7 /* RongIMLib.framework in Frameworks */,
-				A6BE1B481CCEFBC700FF6BF7 /* RongCallLib.framework in Frameworks */,
-				A68AFAEE1CCF06C300F16B3D /* RongIMKit.framework in Frameworks */,
+				397C7A08258AFC3D00FE9D9F /* RongIMLib.framework in Frameworks */,
+				397C7A07258AFC3D00FE9D9F /* RongIMKit.framework in Frameworks */,
+				397C7A09258AFC3E00FE9D9F /* RongCallLib.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -155,6 +158,15 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		5AC79E58256F5A5900B06789 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				5AAE73282570E42300D76BE1 /* RongCallKit.bundle */,
+				5AC79E59256F5A5900B06789 /* RongCallKit.strings */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		A6BE1A441CCE561200FF6BF7 = {
 			isa = PBXGroup;
 			children = (
@@ -184,6 +196,7 @@
 				390467EC20738446007CE8DE /* Category */,
 				A6BE1B191CCEFAAC00FF6BF7 /* Utility */,
 				F8235CD71CE5B29200C95B26 /* Header */,
+				5AC79E58256F5A5900B06789 /* Resources */,
 				A6BE1A511CCE561200FF6BF7 /* RongCallKit.h */,
 				A6BE1B171CCEFAAC00FF6BF7 /* RCCall.h */,
 				A6BE1B181CCEFAAC00FF6BF7 /* RCCall.mm */,
@@ -272,9 +285,9 @@
 		A6BE1B451CCEFBAC00FF6BF7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				A68AFAED1CCF06C200F16B3D /* RongIMKit.framework */,
-				A6BE1B461CCEFBC700FF6BF7 /* RongCallLib.framework */,
-				A6BE1B471CCEFBC700FF6BF7 /* RongIMLib.framework */,
+				397C7A06258AFC3D00FE9D9F /* RongCallLib.framework */,
+				397C7A04258AFC3D00FE9D9F /* RongIMKit.framework */,
+				397C7A05258AFC3D00FE9D9F /* RongIMLib.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -344,7 +357,7 @@
 				A6BE1A491CCE561200FF6BF7 /* Sources */,
 				A6BE1A4A1CCE561200FF6BF7 /* Frameworks */,
 				A6BE1A4B1CCE561200FF6BF7 /* Headers */,
-				A6BE1A4C1CCE561200FF6BF7 /* Resources */,
+				5AC79EE0256FBD9500B06789 /* Resources */,
 				A68AFAEF1CCF078600F16B3D /* ShellScript */,
 			);
 			buildRules = (
@@ -379,6 +392,7 @@
 			knownRegions = (
 				English,
 				en,
+				"zh-Hans",
 			);
 			mainGroup = A6BE1A441CCE561200FF6BF7;
 			productRefGroup = A6BE1A4F1CCE561200FF6BF7 /* Products */;
@@ -391,7 +405,7 @@
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		A6BE1A4C1CCE561200FF6BF7 /* Resources */ = {
+		5AC79EE0256FBD9500B06789 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -446,6 +460,18 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		5AC79E59256F5A5900B06789 /* RongCallKit.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5AC79E5A256F5A5900B06789 /* zh-Hans */,
+				5AC79E5B256F5A5900B06789 /* en */,
+			);
+			name = RongCallKit.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		A6BE1A541CCE561200FF6BF7 /* Debug */ = {
@@ -555,6 +581,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/framework",
@@ -565,13 +592,15 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = staticlib;
-				MARKETING_VERSION = 4.0.4;
+				MARKETING_VERSION = 4.1.0;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = cn.rongcloud.im;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = NO;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = "arm64 armv7 x86_64";
 			};
 			name = Debug;
@@ -590,6 +619,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/framework",
@@ -601,12 +631,14 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = staticlib;
-				MARKETING_VERSION = 4.0.4;
+				MARKETING_VERSION = 4.1.0;
 				OTHER_CFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = cn.rongcloud.im;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = NO;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = "arm64 armv7 x86_64";
 			};
 			name = Release;

@@ -2,7 +2,7 @@
 //  RCCallDetailMessageCell.m
 //  RongCallKit
 //
-//  Created by 岑裕 on 16/3/20.
+//  Created by RongCloud on 16/3/20.
 //  Copyright © 2016年 RongCloud. All rights reserved.
 //
 
@@ -94,7 +94,7 @@
     RCCallSummaryMessage *callMessage = (RCCallSummaryMessage *)self.model.content;
     if (callMessage.duration > 1000) {
         self.textLabel.text =
-            [NSString stringWithFormat:@"%@ %@", NSLocalizedStringFromTable(@"VoIPCallTotalTime", @"RongCloudKit", nil),
+            [NSString stringWithFormat:@"%@ %@", RCCallKitLocalizedString(@"VoIPCallTotalTime"),
                                        [RCCallKitUtility getReadableStringForTime:(long)(callMessage.duration / 1000)]];
     } else {
         self.textLabel.text = [RCCallKitUtility getReadableStringForMessageCell:callMessage.hangupReason];
@@ -153,7 +153,7 @@
         self.textLabel.frame =
             CGRectMake(CGRectGetMaxX(self.mediaTypeIcon.frame) + 7, __bubbleHeight / 2 - __labelSize.height / 2,
                        __labelSize.width, __labelSize.height);
-        self.bubbleBackgroundView.image = [RCKitUtility imageNamed:@"chat_from_bg_normal" ofBundle:@"RongCloud.bundle"];
+        self.bubbleBackgroundView.image = [RCCallKitUtility imageFromVoIPBundle:@"chat_from_bg_normal"];
         UIImage *image = self.bubbleBackgroundView.image;
         self.bubbleBackgroundView.image = [self.bubbleBackgroundView.image
             resizableImageWithCapInsets:UIEdgeInsetsMake(image.size.height * 0.8, image.size.width * 0.8,
@@ -170,7 +170,7 @@
         self.textLabel.textColor = dynamic_color(0x3f81bc,0xe0e0e0);
         self.textLabel.frame = CGRectMake(10, 20 - __labelSize.height / 2, __labelSize.width, __labelSize.height);
         self.mediaTypeIcon.frame = CGRectMake(CGRectGetMaxX(self.textLabel.frame) + 7, 10, 20, 20);
-        self.bubbleBackgroundView.image = [RCKitUtility imageNamed:@"chat_to_bg_normal" ofBundle:@"RongCloud.bundle"];
+        self.bubbleBackgroundView.image = [RCCallKitUtility imageFromVoIPBundle:@"chat_to_bg_normal"];
         UIImage *image = self.bubbleBackgroundView.image;
         CGRect statusFrame = self.statusContentView.frame;
         statusFrame.origin.x = statusFrame.origin.x + 5;

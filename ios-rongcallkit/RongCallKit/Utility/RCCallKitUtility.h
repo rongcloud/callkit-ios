@@ -2,7 +2,7 @@
 //  RCCallKitUtility.h
 //  RongCallKit
 //
-//  Created by 岑裕 on 16/3/12.
+//  Created by RongCloud on 16/3/12.
 //  Copyright © 2016年 RongCloud. All rights reserved.
 //
 
@@ -55,6 +55,9 @@ UIColor* dynamic_color(NSInteger light_hex_value, NSInteger dark_hex_value);
 #define RCCallExtraSpace BOTTOMSAFEAREA
 // iphoneX顶部额外加上statusbar的30（实际刘海的高度）
 #define RCCallStatusBarHeight (BOTTOMSAFEAREA > 0 ? 30.0f : 0.0f)
+// 国际化
+#define RCCallKitLocalizedString(key)  NSLocalizedStringFromTableInBundle(key, @"RongCallKit", [RCCallKitUtility callKitBundle], nil)
+
 @interface RCCallKitUtility : NSObject
 
 + (NSString *)getReadableStringForTime:(long)sec;
@@ -77,5 +80,7 @@ UIColor* dynamic_color(NSInteger light_hex_value, NSInteger dark_hex_value);
 + (void)clearScreenForceOnStatus;
 + (void)checkSystemPermission:(RCCallMediaType)mediaType success:(void (^)(void))successBlock error:(void (^)(void))errorBlock;
 + (NSInteger)compareVersion:(NSString *)version1 toVersion:(NSString *)version2;
+/// 取出callKit资源
++ (NSBundle *)callKitBundle;
 
 @end

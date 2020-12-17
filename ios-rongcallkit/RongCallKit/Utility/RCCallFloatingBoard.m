@@ -145,7 +145,7 @@ static NSString *RCVoipFloatingBoardPosY = @"RCVoipFloatingBoardPosY";
                 [[UILabel alloc] initWithFrame:CGRectMake(0, self.videoView.frame.size.height / 2 - 10,
                                                           self.videoView.frame.size.width, 20)];
             videoStopTips.textAlignment = NSTextAlignmentCenter;
-            videoStopTips.text = NSLocalizedStringFromTable(@"VoIPCallHasEnd", @"RongCloudKit", nil);
+            videoStopTips.text = RCCallKitLocalizedString(@"VoIPCallHasEnd" );
             videoStopTips.textColor = RongVoIPUIColorFromRGB(0x0195ff);
             [self.videoView addSubview:videoStopTips];
         }else {
@@ -156,7 +156,7 @@ static NSString *RCVoipFloatingBoardPosY = @"RCVoipFloatingBoardPosY";
         if (self.callSession.callStatus == RCCallActive) {
             [self.floatingButton setBackgroundColor:[UIColor clearColor]];
         } else if (self.callSession.callStatus == RCCallHangup) {
-            [self.floatingButton setTitle:NSLocalizedStringFromTable(@"VoIPCallHasEnd", @"RongCloudKit", nil)
+            [self.floatingButton setTitle:RCCallKitLocalizedString(@"VoIPCallHasEnd" )
                                  forState:UIControlStateNormal];
         }else {
             [self.floatingButton setBackgroundColor:[UIColor clearColor]];

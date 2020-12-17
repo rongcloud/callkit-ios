@@ -2,7 +2,7 @@
 //  RCCallSelectingMemberCell.m
 //  RongCallKit
 //
-//  Created by 岑裕 on 16/3/15.
+//  Created by RongCloud on 16/3/15.
 //  Copyright © 2016年 RongCloud. All rights reserved.
 //
 
@@ -20,8 +20,8 @@
 
         self.headerImageView = [[RCloudImageView alloc] init];
         self.headerImageView.contentMode = UIViewContentModeScaleAspectFill;
-        [self.headerImageView
-            setPlaceholderImage:[RCKitUtility imageNamed:@"default_portrait_msg" ofBundle:@"RongCloud.bundle"]];
+        [self.headerImageView setPlaceholderImage:[RCCallKitUtility imageFromVoIPBundle:@"default_portrait_msg"]];
+         
         self.headerImageView.frame = CGRectMake(40, 5, 45, 45);
         self.headerImageView.layer.cornerRadius = 5;
         self.headerImageView.layer.masksToBounds = YES;

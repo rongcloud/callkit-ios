@@ -44,9 +44,7 @@
                                       effectWithStyle:UIBlurEffectStyleDark];
         self.blurView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
         self.blurView.frame = self.headerImageView.frame;
-        
-        [self.headerImageView
-            setPlaceholderImage:[RCKitUtility imageNamed:@"default_portrait_msg" ofBundle:@"RongCloud.bundle"]];
+        [self.headerImageView setPlaceholderImage:[RCCallKitUtility imageFromVoIPBundle:@"default_portrait_msg"]];
         self.headerImageView.hidden = YES;
         [[self contentView] addSubview:self.headerImageView];
 

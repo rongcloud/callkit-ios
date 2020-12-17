@@ -345,7 +345,7 @@
         _userCollectionTitleLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size:16.0];
         _userCollectionTitleLabel.textAlignment = NSTextAlignmentCenter;
         _userCollectionTitleLabel.text =
-            NSLocalizedStringFromTable(@"VoIPMultiCallUserCollectionTitle", @"RongCloudKit", nil);
+            RCCallKitLocalizedString(@"VoIPMultiCallUserCollectionTitle" );
         _userCollectionTitleLabel.layer.shadowOpacity = 0.8;
         _userCollectionTitleLabel.layer.shadowRadius = 3.0;
         _userCollectionTitleLabel.layer.shadowColor = [UIColor darkGrayColor].CGColor;
@@ -611,7 +611,7 @@
     NSString *userName = [[RCUserInfoCacheManager sharedManager] getUserInfo:userId].name;
     if (userName) {
         NSString *inviteTips = [NSString
-            stringWithFormat:NSLocalizedStringFromTable(@"VoIPCallRemoteDidInvite", @"RongCloudKit", nil), userName];
+            stringWithFormat:RCCallKitLocalizedString(@"VoIPCallRemoteDidInvite" ), userName];
         self.tipsLabel.text = inviteTips;
 
         __weak typeof(self) weakSelf = self;

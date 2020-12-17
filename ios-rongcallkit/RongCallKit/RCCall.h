@@ -2,7 +2,7 @@
 //  RCCall.h
 //  RongCallKit
 //
-//  Created by 岑裕 on 16/3/11.
+//  Created by RongCloud on 16/3/11.
 //  Copyright © 2016年 RongCloud. All rights reserved.
 //
 

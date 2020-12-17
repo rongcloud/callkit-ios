@@ -39,7 +39,7 @@
 {
     if (!_confirmButton) {
         _confirmButton = [[UIButton alloc] initWithFrame:CGRectMake(UIScreen.mainScreen.bounds.size.width - 80, 17, 80.0, 30.0)];
-        [_confirmButton setTitle:NSLocalizedStringFromTable(@"OK", @"RongCloudKit", nil) forState:UIControlStateNormal];
+        [_confirmButton setTitle:RCCallKitLocalizedString(@"OK" ) forState:UIControlStateNormal];
         [_confirmButton setTitleColor:dynamic_color(0x3A91F3, 0x007acc) forState:(UIControlStateNormal)];
         [_confirmButton setTitleColor:dynamic_color(0xA8A8A8,0x666666) forState:(UIControlStateDisabled)];
         _confirmButton.enabled = NO;

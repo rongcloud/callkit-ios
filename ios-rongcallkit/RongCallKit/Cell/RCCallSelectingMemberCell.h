@@ -2,7 +2,7 @@
 //  RCCallSelectingMemberCell.h
 //  RongCallKit
 //
-//  Created by 岑裕 on 16/3/15.
+//  Created by RongCloud on 16/3/15.
 //  Copyright © 2016年 RongCloud. All rights reserved.
 //
 

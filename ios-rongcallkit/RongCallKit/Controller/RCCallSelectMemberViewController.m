@@ -2,7 +2,7 @@
 //  RCCallSelectMemberViewController.m
 //  RongCallKit
 //
-//  Created by 岑裕 on 16/3/12.
+//  Created by RongCloud on 16/3/12.
 //  Copyright © 2016年 RongCloud. All rights reserved.
 //
 
@@ -103,7 +103,7 @@ typedef void (^CompleteBlock)(NSArray *addUserIdList);
         [weakVC done];
     }];
     
-    _toolBar.numberLabel.text = [NSString stringWithFormat:@"%@ %zi %@",NSLocalizedStringFromTable(@"bottom_result_view_choosed_person_prefix", @"RongCloudKit", nil),  self.selectUserIds.count, NSLocalizedStringFromTable(@"bottom_result_view_choosed_person_subfix", @"RongCloudKit", nil)];
+    _toolBar.numberLabel.text = [NSString stringWithFormat:@"%@ %zi %@",RCCallKitLocalizedString(@"bottom_result_view_choosed_person_prefix"),  self.selectUserIds.count, RCCallKitLocalizedString(@"bottom_result_view_choosed_person_subfix")];
     _toolBar.numberLabel.textColor = [UIColor colorWithRed:168/255.0 green:168/255.0 blue:168/255.0 alpha:1/1.0];
     
     [self.navigationController.view addSubview:_toolBar];
@@ -127,7 +127,7 @@ typedef void (^CompleteBlock)(NSArray *addUserIdList);
     self.searchController.searchBar.frame = CGRectMake(0, 0, self.searchController.searchBar.frame.size.width, 44);
     self.searchController.searchBar.delegate = self;
     [self.searchController.searchBar sizeToFit];
-    self.searchController.searchBar.placeholder = @"Search";
+    self.searchController.searchBar.placeholder = RCCallKitLocalizedString(@"VoIPCall_search_placeholder");
 
     NSInteger checker_iOS13 = [RCCallKitUtility compareVersion:[UIDevice currentDevice].systemVersion toVersion:@"13.0"];
     if (checker_iOS13 >= 0) {
@@ -144,10 +144,10 @@ typedef void (^CompleteBlock)(NSArray *addUserIdList);
     self.tableView.tableHeaderView = self.searchController.searchBar;
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     
-    [self.navigationItem setTitle:NSLocalizedStringFromTable(@"VoIPCallSelectMember", @"RongCloudKit", nil) ];
+    [self.navigationItem setTitle:RCCallKitLocalizedString(@"VoIPCallSelectMember")];
     
     UIBarButtonItem *leftBarButtonItem =
-    [[UIBarButtonItem alloc] initWithTitle:NSLocalizedStringFromTable(@"Cancel", @"RongCloudKit", nil)
+    [[UIBarButtonItem alloc] initWithTitle:RCCallKitLocalizedString(@"Cancel")
                                      style:UIBarButtonItemStylePlain
                                     target:self
                                     action:@selector(cancel:)];
@@ -205,7 +205,7 @@ typedef void (^CompleteBlock)(NSArray *addUserIdList);
 }
 
 - (void)loadErrorAlert:(NSString *)title {
-    UIAlertAction *okAction = [UIAlertAction actionWithTitle:NSLocalizedStringFromTable(@"OK", @"RongCloudKit", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:RCCallKitLocalizedString(@"OK") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
     }];
     
     UIAlertController *controler = [UIAlertController alertControllerWithTitle:title message:nil preferredStyle:UIAlertControllerStyleAlert];
@@ -276,15 +276,13 @@ typedef void (^CompleteBlock)(NSArray *addUserIdList);
     
     if ((self.selectUserIds.count + self.existUserIdList.count > [RCCall sharedRCCall].maxMultiAudioCallUserNumber) &&
         self.mediaType == RCCallMediaAudio) {
-        [self loadErrorAlert:[NSString stringWithFormat:NSLocalizedStringFromTable(@"VoIPAudioCallMaxNumSelectMember",
-                                                                                   @"RongCloudKit", nil),
+        [self loadErrorAlert:[NSString stringWithFormat:RCCallKitLocalizedString(@"VoIPAudioCallMaxNumSelectMember"),
                               [RCCall sharedRCCall].maxMultiAudioCallUserNumber]];
         [self.selectUserIds removeObject:userId];
     } else if ((self.selectUserIds.count + self.existUserIdList.count >
                 [RCCall sharedRCCall].maxMultiVideoCallUserNumber) &&
                self.mediaType == RCCallMediaVideo) {
-        [self loadErrorAlert:[NSString stringWithFormat:NSLocalizedStringFromTable(@"VoIPVideoCallMaxNumSelectMember",
-                                                                                   @"RongCloudKit", nil),
+        [self loadErrorAlert:[NSString stringWithFormat:RCCallKitLocalizedString(@"VoIPVideoCallMaxNumSelectMember"),
                               [RCCall sharedRCCall].maxMultiVideoCallUserNumber]];
         [self.selectUserIds removeObject:userId];
     }
@@ -309,7 +307,7 @@ typedef void (^CompleteBlock)(NSArray *addUserIdList);
         [tableView deselectRowAtIndexPath:indexPath animated:NO];
     }
 
-    _toolBar.numberLabel.text = [NSString stringWithFormat:@"%@ %zi %@",NSLocalizedStringFromTable(@"bottom_result_view_choosed_person_prefix", @"RongCloudKit", nil),  self.selectUserIds.count, NSLocalizedStringFromTable(@"bottom_result_view_choosed_person_subfix", @"RongCloudKit", nil)];
+    _toolBar.numberLabel.text = [NSString stringWithFormat:@"%@ %zi %@",RCCallKitLocalizedString(@"bottom_result_view_choosed_person_prefix"),  self.selectUserIds.count, RCCallKitLocalizedString(@"bottom_result_view_choosed_person_subfix")];
     
     if (self.selectUserIds.count > 0) {
         _toolBar.numberLabel.textColor = dynamic_color(0x3A91F3, 0x007acc);

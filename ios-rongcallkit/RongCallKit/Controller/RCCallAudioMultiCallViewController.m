@@ -2,7 +2,7 @@
 //  RCCallAudioMultiCallViewController.m
 //  RongCallKit
 //
-//  Created by 岑裕 on 16/3/18.
+//  Created by RongCloud on 16/3/18.
 //  Copyright © 2016年 RongCloud. All rights reserved.
 //
 
@@ -296,7 +296,7 @@
         _userCollectionTitleLabel.font = [UIFont systemFontOfSize:16];
         _userCollectionTitleLabel.textAlignment = NSTextAlignmentCenter;
         _userCollectionTitleLabel.text =
-            NSLocalizedStringFromTable(@"VoIPMultiCallUserCollectionTitle", @"RongCloudKit", nil);
+        RCCallKitLocalizedString(@"VoIPMultiCallUserCollectionTitle" );
         _userCollectionTitleLabel.layer.shadowOpacity = 0.8;
         _userCollectionTitleLabel.layer.shadowRadius = 3.0;
         _userCollectionTitleLabel.layer.shadowColor = [UIColor blackColor].CGColor;
@@ -435,7 +435,7 @@
             RCCallHorizontalMargin,  self.view.frame.size.height - RCCallButtonBottomMargin * 2 - RCCallButtonLength - 100.0 - 23.0 - 16.0 - RCCallExtraSpace, self.view.frame.size.width - RCCallHorizontalMargin * 2, RCCallLabelHeight);
         self.userCollectionTitleLabel.hidden = NO;
         _userCollectionTitleLabel.text =
-        NSLocalizedStringFromTable(@"VoIPMultiCallUserCollectionTitle", @"RongCloudKit", nil);
+        RCCallKitLocalizedString(@"VoIPMultiCallUserCollectionTitle" );
         _userCollectionTitleLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size:16];
         self.userCollectionTitleLabel.alpha = 0.4;
     } else {
@@ -443,7 +443,7 @@
         self.userCollectionTitleLabel.frame = CGRectMake(
                                                          RCCallHorizontalMargin, RCCallMiniButtonTopMargin + RCCallStatusBarHeight, self.view.frame.size.width - RCCallHorizontalMargin * 2, RCCallMiniLabelHeight);
         self.userCollectionTitleLabel.hidden = NO;
-        self.userCollectionTitleLabel.text =  NSLocalizedStringFromTable(@"VoIPAudioCall", @"RongCloudKit", nil);;
+        self.userCollectionTitleLabel.text =  RCCallKitLocalizedString(@"VoIPAudioCall" );;
         _userCollectionTitleLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size:18];
     }
 
@@ -522,7 +522,7 @@
     NSString *userName = [[RCUserInfoCacheManager sharedManager] getUserInfo:userId].name;
     if (userName) {
         NSString *inviteTips = [NSString
-            stringWithFormat:NSLocalizedStringFromTable(@"VoIPCallRemoteDidInvite", @"RongCloudKit", nil), userName];
+            stringWithFormat:RCCallKitLocalizedString(@"VoIPCallRemoteDidInvite" ), userName];
         self.tipsLabel.text = inviteTips;
 
         __weak typeof(self) weakSelf = self;
