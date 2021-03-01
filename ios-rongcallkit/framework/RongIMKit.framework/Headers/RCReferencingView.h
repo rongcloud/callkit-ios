@@ -21,9 +21,9 @@
 @interface RCReferencingView : UIView
 
 /*!
- 被引用消息显示左边线
- */
-@property (nonatomic, strong) UIView *leftLimitLine;
+ 关闭引用 button
+*/
+@property (nonatomic, strong) UIButton *dismissButton;
 
 /*!
  被引用消息发送者名称
@@ -31,19 +31,9 @@
 @property (nonatomic, strong) UILabel *nameLabel;
 
 /*!
- 关闭引用 button
-*/
-@property (nonatomic, strong) UIButton *dismissButton;
-
-/*!
  被引用消息内容文本 label
  */
 @property (nonatomic, strong) UILabel *textLabel;
-
-/*!
- 被引用图片消息显示的 View
-*/
-@property (nonatomic, strong) UIImageView *msgImageView;
 
 /*!
  被引用消息体

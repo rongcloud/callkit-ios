@@ -23,5 +23,6 @@
 - (void)updateContent:(RCConversationModel *)model prefixName:(NSString *)prefixName;
 
 - (void)resetDefaultLayout:(RCConversationModel *)reuseModel;
+
 - (void)updateLayout;
 @end

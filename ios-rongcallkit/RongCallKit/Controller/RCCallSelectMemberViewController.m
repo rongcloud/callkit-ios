@@ -45,15 +45,7 @@ typedef void (^CompleteBlock)(NSArray *addUserIdList);
         self.targetId = targetId;
         self.mediaType = mediaType;
         __weak typeof(self) weakSelf = self;
-        if (conversationType == ConversationType_DISCUSSION) {
-            [[RCIMClient sharedRCIMClient] getDiscussion:targetId
-                                                 success:^(RCDiscussion *discussion) {
-                                                     weakSelf.listingUserIdList = [discussion.memberIdList copy];
-                                                 }
-                                                   error:^(RCErrorCode status){
-                                                   }];
-            
-        } else if (conversationType == ConversationType_GROUP) {
+        if (conversationType == ConversationType_GROUP) {
             if ([RCIM sharedRCIM].groupMemberDataSource &&
                 [[RCIM sharedRCIM].groupMemberDataSource respondsToSelector:@selector(getAllMembersOfGroup:result:)]) {
                 [[RCIM sharedRCIM].groupMemberDataSource getAllMembersOfGroup:self.targetId
@@ -96,7 +88,7 @@ typedef void (^CompleteBlock)(NSArray *addUserIdList);
     self.tableView.tintColor = [UIColor colorWithRed:58/255.0 green:145/255.0 blue:243/255.0 alpha:1/1.0];
     self.tableView.tableFooterView = [[UIView alloc] init];
     self.tableView.backgroundColor = dynamic_color(0xf0f0f6, 0x000000);
-    self.tableView.separatorColor = dynamic_color(0xdfdfdf, 0x1a1a1a);
+    self.tableView.separatorColor = dynamic_color(0xE3E5E6, 0x272727);
     
     __weak RCCallSelectMemberViewController *weakVC = self;
     _toolBar = [[RCCallToolBar alloc] initWithFrame:CGRectMake(0, UIScreen.mainScreen.bounds.size.height - 49.0 - RCCallExtraSpace, self.view.frame.size.width, 49.0 + RCCallExtraSpace) withBlock:^{

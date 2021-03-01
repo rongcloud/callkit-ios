@@ -62,9 +62,11 @@
 
     if ([[RCCall sharedRCCall] isAudioCallEnabled:conversationType]) {
         RCExtensionPluginItemInfo *audioItem = [[RCExtensionPluginItemInfo alloc] init];
-        audioItem.image = [RCCallKitUtility imageFromVoIPBundle:@"voip/actionbar_audio_call_icon.png"];
+
+        audioItem.normalImage = [RCCallKitUtility imageFromVoIPBundle:@"voip/plugin_item_audio.png"];
+        audioItem.highlightedImage = [RCCallKitUtility imageFromVoIPBundle:@"voip/plugin_item_audio_highlighted.png"];
         audioItem.title = RCCallKitLocalizedString(@"VoIPAudioCall");
-        
+
         if (conversationType == ConversationType_PRIVATE) {
             audioItem.tapBlock = ^(RCChatSessionInputBarControl *chatSessionInputBar) {
                 [[RCCall sharedRCCall] startSingleCall:targetId mediaType:RCCallMediaAudio];
@@ -79,8 +81,11 @@
     }
     if ([[RCCall sharedRCCall] isVideoCallEnabled:conversationType]) {
         RCExtensionPluginItemInfo *videoItem = [[RCExtensionPluginItemInfo alloc] init];
-        videoItem.image = [RCCallKitUtility imageFromVoIPBundle:@"voip/actionbar_video_call_icon.png"];
+
+        videoItem.normalImage = [RCCallKitUtility imageFromVoIPBundle:@"voip/plugin_item_video.png"];
+        videoItem.highlightedImage = [RCCallKitUtility imageFromVoIPBundle:@"voip/plugin_item_video_highlighted.png"];
         videoItem.title = RCCallKitLocalizedString(@"VoIPVideoCall");
+
         videoItem.tapBlock = ^(RCChatSessionInputBarControl *chatSessionInputBar) {
             [[RCCall sharedRCCall] startSingleCall:targetId mediaType:RCCallMediaVideo];
         };

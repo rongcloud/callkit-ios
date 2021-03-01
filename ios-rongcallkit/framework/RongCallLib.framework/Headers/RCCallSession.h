@@ -9,7 +9,7 @@
 #import "RCCallCommonDefine.h"
 #import "RCCallUserProfile.h"
 #import <Foundation/Foundation.h>
-#import <RongIMLib/RongIMLib.h>
+#import <RongIMLibCore/RongIMLibCore.h>
 #import <CoreMedia/CoreMedia.h>
 
 /*!
@@ -232,7 +232,7 @@
  
  @param sampleBuffer   本地视频数据
  @discussion
- 当前视频通话本地视频数据, 用于GPU滤镜处理, 同步返回处理后的同一 sampleBuffer 对象
+ 当前视频通话本地视频数据, 同步返回处理后的同一 sampleBuffer 对象
  
  @remarks 代理
  @return 处理后的本地视频数据

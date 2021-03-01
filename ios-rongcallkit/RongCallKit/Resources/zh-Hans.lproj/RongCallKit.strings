@@ -11,9 +11,9 @@
 "VoIPAudioCallExistedWarning"="正在进行语音通话，请稍后再试";
 "VoIPVideoCallExistedWarning"="正在进行视频通话，请稍后再试";
 "VoIPCallSelectMember"="选择成员";
-"VoIPAudioCallMaxNumInviteMember"="每次最多可同时邀请%d人\n加入语音通话";
 "VoIPAudioCallMaxNumSelectMember"="最多允许%d人同时语音通话";
 "VoIPVideoCallMaxNumSelectMember"="最多允许%d人同时视频通话";
+"VoIPAudioCallMaxNumInviteMember"="每次最多可同时邀请%d人\n加入语音通话";
 "VoIPCallEnd"="通话结束";
 "VoIPAudioCallCamera"="摄像头";
 "VoIPVideoCallCloseCamera"="关闭摄像头";
@@ -47,8 +47,6 @@
 "VoIPCallRemoteDidInvite"="%@ 加入群聊";
 "VoIPCallLocalNetworkError"="本地网络错误";
 "VoIPCallRemoteNetworkError"="对方网络错误";
-
-//差缺补漏
 "bottom_result_view_choosed_person_prefix"="已选择";
 "bottom_result_view_choosed_person_subfix"="人";
 "Cancel"="取消";
@@ -58,16 +56,12 @@
 "AccessRightTitle"="无法访问";
 "speakerAccessRight"="您没有麦克风访问权限，请前往“设置-隐私-麦克风”选项中，允许访问您的手机麦克风!";
 "cameraAccessRight"="您没有相机访问权限，请前往“设置-隐私-相机”选项中，允许访问您的手机相机!";
-"photoAccessRight"="您没有照片访问权限，请前往“设置-隐私-照片”选项中，允许访问您的手机照片!";
 "receive_new_message"="你收到一条新消息";
 "LocalNotificationShow"="显示";
-
-
 //2020年11月25日 新增key
 "VoIPCall_search_placeholder"="搜索";
-"VoIPCall_invite_push_Content"="%@邀请你进行%@聊天";
-"VoIPCall_Video"="视频";
-"VoIPCall_Audio"="语音";
+"VoIPCall_invite_audio_push_Content"="%@邀请你进行语音聊天";
+"VoIPCall_invite_video_push_Content"="%@邀请你进行视频聊天";
 "VoIPCall_hangup_PushContent"="[结束通话]";
 "VoIPCall_addMembers"="添加成员";
 "VoIPCall_whiteBoard"="白板";

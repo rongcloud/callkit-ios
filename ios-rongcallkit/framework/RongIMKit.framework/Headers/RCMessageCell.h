@@ -12,10 +12,10 @@
 #import "RCMessageCellNotificationModel.h"
 #import "RCThemeDefine.h"
 
-//#define PORTRAIT_WIDTH 45
-//#define PORTRAIT_HEIGHT 45
-#define HeadAndContentSpacing 6
-
+#define HeadAndContentSpacing 8
+#define PortraitViewEdgeSpace 12//头像与屏幕边缘距离
+#define NameAndContentSpace 2
+#define NameHeight 14
 @class RCloudImageView;
 
 /*!
@@ -43,6 +43,11 @@
 @property (nonatomic, strong) RCContentView *messageContentView;
 
 /*!
+ 消息的背景View
+ */
+@property (nonatomic, strong) UIImageView *bubbleBackgroundView;
+
+/*!
  显示发送状态的View
 
  @discussion 其中包含messageFailedStatusView子View。
@@ -60,24 +65,9 @@
 @property (nonatomic, strong) UIActivityIndicatorView *messageActivityIndicatorView;
 
 /*!
- 消息内容的View的宽度
- */
-@property (nonatomic, readonly) CGFloat messageContentViewWidth;
-
-/*!
  显示的用户头像形状
  */
 @property (nonatomic, assign, setter=setPortraitStyle:) RCUserAvatarStyle portraitStyle;
-
-/*!
- 是否显示用户名称
- */
-@property (nonatomic, readonly) BOOL isDisplayNickname;
-
-/*!
- 显示消息已阅读状态的View
- */
-@property (nonatomic, strong) UIView *messageHasReadStatusView;
 
 /*!
  显示是否消息回执的Button
@@ -87,30 +77,10 @@
 @property (nonatomic, strong) UIButton *receiptView;
 
 /*!
- 消息阅读人数的Label
+ 消息阅读状态的 Label
 
- @discussion 仅在群组和讨论组中显示
  */
-@property (nonatomic, strong) UILabel *receiptCountLabel;
-
-/*!
- 显示群是否消息回执的Button
-
- @warning 如果您使用了该属性，可以迁移到receiptView，完全一致。
- */
-@property (nonatomic, strong) UIButton *groupAndDiscussionReceiptView __deprecated_msg("已废弃，请勿使用。");
-
-/*!
- 消息阅读人数的Label
-
- @warning 如果您使用了该属性，可以迁移到receiptCountLabel，完全一致。
- */
-@property (nonatomic, strong) UILabel *groupAndDiscussionReceiptCountView __deprecated_msg("已废弃，请勿使用。");
-
-/*!
- 显示消息发送成功状态的View
- */
-@property (nonatomic, strong) UIView *messageSendSuccessStatusView;
+@property (nonatomic, strong) UILabel *receiptStatusLabel;
 
 /*!
  设置当前消息Cell的数据模型
@@ -126,4 +96,27 @@
  */
 - (void)updateStatusContentView:(RCMessageModel *)model;
 
+/*!
+ 是否显示消息的背景气泡 View
+
+@param show 消息Cell的数据模型
+*/
+- (void)showBubbleBackgroundView:(BOOL)show;
+
+/*!
+阅后即焚的回调
+
+@discussion 阅后即焚的消息，每过 1 秒都会触发该回调更新时间
+*/
+- (void)messageDestructing;
+
+/*!
+阅后即焚的 UI 设置
+*/
+- (void)setDestructViewLayout;
+
+/*!
+点击消息视图 messageContentView 回调
+*/
+- (void)didTapMessageContentView;
 @end

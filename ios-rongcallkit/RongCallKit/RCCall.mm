@@ -320,7 +320,7 @@
     [[RCCXCall sharedInstance] endCXCall];
     
     if (pushConfig && isRemoteCancel) {
-        [self postLocalNotification:pushConfig userInfo:nil hasSound:NO ];
+        [self postLocalNotification:pushConfig userInfo:nil hasSound:NO isCancelCall:YES];
     }
 }
 
@@ -337,10 +337,11 @@
 
     [self startReceiveCallVibrate];
 
-    [self postLocalNotification:pushConfig userInfo:userDict hasSound:YES];
+    [self postLocalNotification:pushConfig userInfo:userDict hasSound:YES isCancelCall:NO];
 }
 
-- (void)postLocalNotification:(RCMessagePushConfig *)pushConfig userInfo:(NSDictionary*)userInfo hasSound:(BOOL)hasSound{
+- (void)postLocalNotification:(RCMessagePushConfig *)pushConfig userInfo:(NSDictionary*)userInfo hasSound:(BOOL)hasSound isCancelCall:(BOOL)isCancelCall{
+    NSLog(@"postLocalNotification-hasSound:%@,isCancelCall:%@", hasSound?@"YES":@"NO", isCancelCall?@"YES":@"NO");
     NSString* pushContent = @"";
     NSString *title = @"";
     NSString* soundName = @"RongCallKit.bundle/voip/voip_call.caf";
@@ -348,9 +349,32 @@
     if ([RCIMClient sharedRCIMClient].pushProfile.isShowPushContent || (pushConfig && pushConfig.forceShowDetailContent)) {
         if (pushConfig && pushConfig.pushTitle && pushConfig.pushTitle.length != 0) {
             title = pushConfig.pushTitle;
+        } else {
+            RCUserInfo* userInfo = [[RCUserInfoCacheManager sharedManager] getUserInfo:self.currentCallSession.inviter];
+            if (self.currentCallSession.conversationType == ConversationType_PRIVATE) {
+                if (userInfo) {
+                    title = userInfo.name;
+                }
+            } else {
+                RCGroup *groupInfo = [[RCUserInfoCacheManager sharedManager] getGroupInfo:self.currentCallSession.targetId];
+                if (groupInfo) {
+                    title = groupInfo.groupName;
+                }
+            }
         }
-        if (pushConfig && pushConfig.pushContent && pushConfig.pushContent.length != 0) {
+        if (pushConfig && pushConfig.pushContent && pushConfig.pushContent.length != 0 && ![pushConfig.pushContent isEqualToString:@"voip"]) {
             pushContent = pushConfig.pushContent;
+        } else {
+            if (isCancelCall) {
+                pushContent = RCCallKitLocalizedString(@"VoIPCall_hangup_PushContent");
+            } else {
+                RCUserInfo* userInfo = [[RCUserInfoCacheManager sharedManager] getUserInfo:self.currentCallSession.inviter];
+                if (userInfo) {
+                    pushContent = [NSString stringWithFormat:self.currentCallSession.mediaType == RCCallMediaAudio ? RCCallKitLocalizedString(@"VoIPCall_invite_audio_push_Content") : RCCallKitLocalizedString(@"VoIPCall_invite_video_push_Content"), [RCIMClient sharedRCIMClient].currentUserInfo.name];
+                } else {
+                    pushContent = self.currentCallSession.mediaType == RCCallMediaVideo ? RCCallKitLocalizedString(@"VoIPVideoCallIncomingWithoutUserName") : RCCallKitLocalizedString(@"VoIPAudioCallIncomingWithoutUserName");
+                }
+            }
         }
     } else {
         pushContent = RCCallKitLocalizedString(@"receive_new_message");
@@ -362,7 +386,9 @@
     
     if(@available(iOS 10.0, *)){
         UNMutableNotificationContent *content = [[UNMutableNotificationContent alloc] init];
-        content.title = title;
+        if (pushConfig && !pushConfig.disablePushTitle) {
+            content.title = title;
+        }
         content.body = pushContent;
         content.userInfo = userInfo;
         if(hasSound){
@@ -371,7 +397,7 @@
         if (pushConfig && pushConfig.iOSConfig && pushConfig.iOSConfig.threadId) {
             content.threadIdentifier = pushConfig.iOSConfig.threadId;
         }
-        [[UNUserNotificationCenter currentNotificationCenter] removeDeliveredNotificationsWithIdentifiers:@[requestWithIdentifier]];
+//        [[UNUserNotificationCenter currentNotificationCenter] removeDeliveredNotificationsWithIdentifiers:@[requestWithIdentifier]];
         UNNotificationRequest *request = [UNNotificationRequest requestWithIdentifier:requestWithIdentifier content:content trigger:nil];
         [[UNUserNotificationCenter currentNotificationCenter] addNotificationRequest:request withCompletionHandler:^(NSError * _Nullable error) {}];
         
@@ -380,7 +406,9 @@
         callNotification.alertAction = RCCallKitLocalizedString(@"LocalNotificationShow" );
         
         if (@available(iOS 8.2, *)) {
-            callNotification.alertTitle = title;
+            if (pushConfig && !pushConfig.disablePushTitle) {
+                callNotification.alertTitle = title;
+            }
         }
         callNotification.alertBody = pushContent;
         callNotification.userInfo = userInfo;
@@ -395,7 +423,6 @@
             [self.locationNotificationMap setObject:callNotification forKey:requestWithIdentifier];
             [[UIApplication sharedApplication] presentLocalNotificationNow:callNotification];
         });
-
     }
 }
 

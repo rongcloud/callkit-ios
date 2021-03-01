@@ -251,8 +251,13 @@
         [self.view addSubview:_inviterPortraitView];
         _inviterPortraitView.hidden = YES;
         [_inviterPortraitView setPlaceholderImage:[RCCallKitUtility getDefaultPortraitImage]];
-        _inviterPortraitView.layer.cornerRadius = 4;
         _inviterPortraitView.layer.masksToBounds = YES;
+        if (RCKitConfigCenter.ui.globalConversationAvatarStyle == RC_USER_AVATAR_CYCLE &&
+            RCKitConfigCenter.ui.globalMessageAvatarStyle == RC_USER_AVATAR_CYCLE) {
+            _inviterPortraitView.layer.cornerRadius = RCCallHeaderLength/2;
+        } else {
+            _inviterPortraitView.layer.cornerRadius = 4.f;
+        }
     }
     return _inviterPortraitView;
 }

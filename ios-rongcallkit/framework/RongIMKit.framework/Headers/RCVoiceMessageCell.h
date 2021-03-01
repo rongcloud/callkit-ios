@@ -10,7 +10,7 @@
 
 #define kAudioBubbleMinWidth 70
 #define kAudioBubbleMaxWidth 180
-#define kBubbleBackgroundViewHeight 36
+#define kMessageContentViewHeight 36
 
 /*!
  开始语音播放的Notification
@@ -26,11 +26,6 @@ UIKIT_EXTERN NSString *const kNotificationStopVoicePlayer;
  语音消息Cell
  */
 @interface RCVoiceMessageCell : RCMessageCell
-
-/*!
- 消息的背景View
- */
-@property (nonatomic, strong) UIImageView *bubbleBackgroundView;
 
 /*!
  语音播放的View

@@ -22,11 +22,6 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (nonatomic, strong) RCAttributedLabel *contentLabel;
 
-/*!
- 背景View
- */
-@property (nonatomic, strong) UIImageView *bubbleBackgroundView;
-
 @end
 
 NS_ASSUME_NONNULL_END

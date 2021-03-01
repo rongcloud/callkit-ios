@@ -77,8 +77,13 @@
         [self.view addSubview:_remotePortraitView];
         _remotePortraitView.hidden = YES;
         [_remotePortraitView setPlaceholderImage:[RCCallKitUtility getDefaultPortraitImage]];
-        _remotePortraitView.layer.cornerRadius = 4;
         _remotePortraitView.layer.masksToBounds = YES;
+        if (RCKitConfigCenter.ui.globalConversationAvatarStyle == RC_USER_AVATAR_CYCLE &&
+            RCKitConfigCenter.ui.globalMessageAvatarStyle == RC_USER_AVATAR_CYCLE) {
+            _remotePortraitView.layer.cornerRadius = RCCallHeaderLength/2;
+        } else {
+            _remotePortraitView.layer.cornerRadius = 4.f;
+        }
     }
     return _remotePortraitView;
 }

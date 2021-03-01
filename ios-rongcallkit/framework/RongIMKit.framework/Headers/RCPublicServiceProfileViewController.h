@@ -9,7 +9,8 @@
 #import "RCThemeDefine.h"
 #import <RongIMLib/RongIMLib.h>
 #import <UIKit/UIKit.h>
-
+#import "RCBaseTableViewController.h"
+@class RCPublicServiceProfile;
 /*!
  公众服务账号信息中的URL点击回调
  */
@@ -27,7 +28,7 @@
 /*!
  公众服务账号信息的ViewController
  */
-@interface RCPublicServiceProfileViewController : UITableViewController
+@interface RCPublicServiceProfileViewController : RCBaseTableViewController
 
 /*!
  公众服务账号信息

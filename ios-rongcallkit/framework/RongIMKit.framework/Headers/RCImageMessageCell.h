@@ -15,11 +15,6 @@
 @interface RCImageMessageCell : RCMessageCell
 
 /*!
- 消息的背景View
- */
-@property (nonatomic, strong) UIImageView *bubbleBackgroundView __deprecated_msg("已废弃，请勿使用。");
-
-/*!
  显示图片缩略图的View
  */
 @property (nonatomic, strong) UIImageView *pictureView;

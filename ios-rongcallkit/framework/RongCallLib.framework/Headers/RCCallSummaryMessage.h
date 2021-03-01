@@ -8,7 +8,7 @@
 
 #import "RCCallCommonDefine.h"
 #import <Foundation/Foundation.h>
-#import <RongIMLib/RongIMLib.h>
+#import <RongIMLibCore/RongIMLibCore.h>
 
 /*!
  通话摘要消息的类型名

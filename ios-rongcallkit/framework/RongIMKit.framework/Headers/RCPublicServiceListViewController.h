@@ -7,11 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "RCBaseTableViewController.h"
 /*!
  已关注公众服务账号列表的展示ViewController
  */
-@interface RCPublicServiceListViewController : UITableViewController
+@interface RCPublicServiceListViewController : RCBaseTableViewController
 
 @property (nonatomic, strong) NSMutableDictionary *allFriends;
 

@@ -372,6 +372,7 @@ static NSString *RCVoipFloatingBoardPosY = @"RCVoipFloatingBoardPosY";
 - (void)callDidDisconnect {
     [[RCCXCall sharedInstance] endCXCall];
     [self updateBoard];
+    [self hideCallFloatingBoard];
     [self performSelector:@selector(clearCallFloatingBoard) withObject:nil afterDelay:2];
     [RCCallKitUtility clearScreenForceOnStatus];
     [self removeProximityMonitoringObserver];

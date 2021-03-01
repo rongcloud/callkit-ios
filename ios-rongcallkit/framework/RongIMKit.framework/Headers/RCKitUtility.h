@@ -19,7 +19,7 @@
 @interface RCKitUtility : NSObject
 
 /*!
- 时间转换
+ 会话列表会话时间转换
 
  @param secs    Unix时间戳（秒）
  @return        可视化的时间字符串
@@ -28,10 +28,10 @@
  如果该时间是昨天的，则返回字符串资源中Yesterday对应语言的字符串；
  如果该时间是昨天之前或者今天之后的，则返回"yyyy-MM-dd"的字符串。
  */
-+ (NSString *)ConvertMessageTime:(long long)secs;
++ (NSString *)convertConversationTime:(long long)secs;
 
 /*!
- 时间转换
+ 聊天页面消息时间转换
 
  @param secs    Unix时间戳（秒）
  @return        可视化的时间字符串
@@ -40,7 +40,7 @@
  如果该时间是昨天的，则返回"Yesterday HH:mm"的字符串（其中，Yesterday为字符串资源中Yesterday对应语言的字符串）；
  如果该时间是昨天之前或者今天之后的，则返回"yyyy-MM-dd HH:mm"的字符串。
  */
-+ (NSString *)ConvertChatMessageTime:(long long)secs;
++ (NSString *)convertMessageTime:(long long)secs;
 
 /*!
  获取资源包中的图片
@@ -50,14 +50,6 @@
  @return            图片
  */
 + (UIImage *)imageNamed:(NSString *)name ofBundle:(NSString *)bundleName;
-
-/*!
- 获取指定颜色的图片
-
- @param color   颜色值
- @return        坐标为(0.0f, 0.0f, 1.0f, 1.0f)的纯色图片
- */
-+ (UIImage *)createImageWithColor:(UIColor *)color;
 
 /*!
  获取文字显示的尺寸
@@ -146,37 +138,12 @@
 + (BOOL)isUnkownMessage:(long)messageId content:(RCMessageContent *)content;
 
 /*!
- 以消息的类型名为Key值在字符串资源中查找对应语言的字符串
-
- @param messageContent  消息内容
- @return                对应语言的字符串
- */
-+ (NSString *)localizedDescription:(RCMessageContent *)messageContent;
-
-/*!
  获取消息对应的本地消息Dictionary
 
  @param message 消息实体
  @return 本地通知的Dictionary
  */
 + (NSDictionary *)getNotificationUserInfoDictionary:(RCMessage *)message;
-
-/*!
- 获取消息对应的本地消息Dictionary（已废弃，请勿使用）
-
- @param conversationType    会话类型
- @param fromUserId          发送者的用户ID
- @param targetId            消息的目标会话ID
- @param messageContent      消息内容
- @return                    本地通知的Dictionary
-
- @warning **已废弃，请勿使用。**
- */
-+ (NSDictionary *)getNotificationUserInfoDictionary:(RCConversationType)conversationType
-                                         fromUserId:(NSString *)fromUserId
-                                           targetId:(NSString *)targetId
-                                     messageContent:(RCMessageContent *)messageContent
-    __deprecated_msg("已废弃，请勿使用。");
 
 /*!
  获取消息对应的本地消息Dictionary
@@ -275,16 +242,6 @@
  */
 + (NSString *)checkOrAppendHttpForUrl:(NSString *)url;
 
-/*!
- 验证手机号
- */
-+ (BOOL)validateCellPhoneNumber:(NSString *)cellNum;
-
-/*!
- 验证邮箱
- */
-+ (BOOL)validateEmail:(NSString *)email;
-
 /**
 获取 keyWindow
 
@@ -313,26 +270,11 @@
 + (BOOL)currentDeviceIsIPad;
 
 /**
-在 controller 弹出弹窗
-
-@param title title
-@param message message
-@param style 弹窗的风格
-@param actions UIAlertAction 的数组
-@param controller 用哪个页面弹出
-*/
-+ (void)showAlertController:(NSString *)title
-                    message:(NSString *)message
-             preferredStyle:(UIAlertControllerStyle)style
-                    actions:(NSArray<UIAlertAction *> *)actions
-           inViewController:(UIViewController *)controller;
-
-/**
-动态颜色设置
+动态颜色设置，暗黑模式
 
  @param lightColor  亮色
  @param darkColor  暗色
- @return 修正后的图片
+ @return 修正后的颜色
 */
 + (UIColor *)generateDynamicColor:(UIColor *)lightColor darkColor:(UIColor *)darkColor;
 
@@ -348,4 +290,47 @@
  @return 图片 data
 */
 + (NSData *)getImageDataForURLString:(NSString *)imageUrl;
+
+/**
+ 获取RCColor.plist文件中色值
+ 
+ @param key 色值对应的key
+ @param colorStr 原始颜色
+ @return 最终返回的颜色
+ */
++ (UIColor *)color:(NSString *)key originalColor:(NSString *)colorStr;
+
+/**
+ 显示进度提示框
+ 
+ @param view view
+ @param text 提示文字
+ @param animated 动画
+ */
++ (BOOL)showProgressViewFor:(UIView *)view text:(NSString *)text animated:(BOOL)animated;
+
+/**
+ 隐藏进度提示框
+ 
+ @param view view
+ @param animated 动画
+ */
++ (BOOL)hideProgressViewFor:(UIView *)view animated:(BOOL)animated;
+
+/**
+ 获取导航左按钮
+ 
+ @param image  亮色
+ @param title  暗色，可为 nil
+ @return 导航左按钮
+ @discussion 布局为 RTL 时，图片会在内部进行翻转，无需开发者处理
+ */
++ (NSArray <UIBarButtonItem *> *)getLeftNavigationItems:(UIImage *)image title:(NSString *)title target:(id)target action:(SEL)action;
+
+/**
+ 判断是否需要 RTL 布局
+ 
+ @discussion 当前系统高于 9.0，并且满足手机系统为 UISemanticContentAttributeForceRightToLeft 布局或者  App 被修改为 UISemanticContentAttributeForceRightToLeft 布局时才会返回 YES，否则为 NO
+ */
++ (BOOL)isRTL;
 @end

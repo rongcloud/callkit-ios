@@ -8,7 +8,7 @@
 
 #import "RCMessageCell.h"
 #import <UIKit/UIKit.h>
-
+#import "RCProgressView.h"
 /*!
  文件消息Cell
  */
@@ -32,12 +32,7 @@
 /*!
  上传或下载的进度条View
  */
-@property (nonatomic, strong) UIProgressView *progressView;
-
-/*!
- 消息的气泡背景View
- */
-@property (nonatomic, strong) UIImageView *bubbleBackgroundView;
+@property (nonatomic, strong) RCProgressView *progressView;
 
 /*!
  取消发送的Button

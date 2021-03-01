@@ -9,7 +9,7 @@
 #import "RCAttributedLabel.h"
 #import "RCMessageCell.h"
 
-#define Text_Message_Font_Size 16
+#define Text_Message_Font_Size 17
 
 /*!
  文本消息Cell
@@ -20,11 +20,6 @@
  显示消息内容的Label
  */
 @property (strong, nonatomic) RCAttributedLabel *textLabel;
-
-/*!
- 消息的背景View
- */
-@property (nonatomic, strong) UIImageView *bubbleBackgroundView;
 
 /*!
  设置当前消息Cell的数据模型

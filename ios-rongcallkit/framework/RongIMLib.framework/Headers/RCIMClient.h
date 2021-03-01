@@ -14,26 +14,7 @@
 #define __RongIMClient
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-
-#import "RCChatRoomInfo.h"
-#import "RCConversation.h"
-#import "RCCustomerServiceConfig.h"
-#import "RCCustomerServiceGroupItem.h"
-#import "RCCustomerServiceInfo.h"
-#import "RCDiscussion.h"
-#import "RCMessage.h"
-#import "RCPublicServiceProfile.h"
-#import "RCPushProfile.h"
-#import "RCSearchConversationResult.h"
-#import "RCStatusDefine.h"
-#import "RCUploadImageStatusListener.h"
-#import "RCUploadMediaStatusListener.h"
-#import "RCUserInfo.h"
-#import "RCUserOnlineStatusInfo.h"
-#import "RCWatchKitStatusDelegate.h"
-#import "RCSendMessageOption.h"
-#import "RCRemoteHistoryMsgOption.h"
-#import "RCIMClientProtocol.h"
+#import "RongIMLibHeader.h"
 
 /*!
  @const 收到已读回执的 Notification
@@ -2347,7 +2328,7 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
 
  @remarks 数据获取
  */
-- (NSData *)encodeWAVEToAMR:(NSData *)data channel:(int)nChannels nBitsPerSample:(int)nBitsPerSample;
+//- (NSData *)encodeWAVEToAMR:(NSData *)data channel:(int)nChannels nBitsPerSample:(int)nBitsPerSample;
 
 #pragma mark - 语音消息设置
 /**

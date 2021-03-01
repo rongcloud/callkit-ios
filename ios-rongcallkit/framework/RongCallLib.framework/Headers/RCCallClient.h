@@ -11,9 +11,9 @@
 #import "RCCallClientSignalServer.h"
 #import <Foundation/Foundation.h>
 #import <AVFoundation/AVFoundation.h>
-#import <RongIMLib/RongIMLib.h>
+#import <RongIMLibCore/RongIMLibCore.h>
 
-#define kRongCallLibVersion @"V4.1.0_20201216154028_release_cea7ab01"
+#define kRongCallLibVersion @""
 
 /*!
  CallLib全局通话呼入的监听器

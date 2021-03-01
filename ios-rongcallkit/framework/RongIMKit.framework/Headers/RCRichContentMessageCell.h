@@ -9,20 +9,10 @@
 #import "RCAttributedLabel.h"
 #import "RCMessageCell.h"
 
-#define RichContent_Title_Font_Size 14
-#define RichContent_Message_Font_Size 12
-#define RICH_CONTENT_THUMBNAIL_WIDTH 45
-#define RICH_CONTENT_THUMBNAIL_HIGHT 45
-
 /*!
  富文本（图文）消息Cell
  */
 @interface RCRichContentMessageCell : RCMessageCell
-
-/*!
- 消息的背景View
- */
-@property (nonatomic, strong) UIImageView *bubbleBackgroundView;
 
 /*!
  图片内容显示的View

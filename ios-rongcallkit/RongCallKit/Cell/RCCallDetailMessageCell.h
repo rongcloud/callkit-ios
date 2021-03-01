@@ -24,11 +24,6 @@
 @property(strong, nonatomic) UIImageView *mediaTypeIcon;
 
 /*!
- 消息的背景View
- */
-@property(nonatomic, strong) UIImageView *bubbleBackgroundView;
-
-/*!
  设置当前消息Cell的数据模型
 
  @param model 消息Cell的数据模型

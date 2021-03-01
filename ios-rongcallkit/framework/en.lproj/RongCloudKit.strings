@@ -1,4 +1,4 @@
-/* extensionkit */
+//extensionkit
 "hold_to_talk_title"="Hold to Talk";
 "release_to_send_title"="Release to send";
 "message_too_short"="Message too short";
@@ -44,7 +44,9 @@
 "Edit"="Edit";
 "GIFAboveMaxSize" = "GIF image size too large, Unable to send";
 "Burn_After_Read"="Secret Chat";
-/* extensionkit */
+"check_unread"="View Unread";
+"unread"="Unread";
+"i_know_it"="I know";
 
 "RC:ImgMsg"="[Image]";
 "RC:GIFMsg"="[Image]";
@@ -82,8 +84,7 @@
 "ConnectionIsNotReachable"="Network unavailable, check network";
 "SendReadReceiptRequestFailed"="Network unavailable, check network";
 "PreviewFile"="File preview";
-"StartDownloadingFile"="Start download";
-"StartDownloadFile"="Download";
+"StartDownloadFile"="Start download";
 "FileIsDownloading"="Downloding...";
 "FileDownloadFailed"="Download failed";
 "FileDownloadCanceled"="Download has been canceled";
@@ -131,7 +132,6 @@
 "VoIP_Offline"="The number you have called is offline";
 "VoIP_Net_busy"="Network is busy, please try later";
 "VoIP_Not_Accept"="Call has not answered";
-"VoIP_Rejected_By_Blacklist"="Your call has been rejected by receiver";
 "WaitingForAcceptInvitation"="Waiting for others to accept the invitation...";
 "VoIP_CallingFailed"="Calling failed, please try again";
 "VoIP_invite"="Invite you for chatting";
@@ -181,7 +181,6 @@
 "DISCUSSION"="Discussion";
 "DateFormat"="MM-dd";
 "MessageHasRead"="Read";
-"MessageHasSend"="Sent";
 "typing"="typing...";
 "Speaking"="Speaking...";
 "Submit"="Submit";
@@ -189,48 +188,9 @@
 "Robot_Comment_Title"="Whether the robotic customer service has solved your problem?";
 "Admin_Comment_Title"="Please rate our services";
 "NOT_CUSTOM_SERVICE"="No custom service";
-"VoIPAudioCall"="Voice Call";
-"VoIPVideoCall"="Video Call";
 "VoIPAudioCallExistedWarning"="Voice call is in progress, please try again later";
 "VoIPVideoCallExistedWarning"="Video call is in progress, please try again later";
 "AudioHoldingWarning"="The audio channel is being used, please try later";
-"VoIPCallSelectMember"="Select Members";
-"VoIPAudioCallMaxNumSelectMember"="Select up to %d members for a voice call";
-"VoIPVideoCallMaxNumSelectMember"="Select up to @ members for a video call";
-"VoIPAudioCallMaxNumInviteMember"="Maxselect %d members for adding member into voice call everytime";
-"VoIPCallEnd"="Call ended";
-"VoIPAudioCallCamera"="Camera";
-"VoIPVideoCallCloseCamera"="Turn off camera";
-"VoIPVideoCallOpenCamera"="Turn on camera";
-"VoIPVideoCallTurnToAudioCall"="Voice Call";
-"VoIPCallHangup"="Hang Up";
-"VoIPCallAccept"="Accept";
-"VoIPCallMute"="Mute";
-"VoIPCallSpeaker"="Speaker";
-"VoIPCallWaitingForRemoteAccept"="Waiting for response...";
-"VoIPAudioCallIncoming"=" invites you to join a voice call";
-"VoIPVideoCallIncoming"=" invites you to join a video call";
-"VoIPAudioCallIncomingWithoutUserName"="You have a voice call";
-"VoIPVideoCallIncomingWithoutUserName"="You have a video call";
-"VoIPMultiCallUserCollectionTitle"="Members";
-"VoIPCallTotalTime"="Duration";
-"VoIPCallHasEnd"="Cancelled";
-"VoIPCallHasCancel"="Cancelled";
-"VoIPCallHasReject"="Declined";
-"VoIPCallHasHangup"="Hung-up";
-"VoIPCallNoResponse"="No answer";
-"VoIPCallRemoteCancel"="has Cancelled";
-"VoIPCallRemoteReject"="has declined";
-"VoIPCallRemoteHangup"="has hung-up";
-"VoIPCallRemoteNoResponse"="not answered the call";
-"VoIPCallAcceptByOtherClient"="Accepted by other client";
-"VoIPCallKickedByServer"="Banned from making this call";
-"VoIPCallMediaServerClosed"="Audio and video services are turned off";
-"VoIPCallRemoteBusyLine"="is busy";
-"VoIPCallRemoteBusyLineAndShowAdvice"="The number you have called is busy, please try later";
-"VoIPCallRemoteDidInvite"="%@ has joined the group chat";
-"VoIPCallLocalNetworkError"="local network error";
-"VoIPCallRemoteNetworkError"="receiver network error";
 "GroupCreated"="%@ has created the group";
 "GroupInvited"="%@ has invited %@ to join the group";
 "GroupRemoved"="%@ has removed %@ from the group ";
@@ -255,7 +215,7 @@
 "locale"="en_US";
 "SameYearDate"="M/d/yy";
 "readNum"="%d read";
-"read"="read";
+"read"="Read";
 "punctuation"=", ";
 "Dawn"="h:mm a";
 "Forenoon"="h:mm a";
@@ -273,13 +233,10 @@
 "SelectContact"="Select Contacts";
 "MessageTapMore"="Select...";
 
-"bottom_result_view_choosed_person_prefix"="Selected";
-"bottom_result_view_choosed_person_subfix"="member(s)";
 "receive_new_message"="You got a new message";
 "push_to_talk"="Push to Talk";
 "no_message"="No chats info";
 "common_phrases" = "Universal";
-"voip_network_bad"="current network is not good";
 "RC:CombineMsg" = "[Chat History]";
 "RC:CardMsg" = "[Contact Card]";
 "GroupChatHistory" = "Group Chat History";

@@ -9,6 +9,7 @@
 #import <RongCallLib/RongCallLib.h>
 #import <RongIMLib/RongIMLib.h>
 #import <UIKit/UIKit.h>
+#import "RCCallTextButton.h"
 
 /*!
  通话的ViewController基类
@@ -71,32 +72,32 @@
 /*!
  静音Button
  */
-@property(nonatomic, strong) UIButton *muteButton;
+@property(nonatomic, strong) RCCallTextButton *muteButton;
 
 /*!
  扬声器Button
  */
-@property(nonatomic, strong) UIButton *speakerButton;
+@property(nonatomic, strong) RCCallTextButton *speakerButton;
 
 /*!
  接听Button
  */
-@property(nonatomic, strong) UIButton *acceptButton;
+@property(nonatomic, strong) RCCallTextButton *acceptButton;
 
 /*!
  挂断Button
  */
-@property(nonatomic, strong) UIButton *hangupButton;
+@property(nonatomic, strong) RCCallTextButton *hangupButton;
 
 /*!
  关闭摄像头的Button
  */
-@property(nonatomic, strong) UIButton *cameraCloseButton;
+@property(nonatomic, strong) RCCallTextButton *cameraCloseButton;
 
 /*!
  切换前后摄像头的Button
  */
-@property(nonatomic, strong) UIButton *cameraSwitchButton;
+@property(nonatomic, strong) RCCallTextButton *cameraSwitchButton;
 
 /*!
  + Button

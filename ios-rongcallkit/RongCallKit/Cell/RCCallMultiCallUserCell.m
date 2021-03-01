@@ -90,8 +90,13 @@
     }else{
         self.headerImageView.layer.borderWidth = 1;
         self.headerImageView.layer.borderColor = [UIColor whiteColor].CGColor;
-        self.headerImageView.layer.cornerRadius = 4;
         self.headerImageView.layer.masksToBounds = YES;
+        if (RCKitConfigCenter.ui.globalConversationAvatarStyle == RC_USER_AVATAR_CYCLE &&
+            RCKitConfigCenter.ui.globalMessageAvatarStyle == RC_USER_AVATAR_CYCLE) {
+            self.headerImageView.layer.cornerRadius = MIN(self.bounds.size.width, self.bounds.size.height - nameLabelHeight - insideMargin)/2;
+        } else {
+            self.headerImageView.layer.cornerRadius = 4.f;
+        }
         self.headerImageView.backgroundColor = [[UIColor clearColor] colorWithAlphaComponent:1.0];
         self.headerImageView.layer.edgeAntialiasingMask =
         kCALayerLeftEdge | kCALayerRightEdge | kCALayerBottomEdge | kCALayerTopEdge;

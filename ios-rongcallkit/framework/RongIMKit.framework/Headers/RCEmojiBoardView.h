@@ -10,7 +10,7 @@
 #import <RongIMLib/RongIMLib.h>
 #import <UIKit/UIKit.h>
 
-@class RCEmojiPageControl;
+@class RCPageControl;
 @class RCEmojiBoardView;
 
 /*!
@@ -58,13 +58,6 @@
 @property (nonatomic, strong) UIScrollView *emojiBackgroundView;
 
 /*!
- 表情的Label(已废弃，请勿使用)
-
- @warning **已废弃，请勿使用。**
- */
-@property (nonatomic, strong) __deprecated_msg("已废弃，请勿使用。") UILabel *emojiLabel;
-
-/*!
  表情输入的回调
  */
 @property (nonatomic, weak) id<RCEmojiViewDelegate> delegate;
@@ -88,10 +81,8 @@
 
 /*!
 发送按钮是否可点击
-
- @param sender 发送者
  */
-- (void)enableSendButton:(BOOL)sender;
+- (void)enableSendButton:(BOOL)enableSend;
 /**
  *  添加表情包（普通开发者调用添加表情包）
  *
@@ -104,10 +95,6 @@
  *  @param viewDataSource 每页表情的数据源代理，当滑动需要加载表情页时会回调代理的方法，您需要返回表情页的view
  */
 - (void)addExtensionEmojiTab:(id<RCEmoticonTabSource>)viewDataSource;
-/**
- *  表情页页码以及选中的页
- */
-- (void)setCurrentIndex:(int)index withTotalPages:(int)totalPageNum;
 
 /**
  *  重新加载通过扩展方式加载的表情包，（调用这个方法会回调RCExtensionModule 协议实现的扩展通过 addEmojiTab

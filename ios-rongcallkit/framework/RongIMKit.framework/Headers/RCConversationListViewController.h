@@ -120,6 +120,11 @@
 @property (nonatomic, strong) UIColor *topCellBackgroundColor;
 
 /*!
+提示网络连接不可用的 View
+*/
+@property (nonatomic, strong) RCNetworkIndicatorView *networkIndicatorView;
+
+/*!
  设置在会话列表中显示的头像形状，矩形或者圆形（全局有效）
 
  @param avatarStyle 显示的头像形状
@@ -192,7 +197,7 @@
  2.9.21 及其以前版本，dataSource 为全量数据，conversationListDataSource = dataSource
  2.9.22 及其以后版本，dataSource 为增量数据，conversationListDataSource += dataSource，如果需要更改全量数据的内容，可以更改 conversationListDataSource
  */
-- (NSMutableArray *)willReloadTableData:(NSMutableArray *)dataSource;
+- (NSMutableArray<RCConversationModel *> *)willReloadTableData:(NSMutableArray<RCConversationModel *> *)dataSource;
 
 /*!
  即将显示Cell的回调
@@ -294,39 +299,5 @@
  @discussion 当收到消息或删除会话时，会调用此回调，您可以在此回调中执行未读消息数相关的操作。
  */
 - (void)notifyUpdateUnreadMessageCount;
-
-#pragma mark - 已废弃方法
-
-/*!
- 移除SDK中会话列表为空时显示的默认View（已废弃，请勿使用）
-
- @discussion 此方法已废弃，您可以直接通过emptyConversationView设置列表为空时需要显示的View。.
-
- @warning **已废弃，请勿使用。**
- */
-- (void)resetConversationListBackgroundViewIfNeeded __deprecated_msg("已废弃，请勿使用。");
-
-/*!
- 提示网络连接不可用的View（已废弃，请勿使用）
- */
-@property (nonatomic, strong) RCNetworkIndicatorView *networkIndicatorView;
-
-/*!
- 当showConnectingStatusOnNavigatorBar设置为YES时，连接状态变化时更新NavigationBar的回调（已废弃，请勿使用）
-
- @discussion SDK在此方法中有默认的处理，如果您在子类中需要重写此方法，请注意调用super。
-
- @warning **已废弃，请勿使用。**
- */
-- (void)updateConnectionStatusOnNavigatorBar __deprecated_msg("已废弃，请勿使用。");
-
-/*!
- 当showConnectingStatusOnNavigatorBar设置为YES时，连接恢复后的回调（已废弃，请勿使用）
-
- @discussion 您需要在此回调中更新NavigationBar的标题显示。
-
- @warning **已废弃，请勿使用。**
- */
-- (void)setNavigationItemTitleView __deprecated_msg("已废弃，请勿使用。");
 
 @end

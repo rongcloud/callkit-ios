@@ -8,13 +8,20 @@
 
 /* Begin PBXBuildFile section */
 		0ADDC74A21B66A6300883EB5 /* RCMultiCallInviteNewUserDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 0ADDC74921B66A6200883EB5 /* RCMultiCallInviteNewUserDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1E5721A125ADD394002FC406 /* RCCallTextButton.h in Headers */ = {isa = PBXBuildFile; fileRef = 1E57219F25ADD394002FC406 /* RCCallTextButton.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1E5721A225ADD394002FC406 /* RCCallTextButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E5721A025ADD394002FC406 /* RCCallTextButton.m */; };
 		390467EF20738446007CE8DE /* UICollectionView+BackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 390467ED20738446007CE8DE /* UICollectionView+BackgroundView.m */; };
 		390467F020738446007CE8DE /* UICollectionView+BackgroundView.h in Headers */ = {isa = PBXBuildFile; fileRef = 390467EE20738446007CE8DE /* UICollectionView+BackgroundView.h */; };
 		3933DF5C206117A100C80615 /* KxCallMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 3933DF5A206117A100C80615 /* KxCallMenu.m */; };
 		3933DF5D206117A100C80615 /* KxCallMenu.h in Headers */ = {isa = PBXBuildFile; fileRef = 3933DF5B206117A100C80615 /* KxCallMenu.h */; };
+		395F66C925ECE320004746A6 /* RongIMLibCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 395F66C825ECE320004746A6 /* RongIMLibCore.framework */; };
+		395F66CD25ECE351004746A6 /* RongIMLib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 395F66CC25ECE351004746A6 /* RongIMLib.framework */; };
+		395F66D125ECE381004746A6 /* RongChatRoom.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 395F66D025ECE381004746A6 /* RongChatRoom.framework */; };
+		395F66D625ECE407004746A6 /* RongDiscussion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 395F66D525ECE407004746A6 /* RongDiscussion.framework */; };
+		395F66DB25ECE42E004746A6 /* RongPublicService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 395F66DA25ECE42E004746A6 /* RongPublicService.framework */; };
 		397C7A07258AFC3D00FE9D9F /* RongIMKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 397C7A04258AFC3D00FE9D9F /* RongIMKit.framework */; };
-		397C7A08258AFC3D00FE9D9F /* RongIMLib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 397C7A05258AFC3D00FE9D9F /* RongIMLib.framework */; };
 		397C7A09258AFC3E00FE9D9F /* RongCallLib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 397C7A06258AFC3D00FE9D9F /* RongCallLib.framework */; };
+		39941CB125ECE493009B45BB /* RongCustomerService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39941CB025ECE493009B45BB /* RongCustomerService.framework */; };
 		983FBC4220BD41010084841D /* RCVideoCollectionViewLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = 983FBC4020BD41010084841D /* RCVideoCollectionViewLayout.h */; };
 		983FBC4320BD41010084841D /* RCVideoCollectionViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 983FBC4120BD41010084841D /* RCVideoCollectionViewLayout.m */; };
 		98A609D120B56EB200BB5158 /* RCCallToolBar.h in Headers */ = {isa = PBXBuildFile; fileRef = 98A609CF20B56EB200BB5158 /* RCCallToolBar.h */; };
@@ -61,13 +68,20 @@
 
 /* Begin PBXFileReference section */
 		0ADDC74921B66A6200883EB5 /* RCMultiCallInviteNewUserDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCMultiCallInviteNewUserDelegate.h; sourceTree = "<group>"; };
+		1E57219F25ADD394002FC406 /* RCCallTextButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCCallTextButton.h; sourceTree = "<group>"; };
+		1E5721A025ADD394002FC406 /* RCCallTextButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCCallTextButton.m; sourceTree = "<group>"; };
 		390467ED20738446007CE8DE /* UICollectionView+BackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UICollectionView+BackgroundView.m"; sourceTree = "<group>"; };
 		390467EE20738446007CE8DE /* UICollectionView+BackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UICollectionView+BackgroundView.h"; sourceTree = "<group>"; };
 		3933DF5A206117A100C80615 /* KxCallMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KxCallMenu.m; sourceTree = "<group>"; };
 		3933DF5B206117A100C80615 /* KxCallMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KxCallMenu.h; sourceTree = "<group>"; };
+		395F66C825ECE320004746A6 /* RongIMLibCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RongIMLibCore.framework; path = framework/RongIMLibCore.framework; sourceTree = "<group>"; };
+		395F66CC25ECE351004746A6 /* RongIMLib.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RongIMLib.framework; path = framework/RongIMLib.framework; sourceTree = "<group>"; };
+		395F66D025ECE381004746A6 /* RongChatRoom.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RongChatRoom.framework; path = framework/RongChatRoom.framework; sourceTree = "<group>"; };
+		395F66D525ECE407004746A6 /* RongDiscussion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RongDiscussion.framework; path = framework/RongDiscussion.framework; sourceTree = "<group>"; };
+		395F66DA25ECE42E004746A6 /* RongPublicService.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RongPublicService.framework; path = framework/RongPublicService.framework; sourceTree = "<group>"; };
 		397C7A04258AFC3D00FE9D9F /* RongIMKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RongIMKit.framework; path = framework/RongIMKit.framework; sourceTree = "<group>"; };
-		397C7A05258AFC3D00FE9D9F /* RongIMLib.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RongIMLib.framework; path = framework/RongIMLib.framework; sourceTree = "<group>"; };
 		397C7A06258AFC3D00FE9D9F /* RongCallLib.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RongCallLib.framework; path = framework/RongCallLib.framework; sourceTree = "<group>"; };
+		39941CB025ECE493009B45BB /* RongCustomerService.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RongCustomerService.framework; path = framework/RongCustomerService.framework; sourceTree = "<group>"; };
 		5AAE73282570E42300D76BE1 /* RongCallKit.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = RongCallKit.bundle; sourceTree = "<group>"; };
 		5AC79E5A256F5A5900B06789 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/RongCallKit.strings"; sourceTree = "<group>"; };
 		5AC79E5B256F5A5900B06789 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/RongCallKit.strings; sourceTree = "<group>"; };
@@ -110,6 +124,7 @@
 		A6BE1B1B1CCEFAAC00FF6BF7 /* RCCallFloatingBoard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCCallFloatingBoard.m; sourceTree = "<group>"; };
 		A6BE1B1C1CCEFAAC00FF6BF7 /* RCCallKitUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCCallKitUtility.h; sourceTree = "<group>"; };
 		A6BE1B1D1CCEFAAC00FF6BF7 /* RCCallKitUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCCallKitUtility.m; sourceTree = "<group>"; };
+		E50FA9972595BEC7001A8A53 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/RongCallKit.strings; sourceTree = "<group>"; };
 		F8235CD91CE5B2A100C95B26 /* RCloudImageLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RCloudImageLoader.h; path = Header/RCloudImageLoader.h; sourceTree = "<group>"; };
 		F8235CDA1CE5B2A100C95B26 /* RCloudImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RCloudImageView.h; path = Header/RCloudImageView.h; sourceTree = "<group>"; };
 		F8235CDB1CE5B2A100C95B26 /* RCUserInfoCacheManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RCUserInfoCacheManager.h; path = Header/RCUserInfoCacheManager.h; sourceTree = "<group>"; };
@@ -122,9 +137,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				397C7A08258AFC3D00FE9D9F /* RongIMLib.framework in Frameworks */,
+				395F66D625ECE407004746A6 /* RongDiscussion.framework in Frameworks */,
+				395F66D125ECE381004746A6 /* RongChatRoom.framework in Frameworks */,
+				39941CB125ECE493009B45BB /* RongCustomerService.framework in Frameworks */,
 				397C7A07258AFC3D00FE9D9F /* RongIMKit.framework in Frameworks */,
+				395F66DB25ECE42E004746A6 /* RongPublicService.framework in Frameworks */,
 				397C7A09258AFC3E00FE9D9F /* RongCallLib.framework in Frameworks */,
+				395F66CD25ECE351004746A6 /* RongIMLib.framework in Frameworks */,
+				395F66C925ECE320004746A6 /* RongIMLibCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -170,8 +190,8 @@
 		A6BE1A441CCE561200FF6BF7 = {
 			isa = PBXGroup;
 			children = (
-				A6BE1B451CCEFBAC00FF6BF7 /* Frameworks */,
 				A6BE1A501CCE561200FF6BF7 /* RongCallKit */,
+				A6BE1B451CCEFBAC00FF6BF7 /* Frameworks */,
 				A6BE1A4F1CCE561200FF6BF7 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -265,6 +285,8 @@
 		A6BE1B191CCEFAAC00FF6BF7 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				1E57219F25ADD394002FC406 /* RCCallTextButton.h */,
+				1E5721A025ADD394002FC406 /* RCCallTextButton.m */,
 				3933DF59206117A100C80615 /* KxCallMenu */,
 				A6BE1B1A1CCEFAAC00FF6BF7 /* RCCallFloatingBoard.h */,
 				A6BE1B1B1CCEFAAC00FF6BF7 /* RCCallFloatingBoard.m */,
@@ -285,9 +307,14 @@
 		A6BE1B451CCEFBAC00FF6BF7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				39941CB025ECE493009B45BB /* RongCustomerService.framework */,
+				395F66DA25ECE42E004746A6 /* RongPublicService.framework */,
+				395F66D525ECE407004746A6 /* RongDiscussion.framework */,
+				395F66D025ECE381004746A6 /* RongChatRoom.framework */,
+				395F66CC25ECE351004746A6 /* RongIMLib.framework */,
+				395F66C825ECE320004746A6 /* RongIMLibCore.framework */,
 				397C7A06258AFC3D00FE9D9F /* RongCallLib.framework */,
 				397C7A04258AFC3D00FE9D9F /* RongIMKit.framework */,
-				397C7A05258AFC3D00FE9D9F /* RongIMLib.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -330,6 +357,7 @@
 				A6BE1B261CCEFAAC00FF6BF7 /* RCCallAudioMultiCallViewController.h in Headers */,
 				A6BE1B2E1CCEFAAC00FF6BF7 /* RCCallVideoMultiCallViewController.h in Headers */,
 				A6BE1B381CCEFAAC00FF6BF7 /* RCCallFloatingBoard.h in Headers */,
+				1E5721A125ADD394002FC406 /* RCCallTextButton.h in Headers */,
 				A6BE1B201CCEFAAC00FF6BF7 /* RCCallMultiCallUserCell.h in Headers */,
 				9CE36FD6200F5FDC0068263B /* RCCXCall.h in Headers */,
 				F8235CDD1CE5B2A100C95B26 /* RCloudImageLoader.h in Headers */,
@@ -393,6 +421,7 @@
 				English,
 				en,
 				"zh-Hans",
+				ar,
 			);
 			mainGroup = A6BE1A441CCE561200FF6BF7;
 			productRefGroup = A6BE1A4F1CCE561200FF6BF7 /* Products */;
@@ -444,6 +473,7 @@
 				A6BE1B391CCEFAAC00FF6BF7 /* RCCallFloatingBoard.m in Sources */,
 				9CE36FD7200F5FDC0068263B /* RCCXCall.m in Sources */,
 				A6BE1B2D1CCEFAAC00FF6BF7 /* RCCallSingleCallViewController.m in Sources */,
+				1E5721A225ADD394002FC406 /* RCCallTextButton.m in Sources */,
 				A68AFAEA1CCEFF5B00F16B3D /* RCCallDetailMessageCell.m in Sources */,
 				F8D2904D1D2790E3002BFA65 /* RCCallKitExtensionModule.m in Sources */,
 				98A609D220B56EB200BB5158 /* RCCallToolBar.m in Sources */,
@@ -467,6 +497,7 @@
 			children = (
 				5AC79E5A256F5A5900B06789 /* zh-Hans */,
 				5AC79E5B256F5A5900B06789 /* en */,
+				E50FA9972595BEC7001A8A53 /* ar */,
 			);
 			name = RongCallKit.strings;
 			sourceTree = "<group>";
@@ -599,8 +630,6 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
-				SUPPORTS_MACCATALYST = NO;
-				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = "arm64 armv7 x86_64";
 			};
 			name = Debug;
@@ -637,8 +666,6 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
-				SUPPORTS_MACCATALYST = NO;
-				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = "arm64 armv7 x86_64";
 			};
 			name = Release;

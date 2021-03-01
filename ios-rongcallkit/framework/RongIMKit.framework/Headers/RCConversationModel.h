@@ -122,13 +122,6 @@ typedef NS_ENUM(NSUInteger, RCConversationModelType) {
 @property (nonatomic, copy) NSString *senderUserId;
 
 /*!
- 会话中最后一条消息的发送者的用户名（已废弃，请勿使用）
-
- @warning **已废弃，请勿使用。**
- */
-@property (nonatomic, strong) __deprecated_msg("已废弃，请勿使用。") NSString *senderUserName;
-
-/*!
  会话中最后一条消息的消息ID
  */
 @property (nonatomic, assign) long lastestMessageId;
@@ -159,32 +152,6 @@ typedef NS_ENUM(NSUInteger, RCConversationModelType) {
 @property (nonatomic, assign) int mentionedCount;
 
 /*!
- 初始化会话Cell的数据模型（已废弃，请勿使用）
-
- @param conversationModelType 会话Cell数据模型的显示类型
- @param extend                用户自定义的扩展数据
- @return 会话Cell的数据模型对象
-
- @warning **已废弃，请勿使用。**
- */
-- (instancetype)init:(RCConversationModelType)conversationModelType
-             exntend:(id)extend __deprecated_msg("已废弃，请勿使用。");
-
-/*!
- 初始化会话显示数据模型
-
- @param conversationModelType 会话Cell数据模型的显示类型
- @param conversation          会话
- @param extend                用户自定义的扩展数据
- @return 会话Cell的数据模型对象
-
- @warning **已废弃，请勿使用。**
- */
-- (instancetype)init:(RCConversationModelType)conversationModelType
-        conversation:(RCConversation *)conversation
-              extend:(id)extend __deprecated_msg("已废弃，请勿使用。");
-
-/*!
  初始化会话显示数据模型
 
  @param conversation          会话
@@ -208,5 +175,4 @@ typedef NS_ENUM(NSUInteger, RCConversationModelType) {
  @return 会话和数据模型是否匹配
  */
 - (BOOL)isMatching:(RCConversationType)conversationType targetId:(NSString *)targetId;
-
 @end
