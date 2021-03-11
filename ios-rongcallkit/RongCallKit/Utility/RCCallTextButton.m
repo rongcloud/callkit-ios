@@ -8,7 +8,7 @@
 
 #import "RCCallTextButton.h"
 #import "RCCallKitUtility.h"
-#import <RongIMKit/RongIMKit.h>
+#import "RongCallKitAdaptiveHeader.h"
 
 @interface RCCallTextButton ()
 @property (nonatomic, strong) NSMutableDictionary *stateMap;

@@ -1577,7 +1577,7 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
  收到电话，可以播放铃声
  */
 - (void)shouldRingForIncomingCall {
-    if ([UIApplication sharedApplication].applicationState == UIApplicationStateActive) {
+    if ([RCIMClient sharedRCIMClient].sdkRunningMode == RCSDKRunningMode_Foreground) {
         NSString *ringPath = [[[NSBundle mainBundle] pathForResource:@"RongCallKit" ofType:@"bundle"]
             stringByAppendingPathComponent:@"voip/voip_call.mp3"];
         [self startPlayRing:ringPath];

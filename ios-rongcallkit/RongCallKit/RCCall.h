@@ -8,8 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import <RongCallLib/RongCallLib.h>
-#import <RongIMKit/RongIMKit.h>
 #import "RCMultiCallInviteNewUserDelegate.h"
+#import "RongCallKitAdaptiveHeader.h"
 
 #define RCCallGroupMemberDataSource RCIMGroupMemberDataSource //接口向后兼容
 

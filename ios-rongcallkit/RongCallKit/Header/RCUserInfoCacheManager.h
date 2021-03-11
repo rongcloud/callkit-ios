@@ -7,13 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <RongIMKit/RongIMKit.h>
-@class RCUserInfoCacheDBHelper;
+#import "RongCallKitAdaptiveHeader.h"
+@class RCUserInfoCacheDBHelper,RCPublicServiceProfile;
 
 //消息分发
 FOUNDATION_EXPORT NSString *const RCKitDispatchUserInfoUpdateNotification;
 FOUNDATION_EXPORT NSString *const RCKitDispatchGroupUserInfoUpdateNotification;
 FOUNDATION_EXPORT NSString *const RCKitDispatchGroupInfoUpdateNotification;
+FOUNDATION_EXPORT NSString *const RCKitDispatchPublicServiceInfoNotification;
 
 #define rcUserInfoWorkingDBHelper ([RCUserInfoCacheManager sharedManager].workingDBHelper)
 #define rcUserInfoDBQueue ([RCUserInfoCacheManager sharedManager].dbQueue)
@@ -84,4 +85,6 @@ FOUNDATION_EXPORT NSString *const RCKitDispatchGroupInfoUpdateNotification;
 
 - (void)clearAllGroupInfo;
 
+#pragma mark - PublicServiceProfile
+- (RCPublicServiceProfile *)getPublicServiceProfile:(NSString *)serviceId;
 @end

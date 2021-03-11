@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <RongCallLib/RongCallLib.h>
-#import <RongIMKit/RongIMKit.h>
+#import "RongCallKitAdaptiveHeader.h"
 #import <UIKit/UIKit.h>
 
 UIColor* rgb(CGFloat red, CGFloat green, CGFloat blue);

@@ -17,6 +17,8 @@ FOUNDATION_EXPORT const unsigned char RongCallKitVersionString[];
 // In this header, you should import all the public headers of your framework
 // using statements like #import <RongCallKit/PublicHeader.h>
 
+#if __has_include(<RongCallKit/RCCall.h>)
+
 #import <RongCallKit/RCCall.h>
 #import <RongCallKit/RCCallAudioMultiCallViewController.h>
 #import <RongCallKit/RCCallBaseViewController.h>
@@ -28,3 +30,19 @@ FOUNDATION_EXPORT const unsigned char RongCallKitVersionString[];
 #import <RongCallKit/RCCallTipMessageCell.h>
 #import <RongCallKit/RCCallUserCallInfoModel.h>
 #import <RongCallKit/RCCallVideoMultiCallViewController.h>
+
+#else
+
+#import "RCCall.h"
+#import "RCCallAudioMultiCallViewController.h"
+#import "RCCallBaseViewController.h"
+#import "RCCallDetailMessageCell.h"
+#import "RCCallFloatingBoard.h"
+#import "RCCallMultiCallUserCell.h"
+#import "RCCallSelectMemberViewController.h"
+#import "RCCallSingleCallViewController.h"
+#import "RCCallTipMessageCell.h"
+#import "RCCallUserCallInfoModel.h"
+#import "RCCallVideoMultiCallViewController.h"
+
+#endif

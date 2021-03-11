@@ -10,6 +10,7 @@
 		0ADDC74A21B66A6300883EB5 /* RCMultiCallInviteNewUserDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 0ADDC74921B66A6200883EB5 /* RCMultiCallInviteNewUserDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1E5721A125ADD394002FC406 /* RCCallTextButton.h in Headers */ = {isa = PBXBuildFile; fileRef = 1E57219F25ADD394002FC406 /* RCCallTextButton.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1E5721A225ADD394002FC406 /* RCCallTextButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E5721A025ADD394002FC406 /* RCCallTextButton.m */; };
+		2790CDBA25DE4039008CBDD8 /* RongCallKitAdaptiveHeader.h in Headers */ = {isa = PBXBuildFile; fileRef = 2790CDB925DE4039008CBDD8 /* RongCallKitAdaptiveHeader.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		390467EF20738446007CE8DE /* UICollectionView+BackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 390467ED20738446007CE8DE /* UICollectionView+BackgroundView.m */; };
 		390467F020738446007CE8DE /* UICollectionView+BackgroundView.h in Headers */ = {isa = PBXBuildFile; fileRef = 390467EE20738446007CE8DE /* UICollectionView+BackgroundView.h */; };
 		3933DF5C206117A100C80615 /* KxCallMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 3933DF5A206117A100C80615 /* KxCallMenu.m */; };
@@ -70,6 +71,7 @@
 		0ADDC74921B66A6200883EB5 /* RCMultiCallInviteNewUserDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCMultiCallInviteNewUserDelegate.h; sourceTree = "<group>"; };
 		1E57219F25ADD394002FC406 /* RCCallTextButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCCallTextButton.h; sourceTree = "<group>"; };
 		1E5721A025ADD394002FC406 /* RCCallTextButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCCallTextButton.m; sourceTree = "<group>"; };
+		2790CDB925DE4039008CBDD8 /* RongCallKitAdaptiveHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RongCallKitAdaptiveHeader.h; sourceTree = "<group>"; };
 		390467ED20738446007CE8DE /* UICollectionView+BackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UICollectionView+BackgroundView.m"; sourceTree = "<group>"; };
 		390467EE20738446007CE8DE /* UICollectionView+BackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UICollectionView+BackgroundView.h"; sourceTree = "<group>"; };
 		3933DF5A206117A100C80615 /* KxCallMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KxCallMenu.m; sourceTree = "<group>"; };
@@ -223,6 +225,7 @@
 				9CE36FD4200F5FDC0068263B /* RCCXCall.h */,
 				9CE36FD5200F5FDC0068263B /* RCCXCall.m */,
 				0ADDC74921B66A6200883EB5 /* RCMultiCallInviteNewUserDelegate.h */,
+				2790CDB925DE4039008CBDD8 /* RongCallKitAdaptiveHeader.h */,
 				A6BE1B3C1CCEFAB700FF6BF7 /* Support Files */,
 			);
 			path = RongCallKit;
@@ -345,6 +348,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2790CDBA25DE4039008CBDD8 /* RongCallKitAdaptiveHeader.h in Headers */,
 				0ADDC74A21B66A6300883EB5 /* RCMultiCallInviteNewUserDelegate.h in Headers */,
 				A6BE1B361CCEFAAC00FF6BF7 /* RCCall.h in Headers */,
 				A6BE1B2A1CCEFAAC00FF6BF7 /* RCCallSelectMemberViewController.h in Headers */,
@@ -623,7 +627,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = staticlib;
-				MARKETING_VERSION = 4.1.0;
+				MARKETING_VERSION = 5.1.0;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = cn.rongcloud.im;
@@ -660,7 +664,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = staticlib;
-				MARKETING_VERSION = 4.1.0;
+				MARKETING_VERSION = 5.1.0;
 				OTHER_CFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = cn.rongcloud.im;
 				PRODUCT_NAME = "$(TARGET_NAME)";

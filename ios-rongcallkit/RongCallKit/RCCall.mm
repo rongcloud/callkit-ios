@@ -17,7 +17,7 @@
 #import "RCCallVideoMultiCallViewController.h"
 #import "RCUserInfoCacheManager.h"
 #import "RCCXCall.h"
-#import <RongIMKit/RongIMKit.h>
+#import "RongCallKitAdaptiveHeader.h"
 #import <AVFoundation/AVFoundation.h>
 
 #if __IPHONE_10_0
@@ -341,7 +341,7 @@
 }
 
 - (void)postLocalNotification:(RCMessagePushConfig *)pushConfig userInfo:(NSDictionary*)userInfo hasSound:(BOOL)hasSound isCancelCall:(BOOL)isCancelCall{
-    NSLog(@"postLocalNotification-hasSound:%@,isCancelCall:%@", hasSound?@"YES":@"NO", isCancelCall?@"YES":@"NO");
+    NSLog(@"postLocalNotification hasSound:%@,isCancelCall:%@", hasSound?@"YES":@"NO", isCancelCall?@"YES":@"NO");
     NSString* pushContent = @"";
     NSString *title = @"";
     NSString* soundName = @"RongCallKit.bundle/voip/voip_call.caf";
@@ -393,11 +393,14 @@
         content.userInfo = userInfo;
         if(hasSound){
             content.sound = [UNNotificationSound soundNamed:soundName];
+        } else {
+            content.sound = [UNNotificationSound defaultSound];
         }
         if (pushConfig && pushConfig.iOSConfig && pushConfig.iOSConfig.threadId) {
             content.threadIdentifier = pushConfig.iOSConfig.threadId;
         }
-//        [[UNUserNotificationCenter currentNotificationCenter] removeDeliveredNotificationsWithIdentifiers:@[requestWithIdentifier]];
+        NSLog(@"postLocalNotification id:%@", requestWithIdentifier);
+        [[UNUserNotificationCenter currentNotificationCenter] removeDeliveredNotificationsWithIdentifiers:@[requestWithIdentifier]];
         UNNotificationRequest *request = [UNNotificationRequest requestWithIdentifier:requestWithIdentifier content:content trigger:nil];
         [[UNUserNotificationCenter currentNotificationCenter] addNotificationRequest:request withCompletionHandler:^(NSError * _Nullable error) {}];
         
@@ -414,6 +417,8 @@
         callNotification.userInfo = userInfo;
         if (hasSound) {
             [callNotification setSoundName:soundName];
+        } else {
+            [callNotification setSoundName:UILocalNotificationDefaultSoundName];
         }
         dispatch_async(dispatch_get_main_queue(), ^{
             UILocalNotification *notification = [self.locationNotificationMap objectForKey:requestWithIdentifier];
@@ -461,9 +466,6 @@
 
 - (void)startReceiveCallVibrate
 {
-    //默认情况按静音或者锁屏键会静音
-    AVAudioSession *audioSession = [AVAudioSession sharedInstance];
-    [audioSession setCategory:AVAudioSessionCategorySoloAmbient error:nil];
     [self triggerVibrateRCCall];
 }
 
@@ -472,10 +474,6 @@
     if (self.timer) {
         [self.timer invalidate];
         self.timer = nil;
-    }
-    
-    if (self.currentCallSession.callStatus == RCCallIncoming || self.currentCallSession.callStatus == RCCallRinging) {
-        [[AVAudioSession sharedInstance] setActive:NO withOptions:AVAudioSessionSetActiveOptionNotifyOthersOnDeactivation error:nil];
     }
 }
 
