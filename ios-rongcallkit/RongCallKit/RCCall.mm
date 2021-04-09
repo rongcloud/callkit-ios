@@ -30,6 +30,10 @@
 #define AlertWithoutConfirm 1000
 #define AlertWithConfirm 1001
 
+static NSString *const __RongCallKit__Version = @"__RongCallKit__Version__Unknown";
+static NSString *const __RongCallKit__Commit = @"__RongCallKit__Commit__Unknown";
+static NSString *const __RongCallKit__Time = @"__RongCallKit__Time__Unknown";
+
 @interface RCCall () <RCCallReceiveDelegate>
 
 @property(nonatomic, strong) NSMutableDictionary *alertInfoDic;
@@ -55,6 +59,7 @@
             pRongVoIP.callWindows = [[NSMutableArray alloc] init];
             pRongVoIP.locationNotificationMap = [[NSMutableDictionary alloc] init];
             [pRongVoIP registerNotification];
+            NSLog(@"callkitVersion:%@, commitId:%@, time:%@", __RongCallKit__Version, __RongCallKit__Commit, __RongCallKit__Time);
         }
     });
     return pRongVoIP;
@@ -505,5 +510,9 @@
     [RCIM sharedRCIM].groupMemberDataSource = groupMemberDataSource;
 }
 //接口向后兼容 --]]
+
++ (NSString *)getVersion {
+    return __RongCallKit__Version;
+}
 
 @end

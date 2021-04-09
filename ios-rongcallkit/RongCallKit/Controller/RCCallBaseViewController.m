@@ -1291,7 +1291,7 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
         if (callStatus == RCCallActive) {
             self.cameraSwitchButton.frame = CGRectMake(
                                                        self.view.frame.size.width - RCCallHeaderLength,
-                                                       RCCallMiniButtonLength + RCCallStatusBarHeight - 13, RCCallMiniButtonLength, RCCallMiniButtonLength);
+                                                       RCCallMiniButtonLength + RCCallStatusBarHeight, RCCallMiniButtonLength, RCCallMiniButtonLength);
             self.cameraSwitchButton.hidden = NO;
         } else if (callStatus != RCCallHangup) {
             self.cameraSwitchButton.hidden = YES;

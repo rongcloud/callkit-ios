@@ -355,9 +355,11 @@ typedef void (^CompleteBlock)(NSArray *addUserIdList);
             dispatch_async(dispatch_get_main_queue(), ^{
                 NSIndexPath *index =
                 [NSIndexPath indexPathForRow:[weakSelf.resultUserIdList indexOfObject:userId] inSection:0];
-                
-                [weakSelf.tableView reloadRowsAtIndexPaths:@[ index ]
-                                          withRowAnimation:UITableViewRowAnimationAutomatic];
+                UITableViewCell *cell = [weakSelf.tableView cellForRowAtIndexPath:index];
+                if (cell) {
+                    [weakSelf.tableView reloadRowsAtIndexPaths:@[ index ]
+                                              withRowAnimation:UITableViewRowAnimationAutomatic];
+                }
             });
             return;
         }

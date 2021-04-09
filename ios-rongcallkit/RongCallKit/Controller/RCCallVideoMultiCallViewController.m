@@ -230,7 +230,9 @@
         NSInteger index = [self.subUserModelList indexOfObject:model];
         if (index != NSNotFound && [self.userCollectionView numberOfItemsInSection: 0] > index) {
             NSIndexPath *indexPath = [NSIndexPath indexPathForItem:index inSection:0];
-            [self.userCollectionView reloadItemsAtIndexPaths:@[ indexPath ]];
+            [UIView performWithoutAnimation:^{
+                [self.userCollectionView reloadItemsAtIndexPaths:@[ indexPath ]];
+            }];
         }
     }
 }

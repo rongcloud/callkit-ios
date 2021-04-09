@@ -9,7 +9,16 @@
 #import <Foundation/Foundation.h>
 #import <RongCallLib/RongCallLib.h>
 #import "RCMultiCallInviteNewUserDelegate.h"
-#import "RongCallKitAdaptiveHeader.h"
+
+#if __has_include(<RongIMKit/RongIMKit.h>)
+
+#import <RongIMKit/RongIMKit.h>
+
+#else
+
+#import "RongIMKit.h"
+
+#endif
 
 #define RCCallGroupMemberDataSource RCIMGroupMemberDataSource //接口向后兼容
 
@@ -151,5 +160,14 @@ UIKIT_EXTERN NSNotificationName const RCCallNewSessionCreationNotification;
  停止来电铃声和震动
  */
 - (void)stopReceiveCallVibrate;
+
+/*!
+ 获取 SDK 版本号
+
+ @return 版本号
+
+ @remarks 参数配置
+ */
++ (NSString *)getVersion;
 
 @end

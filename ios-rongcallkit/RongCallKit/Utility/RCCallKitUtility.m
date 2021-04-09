@@ -196,6 +196,7 @@ UIColor* dynamic_color(NSInteger light_hex_value, NSInteger dark_hex_value) {
         } error:errorBlock];
     }
 }
+
 + (void)checkRecordPermission:(void (^)(void))successBlock error:(void (^)(void))errorBlock{
     if ([[AVAudioSession sharedInstance] respondsToSelector:@selector(requestRecordPermission:)]) {
         [[AVAudioSession sharedInstance] requestRecordPermission:^(BOOL granted) {
@@ -222,14 +223,18 @@ UIColor* dynamic_color(NSInteger light_hex_value, NSInteger dark_hex_value) {
         [self loadErrorAlertWithConfirm:RCCallKitLocalizedString(@"AccessRightTitle" )
                                 message:RCCallKitLocalizedString(@"cameraAccessRight" )];
         complete(NO);
-        errorBlock();
+        dispatch_async(dispatch_get_main_queue(), ^{
+            errorBlock();
+          });
     } else if (authStatus == AVAuthorizationStatusNotDetermined) {
         [AVCaptureDevice
          requestAccessForMediaType:AVMediaTypeVideo
          completionHandler:^(BOOL granted) {
             if (!granted) {
                 [self loadErrorAlertWithConfirm:RCCallKitLocalizedString(@"AccessRightTitle")message:RCCallKitLocalizedString(@"cameraAccessRight")];
-                errorBlock();
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    errorBlock();
+                  });
             }
             complete(granted);
         }];

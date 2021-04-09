@@ -90,7 +90,7 @@
 @property(nonatomic, strong) RCCallTextButton *hangupButton;
 
 /*!
- 关闭摄像头的Button
+ 关闭摄像头的Button  「群聊：关闭摄像头； 单聊：切换为语音通话」
  */
 @property(nonatomic, strong) RCCallTextButton *cameraCloseButton;
 

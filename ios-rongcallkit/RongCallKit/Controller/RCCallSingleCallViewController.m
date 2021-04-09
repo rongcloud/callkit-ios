@@ -286,9 +286,6 @@
 //            self.mainVideoView.frame = CGRectMake(0, RCCallStatusBarHeight, self.view.frame.size.width, self.view.frame.size.height - RCCallExtraSpace - RCCallStatusBarHeight);
             [self.callSession setVideoView:self.mainVideoView
                                     userId:self.callSession.caller];
-
-            [self.callSession setVideoView:self.mainVideoView userId:self.callSession.targetId];
-
         } else if (callStatus == RCCallActive) {
             self.mainVideoView.hidden = NO;
             [self.callSession setVideoView:self.mainVideoView userId:self.callSession.targetId];
