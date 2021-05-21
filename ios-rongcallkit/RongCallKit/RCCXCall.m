@@ -30,6 +30,7 @@
     dispatch_once(&onceToken, ^{
         if (pCall == nil) {
             pCall = [[RCCXCall alloc] init];
+            pCall.acceptedFromCallKit = NO;
         }
     });
     return pCall;
@@ -61,6 +62,4 @@
     }
 }
 
-- (void)setAVAudioSessionMode{
-}
 @end

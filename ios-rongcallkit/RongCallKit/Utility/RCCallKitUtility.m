@@ -129,7 +129,7 @@ UIColor* dynamic_color(NSInteger light_hex_value, NSInteger dark_hex_value) {
             hangupReasonString = RCCallKitLocalizedString(@"VoIPCallRemoteNetworkError" );
             break;
         case RCCallDisconnectReasonAddToBlackList:
-            hangupReasonString = RCCallKitLocalizedString(@"VoIPCallHasReject" );
+            hangupReasonString = RCCallKitLocalizedString(@"VoIP_Rejected_By_Blacklist" );
             break;
         default:
             hangupReasonString = [self getGeneralReadableString:hangupReason];

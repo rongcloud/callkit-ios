@@ -13,6 +13,8 @@
 #import "RCloudImageView.h"
 #import "RCCallKitUtility.h"
 #import "RCCallUserCallInfoModel.h"
+#import "RCCall.h"
+#import "RCCXCall.h"
 
 #define currentUserId ([RCIMClient sharedRCIMClient].currentUserInfo.userId)
 @interface RCCallSingleCallViewController ()
@@ -207,9 +209,15 @@
     return userModel;
 }
 
-- (void)resetLayout:(BOOL)isMultiCall mediaType:(RCCallMediaType)mediaType callStatus:(RCCallStatus)callStatus {
-    [super resetLayout:isMultiCall mediaType:mediaType callStatus:callStatus];
+- (void)resetLayout:(BOOL)isMultiCall mediaType:(RCCallMediaType)mediaType callStatus:(RCCallStatus)sessionCallStatus {
+    [super resetLayout:isMultiCall mediaType:mediaType callStatus:sessionCallStatus];
 
+    RCCallStatus callStatus = sessionCallStatus;
+    if ((callStatus == RCCallIncoming || callStatus == RCCallRinging) && [RCCXCall sharedInstance].acceptedFromCallKit) {
+        callStatus = RCCallActive;
+        [RCCXCall sharedInstance].acceptedFromCallKit = NO;
+    }
+    
     UIImage *remoteHeaderImage = self.remotePortraitView.image;
 
     if (mediaType == RCCallMediaAudio) {

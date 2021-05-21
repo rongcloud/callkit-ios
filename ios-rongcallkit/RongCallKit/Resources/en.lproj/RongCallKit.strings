@@ -5,7 +5,7 @@
   Copyright © 2020 RongCloud. All rights reserved.
 */
 
-"VoIP_Rejected_By_Blacklist"="Your call has been rejected by receiver";
+"VoIP_Rejected_By_Blacklist"="Has been blacklisted by receiver";
 "VoIPAudioCall"="Voice Call";
 "VoIPVideoCall"="Video Call";
 "VoIPAudioCallExistedWarning"="Voice call is in progress, please try again later";
@@ -14,7 +14,7 @@
 "VoIPAudioCallMaxNumSelectMember"="Select up to %d members for a voice call";
 "VoIPVideoCallMaxNumSelectMember"="Select up to @ members for a video call";
 "VoIPAudioCallMaxNumInviteMember"="Maxselect %d members for adding member into voice call everytime";
-"VoIPCallEnd"="Call ended";
+"VoIPCallEnd"="Call Ended";
 "VoIPAudioCallCamera"="Camera";
 "VoIPVideoCallCloseCamera"="Turn off camera";
 "VoIPVideoCallOpenCamera"="Turn on camera";
@@ -34,10 +34,10 @@
 "VoIPCallHasCancel"="Cancelled";
 "VoIPCallHasReject"="Declined";
 "VoIPCallHasHangup"="Hung-up";
-"VoIPCallNoResponse"="No answer";
-"VoIPCallRemoteCancel"="has Cancelled";
-"VoIPCallRemoteReject"="has declined";
-"VoIPCallRemoteHangup"="has hung-up";
+"VoIPCallNoResponse"="No Answer";
+"VoIPCallRemoteCancel"="Has Cancelled";
+"VoIPCallRemoteReject"="Has Declined";
+"VoIPCallRemoteHangup"="Has Hung-up";
 "VoIPCallRemoteNoResponse"="not answered the call";
 "VoIPCallAcceptByOtherClient"="Accepted by other client";
 "VoIPCallKickedByServer"="Banned from making this call";
@@ -45,8 +45,8 @@
 "VoIPCallRemoteBusyLine"="is busy";
 "VoIPCallRemoteBusyLineAndShowAdvice"="The number you have called is busy, please try later";
 "VoIPCallRemoteDidInvite"="%@ has joined the group chat";
-"VoIPCallLocalNetworkError"="local network error";
-"VoIPCallRemoteNetworkError"="receiver network error";
+"VoIPCallLocalNetworkError"="Local network error";
+"VoIPCallRemoteNetworkError"="Receiver network error";
 "bottom_result_view_choosed_person_prefix"="Selected";
 "bottom_result_view_choosed_person_subfix"="member(s)";
 "Cancel"="Cancel";

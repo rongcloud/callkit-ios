@@ -5,7 +5,7 @@
   Copyright © 2020 RongCloud. All rights reserved.
 */
 
-"VoIP_Rejected_By_Blacklist"="تم رفض المكالمة من قبل المتلقي";
+"VoIP_Rejected_By_Blacklist"="تم إضافتها إلى القائمة السوداء";
 "VoIPAudioCall"="مكالمة صوتية";
 "VoIPVideoCall"="مكالمة فيديو";
 "VoIPAudioCallExistedWarning"="مكالمة صوتية جارية، يرجى المحاولة مرة أخرى في وقت لاحق";

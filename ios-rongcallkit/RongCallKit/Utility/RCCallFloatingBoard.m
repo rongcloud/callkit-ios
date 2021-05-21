@@ -60,10 +60,9 @@ static NSString *RCVoipFloatingBoardPosY = @"RCVoipFloatingBoardPosY";
 
 - (void)registerTelephonyEvent {
     self.callCenter = [[CTCallCenter alloc] init];
-    __weak __typeof(self) weakSelf = self;
     self.callCenter.callEventHandler = ^(CTCall *call) {
         if ([call.callState isEqualToString:CTCallStateConnected]) {
-            [weakSelf.callSession hangup];
+            [[RCCXCall sharedInstance] hangupIfNeedWithUUID:call.callID];
         }
     };
 }

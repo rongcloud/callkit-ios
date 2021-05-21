@@ -31,17 +31,18 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
     BOOL hangupButtonClick;
 }
 
-@property(nonatomic, strong) NSTimer *activeTimer;
-@property(nonatomic, strong) AVAudioPlayer *audioPlayer;
-@property(nonatomic, assign) BOOL needPlayingAlertAfterForeground;
-@property(nonatomic, assign) BOOL needPlayingRingAfterForeground;
-@property(nonatomic, strong) CTCallCenter *callCenter;
-@property(nonatomic, strong) UIView *topGradientView;
-@property(nonatomic, strong) UIView *bottomGradientView;
-@property(nonatomic, strong) UIAlertController *alertController;
-@property(nonatomic, assign) BOOL backCamera;
-@property(nonatomic, weak) NSTimer *vibrateTimer;
-@property(nonatomic, strong, readonly) NSString *reportDesc;
+@property (nonatomic, strong) NSTimer *activeTimer;
+@property (nonatomic, strong) AVAudioPlayer *audioPlayer;
+@property (nonatomic, assign) BOOL needPlayingAlertAfterForeground;
+@property (nonatomic, assign) BOOL needPlayingRingAfterForeground;
+@property (nonatomic, strong) CTCallCenter *callCenter;
+@property (nonatomic, strong) UIView *topGradientView;
+@property (nonatomic, strong) UIView *bottomGradientView;
+@property (nonatomic, strong) UIAlertController *alertController;
+@property (nonatomic, assign) BOOL backCamera;
+@property (nonatomic, weak) NSTimer *vibrateTimer;
+@property (nonatomic, strong, readonly) NSString *reportDesc;
+@property (nonatomic, assign) BOOL receivedVideoFirstKeyFrame;
 
 @end
 
@@ -61,6 +62,7 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
         [RCCallKitUtility setScreenForceOn];
         [_callSession setMinimized:NO];
         self.needPlayingRingAfterForeground = YES;
+        self.receivedVideoFirstKeyFrame = NO;
         hangupButtonClick = NO;
     }
     return self;
@@ -309,10 +311,7 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
         [self performSelector:@selector(checkApplicationStateAndAlert) withObject:nil afterDelay:1];
     }
 
-    if (self.callSession.callStatus == RCCallActive) {
-        [self updateActiveTimer];
-        [self startActiveTimer];
-    } else if (self.callSession.callStatus == RCCallDialing) {
+    if (self.callSession.callStatus == RCCallDialing) {
         self.tipsLabel.text = RCCallKitLocalizedString(@"VoIPCallWaitingForRemoteAccept");
     } else if (self.callSession.callStatus == RCCallIncoming || self.callSession.callStatus == RCCallRinging) {
         if (self.needPlayingRingAfterForeground) {
@@ -836,7 +835,13 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
 }
 
 #pragma mark - layout
-- (void)resetLayout:(BOOL)isMultiCall mediaType:(RCCallMediaType)mediaType callStatus:(RCCallStatus)callStatus {
+- (void)resetLayout:(BOOL)isMultiCall mediaType:(RCCallMediaType)mediaType callStatus:(RCCallStatus)sessionCallStatus {
+    RCCallStatus callStatus = sessionCallStatus;
+    if ((callStatus == RCCallIncoming || callStatus == RCCallRinging) && [RCCXCall sharedInstance].acceptedFromCallKit) {
+        callStatus = RCCallActive;
+        [RCCXCall sharedInstance].acceptedFromCallKit = NO;
+    }
+    
     if (mediaType == RCCallMediaAudio && !isMultiCall) {
         self.backgroundView.backgroundColor=[UIColor colorWithRed:20/255.0 green:28/255.0 blue:36/255.0 alpha:1/1.0];
         self.backgroundView.hidden = NO;
@@ -1444,9 +1449,8 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
         [self.callSession.caller isEqualToString:[RCIMClient sharedRCIMClient].currentUserInfo.userId]) {
         [[RCCXCall sharedInstance] reportOutgoingCallConnected];
     }
-
-    self.tipsLabel.text = (self.callSession.mediaType == RCCallMediaVideo) ? RCCallKitLocalizedString(@"Connecting...") : @"";
-    [self startActiveTimer];
+    
+    self.tipsLabel.text = RCCallKitLocalizedString(@"Connecting...");
     [self resetLayout:self.callSession.isMultiCall
             mediaType:self.callSession.mediaType
            callStatus:self.callSession.callStatus];
@@ -1514,8 +1518,6 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
     [self resetLayout:self.callSession.isMultiCall
             mediaType:self.callSession.mediaType
            callStatus:self.callSession.callStatus];
-    
-    [[RCCXCall sharedInstance] setAVAudioSessionMode];
 }
 
 /*!
@@ -1648,7 +1650,7 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
                 break;
         }
         
-        if (self.callSession.callStatus == RCCallActive) {
+        if (self.callSession.callStatus == RCCallActive && self.receivedVideoFirstKeyFrame) {
             if (txQuality > RCCall_Quality_VBad || rxQuality > RCCall_Quality_VBad) {
                 //[self playNetworkBadSounds];
                 self.tipsLabel.frame =
@@ -1657,7 +1659,7 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
                            self.view.frame.size.width - RCCallHorizontalMargin * 2, RCCallLabelHeight);
                 self.tipsLabel.text = RCCallKitLocalizedString(@"voip_network_bad");
             } else {
-                self.tipsLabel.text = nil;
+                self.tipsLabel.text = @"";
             }
         }
     });
@@ -1679,9 +1681,20 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
     }
 }
 
-- (void)receiveRemoteUserVideoFirstKeyFrame:(NSString *)userId
-{
-    self.tipsLabel.text = @"";
+- (void)receiveRemoteUserVideoFirstKeyFrame:(NSString *)userId {
+    if (self.callSession.mediaType == RCCallMediaVideo) {
+        self.tipsLabel.text = @"";
+        self.receivedVideoFirstKeyFrame = YES;
+        [self startActiveTimer];
+    }
+}
+
+- (void)receiveRemoteUserVideoFirstAudioFrame:(NSString *)userId {
+    if (self.callSession.mediaType == RCCallMediaAudio) {
+        self.tipsLabel.text = @"";
+        self.receivedVideoFirstKeyFrame = YES;
+        [self startActiveTimer];
+    }
 }
 
 - (void)setSpeakerEnable:(BOOL)enable

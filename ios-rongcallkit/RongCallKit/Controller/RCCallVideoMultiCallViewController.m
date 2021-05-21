@@ -9,6 +9,7 @@
 #import "RCCallVideoMultiCallViewController.h"
 #import "RCAudioMultiCallUserCollectionLayout.h"
 #import "RCCall.h"
+#import "RCCXCall.h"
 #import "RCCallFloatingBoard.h"
 #import "RCCallKitUtility.h"
 #import "RCCallMultiCallUserCell.h"
@@ -450,8 +451,15 @@
     });
 }
 
-- (void)resetLayout:(BOOL)isMultiCall mediaType:(RCCallMediaType)mediaType callStatus:(RCCallStatus)callStatus {
-    [super resetLayout:isMultiCall mediaType:mediaType callStatus:callStatus];
+- (void)resetLayout:(BOOL)isMultiCall mediaType:(RCCallMediaType)mediaType callStatus:(RCCallStatus)sessionCallStatus {
+    [super resetLayout:isMultiCall mediaType:mediaType callStatus:sessionCallStatus];
+    
+    RCCallStatus callStatus = sessionCallStatus;
+    if ((callStatus == RCCallIncoming || callStatus == RCCallRinging) && [RCCXCall sharedInstance].acceptedFromCallKit) {
+        callStatus = RCCallActive;
+        [RCCXCall sharedInstance].acceptedFromCallKit = NO;
+    }
+    
     self.blurView.hidden = YES;
 
     if (callStatus == RCCallIncoming || callStatus == RCCallRinging) {

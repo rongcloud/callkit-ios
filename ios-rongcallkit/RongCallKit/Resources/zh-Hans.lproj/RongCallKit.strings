@@ -5,7 +5,7 @@
   Copyright © 2020 RongCloud. All rights reserved.
 */
 
-"VoIP_Rejected_By_Blacklist"="您的通话请求已发出，但被对方拒绝";
+"VoIP_Rejected_By_Blacklist"="已被对方加入黑名单";
 "VoIPAudioCall"="语音通话";
 "VoIPVideoCall"="视频通话";
 "VoIPAudioCallExistedWarning"="正在进行语音通话，请稍后再试";

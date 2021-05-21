@@ -95,7 +95,7 @@ typedef void (^CompleteBlock)(NSArray *addUserIdList);
         [weakVC done];
     }];
     
-    _toolBar.numberLabel.text = [NSString stringWithFormat:@"%@ %zi %@",RCCallKitLocalizedString(@"bottom_result_view_choosed_person_prefix"),  self.selectUserIds.count, RCCallKitLocalizedString(@"bottom_result_view_choosed_person_subfix")];
+    _toolBar.numberLabel.text = [NSString stringWithFormat:@"%@ %zi %@",RCCallKitLocalizedString(@"bottom_result_view_choosed_person_prefix"),  self.selectUserIds.count + 1, RCCallKitLocalizedString(@"bottom_result_view_choosed_person_subfix")];
     _toolBar.numberLabel.textColor = [UIColor colorWithRed:168/255.0 green:168/255.0 blue:168/255.0 alpha:1/1.0];
     
     [self.navigationController.view addSubview:_toolBar];
@@ -299,7 +299,7 @@ typedef void (^CompleteBlock)(NSArray *addUserIdList);
         [tableView deselectRowAtIndexPath:indexPath animated:NO];
     }
 
-    _toolBar.numberLabel.text = [NSString stringWithFormat:@"%@ %zi %@",RCCallKitLocalizedString(@"bottom_result_view_choosed_person_prefix"),  self.selectUserIds.count, RCCallKitLocalizedString(@"bottom_result_view_choosed_person_subfix")];
+    _toolBar.numberLabel.text = [NSString stringWithFormat:@"%@ %zi %@",RCCallKitLocalizedString(@"bottom_result_view_choosed_person_prefix"),  self.selectUserIds.count + 1, RCCallKitLocalizedString(@"bottom_result_view_choosed_person_subfix")];
     
     if (self.selectUserIds.count > 0) {
         _toolBar.numberLabel.textColor = dynamic_color(0x3A91F3, 0x007acc);
