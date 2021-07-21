@@ -42,7 +42,7 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
 @property (nonatomic, assign) BOOL backCamera;
 @property (nonatomic, weak) NSTimer *vibrateTimer;
 @property (nonatomic, strong, readonly) NSString *reportDesc;
-@property (nonatomic, assign) BOOL receivedVideoFirstKeyFrame;
+@property (nonatomic, assign) BOOL receivedFirstKeyFrame;
 
 @end
 
@@ -62,7 +62,7 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
         [RCCallKitUtility setScreenForceOn];
         [_callSession setMinimized:NO];
         self.needPlayingRingAfterForeground = YES;
-        self.receivedVideoFirstKeyFrame = NO;
+        self.receivedFirstKeyFrame = NO;
         hangupButtonClick = NO;
     }
     return self;
@@ -153,6 +153,12 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
         [_callSession addDelegate:self];
         [_callSession setMinimized:YES];
         hangupButtonClick = NO;
+        
+        if (self.callSession.callStatus == RCCallActive
+            && self.callSession.connectedTime > 0) {
+            [self updateActiveTimer];
+            [self startActiveTimer];
+        }
     }
     return self;
 }
@@ -214,16 +220,10 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
         if (self.audioPlayer) {
             [self stopPlayRing];
         }
-        AVAudioSession *audioSession = [AVAudioSession sharedInstance];
-        if (self.callSession.callStatus == RCCallDialing) {
-            [audioSession setCategory:AVAudioSessionCategoryPlayAndRecord withOptions:AVAudioSessionCategoryOptionAllowBluetooth | AVAudioSessionCategoryOptionAllowBluetoothA2DP error:nil];
-            
-        } else {
-            //默认情况按静音或者锁屏键会静音
-            [audioSession setCategory:AVAudioSessionCategorySoloAmbient error:nil];
+        
+        if (self.callSession.callStatus != RCCallDialing) {
             [self triggerVibrate];
         }
-        [audioSession setActive:YES error:nil];
 
         NSURL *url = [NSURL fileURLWithPath:ringPath];
         NSError *error = nil;
@@ -357,11 +357,10 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
     [self didTapMinimizeButton];
 
     Class selfClass = [self class];
-    [RCCallFloatingBoard
-        startCallFloatingBoard:self.callSession
-              withTouchedBlock:^(RCCallSession *callSession) {
-                  [[RCCall sharedRCCall] presentCallViewController:[[selfClass alloc] initWithActiveCall:callSession]];
-              }];
+    [RCCallFloatingBoard startCallFloatingBoard:self.callSession
+                               withTouchedBlock:^(RCCallSession *callSession) {
+        [[RCCall sharedRCCall] presentCallViewController:[[selfClass alloc] initWithActiveCall:callSession]];
+    }];
     [self stopActiveTimer];
     [[RCCall sharedRCCall] dismissCallViewController:self];
 }
@@ -1650,7 +1649,7 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
                 break;
         }
         
-        if (self.callSession.callStatus == RCCallActive && self.receivedVideoFirstKeyFrame) {
+        if (self.callSession.callStatus == RCCallActive && self.receivedFirstKeyFrame) {
             if (txQuality > RCCall_Quality_VBad || rxQuality > RCCall_Quality_VBad) {
                 //[self playNetworkBadSounds];
                 self.tipsLabel.frame =
@@ -1682,19 +1681,15 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
 }
 
 - (void)receiveRemoteUserVideoFirstKeyFrame:(NSString *)userId {
-    if (self.callSession.mediaType == RCCallMediaVideo) {
-        self.tipsLabel.text = @"";
-        self.receivedVideoFirstKeyFrame = YES;
-        [self startActiveTimer];
-    }
+    self.tipsLabel.text = @"";
+    self.receivedFirstKeyFrame = YES;
+    [self startActiveTimer];
 }
 
 - (void)receiveRemoteUserVideoFirstAudioFrame:(NSString *)userId {
-    if (self.callSession.mediaType == RCCallMediaAudio) {
-        self.tipsLabel.text = @"";
-        self.receivedVideoFirstKeyFrame = YES;
-        [self startActiveTimer];
-    }
+    self.tipsLabel.text = @"";
+    self.receivedFirstKeyFrame = YES;
+    [self startActiveTimer];
 }
 
 - (void)setSpeakerEnable:(BOOL)enable
