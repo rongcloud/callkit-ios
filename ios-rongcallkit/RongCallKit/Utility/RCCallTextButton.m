@@ -12,26 +12,27 @@
 
 @interface RCCallTextButton ()
 @property (nonatomic, strong) NSMutableDictionary *stateMap;
-@property(nonatomic, strong) UILabel *tLabel;
+@property (nonatomic, strong) UILabel *tLabel;
 @end
 
 @implementation RCCallTextButton
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-    
+
     if (self.tLabel.text.length > 0) {
         [self.tLabel sizeToFit];
-        
+
         CGSize size = self.tLabel.bounds.size;
-        
-        self.tLabel.center = CGPointMake(self.bounds.size.width/2.0, self.bounds.size.height + size.height/2.0 + RCCallInsideMiniMargin);
+
+        self.tLabel.center = CGPointMake(self.bounds.size.width / 2.0,
+                                         self.bounds.size.height + size.height / 2.0 + RCCallInsideMiniMargin);
     }
 }
 
 - (void)setTitle:(NSString *)title forState:(UIControlState)state {
     [super setTitle:nil forState:state];
-    
+
     self.tLabel.text = title;
     if ([RCKitUtility isRTL]) {
         self.tLabel.textAlignment = NSTextAlignmentRight;
@@ -44,33 +45,32 @@
 
 - (void)setSelected:(BOOL)selected {
     [super setSelected:selected];
-    
+
     NSString *key = [self mapStateKey:self.state];
-    
+
     if (self.stateMap && [self.stateMap.allKeys containsObject:key]) {
         self.tLabel.text = self.stateMap[key];
-        self.tLabel.frame = CGRectMake(0, self.bounds.size.height, self.bounds.size.width*2, 26);
+        self.tLabel.frame = CGRectMake(0, self.bounds.size.height, self.bounds.size.width * 2, 26);
     }
 }
 
 - (void)setEnabled:(BOOL)enabled {
     NSString *key = [self mapStateKey:self.state];
-    
+
     if (self.stateMap && [self.stateMap.allKeys containsObject:key]) {
         self.tLabel.text = self.stateMap[key];
-        self.tLabel.frame = CGRectMake(0, self.bounds.size.height, self.bounds.size.width*2, 26);
+        self.tLabel.frame = CGRectMake(0, self.bounds.size.height, self.bounds.size.width * 2, 26);
     }
 }
 
 - (void)setHighlighted:(BOOL)highlighted {
     NSString *key = [self mapStateKey:self.state];
-    
+
     if (self.stateMap && [self.stateMap.allKeys containsObject:key]) {
         self.tLabel.text = self.stateMap[key];
-        self.tLabel.frame = CGRectMake(0, self.bounds.size.height, self.bounds.size.width*2, 26);
+        self.tLabel.frame = CGRectMake(0, self.bounds.size.height, self.bounds.size.width * 2, 26);
     }
 }
-
 
 - (NSString *)mapStateKey:(UIControlState)state {
     switch (state) {
@@ -88,7 +88,8 @@
 
 - (UILabel *)tLabel {
     if (!_tLabel) {
-        _tLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, self.bounds.size.height, self.bounds.size.width*2, 26)];
+        _tLabel =
+            [[UILabel alloc] initWithFrame:CGRectMake(0, self.bounds.size.height, self.bounds.size.width * 2, 26)];
         _tLabel.numberOfLines = 2;
         [_tLabel setFont:[UIFont fontWithName:@"PingFangSC-Regular" size:13]];
         _tLabel.textColor = [UIColor whiteColor];
@@ -103,6 +104,5 @@
     }
     return _stateMap;
 }
-
 
 @end

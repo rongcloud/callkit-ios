@@ -48,12 +48,16 @@
  @param isVideo 是否视频通话。YES: video NO: audio
  */
 - (void)reportIncomingCallWithInviter:(NSString *)inviterId
-                           userIdList:(NSArray <NSString *> *)userIdList
+                           userIdList:(NSArray<NSString *> *)userIdList
                               isVideo:(BOOL)isVideo;
 
 /*!
+ 接通苹果 Callkit 通话
+ */
+- (void)answerCXCall;
+
+/*!
  挂断苹果 Callkit 通话
- 
  */
 - (void)endCXCall;
 

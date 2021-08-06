@@ -6,11 +6,10 @@
 //  Copyright © 2018年 Rong Cloud. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
-typedef void(^RCCallToolBarConfirmBlock)();
-
+typedef void (^RCCallToolBarConfirmBlock)();
 
 @interface RCCallToolBar : UIView
 
@@ -18,6 +17,6 @@ typedef void(^RCCallToolBarConfirmBlock)();
 
 @property (nonatomic, strong) UIButton *confirmButton;
 
-- (instancetype)initWithFrame:(CGRect)frame withBlock:(RCCallToolBarConfirmBlock) block ;
+- (instancetype)initWithFrame:(CGRect)frame withBlock:(RCCallToolBarConfirmBlock)block;
 
 @end

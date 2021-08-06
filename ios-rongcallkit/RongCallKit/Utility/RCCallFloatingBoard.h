@@ -18,22 +18,22 @@
 /*!
  悬浮窗的Window
  */
-@property(nonatomic, strong) UIWindow *window;
+@property (nonatomic, strong) UIWindow *window;
 
 /*!
  音频通话最小化时的Button
  */
-@property(nonatomic, strong) UIButton *floatingButton;
+@property (nonatomic, strong) UIButton *floatingButton;
 
 /*!
  视频通话最小化时的视频View
  */
-@property(nonatomic, strong) UIView *videoView;
+@property (nonatomic, strong) UIView *videoView;
 
 /*!
  当前的通话实体
  */
-@property(nonatomic, strong) RCCallSession *callSession;
+@property (nonatomic, strong) RCCallSession *callSession;
 
 /*!
  开启悬浮窗

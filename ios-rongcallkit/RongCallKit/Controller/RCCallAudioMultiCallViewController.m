@@ -8,8 +8,8 @@
 
 #import "RCCallAudioMultiCallViewController.h"
 #import "RCAudioMultiCallUserCollectionLayout.h"
-#import "RCCall.h"
 #import "RCCXCall.h"
+#import "RCCall.h"
 #import "RCCallFloatingBoard.h"
 #import "RCCallKitUtility.h"
 #import "RCCallMultiCallUserCell.h"
@@ -23,8 +23,8 @@
 
 @interface RCCallAudioMultiCallViewController () <UICollectionViewDataSource>
 
-@property(nonatomic, strong) RCCallUserCallInfoModel *mainModel;
-@property(nonatomic, strong) NSMutableArray *subUserModelList;
+@property (nonatomic, strong) RCCallUserCallInfoModel *mainModel;
+@property (nonatomic, strong) NSMutableArray *subUserModelList;
 
 @end
 
@@ -64,11 +64,13 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    [RCCallKitUtility checkSystemPermission:self.callSession.mediaType success:^{
-        
-    } error:^{
-        [self hangupButtonClicked];
-    }];
+    [RCCallKitUtility checkSystemPermission:self.callSession.mediaType
+        success:^{
+
+        }
+        error:^{
+            [self hangupButtonClicked];
+        }];
 }
 
 - (void)initAllUserModel {
@@ -134,8 +136,7 @@
             }
             if (self.callSession.minimized) {
                 [self.subUserModelList addObject:self.mainModel];
-            }
-            else {
+            } else {
                 RCCallUserCallInfoModel *userModel = [self generateUserModel:currentUserId];
                 [self.subUserModelList addObject:userModel];
             }
@@ -255,7 +256,7 @@
         _inviterPortraitView.layer.masksToBounds = YES;
         if (RCKitConfigCenter.ui.globalConversationAvatarStyle == RC_USER_AVATAR_CYCLE &&
             RCKitConfigCenter.ui.globalMessageAvatarStyle == RC_USER_AVATAR_CYCLE) {
-            _inviterPortraitView.layer.cornerRadius = RCCallHeaderLength/2;
+            _inviterPortraitView.layer.cornerRadius = RCCallHeaderLength / 2;
         } else {
             _inviterPortraitView.layer.cornerRadius = 4.f;
         }
@@ -266,7 +267,7 @@
 - (RCloudImageView *)inviterPortraitBgView {
     if (!_inviterPortraitBgView) {
         _inviterPortraitBgView = [[RCloudImageView alloc] init];
-        
+
         [self.view addSubview:_inviterPortraitBgView];
         [self.view insertSubview:_inviterPortraitBgView aboveSubview:self.backgroundView];
         _inviterPortraitBgView.hidden = YES;
@@ -301,8 +302,7 @@
         _userCollectionTitleLabel.textColor = [UIColor whiteColor];
         _userCollectionTitleLabel.font = [UIFont systemFontOfSize:16];
         _userCollectionTitleLabel.textAlignment = NSTextAlignmentCenter;
-        _userCollectionTitleLabel.text =
-        RCCallKitLocalizedString(@"VoIPMultiCallUserCollectionTitle" );
+        _userCollectionTitleLabel.text = RCCallKitLocalizedString(@"VoIPMultiCallUserCollectionTitle");
         _userCollectionTitleLabel.layer.shadowOpacity = 0.8;
         _userCollectionTitleLabel.layer.shadowRadius = 3.0;
         _userCollectionTitleLabel.layer.shadowColor = [UIColor blackColor].CGColor;
@@ -316,13 +316,13 @@
 - (UICollectionView *)userCollectionView {
     if (!_userCollectionView) {
         if (self.userCollectionViewLayout) {
-            _userCollectionView =
-                [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:self.userCollectionViewLayout];
+            _userCollectionView = [[UICollectionView alloc] initWithFrame:CGRectZero
+                                                     collectionViewLayout:self.userCollectionViewLayout];
         } else {
             RCAudioMultiCallUserCollectionLayout *userCollectionViewLayout =
                 [[RCAudioMultiCallUserCollectionLayout alloc] initWithItemMargin:5 buttomPadding:10];
-            _userCollectionView =
-                [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:userCollectionViewLayout];
+            _userCollectionView = [[UICollectionView alloc] initWithFrame:CGRectZero
+                                                     collectionViewLayout:userCollectionViewLayout];
         }
         _userCollectionView.backgroundColor = [UIColor clearColor];
 
@@ -353,26 +353,28 @@
     [existUserIdList addObject:currentUserId];
 
     __weak typeof(self) weakSelf = self;
-    if ([RCCall sharedRCCall].callInviteNewUserDelegate
-        && [[RCCall sharedRCCall].callInviteNewUserDelegate respondsToSelector:@selector(inviteNewUser:targetId:mediaType:baseOn:selectResult:)]
-        && self.callSession) {
-        [[RCCall sharedRCCall].callInviteNewUserDelegate inviteNewUser:existUserIdList
-                                                              targetId:self.targetId
-                                                             mediaType:self.mediaType
-                                                                baseOn:self
-                                                          selectResult:^(NSArray<NSString *> *userIdList) {
-            [weakSelf.callSession inviteRemoteUsers:userIdList mediaType:weakSelf.mediaType];
-        }];
+    if ([RCCall sharedRCCall].callInviteNewUserDelegate &&
+        [[RCCall sharedRCCall].callInviteNewUserDelegate
+            respondsToSelector:@selector(inviteNewUser:targetId:mediaType:baseOn:selectResult:)] &&
+        self.callSession) {
+        [[RCCall sharedRCCall].callInviteNewUserDelegate
+            inviteNewUser:existUserIdList
+                 targetId:self.targetId
+                mediaType:self.mediaType
+                   baseOn:self
+             selectResult:^(NSArray<NSString *> *userIdList) {
+                 [weakSelf.callSession inviteRemoteUsers:userIdList mediaType:weakSelf.mediaType];
+             }];
     } else {
         RCCallSelectMemberViewController *selectViewController = [[RCCallSelectMemberViewController alloc]
-                                                                  initWithConversationType:self.conversationType
-                                                                  targetId:self.targetId
-                                                                  mediaType:self.mediaType
-                                                                  exist:[existUserIdList copy]
-                                                                  success:^(NSArray *addUserIdList) {
-                                                                      [weakSelf.callSession inviteRemoteUsers:addUserIdList mediaType:weakSelf.mediaType];
-                                                                  }];
-        UINavigationController* nav = [[UINavigationController alloc] initWithRootViewController:selectViewController];
+            initWithConversationType:self.conversationType
+                            targetId:self.targetId
+                           mediaType:self.mediaType
+                               exist:[existUserIdList copy]
+                             success:^(NSArray *addUserIdList) {
+                                 [weakSelf.callSession inviteRemoteUsers:addUserIdList mediaType:weakSelf.mediaType];
+                             }];
+        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:selectViewController];
         nav.modalPresentationStyle = UIModalPresentationFullScreen;
         dispatch_async(dispatch_get_main_queue(), ^{
             [weakSelf presentViewController:nav animated:YES completion:nil];
@@ -386,16 +388,16 @@
         [existUserIdList addObject:userProfile.userId];
     }
     [existUserIdList addObject:currentUserId];
-    
+
     __weak typeof(self) weakSelf = self;
     RCCallSelectMemberViewController *selectViewController = [[RCCallSelectMemberViewController alloc]
-                                                              initWithConversationType:self.conversationType
-                                                              targetId:self.targetId
-                                                              mediaType:self.mediaType
-                                                              exist:existUserIdList
-                                                              success:^(NSArray *addUserIdList) {
-                                                                  [weakSelf.callSession inviteRemoteUsers:addUserIdList mediaType:weakSelf.mediaType];
-                                                              }];
+        initWithConversationType:self.conversationType
+                        targetId:self.targetId
+                       mediaType:self.mediaType
+                           exist:existUserIdList
+                         success:^(NSArray *addUserIdList) {
+                             [weakSelf.callSession inviteRemoteUsers:addUserIdList mediaType:weakSelf.mediaType];
+                         }];
     UINavigationController *rootVC = [[UINavigationController alloc] initWithRootViewController:selectViewController];
     rootVC.modalPresentationStyle = UIModalPresentationFullScreen;
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -405,32 +407,35 @@
 
 - (void)resetLayout:(BOOL)isMultiCall mediaType:(RCCallMediaType)mediaType callStatus:(RCCallStatus)sessionCallStatus {
     [super resetLayout:isMultiCall mediaType:mediaType callStatus:sessionCallStatus];
-    
+
     RCCallStatus callStatus = sessionCallStatus;
-    if ((callStatus == RCCallIncoming || callStatus == RCCallRinging) && [RCCXCall sharedInstance].acceptedFromCallKit) {
+    if ((callStatus == RCCallIncoming || callStatus == RCCallRinging) &&
+        [RCCXCall sharedInstance].acceptedFromCallKit) {
         callStatus = RCCallActive;
         [RCCXCall sharedInstance].acceptedFromCallKit = NO;
     }
-    
+
     self.blurView.hidden = YES;
 
     if (callStatus == RCCallIncoming || callStatus == RCCallRinging) {
         [self.inviterPortraitView setImageURL:[NSURL URLWithString:self.mainModel.userInfo.portraitUri]];
-        self.inviterPortraitView.frame = CGRectMake((self.view.frame.size.width - RCCallHeaderLength) / 2, RCCallTopGGradientHeight + RCCallStatusBarHeight, RCCallHeaderLength, RCCallHeaderLength);
+        self.inviterPortraitView.frame =
+            CGRectMake((self.view.frame.size.width - RCCallHeaderLength) / 2,
+                       RCCallTopGGradientHeight + RCCallStatusBarHeight, RCCallHeaderLength, RCCallHeaderLength);
         self.inviterPortraitView.hidden = NO;
 
         [self.inviterPortraitBgView setImageURL:[NSURL URLWithString:self.mainModel.userInfo.portraitUri]];
         self.inviterPortraitBgView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
         self.inviterPortraitBgView.hidden = YES;
-        
+
         self.inviterNameLabel.text = self.mainModel.userInfo.name;
-        self.inviterNameLabel.frame = CGRectMake((self.view.frame.size.width - RCCallNameLabelWidth) / 2,
-                                                 RCCallTopGGradientHeight + RCCallHeaderLength + RCCallTopMargin + RCCallStatusBarHeight,
-                                                 RCCallNameLabelWidth,
-                                                 RCCallLabelHeight);
+        self.inviterNameLabel.frame =
+            CGRectMake((self.view.frame.size.width - RCCallNameLabelWidth) / 2,
+                       RCCallTopGGradientHeight + RCCallHeaderLength + RCCallTopMargin + RCCallStatusBarHeight,
+                       RCCallNameLabelWidth, RCCallLabelHeight);
         self.inviterNameLabel.hidden = NO;
 
-    }else if (callStatus == RCCallDialing){
+    } else if (callStatus == RCCallDialing) {
         self.inviterPortraitBgView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
         self.inviterPortraitBgView.hidden = YES;
         self.inviterNameLabel.hidden = YES;
@@ -444,27 +449,30 @@
     CGFloat titleY = MAX(RCCallVerticalMargin * 2 + RCCallHeaderLength + RCCallInsideMargin * 3 + RCCallLabelHeight * 2,
                          (self.view.frame.size.height - RCCallLabelHeight) / 2);
     if (callStatus == RCCallIncoming || callStatus == RCCallRinging) {
-        self.userCollectionTitleLabel.frame = CGRectMake(
-            RCCallHorizontalMargin,  self.view.frame.size.height - RCCallButtonBottomMargin * 2 - RCCallButtonLength - 100.0 - 23.0 - 16.0 - RCCallExtraSpace, self.view.frame.size.width - RCCallHorizontalMargin * 2, RCCallLabelHeight);
+        self.userCollectionTitleLabel.frame =
+            CGRectMake(RCCallHorizontalMargin,
+                       self.view.frame.size.height - RCCallButtonBottomMargin * 2 - RCCallButtonLength - 100.0 - 23.0 -
+                           16.0 - RCCallExtraSpace,
+                       self.view.frame.size.width - RCCallHorizontalMargin * 2, RCCallLabelHeight);
         self.userCollectionTitleLabel.hidden = NO;
-        _userCollectionTitleLabel.text =
-        RCCallKitLocalizedString(@"VoIPMultiCallUserCollectionTitle" );
+        _userCollectionTitleLabel.text = RCCallKitLocalizedString(@"VoIPMultiCallUserCollectionTitle");
         _userCollectionTitleLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size:16];
         self.userCollectionTitleLabel.alpha = 0.4;
     } else {
         self.userCollectionTitleLabel.alpha = 0.4;
-        self.userCollectionTitleLabel.frame = CGRectMake(
-                                                         RCCallHorizontalMargin, RCCallMiniButtonTopMargin + RCCallStatusBarHeight, self.view.frame.size.width - RCCallHorizontalMargin * 2, RCCallMiniLabelHeight);
+        self.userCollectionTitleLabel.frame =
+            CGRectMake(RCCallHorizontalMargin, RCCallMiniButtonTopMargin + RCCallStatusBarHeight,
+                       self.view.frame.size.width - RCCallHorizontalMargin * 2, RCCallMiniLabelHeight);
         self.userCollectionTitleLabel.hidden = NO;
-        self.userCollectionTitleLabel.text =  RCCallKitLocalizedString(@"VoIPAudioCall" );;
+        self.userCollectionTitleLabel.text = RCCallKitLocalizedString(@"VoIPAudioCall");
         _userCollectionTitleLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size:18];
     }
 
     if (callStatus == RCCallIncoming || callStatus == RCCallRinging) {
         self.userCollectionView.frame = CGRectMake(
-            RCCallHorizontalMargin  ,  self.view.frame.size.height - RCCallButtonBottomMargin * 2 - RCCallButtonLength - 100.0 - RCCallExtraSpace,
-            self.view.frame.size.width - RCCallHorizontalMargin * 2,
-            80.0);
+            RCCallHorizontalMargin,
+            self.view.frame.size.height - RCCallButtonBottomMargin * 2 - RCCallButtonLength - 100.0 - RCCallExtraSpace,
+            self.view.frame.size.width - RCCallHorizontalMargin * 2, 80.0);
 
         if (self.userCollectionViewLayout) {
             self.userCollectionView.collectionViewLayout = self.userCollectionViewLayout;
@@ -479,9 +487,10 @@
         self.userCollectionView.frame = CGRectMake(0, RCCallTopGGradientHeight + 2.0f + RCCallStatusBarHeight,
                                                    self.view.frame.size.width, RCCallButtonLength * 3);
         self.tipsLabel.frame =
-        CGRectMake(RCCallHorizontalMargin, self.userCollectionView.frame.origin.y + self.userCollectionView.frame.size.height + 40.0f,
-                   self.view.frame.size.width - RCCallHorizontalMargin * 2, RCCallLabelHeight);
-        
+            CGRectMake(RCCallHorizontalMargin,
+                       self.userCollectionView.frame.origin.y + self.userCollectionView.frame.size.height + 40.0f,
+                       self.view.frame.size.width - RCCallHorizontalMargin * 2, RCCallLabelHeight);
+
         if (self.userCollectionViewLayout) {
             self.userCollectionView.collectionViewLayout = self.userCollectionViewLayout;
         } else {
@@ -534,8 +543,8 @@
 
     NSString *userName = [[RCUserInfoCacheManager sharedManager] getUserInfo:userId].name;
     if (userName) {
-        NSString *inviteTips = [NSString
-            stringWithFormat:RCCallKitLocalizedString(@"VoIPCallRemoteDidInvite" ), userName];
+        NSString *inviteTips =
+            [NSString stringWithFormat:RCCallKitLocalizedString(@"VoIPCallRemoteDidInvite"), userName];
         self.tipsLabel.text = inviteTips;
 
         __weak typeof(self) weakSelf = self;
@@ -610,8 +619,8 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView
                   cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    RCCallMultiCallUserCell *cell =
-        [collectionView dequeueReusableCellWithReuseIdentifier:RongVoIPMultiAudioCellReuseID forIndexPath:indexPath];
+    RCCallMultiCallUserCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:RongVoIPMultiAudioCellReuseID
+                                                                              forIndexPath:indexPath];
     RCCallUserCallInfoModel *model = self.subUserModelList[indexPath.row];
     [cell setModel:model status:self.callSession.callStatus];
     return cell;

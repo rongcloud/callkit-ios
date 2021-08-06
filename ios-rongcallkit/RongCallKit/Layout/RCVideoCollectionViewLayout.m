@@ -8,14 +8,14 @@
 
 #import "RCVideoCollectionViewLayout.h"
 @interface RCVideoCollectionViewLayout ()
-@property(nonatomic, strong) NSMutableArray *attributesArray;
-@property(nonatomic, assign) CGFloat itemAreaWidth;
-@property(nonatomic, assign) CGFloat itemWidth;
+@property (nonatomic, strong) NSMutableArray *attributesArray;
+@property (nonatomic, assign) CGFloat itemAreaWidth;
+@property (nonatomic, assign) CGFloat itemWidth;
 
 @end
 
 @implementation RCVideoCollectionViewLayout
- 
+
 //- (void)prepareLayout {
 //    int itemCount = (int)[self.collectionView numberOfItemsInSection:0];
 //    if (itemCount == 0) {
@@ -77,7 +77,10 @@
 //    [super prepareLayout];
 //}
 - (CGSize)collectionViewContentSize {
-    return CGSizeMake(self.itemSize.width * [self.collectionView numberOfItemsInSection:0]+ (self.minimumInteritemSpacing * ([self.collectionView numberOfItemsInSection:0] - 1)) + _collectionViewContentInset.left + _collectionViewContentInset.right, 0);
+    return CGSizeMake(self.itemSize.width * [self.collectionView numberOfItemsInSection:0] +
+                          (self.minimumInteritemSpacing * ([self.collectionView numberOfItemsInSection:0] - 1)) +
+                          _collectionViewContentInset.left + _collectionViewContentInset.right,
+                      0);
 }
 
 - (UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)path {
@@ -86,29 +89,29 @@
 }
 
 - (NSArray *)layoutAttributesForElementsInRect:(CGRect)rect {
-    NSArray * layoutAttributes_t = [super layoutAttributesForElementsInRect:rect];
-    NSArray * layoutAttributes = [[NSArray alloc]initWithArray:layoutAttributes_t copyItems:YES];
-    
+    NSArray *layoutAttributes_t = [super layoutAttributesForElementsInRect:rect];
+    NSArray *layoutAttributes = [[NSArray alloc] initWithArray:layoutAttributes_t copyItems:YES];
+
     NSMutableArray *attributesArrays = [NSMutableArray array];
-    CGFloat nowWidth = self.itemSize.width * [self.collectionView numberOfItemsInSection:0]+ (self.minimumInteritemSpacing * ([self.collectionView numberOfItemsInSection:0] - 1)) + _collectionViewContentInset.left  ;
-//    self.collectionView.contentOffset = CGPointMake(self.collectionView.frame.size.width, 0);
-    if (nowWidth < self.collectionView.frame.size.width - _collectionViewContentInset.left){
+    CGFloat nowWidth = self.itemSize.width * [self.collectionView numberOfItemsInSection:0] +
+        (self.minimumInteritemSpacing * ([self.collectionView numberOfItemsInSection:0] - 1)) +
+        _collectionViewContentInset.left;
+    //    self.collectionView.contentOffset = CGPointMake(self.collectionView.frame.size.width, 0);
+    if (nowWidth < self.collectionView.frame.size.width - _collectionViewContentInset.left) {
         nowWidth = self.collectionView.frame.size.width - _collectionViewContentInset.left;
     }
     for (NSInteger i = 0; i < layoutAttributes.count; i++) {
-//        NSIndexPath *indexPath = [NSIndexPath indexPathForItem:i inSection:0];
-        UICollectionViewLayoutAttributes *attribute  = [layoutAttributes objectAtIndex:i];
+        //        NSIndexPath *indexPath = [NSIndexPath indexPathForItem:i inSection:0];
+        UICollectionViewLayoutAttributes *attribute = [layoutAttributes objectAtIndex:i];
         CGRect nowFrame = attribute.frame;
         nowFrame.origin.x = nowWidth - attribute.frame.size.width;
         attribute.frame = nowFrame;
         [attributesArrays addObject:attribute];
         nowWidth = nowWidth - attribute.frame.size.width - self.minimumInteritemSpacing;
-//        [attributes addObject:[self layoutAttributesForItemAtIndexPath:indexPath]];
+        //        [attributes addObject:[self layoutAttributesForItemAtIndexPath:indexPath]];
     }
     self.attributesArray = attributesArrays;
     return attributesArrays;
 }
-
-
 
 @end

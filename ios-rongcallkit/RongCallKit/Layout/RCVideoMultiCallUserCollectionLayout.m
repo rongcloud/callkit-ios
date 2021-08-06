@@ -9,9 +9,9 @@
 #import "RCVideoMultiCallUserCollectionLayout.h"
 
 @interface RCVideoMultiCallUserCollectionLayout ()
-@property(nonatomic, strong) NSMutableArray *attributesArray;
-@property(nonatomic, assign) CGFloat itemAreaWidth;
-@property(nonatomic, assign) CGFloat itemWidth;
+@property (nonatomic, strong) NSMutableArray *attributesArray;
+@property (nonatomic, assign) CGFloat itemAreaWidth;
+@property (nonatomic, assign) CGFloat itemWidth;
 @end
 
 @implementation RCVideoMultiCallUserCollectionLayout

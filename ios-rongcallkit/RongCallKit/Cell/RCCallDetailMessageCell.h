@@ -24,12 +24,12 @@
 /*!
  消息文本的Label
  */
-@property(strong, nonatomic) UILabel *textLabel;
+@property (strong, nonatomic) UILabel *textLabel;
 
 /*!
  标识媒体类型的Icon
  */
-@property(strong, nonatomic) UIImageView *mediaTypeIcon;
+@property (strong, nonatomic) UIImageView *mediaTypeIcon;
 
 /*!
  设置当前消息Cell的数据模型

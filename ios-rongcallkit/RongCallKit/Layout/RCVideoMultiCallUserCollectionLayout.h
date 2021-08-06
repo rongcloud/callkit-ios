@@ -10,7 +10,7 @@
 
 @interface RCVideoMultiCallUserCollectionLayout : UICollectionViewLayout
 
-@property(nonatomic, assign) CGFloat itemMargin;
+@property (nonatomic, assign) CGFloat itemMargin;
 
 - (instancetype)initWithItemMargin:(CGFloat)itemMargin;
 

@@ -26,8 +26,8 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.messageLabel = [RCTipLabel greyTipLabel];
-        self.messageLabel.backgroundColor =
-            [RCKitUtility generateDynamicColor:hex_rgb(0xc9c9c9) darkColor:hex_rgb(0x232323)];
+        self.messageLabel.backgroundColor = [RCKitUtility generateDynamicColor:hex_rgb(0xc9c9c9)
+                                                                     darkColor:hex_rgb(0x232323)];
         self.messageLabel.textColor = dynamic_color(0xffffff, 0x707070);
         [self.baseContentView addSubview:self.messageLabel];
         self.messageLabel.marginInsets = UIEdgeInsetsMake(0.5f, 0.5f, 0.5f, 0.5f);
@@ -38,8 +38,8 @@
     self = [super initWithCoder:aDecoder];
     if (self) {
         self.messageLabel = [RCTipLabel greyTipLabel];
-        self.messageLabel.backgroundColor =
-            [RCKitUtility generateDynamicColor:rgba(0, 0, 0, 0.1) darkColor:hex_rgb(0x232323)];
+        self.messageLabel.backgroundColor = [RCKitUtility generateDynamicColor:rgba(0, 0, 0, 0.1)
+                                                                     darkColor:hex_rgb(0x232323)];
         self.messageLabel.textColor = dynamic_color(0xffffff, 0x707070);
         [self.baseContentView addSubview:self.messageLabel];
         self.messageLabel.marginInsets = UIEdgeInsetsMake(0.5f, 0.5f, 0.5f, 0.5f);
@@ -75,17 +75,17 @@
         }
 
         if (message.mediaType == RCCallMediaAudio) {
-            [self.messageLabel setText:[NSString stringWithFormat:@" %@%@ ",
-                                        RCCallKitLocalizedString(@"VoIPAudioCall"),status]
+            [self.messageLabel setText:[NSString stringWithFormat:@" %@%@ ", RCCallKitLocalizedString(@"VoIPAudioCall"),
+                                                                  status]
                    dataDetectorEnabled:NO];
         } else {
-            [self.messageLabel setText:[NSString stringWithFormat:@" %@%@ ",
-                                        RCCallKitLocalizedString(@"VoIPVideoCall"),status]
+            [self.messageLabel setText:[NSString stringWithFormat:@" %@%@ ", RCCallKitLocalizedString(@"VoIPVideoCall"),
+                                                                  status]
                    dataDetectorEnabled:NO];
         }
 
-        if (message.hangupReason == RCCallDisconnectReasonMediaServerClosed
-            || message.hangupReason == RCCallDisconnectReasonRemoteEngineUnsupported) {
+        if (message.hangupReason == RCCallDisconnectReasonMediaServerClosed ||
+            message.hangupReason == RCCallDisconnectReasonRemoteEngineUnsupported) {
             [self.messageLabel setText:RCCallKitLocalizedString(@"VoIPCallMediaServerClosed")];
         }
     }

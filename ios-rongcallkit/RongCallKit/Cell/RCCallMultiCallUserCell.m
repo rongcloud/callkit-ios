@@ -13,9 +13,9 @@
 
 @interface RCCallMultiCallUserCell ()
 
-@property(nonatomic, strong) RCCallUserCallInfoModel *model;
-@property(nonatomic, assign) RCCallStatus callStatus;
-@property(nonatomic, strong) UIVisualEffectView *blurView;
+@property (nonatomic, strong) RCCallUserCallInfoModel *model;
+@property (nonatomic, assign) RCCallStatus callStatus;
+@property (nonatomic, strong) UIVisualEffectView *blurView;
 
 @end
 
@@ -34,14 +34,13 @@
         self.headerImageView.layer.borderColor = [[UIColor whiteColor] CGColor];
 
         // add a white frame around the image
-       
+
         // Define how the edges of the layer are rasterized for each of the four
         // edges
         // (left, right, bottom, top) if the corresponding bit is set the edge will
         // be antialiased
         //
-        UIVisualEffect *blurEffect = [UIBlurEffect
-                                      effectWithStyle:UIBlurEffectStyleDark];
+        UIVisualEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
         self.blurView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
         self.blurView.frame = self.headerImageView.frame;
         [self.headerImageView setPlaceholderImage:[RCCallKitUtility imageFromVoIPBundle:@"default_portrait_msg"]];
@@ -59,7 +58,6 @@
         self.statusView.hidden = YES;
         [[self contentView] addSubview:self.statusView];
 
- 
         _cellNameLabel = [[UILabel alloc] init];
         _cellNameLabel.backgroundColor = [UIColor clearColor];
         _cellNameLabel.textColor = [UIColor whiteColor];
@@ -69,9 +67,10 @@
         _cellNameLabel.layer.shadowOffset = CGSizeMake(0, 1);
         _cellNameLabel.font = [UIFont systemFontOfSize:14];
         _cellNameLabel.textAlignment = NSTextAlignmentCenter;
-        _cellNameLabel.frame = CGRectMake(0, self.frame.size.height - 16 - RCCallInsideMargin, self.frame.size.width, 16);
+        _cellNameLabel.frame =
+            CGRectMake(0, self.frame.size.height - 16 - RCCallInsideMargin, self.frame.size.width, 16);
         [[self contentView] addSubview:self.cellNameLabel];
-        
+
         self.contentView.backgroundColor = [UIColor clearColor];
     }
     return self;
@@ -84,37 +83,34 @@
     CGFloat nameLabelHeight = 16;
     CGFloat insideMargin = 5;
 
-    if ((callStatus == RCCallDialing || callStatus == RCCallActive) && model.profile.mediaType == RCCallMediaVideo )
-    {
-       
-    }else{
+    if ((callStatus == RCCallDialing || callStatus == RCCallActive) && model.profile.mediaType == RCCallMediaVideo) {
+    } else {
         self.headerImageView.layer.borderWidth = 1;
         self.headerImageView.layer.borderColor = [UIColor whiteColor].CGColor;
         self.headerImageView.layer.masksToBounds = YES;
         if (RCKitConfigCenter.ui.globalConversationAvatarStyle == RC_USER_AVATAR_CYCLE &&
             RCKitConfigCenter.ui.globalMessageAvatarStyle == RC_USER_AVATAR_CYCLE) {
-            self.headerImageView.layer.cornerRadius = MIN(self.bounds.size.width, self.bounds.size.height - nameLabelHeight - insideMargin)/2;
+            self.headerImageView.layer.cornerRadius =
+                MIN(self.bounds.size.width, self.bounds.size.height - nameLabelHeight - insideMargin) / 2;
         } else {
             self.headerImageView.layer.cornerRadius = 4.f;
         }
         self.headerImageView.backgroundColor = [[UIColor clearColor] colorWithAlphaComponent:1.0];
         self.headerImageView.layer.edgeAntialiasingMask =
-        kCALayerLeftEdge | kCALayerRightEdge | kCALayerBottomEdge | kCALayerTopEdge;
+            kCALayerLeftEdge | kCALayerRightEdge | kCALayerBottomEdge | kCALayerTopEdge;
     }
-    
-    
+
     if (callStatus == RCCallIncoming || callStatus == RCCallRinging || model.profile.mediaType == RCCallMediaVideo) {
         nameLabelHeight = 0;
         insideMargin = 0;
     }
-    
+
     if (model.profile.mediaType == RCCallMediaAudio) {
         [self resetLayout:nameLabelHeight insideMargin:insideMargin];
-    }else
-    {
-        [self resetLayoutWithVideo: nameLabelHeight insideMargin:insideMargin];
+    } else {
+        [self resetLayoutWithVideo:nameLabelHeight insideMargin:insideMargin];
     }
- 
+
     [self.headerImageView setImageURL:[NSURL URLWithString:model.userInfo.portraitUri]];
     [self.nameLabel setText:model.userInfo.name];
     self.headerImageView.hidden = NO;
@@ -146,50 +142,47 @@
 
     self.statusView.frame =
         CGRectMake((self.bounds.size.width - 17) / 2, (self.headerImageView.frame.size.width - 4) / 2, 17, 4);
-    
-    if (self.callStatus == RCCallIncoming || self.callStatus == RCCallRinging ) {
+
+    if (self.callStatus == RCCallIncoming || self.callStatus == RCCallRinging) {
         self.statusView.hidden = YES;
-    }else{
+    } else {
         self.statusView.hidden = NO;
-        
-        if (_model.profile.callStatus == RCCallIncoming || _model.profile.callStatus == RCCallRinging ||_model.profile.callStatus == RCCallDialing){
+
+        if (_model.profile.callStatus == RCCallIncoming || _model.profile.callStatus == RCCallRinging ||
+            _model.profile.callStatus == RCCallDialing) {
             self.statusView.hidden = NO;
-        }else{
+        } else {
             self.statusView.hidden = YES;
         }
-        
     }
 }
 
 - (void)resetLayoutWithVideo:(CGFloat)nameLabelHeight insideMargin:(CGFloat)insideMargin {
-
     self.headerImageView.frame = self.bounds;
     self.headerImageView.hidden = NO;
-    
+
     self.nameLabel.frame =
-    CGRectMake(0, self.bounds.size.height - nameLabelHeight - 10, self.bounds.size.width, nameLabelHeight);
+        CGRectMake(0, self.bounds.size.height - nameLabelHeight - 10, self.bounds.size.width, nameLabelHeight);
     if (nameLabelHeight > 0) {
         self.nameLabel.hidden = NO;
     } else {
         self.nameLabel.hidden = YES;
     }
-	
-    self.statusView.frame =
-    CGRectMake((self.bounds.size.width - 20.0) , 13.5, 17, 4);
+
+    self.statusView.frame = CGRectMake((self.bounds.size.width - 20.0), 13.5, 17, 4);
     //    self.statusView.contentMode = UIViewContentModeScaleAspectFit;
- 
-    if (self.callStatus == RCCallIncoming || self.callStatus == RCCallRinging ) {
+
+    if (self.callStatus == RCCallIncoming || self.callStatus == RCCallRinging) {
         self.statusView.hidden = YES;
         self.nameLabel.hidden = YES;
-    }else{
+    } else {
         self.nameLabel.hidden = NO;
-        if (_model.profile.callStatus == RCCallIncoming || _model.profile.callStatus == RCCallRinging ||_model.profile.callStatus == RCCallDialing){
+        if (_model.profile.callStatus == RCCallIncoming || _model.profile.callStatus == RCCallRinging ||
+            _model.profile.callStatus == RCCallDialing) {
             self.statusView.hidden = NO;
-        }else{
+        } else {
             self.statusView.hidden = YES;
         }
- 
     }
-    
 }
 @end

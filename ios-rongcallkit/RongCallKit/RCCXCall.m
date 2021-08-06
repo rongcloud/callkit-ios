@@ -14,8 +14,8 @@
 
 #define RCCXCallLocalizedName @"RongCloud"
 
-@interface RCCXCall()
-@property(nonatomic, strong) NSUUID *currentUUID;
+@interface RCCXCall ()
+@property (nonatomic, strong) NSUUID *currentUUID;
 @end
 
 
@@ -47,6 +47,10 @@
 - (void)reportIncomingCallWithInviter:(NSString *)inviterId
                            userIdList:(NSArray<NSString *> *)userIdList
                               isVideo:(BOOL)isVideo {
+}
+
+- (void)answerCXCall {
+    self.currentUUID = nil;
 }
 
 - (void)endCXCall {

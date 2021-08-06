@@ -20,7 +20,7 @@
 
 #endif
 
-#define RCCallGroupMemberDataSource RCIMGroupMemberDataSource //接口向后兼容
+#define RCCallGroupMemberDataSource RCIMGroupMemberDataSource  //接口向后兼容
 
 /// 新的 callsession 被创建时发出该通知
 UIKIT_EXTERN NSNotificationName const RCCallNewSessionCreationNotification;
@@ -43,7 +43,7 @@ UIKIT_EXTERN NSNotificationName const RCCallNewSessionCreationNotification;
 /*!
  视频通话支持的最大通话人数
  */
-@property(nonatomic, assign) NSInteger maxMultiVideoCallUserNumber;
+@property (nonatomic, assign) NSInteger maxMultiVideoCallUserNumber;
 
 /*!
  系统来电显示的 app 名字

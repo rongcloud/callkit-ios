@@ -19,34 +19,34 @@
 /*!
  通话呼入时，最上方显示的邀请者头像View
  */
-@property(nonatomic, strong) RCloudImageView *inviterPortraitView;
+@property (nonatomic, strong) RCloudImageView *inviterPortraitView;
 
 /*!
  通话呼入时，最上方显示的邀请者头像View
  */
-@property(nonatomic, strong) RCloudImageView *inviterPortraitBgView;
+@property (nonatomic, strong) RCloudImageView *inviterPortraitBgView;
 
 /*!
  通话呼入时，最上方显示的邀请者名字Label
  */
-@property(nonatomic, strong) UILabel *inviterNameLabel;
+@property (nonatomic, strong) UILabel *inviterNameLabel;
 
 /*!
  全屏的用户的名称Label
  */
-@property(nonatomic, strong) UILabel *mainNameLabel;
+@property (nonatomic, strong) UILabel *mainNameLabel;
 
 /*!
  通话呼入时，用户列表说明的Label
  */
-@property(nonatomic, strong) UILabel *userCollectionTitleLabel;
+@property (nonatomic, strong) UILabel *userCollectionTitleLabel;
 
 /*!
  用户视频列表的CollectionView
  */
-@property(nonatomic, strong) UICollectionView *userCollectionView;
+@property (nonatomic, strong) UICollectionView *userCollectionView;
 
-@property(nonatomic, strong) NSMutableArray *subUserModelList;
+@property (nonatomic, strong) NSMutableArray *subUserModelList;
 
 /*!
  用户视频列表CollectionView所使用的Layout
@@ -54,7 +54,7 @@
  @discussion
  默认使用的是RCVideoMultiCallUserCollectionLayout，您也可以自定义Layout。
  */
-@property(nonatomic, strong) UICollectionViewLayout *userCollectionViewLayout;
+@property (nonatomic, strong) UICollectionViewLayout *userCollectionViewLayout;
 
 #pragma mark - 初始化
 /*!

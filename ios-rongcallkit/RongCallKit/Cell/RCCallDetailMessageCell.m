@@ -54,13 +54,12 @@
     [self.messageContentView addSubview:self.mediaTypeIcon];
 }
 
-
 - (void)setDataModel:(RCMessageModel *)model {
     [super setDataModel:model];
     [self setAutoLayout];
 }
 
-- (void)setAutoLayout {    
+- (void)setAutoLayout {
     RCCallSummaryMessage *callMessage = (RCCallSummaryMessage *)self.model.content;
     if (callMessage.duration > 1000) {
         self.textLabel.text =
@@ -92,11 +91,12 @@
         getTextDrawingSize:self.textLabel.text
                       font:self.textLabel.font
            constrainedSize:CGSizeMake(self.baseContentView.bounds.size.width -
-                                          (10 + RCKitConfigCenter.ui.globalMessagePortraitSize.width + 10) * 2 - (14 + 20 + 7 + 10),
+                                          (10 + RCKitConfigCenter.ui.globalMessagePortraitSize.width + 10) * 2 -
+                                          (14 + 20 + 7 + 10),
                                       8000)];
     __textSize = CGSizeMake(ceilf(__textSize.width), ceilf(__textSize.height));
     float maxWidth = self.baseContentView.bounds.size.width -
-                     (10 + RCKitConfigCenter.ui.globalMessagePortraitSize.width + 10) * 2 - 5 - (14 + 20 + 7 + 10);
+        (10 + RCKitConfigCenter.ui.globalMessagePortraitSize.width + 10) * 2 - 5 - (14 + 20 + 7 + 10);
     if (__textSize.width > maxWidth) {
         __textSize.width = maxWidth;
     }
@@ -107,15 +107,19 @@
 
     CGSize __bubbleSize = CGSizeMake(__bubbleWidth, __bubbleHeight);
 
-    self.messageContentView.contentSize =__bubbleSize;
+    self.messageContentView.contentSize = __bubbleSize;
     if (self.model.messageDirection == MessageDirection_SEND) {
-        self.textLabel.frame = CGRectMake(10, (__bubbleHeight - __labelSize.height) / 2, __labelSize.width, __labelSize.height);
+        self.textLabel.frame =
+            CGRectMake(10, (__bubbleHeight - __labelSize.height) / 2, __labelSize.width, __labelSize.height);
         self.mediaTypeIcon.frame = CGRectMake(CGRectGetMaxX(self.textLabel.frame) + 7, 10, 20, 20);
         [self.textLabel setTextColor:RCDYCOLOR(0x262626, 0x040A0F)];
-    }else{
+    } else {
         self.mediaTypeIcon.frame = CGRectMake(10, 10, 20, 20);
-        self.textLabel.frame = CGRectMake(CGRectGetMaxX(self.mediaTypeIcon.frame) + 7, (__bubbleHeight - __labelSize.height) / 2, __labelSize.width, __labelSize.height);
-        [self.textLabel setTextColor:[RCKitUtility generateDynamicColor:HEXCOLOR(0x262626) darkColor:RCMASKCOLOR(0xffffff, 0.8)]];
+        self.textLabel.frame =
+            CGRectMake(CGRectGetMaxX(self.mediaTypeIcon.frame) + 7, (__bubbleHeight - __labelSize.height) / 2,
+                       __labelSize.width, __labelSize.height);
+        [self.textLabel setTextColor:[RCKitUtility generateDynamicColor:HEXCOLOR(0x262626)
+                                                              darkColor:RCMASKCOLOR(0xffffff, 0.8)]];
     }
 }
 @end

@@ -7,17 +7,17 @@
 //
 
 #import "RCCallFloatingBoard.h"
-#import "RCCallKitUtility.h"
-#import "RCCXCall.h"
 #import <CoreTelephony/CTCall.h>
 #import <CoreTelephony/CTCallCenter.h>
 #import <UIKit/UIKit.h>
+#import "RCCXCall.h"
+#import "RCCallKitUtility.h"
 
 @interface RCCallFloatingBoard () <RCCallSessionDelegate>
 
-@property(nonatomic, strong) NSTimer *activeTimer;
-@property(nonatomic, copy) void (^touchedBlock)(RCCallSession *callSession);
-@property(nonatomic, strong) CTCallCenter *callCenter;
+@property (nonatomic, strong) NSTimer *activeTimer;
+@property (nonatomic, copy) void (^touchedBlock)(RCCallSession *callSession);
+@property (nonatomic, strong) CTCallCenter *callCenter;
 
 @end
 
@@ -144,10 +144,10 @@ static NSString *RCVoipFloatingBoardPosY = @"RCVoipFloatingBoardPosY";
                 [[UILabel alloc] initWithFrame:CGRectMake(0, self.videoView.frame.size.height / 2 - 10,
                                                           self.videoView.frame.size.width, 20)];
             videoStopTips.textAlignment = NSTextAlignmentCenter;
-            videoStopTips.text = RCCallKitLocalizedString(@"VoIPCallHasEnd" );
+            videoStopTips.text = RCCallKitLocalizedString(@"VoIPCallHasEnd");
             videoStopTips.textColor = RongVoIPUIColorFromRGB(0x0195ff);
             [self.videoView addSubview:videoStopTips];
-        }else {
+        } else {
             [self.floatingButton setBackgroundColor:[UIColor clearColor]];
             [self.videoView setBackgroundColor:[UIColor clearColor]];
         }
@@ -155,9 +155,8 @@ static NSString *RCVoipFloatingBoardPosY = @"RCVoipFloatingBoardPosY";
         if (self.callSession.callStatus == RCCallActive) {
             [self.floatingButton setBackgroundColor:[UIColor clearColor]];
         } else if (self.callSession.callStatus == RCCallHangup) {
-            [self.floatingButton setTitle:RCCallKitLocalizedString(@"VoIPCallHasEnd" )
-                                 forState:UIControlStateNormal];
-        }else {
+            [self.floatingButton setTitle:RCCallKitLocalizedString(@"VoIPCallHasEnd") forState:UIControlStateNormal];
+        } else {
             [self.floatingButton setBackgroundColor:[UIColor clearColor]];
         }
     }
@@ -179,14 +178,14 @@ static NSString *RCVoipFloatingBoardPosY = @"RCVoipFloatingBoardPosY";
         _window.layer.masksToBounds = YES;
         _window.layer.borderWidth = 1;
         _window.layer.borderColor = [RongVoIPUIColorFromRGB(0x0A88E1) CGColor];
-        
+
         NSInteger checker = [RCCallKitUtility compareVersion:[UIDevice currentDevice].systemVersion toVersion:@"13.0"];
         if (checker >= 0) {
 #ifdef __IPHONE_13_0
             [_window setWindowScene:[UIApplication sharedApplication].keyWindow.windowScene];
 #endif
         }
-        [_window makeKeyAndVisible]; //关键语句,显示window
+        [_window makeKeyAndVisible];  //关键语句,显示window
 
         UIPanGestureRecognizer *panGestureRecognizer =
             [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanGestures:)];
@@ -207,8 +206,8 @@ static NSString *RCVoipFloatingBoardPosY = @"RCVoipFloatingBoardPosY";
         self.window.frame = windowFrame;
         [self.window addSubview:_videoView];
 
-        UITapGestureRecognizer *tap =
-            [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(touchedBoard:)];
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                              action:@selector(touchedBoard:)];
         [_videoView addGestureRecognizer:tap];
     }
     return _videoView;
@@ -277,7 +276,8 @@ static NSString *RCVoipFloatingBoardPosY = @"RCVoipFloatingBoardPosY";
             frame.origin.y = 2;
         }
 
-        if ([RCCallKitUtility isLandscape] && [self isSupportOrientation:(UIInterfaceOrientation)[UIDevice currentDevice].orientation]) {
+        if ([RCCallKitUtility isLandscape] &&
+            [self isSupportOrientation:(UIInterfaceOrientation)[UIDevice currentDevice].orientation]) {
             if (frame.origin.y + frame.size.height > [UIScreen mainScreen].bounds.size.width) {
                 frame.origin.y = [UIScreen mainScreen].bounds.size.width - 2 - frame.size.height;
             }
@@ -415,7 +415,8 @@ static NSString *RCVoipFloatingBoardPosY = @"RCVoipFloatingBoardPosY";
             if (mediaType == RCCallMediaAudio && self.callSession.mediaType != RCCallMediaAudio) {
                 if ([self.callSession changeMediaType:RCCallMediaAudio]) {
                     [self.videoView removeFromSuperview];
-                    [self->_floatingButton setImage:[RCCallKitUtility imageFromVoIPBundle:@"voip/audio_min.png"] forState:UIControlStateNormal];
+                    [self->_floatingButton setImage:[RCCallKitUtility imageFromVoIPBundle:@"voip/audio_min.png"]
+                                           forState:UIControlStateNormal];
                     [self initBoard];
                 }
             }

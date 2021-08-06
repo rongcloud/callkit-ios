@@ -18,32 +18,32 @@
 /*!
  会话类型
  */
-@property(nonatomic, assign) RCConversationType conversationType;
+@property (nonatomic, assign) RCConversationType conversationType;
 
 /*!
  目标会话ID
  */
-@property(nonatomic, strong) NSString *targetId;
+@property (nonatomic, strong) NSString *targetId;
 
 /*!
  媒体类型
  */
-@property(nonatomic, assign) RCCallMediaType mediaType;
+@property (nonatomic, assign) RCCallMediaType mediaType;
 
 /*!
  列表中所有的用户ID列表
  */
-@property(nonatomic, strong) NSArray *listingUserIdList;
+@property (nonatomic, strong) NSArray *listingUserIdList;
 
 /*!
  通话中已经存在的用户ID列表
  */
-@property(nonatomic, strong) NSArray *existUserIdList;
+@property (nonatomic, strong) NSArray *existUserIdList;
 
 /*!
  通话实体
  */
-@property(nonatomic, strong) RCCallSession *callSession;
+@property (nonatomic, strong) RCCallSession *callSession;
 
 /*!
  初始化选择通话成员的ViewController
@@ -61,7 +61,6 @@
                                mediaType:(RCCallMediaType)mediaType
                                    exist:(NSArray *)existUserIdList
                                  success:(void (^)(NSArray *addUserIdList))successBlock;
-
 
 - (void)done;
 

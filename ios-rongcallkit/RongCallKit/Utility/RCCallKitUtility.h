@@ -8,21 +8,21 @@
 
 #import <Foundation/Foundation.h>
 #import <RongCallLib/RongCallLib.h>
-#import "RongCallKitAdaptiveHeader.h"
 #import <UIKit/UIKit.h>
+#import "RongCallKitAdaptiveHeader.h"
 
-UIColor* rgb(CGFloat red, CGFloat green, CGFloat blue);
-UIColor* rgba(CGFloat red, CGFloat green, CGFloat blue, CGFloat alpha);
-UIColor* hex_rgb(NSInteger hex_value);
-UIColor* dynamic_color(NSInteger light_hex_value, NSInteger dark_hex_value);
+UIColor *rgb(CGFloat red, CGFloat green, CGFloat blue);
+UIColor *rgba(CGFloat red, CGFloat green, CGFloat blue, CGFloat alpha);
+UIColor *hex_rgb(NSInteger hex_value);
+UIColor *dynamic_color(NSInteger light_hex_value, NSInteger dark_hex_value);
 
-#define RongVoIPUIColorFromRGB(rgbValue)                                                                               \
-    [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16)) / 255.0                                               \
-                    green:((float)((rgbValue & 0x00FF00) >> 8)) / 255.0                                                \
-                     blue:((float)((rgbValue & 0x0000FF) >> 0)) / 255.0                                                \
+#define RongVoIPUIColorFromRGB(rgbValue)                                 \
+    [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16)) / 255.0 \
+                    green:((float)((rgbValue & 0x00FF00) >> 8)) / 255.0  \
+                     blue:((float)((rgbValue & 0x0000FF) >> 0)) / 255.0  \
                     alpha:1.0]
 
-#define RC_IOS_SYSTEM_VERSION_LESS_THAN(v)                                                                             \
+#define RC_IOS_SYSTEM_VERSION_LESS_THAN(v) \
     ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedAscending)
 
 #define RCCallHeaderLength 90.0f
@@ -49,14 +49,18 @@ UIColor* dynamic_color(NSInteger light_hex_value, NSInteger dark_hex_value);
 #define RCCallCollectionCellWidth 55.0f
 
 #define RCCallTopGGradientHeight 100
-#define BOTTOMSAFEAREA (([RCCallKitUtility compareVersion:[UIDevice currentDevice].systemVersion toVersion:@"11.0"] >= 0) ? [UIApplication sharedApplication].keyWindow.safeAreaInsets.bottom : UIEdgeInsetsZero.bottom)
+#define BOTTOMSAFEAREA                                                                                   \
+    (([RCCallKitUtility compareVersion:[UIDevice currentDevice].systemVersion toVersion:@"11.0"] >= 0) ? \
+         [UIApplication sharedApplication].keyWindow.safeAreaInsets.bottom :                             \
+         UIEdgeInsetsZero.bottom)
 #define RCCallBottomGradientHeight (BOTTOMSAFEAREA > 0 ? 242.0f : 208.0f)
 //  判断是否为iphoneX，是iphoneX，底部按钮整体上移34
 #define RCCallExtraSpace BOTTOMSAFEAREA
 // iphoneX顶部额外加上statusbar的30（实际刘海的高度）
 #define RCCallStatusBarHeight (BOTTOMSAFEAREA > 0 ? 30.0f : 0.0f)
 // 国际化
-#define RCCallKitLocalizedString(key)  NSLocalizedStringFromTableInBundle(key, @"RongCallKit", [RCCallKitUtility callKitBundle], nil)
+#define RCCallKitLocalizedString(key) \
+    NSLocalizedStringFromTableInBundle(key, @"RongCallKit", [RCCallKitUtility callKitBundle], nil)
 
 @interface RCCallKitUtility : NSObject
 
@@ -78,7 +82,9 @@ UIColor* dynamic_color(NSInteger light_hex_value, NSInteger dark_hex_value);
 
 + (void)setScreenForceOn;
 + (void)clearScreenForceOnStatus;
-+ (void)checkSystemPermission:(RCCallMediaType)mediaType success:(void (^)(void))successBlock error:(void (^)(void))errorBlock;
++ (void)checkSystemPermission:(RCCallMediaType)mediaType
+                      success:(void (^)(void))successBlock
+                        error:(void (^)(void))errorBlock;
 + (NSInteger)compareVersion:(NSString *)version1 toVersion:(NSString *)version2;
 /// 取出callKit资源
 + (NSBundle *)callKitBundle;

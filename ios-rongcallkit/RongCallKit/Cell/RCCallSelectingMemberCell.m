@@ -21,12 +21,12 @@
         self.headerImageView = [[RCloudImageView alloc] init];
         self.headerImageView.contentMode = UIViewContentModeScaleAspectFill;
         [self.headerImageView setPlaceholderImage:[RCCallKitUtility imageFromVoIPBundle:@"default_portrait_msg"]];
-         
+
         self.headerImageView.frame = CGRectMake(40, 5, 45, 45);
         self.headerImageView.layer.masksToBounds = YES;
         if (RCKitConfigCenter.ui.globalConversationAvatarStyle == RC_USER_AVATAR_CYCLE &&
             RCKitConfigCenter.ui.globalMessageAvatarStyle == RC_USER_AVATAR_CYCLE) {
-            self.headerImageView.layer.cornerRadius = self.headerImageView.frame.size.width/2;
+            self.headerImageView.layer.cornerRadius = self.headerImageView.frame.size.width / 2;
         } else {
             self.headerImageView.layer.cornerRadius = 5.f;
         }

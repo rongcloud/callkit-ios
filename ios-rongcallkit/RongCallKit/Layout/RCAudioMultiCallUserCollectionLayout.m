@@ -9,9 +9,9 @@
 #import "RCAudioMultiCallUserCollectionLayout.h"
 
 @interface RCAudioMultiCallUserCollectionLayout ()
-@property(nonatomic, strong) NSMutableArray *attributesArray;
-@property(nonatomic, assign) CGFloat itemAreaWidth;
-@property(nonatomic, assign) CGFloat itemWidth;
+@property (nonatomic, strong) NSMutableArray *attributesArray;
+@property (nonatomic, assign) CGFloat itemAreaWidth;
+@property (nonatomic, assign) CGFloat itemWidth;
 @end
 
 @implementation RCAudioMultiCallUserCollectionLayout
@@ -52,9 +52,9 @@
         int topCount = (itemCount <= 4) ? itemCount : 4;
 
         CGFloat topY = (frame.size.height - self.buttomPadding) / 2 - self.itemAreaWidth +
-                       (topCount == itemCount ? self.itemAreaWidth / 2 : 0);
-        CGFloat leftX1 = (frame.size.width - self.itemAreaWidth * topCount) / 2;               // line1
-        CGFloat leftX2 = (frame.size.width - self.itemAreaWidth * (itemCount - topCount)) / 2; // line2
+            (topCount == itemCount ? self.itemAreaWidth / 2 : 0);
+        CGFloat leftX1 = (frame.size.width - self.itemAreaWidth * topCount) / 2;                // line1
+        CGFloat leftX2 = (frame.size.width - self.itemAreaWidth * (itemCount - topCount)) / 2;  // line2
         for (int i = 0; i < itemCount; i++) {
             UICollectionViewLayoutAttributes *attributes = [UICollectionViewLayoutAttributes
                 layoutAttributesForCellWithIndexPath:[NSIndexPath indexPathForItem:i inSection:0]];

@@ -7,6 +7,8 @@
 //
 
 #import "RCCall.h"
+#import <AVFoundation/AVFoundation.h>
+#import "RCCXCall.h"
 #import "RCCallAudioMultiCallViewController.h"
 #import "RCCallBaseViewController.h"
 #import "RCCallDetailMessageCell.h"
@@ -16,9 +18,7 @@
 #import "RCCallTipMessageCell.h"
 #import "RCCallVideoMultiCallViewController.h"
 #import "RCUserInfoCacheManager.h"
-#import "RCCXCall.h"
 #import "RongCallKitAdaptiveHeader.h"
-#import <AVFoundation/AVFoundation.h>
 
 #if __IPHONE_10_0
 #import <UserNotifications/UserNotifications.h>
@@ -43,7 +43,6 @@ static NSString *const __RongCallKit__Time = @"__RongCallKit__Time__Unknown";
 @property (nonatomic, strong) NSMutableDictionary *locationNotificationMap;
 
 @end
-
 
 @implementation RCCall
 
@@ -138,7 +137,8 @@ static NSString *const __RongCallKit__Time = @"__RongCallKit__Time__Unknown";
                                                               mediaType:mediaType
                                                              userIdList:addUserIdList];
                              }];
-        UINavigationController *rootVC = [[UINavigationController alloc] initWithRootViewController:voipCallSelectViewController];
+        UINavigationController *rootVC =
+            [[UINavigationController alloc] initWithRootViewController:voipCallSelectViewController];
         rootVC.modalPresentationStyle = UIModalPresentationFullScreen;
         [self presentCallViewController:rootVC];
     }
@@ -148,24 +148,22 @@ static NSString *const __RongCallKit__Time = @"__RongCallKit__Time__Unknown";
                             targetId:(NSString *)targetId
                            mediaType:(RCCallMediaType)mediaType
                           userIdList:(NSArray *)userIdList {
-    
     if ([self preCheckForStartCall:mediaType]) {
         [self checkSystemPermission:mediaType
                             success:^{
-                                UIViewController* avCallVC = nil;
+                                UIViewController *avCallVC = nil;
                                 if (mediaType == RCCallMediaAudio) {
                                     avCallVC = [[RCCallAudioMultiCallViewController alloc]
-                                                    initWithOutgoingCall:conversationType
-                                                                targetId:targetId
-                                                              userIdList:userIdList];
-                                    
+                                        initWithOutgoingCall:conversationType
+                                                    targetId:targetId
+                                                  userIdList:userIdList];
+
                                 } else {
                                     avCallVC = [[RCCallVideoMultiCallViewController alloc]
-                                                    initWithOutgoingCall:conversationType
-                                                                targetId:targetId
-                                                               mediaType:mediaType
-                                                              userIdList:userIdList];
-                                    
+                                        initWithOutgoingCall:conversationType
+                                                    targetId:targetId
+                                                   mediaType:mediaType
+                                                  userIdList:userIdList];
                                 }
                                 [self presentCallViewController:avCallVC];
                             }];
@@ -196,9 +194,8 @@ static NSString *const __RongCallKit__Time = @"__RongCallKit__Time__Unknown";
                 if (granted) {
                     successBlock();
                 } else {
-                    [self
-                        loadErrorAlertWithConfirm:RCCallKitLocalizedString(@"AccessRightTitle")
-                     message:RCCallKitLocalizedString(@"speakerAccessRight")];
+                    [self loadErrorAlertWithConfirm:RCCallKitLocalizedString(@"AccessRightTitle")
+                                            message:RCCallKitLocalizedString(@"speakerAccessRight")];
                 }
             });
         }];
@@ -209,8 +206,8 @@ static NSString *const __RongCallKit__Time = @"__RongCallKit__Time__Unknown";
     AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
 
     if (authStatus == AVAuthorizationStatusDenied || authStatus == AVAuthorizationStatusRestricted) {
-        [self loadErrorAlertWithConfirm:RCCallKitLocalizedString(@"AccessRightTitle" )
-                                message:RCCallKitLocalizedString(@"cameraAccessRight" )];
+        [self loadErrorAlertWithConfirm:RCCallKitLocalizedString(@"AccessRightTitle")
+                                message:RCCallKitLocalizedString(@"cameraAccessRight")];
         complete(NO);
     } else if (authStatus == AVAuthorizationStatusNotDetermined) {
         [AVCaptureDevice
@@ -244,25 +241,24 @@ static NSString *const __RongCallKit__Time = @"__RongCallKit__Time__Unknown";
     UIWindow *activityWindow = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     activityWindow.windowLevel = UIWindowLevelNormal;
     activityWindow.rootViewController = viewController;
-    
+
     NSInteger checker = [RCCallKitUtility compareVersion:[UIDevice currentDevice].systemVersion toVersion:@"13.0"];
     if (checker >= 0) {
 #ifdef __IPHONE_13_0
         [activityWindow setWindowScene:[UIApplication sharedApplication].keyWindow.windowScene];
 #endif
     }
-    
+
     [activityWindow makeKeyAndVisible];
     CATransition *animation = [CATransition animation];
     [animation setDuration:0.3];
-    animation.type = kCATransitionMoveIn;     //可更改为其他方式
-    animation.subtype = kCATransitionFromTop; //可更改为其他方式
+    animation.type = kCATransitionMoveIn;      //可更改为其他方式
+    animation.subtype = kCATransitionFromTop;  //可更改为其他方式
     [[activityWindow layer] addAnimation:animation forKey:nil];
     [self.callWindows addObject:activityWindow];
 }
 
 - (void)dismissCallViewController:(UIViewController *)viewController {
-
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
     if ([viewController isKindOfClass:[RCCallBaseViewController class]]) {
         UIViewController *rootVC = viewController;
@@ -294,22 +290,22 @@ static NSString *const __RongCallKit__Time = @"__RongCallKit__Time__Unknown";
         [callSession hangup];
         return;
     }
-    
+
     if (!callSession.isMultiCall) {
         RCCallSingleCallViewController *singleCallViewController =
-        [[RCCallSingleCallViewController alloc] initWithIncomingCall:callSession];
-        
+            [[RCCallSingleCallViewController alloc] initWithIncomingCall:callSession];
+
         [self presentCallViewController:singleCallViewController];
     } else {
         if (callSession.mediaType == RCCallMediaAudio) {
             RCCallAudioMultiCallViewController *multiCallViewController =
-            [[RCCallAudioMultiCallViewController alloc] initWithIncomingCall:callSession];
-            
+                [[RCCallAudioMultiCallViewController alloc] initWithIncomingCall:callSession];
+
             [self presentCallViewController:multiCallViewController];
         } else {
             RCCallVideoMultiCallViewController *multiCallViewController =
-            [[RCCallVideoMultiCallViewController alloc] initWithIncomingCall:callSession];
-            
+                [[RCCallVideoMultiCallViewController alloc] initWithIncomingCall:callSession];
+
             [self presentCallViewController:multiCallViewController];
         }
     }
@@ -319,12 +315,12 @@ static NSString *const __RongCallKit__Time = @"__RongCallKit__Time__Unknown";
                           inviterUserId:(NSString *)inviterUserId
                               mediaType:(RCCallMediaType)mediaType
                              userIdList:(NSArray *)userIdList
-                             pushConfig:(RCMessagePushConfig *) pushConfig
+                             pushConfig:(RCMessagePushConfig *)pushConfig
                          isRemoteCancel:(BOOL)isRemoteCancel {
     [self stopReceiveCallVibrate];
-    
+
     [[RCCXCall sharedInstance] endCXCall];
-    
+
     if (pushConfig && isRemoteCancel) {
         [self postLocalNotification:pushConfig userInfo:nil hasSound:NO isCancelCall:YES];
     }
@@ -350,38 +346,49 @@ static NSString *const __RongCallKit__Time = @"__RongCallKit__Time__Unknown";
                      userInfo:(NSDictionary *)userInfo
                      hasSound:(BOOL)hasSound
                  isCancelCall:(BOOL)isCancelCall {
-    NSLog(@"postLocalNotification hasSound:%@,isCancelCall:%@", hasSound?@"YES":@"NO", isCancelCall?@"YES":@"NO");
-    NSString* pushContent = @"";
+    NSLog(@"postLocalNotification hasSound:%@,isCancelCall:%@", hasSound ? @"YES" : @"NO",
+          isCancelCall ? @"YES" : @"NO");
+    NSString *pushContent = @"";
     NSString *title = @"";
-    NSString* soundName = @"RongCallKit.bundle/voip/voip_call.caf";
-    
-    if ([RCIMClient sharedRCIMClient].pushProfile.isShowPushContent || (pushConfig && pushConfig.forceShowDetailContent)) {
+    NSString *soundName = @"RongCallKit.bundle/voip/voip_call.caf";
+
+    if ([RCIMClient sharedRCIMClient].pushProfile.isShowPushContent ||
+        (pushConfig && pushConfig.forceShowDetailContent)) {
         if (pushConfig && pushConfig.pushTitle && pushConfig.pushTitle.length != 0) {
             title = pushConfig.pushTitle;
         } else {
-            RCUserInfo* userInfo = [[RCUserInfoCacheManager sharedManager] getUserInfo:self.currentCallSession.inviter];
+            RCUserInfo *userInfo = [[RCUserInfoCacheManager sharedManager] getUserInfo:self.currentCallSession.inviter];
             if (self.currentCallSession.conversationType == ConversationType_PRIVATE) {
                 if (userInfo) {
                     title = userInfo.name;
                 }
             } else {
-                RCGroup *groupInfo = [[RCUserInfoCacheManager sharedManager] getGroupInfo:self.currentCallSession.targetId];
+                RCGroup *groupInfo =
+                    [[RCUserInfoCacheManager sharedManager] getGroupInfo:self.currentCallSession.targetId];
                 if (groupInfo) {
                     title = groupInfo.groupName;
                 }
             }
         }
-        if (pushConfig && pushConfig.pushContent && pushConfig.pushContent.length != 0 && ![pushConfig.pushContent isEqualToString:@"voip"]) {
+        if (pushConfig && pushConfig.pushContent && pushConfig.pushContent.length != 0 &&
+            ![pushConfig.pushContent isEqualToString:@"voip"]) {
             pushContent = pushConfig.pushContent;
         } else {
             if (isCancelCall) {
                 pushContent = RCCallKitLocalizedString(@"VoIPCall_hangup_PushContent");
             } else {
-                RCUserInfo* userInfo = [[RCUserInfoCacheManager sharedManager] getUserInfo:self.currentCallSession.inviter];
+                RCUserInfo *userInfo =
+                    [[RCUserInfoCacheManager sharedManager] getUserInfo:self.currentCallSession.inviter];
                 if (userInfo) {
-                    pushContent = [NSString stringWithFormat:self.currentCallSession.mediaType == RCCallMediaAudio ? RCCallKitLocalizedString(@"VoIPCall_invite_audio_push_Content") : RCCallKitLocalizedString(@"VoIPCall_invite_video_push_Content"), [RCIMClient sharedRCIMClient].currentUserInfo.name];
+                    pushContent =
+                        [NSString stringWithFormat:self.currentCallSession.mediaType == RCCallMediaAudio ?
+                                                       RCCallKitLocalizedString(@"VoIPCall_invite_audio_push_Content") :
+                                                       RCCallKitLocalizedString(@"VoIPCall_invite_video_push_Content"),
+                                                   [RCIMClient sharedRCIMClient].currentUserInfo.name];
                 } else {
-                    pushContent = self.currentCallSession.mediaType == RCCallMediaVideo ? RCCallKitLocalizedString(@"VoIPVideoCallIncomingWithoutUserName") : RCCallKitLocalizedString(@"VoIPAudioCallIncomingWithoutUserName");
+                    pushContent = self.currentCallSession.mediaType == RCCallMediaVideo ?
+                        RCCallKitLocalizedString(@"VoIPVideoCallIncomingWithoutUserName") :
+                        RCCallKitLocalizedString(@"VoIPAudioCallIncomingWithoutUserName");
                 }
             }
         }
@@ -389,18 +396,19 @@ static NSString *const __RongCallKit__Time = @"__RongCallKit__Time__Unknown";
         pushContent = RCCallKitLocalizedString(@"receive_new_message");
     }
     NSString *requestWithIdentifier = [NSUUID UUID].UUIDString;
-    if (pushConfig && pushConfig.iOSConfig && pushConfig.iOSConfig.apnsCollapseId && pushConfig.iOSConfig.apnsCollapseId.length > 0) {
+    if (pushConfig && pushConfig.iOSConfig && pushConfig.iOSConfig.apnsCollapseId &&
+        pushConfig.iOSConfig.apnsCollapseId.length > 0) {
         requestWithIdentifier = pushConfig.iOSConfig.apnsCollapseId;
     }
-    
-    if(@available(iOS 10.0, *)){
+
+    if (@available(iOS 10.0, *)) {
         UNMutableNotificationContent *content = [[UNMutableNotificationContent alloc] init];
         if (pushConfig && !pushConfig.disablePushTitle) {
             content.title = title;
         }
         content.body = pushContent;
         content.userInfo = userInfo;
-        if(hasSound){
+        if (hasSound) {
             content.sound = [UNNotificationSound soundNamed:soundName];
         } else {
             content.sound = [UNNotificationSound defaultSound];
@@ -409,14 +417,19 @@ static NSString *const __RongCallKit__Time = @"__RongCallKit__Time__Unknown";
             content.threadIdentifier = pushConfig.iOSConfig.threadId;
         }
         NSLog(@"postLocalNotification id:%@", requestWithIdentifier);
-        [[UNUserNotificationCenter currentNotificationCenter] removeDeliveredNotificationsWithIdentifiers:@[requestWithIdentifier]];
-        UNNotificationRequest *request = [UNNotificationRequest requestWithIdentifier:requestWithIdentifier content:content trigger:nil];
-        [[UNUserNotificationCenter currentNotificationCenter] addNotificationRequest:request withCompletionHandler:^(NSError * _Nullable error) {}];
-        
-    }else{
+        [[UNUserNotificationCenter currentNotificationCenter]
+            removeDeliveredNotificationsWithIdentifiers:@[ requestWithIdentifier ]];
+        UNNotificationRequest *request = [UNNotificationRequest requestWithIdentifier:requestWithIdentifier
+                                                                              content:content
+                                                                              trigger:nil];
+        [[UNUserNotificationCenter currentNotificationCenter] addNotificationRequest:request
+                                                               withCompletionHandler:^(NSError *_Nullable error){
+                                                               }];
+
+    } else {
         UILocalNotification *callNotification = [[UILocalNotification alloc] init];
-        callNotification.alertAction = RCCallKitLocalizedString(@"LocalNotificationShow" );
-        
+        callNotification.alertAction = RCCallKitLocalizedString(@"LocalNotificationShow");
+
         if (@available(iOS 8.2, *)) {
             if (pushConfig && !pushConfig.disablePushTitle) {
                 callNotification.alertTitle = title;
@@ -442,8 +455,11 @@ static NSString *const __RongCallKit__Time = @"__RongCallKit__Time__Unknown";
 
 #pragma mark - alert
 - (void)loadErrorAlertWithoutConfirm:(NSString *)title {
-    UIAlertView *alert =
-        [[UIAlertView alloc] initWithTitle:title message:nil delegate:nil cancelButtonTitle:nil otherButtonTitles:nil];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title
+                                                    message:nil
+                                                   delegate:nil
+                                          cancelButtonTitle:nil
+                                          otherButtonTitles:nil];
     alert.tag = AlertWithoutConfirm;
     [NSTimer scheduledTimerWithTimeInterval:1.0f
                                      target:self
@@ -466,20 +482,18 @@ static NSString *const __RongCallKit__Time = @"__RongCallKit__Time__Unknown";
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title
                                                         message:message
                                                        delegate:nil
-                                              cancelButtonTitle:RCCallKitLocalizedString(@"OK" )
+                                              cancelButtonTitle:RCCallKitLocalizedString(@"OK")
                                               otherButtonTitles:nil];
         alert.tag = AlertWithConfirm;
         [alert show];
     });
 }
 
-- (void)startReceiveCallVibrate
-{
+- (void)startReceiveCallVibrate {
     [self triggerVibrateRCCall];
 }
 
-- (void)stopReceiveCallVibrate
-{
+- (void)stopReceiveCallVibrate {
     if (self.timer) {
         [self.timer invalidate];
         self.timer = nil;
@@ -487,11 +501,14 @@ static NSString *const __RongCallKit__Time = @"__RongCallKit__Time__Unknown";
 }
 
 - (void)triggerVibrateRCCall {
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:2.f target:self selector:@selector(triggerVibrateRCCallAction) userInfo:nil repeats:YES];
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:2.f
+                                                  target:self
+                                                selector:@selector(triggerVibrateRCCallAction)
+                                                userInfo:nil
+                                                 repeats:YES];
 }
 
-- (void)triggerVibrateRCCallAction
-{
+- (void)triggerVibrateRCCallAction {
     NSInteger checker = [RCCallKitUtility compareVersion:[UIDevice currentDevice].systemVersion toVersion:@"9.0"];
     if (checker >= 0) {
         AudioServicesPlaySystemSoundWithCompletion(kSystemSoundID_Vibrate, ^{});

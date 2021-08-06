@@ -47,7 +47,8 @@
     if ([messageModel.content isKindOfClass:[RCCallSummaryMessage class]]) {
         RCCallSummaryMessage *callMessage = (RCCallSummaryMessage *)messageModel.content;
         //  其他端接听显示的消息不可点击
-        if (messageModel.conversationType == ConversationType_PRIVATE && callMessage.hangupReason != RCCallDisconnectReasonAcceptByOtherClient) {
+        if (messageModel.conversationType == ConversationType_PRIVATE &&
+            callMessage.hangupReason != RCCallDisconnectReasonAcceptByOtherClient) {
             [[RCCall sharedRCCall] startSingleCall:messageModel.targetId mediaType:callMessage.mediaType];
         }
     }

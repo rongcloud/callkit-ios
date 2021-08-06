@@ -22,82 +22,82 @@
 /*!
  会话类型
  */
-@property(nonatomic, assign, readonly) RCConversationType conversationType;
+@property (nonatomic, assign, readonly) RCConversationType conversationType;
 
 /*!
  会话目标ID
  */
-@property(nonatomic, strong, readonly) NSString *targetId;
+@property (nonatomic, strong, readonly) NSString *targetId;
 
 /*!
  媒体类型
  */
-@property(nonatomic, assign, readonly) RCCallMediaType mediaType;
+@property (nonatomic, assign, readonly) RCCallMediaType mediaType;
 
 /*!
  通话实体
  */
-@property(nonatomic, strong, readonly) RCCallSession *callSession;
+@property (nonatomic, strong, readonly) RCCallSession *callSession;
 
 /*!
  背景View
  */
-@property(nonatomic, strong) UIView *backgroundView;
+@property (nonatomic, strong) UIView *backgroundView;
 
 /*!
  蒙层View
  */
-@property(nonatomic, strong) UIView *blurView;
+@property (nonatomic, strong) UIView *blurView;
 
 /*!
  最小化Button
  */
-@property(nonatomic, strong) UIButton *minimizeButton;
+@property (nonatomic, strong) UIButton *minimizeButton;
 
 /*!
  加人Button
  */
-@property(nonatomic, strong) UIButton *inviteUserButton;
+@property (nonatomic, strong) UIButton *inviteUserButton;
 
 /*!
  通话时长Label
  */
-@property(nonatomic, strong) UILabel *timeLabel;
+@property (nonatomic, strong) UILabel *timeLabel;
 
 /*!
  提示Label
  */
-@property(nonatomic, strong) UILabel *tipsLabel;
+@property (nonatomic, strong) UILabel *tipsLabel;
 
 /*!
  静音Button
  */
-@property(nonatomic, strong) RCCallTextButton *muteButton;
+@property (nonatomic, strong) RCCallTextButton *muteButton;
 
 /*!
  扬声器Button
  */
-@property(nonatomic, strong) RCCallTextButton *speakerButton;
+@property (nonatomic, strong) RCCallTextButton *speakerButton;
 
 /*!
  接听Button
  */
-@property(nonatomic, strong) RCCallTextButton *acceptButton;
+@property (nonatomic, strong) RCCallTextButton *acceptButton;
 
 /*!
  挂断Button
  */
-@property(nonatomic, strong) RCCallTextButton *hangupButton;
+@property (nonatomic, strong) RCCallTextButton *hangupButton;
 
 /*!
  关闭摄像头的Button  「群聊：关闭摄像头； 单聊：切换为语音通话」
  */
-@property(nonatomic, strong) RCCallTextButton *cameraCloseButton;
+@property (nonatomic, strong) RCCallTextButton *cameraCloseButton;
 
 /*!
  切换前后摄像头的Button
  */
-@property(nonatomic, strong) RCCallTextButton *cameraSwitchButton;
+@property (nonatomic, strong) RCCallTextButton *cameraSwitchButton;
 
 /*!
  + Button
