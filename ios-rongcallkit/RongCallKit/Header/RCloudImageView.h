@@ -24,18 +24,18 @@
 //  THE SOFTWARE.
 //
 
-#import "RCloudImageLoader.h"
 #import <UIKit/UIKit.h>
+#import "RCloudImageLoader.h"
 
 @protocol RCloudImageViewDelegate;
 @interface RCloudImageView : UIImageView <RCloudImageLoaderObserver> {
-  @private
+   @private
     NSURL *imageURL;
     UIImage *placeholderImage;
     __weak id<RCloudImageViewDelegate> delegate;
 }
 
-- (instancetype)initWithPlaceholderImage:(UIImage *)anImage; // delegate:nil
+- (instancetype)initWithPlaceholderImage:(UIImage *)anImage;  // delegate:nil
 - (instancetype)initWithPlaceholderImage:(UIImage *)anImage delegate:(id<RCloudImageViewDelegate>)aDelegate;
 
 - (void)cancelImageLoad;

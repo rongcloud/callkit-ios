@@ -384,7 +384,7 @@ static NSString *const __RongCallKit__Time = @"__RongCallKit__Time__Unknown";
                         [NSString stringWithFormat:self.currentCallSession.mediaType == RCCallMediaAudio ?
                                                        RCCallKitLocalizedString(@"VoIPCall_invite_audio_push_Content") :
                                                        RCCallKitLocalizedString(@"VoIPCall_invite_video_push_Content"),
-                                                   [RCIMClient sharedRCIMClient].currentUserInfo.name];
+                                                   userInfo.name];
                 } else {
                     pushContent = self.currentCallSession.mediaType == RCCallMediaVideo ?
                         RCCallKitLocalizedString(@"VoIPVideoCallIncomingWithoutUserName") :
@@ -418,7 +418,7 @@ static NSString *const __RongCallKit__Time = @"__RongCallKit__Time__Unknown";
         }
         NSLog(@"postLocalNotification id:%@", requestWithIdentifier);
         [[UNUserNotificationCenter currentNotificationCenter]
-            removeDeliveredNotificationsWithIdentifiers:@[ requestWithIdentifier ]];
+            removeDeliveredNotificationsWithIdentifiers:@[requestWithIdentifier]];
         UNNotificationRequest *request = [UNNotificationRequest requestWithIdentifier:requestWithIdentifier
                                                                               content:content
                                                                               trigger:nil];
@@ -534,6 +534,15 @@ static NSString *const __RongCallKit__Time = @"__RongCallKit__Time__Unknown";
 
 + (NSString *)getVersion {
     return __RongCallKit__Version;
+}
+
++ (void)load {
+    Class clazz = NSClassFromString(@"RCUtilities");
+    if (clazz && [clazz respondsToSelector:@selector(setModuleName:version:)]) {
+        [clazz performSelector:@selector(setModuleName:version:)
+                    withObject:@"callkit"
+                    withObject:__RongCallKit__Version];
+    }
 }
 
 @end

@@ -259,7 +259,7 @@
 
         } else if (callStatus == RCCallActive) {
             self.blurView.hidden = NO;
-            self.remotePortraitView.alpha = 0.5;
+            self.remotePortraitView.alpha = 1.0;
             self.statusView.hidden = YES;
             self.remotePortraitBgView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
             self.remotePortraitView.image = remoteHeaderImage;

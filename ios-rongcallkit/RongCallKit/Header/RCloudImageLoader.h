@@ -37,7 +37,7 @@
 
 @protocol RCloudImageLoaderObserver;
 @interface RCloudImageLoader : NSObject /*<NSURLConnectionDelegate>*/ {
-  @private
+   @private
     NSDictionary *_currentConnections;
     NSMutableDictionary *currentConnections;
 #if __EGOIL_USE_BLOCKS
@@ -80,7 +80,7 @@
 @protocol RCloudImageLoaderObserver <NSObject>
 @optional
 - (void)imageLoaderDidLoad:
-    (NSNotification *)notification; // Object will be EGOImageLoader, userInfo will contain imageURL and image
+    (NSNotification *)notification;  // Object will be EGOImageLoader, userInfo will contain imageURL and image
 - (void)imageLoaderDidFailToLoad:
-    (NSNotification *)notification; // Object will be EGOImageLoader, userInfo will contain error
+    (NSNotification *)notification;  // Object will be EGOImageLoader, userInfo will contain error
 @end

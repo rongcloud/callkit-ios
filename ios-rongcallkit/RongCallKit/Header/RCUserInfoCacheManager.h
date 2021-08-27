@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "RongCallKitAdaptiveHeader.h"
-@class RCUserInfoCacheDBHelper,RCPublicServiceProfile;
+@class RCUserInfoCacheDBHelper, RCPublicServiceProfile;
 
 //消息分发
 FOUNDATION_EXPORT NSString *const RCKitDispatchUserInfoUpdateNotification;
@@ -21,14 +21,14 @@ FOUNDATION_EXPORT NSString *const RCKitDispatchPublicServiceInfoNotification;
 
 @interface RCUserInfoCacheManager : NSObject
 
-@property(nonatomic, strong) RCUserInfoCacheDBHelper *workingDBHelper;
-@property(nonatomic, strong) dispatch_queue_t dbQueue;
+@property (nonatomic, strong) RCUserInfoCacheDBHelper *workingDBHelper;
+@property (nonatomic, strong) dispatch_queue_t dbQueue;
 
 + (instancetype)sharedManager;
 
 // appkey, token, userId, 确定存储的DB路径
-@property(nonatomic, strong) NSString *appKey;
-@property(nonatomic, strong) NSString *currentUserId;
+@property (nonatomic, strong) NSString *appKey;
+@property (nonatomic, strong) NSString *currentUserId;
 
 #pragma mark - UserInfo
 
@@ -51,7 +51,7 @@ FOUNDATION_EXPORT NSString *const RCKitDispatchPublicServiceInfoNotification;
 
 #pragma mark - GroupUserInfo (sugar for ConversationUserInfo)
 
-@property(nonatomic, assign) BOOL groupUserInfoEnabled;
+@property (nonatomic, assign) BOOL groupUserInfoEnabled;
 
 - (RCUserInfo *)getUserInfo:(NSString *)userId inGroupId:(NSString *)groupId;
 
