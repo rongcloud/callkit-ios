@@ -76,6 +76,27 @@ UIColor *dynamic_color(NSInteger light_hex_value, NSInteger dark_hex_value) {
         case RCCallDisconnectReasonHangup:
             hangupReasonString = RCCallKitLocalizedString(@"VoIPCallHasHangup");
             break;
+        case RCCallDisconnectReasonBusyLine:
+            hangupReasonString = RCCallKitLocalizedString(@"VoIPCallBusyLine");
+            break;
+        case RCCallDisconnectReasonNoResponse:
+            hangupReasonString = RCCallKitLocalizedString(@"VoIPCallNoResponse");
+            break;
+        case RCCallDisconnectReasonEngineUnsupported:
+            hangupReasonString = RCCallKitLocalizedString(@"VoIPCallEngineUnsupport");
+            break;
+        case RCCallDisconnectReasonNetworkError:
+            hangupReasonString = RCCallKitLocalizedString(@"VoIPCallLocalNetworkError");
+            break;
+        case RCCallDisconnectReasonResourceError:
+            hangupReasonString = RCCallKitLocalizedString(@"VoIPCallLocalResourceError");
+            break;
+        case RCCallDisconnectReasonPublishError:
+            hangupReasonString = RCCallKitLocalizedString(@"VoIPCallLocalPublishError");
+            break;
+        case RCCallDisconnectReasonSubscribeError:
+            hangupReasonString = RCCallKitLocalizedString(@"VoIPCallLocalSubscribeError");
+            break;
         case RCCallDisconnectReasonRemoteCancel:
             hangupReasonString = RCCallKitLocalizedString(@"VoIPCallRemoteCancel");
             break;
@@ -91,14 +112,49 @@ UIColor *dynamic_color(NSInteger light_hex_value, NSInteger dark_hex_value) {
         case RCCallDisconnectReasonRemoteNoResponse:
             hangupReasonString = RCCallKitLocalizedString(@"VoIPCallRemoteNoResponse");
             break;
+        case RCCallDisconnectReasonRemoteEngineUnsupported:
+            hangupReasonString = RCCallKitLocalizedString(@"VoIPCallRemoteEngineUnsupport");
+            break;
+        case RCCallDisconnectReasonRemoteNetworkError:
+            hangupReasonString = RCCallKitLocalizedString(@"VoIPCallRemoteNetworkError");
+            break;
+        case RCCallDisconnectReasonRemoteResourceError:
+            hangupReasonString = RCCallKitLocalizedString(@"VoIPCallRemoteResourceError");
+            break;
+        case RCCallDisconnectReasonRemotePublishError:
+            hangupReasonString = RCCallKitLocalizedString(@"VoIPCallRemotePublishError");
+            break;
+        case RCCallDisconnectReasonRemoteSubscribeError:
+            hangupReasonString = RCCallKitLocalizedString(@"VoIPCallRemoteSubscribeError");
+            break;
+        case RCCallDisconnectReasonKickedByOtherCall:
+            hangupReasonString = RCCallKitLocalizedString(@"VoIPCallLocalKickedByOtherCallError");
+            break;
+        case RCCallDisconnectReasonInOtherCall:
+            hangupReasonString = RCCallKitLocalizedString(@"VoIPCallLocalInOtherCallError");
+            break;
+        case RCCallDisconnectReasonKickedByServer:
+            hangupReasonString = RCCallKitLocalizedString(@"VoIPCallLocalKickedByServer");
+            break;
+        case RCCallDisconnectReasonRemoteKickedByOtherCall:
+            hangupReasonString = RCCallKitLocalizedString(@"VoIPCallRemoteKickedByOtherCallError");
+            break;
+        case RCCallDisconnectReasonRemoteInOtherCall:
+            hangupReasonString = RCCallKitLocalizedString(@"VoIPCallRemoteInOtherCallError");
+            break;
+        case RCCallDisconnectReasonRemoteKickedByServer:
+            hangupReasonString = RCCallKitLocalizedString(@"VoIPCallRemoteKickedByServer");
+            break;
         case RCCallDisconnectReasonAcceptByOtherClient:
             hangupReasonString = RCCallKitLocalizedString(@"VoIPCallAcceptByOtherClient");
             break;
-        case RCCallDisconnectReasonKickedByServer:
-            hangupReasonString = RCCallKitLocalizedString(@"VoIPCallKickedByServer");
+        case RCCallDisconnectReasonHangupByOtherClient:
+            hangupReasonString = RCCallKitLocalizedString(@"VoIPCallHangupByOtherClient");
+            break;
+        case RCCallDisconnectReasonAddToBlackList:
+            hangupReasonString = RCCallKitLocalizedString(@"VoIP_Rejected_By_Blacklist");
             break;
         case RCCallDisconnectReasonMediaServerClosed:
-        case RCCallDisconnectReasonRemoteEngineUnsupported:
             hangupReasonString = RCCallKitLocalizedString(@"VoIPCallMediaServerClosed");
             break;
         default:
@@ -108,56 +164,19 @@ UIColor *dynamic_color(NSInteger light_hex_value, NSInteger dark_hex_value) {
 }
 
 + (NSString *)getReadableStringForMessageCell:(RCCallDisconnectReason)hangupReason {
-    NSString *hangupReasonString = nil;
     if (hangupReason <= 0) {
         hangupReason = 1;
     }
-    switch (hangupReason) {
-        case RCCallDisconnectReasonBusyLine:
-            hangupReasonString = RCCallKitLocalizedString(@"VoIPCallNoResponse");
-            break;
-        case RCCallDisconnectReasonNoResponse:
-            hangupReasonString = RCCallKitLocalizedString(@"VoIPCallNoResponse");
-            break;
-        case RCCallDisconnectReasonNetworkError:
-            hangupReasonString = RCCallKitLocalizedString(@"VoIPCallLocalNetworkError");
-            break;
-        case RCCallDisconnectReasonRemoteNetworkError:
-            hangupReasonString = RCCallKitLocalizedString(@"VoIPCallRemoteNetworkError");
-            break;
-        case RCCallDisconnectReasonAddToBlackList:
-            hangupReasonString = RCCallKitLocalizedString(@"VoIP_Rejected_By_Blacklist");
-            break;
-        default:
-            hangupReasonString = [self getGeneralReadableString:hangupReason];
-            break;
-    }
-    return hangupReasonString;
+    
+    return [self getGeneralReadableString:hangupReason];
 }
 
 + (NSString *)getReadableStringForCallViewController:(RCCallDisconnectReason)hangupReason {
-    NSString *hangupReasonString = nil;
-    switch (hangupReason) {
-        case RCCallDisconnectReasonNoResponse:
-            hangupReasonString = RCCallKitLocalizedString(@"VoIPCallNoResponse");
-            break;
-        case RCCallDisconnectReasonNetworkError:
-            hangupReasonString = RCCallKitLocalizedString(@"VoIPCallLocalNetworkError");
-            break;
-        case RCCallDisconnectReasonRemoteNetworkError:
-            hangupReasonString = RCCallKitLocalizedString(@"VoIPCallRemoteNetworkError");
-            break;
-        case RCCallDisconnectReasonRemoteBusyLine:
-            hangupReasonString = RCCallKitLocalizedString(@"VoIPCallRemoteBusyLineAndShowAdvice");
-            break;
-        case RCCallDisconnectReasonAddToBlackList:
-            hangupReasonString = RCCallKitLocalizedString(@"VoIP_Rejected_By_Blacklist");
-            break;
-        default:
-            hangupReasonString = [self getGeneralReadableString:hangupReason];
-            break;
+    if (hangupReason <= 0) {
+        hangupReason = 1;
     }
-    return hangupReasonString;
+    
+    return [self getGeneralReadableString:hangupReason];
 }
 
 + (BOOL)isLandscape {
@@ -180,18 +199,24 @@ UIColor *dynamic_color(NSInteger light_hex_value, NSInteger dark_hex_value) {
                       success:(void (^)(void))successBlock
                         error:(void (^)(void))errorBlock {
     if (mediaType == RCCallMediaVideo) {
-        [self checkCapturePermission:^(BOOL granted) {
-            if (granted) {
-                [self checkRecordPermission:^() {
-                    successBlock();
-                } error:errorBlock];
+        [self
+            checkCapturePermission:^(BOOL granted) {
+                if (granted) {
+                    [self
+                        checkRecordPermission:^() {
+                            successBlock();
+                        }
+                                        error:errorBlock];
+                }
             }
-        } error:errorBlock];
-        
+                             error:errorBlock];
+
     } else if (mediaType == RCCallMediaAudio) {
-        [self checkRecordPermission:^() {
-            successBlock();
-        } error:errorBlock];
+        [self
+            checkRecordPermission:^() {
+                successBlock();
+            }
+                            error:errorBlock];
     }
 }
 
@@ -224,17 +249,18 @@ UIColor *dynamic_color(NSInteger light_hex_value, NSInteger dark_hex_value) {
             errorBlock();
         });
     } else if (authStatus == AVAuthorizationStatusNotDetermined) {
-        [AVCaptureDevice
-         requestAccessForMediaType:AVMediaTypeVideo
-         completionHandler:^(BOOL granted) {
-            if (!granted) {
-                [self loadErrorAlertWithConfirm:RCCallKitLocalizedString(@"AccessRightTitle")message:RCCallKitLocalizedString(@"cameraAccessRight")];
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    errorBlock();
-                  });
-            }
-            complete(granted);
-        }];
+        [AVCaptureDevice requestAccessForMediaType:AVMediaTypeVideo
+                                 completionHandler:^(BOOL granted) {
+                                     if (!granted) {
+                                         [self
+                                             loadErrorAlertWithConfirm:RCCallKitLocalizedString(@"AccessRightTitle")
+                                                               message:RCCallKitLocalizedString(@"cameraAccessRight")];
+                                         dispatch_async(dispatch_get_main_queue(), ^{
+                                             errorBlock();
+                                         });
+                                     }
+                                     complete(granted);
+                                 }];
     } else {
         complete(YES);
     }

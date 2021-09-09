@@ -465,6 +465,7 @@
                        self.view.frame.size.width - RCCallHorizontalMargin * 2, RCCallMiniLabelHeight);
         self.userCollectionTitleLabel.hidden = NO;
         self.userCollectionTitleLabel.text = RCCallKitLocalizedString(@"VoIPAudioCall");
+        ;
         _userCollectionTitleLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size:18];
     }
 

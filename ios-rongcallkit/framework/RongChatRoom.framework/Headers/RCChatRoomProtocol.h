@@ -8,6 +8,19 @@
 
 #ifndef RCChatRoomProtocol_h
 #define RCChatRoomProtocol_h
+
+typedef NS_ENUM(NSUInteger, RCChatRoomDestroyType) {
+    /*!
+     开发者主动销毁
+     */
+    RCChatRoomDestroyTypeManual = 0,
+
+    /*!
+     聊天室长时间不活跃，被系统自动回收
+     */
+    RCChatRoomDestroyTypeAuto = 3
+};
+
 #pragma mark - 聊天室监听器
 
 /*!
@@ -44,11 +57,27 @@
 - (void)onChatRoomJoinFailed:(NSString *)chatroomId errorCode:(RCErrorCode)errorCode;
 
 /*!
+ 加入聊天室成功，但是聊天室被重置。接收到此回调后，还会收到 onChatRoomJoined：回调。
+
+ @param chatroomId 聊天室ID
+ */
+- (void)onChatRoomReset:(NSString *)chatroomId;
+
+/*!
  退出聊天室成功的回调
 
  @param chatroomId 聊天室ID
  */
 - (void)onChatRoomQuited:(NSString *)chatroomId;
+
+/*!
+ 聊天室被销毁的回调，用户在线的时候房间被销毁才会收到此回调。
+
+ @param chatroomId 聊天室ID
+ @param type 聊天室销毁原因
+
+ */
+- (void)onChatRoomDestroyed:(NSString *)chatroomId type:(RCChatRoomDestroyType)type;
 
 @end
 

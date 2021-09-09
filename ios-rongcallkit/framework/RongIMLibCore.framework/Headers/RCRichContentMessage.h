@@ -48,11 +48,6 @@
 @property (nonatomic, copy) NSString *url;
 
 /*!
- 图文消息的扩展信息
- */
-@property (nonatomic, copy) NSString *extra;
-
-/*!
  初始化图文消息
 
  @param title       图文消息的标题

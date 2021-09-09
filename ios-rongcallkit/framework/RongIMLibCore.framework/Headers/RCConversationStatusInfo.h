@@ -40,6 +40,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *targetId;
 
 /*!
+ 所属会话的业务标识
+ */
+@property (nonatomic, copy) NSString *channelId;
+
+/*!
  会话状态改变的类型
 */
 @property (nonatomic, assign) RCConversationStatusType conversationStatusType;

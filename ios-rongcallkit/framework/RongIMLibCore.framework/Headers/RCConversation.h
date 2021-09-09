@@ -31,6 +31,11 @@
 @property (nonatomic, copy) NSString *targetId;
 
 /*!
+ 该会话的业务标识，长度限制 20 字符
+ */
+@property (nonatomic, copy) NSString *channelId;
+
+/*!
  会话的标题
  */
 @property (nonatomic, copy) NSString *conversationTitle;

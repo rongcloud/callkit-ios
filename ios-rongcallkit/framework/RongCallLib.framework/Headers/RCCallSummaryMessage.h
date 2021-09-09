@@ -6,9 +6,9 @@
 //  Copyright © 2016年 RongCloud. All rights reserved.
 //
 
-#import "RCCallCommonDefine.h"
 #import <Foundation/Foundation.h>
 #import <RongIMLibCore/RongIMLibCore.h>
+#import "RCCallCommonDefine.h"
 
 /*!
  通话摘要消息的类型名

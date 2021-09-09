@@ -29,11 +29,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) long duration;
 
 /*!
- 语音消息的附加信息
- */
-@property (nonatomic, copy) NSString *extra;
-
-/*!
  初始化高清语音消息
 
  @param localPath 语音的本地路径

@@ -146,6 +146,11 @@
 @property (nonatomic, strong) RCEmojiBoardView *emojiBoardView;
 
 /*!
+ 输入工具栏底部的 SafeArea view；当前设备没有 SafeArea，则该 view 为 nil
+ */
+@property (nonatomic, strong, readonly) UIView *safeAreaView;
+
+/*!
  View即将显示的回调
  */
 - (void)containerViewWillAppear;

@@ -30,7 +30,7 @@
 		</data>
 		<key>Headers/RCChatSessionInputBarControl.h</key>
 		<data>
-		5OYcyUvNXU+yz8n+uWkO+j618LQ=
+		G2ZaGVrRXxwhbIQ0U5mu2BdtELw=
 		</data>
 		<key>Headers/RCContentView.h</key>
 		<data>
@@ -62,7 +62,7 @@
 		</data>
 		<key>Headers/RCConversationViewController.h</key>
 		<data>
-		D0hknrJxoV5oXQobfktc0M8UfdY=
+		AsrIUreQab9CvBb/Hp2Fh878HWk=
 		</data>
 		<key>Headers/RCEmojiBoardView.h</key>
 		<data>
@@ -102,15 +102,15 @@
 		</data>
 		<key>Headers/RCHQVoiceMessageCell.h</key>
 		<data>
-		6K1y1yfHQAGB3dinJM6YDsSgbY4=
+		paT9J3OYRG65aDkYLzmXWhedv1k=
 		</data>
 		<key>Headers/RCIM+Deprecated.h</key>
 		<data>
-		uSwEGHfSUmy7E4PKooGFrAXtoN0=
+		krlIui5aUa4WyawRSq1mUSveZ4g=
 		</data>
 		<key>Headers/RCIM.h</key>
 		<data>
-		XpdzNsG/FrBfXrOI52GEeWIzsI4=
+		90OHNG8BBvS24adGhX3Csl3QqIs=
 		</data>
 		<key>Headers/RCImageMessageCell.h</key>
 		<data>
@@ -122,7 +122,7 @@
 		</data>
 		<key>Headers/RCImageSlideController.h</key>
 		<data>
-		RJ1K51yVQwcFZgKlYXiaI0hLDe4=
+		fNKvMpNtS+Um20YuSnlCdMzrKmo=
 		</data>
 		<key>Headers/RCInputContainerView.h</key>
 		<data>
@@ -130,7 +130,7 @@
 		</data>
 		<key>Headers/RCKitCommonDefine.h</key>
 		<data>
-		KrNPTQOQEDt/U4RaWH33PUi+JwA=
+		7gPcqkAi+yQOC2b6IR13s5gh2mo=
 		</data>
 		<key>Headers/RCKitConfig.h</key>
 		<data>
@@ -142,7 +142,7 @@
 		</data>
 		<key>Headers/RCKitMessageConf.h</key>
 		<data>
-		saxWKBHDltCge4iTzKwrIz1Fzok=
+		5GYTyplWao9XZ6Cx4UXasGRoSP8=
 		</data>
 		<key>Headers/RCKitUIConf.h</key>
 		<data>
@@ -150,7 +150,7 @@
 		</data>
 		<key>Headers/RCKitUtility.h</key>
 		<data>
-		2+uizrkKYgAxC3KGLr6vXT/sBEs=
+		sEfb0+QL5PGhcN7xoQhnzmOrIpk=
 		</data>
 		<key>Headers/RCLocationMessageCell.h</key>
 		<data>
@@ -218,7 +218,7 @@
 		</data>
 		<key>Headers/RCReferenceMessageCell.h</key>
 		<data>
-		jy+6s2dSTmLiG5+KpNxCsHCV7qk=
+		dGNAUvJ6PH6z/IBwpFjK1rG58rc=
 		</data>
 		<key>Headers/RCReferencedContentView.h</key>
 		<data>
@@ -262,7 +262,7 @@
 		</data>
 		<key>Headers/RongIMKit.h</key>
 		<data>
-		RGUrtTqxTQuUWjFiPvphmk9APhQ=
+		hAnQOL9yq8ZlvVYn4og4KoGsZ2w=
 		</data>
 		<key>Headers/RongIMKitExtensionModule.h</key>
 		<data>
@@ -270,7 +270,11 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		fliDJTo+7MwU7Tp2zvnS52H9xYc=
+		1ge2DDlrnjCMtKHlzv/5H0hUy58=
+		</data>
+		<key>Modules/module.modulemap</key>
+		<data>
+		AQzD6JawyZvE4Fx9Cc+bmmBcriM=
 		</data>
 	</dict>
 	<key>files2</key>
@@ -345,11 +349,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			5OYcyUvNXU+yz8n+uWkO+j618LQ=
+			G2ZaGVrRXxwhbIQ0U5mu2BdtELw=
 			</data>
 			<key>hash2</key>
 			<data>
-			xkHbDQyj9hvGdhxOu6AOj7YSRDRXA5VM4K7FCdtnmR4=
+			liiJTqkl872Nx6DMXndExGwrjYuRKpscrriqa7dXhjo=
 			</data>
 		</dict>
 		<key>Headers/RCContentView.h</key>
@@ -433,11 +437,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			D0hknrJxoV5oXQobfktc0M8UfdY=
+			AsrIUreQab9CvBb/Hp2Fh878HWk=
 			</data>
 			<key>hash2</key>
 			<data>
-			4xTqMId83Zie2Qh7yMaLp9rpUk1xtI6lsRQwRIvinr0=
+			2GG1YCXewR7HWNz7gDgZRBpp6JXCsePBOpNTdUBV+L4=
 			</data>
 		</dict>
 		<key>Headers/RCEmojiBoardView.h</key>
@@ -543,33 +547,33 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			6K1y1yfHQAGB3dinJM6YDsSgbY4=
+			paT9J3OYRG65aDkYLzmXWhedv1k=
 			</data>
 			<key>hash2</key>
 			<data>
-			/j5CDg3Dsk0EDjXffHiF7oJFrZ0pEuyI12XzQwlHS38=
+			Bu3thBRm+s8YhMXGipJiVrTv6xPpsPEAq+AF67Aocdw=
 			</data>
 		</dict>
 		<key>Headers/RCIM+Deprecated.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			uSwEGHfSUmy7E4PKooGFrAXtoN0=
+			krlIui5aUa4WyawRSq1mUSveZ4g=
 			</data>
 			<key>hash2</key>
 			<data>
-			94hSJ2IZUmny7w/wY2DpTT5E6qdadRz4576syQGGwOg=
+			l3uKeyn0SHhLgP5PCftr7szJWexXrFtPh7V7LeDWIVw=
 			</data>
 		</dict>
 		<key>Headers/RCIM.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			XpdzNsG/FrBfXrOI52GEeWIzsI4=
+			90OHNG8BBvS24adGhX3Csl3QqIs=
 			</data>
 			<key>hash2</key>
 			<data>
-			X7liakKJkDzCWjECLrPOVIOCJwFpmzMTTY7CcRPRpPI=
+			yYQTq7DM70h5QZBxf9BR4Q/dMcEPtP45bJqWOMAEBhs=
 			</data>
 		</dict>
 		<key>Headers/RCImageMessageCell.h</key>
@@ -598,11 +602,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			RJ1K51yVQwcFZgKlYXiaI0hLDe4=
+			fNKvMpNtS+Um20YuSnlCdMzrKmo=
 			</data>
 			<key>hash2</key>
 			<data>
-			2JVa4AZP8u3KGpW82/ORi1ZzMQg7K8si25yQRLi3doU=
+			C4Z109g0crmTxoMXxKHwMnGlT70u24thHaSshDOoiq0=
 			</data>
 		</dict>
 		<key>Headers/RCInputContainerView.h</key>
@@ -620,11 +624,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			KrNPTQOQEDt/U4RaWH33PUi+JwA=
+			7gPcqkAi+yQOC2b6IR13s5gh2mo=
 			</data>
 			<key>hash2</key>
 			<data>
-			tjzugbIpNO7NrpR4+xk57J5vMyPqLAMlzFzYGPvG9RA=
+			BWMSYMvqNWryH9vYWXzBh2PAgAW8vIHs/LZhHMO9L3A=
 			</data>
 		</dict>
 		<key>Headers/RCKitConfig.h</key>
@@ -653,11 +657,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			saxWKBHDltCge4iTzKwrIz1Fzok=
+			5GYTyplWao9XZ6Cx4UXasGRoSP8=
 			</data>
 			<key>hash2</key>
 			<data>
-			pXjVWabCckCoNSzVxBnI9FlR+pB3XShh7xCKX15VgKk=
+			q4sWlOlaXGQU6EXjq48PwhIqUQCNiCx+oFRICOChz0g=
 			</data>
 		</dict>
 		<key>Headers/RCKitUIConf.h</key>
@@ -675,11 +679,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			2+uizrkKYgAxC3KGLr6vXT/sBEs=
+			sEfb0+QL5PGhcN7xoQhnzmOrIpk=
 			</data>
 			<key>hash2</key>
 			<data>
-			arlvZCcd8IxTXMRgGmsPS3nNXCVJwtWcquA2vAuAHNI=
+			V6K5zmdJm6G68cShE1VAmxuhtAXOtBQuu+6riNybHbA=
 			</data>
 		</dict>
 		<key>Headers/RCLocationMessageCell.h</key>
@@ -862,11 +866,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			jy+6s2dSTmLiG5+KpNxCsHCV7qk=
+			dGNAUvJ6PH6z/IBwpFjK1rG58rc=
 			</data>
 			<key>hash2</key>
 			<data>
-			liFAoizpMwHLpXesySQmEwXGBNz8GolJJmD7tiwKJE4=
+			GlfijIMU+o71riOgq19L5gmnBT5u8QqoOxBpNqoZsFs=
 			</data>
 		</dict>
 		<key>Headers/RCReferencedContentView.h</key>
@@ -983,11 +987,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			RGUrtTqxTQuUWjFiPvphmk9APhQ=
+			hAnQOL9yq8ZlvVYn4og4KoGsZ2w=
 			</data>
 			<key>hash2</key>
 			<data>
-			5GYTbbmhspIf+B7mf8NT32mlZ6XFbambtFhhV0PKaag=
+			x0+oixNUF/ad2YGL5Zo16WJrmrVgLQ38zxNdpo0yiR4=
 			</data>
 		</dict>
 		<key>Headers/RongIMKitExtensionModule.h</key>
@@ -999,6 +1003,17 @@
 			<key>hash2</key>
 			<data>
 			ERrR+vYVkOQBi+tWQXN3VI2cYTDRZVd5Qyn9ZWGuHcA=
+			</data>
+		</dict>
+		<key>Modules/module.modulemap</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			AQzD6JawyZvE4Fx9Cc+bmmBcriM=
+			</data>
+			<key>hash2</key>
+			<data>
+			zK4p2dPW5V0ZCzArVrQi6AHPZWTu7Mi0fUkTMlGwNsw=
 			</data>
 		</dict>
 	</dict>

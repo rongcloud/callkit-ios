@@ -68,7 +68,8 @@ UIKIT_EXTERN NSNotificationName const RCCallNewSessionCreationNotification;
  @warning  **已废弃，请勿使用。**
  升级说明：如果您之前使用了此属性，可以直接替换为[RCIM sharedRCIM]的groupMemberDataSource属性，行为和实现完全一致。
  */
-@property (nonatomic, weak) id<RCCallGroupMemberDataSource> groupMemberDataSource __deprecated_msg("已废弃，请勿使用。");
+@property (nonatomic, weak) id<RCCallGroupMemberDataSource> groupMemberDataSource __deprecated_msg("已废弃，请勿使用。")
+    ;
 
 /*!
  获取融云通话界面组件CallKit的核心类单例

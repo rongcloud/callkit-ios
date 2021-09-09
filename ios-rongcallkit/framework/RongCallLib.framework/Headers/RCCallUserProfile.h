@@ -6,9 +6,9 @@
 //  Copyright © 2016年 RongCloud. All rights reserved.
 //
 
-#import "RCCallCommonDefine.h"
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import "RCCallCommonDefine.h"
 
 /*!
  用户的通话状态

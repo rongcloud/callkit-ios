@@ -226,6 +226,24 @@ FOUNDATION_EXPORT NSString *const RCKitDispatchConversationStatusChangeNotificat
 
 @optional
 
+/**
+ 接收消息的回调方法
+
+ @param message 当前接收到的消息
+ @param nLeft 还剩余的未接收的消息数，left>=0
+ @param offline 是否是离线消息
+ @param hasPackage SDK 拉取服务器的消息以包(package)的形式批量拉取，有 package 存在就意味着远端服务器还有消息尚未被 SDK
+ 拉取
+ @discussion 和上面的 - (void)onRCIMReceived:(RCMessage *)message left:(int)nLeft 功能完全一致，额外把
+ offline 和 hasPackage 参数暴露，开发者可以根据 nLeft、offline、hasPackage 来决定何时的时机刷新 UI ；建议当 hasPackage=0
+ 并且 nLeft=0 时刷新 UI
+ @warning 如果使用此方法，那么就不能再使用 RCIM 中 - (void)onRCIMReceived:(RCMessage *)message left:(int)nLeft 的使用，否则会出现重复操作的情形
+ */
+- (void)onRCIMReceived:(RCMessage *)message
+                  left:(int)nLeft
+               offline:(BOOL)offline
+            hasPackage:(BOOL)hasPackage;
+
 /*!
  当App处于后台时，接收到消息并弹出本地通知的回调方法
 
@@ -1048,5 +1066,11 @@ FOUNDATION_EXPORT NSString *const RCKitDispatchConversationStatusChangeNotificat
  @return        YES处理，NO未处理。
  */
 - (BOOL)openExtensionModuleUrl:(NSURL *)url;
+
+/*!
+ 获取 SDK 版本号
+ @return SDK 版本号
+ */
++ (NSString *)getVersion;
 
 @end

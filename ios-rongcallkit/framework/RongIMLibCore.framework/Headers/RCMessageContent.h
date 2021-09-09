@@ -135,6 +135,11 @@
  */
 @property (nonatomic, assign) NSUInteger destructDuration;
 
+/*!
+ 消息的附加信息
+ */
+@property (nonatomic, copy) NSString *extra;
+
 /**
  将用户信息编码到字典中
 

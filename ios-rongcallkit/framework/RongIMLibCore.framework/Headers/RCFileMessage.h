@@ -47,11 +47,6 @@
 @property (nonatomic, copy) NSString *localPath;
 
 /*!
- 附加信息
- */
-@property (nonatomic, copy) NSString *extra;
-
-/*!
  初始化文件消息
 
  @param localPath 文件的本地路径

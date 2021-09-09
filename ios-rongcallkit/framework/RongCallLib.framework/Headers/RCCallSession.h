@@ -6,11 +6,11 @@
 //  Copyright © 2016年 RongCloud. All rights reserved.
 //
 
-#import "RCCallCommonDefine.h"
-#import "RCCallUserProfile.h"
+#import <CoreMedia/CoreMedia.h>
 #import <Foundation/Foundation.h>
 #import <RongIMLibCore/RongIMLibCore.h>
-#import <CoreMedia/CoreMedia.h>
+#import "RCCallCommonDefine.h"
+#import "RCCallUserProfile.h"
 
 /*!
  通话状态变化的监听器
@@ -133,7 +133,9 @@
  
  @remarks 代理
 */
-- (void)remoteUserDidPublishCustomMediaStream:(NSString *)streamId streamTag:(NSString *)tag mediaType:(RCCallMediaType)mediaType;
+- (void)remoteUserDidPublishCustomMediaStream:(NSString *)streamId
+                                    streamTag:(NSString *)tag
+                                    mediaType:(RCCallMediaType)mediaType;
 
 /*!
  对端用户取消发布自定义媒体流
@@ -240,12 +242,20 @@
 - (CMSampleBufferRef)processVideoFrame:(CMSampleBufferRef)sampleBuffer;
 
 /*!
- 当前通话视频通话时, 收到远端用户的第一个视频帧的回调
+ 当前通话为视频通话时, 收到远端用户的第一个视频帧的回调
  @param userId   远端用户ID
  
  @remarks 代理
  */
 - (void)receiveRemoteUserVideoFirstKeyFrame:(NSString *)userId;
+
+/*!
+ 当前通话为音频或视频通话时, 收到远端用户的第一个音频帧的回调
+ @param userId   远端用户ID
+ 
+ @remarks 代理
+ */
+- (void)receiveRemoteUserVideoFirstAudioFrame:(NSString *)userId;
 
 @end
 
@@ -265,6 +275,7 @@
  通话ID
  */
 @property (nonatomic, strong, readonly) NSString *callId;
+
 /*!
  通话的目标会话ID
  */
@@ -278,7 +289,7 @@
 /*!
  是否是多方通话
  */
-@property (nonatomic, assign, readonly, getter = isMultiCall) BOOL multiCall;
+@property (nonatomic, assign, readonly, getter=isMultiCall) BOOL multiCall;
 
 /*!
  通话的扩展信息
@@ -377,7 +388,7 @@
  @remarks 通话设置
  @return 所有注册的代理数组
  */
-- (NSArray <id <RCCallSessionDelegate>> *)allDelegates;
+- (NSArray<id<RCCallSessionDelegate>> *)allDelegates;
 
 /*!
  接听来电
@@ -452,7 +463,9 @@
  
  @remarks 通话管理
  */
-- (void)inviteRemoteUsers:(NSArray *)userIdList observerIdList:(NSArray *)observerIdList mediaType:(RCCallMediaType)type;
+- (void)inviteRemoteUsers:(NSArray *)userIdList
+           observerIdList:(NSArray *)observerIdList
+                mediaType:(RCCallMediaType)type;
 
 /*!
  设置用户所在的视频View

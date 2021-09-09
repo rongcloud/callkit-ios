@@ -214,7 +214,7 @@
 
  @discussion 会根据已经设置的RCIM的enabledReadReceiptConversationTypeList属性进行过滤、同步。
  */
-+ (void)syncConversationReadStatusIfEnabled:(RCConversation *)conversation;
++ (void)syncConversationReadStatusIfEnabled:(RCConversationModel *)conversation;
 
 /*!
  获取汉字对应的拼音首字母
@@ -333,4 +333,18 @@
  @discussion 当前系统高于 9.0，并且满足手机系统为 UISemanticContentAttributeForceRightToLeft 布局或者  App 被修改为 UISemanticContentAttributeForceRightToLeft 布局时才会返回 YES，否则为 NO
  */
 + (BOOL)isRTL;
+
+/**
+ 判断其他模块是否正在使用声音通道
+ 
+ @discussion 主要检测 IMKit 子模块和 IMLib 子模块是否占用
+ */
++ (BOOL)isAudioHolding;
+
+/**
+ 判断其他模块是否正在使用摄像头
+ 
+ @discussion 主要检测 IMKit 子模块和 IMLib 子模块是否占用
+ */
++ (BOOL)isCameraHolding;
 @end

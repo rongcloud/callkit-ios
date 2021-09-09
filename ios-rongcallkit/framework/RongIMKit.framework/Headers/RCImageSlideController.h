@@ -2,13 +2,13 @@
 //  RCImageSlideController.h
 //  RongIMKit
 //
-//  Created by liulin on 16/5/18.
-//  Copyright © 2016年 RongCloud. All rights reserved.
+//  Created by zhanggaihong on 2021/5/27.
+//  Copyright © 2021年 RongCloud. All rights reserved.
 //
 
-#import "RCBaseViewController.h"
-#import "RCImageMessageProgressView.h"
 #import <UIKit/UIKit.h>
+#import "RCBaseViewController.h"
+
 @class RCMessageModel;
 
 @interface RCImageSlideController : RCBaseViewController

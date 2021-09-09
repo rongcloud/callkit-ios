@@ -181,11 +181,9 @@ typedef enum {
         _arrowDirection = KxCallMenuViewArrowDirectionUp;
         CGPoint point = (CGPoint){rectXM - widthHalf, rectY1 + 16};
 
-        if (point.x < kMargin)
-            point.x = kMargin;
+        if (point.x < kMargin) point.x = kMargin;
 
-        if ((point.x + contentSize.width + kMargin) > outerWidth)
-            point.x = outerWidth - contentSize.width - kMargin;
+        if ((point.x + contentSize.width + kMargin) > outerWidth) point.x = outerWidth - contentSize.width - kMargin;
 
         _arrowPosition = rectXM - point.x;
         //_arrowPosition = MAX(16, MIN(_arrowPosition, contentSize.width - 16));
@@ -199,11 +197,9 @@ typedef enum {
         _arrowDirection = KxCallMenuViewArrowDirectionDown;
         CGPoint point = (CGPoint){rectXM - widthHalf, rectY0 - heightPlusArrow};
 
-        if (point.x < kMargin)
-            point.x = kMargin;
+        if (point.x < kMargin) point.x = kMargin;
 
-        if ((point.x + contentSize.width + kMargin) > outerWidth)
-            point.x = outerWidth - contentSize.width - kMargin;
+        if ((point.x + contentSize.width + kMargin) > outerWidth) point.x = outerWidth - contentSize.width - kMargin;
 
         _arrowPosition = rectXM - point.x;
         _contentView.frame = (CGRect){CGPointZero, contentSize};
@@ -216,8 +212,7 @@ typedef enum {
         _arrowDirection = KxCallMenuViewArrowDirectionLeft;
         CGPoint point = (CGPoint){rectX1, rectYM - heightHalf};
 
-        if (point.y < kMargin)
-            point.y = kMargin;
+        if (point.y < kMargin) point.y = kMargin;
 
         if ((point.y + contentSize.height + kMargin) > outerHeight)
             point.y = outerHeight - contentSize.height - kMargin;
@@ -233,11 +228,9 @@ typedef enum {
         _arrowDirection = KxCallMenuViewArrowDirectionRight;
         CGPoint point = (CGPoint){rectX0 - widthPlusArrow, rectYM - heightHalf};
 
-        if (point.y < kMargin)
-            point.y = kMargin;
+        if (point.y < kMargin) point.y = kMargin;
 
-        if ((point.y + contentSize.height + 5) > outerHeight)
-            point.y = outerHeight - contentSize.height - kMargin;
+        if ((point.y + contentSize.height + 5) > outerHeight) point.y = outerHeight - contentSize.height - kMargin;
 
         _arrowPosition = rectYM - point.y;
         _contentView.frame = (CGRect){CGPointZero, contentSize};
@@ -250,6 +243,7 @@ typedef enum {
         _arrowDirection = KxCallMenuViewArrowDirectionNone;
 
         self.frame = (CGRect){
+
             (outerWidth - contentSize.width) * 0.5f,
             (outerHeight - contentSize.height) * 0.5f,
             contentSize,
@@ -295,14 +289,12 @@ typedef enum {
                     self.frame = toFrame;
                 }
                 completion:^(BOOL finished) {
-                    if ([self.superview isKindOfClass:[KxCallMenuOverlay class]])
-                        [self.superview removeFromSuperview];
+                    if ([self.superview isKindOfClass:[KxCallMenuOverlay class]]) [self.superview removeFromSuperview];
                     [self removeFromSuperview];
                 }];
 
         } else {
-            if ([self.superview isKindOfClass:[KxCallMenuOverlay class]])
-                [self.superview removeFromSuperview];
+            if ([self.superview isKindOfClass:[KxCallMenuOverlay class]]) [self.superview removeFromSuperview];
             [self removeFromSuperview];
         }
     }
@@ -321,16 +313,14 @@ typedef enum {
         [v removeFromSuperview];
     }
 
-    if (!_menuItems.count)
-        return nil;
+    if (!_menuItems.count) return nil;
 
     const CGFloat kMinMenuItemWidth = 32.f;
     const CGFloat kMarginX = 10.f;
     const CGFloat kMarginY = 5.f;
 
     UIFont *titleFont = [KxCallMenu titleFont];
-    if (!titleFont)
-        titleFont = [UIFont boldSystemFontOfSize:16];
+    if (!titleFont) titleFont = [UIFont boldSystemFontOfSize:16];
 
     CGFloat maxImageWidth = 0;
     CGFloat maxItemHeight = 0;
@@ -338,8 +328,7 @@ typedef enum {
 
     {
         const CGSize imageSize = CGSizeMake(20, 20);
-        if (imageSize.width > maxImageWidth)
-            maxImageWidth = imageSize.width;
+        if (imageSize.width > maxImageWidth) maxImageWidth = imageSize.width;
     }
 
     for (KxCallMenuItem *menuItem in _menuItems) {
@@ -350,11 +339,9 @@ typedef enum {
         const CGFloat itemHeight = MAX(titleSize.height, imageSize.height) + kMarginY * 2;
         const CGFloat itemWidth = (menuItem.image ? maxImageWidth + kMarginX : 0) + titleSize.width + kMarginX * 4 + 15;
 
-        if (itemHeight > maxItemHeight)
-            maxItemHeight = itemHeight;
+        if (itemHeight > maxItemHeight) maxItemHeight = itemHeight;
 
-        if (itemWidth > maxItemWidth)
-            maxItemWidth = itemWidth;
+        if (itemWidth > maxItemWidth) maxItemWidth = itemWidth;
     }
 
     maxItemWidth = MAX(maxItemWidth, kMinMenuItemWidth);
@@ -492,14 +479,8 @@ typedef enum {
 
     const CGFloat R = 0.44f, G = 0.44f, B = 0.44f;
 
-        const CGFloat components[20] = {
-            R,G,B,0.1,
-            R,G,B,0.4,
-            R,G,B,0.7,
-            R,G,B,0.4,
-            R,G,B,0.1
-        };
-    
+    const CGFloat components[20] = {R, G, B, 0.1, R, G, B, 0.4, R, G, B, 0.7, R, G, B, 0.4, R, G, B, 0.1};
+
     return [self gradientImageWithSize:size locations:locations components:components count:5];
     //    return [UIImage image:[UIImage imageNamed:@"line_x2"] byScalingToSize:size];
 }

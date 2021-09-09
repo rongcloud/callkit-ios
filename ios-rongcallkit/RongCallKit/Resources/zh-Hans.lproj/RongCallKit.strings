@@ -5,7 +5,6 @@
   Copyright © 2020 RongCloud. All rights reserved.
 */
 
-"VoIP_Rejected_By_Blacklist"="已被对方加入黑名单";
 "VoIPAudioCall"="语音通话";
 "VoIPVideoCall"="视频通话";
 "VoIPAudioCallExistedWarning"="正在进行语音通话，请稍后再试";
@@ -34,19 +33,35 @@
 "VoIPCallHasCancel"="已取消";
 "VoIPCallHasReject"="已拒绝";
 "VoIPCallHasHangup"="已挂断";
+"VoIPCallBusyLine"="己方忙";
 "VoIPCallNoResponse"="未接听";
+"VoIPCallEngineUnsupport"="己方不支持当前引擎";
+"VoIPCallLocalNetworkError"="本地网络错误";
+"VoIPCallLocalResourceError"="己方获取媒体资源失败";
+"VoIPCallLocalPublishError"="己方发布资源失败";
+"VoIPCallLocalSubscribeError"="己方订阅资源失败";
+"VoIPCallLocalKickedByOtherCallError"="己方其他端已加入新通话";
+"VoIPCallLocalInOtherCallError"="己方其他端已在通话中";
+"VoIPCallLocalKickedByServer"="己方已被禁止通话";
 "VoIPCallRemoteCancel"="对方已取消";
 "VoIPCallRemoteReject"="对方已拒绝";
 "VoIPCallRemoteHangup"="对方已挂断";
-"VoIPCallRemoteNoResponse"="对方未接听";
-"VoIPCallAcceptByOtherClient"="其他设备已处理";
-"VoIPCallKickedByServer"="已被禁止通话";
-"VoIPCallMediaServerClosed"="音视频服务已关闭";
 "VoIPCallRemoteBusyLine"="对方忙";
+"VoIPCallRemoteNoResponse"="对方未接听";
+"VoIPCallRemoteEngineUnsupport"="对方不支持当前引擎";
+"VoIPCallRemoteNetworkError"="对方网络错误";
+"VoIPCallRemoteResourceError"="对方获取媒体资源失败";
+"VoIPCallRemotePublishError"="对方发布资源失败";
+"VoIPCallRemoteSubscribeError"="对方订阅资源失败";
+"VoIPCallRemoteKickedByOtherCallError"="对方其他端已加入新通话";
+"VoIPCallRemoteInOtherCallError"="己方其他端已在通话中";
+"VoIPCallRemoteKickedByServer"="对方已被禁止通话";
+"VoIPCallAcceptByOtherClient"="己方其他端已接听";
+"VoIPCallHangupByOtherClient"="己方其他端已挂断";
+"VoIP_Rejected_By_Blacklist"="已被对方加入黑名单";
+"VoIPCallMediaServerClosed"="音视频服务已关闭";
 "VoIPCallRemoteBusyLineAndShowAdvice"="对方忙，请稍后再拨";
 "VoIPCallRemoteDidInvite"="%@ 加入群聊";
-"VoIPCallLocalNetworkError"="本地网络错误";
-"VoIPCallRemoteNetworkError"="对方网络错误";
 "bottom_result_view_choosed_person_prefix"="已选择";
 "bottom_result_view_choosed_person_subfix"="人";
 "Cancel"="取消";

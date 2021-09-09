@@ -6,7 +6,7 @@
 //  Copyright © 2020 RongCloud. All rights reserved.
 //
 
-#import <RongIMKit/RongIMKit.h>
+#import "RongIMKit.h"
 #import "RCAttributedLabel.h"
 #import "RCReferencedContentView.h"
 NS_ASSUME_NONNULL_BEGIN

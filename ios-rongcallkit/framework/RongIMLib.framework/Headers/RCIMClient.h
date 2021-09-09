@@ -28,6 +28,7 @@
  NSNumber *ctype = [notification.userInfo objectForKey:@"cType"];
  NSNumber *time = [notification.userInfo objectForKey:@"messageTime"];
  NSString *targetId = [notification.userInfo objectForKey:@"tId"];
+ NSString *channelId = [notification.userInfo objectForKey:@"cId"];
  NSString *fromUserId = [notification.userInfo objectForKey:@"fId"];
 
  收到这个消息之后可以更新这个会话中 messageTime 以前的消息 UI 为已读（底层数据库消息状态已经改为已读）。
@@ -662,6 +663,26 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  @remarks 消息操作
  */
 - (BOOL)cancelSendMediaMessage:(long)messageId;
+
+/*!
+ 批量插入接收的消息（该消息只插入本地数据库，实际不会发送给服务器和对方）
+ RCMessage 下列属性会被入库，其余属性会被抛弃
+ conversationType    会话类型
+ targetId            会话 ID
+ messageDirection    消息方向
+ senderUserId        发送者 ID
+ receivedStatus      接收状态；消息方向为接收方，并且 receivedStatus 为 ReceivedStatus_UNREAD 时，该条消息未读
+ sentStatus          发送状态
+ content             消息的内容
+ sentTime            消息发送的 Unix 时间戳，单位为毫秒 ，会影响消息排序
+ extra            RCMessage 的额外字段
+ 
+ @discussion 此方法不支持聊天室的会话类型。每批最多处理  500 条消息，超过 500 条返回 NO
+ @discussion 消息的未读会累加到回话的未读数上
+
+ @remarks 消息操作
+ */
+- (BOOL)batchInsertMessage:(NSArray<RCMessage *> *)msgs;
 
 /*!
  插入向外发送的消息（该消息只插入本地数据库，实际不会发送给服务器和对方）
@@ -1740,7 +1761,7 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
 
  @param startTime       开始消息免打扰时间，格式为 HH:MM:SS
  @param spanMins        需要消息免打扰分钟数，0 < spanMins < 1440（ 比如，您设置的起始时间是 00：00， 结束时间为
- 23：59，则 spanMins 为 23 * 60 + 59 = 1339 分钟。）
+ 23：59，则 spanMins 为 23 * 60 + 59 = 1439 分钟。）
  @param successBlock    屏蔽成功的回调
  @param errorBlock      屏蔽失败的回调 [status:屏蔽失败的错误码]
 
@@ -2279,7 +2300,7 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
 
  @remarks 数据获取
  */
-- (NSString *)getSDKVersion;
++ (NSString *)getVersion;
 
 /*!
  获取当前手机与服务器的时间差
@@ -2883,6 +2904,14 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  @remarks 高级功能
  */
 @property (nonatomic, weak) id<RCMessageExpansionDelegate> messageExpansionDelegate;
+
+/*!
+ 缩略图压缩配置
+ 
+ @remarks 缩略图压缩配置，如果此处设置了配置就按照这个配置进行压缩。如果此处没有设置，会按照 RCConfig.plist 中的配置进行压缩。
+ */
+@property (nonatomic, strong) RCImageCompressConfig *imageCompressConfig;
+
 @end
 
 #endif

@@ -36,10 +36,6 @@
  */
 @property (nonatomic, assign) long duration;
 
-/*!
- 语音消息的附加信息
- */
-@property (nonatomic, copy) NSString *extra;
 
 /*!
  初始化语音消息

@@ -78,11 +78,13 @@
     [super viewDidAppear:animated];
     self.isFullScreen = NO;
     self.cellLabelDic = [NSMutableDictionary dictionary];
-    [RCCallKitUtility checkSystemPermission:self.callSession.mediaType success:^{
-        
-    } error:^{
-        [self hangupButtonClicked];
-    }];
+    [RCCallKitUtility checkSystemPermission:self.callSession.mediaType
+        success:^{
+
+        }
+        error:^{
+            [self hangupButtonClicked];
+        }];
 }
 
 - (void)initAllUserModel {
@@ -100,8 +102,7 @@
                 }
             }
             RCCallUserCallInfoModel *userModel = [self generateUserModel:currentUserId];
-            if (userModel.profile.userType != 2)
-                [self.subUserModelList addObject:userModel];
+            if (userModel.profile.userType != 2) [self.subUserModelList addObject:userModel];
         } else {
             self.mainModel = [self generateUserModel:self.callSession.inviter];
             [self.callSession setVideoView:self.backgroundView userId:self.mainModel.userId];
@@ -120,8 +121,7 @@
 
             if (!isContaitSelf) {
                 RCCallUserCallInfoModel *userModel = [self generateUserModel:currentUserId];
-                if (userModel.profile.userType != 2)
-                    [self.subUserModelList addObject:userModel];
+                if (userModel.profile.userType != 2) [self.subUserModelList addObject:userModel];
             }
         }
     } else if (self.callSession.callStatus == RCCallDialing) {
@@ -159,8 +159,7 @@
                 }
             }
             RCCallUserCallInfoModel *userModel = [self generateUserModel:currentUserId];
-            if (userModel.profile.userType != 2)
-                [self.subUserModelList addObject:userModel];
+            if (userModel.profile.userType != 2) [self.subUserModelList addObject:userModel];
         }
     }
 }

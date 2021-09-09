@@ -6,14 +6,12 @@
 //  Copyright © 2016年 RongCloud. All rights reserved.
 //
 
+#import <AVFoundation/AVFoundation.h>
+#import <Foundation/Foundation.h>
+#import <RongIMLibCore/RongIMLibCore.h>
+#import "RCCallClientSignalServer.h"
 #import "RCCallCommonDefine.h"
 #import "RCCallSession.h"
-#import "RCCallClientSignalServer.h"
-#import <Foundation/Foundation.h>
-#import <AVFoundation/AVFoundation.h>
-#import <RongIMLibCore/RongIMLibCore.h>
-
-#define kRongCallLibVersion @""
 
 /*!
  CallLib全局通话呼入的监听器
@@ -54,7 +52,7 @@
                               userIdList:(NSArray *)userIdList
                                 userDict:(NSDictionary *)userDict
                               isVoIPPush:(BOOL)isVoIPPush
-                              pushConfig:(RCMessagePushConfig*) pushConfig;
+                              pushConfig:(RCMessagePushConfig *)pushConfig;
 
 /*!
  接收到取消通话的远程通知的回调
@@ -70,12 +68,12 @@
  
  @remarks 代理
  */
--(void)didCancelCallRemoteNotification:(NSString *)callId
-                         inviterUserId:(NSString *)inviterUserId
-                             mediaType:(RCCallMediaType)mediaType
-                            userIdList:(NSArray *)userIdList
-                            pushConfig:(RCMessagePushConfig*) pushConfig
-                        isRemoteCancel:(BOOL)isRemoteCancel;
+- (void)didCancelCallRemoteNotification:(NSString *)callId
+                          inviterUserId:(NSString *)inviterUserId
+                              mediaType:(RCCallMediaType)mediaType
+                             userIdList:(NSArray *)userIdList
+                             pushConfig:(RCMessagePushConfig *)pushConfig
+                         isRemoteCancel:(BOOL)isRemoteCancel;
 
 @optional
 /*!
@@ -93,7 +91,9 @@
 - (void)didCancelCallRemoteNotification:(NSString *)callId
                           inviterUserId:(NSString *)inviterUserId
                               mediaType:(RCCallMediaType)mediaType
-                             userIdList:(NSArray *)userIdList API_DEPRECATED_WITH_REPLACEMENT("didCancelCallRemoteNotification: inviterUserId:mediaType:userIdList:message:isRemoteCancel:", ios(8.0, 13.0));
+                             userIdList:(NSArray *)userIdList
+    DEPRECATED_MSG_ATTRIBUTE(
+        "use didCancelCallRemoteNotification:inviterUserId:mediaType:userIdList:pushConfig:isRemoteCancel: instead");
 
 /*!
  接收到通话呼入的远程通知的回调
@@ -112,7 +112,10 @@
                            inviterUserId:(NSString *)inviterUserId
                                mediaType:(RCCallMediaType)mediaType
                               userIdList:(NSArray *)userIdList
-                                userDict:(NSDictionary *)userDict API_DEPRECATED_WITH_REPLACEMENT("didReceiveCallRemoteNotification:inviterUserId:mediaType:userIdList:userDict:isVoIPPush:message:", ios(8.0, 13.0));
+                                userDict:(NSDictionary *)userDict
+    DEPRECATED_MSG_ATTRIBUTE(
+        "use didReceiveCallRemoteNotification:inviterUserId:mediaType:userIdList:userDict:isVoIPPush:pushConfig: "
+        "instead");
 
 /*!
  接收到通话呼入的远程通知的回调
@@ -133,7 +136,10 @@
                                mediaType:(RCCallMediaType)mediaType
                               userIdList:(NSArray *)userIdList
                                 userDict:(NSDictionary *)userDict
-                              isVoIPPush:(BOOL)isVoIPPush  API_DEPRECATED_WITH_REPLACEMENT("didReceiveCallRemoteNotification:inviterUserId:mediaType:userIdList:userDict:isVoIPPush:message:", ios(8.0, 13.0));
+                              isVoIPPush:(BOOL)isVoIPPush
+    DEPRECATED_MSG_ATTRIBUTE(
+        "use didReceiveCallRemoteNotification:inviterUserId:mediaType:userIdList:userDict:isVoIPPush:pushConfig: "
+        "instead");
 
 @end
 
@@ -144,11 +150,20 @@
  */
 @interface RCCallClient : NSObject
 
-/// 自定义push消息. 应在startCall之前调用
-@property(nonatomic, strong)RCMessagePushConfig *invitePushConfig;
+/*!
+ 自定义push消息. 应在startCall之前调用
+ */
+@property (nonatomic, strong) RCMessagePushConfig *invitePushConfig;
 
-/// 自定义push消息. 应在startCall之前调用
-@property(nonatomic, strong)RCMessagePushConfig *hangupPushConfig;
+/*!
+ 自定义push消息. 应在startCall之前调用
+ */
+@property (nonatomic, strong) RCMessagePushConfig *hangupPushConfig;
+
+/*!
+ 呼叫接听后, 在初次连接失败后是否重试, 默认: NO 不重试
+ */
+@property (nonatomic, assign) BOOL isRetryStreamConnect;
 
 /*!
  获取融云通话能力库 RCCallClient 的核心类单例
@@ -217,7 +232,6 @@
                    mediaType:(RCCallMediaType)type
              sessionDelegate:(id<RCCallSessionDelegate>)delegate
                        extra:(NSString *)extra;
-
 
 /*!
  当前会话类型是否支持音频通话
@@ -310,5 +324,14 @@
  @remarks 通话设置
  */
 - (void)setApplePushKitEnable:(BOOL)enable;
+
+/*!
+ 获取 SDK 版本号
+
+ @return 版本号
+
+ @remarks 参数配置
+ */
++ (NSString *)getVersion;
 
 @end

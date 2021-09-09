@@ -88,8 +88,12 @@ static NSString *RCVoipFloatingBoardPosY = @"RCVoipFloatingBoardPosY";
 }
 
 - (void)updateActiveTimer {
-    long sec = [[NSDate date] timeIntervalSince1970] - self.callSession.connectedTime / 1000;
+    
     if (self.callSession.callStatus == RCCallActive && ![self isVideoViewEnabledSession]) {
+        if (!self.callSession.connectedTime) {
+            return;
+        }
+        long sec = [[NSDate date] timeIntervalSince1970] - self.callSession.connectedTime / 1000;
         [self.floatingButton setTitle:[RCCallKitUtility getReadableStringForTime:sec] forState:UIControlStateNormal];
         [self layoutTextUnderImageButton:self.floatingButton];
     }

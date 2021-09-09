@@ -94,6 +94,7 @@
                        targetId:(NSString *)targetId
                      messageUId:(NSString *)messageUId;
 
+
 /*!
  消息已读回执响应（收到阅读回执响应，可以按照 messageUId 更新消息的阅读数）
  @param messageUId       请求已读回执的消息ID
@@ -105,6 +106,7 @@
                         targetId:(NSString *)targetId
                       messageUId:(NSString *)messageUId
                       readerList:(NSMutableDictionary *)userIdList;
+
 
 @end
 
@@ -201,6 +203,14 @@
 
 @end
 
+#pragma mark - 会话监听
+
+@protocol RCConversationDelegate <NSObject>
+
+- (void)conversationDidSync;
+
+@end
+
 #pragma mark - 会话状态同步
 
 /**
@@ -245,6 +255,61 @@
 */
 - (void)messageExpansionDidRemove:(NSArray<NSString *> *)keyArray
                             message:(RCMessage *)message;
+
+@end
+
+#pragma mark - 消息拦截器
+
+/**
+ 消息拦截器
+ */
+@protocol RCMessageInterceptor <NSObject>
+
+@optional
+
+/**
+ 上传多媒体内容之前的回调
+ 
+ @param message 待上传的多媒体消息
+ @return 处理后的消息
+ @discussion 如果返回的 message 或 message.content 为 nil，该条消息不会上传到服务，状态设置为 SentStatus_FAILED， 并回调失败
+ */
+- (RCMessage *)mediaMessageWillUpload:(RCMessage *)message;
+
+/**
+ 消息保存到数据库，发送到服务前调用此回调
+ 
+ @param message 待发送的消息
+ @return 处理后的消息
+ @discussion 如果返回的 message 或 message.content 为 nil，该条消息不会上传到服务，状态设置为 SentStatus_FAILED， 并回调失败
+ */
+- (RCMessage *)messageWillSendAfterDB:(RCMessage *)message;
+
+/**
+ 接收到消息准备入库前的回调，开发者可以通过此回调对消息进行自定义处理。
+ 
+ @param message 待入库的消息
+ @return 处理后的消息，SDK 会将返回的消息入库并通过 RCIMClientReceiveMessageDelegate 的 onReceived 方法回调给上层
+ @discussion 如果返回的 message 或 message.content 为 nil, RCIMClientReceiveMessageDelegate 的 onReceived 方法会将待入库的消息回调给上层
+ */
+- (RCMessage *)messageDidReceiveBeforeDB:(RCMessage *)message;
+
+@end
+
+#pragma mark - 媒体文件请求拦截器
+
+/**
+ 媒体文件下载拦截器
+ */
+@protocol RCDownloadInterceptor <NSObject>
+
+/**
+ 下载前的回调
+ 
+ @param request request 请求
+ @return request 请求，返回值不能为 nil，否则无法正常下载
+ */
+- (NSMutableURLRequest *)onDownloadRequest:(NSMutableURLRequest *)request;
 
 @end
 

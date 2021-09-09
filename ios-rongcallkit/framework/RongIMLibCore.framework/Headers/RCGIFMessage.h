@@ -38,11 +38,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) long height;
 
 /*!
- GIF 消息的附加信息
- */
-@property (nonatomic, copy) NSString *extra;
-
-/*!
  初始化 GIF 消息
 
  @param gifImageData    GIF 图的数据

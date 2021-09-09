@@ -215,9 +215,10 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
 - (void)triggerVibrateAction {
     NSInteger checker = [RCCallKitUtility compareVersion:[UIDevice currentDevice].systemVersion toVersion:@"9.0"];
     if (checker >= 0) {
-        AudioServicesPlaySystemSoundWithCompletion(kSystemSoundID_Vibrate, ^{});
-    }
-    else{
+        AudioServicesPlaySystemSoundWithCompletion(kSystemSoundID_Vibrate,
+                                                   ^{
+                                                   });
+    } else {
         AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
     }
 }
@@ -973,8 +974,7 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
             //            [self layoutTextUnderImageButton:self.speakerButton];
             self.speakerButton.hidden = NO;
             [self.speakerButton setSelected:self.callSession.speakerEnabled];
-            if ([self isHeadsetPluggedIn])
-                [self reloadSpeakerRoute:NO];
+            if ([self isHeadsetPluggedIn]) [self reloadSpeakerRoute:NO];
         } else if (callStatus == RCCallDialing) {
             self.speakerButton.frame =
                 CGRectMake(self.view.frame.size.width - RCCallHorizontalMiddleMargin - RCCallCustomButtonLength,
@@ -983,8 +983,7 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
                            RCCallCustomButtonLength, RCCallCustomButtonLength);
             //            [self layoutTextUnderImageButton:self.speakerButton];
             self.speakerButton.hidden = NO;
-            if ([self isHeadsetPluggedIn])
-                [self reloadSpeakerRoute:NO];
+            if ([self isHeadsetPluggedIn]) [self reloadSpeakerRoute:NO];
         } else if (callStatus != RCCallHangup) {
             self.speakerButton.hidden = YES;
         }
@@ -1128,8 +1127,7 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
                            RCCallCustomButtonLength, RCCallCustomButtonLength);
             //            [self layoutTextUnderImageButton:self.speakerButton];
             self.speakerButton.hidden = NO;
-            if ([self isHeadsetPluggedIn])
-                [self reloadSpeakerRoute:NO];
+            if ([self isHeadsetPluggedIn]) [self reloadSpeakerRoute:NO];
         } else if (callStatus != RCCallHangup) {
             self.speakerButton.hidden = YES;
         }
@@ -1391,8 +1389,7 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
                            RCCallCustomButtonLength, RCCallCustomButtonLength);
             //            [self layoutTextUnderImageButton:self.speakerButton];
             self.speakerButton.hidden = YES;
-            if ([self isHeadsetPluggedIn])
-                [self reloadSpeakerRoute:NO];
+            if ([self isHeadsetPluggedIn]) [self reloadSpeakerRoute:NO];
         } else if (callStatus != RCCallHangup) {
             self.speakerButton.hidden = YES;
         }

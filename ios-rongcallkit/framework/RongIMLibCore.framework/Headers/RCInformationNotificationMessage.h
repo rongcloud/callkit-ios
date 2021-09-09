@@ -32,11 +32,6 @@
 @property (nonatomic, copy) NSString *message;
 
 /*!
- 通知的附加信息
- */
-@property (nonatomic, copy) NSString *extra;
-
-/*!
  初始化通知消息
 
  @param message 通知的内容

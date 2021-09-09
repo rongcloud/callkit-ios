@@ -20,6 +20,8 @@ FOUNDATION_EXPORT const unsigned char RongIMLibCoreVersionString[];
 
 /// IMLib核心类
 #import <RongIMLibCore/RCCoreClient.h>
+#import <RongIMLibCore/RCChannelClient.h>
+#import <RongIMLibCore/RCConversationChannelProtocol.h>
 #import <RongIMLibCore/RCStatusDefine.h>
 /// 会话相关类
 #import <RongIMLibCore/RCConversation.h>
@@ -49,6 +51,11 @@ FOUNDATION_EXPORT const unsigned char RongIMLibCoreVersionString[];
 #import <RongIMLibCore/RCMessagePushConfig.h>
 #import <RongIMLibCore/RCiOSConfig.h>
 #import <RongIMLibCore/RCAndroidConfig.h>
+#import <RongIMLibCore/RCTagInfo.h>
+#import <RongIMLibCore/RCConversationIdentifier.h>
+#import <RongIMLibCore/RCConversationTagInfo.h>
+#import <RongIMLibCore/RCTagProtocol.h>
+
 /// 工具类
 #import <RongIMLibCore/RCAMRDataConverter.h>
 #import <RongIMLibCore/RCTSMutableDictionary.h>
@@ -63,12 +70,17 @@ FOUNDATION_EXPORT const unsigned char RongIMLibCoreVersionString[];
 #import <RongIMLibCore/RCUserInfo.h>
 #import <RongIMLibCore/RCWatchKitStatusDelegate.h>
 #import <RongIMLibCore/RCRemoteHistoryMsgOption.h>
+#import <RongIMLibCore/RCHistoryMessageOption.h>
 
 #import <RongIMLibCore/RCFileMessage.h>
 #import <RongIMLibCore/RCFileUtility.h>
 #import <RongIMLibCore/RCReadReceiptInfo.h>
 #import <RongIMLibCore/RCUserOnlineStatusInfo.h>
 #import <RongIMLibCore/RCConversationStatusInfo.h>
+#import <RongIMLibCore/RCGroupMessageReaderV2.h>
+#import <RongIMLibCore/RCGroupReadReceiptV2Manager.h>
+#import <RongIMLibCore/RCGroupReadReceiptV2Protocol.h>
+#import <RongIMLibCore/RCGroupReadReceiptInfoV2.h>
 
 // log
 #import <RongIMLibCore/RCFwLog.h>

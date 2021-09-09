@@ -10,7 +10,7 @@
 		</data>
 		<key>Headers/RCChatRoomEnumDefine.h</key>
 		<data>
-		yil0RJT7ewMCSt/IVA1rq5784eg=
+		k+L0Excprr/fLC3inSB5KP9VWq8=
 		</data>
 		<key>Headers/RCChatRoomInfo.h</key>
 		<data>
@@ -22,7 +22,7 @@
 		</data>
 		<key>Headers/RCChatRoomProtocol.h</key>
 		<data>
-		E1UNJDKlf6L4c7ZF5k0BrX6FLck=
+		LBcAW1CKEgnFE4PedlxYq5adl3E=
 		</data>
 		<key>Headers/RCChatroomKVNotificationMessage.h</key>
 		<data>
@@ -34,7 +34,7 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		qH/GOA0c4XgZXzpgYUIdB+neuIc=
+		1gk8S4s/e7Fu7Gcm9Q5/KsB+gtI=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -58,11 +58,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			yil0RJT7ewMCSt/IVA1rq5784eg=
+			k+L0Excprr/fLC3inSB5KP9VWq8=
 			</data>
 			<key>hash2</key>
 			<data>
-			9FzzvGJcda0g5lLpVK+/B7Pj3Q5qi+kB400BOUincB8=
+			9Ldd6npvZhI09Bxuig9nQI7XK0ZqeRTwheT3Z7Z83ww=
 			</data>
 		</dict>
 		<key>Headers/RCChatRoomInfo.h</key>
@@ -91,11 +91,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			E1UNJDKlf6L4c7ZF5k0BrX6FLck=
+			LBcAW1CKEgnFE4PedlxYq5adl3E=
 			</data>
 			<key>hash2</key>
 			<data>
-			4SA0YMLHeXgTv+soWsYt4xK11raP+0u3HUHsjlFxbOc=
+			kEosZbTJDIRcUBF5P+LHuLWy4gmXk7+2pzv0xX1X4VI=
 			</data>
 		</dict>
 		<key>Headers/RCChatroomKVNotificationMessage.h</key>

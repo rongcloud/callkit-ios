@@ -23,7 +23,6 @@ typedef NS_ENUM(NSInteger, RCChatRoomStatus) {
      加入聊天室成功
      */
     RCChatRoomStatus_Joined = 2,
-
     /*!
      加入聊天室失败
      */
@@ -33,6 +32,17 @@ typedef NS_ENUM(NSInteger, RCChatRoomStatus) {
      退出了聊天室
      */
     RCChatRoomStatus_Quited = 4,
+    
+    /*!
+     聊天室被销毁
+     */
+    RCChatRoomStatus_Destroyed = 5,
+    /*!
+     聊天室被重置
+     由于聊天室长时间不活跃，已经被系统回收。聊天室 KV 已经被清空，请开发者刷新界面。
+     */
+    RCChatRoomStatus_Reset = 6,
+    
 };
 
 #pragma mark RCChatRoomMemberOrder - 聊天室成员排列顺序

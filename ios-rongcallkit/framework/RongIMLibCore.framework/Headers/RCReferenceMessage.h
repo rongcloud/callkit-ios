@@ -27,12 +27,15 @@
  被引用消息的发送者 ID
  */
 @property (nonatomic, strong) NSString *referMsgUserId;
+
 /*!
  被引用消息体
  */
 @property (nonatomic, strong) RCMessageContent *referMsg;
+
 /*!
- 扩展字段
+ 被引用消息的 messageUId。服务器消息唯一 ID（在同一个 Appkey 下全局唯一）
  */
-@property (nonatomic, strong) NSString *extra;
+@property (nonatomic, strong) NSString *referMsgUid;
+
 @end

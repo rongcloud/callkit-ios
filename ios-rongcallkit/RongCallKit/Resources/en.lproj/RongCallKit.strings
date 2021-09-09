@@ -5,7 +5,6 @@
   Copyright © 2020 RongCloud. All rights reserved.
 */
 
-"VoIP_Rejected_By_Blacklist"="Has been blacklisted by receiver";
 "VoIPAudioCall"="Voice Call";
 "VoIPVideoCall"="Video Call";
 "VoIPAudioCallExistedWarning"="Voice call is in progress, please try again later";
@@ -34,19 +33,36 @@
 "VoIPCallHasCancel"="Cancelled";
 "VoIPCallHasReject"="Declined";
 "VoIPCallHasHangup"="Hung-up";
+"VoIPCallBusyLine"="Busy";
 "VoIPCallNoResponse"="No Answer";
+"VoIPCallEngineUnsupport"="Unsupport Engine";
+"VoIPCallLocalNetworkError"="Local network error";
+"VoIPCallLocalResourceError"="Local get resource error";
+"VoIPCallLocalPublishError"="Local publish error";
+"VoIPCallLocalSubscribeError"="Local subscribe error";
+"VoIPCallLocalKickedByOtherCallError"="Local kicked by other call error";
+"VoIPCallLocalInOtherCallError"="In other call error";
+"VoIPCallLocalKickedByServer"="Kicked by server";
 "VoIPCallRemoteCancel"="Has Cancelled";
 "VoIPCallRemoteReject"="Has Declined";
 "VoIPCallRemoteHangup"="Has Hung-up";
+"VoIPCallRemoteBusyLine"="Busying";
 "VoIPCallRemoteNoResponse"="not answered the call";
+"VoIPCallRemoteEngineUnsupport"="Unsupport Engine";
+"VoIPCallRemoteNetworkError"="Receiver network error";
+"VoIPCallRemoteResourceError"="Remote get resource error";
+"VoIPCallRemotePublishError"="Remote publish error";
+"VoIPCallRemoteSubscribeError"="Remote subscribe error";
+"VoIPCallRemoteKickedByOtherCallError"="Remote kicked by other call error";
+"VoIPCallRemoteInOtherCallError"="Remote kicked by other call error";
+"VoIPCallRemoteKickedByServer"="Kicked by server";
 "VoIPCallAcceptByOtherClient"="Accepted by other client";
-"VoIPCallKickedByServer"="Banned from making this call";
+"VoIPCallHangupByOtherClient"="Hanguped by other client";
+"VoIP_Rejected_By_Blacklist"="Has been blacklisted by receiver";
 "VoIPCallMediaServerClosed"="Audio and video services are turned off";
-"VoIPCallRemoteBusyLine"="is busy";
+"VoIPCallKickedByServer"="Banned from making this call";
 "VoIPCallRemoteBusyLineAndShowAdvice"="The number you have called is busy, please try later";
 "VoIPCallRemoteDidInvite"="%@ has joined the group chat";
-"VoIPCallLocalNetworkError"="Local network error";
-"VoIPCallRemoteNetworkError"="Receiver network error";
 "bottom_result_view_choosed_person_prefix"="Selected";
 "bottom_result_view_choosed_person_subfix"="member(s)";
 "Cancel"="Cancel";

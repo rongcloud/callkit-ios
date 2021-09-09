@@ -32,9 +32,4 @@
  */
 @property (nonatomic, strong) RCRichContentItem *richContent;
 
-/*!
- 图文消息的附加信息
- */
-@property (nonatomic, copy) NSString *extra;
-
 @end

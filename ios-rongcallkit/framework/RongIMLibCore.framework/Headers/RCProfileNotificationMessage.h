@@ -37,11 +37,6 @@
 @property (nonatomic, copy) NSString *data;
 
 /*!
- 信息变更的附加信息
- */
-@property (nonatomic, copy) NSString *extra;
-
-/*!
  初始化公众服务账号信息变更消息
 
  @param operation   信息变更的操作名

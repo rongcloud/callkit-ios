@@ -34,7 +34,7 @@
     return [super initWithOutgoingCall:ConversationType_PRIVATE
                               targetId:targetId
                              mediaType:mediaType
-                            userIdList:@[ targetId ]];
+                            userIdList:@[targetId]];
 }
 
 - (instancetype)initWithActiveCall:(RCCallSession *)callSession {
@@ -66,11 +66,13 @@
     [super viewDidAppear:animated];
 
     self.isFullScreen = NO;
-    [RCCallKitUtility checkSystemPermission:self.callSession.mediaType success:^{
-        
-    } error:^{
-        [self hangupButtonClicked];
-    }];
+    [RCCallKitUtility checkSystemPermission:self.callSession.mediaType
+        success:^{
+
+        }
+        error:^{
+            [self hangupButtonClicked];
+        }];
 }
 
 - (RCloudImageView *)remotePortraitView {

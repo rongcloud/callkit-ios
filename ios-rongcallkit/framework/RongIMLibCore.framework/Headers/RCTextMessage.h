@@ -32,11 +32,6 @@
 @property (nonatomic, copy) NSString *content;
 
 /*!
- 文本消息的附加信息
- */
-@property (nonatomic, copy) NSString *extra;
-
-/*!
  初始化文本消息
 
  @param content 文本消息的内容

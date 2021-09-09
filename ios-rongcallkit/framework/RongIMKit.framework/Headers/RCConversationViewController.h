@@ -116,6 +116,17 @@ typedef NS_ENUM(NSUInteger, RCCustomerServiceStatus) {
  */
 @property (nonatomic, assign) BOOL enableUnreadMessageIcon;
 
+
+#pragma mark 右上角的未读 @ 消息数提示
+/*!
+ 当收到的消息中有 @ 消息时，进入会话之后，是否在右上角提示未读 @ 消息数
+
+ @discussion 默认值为YES。
+ 开启该提示功能之后，当一个会话收到大量消息时（超过一个屏幕能显示的内容），
+ 进入该会话后，会在右上角提示用户上方存在的未读 @ 消息数，用户点击该提醒按钮，会跳转到最早的未读 @ 消息处，同时未读 @ 消息数量减 1，再次点击，未读 @ 消息数量根据当前屏幕内看到的个数相应减少。
+ */
+@property (nonatomic, assign) BOOL enableUnreadMentionedIcon;
+
 /*!
  该会话的未读消息数
  */
@@ -132,6 +143,19 @@ typedef NS_ENUM(NSUInteger, RCCustomerServiceStatus) {
  右上角未读消息数提示的按钮
  */
 @property (nonatomic, strong) UIButton *unReadButton;
+
+/*!
+ 右上角@消息数提示的Label
+ */
+@property (nonatomic, strong) UILabel *unReadMentionedLabel;
+
+
+@property (nonatomic, strong) UIImageView *unreadRightBottomIcon;
+
+/*!
+ 右上角@消息数提示的按钮
+ */
+@property (nonatomic, strong) UIButton *unReadMentionedButton;
 
 #pragma mark 右下角的未读消息数提示
 /*!
@@ -177,6 +201,16 @@ typedef NS_ENUM(NSUInteger, RCCustomerServiceStatus) {
 @property (nonatomic, strong) RCReferencingView *referencingView;
 
 /*!
+ 输入工具栏占位文本 label，默认为 nil，不显示占位
+ 
+ 在会话页面的 viewDidLoad 写如下代码即可
+ self.placeholderLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, 180, 20)];
+ self.placeholderLabel.text = @"测试 Placeholder";
+ self.placeholderLabel.textColor = [UIColor grayColor];
+*/
+@property (nonatomic, strong) UILabel *placeholderLabel;
+
+/*!
  输入框中内容发生变化的回调
 
  @param inputTextView 文本输入框
@@ -219,9 +253,21 @@ typedef NS_ENUM(NSUInteger, RCCustomerServiceStatus) {
  设置进入聊天室需要获取的历史消息数量（仅在当前会话为聊天室时生效）
 
  @discussion 此属性需要在viewDidLoad之前进行设置。
- -1表示不获取任何历史消息，0表示不特殊设置而使用SDK默认的设置（默认为获取10条），0<messageCount<=50为具体获取的消息数量,最大值为50。注：如果是7.x系统获取历史消息数量不要大于30
+ -1表示不获取任何历史消息，0表示不特殊设置而使用SDK默认的设置（默认为获取10条），0<messageCount<=50为具体获取的消息数量,最大值为30。注：如果是7.x系统获取历史消息数量不要大于30
  */
 @property (nonatomic, assign) int defaultHistoryMessageCountOfChatRoom;
+
+/*!
+ 设置进入会话页面后下拉刷新从远端获取消息的条数，默认是 10。
+ @discussion 此属性需要在viewDidLoad之前进行设置。
+ */
+@property (nonatomic, assign) int defaultRemoteHistoryMessageCount;
+
+/*!
+ 设置进入会话页面后下拉刷新从本地数据库取的消息的条数，默认是 10。
+ @discussion 此属性需要在viewDidLoad之前进行设置。
+ */
+@property (nonatomic, assign) int defaultLocalHistoryMessageCount;
 
 /*!
  已经选择的所有消息
@@ -439,6 +485,8 @@ typedef NS_ENUM(NSUInteger, RCCustomerServiceStatus) {
 
  @discussion
  你需要在cell中重写RCMessageBaseCell基类的sizeForMessageModel:withCollectionViewWidth:referenceExtraHeight:来计算cell的高度。
+ 
+ @discussion 如果有自定义消息，在会话页面子类 viewDidLoad 方法中需优先注册自定义消息的 cell, 再做其他操作
  */
 - (void)registerClass:(Class)cellClass forMessageClass:(Class)messageClass;
 

@@ -30,9 +30,21 @@
 #define AlertWithoutConfirm 1000
 #define AlertWithConfirm 1001
 
-static NSString *const __RongCallKit__Version = @"__RongCallKit__Version__Unknown";
-static NSString *const __RongCallKit__Commit = @"__RongCallKit__Commit__Unknown";
-static NSString *const __RongCallKit__Time = @"__RongCallKit__Time__Unknown";
+#define kActivityWindowTag 1002
+
+#ifndef dispatch_main_async_safe
+#define dispatch_main_async_safe(block)                           \
+    if (dispatch_queue_get_label(DISPATCH_CURRENT_QUEUE_LABEL) == \
+        dispatch_queue_get_label(dispatch_get_main_queue())) {    \
+        block();                                                  \
+    } else {                                                      \
+        dispatch_async(dispatch_get_main_queue(), block);         \
+    }
+#endif
+
+static NSString *const __RongCallKit__Version = @"5.1.8";
+static NSString *const __RongCallKit__Commit = @"0403b89c";
+static NSString *const __RongCallKit__Time = @"202109091633";
 
 @interface RCCall () <RCCallReceiveDelegate>
 
@@ -59,7 +71,14 @@ static NSString *const __RongCallKit__Time = @"__RongCallKit__Time__Unknown";
             pRongVoIP.callWindows = [[NSMutableArray alloc] init];
             pRongVoIP.locationNotificationMap = [[NSMutableDictionary alloc] init];
             [pRongVoIP registerNotification];
-            NSLog(@"callkitVersion:%@, commitId:%@, time:%@", __RongCallKit__Version, __RongCallKit__Commit, __RongCallKit__Time);
+//RCCallKit_Delete_Start
+#if PUBLIC
+#else
+            [[RCCallClient sharedRCCallClient] setApplePushKitEnable:YES];
+#endif
+            //RCCallKit_Delete_end
+            NSLog(@"callkitVersion:%@, commitId:%@, time:%@", __RongCallKit__Version, __RongCallKit__Commit,
+                  __RongCallKit__Time);
         }
     });
     return pRongVoIP;
@@ -210,14 +229,15 @@ static NSString *const __RongCallKit__Time = @"__RongCallKit__Time__Unknown";
                                 message:RCCallKitLocalizedString(@"cameraAccessRight")];
         complete(NO);
     } else if (authStatus == AVAuthorizationStatusNotDetermined) {
-        [AVCaptureDevice
-            requestAccessForMediaType:AVMediaTypeVideo
-                    completionHandler:^(BOOL granted) {
-                        if (!granted) {
-                            [self loadErrorAlertWithConfirm:RCCallKitLocalizedString(@"AccessRightTitle")message:RCCallKitLocalizedString(@"cameraAccessRight")];
-                        }
-                        complete(granted);
-                    }];
+        [AVCaptureDevice requestAccessForMediaType:AVMediaTypeVideo
+                                 completionHandler:^(BOOL granted) {
+                                     if (!granted) {
+                                         [self
+                                             loadErrorAlertWithConfirm:RCCallKitLocalizedString(@"AccessRightTitle")
+                                                               message:RCCallKitLocalizedString(@"cameraAccessRight")];
+                                     }
+                                     complete(granted);
+                                 }];
     } else {
         complete(YES);
     }
@@ -239,24 +259,47 @@ static NSString *const __RongCallKit__Time = @"__RongCallKit__Time__Unknown";
 - (void)presentCallViewController:(UIViewController *)viewController {
     [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
     UIWindow *activityWindow = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    activityWindow.windowLevel = UIWindowLevelNormal;
+    activityWindow.windowLevel = [UIApplication sharedApplication].keyWindow.windowLevel + 1;
     activityWindow.rootViewController = viewController;
-
-    NSInteger checker = [RCCallKitUtility compareVersion:[UIDevice currentDevice].systemVersion toVersion:@"13.0"];
-    if (checker >= 0) {
-#ifdef __IPHONE_13_0
-        [activityWindow setWindowScene:[UIApplication sharedApplication].keyWindow.windowScene];
-#endif
-    }
-
-    [activityWindow makeKeyAndVisible];
-    CATransition *animation = [CATransition animation];
-    [animation setDuration:0.3];
-    animation.type = kCATransitionMoveIn;      //可更改为其他方式
-    animation.subtype = kCATransitionFromTop;  //可更改为其他方式
-    [[activityWindow layer] addAnimation:animation forKey:nil];
+    activityWindow.tag = kActivityWindowTag;
     [self.callWindows addObject:activityWindow];
+
+    [self showActivityWindowIfNeedDelay];
 }
+
+- (void)showActivityWindowIfNeedDelay {
+    NSArray *windows = [self.callWindows
+        filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"tag == %ld", kActivityWindowTag]];
+    if (!windows || windows.count == 0) {
+        return;
+    }
+    UIWindow *window = windows.firstObject;
+    if (@available(iOS 13.0, *)) {
+        if ([UIApplication sharedApplication].keyWindow.windowScene) {
+            [window setWindowScene:[UIApplication sharedApplication].keyWindow.windowScene];
+            [self showActivityWindow:window];
+        } else {
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(),
+                           ^{
+                               [self showActivityWindowIfNeedDelay];
+                           });
+        }
+    } else {
+        [self showActivityWindow:window];
+    }
+}
+
+- (void)showActivityWindow:(UIWindow *)window {
+    dispatch_main_async_safe(^{
+        [window makeKeyAndVisible];
+        CATransition *animation = [CATransition animation];
+        [animation setDuration:0.3];
+        animation.type = kCATransitionMoveIn;      //可更改为其他方式
+        animation.subtype = kCATransitionFromTop;  //可更改为其他方式
+        [[window layer] addAnimation:animation forKey:nil];
+    });
+}
+
 
 - (void)dismissCallViewController:(UIViewController *)viewController {
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
@@ -336,6 +379,27 @@ static NSString *const __RongCallKit__Time = @"__RongCallKit__Time__Unknown";
     if (!self.canIncomingCall) {
         return;
     }
+//RCCallKit_Delete_Start
+#if PUBLIC
+#else
+    if (isVoIPPush) {
+        NSInteger checker = [RCCallKitUtility compareVersion:[UIDevice currentDevice].systemVersion toVersion:@"10.0"];
+        if (checker >= 0) {
+            if (mediaType == RCCallMediaAudio) {
+                [[RCCXCall sharedInstance] reportIncomingCallWithInviter:inviterUserId
+                                                              userIdList:userIdList
+                                                                 isVideo:NO];
+                return;
+            } else {
+                [[RCCXCall sharedInstance] reportIncomingCallWithInviter:inviterUserId
+                                                              userIdList:userIdList
+                                                                 isVideo:YES];
+                return;
+            }
+        }
+    }
+#endif
+    //RCCallKit_Delete_end
 
     [self startReceiveCallVibrate];
 
@@ -511,9 +575,10 @@ static NSString *const __RongCallKit__Time = @"__RongCallKit__Time__Unknown";
 - (void)triggerVibrateRCCallAction {
     NSInteger checker = [RCCallKitUtility compareVersion:[UIDevice currentDevice].systemVersion toVersion:@"9.0"];
     if (checker >= 0) {
-        AudioServicesPlaySystemSoundWithCompletion(kSystemSoundID_Vibrate, ^{});
-    }
-    else{
+        AudioServicesPlaySystemSoundWithCompletion(kSystemSoundID_Vibrate,
+                                                   ^{
+                                                   });
+    } else {
         AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
     }
 }

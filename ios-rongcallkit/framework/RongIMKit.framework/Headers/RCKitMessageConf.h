@@ -152,16 +152,16 @@
 @property (nonatomic, assign) NSUInteger sightRecordMaxDuration;
 
 /*!
- 是否开启消息自动重发功能，默认是 NO
+ 是否开启消息自动重发功能，默认是 YES
  
  @discussion 开启后，在消息发送失败时 SDK 会自动重发
 */
 @property (nonatomic, assign) BOOL enableMessageResend;
 
 /*!
- 视频上传的时长限制，单位是秒，默认值是 300。
+ 视频上传的时长限制，单位是秒，等于 [RCCoreClient  getVideoDurationLimit]。
 */
-@property (nonatomic, assign) NSTimeInterval uploadVideoDurationLimit;
+@property (nonatomic, assign, readonly) NSTimeInterval uploadVideoDurationLimit;
 
 @end
 

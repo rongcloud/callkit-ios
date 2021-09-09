@@ -60,4 +60,13 @@
 #pragma mark - device
 #define ISX [RCKitUtility getWindowSafeAreaInsets].top >= 10
 
+#ifdef DEBUG
+#define DebugLog( s, ... ) NSLog( @"[%@:(%d)] %@", [[NSString stringWithUTF8String:__FILE__] lastPathComponent], __LINE__, [NSString stringWithFormat:(s), ##__VA_ARGS__] )
+#else
+#define DebugLog( s, ... )
+#endif
+
+//在允许横竖屏的页面出现或者消失时发此通知，Notification 的 object 为 @(YES) 或者 @(NO)
+#define RCKitViewSupportAutorotateNotification @"RCKitViewSupportAutorotateNotification"
+
 #endif /* RCKitCommonDefine_h */

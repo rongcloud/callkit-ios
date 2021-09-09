@@ -57,9 +57,8 @@ static NSString *key = @"UICollectionView_BackgroundView";
 }
 
 - (BOOL)isTouchEnable:(NSInteger)count withPoint:(CGPoint)point {
-    if (self.tag != 202872)
-        return NO;
-    
+    if (self.tag != 202872) return NO;
+
     if (!count) {
         return YES;
     }

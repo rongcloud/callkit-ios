@@ -75,11 +75,6 @@
 @property (nonatomic, copy) NSString *message;
 
 /*!
- 当前操作的附加信息
- */
-@property (nonatomic, copy) NSString *extra;
-
-/*!
  初始化群组通知消息
 
  @param operation       群组通知的当前操作名
