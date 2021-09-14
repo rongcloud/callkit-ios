@@ -13,6 +13,8 @@
 #import "RCloudImageView.h"
 #import "RCCallKitUtility.h"
 #import "RCCallUserCallInfoModel.h"
+#import "RCCall.h"
+#import "RCCXCall.h"
 
 #define currentUserId ([RCIMClient sharedRCIMClient].currentUserInfo.userId)
 @interface RCCallSingleCallViewController ()
@@ -202,9 +204,15 @@
     return userModel;
 }
 
-- (void)resetLayout:(BOOL)isMultiCall mediaType:(RCCallMediaType)mediaType callStatus:(RCCallStatus)callStatus {
-    [super resetLayout:isMultiCall mediaType:mediaType callStatus:callStatus];
+- (void)resetLayout:(BOOL)isMultiCall mediaType:(RCCallMediaType)mediaType callStatus:(RCCallStatus)sessionCallStatus {
+    [super resetLayout:isMultiCall mediaType:mediaType callStatus:sessionCallStatus];
 
+    RCCallStatus callStatus = sessionCallStatus;
+    if ((callStatus == RCCallIncoming || callStatus == RCCallRinging) && [RCCXCall sharedInstance].acceptedFromCallKit) {
+        callStatus = RCCallActive;
+        [RCCXCall sharedInstance].acceptedFromCallKit = NO;
+    }
+    
     UIImage *remoteHeaderImage = self.remotePortraitView.image;
 
     if (mediaType == RCCallMediaAudio) {
@@ -281,9 +289,6 @@
 //            self.mainVideoView.frame = CGRectMake(0, RCCallStatusBarHeight, self.view.frame.size.width, self.view.frame.size.height - RCCallExtraSpace - RCCallStatusBarHeight);
             [self.callSession setVideoView:self.mainVideoView
                                     userId:self.callSession.caller];
-
-            [self.callSession setVideoView:self.mainVideoView userId:self.callSession.targetId];
-
         } else if (callStatus == RCCallActive) {
             self.mainVideoView.hidden = NO;
             [self.callSession setVideoView:self.mainVideoView userId:self.callSession.targetId];

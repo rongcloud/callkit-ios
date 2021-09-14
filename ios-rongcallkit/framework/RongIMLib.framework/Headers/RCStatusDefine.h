@@ -82,6 +82,13 @@ typedef NS_ENUM(NSInteger, RCConnectErrorCode) {
     RC_DISCONN_KICK = 31010,
 
     /*!
+     token 已过期
+     
+     @discussion 您可能需要请求您的服务器重新获取 token，并使用新的 token 建立连接。
+     */
+    RC_CONN_TOKEN_EXPIRE = 31020,
+    
+    /*!
      用户在其它设备上登录
 
       @discussion 重连过程中当前用户在其它设备上登录

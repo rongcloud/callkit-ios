@@ -13,7 +13,14 @@
  */
 @interface RCCXCall : NSObject
 
-/**
+/*!
+ 收到呼叫时, 是否直接显示已接听页面
+ 从后台进入App时为 YES , 不显示来电页面, 直接显示已接听页面
+ App在前台时为 NO , 显示来电页面
+ */
+@property (nonatomic, assign) BOOL acceptedFromCallKit;
+
+/*!
  获取 RCCXCall 单例
 
  @return RCCXCall 单例
@@ -33,7 +40,7 @@
  */
 - (void)reportOutgoingCallConnected;
 
-/**
+/*!
  通知苹果 Callkit 来电
 
  @param inviterId 来电人用户 id
@@ -50,14 +57,14 @@
  */
 - (void)endCXCall;
 
-/**
+/*!
  当系统来电接通时，如果没有激活苹果 Callkit 通话，则挂断 VOIP
  
  @param UUID 系统来电 UUID
  */
 - (void)hangupIfNeedWithUUID:(NSString *)UUID;
 
-/**
+/*!
  当苹果 Callkit 通话接通后，重新设置AVAudioSessionMode
  */
 - (void)setAVAudioSessionMode;

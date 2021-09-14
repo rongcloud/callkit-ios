@@ -34,6 +34,7 @@
 #import "RCSendMessageOption.h"
 #import "RCRemoteHistoryMsgOption.h"
 #import "RCIMClientProtocol.h"
+#import "RCImageCompressConfig.h"
 
 /*!
  @const 收到已读回执的 Notification
@@ -2902,6 +2903,14 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  @remarks 高级功能
  */
 @property (nonatomic, weak) id<RCMessageExpansionDelegate> messageExpansionDelegate;
+
+/*!
+ 缩略图压缩配置
+ 
+ @remarks 缩略图压缩配置，如果此处设置了配置就按照这个配置进行压缩。如果此处没有设置，会按照 RCConfig.plist 中的配置进行压缩。
+ */
+@property (nonatomic, strong) RCImageCompressConfig *imageCompressConfig;
+
 @end
 
 #endif

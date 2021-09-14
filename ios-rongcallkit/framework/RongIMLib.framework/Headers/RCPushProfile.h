@@ -34,13 +34,25 @@
 /**
  设置推送内容的自然语言
 
- @param pushLauguage      设置推送内容的自然语言 （目前只支持中文和英文）
+ @param pushLauguage      设置推送内容的自然语言
  @param successBlock      成功回调
  @param errorBlock        失败回调
  */
 - (void)setPushLauguage:(RCPushLauguage)pushLauguage
                 success:(void (^)(void))successBlock
-                  error:(void (^)(RCErrorCode status))errorBlock;
+                  error:(void (^)(RCErrorCode status))errorBlock __deprecated_msg("已废弃，请使用 setPushLauguageCode:success:error");
+
+
+/**
+ 设置推送内容的自然语言
+ 
+ @param lauguage             通过 SDK 设置的语言环境，语言缩写内容格式为 (ISO-639 Language Code)_(ISO-3166 Country Codes)，如：zh_CN。目前融云支持的内置推送语言为 zh_CN、en_US、ar_SA
+ @param successBlock    成功回调
+ @param errorBlock        失败回调
+ */
+- (void)setPushLauguageCode:(NSString *)lauguage
+                    success:(void (^)(void))successBlock
+                      error:(void (^)(RCErrorCode status))errorBlock;
 
 /**
  设置 Web 端在线时，手机端是否接收推送

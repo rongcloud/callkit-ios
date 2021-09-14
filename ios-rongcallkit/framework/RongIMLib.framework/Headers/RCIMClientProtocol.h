@@ -69,7 +69,17 @@
 
  @discussion 被撤回的消息会变更为RCRecallNotificationMessage，App需要在UI上刷新这条消息。
  */
-- (void)onMessageRecalled:(long)messageId;
+- (void)onMessageRecalled:(long)messageId __deprecated_msg("已废弃，请使用 messageDidRecall:");;
+
+/*!
+ 消息被撤回的回调方法
+
+ @param message 被撤回的消息
+
+ @discussion 被撤回的消息会变更为RCRecallNotificationMessage，App需要在UI上刷新这条消息。
+ @discussion 和上面的 - (void)onMessageRecalled:(long)messageId 功能完全一致，只能选择其中一个使用。
+ */
+- (void)messageDidRecall:(RCMessage *)message;
 
 /*!
  请求消息已读回执（收到需要阅读时发送回执的请求，收到此请求后在会话页面已经展示该 messageUId 对应的消息或者调用

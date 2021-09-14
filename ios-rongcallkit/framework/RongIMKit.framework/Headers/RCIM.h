@@ -260,7 +260,17 @@ FOUNDATION_EXPORT NSString *const RCKitDispatchConversationStatusChangeNotificat
 
  @discussion 被撤回的消息会变更为RCRecallNotificationMessage，App需要在UI上刷新这条消息。
  */
-- (void)onRCIMMessageRecalled:(long)messageId;
+- (void)onRCIMMessageRecalled:(long)messageId __deprecated_msg("已废弃，请使用 RCIM 的 messageDidRecall");
+
+/*!
+ 消息被撤回的回调方法
+
+ @param message 被撤回的消息
+
+ @discussion 被撤回的消息会变更为RCRecallNotificationMessage，App需要在UI上刷新这条消息。
+ @discussion 和上面的 - (void)onRCIMMessageRecalled:(long)messageId 功能完全一致，只能选择其中一个使用。
+ */
+- (void)messageDidRecall:(RCMessage *)message;
 
 /*!
  当 Kit 收到消息回调的方法

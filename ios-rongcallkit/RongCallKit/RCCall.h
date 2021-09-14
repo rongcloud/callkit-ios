@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <RongCallLib/RongCallLib.h>
+#import "RCMultiCallInviteNewUserDelegate.h"
 #import <RongIMKit/RongIMKit.h>
 #import "RCMultiCallInviteNewUserDelegate.h"
 
@@ -29,31 +30,29 @@ UIKIT_EXTERN NSNotificationName const RCCallNewSessionCreationNotification;
 /*!
  音频通话支持的最大通话人数
  */
-@property (nonatomic, assign) int maxMultiAudioCallUserNumber;
+@property (nonatomic, assign) NSInteger maxMultiAudioCallUserNumber;
 
 /*!
  视频通话支持的最大通话人数
  */
-@property(nonatomic, assign) int maxMultiVideoCallUserNumber;
+@property(nonatomic, assign) NSInteger maxMultiVideoCallUserNumber;
 
-/**
+/*!
  系统来电显示的 app 名字
  */
 @property (nonatomic, copy) NSString *appLocalizedName;
 
-/**
+/*!
  是否处理来电, 默认: YES 处理, 设置为 NO 时会直接挂断来电
 */
 @property (nonatomic, assign) BOOL canIncomingCall;
 
-/**
+/*!
  多人音视频通话邀请用户代理
  
  @discussion 如果实现该代理则多人音视频通话界面将有用户自己定义否则使用 RongCallKit 自带的选人界面
- 
  */
 @property (nonatomic, weak) id<RCMultiCallInviteNewUserDelegate> callInviteNewUserDelegate;
-
 
 /*!
  群组成员列表提供者
@@ -151,5 +150,14 @@ UIKIT_EXTERN NSNotificationName const RCCallNewSessionCreationNotification;
  停止来电铃声和震动
  */
 - (void)stopReceiveCallVibrate;
+
+/*!
+ 获取 SDK 版本号
+
+ @return 版本号
+
+ @remarks 参数配置
+ */
++ (NSString *)getVersion;
 
 @end

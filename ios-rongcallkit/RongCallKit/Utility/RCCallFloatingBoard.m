@@ -60,10 +60,9 @@ static NSString *RCVoipFloatingBoardPosY = @"RCVoipFloatingBoardPosY";
 
 - (void)registerTelephonyEvent {
     self.callCenter = [[CTCallCenter alloc] init];
-    __weak __typeof(self) weakSelf = self;
     self.callCenter.callEventHandler = ^(CTCall *call) {
         if ([call.callState isEqualToString:CTCallStateConnected]) {
-            [weakSelf.callSession hangup];
+            [[RCCXCall sharedInstance] hangupIfNeedWithUUID:call.callID];
         }
     };
 }
@@ -372,6 +371,7 @@ static NSString *RCVoipFloatingBoardPosY = @"RCVoipFloatingBoardPosY";
 - (void)callDidDisconnect {
     [[RCCXCall sharedInstance] endCXCall];
     [self updateBoard];
+    [self hideCallFloatingBoard];
     [self performSelector:@selector(clearCallFloatingBoard) withObject:nil afterDelay:2];
     [RCCallKitUtility clearScreenForceOnStatus];
     [self removeProximityMonitoringObserver];

@@ -73,11 +73,7 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
     self = [super init];
     if (self) {
         [self willChangeValueForKey:@"callSession"];
-        NSString *mediaTypeStr = (mediaType == RCCallMediaVideo? RCCallKitLocalizedString(@"VoIPCall_Video"):
-            RCCallKitLocalizedString(@"VoIPCall_Audio"));
-        NSString *invitePushContent = [NSString stringWithFormat:RCCallKitLocalizedString(@"VoIPCall_invite_push_Content")
-            ,[RCIMClient sharedRCIMClient].currentUserInfo.name
-            ,mediaTypeStr];
+        NSString *invitePushContent = [NSString stringWithFormat:mediaType == RCCallMediaAudio ? RCCallKitLocalizedString(@"VoIPCall_invite_audio_push_Content") : RCCallKitLocalizedString(@"VoIPCall_invite_video_push_Content"), [RCIMClient sharedRCIMClient].currentUserInfo.name];
         NSString *hangupPushContent = RCCallKitLocalizedString(@"VoIPCall_hangup_PushContent");
         
         
@@ -840,7 +836,13 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
 }
 
 #pragma mark - layout
-- (void)resetLayout:(BOOL)isMultiCall mediaType:(RCCallMediaType)mediaType callStatus:(RCCallStatus)callStatus {
+- (void)resetLayout:(BOOL)isMultiCall mediaType:(RCCallMediaType)mediaType callStatus:(RCCallStatus)sessionCallStatus {
+    RCCallStatus callStatus = sessionCallStatus;
+    if ((callStatus == RCCallIncoming || callStatus == RCCallRinging) && [RCCXCall sharedInstance].acceptedFromCallKit) {
+        callStatus = RCCallActive;
+        [RCCXCall sharedInstance].acceptedFromCallKit = NO;
+    }
+    
     if (mediaType == RCCallMediaAudio && !isMultiCall) {
         self.backgroundView.backgroundColor=[UIColor colorWithRed:20/255.0 green:28/255.0 blue:36/255.0 alpha:1/1.0];
         self.backgroundView.hidden = NO;
@@ -1581,7 +1583,7 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
  收到电话，可以播放铃声
  */
 - (void)shouldRingForIncomingCall {
-    if ([UIApplication sharedApplication].applicationState == UIApplicationStateActive) {
+    if ([RCIMClient sharedRCIMClient].sdkRunningMode == RCSDKRunningMode_Foreground) {
         NSString *ringPath = [[[NSBundle mainBundle] pathForResource:@"RongCallKit" ofType:@"bundle"]
             stringByAppendingPathComponent:@"voip/voip_call.mp3"];
         [self startPlayRing:ringPath];
@@ -1697,13 +1699,14 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
 #pragma mark - testPushConfig
 
 -(RCMessagePushConfig*)getPushConfig{
-    
     RCMessagePushConfig* config = [[RCMessagePushConfig alloc] init];
     NSUserDefaults *defauts = [NSUserDefaults standardUserDefaults];
+    config.disablePushTitle = [[defauts objectForKey:@"pushConfig-disablePushTitle"] boolValue];
     config.pushTitle = [defauts objectForKey:@"pushConfig-title"];
     config.pushContent = [defauts objectForKey:@"pushConfig-content"];
     config.pushData = [defauts objectForKey:@"pushConfig-data"];
     config.forceShowDetailContent =[[defauts objectForKey:@"pushConfig-forceShowDetailContent"] boolValue];
+    config.templateId = [defauts objectForKey:@"pushConfig-templateId"];
     config.iOSConfig.threadId = [defauts objectForKey:@"pushConfig-threadId"];
     config.iOSConfig.apnsCollapseId = [defauts objectForKey:@"pushConfig-apnsCollapseId"];
     config.androidConfig.notificationId = [defauts objectForKey:@"pushConfig-android-id"];

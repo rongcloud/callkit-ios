@@ -62,6 +62,14 @@
 + (UIImage *)imageByScalingAndCropSize:(UIImage *)image targetSize:(CGSize)targetSize;
 
 /*!
+ 根据配置压缩图片，如果设置了[RCCoreClient sharedCoreClient].imageCompressConfig ，就按照此设置进行压缩。如果没有设置，就按照RCConfigg.plis文件中的配置进行压缩。
+  
+  @param image           原图片
+  @return          压缩后的图片
+ */
++ (UIImage *)generateThumbnailByConfig:(UIImage *)image;
+
+/*!
  generate thumbnail from image
 
  @param image           image
@@ -70,6 +78,17 @@
  @return                image
  */
 + (UIImage *)generateThumbnail:(UIImage *)image targetSize:(CGSize)targetSize;
+
+/*!
+ generate thumbnail from image
+
+ @param image           image
+ @param targetSize      targetSize
+ @param percent         percent
+
+ @return                image
+ */
++ (UIImage *)generateThumbnail:(UIImage *)image targetSize:(CGSize)targetSize percent:(CGFloat)percent;
 /*!
  compressedImageWithMaxDataLength
 
