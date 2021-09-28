@@ -42,9 +42,9 @@
     }
 #endif
 
-static NSString *const __RongCallKit__Version = @"5.1.8";
-static NSString *const __RongCallKit__Commit = @"0403b89c";
-static NSString *const __RongCallKit__Time = @"202109091633";
+static NSString *const __RongCallKit__Version = @"5.1.9";
+static NSString *const __RongCallKit__Commit = @"04724f7f";
+static NSString *const __RongCallKit__Time = @"202109281427";
 
 @interface RCCall () <RCCallReceiveDelegate>
 
@@ -386,14 +386,16 @@ static NSString *const __RongCallKit__Time = @"202109091633";
         NSInteger checker = [RCCallKitUtility compareVersion:[UIDevice currentDevice].systemVersion toVersion:@"10.0"];
         if (checker >= 0) {
             if (mediaType == RCCallMediaAudio) {
-                [[RCCXCall sharedInstance] reportIncomingCallWithInviter:inviterUserId
-                                                              userIdList:userIdList
-                                                                 isVideo:NO];
+                [[RCCXCall sharedInstance] reportIncomingCallWithCallId:callId
+                                                                inviter:inviterUserId
+                                                             userIdList:userIdList
+                                                                isVideo:NO];
                 return;
             } else {
-                [[RCCXCall sharedInstance] reportIncomingCallWithInviter:inviterUserId
-                                                              userIdList:userIdList
-                                                                 isVideo:YES];
+                [[RCCXCall sharedInstance] reportIncomingCallWithCallId:callId
+                                                                inviter:inviterUserId
+                                                             userIdList:userIdList
+                                                                isVideo:YES];
                 return;
             }
         }

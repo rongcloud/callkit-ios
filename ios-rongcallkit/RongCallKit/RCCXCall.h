@@ -33,9 +33,10 @@
 /*!
  通知苹果 Callkit 开始呼出电话
  
+ @param callId 呼叫 id
  @param userId 呼叫用户 id，如果是多人通话则传多个用户 id，以:::分隔
  */
-- (void)startCall:(NSString *)userId;
+- (void)startCallId:(NSString *)callId userId:(NSString *)userId;
 
 /*!
  通知苹果 Callkit 呼出电话已连接
@@ -46,13 +47,15 @@
 /*!
  通知苹果 Callkit 来电
 
+ @param callId 通话 id
  @param inviterId 来电人用户 id
  @param userIdList 被邀请者的 userId 列表。nil 表示单人通话
  @param isVideo 是否视频通话。YES: video NO: audio
  */
-- (void)reportIncomingCallWithInviter:(NSString *)inviterId
-                           userIdList:(NSArray<NSString *> *)userIdList
-                              isVideo:(BOOL)isVideo;
+- (void)reportIncomingCallWithCallId:(NSString *)callId
+                             inviter:(NSString *)inviterId
+                          userIdList:(NSArray<NSString *> *)userIdList
+                             isVideo:(BOOL)isVideo;
 
 /*!
  接通苹果 Callkit 通话

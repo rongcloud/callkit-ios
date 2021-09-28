@@ -62,8 +62,8 @@
     return pCall;
 }
 
-- (void)startCall:(NSString *)userId {
-    NSUUID *uuid = [NSUUID UUID];
+- (void)startCallId:(NSString *)callId userId:(NSString *)userId {
+    NSUUID *uuid = [[NSUUID alloc] initWithUUIDString:callId];
     self.currentUUID = uuid;
 //RCCallKit_Delete_Start
 #if PUBLIC
@@ -105,9 +105,10 @@
     //RCCallKit_Delete_end
 }
 
-- (void)reportIncomingCallWithInviter:(NSString *)inviterId
-                           userIdList:(NSArray<NSString *> *)userIdList
-                              isVideo:(BOOL)isVideo {
+- (void)reportIncomingCallWithCallId:(NSString *)callId
+                             inviter:(NSString *)inviterId
+                          userIdList:(NSArray<NSString *> *)userIdList
+                             isVideo:(BOOL)isVideo {
 //RCCallKit_Delete_Start
 #if PUBLIC
 #else
@@ -115,7 +116,7 @@
         return;
     }
     [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayAndRecord error:nil];
-    NSUUID *uuid = [[NSUUID alloc] init];
+    NSUUID *uuid = [[NSUUID alloc] initWithUUIDString:callId];
     self.currentUUID = uuid;
     CXCallUpdate *update = [[CXCallUpdate alloc] init];
     update.supportsHolding = NO;

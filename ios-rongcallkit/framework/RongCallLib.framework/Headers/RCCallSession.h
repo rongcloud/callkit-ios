@@ -149,6 +149,17 @@
 - (void)remoteUserDidCancelPublishCustomMediaStream:(NSString *)streamId;
 
 /*!
+ 本地发布资源上报
+ 
+ @param success 发布资源是否成功
+ @discussion
+ 本地发布资源上报
+ 
+ @remarks 代理
+ */
+- (void)localUserDidPublishStream:(BOOL)success;
+
+/*!
  彩铃
  
  @discussion
@@ -410,6 +421,18 @@
  @remarks 通话管理
 */
 - (void)hangup;
+
+/*!
+ 挂断通话
+ 
+ @param block 挂断消息发送回调
+
+ @discussion
+ 挂断通话
+ 
+ @remarks 通话管理
+*/
+- (void)hangup:(void (^)(BOOL isSuccess, NSInteger code))block;
 
 /*!
  观察者身份用户, 发布自己的音视频资源

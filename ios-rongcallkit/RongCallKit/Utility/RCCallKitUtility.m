@@ -136,6 +136,9 @@ UIColor *dynamic_color(NSInteger light_hex_value, NSInteger dark_hex_value) {
         case RCCallDisconnectReasonKickedByServer:
             hangupReasonString = RCCallKitLocalizedString(@"VoIPCallLocalKickedByServer");
             break;
+        case RCCallDisconnectReasonAcceptSystemCall:
+            hangupReasonString = RCCallKitLocalizedString(@"VoIPCallLocalAcceptSystemCall");
+            break;
         case RCCallDisconnectReasonRemoteKickedByOtherCall:
             hangupReasonString = RCCallKitLocalizedString(@"VoIPCallRemoteKickedByOtherCallError");
             break;
@@ -144,6 +147,9 @@ UIColor *dynamic_color(NSInteger light_hex_value, NSInteger dark_hex_value) {
             break;
         case RCCallDisconnectReasonRemoteKickedByServer:
             hangupReasonString = RCCallKitLocalizedString(@"VoIPCallRemoteKickedByServer");
+            break;
+        case RCCallDisconnectReasonRemoteAcceptSystemCall:
+            hangupReasonString = RCCallKitLocalizedString(@"VoIPCallRemoteAcceptSystemCall");
             break;
         case RCCallDisconnectReasonAcceptByOtherClient:
             hangupReasonString = RCCallKitLocalizedString(@"VoIPCallAcceptByOtherClient");

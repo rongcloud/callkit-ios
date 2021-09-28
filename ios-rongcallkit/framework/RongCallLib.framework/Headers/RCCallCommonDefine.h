@@ -273,6 +273,10 @@ typedef NS_ENUM(NSInteger, RCCallDisconnectReason) {
      */
     RCCallDisconnectReasonKickedByServer = 23,
     /*!
+     己方已接听系统来电
+     */
+    RCCallDisconnectReasonAcceptSystemCall = 24,
+    /*!
      对方其他端已加入新通话
      */
     RCCallDisconnectReasonRemoteKickedByOtherCall = 31,
@@ -284,6 +288,10 @@ typedef NS_ENUM(NSInteger, RCCallDisconnectReason) {
      对方已被禁止通话
      */
     RCCallDisconnectReasonRemoteKickedByServer = 33,
+    /*!
+     对方已接听系统来电
+     */
+    RCCallDisconnectReasonRemoteAcceptSystemCall = 34,
     /*!
      己方其他端已接听
      */

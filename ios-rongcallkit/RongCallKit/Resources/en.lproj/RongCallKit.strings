@@ -43,11 +43,12 @@
 "VoIPCallLocalKickedByOtherCallError"="Local kicked by other call error";
 "VoIPCallLocalInOtherCallError"="In other call error";
 "VoIPCallLocalKickedByServer"="Kicked by server";
+"VoIPCallLocalAcceptSystemCall"="Local accept system call";
 "VoIPCallRemoteCancel"="Has Cancelled";
 "VoIPCallRemoteReject"="Has Declined";
 "VoIPCallRemoteHangup"="Has Hung-up";
 "VoIPCallRemoteBusyLine"="Busying";
-"VoIPCallRemoteNoResponse"="not answered the call";
+"VoIPCallRemoteNoResponse"="Remote no response";
 "VoIPCallRemoteEngineUnsupport"="Unsupport Engine";
 "VoIPCallRemoteNetworkError"="Receiver network error";
 "VoIPCallRemoteResourceError"="Remote get resource error";
@@ -56,11 +57,11 @@
 "VoIPCallRemoteKickedByOtherCallError"="Remote kicked by other call error";
 "VoIPCallRemoteInOtherCallError"="Remote kicked by other call error";
 "VoIPCallRemoteKickedByServer"="Kicked by server";
+"VoIPCallRemoteAcceptSystemCall"="Remote accept system call";
 "VoIPCallAcceptByOtherClient"="Accepted by other client";
 "VoIPCallHangupByOtherClient"="Hanguped by other client";
 "VoIP_Rejected_By_Blacklist"="Has been blacklisted by receiver";
 "VoIPCallMediaServerClosed"="Audio and video services are turned off";
-"VoIPCallKickedByServer"="Banned from making this call";
 "VoIPCallRemoteBusyLineAndShowAdvice"="The number you have called is busy, please try later";
 "VoIPCallRemoteDidInvite"="%@ has joined the group chat";
 "bottom_result_view_choosed_person_prefix"="Selected";

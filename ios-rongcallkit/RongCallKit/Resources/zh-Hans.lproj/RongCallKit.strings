@@ -43,6 +43,7 @@
 "VoIPCallLocalKickedByOtherCallError"="己方其他端已加入新通话";
 "VoIPCallLocalInOtherCallError"="己方其他端已在通话中";
 "VoIPCallLocalKickedByServer"="己方已被禁止通话";
+"VoIPCallLocalAcceptSystemCall"="己方已接听系统来电";
 "VoIPCallRemoteCancel"="对方已取消";
 "VoIPCallRemoteReject"="对方已拒绝";
 "VoIPCallRemoteHangup"="对方已挂断";
@@ -56,6 +57,7 @@
 "VoIPCallRemoteKickedByOtherCallError"="对方其他端已加入新通话";
 "VoIPCallRemoteInOtherCallError"="己方其他端已在通话中";
 "VoIPCallRemoteKickedByServer"="对方已被禁止通话";
+"VoIPCallRemoteAcceptSystemCall"="对方已接听系统来电";
 "VoIPCallAcceptByOtherClient"="己方其他端已接听";
 "VoIPCallHangupByOtherClient"="己方其他端已挂断";
 "VoIP_Rejected_By_Blacklist"="已被对方加入黑名单";

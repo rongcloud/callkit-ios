@@ -166,6 +166,11 @@
 @property (nonatomic, assign) BOOL isRetryStreamConnect;
 
 /*!
+ 呼叫或通话过程中, 当收到手机号系统来电时, 是否挂断当前呼叫或通话, 默认: Yes 挂断
+*/
+@property (nonatomic, assign) BOOL canHangupSystemPhonecall;
+
+/*!
  获取融云通话能力库 RCCallClient 的核心类单例
  
  @discussion

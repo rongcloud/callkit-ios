@@ -125,18 +125,18 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
         [self didChangeValueForKey:@"callSession"];
         sem = dispatch_semaphore_create(1);
         queue = dispatch_queue_create("AnswerQueue", DISPATCH_QUEUE_SERIAL);
-        if (mediaType == RCCallMediaAudio) {
-            if (conversationType == ConversationType_PRIVATE) {
-                [[RCCXCall sharedInstance] startCall:targetId];
-            } else {
-                NSString *str = @"";
-                for (NSString *userId in userIdList) {
-                    str = [str stringByAppendingFormat:@"%@:::", userId];
-                }
-                str = [str substringToIndex:str.length - 3];
-                [[RCCXCall sharedInstance] startCall:str];
+        
+        if (conversationType == ConversationType_PRIVATE) {
+            [[RCCXCall sharedInstance] startCallId:_callSession.callId userId:targetId];
+        } else {
+            NSString *str = @"";
+            for (NSString *userId in userIdList) {
+                str = [str stringByAppendingFormat:@"%@:::", userId];
             }
+            str = [str substringToIndex:str.length - 3];
+            [[RCCXCall sharedInstance] startCallId:_callSession.callId userId:str];
         }
+        
         [self registerForegroundNotification];
         [RCCallKitUtility setScreenForceOn];
         [_callSession setMinimized:NO];
@@ -1592,6 +1592,7 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
     [[RCCXCall sharedInstance] endCXCall];
     [RCCallKitUtility clearScreenForceOnStatus];
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
+    [RCCXCall sharedInstance].acceptedFromCallKit = NO;
 
     if (self.callSession.connectedTime > 0) {
         self.tipsLabel.text = RCCallKitLocalizedString(@"VoIPCallEnd");
