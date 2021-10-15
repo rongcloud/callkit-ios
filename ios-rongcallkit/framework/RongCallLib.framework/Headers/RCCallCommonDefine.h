@@ -171,9 +171,13 @@ typedef NS_ENUM(NSInteger, RCCallErrorCode) {
      */
     RCCallMediaServerSubscribeError = 14,
     /*!
-     其他端已在通话中错误
+     其他端已在通话中
      */
-    RCCallMediaJoinRoomRefuseError = 15
+    RCCallMediaJoinRoomRefuseError = 15,
+    /*!
+     己方其他端已加入其他房间
+     */
+    RCCallMediaOtherClientJoinedRoom = 16
 };
 
 /*!
