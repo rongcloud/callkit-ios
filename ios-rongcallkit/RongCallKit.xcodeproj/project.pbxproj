@@ -128,6 +128,9 @@
 		A6BE1B1C1CCEFAAC00FF6BF7 /* RCCallKitUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCCallKitUtility.h; sourceTree = "<group>"; };
 		A6BE1B1D1CCEFAAC00FF6BF7 /* RCCallKitUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCCallKitUtility.m; sourceTree = "<group>"; };
 		A6BE1B461CCEFBC700FF6BF7 /* RongCallLib.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RongCallLib.framework; path = framework/RongCallLib.framework; sourceTree = "<group>"; };
+		B26F124A2480E69C0039081A /* jenkins_build.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = jenkins_build.sh; sourceTree = "<group>"; };
+		B2B0B1702480D096007DAFF4 /* after_build.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = after_build.sh; sourceTree = "<group>"; };
+		B2B0B1712480D096007DAFF4 /* before_build.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = before_build.sh; sourceTree = "<group>"; };
 		E50FA9972595BEC7001A8A53 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/RongCallKit.strings; sourceTree = "<group>"; };
 		F8235CD91CE5B2A100C95B26 /* RCloudImageLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RCloudImageLoader.h; path = Header/RCloudImageLoader.h; sourceTree = "<group>"; };
 		F8235CDA1CE5B2A100C95B26 /* RCloudImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RCloudImageView.h; path = Header/RCloudImageView.h; sourceTree = "<group>"; };
@@ -195,6 +198,7 @@
 		A6BE1A441CCE561200FF6BF7 = {
 			isa = PBXGroup;
 			children = (
+				B2B0B16F2480D080007DAFF4 /* Script */,
 				A6BE1A501CCE561200FF6BF7 /* RongCallKit */,
 				A6BE1B451CCEFBAC00FF6BF7 /* Frameworks */,
 				A6BE1A4F1CCE561200FF6BF7 /* Products */,
@@ -326,6 +330,16 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		B2B0B16F2480D080007DAFF4 /* Script */ = {
+			isa = PBXGroup;
+			children = (
+				B26F124A2480E69C0039081A /* jenkins_build.sh */,
+				B2B0B1702480D096007DAFF4 /* after_build.sh */,
+				B2B0B1712480D096007DAFF4 /* before_build.sh */,
+			);
+			name = Script;
+			sourceTree = "<group>";
+		};
 		F8235CD71CE5B29200C95B26 /* Header */ = {
 			isa = PBXGroup;
 			children = (
@@ -390,10 +404,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A6BE1A561CCE561200FF6BF7 /* Build configuration list for PBXNativeTarget "RongCallKit" */;
 			buildPhases = (
+				B2CF8AAA247FB45A0057D5E4 /* Copy Dependent Frameworks And Header Files */,
 				A6BE1A491CCE561200FF6BF7 /* Sources */,
 				A6BE1A4A1CCE561200FF6BF7 /* Frameworks */,
 				A6BE1A4B1CCE561200FF6BF7 /* Headers */,
 				5AC79EE0256FBD9500B06789 /* Resources */,
+				A68AFAEF1CCF078600F16B3D /* Create Universal Framework */,
 			);
 			buildRules = (
 			);
@@ -450,6 +466,41 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		A68AFAEF1CCF078600F16B3D /* Create Universal Framework */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Create Universal Framework";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "#sh xcodebuild.sh\nsh after_build.sh\n";
+		};
+		B2CF8AAA247FB45A0057D5E4 /* Copy Dependent Frameworks And Header Files */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Dependent Frameworks And Header Files";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nsh before_build.sh\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		A6BE1A491CCE561200FF6BF7 /* Sources */ = {

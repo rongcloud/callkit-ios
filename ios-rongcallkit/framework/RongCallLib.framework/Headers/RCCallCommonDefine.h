@@ -233,7 +233,7 @@ typedef NS_ENUM(NSInteger, RCCallDisconnectReason) {
      */
     RCCallDisconnectReasonRemoteReject = 12,
     /*!
-     通话过程对方挂断
+     对方挂断
      */
     RCCallDisconnectReasonRemoteHangup = 13,
     /*!
