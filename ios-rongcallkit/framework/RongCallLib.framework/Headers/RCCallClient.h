@@ -161,11 +161,6 @@
 @property (nonatomic, strong) RCMessagePushConfig *hangupPushConfig;
 
 /*!
- 呼叫接听后, 在初次连接失败后是否重试, 默认: NO 不重试
- */
-@property (nonatomic, assign) BOOL isRetryStreamConnect;
-
-/*!
  呼叫或通话过程中, 当收到手机号系统来电时, 是否挂断当前呼叫或通话, 默认: Yes 挂断
 */
 @property (nonatomic, assign) BOOL canHangupSystemPhonecall;

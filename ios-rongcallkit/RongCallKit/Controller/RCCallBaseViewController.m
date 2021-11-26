@@ -1658,14 +1658,12 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
 - (void)remoteUserDidChangeMediaType:(NSString *)userId mediaType:(RCCallMediaType)mediaType {
     dispatch_async(dispatch_get_main_queue(), ^{
         if (!self.callSession.isMultiCall) {
-            if (mediaType == RCCallMediaAudio && self.callSession.mediaType != RCCallMediaAudio) {
-                if ([self.callSession changeMediaType:RCCallMediaAudio]) {
-                    [self.callSession setVideoView:nil userId:[RCIMClient sharedRCIMClient].currentUserInfo.userId];
-                    [self.callSession setVideoView:nil userId:self.callSession.targetId];
-                    [self resetLayout:self.callSession.isMultiCall
-                            mediaType:RCCallMediaAudio
-                           callStatus:self.callSession.callStatus];
-                }
+            if (mediaType == RCCallMediaAudio) {
+                [self.callSession setVideoView:nil userId:[RCIMClient sharedRCIMClient].currentUserInfo.userId];
+                [self.callSession setVideoView:nil userId:self.callSession.targetId];
+                [self resetLayout:self.callSession.isMultiCall
+                        mediaType:RCCallMediaAudio
+                       callStatus:self.callSession.callStatus];
             }
         } else if (self.callSession.mediaType == mediaType && mediaType == RCCallMediaVideo) {
             [self remoteUserDidDisableCamera:NO byUser:userId];
