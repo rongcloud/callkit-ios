@@ -225,21 +225,7 @@ typedef void (^CompleteBlock)(NSArray *addUserIdList);
 }
 
 - (void)loadErrorAlert:(NSString *)title {
-    UIAlertAction *okAction = [UIAlertAction actionWithTitle:RCCallKitLocalizedString(@"OK")
-                                                       style:UIAlertActionStyleDefault
-                                                     handler:^(UIAlertAction *_Nonnull action){
-                                                     }];
-
-    UIAlertController *controler = [UIAlertController alertControllerWithTitle:title
-                                                                       message:nil
-                                                                preferredStyle:UIAlertControllerStyleAlert];
-    [controler addAction:okAction];
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self presentViewController:controler
-                           animated:YES
-                         completion:^{
-                         }];
-    });
+    [RCAlertView showAlertController:title message:nil cancelTitle:RCCallKitLocalizedString(@"OK")  inViewController:self];
 }
 
 #pragma mark - UITableViewDataSource

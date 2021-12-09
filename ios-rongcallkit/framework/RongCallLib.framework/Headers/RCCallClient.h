@@ -166,6 +166,11 @@
 @property (nonatomic, assign) BOOL canHangupSystemPhonecall;
 
 /*!
+ 多端登录时, 同一UserId的两端加入不同通话的类型, 默认: RCRTCJoinRoomTypeCoexist 多端可共存不同通话
+ */
+@property (nonatomic, assign) RCCallJoinCallType joinCallType;
+
+/*!
  获取融云通话能力库 RCCallClient 的核心类单例
  
  @discussion

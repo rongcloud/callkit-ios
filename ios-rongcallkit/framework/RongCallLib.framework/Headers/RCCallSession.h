@@ -241,9 +241,9 @@
 - (void)audioLevel:(NSInteger)leavel userID:(NSString *)userID;
 
 /*!
- 本地视频数据上报
+ 本地发送视频数据上报
  
- @param sampleBuffer   本地视频数据
+ @param sampleBuffer   本地发送视频数据
  @discussion
  当前视频通话本地视频数据, 同步返回处理后的同一 sampleBuffer 对象
  
@@ -267,6 +267,18 @@
  @remarks 代理
  */
 - (void)receiveRemoteUserVideoFirstAudioFrame:(NSString *)userId;
+
+/*!
+ 对端用户视频分辨率变化的回调
+ 
+ @param userId    用户ID
+ @param size 变化后的视频分辨率
+ @discussion
+ 对端用户视频分辨率变化的回调
+ 
+ @remarks 代理
+ */
+- (void)remoteUserDidChangeResolution:(NSString *)userId resolution:(CGSize)size;
 
 @end
 

@@ -272,15 +272,7 @@ UIColor *dynamic_color(NSInteger light_hex_value, NSInteger dark_hex_value) {
     }
 }
 + (void)loadErrorAlertWithConfirm:(NSString *)title message:(NSString *)message {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title
-                                                        message:message
-                                                       delegate:nil
-                                              cancelButtonTitle:RCCallKitLocalizedString(@"OK")
-                                              otherButtonTitles:nil];
-        alert.tag = 1002;
-        [alert show];
-    });
+    [RCAlertView showAlertController:title message:message cancelTitle:RCCallKitLocalizedString(@"OK")];
 }
 
 + (NSInteger)compareVersion:(NSString *)version1 toVersion:(NSString *)version2 {
