@@ -319,6 +319,11 @@
 @property (nonatomic, assign) BOOL enableCallSummary;
 
 /*!
+ 是否开启多平台模式，默认为NO
+ */
+@property (nonatomic, assign) BOOL enableMultiPlatformMode;
+
+/*!
  设置是否使用苹果 PushKit 推送
  
  @param enable YES 使用, NO 不使用

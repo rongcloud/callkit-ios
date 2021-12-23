@@ -283,6 +283,7 @@
 @end
 
 @class RCMessagePushConfig;
+@protocol RCRTCDrawer;
 
 /*!
  通话实体
@@ -513,6 +514,21 @@
  @remarks 视频配置
  */
 - (void)setVideoView:(UIView *)view userId:(NSString *)userId;
+
+/*!
+ 设置用户所在的视频View
+
+ @param userId 用户ID（自己或他人）
+ @param view   继承RCRTCDrawer 接口 视频的View
+ @discussion
+ 设置用户所在的视频View
+ 注意：
+ 1.此接口需要RCCallClient中enableMultiPlatformMode设置为YES方可使用
+ 2. view 的生命周期自己处理
+ 
+ @remarks 视频配置
+ */
+- (int)setMultiPlatformVideoView:(id<RCRTCDrawer>)view userId:(NSString *)userId;
 
 /**
  设置用户所在的视频View
