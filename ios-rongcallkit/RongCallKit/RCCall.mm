@@ -42,9 +42,9 @@
     }
 #endif
 
-static NSString *const __RongCallKit__Version = @"5.1.15_opensource";
-static NSString *const __RongCallKit__Commit = @"b25034db";
-static NSString *const __RongCallKit__Time = @"202112231602";
+static NSString *const __RongCallKit__Version = @"5.1.16_opensource";
+static NSString *const __RongCallKit__Commit = @"822b9ccb";
+static NSString *const __RongCallKit__Time = @"202201061814";
 
 @interface RCCall () <RCCallReceiveDelegate>
 
@@ -257,14 +257,26 @@ static NSString *const __RongCallKit__Time = @"202112231602";
 }
 
 - (void)presentCallViewController:(UIViewController *)viewController {
-    [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
-    UIWindow *activityWindow = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    activityWindow.windowLevel = [UIApplication sharedApplication].keyWindow.windowLevel + 1;
-    activityWindow.rootViewController = viewController;
-    activityWindow.tag = kActivityWindowTag;
-    [self.callWindows addObject:activityWindow];
+    NSArray *windows = [self.callWindows
+        filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"tag == %ld", kActivityWindowTag]];
+    if (!windows || windows.count == 0) {
+        [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
+        UIWindow *activityWindow = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+        activityWindow.windowLevel = [UIApplication sharedApplication].keyWindow.windowLevel + 1;
+        activityWindow.rootViewController = viewController;
+        activityWindow.tag = kActivityWindowTag;
+        [self.callWindows addObject:activityWindow];
 
-    [self showActivityWindowIfNeedDelay];
+        [self showActivityWindowIfNeedDelay];
+    } else {
+        UIWindow *activityWindow = windows.firstObject;
+        UIViewController *activityViewController = activityWindow.rootViewController;
+        while (activityViewController.presentingViewController) {
+            activityViewController = activityViewController.presentingViewController;
+        }
+        viewController.modalPresentationStyle = UIModalPresentationFullScreen;
+        [activityViewController presentViewController:viewController animated:YES completion:nil];
+    }
 }
 
 - (void)showActivityWindowIfNeedDelay {
