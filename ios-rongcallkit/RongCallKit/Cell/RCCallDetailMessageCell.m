@@ -103,7 +103,8 @@
     CGSize __labelSize = CGSizeMake(__textSize.width, __textSize.height + 5);
 
     CGFloat __bubbleWidth = __labelSize.width + (14 + 20 + 7 + 10) < 50 ? 50 : (__labelSize.width + (14 + 20 + 7 + 10));
-    CGFloat __bubbleHeight = __labelSize.height + 5 + 5 < 40 ? 40 : (__labelSize.height + 5 + 5);
+    
+    CGFloat __bubbleHeight = __labelSize.height + 5 + 5 < RCKitConfigCenter.ui.globalMessagePortraitSize.height ? RCKitConfigCenter.ui.globalMessagePortraitSize.height : (__labelSize.height + 5 + 5);
 
     CGSize __bubbleSize = CGSizeMake(__bubbleWidth, __bubbleHeight);
 
@@ -111,10 +112,10 @@
     if (self.model.messageDirection == MessageDirection_SEND) {
         self.textLabel.frame =
             CGRectMake(10, (__bubbleHeight - __labelSize.height) / 2, __labelSize.width, __labelSize.height);
-        self.mediaTypeIcon.frame = CGRectMake(CGRectGetMaxX(self.textLabel.frame) + 7, 10, 20, 20);
+        self.mediaTypeIcon.frame = CGRectMake(CGRectGetMaxX(self.textLabel.frame) + 7, (__bubbleHeight - 20) / 2, 20, 20);
         [self.textLabel setTextColor:RCDYCOLOR(0x262626, 0x040A0F)];
     } else {
-        self.mediaTypeIcon.frame = CGRectMake(10, 10, 20, 20);
+        self.mediaTypeIcon.frame = CGRectMake(10, (__bubbleHeight - 20) / 2, 20, 20);
         self.textLabel.frame =
             CGRectMake(CGRectGetMaxX(self.mediaTypeIcon.frame) + 7, (__bubbleHeight - __labelSize.height) / 2,
                        __labelSize.width, __labelSize.height);
