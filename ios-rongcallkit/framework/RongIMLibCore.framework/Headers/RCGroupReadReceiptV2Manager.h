@@ -49,6 +49,8 @@
  @param successBlock     同步成功的回调
  @param errorBlock       同步失败的回调[nErrorCode: 失败的错误码]
 
+ @discussion 此方法不支持超级群的会话类型。
+ 
  @remarks 高级功能
  */
 - (void)getGroupMessageReaderList:(RCMessage *)message

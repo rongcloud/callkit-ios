@@ -10,7 +10,7 @@
 		</data>
 		<key>Headers/RCDiscussionClient.h</key>
 		<data>
-		mzdTh6zWVEmFEKOdOpWrYLlS92w=
+		p2+nW4fH+zqAsnKe9aoW5HS+IRw=
 		</data>
 		<key>Headers/RCDiscussionNotificationMessage.h</key>
 		<data>
@@ -22,7 +22,7 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		DLAxAxbVSnljY2dDYQy1PeZvxXM=
+		GyI1vWfpL0BbCGmKu0mDVhwUT4o=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -46,11 +46,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			mzdTh6zWVEmFEKOdOpWrYLlS92w=
+			p2+nW4fH+zqAsnKe9aoW5HS+IRw=
 			</data>
 			<key>hash2</key>
 			<data>
-			qsN4ZJaXmD3YVOk8iKzwKjTa0DKOxJQa00MRwRHtQkA=
+			zSTAHakY8agmYT8wwo7755N2mlAMvQwKHwyupQ3U7kE=
 			</data>
 		</dict>
 		<key>Headers/RCDiscussionNotificationMessage.h</key>

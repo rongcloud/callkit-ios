@@ -32,6 +32,8 @@ NS_ASSUME_NONNULL_BEGIN
  -1 表示不获取任何历史消息，0 表示不特殊设置而使用SDK默认的设置（默认为获取 10 条），0 < messageCount <= 50
  为具体获取的消息数量,最大值为 50。注：如果是 7.x 系统获取历史消息数量不要大于 30
 
+ @warning 没有加入过的聊天室(或杀死 app 重新打开)，调用该接口会把该聊天室本地的消息与 KV 清除
+ 
  @remarks 聊天室
  */
 - (void)joinChatRoom:(NSString *)targetId
@@ -58,6 +60,8 @@ NS_ASSUME_NONNULL_BEGIN
  -1 表示不获取任何历史消息，0 表示不特殊设置而使用SDK默认的设置（默认为获取 10 条），0 < messageCount <= 50
  为具体获取的消息数量，最大值为 50。
 
+ @warning 没有加入过的聊天室(或杀死 app 重新打开)，调用该接口会把该聊天室本地的消息与 KV 清除
+ 
  @remarks 聊天室
  */
 - (void)joinExistChatRoom:(NSString *)targetId
@@ -145,6 +149,28 @@ NS_ASSUME_NONNULL_BEGIN
 */
 - (void)setRCChatRoomKVStatusChangeDelegate:(id<RCChatRoomKVStatusChangeDelegate>)delegate;
 
+/*!
+ 添加聊天室 KV 状态变化监听
+
+ @param delegate 代理
+ */
+- (void)addChatRoomKVStatusChangeDelegate:(id<RCChatRoomKVStatusChangeDelegate>)delegate;
+
+/*!
+ 移除聊天室 KV 状态变化监听
+
+ @param delegate 代理
+ */
+- (void)removeChatRoomKVStatusChangeDelegate:(id<RCChatRoomKVStatusChangeDelegate>)delegate;
+
+/*!
+ 获取聊天室 KV 状态变化监听
+ 
+ @return 所有聊天室 KV 状态变化的监听器
+ */
+- (NSArray <id<RCChatRoomKVStatusChangeDelegate>> *)allChatRoomKVStatusChangeDelegates;
+
+
 
 /**
  设置聊天室自定义属性
@@ -200,6 +226,27 @@ NS_ASSUME_NONNULL_BEGIN
             notificationExtra:(NSString *)notificationExtra
                       success:(void (^)(void))successBlock
                         error:(void (^)(RCErrorCode nErrorCode))errorBlock;
+
+/**
+ 批量设置聊天室自定义属性
+
+ @param chatroomId   聊天室 ID
+ @param entries   聊天室属性，key 支持大小写英文字母、数字、部分特殊符号 + = - _ 的组合方式，最大长度 128 个字符，value 聊天室属性对应的值，最大长度 4096 个字符，最多一次设置 10 条
+ @param isForce   是否强制覆盖
+ @param autoDelete   用户掉线或退出时，是否自动删除该 Key、Value 值
+ @param successBlock 成功回调
+ @param errorBlock   失败回调，当 nErrorCode 为 RC_KV_STORE_NOT_ALL_SUCCESS（23428）的时候，entries 才会有值（key 为设置失败的 key，value 为该 key 对应的错误码）
+
+ @discussion 必须先开通聊天室状态存储功能
+ 
+ @remarks 聊天室
+ */
+- (void)setChatRoomEntries:(NSString *)chatroomId
+                   entries:(NSDictionary *)entries
+                   isForce:(BOOL)isForce
+                autoDelete:(BOOL)autoDelete
+                   success:(void (^)(void))successBlock
+                     error:(void (^)(RCErrorCode nErrorCode, NSDictionary *entries))errorBlock;
 
 /**
  获取聊天室单个属性
@@ -278,6 +325,37 @@ NS_ASSUME_NONNULL_BEGIN
                notificationExtra:(NSString *)notificationExtra
                          success:(void (^)(void))successBlock
                            error:(void (^)(RCErrorCode nErrorCode))errorBlock;
+
+/**
+ 批量删除聊天室自定义属性
+
+ @param chatroomId   聊天室 ID
+ @param keys   聊天室属性名称，最多一次删除 10 条
+ @param isForce   是否强制覆盖
+ @param successBlock 成功回调
+ @param errorBlock   失败回调，当 nErrorCode 为 RC_KV_STORE_NOT_ALL_SUCCESS（23428）的时候，entries 才会有值（key 为设置失败的 key，value 为该 key 对应的错误码）
+
+ @discussion 必须先开通聊天室状态存储功能
+ 
+ @remarks 聊天室
+ */
+- (void)removeChatRoomEntries:(NSString *)chatroomId
+                         keys:(NSArray *)keys
+                      isForce:(BOOL)isForce
+                      success:(void (^)(void))successBlock
+                        error:(void (^)(RCErrorCode nErrorCode, NSDictionary *entries))errorBlock;
+
+#pragma mark - 聊天室成员变化监听器
+
+/*!
+ 设置聊天室成员变化的监听器
+
+ @discussion 可以设置并实现此拦截器来监听聊天室成员的加入或退出
+
+ @remarks 功能设置
+ */
+@property (nonatomic, weak) id<RCChatRoomMemberDelegate> memberDelegate;
+
 @end
 
 NS_ASSUME_NONNULL_END

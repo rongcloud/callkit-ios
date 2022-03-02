@@ -77,7 +77,7 @@
 /**
  点击编辑按钮会调用该代理的onClickEditPicture方法
  */
-@property (weak, nonatomic) id<RCPictureEditDelegate> photoEditorDelegate;
+@property (weak, nonatomic) id<RCPictureEditDelegate> photoEditorDelegate __deprecated_msg("已废弃");
 
 #pragma mark - 视图显示
 /*!
@@ -531,6 +531,6 @@
  */
 - (void)onClickEditPicture:(UIViewController *)rootCtrl
              originalImage:(UIImage *)originalImage
-            editCompletion:(void (^)(UIImage *editedImage))editCompletion;
+            editCompletion:(void (^)(UIImage *editedImage))editCompletion __deprecated_msg("已废弃");
 
 @end

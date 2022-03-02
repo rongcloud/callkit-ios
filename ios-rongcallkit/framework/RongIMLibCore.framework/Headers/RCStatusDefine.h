@@ -100,7 +100,21 @@ typedef NS_ENUM(NSInteger, RCConnectErrorCode) {
      
      @discussion 请检查 AppKey 和连接环境（开发环境/生产环境）是否匹配
      */
-    RC_CONN_CLUSTER_ERROR  = 31026,
+    RC_CONN_CLUSTER_ERROR  = 31025,
+    
+    /*!
+     APP 服务校验失败
+     
+     @discussion 连接接口 RCConnectOption.connectExt 参数在 APP 服务验证不通过
+     */
+    RC_CONN_APP_AUTH_FAILED  = 31026,
+    
+    /*!
+     token 已经被使用过，无法再连接
+     
+     @discussion 一次性 token 只能连接一次，之后再使用会上报此错误
+     */
+    RC_CONN_DISPOSABLE_TOKEN_USED = 31027,
 
     /*!
      SDK 没有初始化
@@ -267,6 +281,77 @@ typedef NS_ENUM(NSInteger, RCErrorCode) {
     RC_KEY_NOT_EXIST = 23427,
     
     /*!
+     聊天室批量设置 KV 部分不成功
+    */
+    RC_KV_STORE_NOT_ALL_SUCCESS = 23428,
+    
+    /*!
+     聊天室设置 KV，数量超限（最多一次 10 条）
+    */
+    RC_KV_STORE_OUT_OF_LIMIT = 23429,
+    
+    /*!
+     超级群功能没有开通，请联系商务开通
+    */
+    RC_ULTRA_GROUP_NOT_AVAILABLE = 24401,
+    
+    /*!
+     超级群服务异常
+    */
+    RC_ULTRA_GROUP_SERVICE_ABNORMAL = 24402,
+    
+    /*!
+     超级群参数错误
+    */
+    RC_ULTRA_GROUP_PARAMETER_ERROR = 24403,
+    
+    /*!
+     超级群未知异常
+    */
+    RC_ULTRA_GROUP_UNKNOWN_ERROR = 24404,
+    
+    /*!
+     当前用户不在该超级群中
+     */
+    RC_NOT_IN_ULTRA_GROUP = 24406,
+    
+    /*!
+     当前用户在超级群中已被禁言
+     */
+    RC_FORBIDDEN_IN_ULTRA_GROUP = 24408,
+    
+    /*!
+     超级群不存在
+     */
+    RC_ULTRA_GROUP_NOT_EXIST = 24410,
+    
+    /*!
+     超级群成员超限制
+     */
+    RC_ULTRA_GROUP_MEMBERS_EXCEED_LIMIT = 24411,
+    
+    /*!
+     用户加入超级群数量超限
+     */
+    RC_ULTRA_GROUP_NUMBER_EXCEED_LIMIT = 24412,
+    
+    /*!
+     创建超级群频道，频道数超限
+     */
+    RC_ULTRA_GROUP_CHANNELS_EXCEED_LIMIT = 24413,
+    
+    /*!
+     超级群 频道 ID 不存在
+     */
+    RC_ULTRA_GROUP_CHANNEL_ID_NOT_EXIST = 24414,
+
+    /*
+     聊天室设置 KV 失败，出现在两人或者多端同时操作一个 kv。
+     如果出现该错误，为避免和其他端同时操作，请延时一定时间再试
+    */
+    RC_KV_CONCURRENT_SET_ERROR = 23431,
+    
+    /*!
      操作跟服务端同步时出现问题，有可能是操作过于频繁所致。如果出现该错误，请延时 0.5s 再试
     */
     RC_SETTING_SYNC_FAILED = 26002,
@@ -301,6 +386,18 @@ typedef NS_ENUM(NSInteger, RCErrorCode) {
      客户端发送消息请求，融云服务端响应超时。
      */
     RC_MSG_RESPONSE_TIMEOUT = 30003,
+    
+    /*!
+    将消息存储到本地数据时失败。
+    发送或插入消息时，消息需要存储到本地数据库，当存库失败时，会回调此错误码。
+    
+    可能由以下几种原因引起：
+    * 1. 消息内包含非法参数。请检查消息的 targetId 或 senderId 是否为空或超过最大长度 64 字节。
+    * 2. SDK 没有初始化。在使用 SDK 任何功能之前，请确保先初始化。
+    * 3. SDK 没有连接。请确保调用 SDK 连接方法并回调数据库打开后再调用消息相关 API。
+    */
+    
+    BIZ_SAVE_MESSAGE_ERROR = 33000,
 
     /*!
      SDK 没有初始化
@@ -518,6 +615,56 @@ typedef NS_ENUM(NSInteger, RCErrorCode) {
      媒体文件上传异常，媒体文件不存在或文件大小为 0
      */
     RC_MEDIA_EXCEPTION = 34018,
+    
+    /**
+     * 文件已过期或被清理
+     * 小视频文件默认存储 7 天，其它文件默认存储 6个月。到期后自动清理。
+     * 如果小视频文件需要存储更长时间，可在[融云开发者后台](https://developer.rongcloud.cn/advance/index)的 **服务管理-> 小视频-> 服务设置** 中开通小视频高级版功能，开通后小视频文件，默认存储 6 个月。
+     */
+    RC_FILE_EXPIRED = 34020,
+    
+    /*!
+     * 消息未被注册
+     * 发送或者插入自定义消息之前，请确保注册了该类型的消息{RCCoreClient 或者 RCIM 的 registerMessageType}
+     * added from 5.1.7
+     */
+    RC_MESSAGE_NOT_REGISTERED = 34021,
+    
+    /*!
+     * 该接口不支持超级群会话
+     * 
+     */
+    RC_ULTRA_GROUP_NOT_SUPPORT = 34022,
+    
+    /*!
+     超级群功能未开通
+     */
+    RC_ULTRA_GROUP_DISABLED = 34023,
+    
+    /*!
+     超级群频道不存在
+     */
+    RC_ULTRA_GROUP_CHANNEL_NOT_EXIST = 34024,
+    
+    /*!
+     超级群扩展消息，但是原始消息不存在
+     */
+    RC_ORIGINAL_MESSAGE_NOT_EXIST = 22201,
+     
+    /*!
+     超级群扩展消息，但是原始消息不支持扩展
+     */
+    RC_ORIGINAL_MESSAGE_CANT_EXPAND = 22202,
+
+    /*!
+     超级群扩展消息，扩展内容格式错误
+     */
+    RC_MESSAGE_EXPAND_FORMAT_ERROR = 22203,
+
+    /*!
+     超级群扩展消息，无操作权限
+     */
+    RC_MESSAGE_EXPAND_NOT_AUTHORIZED = 22204,
 };
 
 typedef NS_ENUM(NSInteger, RCDBErrorCode) {
@@ -691,6 +838,11 @@ typedef NS_ENUM(NSUInteger, RCConversationType) {
      推送服务会话
      */
     ConversationType_PUSHSERVICE = 9,
+    
+    /*!
+     超级群
+     */
+    ConversationType_ULTRAGROUP = 10,
 
     /*!
      加密会话（仅对部分私有云用户开放，公有云用户不适用）
@@ -761,7 +913,7 @@ typedef NS_ENUM(NSUInteger, RCMessagePersistent) {
     /*!
      在本地不存储，不计入未读数，并且如果对方不在线，服务器会直接丢弃该消息，对方如果之后再上线也不会再收到此消息。
 
-     @discussion 一般用于发送输入状态之类的消息，该类型消息的messageUId为nil。
+     @discussion 一般用于发送输入状态之类的消息。
      */
     MessagePersistent_STATUS = 16
 };
@@ -905,6 +1057,14 @@ typedef NS_ENUM(NSUInteger, RCMediaType) {
     MediaType_HTML = 6
 };
 
+#pragma mark RCTypingStatus - 输入状态
+typedef NS_ENUM(NSUInteger, RCUltraGroupTypingStatus) {
+    /*!
+     正在输入文本
+     */
+    RCUltraGroupTypingStatusText = 0,
+};
+
 #pragma mark RCMediaType - 消息中@提醒的类型
 /*!
  @提醒的类型
@@ -961,27 +1121,6 @@ typedef NS_ENUM(NSUInteger, RCPublicServiceType) {
     RC_PUBLIC_SERVICE = 8,
 };
 
-#pragma mark RCPublicServiceMenuItemType - 公众服务菜单类型
-/*!
- 公众服务菜单类型
- */
-typedef NS_ENUM(NSUInteger, RCPublicServiceMenuItemType) {
-    /*!
-     包含子菜单的一组菜单
-     */
-    RC_PUBLIC_SERVICE_MENU_ITEM_GROUP = 0,
-
-    /*!
-     包含查看事件的菜单
-     */
-    RC_PUBLIC_SERVICE_MENU_ITEM_VIEW = 1,
-
-    /*!
-     包含点击事件的菜单
-     */
-    RC_PUBLIC_SERVICE_MENU_ITEM_CLICK = 2,
-};
-
 #pragma mark RCSearchType - 公众服务查找匹配方式
 /*!
  公众服务查找匹配方式
@@ -1000,106 +1139,6 @@ typedef NS_ENUM(NSUInteger, RCSearchType) {
      无效类型
      */
     RCSearchType_INVALID
-};
-
-/*!
- 客服服务方式
- */
-typedef NS_ENUM(NSUInteger, RCCSModeType) {
-    /*!
-     无客服服务
-     */
-    RC_CS_NoService = 0,
-
-    /*!
-     机器人服务
-     */
-    RC_CS_RobotOnly = 1,
-
-    /*!
-     人工服务
-     */
-    RC_CS_HumanOnly = 2,
-
-    /*!
-     机器人优先服务
-     */
-    RC_CS_RobotFirst = 3,
-};
-
-/*!
- 客服评价时机
- */
-typedef NS_ENUM(NSUInteger, RCCSEvaEntryPoint) {
-    /*!
-     离开客服评价
-     */
-    RCCSEvaLeave = 0,
-
-    /*!
-     在扩展中展示客户主动评价按钮，离开客服不评价
-     */
-    RCCSEvaExtention = 1,
-
-    /*!
-     无评价入口
-     */
-    RCCSEvaNone = 2,
-
-    /*!
-     坐席结束会话评价
-     */
-    RCCSEvaCSEnd = 3,
-};
-
-/*!
- 客服留言类型
- */
-typedef NS_ENUM(NSUInteger, RCCSLMType) {
-    /*!
-     本地 Native 页面留言
-     */
-    RCCSLMNative = 0,
-
-    /*!
-     web 页面留言
-     */
-    RCCSLMWeb = 1,
-};
-
-/*!
- 客服问题解决状态
- */
-typedef NS_ENUM(NSUInteger, RCCSResolveStatus) {
-    /*!
-     未解决
-     */
-    RCCSUnresolved = 0,
-
-    /*!
-     已解决
-     */
-    RCCSResolved = 1,
-
-    /*!
-     解决中
-     */
-    RCCSResolving = 2,
-};
-
-/*!
- 客服评价类型
- */
-typedef NS_ENUM(NSUInteger, RCCSEvaType) {
-    /*!
-     人工机器人分开评价
-     */
-    RCCSEvaSeparately = 0,
-
-    /*!
-     人工机器人统一评价
-     */
-    EVA_UNIFIED = 1,
 };
 
 #pragma mark RCLogLevel - 日志级别
@@ -1203,6 +1242,28 @@ typedef NS_ENUM(NSUInteger, RCPushLauguage) {
      阿拉伯文
      */
     RCPushLauguage_AR_SA
+};
+
+#pragma mark RCMessageBlockType - 消息被拦截类型
+
+/*!
+ 消息被拦截类型
+ */
+typedef NS_ENUM(NSUInteger, RCMessageBlockType) {
+    /*!
+     全局敏感词：命中了融云内置的全局敏感词
+     */
+    RCMessageBlockTypeGlobal = 1,
+
+    /*!
+     自定义敏感词拦截：命中了客户在融云自定义的敏感词
+     */
+    RCMessageBlockTypeCustom = 2,
+    
+    /*!
+     第三方审核拦截：命中了第三方（数美）或模板路由决定不下发的状态
+     */
+    RCMessageBlockTypeThirdParty = 3,
 };
 
 #endif

@@ -32,6 +32,11 @@
  */
 @property (nonatomic, copy) NSString *portraitUri;
 
+/*!
+ 用户备注
+ */
+@property (nonatomic, copy) NSString *alias;
+
 /**
  用户信息附加字段
  */

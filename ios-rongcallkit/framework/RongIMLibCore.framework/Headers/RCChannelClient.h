@@ -18,6 +18,9 @@
 #import "RCRemoteHistoryMsgOption.h"
 #import "RCConversationChannelProtocol.h"
 #import "RCHistoryMessageOption.h"
+#import "RCConversationIdentifier.h"
+#import "RCIMClientProtocol.h"
+
 /*!
  融云 ConversationChannel 核心类
 
@@ -56,6 +59,36 @@
  @remarks 功能设置
  */
 - (void)setRCConversationChannelTypingStatusDelegate:(id<RCConversationChannelTypingStatusDelegate>)delegate;
+
+/*!
+ 设置超级群输入状态的监听器
+
+ @param delegate         RCChannelClient 输入状态的的监听器
+
+ @discussion 此方法只支持超级群的会话类型。
+ @remarks 超级群
+ */
+- (void)setRCUltraGroupTypingStatusDelegate:(id<RCUltraGroupTypingStatusDelegate>)delegate;
+
+/*!
+ 设置超级群已读时间回调监听器
+
+ @param delegate    超级群已读时间回调监听器
+ 
+ @discussion 此方法只支持超级群的会话类型。
+ @remarks 超级群
+ */
+- (void)setRCUltraGroupReadTimeDelegate:(id<RCUltraGroupReadTimeDelegate>)delegate;
+
+/*!
+ 设置超级群消息处理监听器
+
+ @param delegate    超级群消息处理回调监听器
+ 
+ @discussion 此方法只支持超级群的会话类型。
+ @remarks 超级群
+ */
+- (void)setRCUltraGroupMessageChangeDelegate:(id<RCUltraGroupMessageChangeDelegate>)delegate;
 
 #pragma mark 消息发送
 
@@ -301,8 +334,9 @@
  @discussion 此方法用于在群组和讨论组中发送消息给其中的部分用户，其它用户不会收到这条消息。
  如果您使用 IMLibCore，可以使用此方法发送定向消息；
  如果您使用 IMKit，请使用 RCIM 中的同名方法发送定向消息，否则不会自动更新 UI。
+ @discussion userIdList里ID个数不能超过300，超过会被截断。
 
- @warning 此方法目前仅支持群组和讨论组。
+ @warning 此方法目前仅支持普通群组和讨论组。
 
  @remarks 消息操作
  */
@@ -336,8 +370,9 @@
  @discussion 此方法用于在群组和讨论组中发送消息给其中的部分用户，其它用户不会收到这条消息。
  如果您使用 IMLibCore，可以使用此方法发送定向消息；
  如果您使用 IMKit，请使用 RCIM 中的同名方法发送定向消息，否则不会自动更新 UI。
+ userIdList里ID个数不能超过300，超过会被截断。
 
- @warning 此方法目前仅支持群组和讨论组。
+ @warning 此方法目前仅支持普通群组和讨论组。
 
  @remarks 消息操作
  */
@@ -409,6 +444,8 @@
  @param successBlock     同步成功的回调
  @param errorBlock       同步失败的回调[nErrorCode: 失败的错误码]
 
+ @discussion 此方法不支持超级群的会话类型。
+ 
  @remarks 高级功能
  */
 - (void)syncConversationReadStatus:(RCConversationType)conversationType
@@ -418,6 +455,23 @@
                            success:(void (^)(void))successBlock
                              error:(void (^)(RCErrorCode nErrorCode))errorBlock;
 
+/*!
+ 上报超级群的已读时间
+ 
+ @param targetId   会话 ID
+ @param channelId  所属会话的业务标识
+ @param timestamp 已读时间
+ @param successBlock 成功的回调
+ @param errorBlock 失败的回调
+ 
+ @discussion 此方法只支持超级群的会话类型。
+ @remarks 超级群
+ */
+- (void)syncUltraGroupReadStatus:(NSString *)targetId
+                       channelId:(NSString *)channelId
+                            time:(long long)timestamp
+                         success:(void (^)(void))successBlock
+                           error:(void (^)(RCErrorCode errorCode))errorBlock;
 #pragma mark - 消息操作
 
 /*!
@@ -453,6 +507,8 @@
  如：
  oldestMessageId 为 10，count 为 2，会返回 messageId 为 9 和 8 的 RCMessage 对象列表。
 
+ @discussion 此方法不支持超级群的会话类型。
+ 
  @remarks 消息操作
  */
 - (NSArray *)getHistoryMessages:(RCConversationType)conversationType
@@ -478,6 +534,8 @@
  的值，会将该会话中的所有消息返回。
  如：oldestMessageId 为 10，count 为 2，会返回 messageId 为 9 和 8 的 RCMessage 对象列表。
 
+ @discussion 此方法不支持超级群的会话类型。
+ 
  @remarks 消息操作
  */
 - (NSArray *)getHistoryMessages:(RCConversationType)conversationType
@@ -503,6 +561,8 @@
  之前或之后的、指定数量、消息类型和查询方向的最新消息实体，返回的消息实体按照时间从新到旧排列。
  返回的消息中不包含 baseMessageId 对应的那条消息，如果会话中的消息数量小于参数 count 的值，会将该会话中的所有消息返回。
 
+ @discussion 此方法不支持超级群的会话类型。
+ 
  @remarks 消息操作
  */
 - (NSArray *)getHistoryMessages:(RCConversationType)conversationType
@@ -530,6 +590,8 @@
  之前或之后的、指定数量、指定消息类型（多个）的消息实体列表，返回的消息实体按照时间从新到旧排列。
  返回的消息中不包含 sentTime 对应的那条消息，如果会话中的消息数量小于参数 count 的值，会将该会话中的所有消息返回。
 
+ @discussion 此方法不支持超级群的会话类型。
+ 
  @remarks 消息操作
  */
 - (NSArray *)getHistoryMessages:(RCConversationType)conversationType
@@ -555,6 +617,8 @@
  @discussion
  获取该会话的这条消息及这条消息前 beforeCount 条和后 afterCount 条消息,如前后消息不够则返回实际数量的消息。
 
+ @discussion 此方法不支持超级群的会话类型。
+ 
  @remarks 消息操作
  */
 - (NSArray *)getHistoryMessages:(RCConversationType)conversationType
@@ -673,7 +737,7 @@
 
 
 /*!
- 获取历史消息
+ 获取历史消息（仅支持单群聊）
 
  @param conversationType    会话类型
  @param targetId            会话 ID
@@ -683,7 +747,7 @@
 
  @discussion 必须开通历史消息云存储功能。
  @discussion count 传入 1~20 之间的数值。
- @discussion 此方法先从本地获取历史消息，本地有缺失的情况下会从服务端同步缺失的部分。
+ @discussion 此方法先从本地获取历史消息，本地有缺失的情况下会从服务端同步缺失的部分。当本地没有更多消息的时候，会从服务器拉取
  @discussion 从服务端同步失败的时候会返回非 0 的 errorCode，同时把本地能取到的消息回调上去。
 
  @remarks 消息操作
@@ -693,6 +757,32 @@
           channelId:(NSString *)channelId
              option:(RCHistoryMessageOption *)option
            complete:(void (^)(NSArray *messages, RCErrorCode code))complete;
+/*!
+ * \~chinese
+ 获取历史消息
+
+ @param conversationType    会话类型
+ @param targetId            会话 ID
+ @param channelId          所属会话的业务标识
+ @param option              可配置的参数
+ @param complete        获取成功的回调 [messages：获取到的历史消息数组； code : 获取是否成功，0表示成功，非 0 表示失败，此时 messages 数组可能存在断档]
+ @param errorBlock 获取失败的回调 [status:获取失败的错误码]，参数合法性检查不通过会直接回调 errorBlock
+
+ @discussion 必须开通历史消息云存储功能。
+ @discussion count 传入 1~20 之间的数值。
+ @discussion 此方法先从本地获取历史消息，本地有缺失的情况下会从服务端同步缺失的部分。当本地没有更多消息的时候，会从服务器拉取
+ @discussion 从服务端同步失败的时候会返回非 0 的 errorCode，同时把本地能取到的消息回调上去。
+ @discussion 在获取远端消息的时候，可能会拉到信令消息，信令消息会被 SDK 排除掉，导致 messages.count < option.count 此时只要 isRemaining 为 YES，那么下次拉取消息的时候，请用 timestamp 当做 option.recordTime 再去拉取
+ * 如果 isRemaining 为 NO，则代表远端不再有消息了
+
+ @remarks 消息操作
+ */
+- (void)getMessages:(RCConversationType)conversationType
+           targetId:(NSString *)targetId
+          channelId:(NSString *)channelId
+             option:(RCHistoryMessageOption *)option
+           complete:(void (^)(NSArray *messages,long long timestamp,BOOL isRemaining, RCErrorCode code))complete
+              error:(void (^)(RCErrorCode status))errorBlock;
 
 /*!
  获取会话中@提醒自己的消息
@@ -709,6 +799,90 @@
  @remarks 高级功能
  */
 - (NSArray *)getUnreadMentionedMessages:(RCConversationType)conversationType targetId:(NSString *)targetId channelId:(NSString *)channelId;
+
+/*!
+ 根据会话 id 获取所有子频道的 @ 未读消息总数
+ 
+ @param targetId  会话 ID
+ @return         该会话内的未读消息数
+ 
+ @remarks 超级群消息操作
+ */
+- (int)getUltraGroupUnreadMentionedCount:(NSString *)targetId;
+
+/**
+ 消息修改
+
+ @param messageUId 将被修改的消息id
+ @param newContent 将被修改的消息内容
+ @param successBlock 成功的回调
+ @param errorBlock 失败的回调
+
+ @discussion
+ 此方法只能修改同类型消息
+
+ @remarks 消息操作
+ */
+- (void)modifyUltraGroupMessage:(NSString *)messageUId
+                 messageContent:(RCMessageContent *)newContent
+                        success:(void (^)(void))successBlock
+                          error:(void (^)(RCErrorCode status))errorBlock;
+
+/**
+ 更新消息扩展信息
+
+ @param messageUId 消息 messageUId
+ @param expansionDic 要更新的消息扩展信息键值对
+ @param successBlock 成功的回调
+ @param errorBlock 失败的回调
+ 
+ @remarks 高级功能
+*/
+- (void)updateUltraGroupMessageExpansion:(NSString *)messageUId
+                            expansionDic:(NSDictionary<NSString *, NSString *> *)expansionDic
+                                 success:(void (^)(void))successBlock
+                                   error:(void (^)(RCErrorCode status))errorBlock;
+
+/**
+ 删除消息扩展信息中特定的键值对
+
+ @param messageUId 消息 messageUId
+ @param keyArray 消息扩展信息中待删除的 key 的列表
+ @param successBlock 成功的回调
+ @param errorBlock 失败的回调
+
+ @discussion 扩展信息只支持单聊和群组，其它会话类型不能设置扩展信息
+ 
+ @remarks 高级功能
+*/
+- (void)removeUltraGroupMessageExpansion:(NSString *)messageUId
+                                keyArray:(NSArray *)keyArray
+                                 success:(void (^)(void))successBlock
+                                   error:(void (^)(RCErrorCode status))errorBlock;
+
+/*!
+ 撤回消息
+
+ @param message      需要撤回的消息
+ @param successBlock 撤回成功的回调 [messageId:撤回的消息 ID，该消息已经变更为新的消息]
+ @param errorBlock   撤回失败的回调 [errorCode:撤回失败错误码]
+ @remarks 高级功能
+ */
+- (void)recallUltraGroupMessage:(RCMessage *)message
+                        success:(void (^)(long messageId))successBlock
+                          error:(void (^)(RCErrorCode status))errorBlock;
+
+/*!
+ 获取同一个超级群下的批量服务消息（含所有频道）
+
+ @param messages      消息列表
+ @param successBlock 成功的回调 [matchedMsgList:成功的消息列表，notMatchMsgList:失败的消息列表]
+ @param errorBlock   失败的回调 [errorCode:错误码]
+ @remarks 高级功能
+ */
+- (void)getBatchRemoteUltraGroupMessages:(NSArray <RCMessage*>*)messages
+                                 success:(void (^)(NSArray *matchedMsgList, NSArray *notMatchMsgList))successBlock
+                                   error:(void (^)(RCErrorCode status))errorBlock;
 
 /**
  * 获取会话里第一条未读消息。
@@ -764,6 +938,47 @@
                       error:(void (^)(RCErrorCode status))errorBlock;
 
 /*!
+ 删除本地所有 channel 特定时间之前的消息
+
+ @param targetId            会话 ID
+ @param timestamp          会话的时间戳
+ @return             是否删除成功
+
+ @remarks 消息操作
+ */
+- (BOOL)deleteUltraGroupMessagesForAllChannel:(NSString *)targetId timestamp:(long long)timestamp;
+
+/*!
+ 删除本地特定 channel 特点时间之前的消息
+
+ @param targetId            会话 ID
+ @param channelId           频道 ID
+ @param timestamp          会话的时间戳
+ @return             是否删除成功
+
+ @remarks 消息操作
+ */
+- (BOOL)deleteUltraGroupMessages:(NSString *)targetId
+                       channelId:(NSString *)channelId
+                       timestamp:(long long)timestamp;
+
+/*!
+ 删除服务端特定 channel 特定时间之前的消息
+
+ @param targetId            会话 ID
+ @param channelId           频道 ID
+ @param timestamp          会话的时间戳
+ @param successBlock    成功的回调
+ @param errorBlock         失败的回调
+
+ @remarks 消息操作
+ */
+- (void)deleteRemoteUltraGroupMessages:(NSString *)targetId
+                             channelId:(NSString *)channelId
+                             timestamp:(long long)timestamp
+                               success:(void (^)(void))successBlock
+                                 error:(void (^)(RCErrorCode status))errorBlock;
+/*!
  删除某个会话中的所有消息
 
  @param conversationType    会话类型
@@ -787,6 +1002,7 @@
  返回的会话列表按照时间从前往后排列，如果有置顶的会话，则置顶的会话会排列在前面。
  @discussion 当您的会话较多且没有清理机制的时候，强烈建议您使用 getConversationList: count: startTime:
  分页拉取会话列表,否则有可能造成内存过大。
+ @discussion conversationTypeList中类型个数不能超过300，超过会被截断。
 
  @remarks 会话列表
  */
@@ -803,10 +1019,24 @@
 
  @discussion 此方法会从本地数据库中，读取会话列表。
  返回的会话列表按照时间从前往后排列，如果有置顶的会话，则置顶的会话会排列在前面。
+ @discussion conversationTypeList中类型个数不能超过300，超过会被截断。
 
  @remarks 会话列表
  */
 - (NSArray *)getConversationList:(NSArray *)conversationTypeList channelId:(NSString *)channelId count:(int)count startTime:(long long)startTime;
+/*!
+获取特定会话下所有频道的会话列表
+
+@param conversationType         会话类型
+@param targetId                           会话 ID
+@return                    会话 RCConversation 的列表
+
+@discussion 此方法会从本地数据库中，读取会话列表。
+返回的会话列表按照时间从前往后排列，如果有置顶的会话，则置顶的会话会排列在前面。
+
+@remarks 会话列表
+*/
+- (NSArray <RCConversation *>*)getConversationListForAllChannel:(RCConversationType)conversationType targetId:(NSString *)targetId;
 
 /*!
  获取单个会话数据
@@ -843,6 +1073,9 @@
 
  @discussion 此方法会从本地存储中删除该会话，同时删除会话中的消息。
 
+ @discussion 此方法不支持超级群的会话类型，包含超级群时可能会造成数据异常。
+ @discussion conversationTypeList中类型个数不能超过300，超过会被截断。
+ 
  @remarks 会话
  */
 - (BOOL)clearConversations:(NSArray *)conversationTypeList channelId:(NSString *)channelId;
@@ -872,11 +1105,22 @@
  @return                    设置是否成功
 
  @discussion 会话不存在时设置置顶，会在会话列表生成会话。
- @discussion 设置置顶之后删除会话，置顶设置自动失效
 
  @remarks 会话
  */
 - (BOOL)setConversationToTop:(RCConversationType)conversationType targetId:(NSString *)targetId channelId:(NSString *)channelId isTop:(BOOL)isTop;
+
+/*!
+ 获取会话的置顶状态
+
+ @param conversationIdentifier 会话信息
+ @param channelId          所属会话的业务标识
+
+ @discussion 此方法会从本地数据库中，读取该会话是否置顶。
+
+ @remarks 会话
+ */
+- (BOOL)getConversationTopStatus:(RCConversationIdentifier *)conversationIdentifier channelId:(NSString *)channelId;
 
 /*!
  获取置顶的会话列表
@@ -957,6 +1201,20 @@
  */
 - (int)getUnreadCount:(RCConversationType)conversationType targetId:(NSString *)targetId channelId:(NSString *)channelId;
 
+/*!
+ 获取某个会话内的未读消息数
+
+ @param conversationIdentifier 会话信息
+ @param messageClassList          消息类型数组
+ @param channelId                         所属会话的业务标识
+ @return                    该会话内的未读消息数
+
+ @discussion 此方法不支持聊天室和超级群的会话类型。
+ 
+ @remarks 会话
+ */
+- (int)getUnreadCount:(RCConversationIdentifier *)conversationIdentifier messageClassList:(NSArray <Class> *)messageClassList channelId:(NSString *)channelId;
+
 /**
  获取某些类型的会话中所有的未读消息数 （聊天室会话除外）
 
@@ -965,6 +1223,8 @@
  @param isContain           是否包含免打扰消息的未读数
  @return                    该类型的会话中所有的未读消息数
 
+ @discussion conversationTypes中类型个数不能超过300，超过会被截断。
+ 
  @remarks 会话
  */
 - (int)getUnreadCount:(NSArray *)conversationTypes channelId:(NSString *)channelId containBlocked:(bool)isContain;
@@ -976,6 +1236,8 @@
  @param channelId          所属会话的业务标识
  @return                    该类型的会话中所有未读的被@的消息数
 
+ @discussion conversationTypeList中类型个数不能超过300，超过会被截断。
+ 
  @remarks 会话
  */
 - (int)getUnreadMentionedCount:(NSArray *)conversationTypes channelId:(NSString *)channelId;
@@ -1088,6 +1350,20 @@
                channelId:(NSString *)channelId
              contentType:(NSString *)objectName;
 
+/*!
+ 向会话中发送正在输入的状态
+
+ @param targetId            会话目标  ID
+ @param channelId          所属会话的频道id
+ @param status                输入状态类型
+
+ @remarks 高级功能
+ */
+- (void)sendUltraGroupTypingStatus:(NSString *)targetId
+                         channleId:(NSString *)channelId
+                      typingStatus:(RCUltraGroupTypingStatus)status
+                           success:(void (^)(void))successBlock
+                             error:(void (^)(RCErrorCode status))errorBlock;
 #pragma mark - 搜索
 
 /*!
@@ -1102,6 +1378,8 @@
 
  @return 匹配的消息列表
 
+ @discussion 此方法不支持超级群的会话类型。
+ 
  @remarks 消息操作
  */
 - (NSArray<RCMessage *> *)searchMessages:(RCConversationType)conversationType
@@ -1125,6 +1403,8 @@
 
  @return 匹配的消息列表
 
+ @discussion 此方法不支持超级群的会话类型。
+ 
  @remarks 消息操作
  */
 - (NSArray<RCMessage *> *)searchMessages:(RCConversationType)conversationType
@@ -1148,6 +1428,8 @@
 
  @return 匹配的消息列表
 
+ @discussion 此方法不支持超级群的会话类型。
+ 
  @remarks 消息操作
  */
 - (NSArray<RCMessage *> *)searchMessages:(RCConversationType)conversationType
@@ -1170,6 +1452,10 @@
  @discussion 目前，SDK 内置的文本消息、文件消息、图文消息支持搜索。
  自定义的消息必须要实现 RCMessageContent 的 getSearchableWords 接口才能进行搜索。
 
+ @discussion 此方法不支持超级群的会话类型，包含超级群时可能会造成数据异常。
+ @discussion conversationTypeList中类型个数不能超过300，超过会被截断。
+ @discussion objectNameList中类型名个数不能超过300，超过会被截断。
+ 
  @remarks 消息操作
  */
 - (NSArray<RCSearchConversationResult *> *)searchConversations:(NSArray<NSNumber *> *)conversationTypeList

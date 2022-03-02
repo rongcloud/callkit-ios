@@ -137,6 +137,7 @@
 
 /*!
  消息的附加信息
+ 请确保传入的是 NSString 类型的数据
  */
 @property (nonatomic, copy) NSString *extra;
 

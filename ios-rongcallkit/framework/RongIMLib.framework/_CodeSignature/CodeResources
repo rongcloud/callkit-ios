@@ -6,7 +6,7 @@
 	<dict>
 		<key>Headers/RCIMClient.h</key>
 		<data>
-		a6XYgisw6qSHm7fDfpRCMvbbVvs=
+		1amGU9xmR8xxweKnV3V3ZcgCDCg=
 		</data>
 		<key>Headers/RongIMLib.h</key>
 		<data>
@@ -18,7 +18,7 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		Jgt4TFtGIdrEHsyPO4S2mZKWbdw=
+		iAf4xVP4kgSgL6xKZ1dccMqBgJo=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -31,11 +31,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			a6XYgisw6qSHm7fDfpRCMvbbVvs=
+			1amGU9xmR8xxweKnV3V3ZcgCDCg=
 			</data>
 			<key>hash2</key>
 			<data>
-			DuaHWzsJbb2vqDH2cpRBguiX03S9w9UXXbJSOI9b9fM=
+			YKLuIf1RGksV3p3C35pI5B0jMdFIMidlZ73hdCXevfg=
 			</data>
 		</dict>
 		<key>Headers/RongIMLib.h</key>

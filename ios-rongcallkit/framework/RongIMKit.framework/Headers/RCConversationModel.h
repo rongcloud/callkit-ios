@@ -57,6 +57,11 @@ typedef NS_ENUM(NSUInteger, RCConversationModelType) {
 @property (nonatomic, copy) NSString *targetId;
 
 /*!
+ 目标频道会话ID
+ */
+@property (nonatomic, copy) NSString *channelId;
+
+/*!
  会话的标题
  */
 @property (nonatomic, copy) NSString *conversationTitle;
