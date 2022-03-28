@@ -10,7 +10,6 @@
 #import "RCCustomerServiceConfig.h"
 #import "RCCustomerServiceGroupItem.h"
 #import "RCCustomerServiceInfo.h"
-#import "RCCustomerServiceDefine.h"
 
 @interface RCCustomerServiceClient : NSObject
 

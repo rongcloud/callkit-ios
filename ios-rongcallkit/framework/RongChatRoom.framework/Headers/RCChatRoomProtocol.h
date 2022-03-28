@@ -9,8 +9,6 @@
 #ifndef RCChatRoomProtocol_h
 #define RCChatRoomProtocol_h
 
-@class RCChatRoomMemberAction;
-
 typedef NS_ENUM(NSUInteger, RCChatRoomDestroyType) {
     /*!
      开发者主动销毁
@@ -115,19 +113,6 @@ typedef NS_ENUM(NSUInteger, RCChatRoomDestroyType) {
  @param entry KV 字典
  */
 - (void)chatRoomKVDidRemove:(NSString *)roomId entry:(NSDictionary<NSString *, NSString *> *)entry;
-
-@end
-
-
-#pragma mark - 聊天室成员变化监听器
-@protocol RCChatRoomMemberDelegate <NSObject>
-/**
- 有聊天室成员加入或退出的回调
- 
- @param members 相关信息
- @param roomId 聊天室 Id
- */
-- (void)memberDidChange:(NSArray <RCChatRoomMemberAction *> *)members inRoom:(NSString *)roomId;
 
 @end
 

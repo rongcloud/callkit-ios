@@ -678,7 +678,7 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  extra            RCMessage 的额外字段
  
  @discussion 此方法不支持聊天室的会话类型。每批最多处理  500 条消息，超过 500 条返回 NO
- @discussion 消息的未读会累加到会话的未读数上
+ @discussion 消息的未读会累加到回话的未读数上
 
  @remarks 消息操作
  */
@@ -872,7 +872,7 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  如果您使用 IMLib，可以使用此方法发送定向消息；
  如果您使用 IMKit，请使用 RCIM 中的同名方法发送定向消息，否则不会自动更新 UI。
 
- @warning 此方法目前仅支持普通群组和讨论组。
+ @warning 此方法目前仅支持群组和讨论组。
 
  @remarks 消息操作
  */
@@ -899,7 +899,7 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
 
  @discussion 此方法用于在群组和讨论组中发送消息给其中的部分用户，其它用户不会收到这条消息。
 
- @warning 此方法目前仅支持普通群组和讨论组。
+ @warning 此方法目前仅支持群组和讨论组。
 
  @remarks 消息操作
  */
@@ -919,6 +919,10 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
 
  @discussion
  设置 IMLib 的消息接收监听器请参考 RCIMClient 的 setReceiveMessageDelegate:object:方法。
+
+ userData 为您自定义的任意数据，SDK 会在回调的 onReceived:left:object:方法中传入作为 object 参数。
+ 您如果有设置多个监听，会只有最终的一个监听器起作用，您可以通过该 userData 值区分您设置的监听器。如果不需要直接设置为
+ nil 就可以。
 
  @warning 如果您使用 IMlib，可以设置并实现此 Delegate 监听消息接收；
  如果您使用 IMKit，请使用 RCIM 中的 receiveMessageDelegate 监听消息接收，而不要使用此方法，否则会导致 IMKit
@@ -961,8 +965,6 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  @param errorBlock   请求失败的回调[nErrorCode: 失败的错误码]
 
  @discussion 通过此接口，可以要求阅读了这条消息的用户发送阅读回执。
- 
- @discussion 此方法不支持超级群的会话类型。
 
  @remarks 高级功能
  */
@@ -980,8 +982,6 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  @param errorBlock       发送失败的回调[nErrorCode: 失败的错误码]
 
  @discussion 当用户阅读了需要阅读回执的消息，可以通过此接口发送阅读回执，消息的发送方即可直接知道那些人已经阅读。
- 
- @discussion 此方法不支持超级群的会话类型。
 
  @remarks 高级功能
  */
@@ -1000,8 +1000,6 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  @param successBlock     同步成功的回调
  @param errorBlock       同步失败的回调[nErrorCode: 失败的错误码]
 
- @discussion 此方法不支持超级群的会话类型。
- 
  @remarks 高级功能
  */
 - (void)syncConversationReadStatus:(RCConversationType)conversationType
@@ -1074,8 +1072,6 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  如：
  oldestMessageId 为 10，count 为 2，会返回 messageId 为 9 和 8 的 RCMessage 对象列表。
 
- @discussion 此方法不支持超级群的会话类型。
- 
  @remarks 消息操作
  */
 - (NSArray *)getHistoryMessages:(RCConversationType)conversationType
@@ -1099,8 +1095,6 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  的值，会将该会话中的所有消息返回。
  如：oldestMessageId 为 10，count 为 2，会返回 messageId 为 9 和 8 的 RCMessage 对象列表。
 
- @discussion 此方法不支持超级群的会话类型。
- 
  @remarks 消息操作
  */
 - (NSArray *)getHistoryMessages:(RCConversationType)conversationType
@@ -1125,8 +1119,6 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  之前或之后的、指定数量、消息类型和查询方向的最新消息实体，返回的消息实体按照时间从新到旧排列。
  返回的消息中不包含 baseMessageId 对应的那条消息，如果会话中的消息数量小于参数 count 的值，会将该会话中的所有消息返回。
 
- @discussion 此方法不支持超级群的会话类型。
- 
  @remarks 消息操作
  */
 - (NSArray *)getHistoryMessages:(RCConversationType)conversationType
@@ -1151,8 +1143,6 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  此方法会获取该会话中，sentTime
  之前或之后的、指定数量、指定消息类型（多个）的消息实体列表，返回的消息实体按照时间从新到旧排列。
  返回的消息中不包含 sentTime 对应的那条消息，如果会话中的消息数量小于参数 count 的值，会将该会话中的所有消息返回。
- 
- @discussion 此方法不支持超级群的会话类型。
 
  @remarks 消息操作
  */
@@ -1177,8 +1167,6 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  @discussion
  获取该会话的这条消息及这条消息前 beforeCount 条和后 afterCount 条消息,如前后消息不够则返回实际数量的消息。
 
- @discussion 此方法不支持超级群的会话类型。
- 
  @remarks 消息操作
  */
 - (NSArray *)getHistoryMessages:(RCConversationType)conversationType
@@ -1458,8 +1446,6 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
 
  @discussion 用于 UI 展示消息为正在发送，对方已接收等状态。
 
- @discussion 此方法不支持超级群的会话类型。
- 
  @remarks 消息操作
  */
 - (BOOL)setMessageSentStatus:(long)messageId sentStatus:(RCSentStatus)sentStatus;
@@ -1547,8 +1533,6 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
 
  @discussion 此方法会从本地存储中删除该会话，同时删除会话中的消息。
 
- @discussion 此方法不支持超级群的会话类型，包含超级群时可能会造成数据异常。
- 
  @remarks 会话
  */
 - (BOOL)clearConversations:(NSArray *)conversationTypeList;
@@ -1576,6 +1560,7 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  @return                    设置是否成功
 
  @discussion 会话不存在时设置置顶，会在会话列表生成会话。
+ @discussion 设置置顶之后删除会话，置顶设置自动失效
 
  @remarks 会话
  */
@@ -1781,8 +1766,8 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  @param errorBlock      屏蔽失败的回调 [status:屏蔽失败的错误码]
 
  @discussion 此方法设置的屏蔽时间会在每天该时间段时生效。
- 如果您使用 IMLib，此方法会屏蔽所有会话在该时间段的远程推送；如果您使用
- IMKit，此方法会屏蔽所有会话在该时间段的所有提醒（远程推送、本地通知、前台提示音）。
+ 如果您使用 IMLib，此方法会屏蔽该会话在该时间段的远程推送；如果您使用
+ IMKit，此方法会屏蔽该会话在该时间段的所有提醒（远程推送、本地通知、前台提示音）。
 
  @remarks 会话
  */
@@ -1805,12 +1790,12 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  查询已设置的全局时间段消息提醒屏蔽
 
  @param successBlock    屏蔽成功的回调 [startTime:已设置的屏蔽开始时间,
- spanMins:已设置的屏蔽时间分钟数，0 < spanMins < 1440]
+ spansMin:已设置的屏蔽时间分钟数，0 < spansMin < 1440]
  @param errorBlock      查询失败的回调 [status:查询失败的错误码]
 
  @remarks 会话
  */
-- (void)getNotificationQuietHours:(void (^)(NSString *startTime, int spanMins))successBlock
+- (void)getNotificationQuietHours:(void (^)(NSString *startTime, int spansMin))successBlock
                             error:(void (^)(RCErrorCode status))errorBlock;
 
 #pragma mark - 输入状态提醒
@@ -2581,8 +2566,6 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
 
  @return 匹配的消息列表
 
- @discussion 此方法不支持超级群的会话类型。
- 
  @remarks 消息操作
  */
 - (NSArray<RCMessage *> *)searchMessages:(RCConversationType)conversationType
@@ -2601,8 +2584,6 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  @param startTime        查询 startTime 之前的消息（传 0 表示不限时间）
 
  @return 匹配的消息列表
- 
- @discussion 此方法不支持超级群的会话类型。
 
  @remarks 消息操作
  */

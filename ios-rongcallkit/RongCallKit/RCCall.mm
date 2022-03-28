@@ -42,9 +42,9 @@
     }
 #endif
 
-static NSString *const __RongCallKit__Version = @"5.2.0_opensource";
-static NSString *const __RongCallKit__Commit = @"fedc7812";
-static NSString *const __RongCallKit__Time = @"202203011418";
+static NSString *const __RongCallKit__Version = @"5.2.1_opensource";
+static NSString *const __RongCallKit__Commit = @"30583160";
+static NSString *const __RongCallKit__Time = @"202203281940";
 
 @interface RCCall () <RCCallReceiveDelegate>
 
@@ -74,6 +74,7 @@ static NSString *const __RongCallKit__Time = @"202203011418";
 //RCCallKit_Delete_Start
 #if PUBLIC
 #else
+            [[RCCallClient sharedRCCallClient] setCanHangupSystemPhonecall:NO];
             [[RCCallClient sharedRCCallClient] setApplePushKitEnable:YES];
 #endif
             //RCCallKit_Delete_end

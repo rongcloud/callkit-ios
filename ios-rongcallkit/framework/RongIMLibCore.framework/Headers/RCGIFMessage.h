@@ -12,7 +12,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 /*!
  GIF 消息的类型名
- 仅支持 gif 类型的图片；jpg、png 等其他格式的图片请使用 RCImageMessage
  */
 #define RCGIFMessageTypeIdentifier @"RC:GIFMsg"
 /*!

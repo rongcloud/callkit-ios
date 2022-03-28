@@ -11,8 +11,6 @@
 
 @class RCMessage;
 @class RCConversationStatusInfo;
-@class RCBlockedMessageInfo;
-@class RCUltraGroupTypingStatusInfo;
 
 #pragma mark - 消息接收监听器
 
@@ -27,8 +25,6 @@
  */
 @protocol RCIMClientReceiveMessageDelegate <NSObject>
 
-@optional
-
 /*!
  接收消息的回调方法
 
@@ -42,6 +38,8 @@
  object为您在设置消息接收监听时的key值。
  */
 - (void)onReceived:(RCMessage *)message left:(int)nLeft object:(id)object;
+
+@optional
 
 /**
  接收消息的回调方法
@@ -108,16 +106,7 @@
                         targetId:(NSString *)targetId
                       messageUId:(NSString *)messageUId
                       readerList:(NSMutableDictionary *)userIdList;
-@end
 
-#pragma mark - 发送消息被拦截监听器
-@protocol RCMessageBlockDelegate <NSObject>
-
-/*!
- 发送消息被拦截的回调方法
- @param blockedMessageInfo       被拦截消息的相关信息
- */
-- (void)messageDidBlock:(RCBlockedMessageInfo *)blockedMessageInfo;
 
 @end
 
@@ -130,7 +119,7 @@
  设置IMLib的连接状态监听器，请参考RCIMClient的setRCConnectionStatusChangeDelegate:方法。
 
  @warning 如果您使用IMLib，可以设置并实现此Delegate监听连接状态变化；
- 如果您使用IMKit，请使用RCIM中的RCIMConnectionStatusDelegate监听连接状态，而不要使用此监听器，否则会导致IMKit中无法自动更新UI！
+ 如果您使用IMKit，请使用RCIM中的RCIMConnectionStatusDelegate监听消息接收，而不要使用此监听器，否则会导致IMKit中无法自动更新UI！
  */
 @protocol RCConnectionStatusChangeDelegate <NSObject>
 
@@ -139,7 +128,7 @@
 
  @param status  SDK与融云服务器的连接状态
 
- @discussion 如果您设置了IMLib连接监听之后，当SDK与融云服务器的连接状态发生变化时，会回调此方法。
+ @discussion 如果您设置了IMLib消息监听之后，当SDK与融云服务器的连接状态发生变化时，会回调此方法。
  */
 - (void)onConnectionStatusChanged:(RCConnectionStatus)status;
 
@@ -301,7 +290,7 @@
  
  @param message 待入库的消息
  @return 处理后的消息，SDK 会将返回的消息入库并通过 RCIMClientReceiveMessageDelegate 的 onReceived 方法回调给上层
- @discussion 如果返回的 message 或 message.content 为 nil, RCIMClientReceiveMessageDelegate 的 onReceived 方法会将原消息回调给上层
+ @discussion 如果返回的 message 或 message.content 为 nil, RCIMClientReceiveMessageDelegate 的 onReceived 方法会将待入库的消息回调给上层
  */
 - (RCMessage *)messageDidReceiveBeforeDB:(RCMessage *)message;
 
@@ -321,67 +310,6 @@
  @return request 请求，返回值不能为 nil，否则无法正常下载
  */
 - (NSMutableURLRequest *)onDownloadRequest:(NSMutableURLRequest *)request;
-
-@end
-
-#pragma mark - 超级群
-
-/**
- 超级群已读时间同步代理
- */
-@protocol RCUltraGroupReadTimeDelegate <NSObject>
-
-/**
- 超级群已读时间同步
- 
- @param targetId 会话 ID
- @param channelId 频道 ID
- @param readTime 已读时间
- */
-- (void)onUltraGroupReadTimeReceived:(NSString *)targetId channelId:(NSString *)channelId readTime:(long long)readTime;
-
-@end
-
-/**
- 超级群输入状态代理
- */
-@protocol RCUltraGroupTypingStatusDelegate <NSObject>
-/*!
- 用户输入状态变化的回调
-
- @param infoArr        正在输入的RCUltraGroupTypingStatusInfo列表（nil标示当前没有用户正在输入）
-
- @discussion
- 当客户端收到用户输入状态的变化时，会回调此接口，通知发生变化的会话以及当前正在输入的RCUltraGroupTypingStatusInfo列表。
- */
-- (void)onUltraGroupTypingStatusChanged:(NSArray<RCUltraGroupTypingStatusInfo*>*)infoArr;
-@end
-
-/*!
- 超级群消息变化回调
- */
-@protocol RCUltraGroupMessageChangeDelegate <NSObject>
-
-/*!
- 消息扩展更新，删除
- 
- @param messages 消息集合
- */
-- (void)onUltraGroupMessageExpansionUpdated:(NSArray<RCMessage*>*)messages;
-
-/*!
- 消息内容发生变更
- 
- @param messages 消息集合
- */
-- (void)onUltraGroupMessageModified:(NSArray<RCMessage*>*)messages;
-
-/*!
- 消息撤回
- 
- @param messages 消息集合
- */
-- (void)onUltraGroupMessageRecalled:(NSArray<RCMessage*>*)messages;
 
 @end
 

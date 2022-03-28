@@ -42,11 +42,6 @@
 @property (nonatomic, assign) BOOL isAdmin;
 
 /*!
- 是否删除
- */
-@property (nonatomic, assign) BOOL isDelete;
-
-/*!
  撤回的文本消息的内容
 */
 @property (nonatomic, copy) NSString *recallContent;
@@ -55,10 +50,5 @@
  撤回动作的时间（毫秒）
 */
 @property (nonatomic, assign) long long recallActionTime;
-
-/*!
- 被撤回的原消息
-*/
-@property (nonatomic, strong) RCMessageContent *originalMessageContent;
 
 @end

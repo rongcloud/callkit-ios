@@ -24,5 +24,3 @@ FOUNDATION_EXPORT const unsigned char RongPublicServiceVersionString[];
 #import <RongPublicService/RCPublicServiceMenu.h>
 #import <RongPublicService/RCPublicServiceProfile.h>
 #import <RongPublicService/RCRichContentItem.h>
-
-#import <RongPublicService/RCPublicServiceDefine.h>

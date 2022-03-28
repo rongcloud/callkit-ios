@@ -96,9 +96,8 @@
  语音消息的最大长度
 
  @discussion 默认值是 60 秒
- @warning 该接口已被废弃，只支持 60 秒的语音消息
  */
-@property (nonatomic, assign) NSUInteger maxVoiceDuration __deprecated_msg();
+@property (nonatomic, assign) NSUInteger maxVoiceDuration;
 
 /*!
  APP是否独占音频

@@ -10,7 +10,6 @@
 #import <RongIMLibCore/RongIMLibCore.h>
 #import "RCCSLeaveMessageItem.h"
 #import "RCEvaluateItem.h"
-#import "RCCustomerServiceDefine.h"
 
 /*!
  客服配置对象

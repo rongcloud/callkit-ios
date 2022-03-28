@@ -23,4 +23,3 @@ FOUNDATION_EXPORT const unsigned char RongCustomerServiceVersionString[];
 #import <RongCustomerService/RCEvaluateItem.h>
 #import <RongCustomerService/RCCustomerServiceGroupItem.h>
 #import <RongCustomerService/RCCustomerServiceConfig.h>
-#import <RongCustomerService/RCCustomerServiceDefine.h>

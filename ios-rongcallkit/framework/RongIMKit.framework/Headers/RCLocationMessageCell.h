@@ -6,6 +6,7 @@
 //  Copyright (c) 2015年 RongCloud. All rights reserved.
 //
 
+#import "RCImageMessageProgressView.h"
 #import "RCMessageCell.h"
 
 /*!

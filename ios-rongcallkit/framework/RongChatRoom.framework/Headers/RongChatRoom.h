@@ -22,5 +22,3 @@ FOUNDATION_EXPORT const unsigned char RongChatRoomVersionString[];
 #import <RongChatRoom/RCChatRoomInfo.h>
 #import <RongChatRoom/RCChatroomKVNotificationMessage.h>
 #import <RongChatRoom/RCChatRoomMemberInfo.h>
-
-#import <RongChatRoom/RCChatRoomMemberAction.h>

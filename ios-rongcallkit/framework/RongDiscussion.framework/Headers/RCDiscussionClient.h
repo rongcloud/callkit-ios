@@ -31,7 +31,7 @@
 - (void)createDiscussion:(NSString *)name
               userIdList:(NSArray *)userIdList
                  success:(void (^)(RCDiscussion *discussion))successBlock
-                   error:(void (^)(RCErrorCode status))errorBlock __deprecated_msg("已废弃，请勿使用。");
+                   error:(void (^)(RCErrorCode status))errorBlock;
 
 /*!
  讨论组加人，将用户加入讨论组

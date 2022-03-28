@@ -61,20 +61,4 @@ typedef NS_ENUM(NSUInteger, RCChatRoomMemberOrder) {
     RC_ChatRoom_Member_Desc = 2,
 };
 
-#pragma mark RCChatRoomMemberActionType - 聊天室成员加入或退出
-/*!
- 聊天室成员加入或者退出
- */
-typedef NS_ENUM(NSInteger, RCChatRoomMemberActionType) {
-    /*!
-     聊天室成员退出
-     */
-    RC_ChatRoom_Member_Quit = 0,
-    
-    /*!
-     聊天室成员加入
-     */
-    RC_ChatRoom_Member_Join = 1,
-};
-
 #endif /* RCChatRoomEnumDefine_h */
