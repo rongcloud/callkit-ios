@@ -41,6 +41,7 @@
  列表中需要显示的会话类型数组
 
  @discussion 数组中的元素为RCConversationType转换的NSNumber
+ @discussion 默认显示单聊、群聊、聊天室、公众号、客服、系统的会话
  */
 @property (nonatomic, strong) NSArray *displayConversationTypeArray;
 
@@ -55,6 +56,8 @@
  设置在列表中需要显示的会话类型
 
  @param conversationTypeArray 列表中需要显示的会话类型数组(需要将RCConversationType转为NSNumber构建Array)
+ 
+ @discussion 默认显示单聊、群聊、聊天室、公众号、客服、系统的会话
  */
 - (void)setDisplayConversationTypes:(NSArray *)conversationTypeArray;
 
@@ -277,8 +280,9 @@
  当用户退出登陆时，是否还能继续显示会话列表
 
  @discussion 默认值为YES。
+ @warning 该字段已被废弃，用户会使用 APP  收发个人的敏感消息，如果断开链接之后不关闭数据库，可能出现当前用户看到上个用户的敏感消息，基于安全方面考虑：当断开 SDK 连接的时候，SDK 会把消息数据库关闭
  */
-@property (nonatomic, assign) BOOL showConversationListWhileLogOut;
+@property (nonatomic, assign) BOOL showConversationListWhileLogOut __deprecated_msg("");
 
 #pragma mark - 其他
 

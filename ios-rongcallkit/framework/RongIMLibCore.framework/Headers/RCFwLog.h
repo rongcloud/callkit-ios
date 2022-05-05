@@ -11,7 +11,8 @@
 #define __FILE_STRING__ [NSString stringWithUTF8String:__FILE__]
 #define __GET_FILENAME__                                                                                               \
     [__FILE_STRING__ substringFromIndex:[__FILE_STRING__ rangeOfString:@"/" options:NSBackwardsSearch].location + 1]
-
+#define RCLogS(k, ...)                                                                                                 \
+    [[RCFwLog getInstance] write:RC_Level_S type:RC_Type_DEB tag:__GET_FILENAME__ keys:k, ##__VA_ARGS__]
 #define RCLogR(k, ...)                                                                                                 \
     [[RCFwLog getInstance] write:RC_Level_R type:RC_Type_DEB tag:__GET_FILENAME__ keys:k, ##__VA_ARGS__]
 #define RCLogF(k, ...)                                                                                                 \
@@ -27,6 +28,7 @@
 #define RCLogV(k, ...)                                                                                                 \
     [[RCFwLog getInstance] write:RC_Level_V type:RC_Type_DEB tag:__GET_FILENAME__ keys:k, ##__VA_ARGS__]
 
+#define FwLogS(p, t, k, ...) [[RCFwLog getInstance] write:RC_Level_S type:p tag:t keys:k, ##__VA_ARGS__]
 #define FwLogR(p, t, k, ...) [[RCFwLog getInstance] write:RC_Level_R type:p tag:t keys:k, ##__VA_ARGS__]
 #define FwLogF(p, t, k, ...) [[RCFwLog getInstance] write:RC_Level_F type:p tag:t keys:k, ##__VA_ARGS__]
 #define FwLogE(p, t, k, ...) [[RCFwLog getInstance] write:RC_Level_E type:p tag:t keys:k, ##__VA_ARGS__]
@@ -35,6 +37,7 @@
 #define FwLogD(p, t, k, ...) [[RCFwLog getInstance] write:RC_Level_D type:p tag:t keys:k, ##__VA_ARGS__]
 
 typedef NS_ENUM(NSInteger, RCFwLogLevel) {
+    RC_Level_S = -2,//Statistics
     RC_Level_R = -1,//Record
     RC_Level_N = 0,//None
     RC_Level_F = 1,//Fatal

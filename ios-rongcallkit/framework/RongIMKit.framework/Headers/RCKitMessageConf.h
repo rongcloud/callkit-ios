@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "RCKitTranslationConfig.h"
 
 @interface RCKitMessageConf : NSObject
 #pragma mark - Config
@@ -96,8 +97,9 @@
  语音消息的最大长度
 
  @discussion 默认值是 60 秒
+ @warning 该接口已被废弃，只支持 60 秒的语音消息
  */
-@property (nonatomic, assign) NSUInteger maxVoiceDuration;
+@property (nonatomic, assign) NSUInteger maxVoiceDuration __deprecated_msg();
 
 /*!
  APP是否独占音频
@@ -162,6 +164,8 @@
  视频上传的时长限制，单位是秒，等于 [RCCoreClient  getVideoDurationLimit]。
 */
 @property (nonatomic, assign, readonly) NSTimeInterval uploadVideoDurationLimit;
+
+@property (nonatomic, strong) RCKitTranslationConfig *translationConfig;
 
 @end
 

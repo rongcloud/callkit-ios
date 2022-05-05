@@ -58,4 +58,12 @@
                     channelId:(NSString *)channelId
                        status:(NSArray *)userTypingStatusList;
 @end
+
+#pragma mark - 超级群会话代理
+
+@protocol RCUltraGroupConversationDelegate<NSObject>
+
+//超级群会话列表与会话最后一条消息同步完成
+- (void)ultraGroupConversationListDidSync;
+@end
 #endif /* RCConversationChannelProtocol_h */

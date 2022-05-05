@@ -27,14 +27,15 @@ typedef enum : NSUInteger {
 
 /**
  需要获取的消息数量， 0 < count <= 20
+ 超级群可以传入 100
  默认 0
  */
 @property (nonatomic, assign) NSInteger count;
 
 /**
  拉取顺序
- RCRemoteHistoryOrderDesc： 降序，结合传入的时间戳参数，获取 recordtime 之前的消息
- RCRemoteHistoryOrderAsc： 升序，结合传入的时间戳参数，获取 recordtime 之后的消息
+ RCHistoryMessageOrderDesc： 降序，结合传入的时间戳参数，获取 recordtime 之前的消息
+ RCHistoryMessageOrderAsc： 升序，结合传入的时间戳参数，获取 recordtime 之后的消息
  默认降序
  */
 @property (nonatomic, assign) RCHistoryMessageOrder order;

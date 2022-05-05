@@ -13,6 +13,7 @@
 #import "RCMessageContent.h"
 #import <Foundation/Foundation.h>
 
+@class RCReadReceiptInfo, RCGroupReadReceiptInfoV2, RCMessageConfig;
 /*!
  会话类
 
@@ -137,4 +138,41 @@
 */
 @property (nonatomic, assign) RCConversationNotificationStatus blockStatus;
 
+/*!
+ 最后一条消息的阅读回执状态
+ */
+@property (nonatomic, strong) RCReadReceiptInfo *latestMessageReadReceiptInfo;
+
+/*!
+ 最后一条消息的群阅读回执状态
+ @discussion 如果是调用 RCGroupReadReceiptV2Manager 中方法实现群已读回执功能，此参数才有效，否则请使用 readReceiptInfo 属性获取阅读回执状态
+ @discussion 如果使用 IMKit，请用 readReceiptInfo 属性
+ */
+@property (nonatomic, strong) RCGroupReadReceiptInfoV2 *latestMessageGroupReadReceiptInfoV2;
+
+/*!
+ 最后一条消息的消息配置
+ */
+@property (nonatomic, strong) RCMessageConfig *latestMessageMessageConfig;
+
+/*!
+ 最后一条消息是否可以包含扩展信息
+ 
+ @discussion 该属性在消息发送时确定，发送之后不能再做修改
+ @discussion 扩展信息只支持单聊和群组，其它会话类型不能设置扩展信息
+*/
+@property (nonatomic, assign) BOOL latestMessageCanIncludeExpansion;
+
+/*!
+ 最后一条消息的扩展信息列表
+ 
+ @discussion 扩展信息只支持单聊和群组，其它会话类型不能设置扩展信息
+ @discussion 默认消息扩展字典 key 长度不超过 32 ，value 长度不超过 4096 ，单次设置扩展数量最大为 20，消息的扩展总数不能超过 300
+*/
+@property (nonatomic, strong) NSDictionary<NSString *, NSString *> *latestMessageExpansion;
+
+/*!
+ 免打扰级别
+ */
+@property (nonatomic, assign) RCPushNotificationLevel notificationLevel;
 @end

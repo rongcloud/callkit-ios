@@ -258,21 +258,6 @@
  */
 + (NSString *)getNowrapString:(NSString *)originalString;
 
-/**
- 获取消息类型对应的描述
-
- @param mediaType 消息类型
- @return 描述
- */
-+ (NSString *)getMediaTypeString:(RCMediaType)mediaType;
-
-/**
- 获取消息内容对应的媒体类型
-
- @param content 消息内容
- @return 媒体类型，如果是不支持的媒体类型或者消息，将返回 -1
- */
-+ (RCMediaType)getMediaType:(RCMessageContent *)content;
 
 /**
  判断一张照片是否是含透明像素的照片
@@ -323,11 +308,27 @@
 + (NSString *)getDeviceId:(NSString *)appKey;
 
 /**
+ 根据字符串生成 md5
+ @param bateNum MD5位数
+ @param isLowercaseStr 是否生成小写字符串
+ @return MD5
+ */
++ (NSString *)md5EncryptStr:(NSString *)str bateNum:(NSInteger)bateNum isLowercaseStr:(BOOL)isLowercaseStr;
+
+/**
 获取手机型号
 
 @return  手机型号
  */
 + (NSString *)iphoneType;
+
++ (void)setModuleName:(NSString *)moduleName version:(NSString *)version;
+
++ (NSDictionary *)getModuleVersionInfo;
+
+/// 将字典或者数组转换成字符串,能去打印的换行 '\n' 以及空格
+/// @param objc 必须是字典或者是数组
++ (NSString *)jsonFromObject:(id)objc;
 
 @end
 

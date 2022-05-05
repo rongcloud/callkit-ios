@@ -139,9 +139,16 @@
  消息扩展信息列表
  
  @discussion 扩展信息只支持单聊和群组，其它会话类型不能设置扩展信息
- @discussion 默认消息扩展字典 key 长度不超过 32 ，value 长度不超过 64 ，单次设置扩展数量最大为 20，消息的扩展总数不能超过 300
+ @discussion 默认消息扩展字典 key 长度不超过 32 ，value 长度不超过 4096 ，单次设置扩展数量最大为 20，消息的扩展总数不能超过 300
 */
 @property (nonatomic, strong) NSDictionary<NSString *, NSString *> *expansionDic;
+
+/*!
+ 消息是否被修改
+
+ @discussion 仅超级群支持
+ */
+@property (nonatomic, assign) BOOL hasChanged;
 
 /*!
  RCMessage初始化方法
@@ -153,6 +160,22 @@
  */
 - (instancetype)initWithType:(RCConversationType)conversationType
                     targetId:(NSString *)targetId
+                   direction:(RCMessageDirection)messageDirection
+                     content:(RCMessageContent *)content;
+
+
+/*!
+ RCMessage初始化方法，供超级群消息使用
+
+ @param  conversationType    会话类型
+ @param  targetId            会话 ID
+ @param  channelId           频道 ID
+ @param  messageDirection    消息的方向
+ @param  content             消息的内容
+ */
+- (instancetype)initWithType:(RCConversationType)conversationType
+                    targetId:(NSString *)targetId
+                   channelId:(NSString *)channelId
                    direction:(RCMessageDirection)messageDirection
                      content:(RCMessageContent *)content;
 

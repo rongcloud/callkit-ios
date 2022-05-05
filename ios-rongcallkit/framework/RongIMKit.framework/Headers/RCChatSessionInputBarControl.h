@@ -77,7 +77,7 @@
 /**
  点击编辑按钮会调用该代理的onClickEditPicture方法
  */
-@property (weak, nonatomic) id<RCPictureEditDelegate> photoEditorDelegate;
+@property (weak, nonatomic) id<RCPictureEditDelegate> photoEditorDelegate __deprecated_msg("已废弃");
 
 #pragma mark - 视图显示
 /*!
@@ -379,6 +379,13 @@
             replacementText:(NSString *)text;
 
 /*!
+ 输入框中内容已经发生变化的回调
+
+ @param inputTextView 文本输入框
+ */
+- (void)inputTextViewDidChange:(UITextView *)inputTextView;
+
+/*!
  公众服务菜单的点击回调
 
  @param selectedMenuItem 点击的公众服务菜单项
@@ -531,6 +538,6 @@
  */
 - (void)onClickEditPicture:(UIViewController *)rootCtrl
              originalImage:(UIImage *)originalImage
-            editCompletion:(void (^)(UIImage *editedImage))editCompletion;
+            editCompletion:(void (^)(UIImage *editedImage))editCompletion __deprecated_msg("已废弃");
 
 @end

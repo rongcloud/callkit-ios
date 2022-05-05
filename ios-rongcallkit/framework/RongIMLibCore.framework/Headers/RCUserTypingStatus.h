@@ -27,6 +27,8 @@
  */
 @property (nonatomic, copy) NSString *contentType;
 
+@property (nonatomic, assign) long long sentTime;
+
 /*!
  初始化用户输入状态对象
 

@@ -11,7 +11,7 @@
 #import "RCMessageCellDelegate.h"
 #import "RCMessageCellNotificationModel.h"
 #import "RCThemeDefine.h"
-
+#import "RCButton.h"
 #define HeadAndContentSpacing 8
 #define PortraitViewEdgeSpace 12//头像与屏幕边缘距离
 #define NameAndContentSpace 2
@@ -57,7 +57,7 @@
 /*!
  显示发送失败状态的View
  */
-@property (nonatomic, strong) UIButton *messageFailedStatusView;
+@property (nonatomic, strong) RCButton *messageFailedStatusView;
 
 /*!
  消息发送指示View

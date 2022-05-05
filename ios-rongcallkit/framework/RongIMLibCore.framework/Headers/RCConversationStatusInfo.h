@@ -50,8 +50,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) RCConversationStatusType conversationStatusType;
 
 /*!
- 如果 conversationStatusType  = RCConversationStatusType_Mute， conversationStatusvalue = 0
- 是提醒，conversationStatusvalue = 1 是免打扰。  如果 conversationStatusType  = RCConversationStatusType_Top，
+ 如果 conversationStatusType  = RCConversationStatusType_Mute， conversationStatusvalue = 1
+ 是提醒，conversationStatusvalue = 0 是免打扰。  如果 conversationStatusType  = RCConversationStatusType_Top，
  conversationStatusvalue = 0 是不置顶，conversationStatusvalue = 1 是置顶。
 */
 @property (nonatomic, assign) int conversationStatusvalue;

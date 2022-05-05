@@ -12,6 +12,7 @@
 
 #import <RongIMLibCore/RongIMLibCore.h>
 #import <Foundation/Foundation.h>
+#import "RCPublicServiceDefine.h"
 
 /*!
  公众服务的菜单项

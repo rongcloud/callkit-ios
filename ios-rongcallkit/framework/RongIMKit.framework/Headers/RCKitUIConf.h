@@ -57,6 +57,7 @@
 
 /*!
 是否支持暗黑模式，默认值是NO，开启之后 UI 支持暗黑模式，可以跟随系统切换
+@discussion 开启该属性后， 如果想控制 App 不随系统暗黑模式转变，请参考 https://support.rongcloud.cn/ks/MTE0Mg==
 */
 @property (nonatomic, assign) BOOL enableDarkMode;
 @end

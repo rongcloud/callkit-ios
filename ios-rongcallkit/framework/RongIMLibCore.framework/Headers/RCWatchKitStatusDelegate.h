@@ -15,7 +15,7 @@
  @discussion 此协议定义了 IMLib 在状态变化和各种活动时的回调，主要用于 Apple
  Watch。
  */
-@protocol RCWatchKitStatusDelegate <NSObject>
+__deprecated_msg("已废弃") @protocol RCWatchKitStatusDelegate <NSObject>
 
 @optional
 

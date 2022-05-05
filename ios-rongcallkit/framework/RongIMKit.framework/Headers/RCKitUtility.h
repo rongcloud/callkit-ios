@@ -347,4 +347,11 @@
  @discussion 主要检测 IMKit 子模块和 IMLib 子模块是否占用
  */
 + (BOOL)isCameraHolding;
+
+/**
+ 获取需要显示的用户名
+ 
+ @discussion 优先返回 alias，如果 alias 没有值，返回 name
+ */
++ (NSString *)getDisplayName:(RCUserInfo *)userInfo;
 @end

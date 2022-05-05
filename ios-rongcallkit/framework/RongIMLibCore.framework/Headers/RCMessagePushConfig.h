@@ -35,13 +35,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 /*!
  推送内容
- 优先使用 MessagePushConfig 的 pushContent，如果没有，则使用 sendMessage 或者 sendMediaMessage 的 pushContent。
+ 优先使用 MessagePushConfig 的 pushContent。如果一个接口 RCMessage 和 pushContent 同时存在，且 MessagePushConfig.pushContent 为有效值，会优先使用  MessagePushConfig.pushContent 当做最终的 pushContent，例如  sendMessage 、 sendMediaMessage、recallMessage 接口。
  */
 @property (nonatomic, copy) NSString *pushContent;
 
 /*!
  远程推送附加信息
- 优先使用 MessagePushConfig 的 pushData，如果没有，则使用 sendMessage 或者 sendMediaMessage 的 pushData。
+ 优先使用 MessagePushConfig 的 pushData。如果一个接口 RCMessage 和 pushData 同时存在，且 MessagePushConfig.pushData 为有效值，会优先使用 MessagePushConfig.pushData 当做最终的 pushData，例如  sendMessage 、 sendMediaMessage 接口。
  */
 @property (nonatomic, copy) NSString *pushData;
 

@@ -60,7 +60,7 @@
 #import <RongIMKit/RCKitFontConf.h>
 #import <RongIMKit/RCKitMessageConf.h>
 #import <RongIMKit/RCKitUIConf.h>
-
+#import <RongIMKit/RCKitTranslationConfig.h>
 /// 其他
 #import <RongIMKit/RCAttributedLabel.h>
 #import <RongIMKit/RCBaseViewController.h>
@@ -125,7 +125,7 @@
 #import "RCKitFontConf.h"
 #import "RCKitMessageConf.h"
 #import "RCKitUIConf.h"
-
+#import "RCKitTranslationConfig.h"
 /// 其他
 #import "RCAttributedLabel.h"
 #import "RCBaseViewController.h"
