@@ -287,7 +287,6 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
                                                object:nil];
 
     [self registerTelephonyEvent];
-    [self addProximityMonitoringObserver];
 
     //    UIVisualEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
     //    self.blurView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
@@ -329,7 +328,7 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
 
     //呼出后立刻振铃
     if (self.callSession.callStatus == RCCallDialing) {
-        [self performSelector:@selector(checkApplicationStateAndAlert) withObject:nil afterDelay:1];
+        [self checkApplicationStateAndAlert];
     }
 
     if (self.callSession.callStatus == RCCallDialing) {
@@ -1282,7 +1281,7 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
             self.muteButton.hidden = NO;
             self.muteButton.enabled = NO;
         } else if (callStatus != RCCallHangup) {
-            self.muteButton.hidden = NO;
+            self.muteButton.hidden = YES;
             self.muteButton.enabled = NO;
         }
 
@@ -1611,7 +1610,6 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
         [[RCCall sharedRCCall] dismissCallViewController:self];
         [[RCCall sharedRCCall] stopReceiveCallVibrate];
     });
-    [self removeProximityMonitoringObserver];
 }
 
 /*!
@@ -1854,41 +1852,7 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
     };
 }
 
-#pragma mark - proximity
-- (void)addProximityMonitoringObserver {
-    if (self.callSession.mediaType == RCCallMediaAudio) {
-        [UIDevice currentDevice].proximityMonitoringEnabled = YES;
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(proximityStatueChanged:)
-                                                     name:UIDeviceProximityStateDidChangeNotification
-                                                   object:nil];
-    }
-}
-
-- (void)removeProximityMonitoringObserver {
-    [UIDevice currentDevice].proximityMonitoringEnabled = NO;
-    [[NSNotificationCenter defaultCenter] removeObserver:self
-                                                    name:UIDeviceProximityStateDidChangeNotification
-                                                  object:nil];
-}
-
-- (void)proximityStatueChanged:(NSNotificationCenter *)notification {
-    switch (self.mediaType) {
-        case RCCallMediaAudio: {
-        } break;
-        case RCCallMediaVideo: {
-            if (self.callSession.callStatus == RCCallActive) {
-                if ([UIDevice currentDevice].proximityState)
-                    [self.callSession setSpeakerEnabled:NO];
-                else
-                    [self.callSession setSpeakerEnabled:YES];
-            }
-        } break;
-        default:
-            break;
-    }
-}
-
+#pragma mark - AVAudioSessionRouteChangeNotification
 - (void)handleAudioRouteChange:(NSNotification *)notification {
     NSInteger reason = [[[notification userInfo] objectForKey:AVAudioSessionRouteChangeReasonKey] integerValue];
     AVAudioSessionRouteDescription *route = [AVAudioSession sharedInstance].currentRoute;

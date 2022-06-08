@@ -22,14 +22,15 @@
  @discussion 收到消息已读回执之后，IMLib 会分发此通知。
 
  Notification 的 object 为 nil，userInfo 为 NSDictionary 对象，
- 其中 key 值分别为 @"cType"、@"tId"、@"messageTime",
- 对应的 value 为会话类型的 NSNumber 对象 、会话的 targetId 、已阅读的最后一条消息的 sendTime。
+ 其中 key 值分别为 @"cType"、@"tId"、@"messageTime"、@"sentTime",
+ 对应的 value 为会话类型的 NSNumber 对象 、会话的 targetId 、已阅读的最后一条消息的 sendTime、已读回执消息的发送时间。
  如：
  NSNumber *ctype = [notification.userInfo objectForKey:@"cType"];
  NSNumber *time = [notification.userInfo objectForKey:@"messageTime"];
  NSString *targetId = [notification.userInfo objectForKey:@"tId"];
  NSString *channelId = [notification.userInfo objectForKey:@"cId"];
  NSString *fromUserId = [notification.userInfo objectForKey:@"fId"];
+ NSNumber *sentTime = [notification.userInfo objectForKey:@"sentTime"];
 
  收到这个消息之后可以更新这个会话中 messageTime 以前的消息 UI 为已读（底层数据库消息状态已经改为已读）。
 

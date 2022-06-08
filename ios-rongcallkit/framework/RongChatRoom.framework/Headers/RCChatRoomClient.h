@@ -134,7 +134,7 @@ NS_ASSUME_NONNULL_BEGIN
                               recordTime:(long long)recordTime
                                    count:(int)count
                                    order:(RCTimestampOrder)order
-                                 success:(void (^)(NSArray *messages, long long syncTime))successBlock
+                                 success:(void (^)(NSArray<RCMessage *> *messages, long long syncTime))successBlock
                                    error:(void (^)(RCErrorCode status))errorBlock;
 
 #pragma mark - 聊天室状态存储 (使用前必须先联系商务开通)
@@ -242,11 +242,11 @@ NS_ASSUME_NONNULL_BEGIN
  @remarks 聊天室
  */
 - (void)setChatRoomEntries:(NSString *)chatroomId
-                   entries:(NSDictionary *)entries
+                   entries:(NSDictionary<NSString *, NSString *> *)entries
                    isForce:(BOOL)isForce
                 autoDelete:(BOOL)autoDelete
                    success:(void (^)(void))successBlock
-                     error:(void (^)(RCErrorCode nErrorCode, NSDictionary *entries))errorBlock;
+                     error:(void (^)(RCErrorCode nErrorCode, NSDictionary<NSString *,NSNumber *> *failureEntries))errorBlock;
 
 /**
  获取聊天室单个属性
@@ -262,7 +262,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)getChatRoomEntry:(NSString *)chatroomId
                      key:(NSString *)key
-                 success:(void (^)(NSDictionary *entry))successBlock
+                 success:(void (^)(NSDictionary<NSString *,NSString *> *entry))successBlock
                    error:(void (^)(RCErrorCode nErrorCode))errorBlock;
 
 /**
@@ -277,7 +277,7 @@ NS_ASSUME_NONNULL_BEGIN
  @remarks 聊天室
  */
 - (void)getAllChatRoomEntries:(NSString *)chatroomId
-                      success:(void (^)(NSDictionary *entry))successBlock
+                      success:(void (^)(NSDictionary<NSString *, NSString *> *entry))successBlock
                         error:(void (^)(RCErrorCode nErrorCode))errorBlock;
 
 /**
@@ -340,10 +340,10 @@ NS_ASSUME_NONNULL_BEGIN
  @remarks 聊天室
  */
 - (void)removeChatRoomEntries:(NSString *)chatroomId
-                         keys:(NSArray *)keys
+                         keys:(NSArray<NSString *> *)keys
                       isForce:(BOOL)isForce
                       success:(void (^)(void))successBlock
-                        error:(void (^)(RCErrorCode nErrorCode, NSDictionary *entries))errorBlock;
+                        error:(void (^)(RCErrorCode nErrorCode, NSDictionary<NSString *, NSNumber *> *failureEntries))errorBlock;
 
 #pragma mark - 聊天室成员变化监听器
 

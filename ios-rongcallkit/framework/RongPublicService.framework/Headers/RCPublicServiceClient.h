@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "RCPublicServiceProfile.h"
 
+NS_ASSUME_NONNULL_BEGIN
 
 @interface RCPublicServiceClient : NSObject
 
@@ -27,7 +28,7 @@
  */
 - (void)searchPublicService:(RCSearchType)searchType
                   searchKey:(NSString *)searchKey
-                    success:(void (^)(NSArray *accounts))successBlock
+                    success:(void (^)(NSArray<RCPublicServiceProfile *> *accounts))successBlock
                       error:(void (^)(RCErrorCode status))errorBlock;
 
 /*!
@@ -45,7 +46,7 @@
 - (void)searchPublicServiceByType:(RCPublicServiceType)publicServiceType
                        searchType:(RCSearchType)searchType
                         searchKey:(NSString *)searchKey
-                          success:(void (^)(NSArray *accounts))successBlock
+                          success:(void (^)(NSArray<RCPublicServiceProfile *> *accounts))successBlock
                             error:(void (^)(RCErrorCode status))errorBlock;
 
 /*!
@@ -85,7 +86,7 @@
 
  @remarks 公众号
  */
-- (NSArray *)getPublicServiceList;
+- (nullable NSArray<RCPublicServiceProfile *> *)getPublicServiceList;
 
 /*!
  获取公众服务账号信息
@@ -98,7 +99,7 @@
 
  @remarks 公众号
  */
-- (RCPublicServiceProfile *)getPublicServiceProfile:(RCPublicServiceType)publicServiceType
+- (nullable RCPublicServiceProfile *)getPublicServiceProfile:(RCPublicServiceType)publicServiceType
                                     publicServiceId:(NSString *)publicServiceId;
 
 /*!
@@ -132,7 +133,8 @@
 
  @remarks 公众号
  */
-- (UIViewController *)getPublicServiceWebViewController:(NSString *)URLString;
+- (nullable UIViewController *)getPublicServiceWebViewController:(NSString *)URLString;
 
 @end
 
+NS_ASSUME_NONNULL_END

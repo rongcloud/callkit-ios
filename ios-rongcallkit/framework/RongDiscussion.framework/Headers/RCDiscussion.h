@@ -77,7 +77,7 @@
                       discussionName:(NSString *)discussionName
                            creatorId:(NSString *)creatorId
                     conversationType:(int)conversationType
-                        memberIdList:(NSArray *)memberIdList
+                        memberIdList:(NSArray<NSString *> *)memberIdList
                         inviteStatus:(int)inviteStatus
                msgNotificationStatus:(int)pushMessageNotificationStatus;
 

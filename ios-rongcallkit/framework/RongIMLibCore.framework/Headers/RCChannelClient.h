@@ -873,6 +873,19 @@
                           error:(void (^)(RCErrorCode status))errorBlock;
 
 /*!
+ 撤回消息
+
+ @param message      需要撤回的消息
+ @param isDelete     是否移除远端消息记录
+ @param successBlock 撤回成功的回调 [messageId:撤回的消息 ID，该消息已经变更为新的消息]
+ @param errorBlock   撤回失败的回调 [errorCode:撤回失败错误码]
+ @remarks 高级功能
+ */
+- (void)recallUltraGroupMessage:(RCMessage *)message
+                       isDelete:(BOOL)isDelete
+                        success:(void (^)(long messageId))successBlock
+                          error:(void (^)(RCErrorCode errorcode))errorBlock;
+/*!
  获取同一个超级群下的批量服务消息（含所有频道）
  获取成功后强制更新本地消息
  @param messages      消息列表
@@ -1042,6 +1055,35 @@
 - (NSArray<RCConversation *> *)getConversationListForAllChannel:(RCConversationType)conversationType targetId:(NSString *)targetId;
 
 /*!
+ 分页获取特定会话类型下所有 channel 的会话列表
+ @param conversationTypeList         会话类型数组
+ @param count                                           会话个数
+ @param startTime                                 开始时间，首次可传入 0
+ @return                    会话 RCConversation 的列表
+
+ @discussion 此方法会从本地数据库中，读取会话列表。
+ 返回的会话列表按照时间从前往后排列，如果有置顶的会话，则置顶的会话会排列在前面。
+ */
+- (NSArray<RCConversation *> *)getConversationListForAllChannel:(NSArray *)conversationTypeList count:(int)count startTime:(long long)startTime;
+
+
+/*!
+ 获取所有含 ChannelId 会话列表
+
+ @param conversationTypeList 会话类型的数组(需要将 RCConversationType 转为 NSNumber 构建 NSArray)
+ @return                     会话 RCConversation 的列表
+
+ @discussion 此方法会从本地数据库中，读取会话列表。
+ 返回的会话列表按照时间从前往后排列，如果有置顶的会话，则置顶的会话会排列在前面。
+ 
+ @warning  当会话数量多的时候，会有性能问题，所以建议在非主线程调用该接口
+ @remarks 会话列表
+ */
+- (NSArray<RCConversation *> *)getConversationListForAllChannel:(NSArray *)conversationTypeList;
+
+
+
+/*!
  获取单个会话数据
 
  @param conversationType    会话类型
@@ -1186,11 +1228,23 @@
  
  @param channelId          所属会话的业务标识
 
- @return    所有的未读消息数
+ @return    所有的未读消息数（含免打扰会话未读数）
 
  @remarks 会话
  */
 - (int)getTotalUnreadCountWithChannelId:(NSString *)channelId;
+
+/*!
+ 获取所有的未读消息数（聊天室会话除外）
+ 
+ @param channelId          所属会话的业务标识
+ @param isContain          是否包含免打扰会话的未读数，YES 包含免打扰会话未读数
+
+ @return    所有的未读消息数
+
+ @remarks 会话
+ */
+- (int)getTotalUnreadCountWithChannelId:(NSString *)channelId containBlocked:(BOOL)isContain;
 
 /*!
  获取某个会话内的未读消息数（聊天室会话除外）
@@ -1508,6 +1562,52 @@
                                startTime:(long long)startTime;
 
 /*!
+ 搜索指定会话中所有 channelId 的消息
+
+ @param conversationType 会话类型
+ @param targetId         会话 ID
+ @param keyword           关键字，非空
+ @param count            最大的查询数量
+ @param startTime        查询 startTime 之前的消息（传 0 表示不限时间）
+
+ @return 匹配的消息列表
+
+ @discussion 此方法不支持超级群的会话类型。
+ 
+ @remarks 消息操作
+ */
+- (NSArray<RCMessage *> *)searchMessagesForAllChannel:(RCConversationType)conversationType
+                                targetId:(NSString *)targetId
+                                 keyword:(NSString *)keyword
+                                   count:(int)count
+                               startTime:(long long)startTime;
+
+/*!
+ 分页搜索指定会话中所有 channelId 在指定时间范围内的消息
+
+ @param conversationType 会话类型
+ @param targetId         会话 ID
+ @param keyword           关键字，非空
+ @param startTime        开始时间（传 0 表示不限时间）
+ @param endTime       结束时间，可传入当前 unix 时间，精确到毫秒
+ @param offset            偏移量，默认填 0
+ @param limit            最大的查询数量
+
+ @return 匹配的消息列表
+
+ @discussion 此方法不支持超级群的会话类型。
+ 
+ @remarks 消息操作
+ */
+- (NSArray<RCMessage *> *)searchMessagesForAllChannel:(RCConversationType)conversationType
+                                targetId:(NSString *)targetId
+                                 keyword:(NSString *)keyword
+                               startTime:(long long)startTime
+                                 endTime:(long long)endTime
+                                  offset:(int)offset
+                                   limit:(int)limit;
+
+/*!
  根据关键字搜索会话
 
  @param conversationTypeList 需要搜索的会话类型列表
@@ -1536,6 +1636,36 @@
                                                      channelId:(NSString *)channelId
                                                    messageType:(NSArray<NSString *> *)objectNameList
                                                        keyword:(NSString *)keyword;
+
+/*!
+ 根据关键字搜索特定会话类型下所有 channelId 的会话
+
+ @param conversationTypeList 需要搜索的会话类型列表
+ @param objectNameList       需要搜索的消息类型名列表(即每个消息类方法 getObjectName 的返回值)，不能为 nil
+ @param keyword              关键字
+
+ @return 匹配的会话搜索结果列表
+
+ @discussion 目前，SDK 内置的文本消息、文件消息、图文消息支持搜索。
+ 自定义的消息必须要实现 RCMessageContent 的 getSearchableWords 接口才能进行搜索。
+
+ @discussion 此方法不支持超级群的会话类型，包含超级群时可能会造成数据异常。
+ @discussion conversationTypeList中类型个数不能超过300，超过会被截断。
+ @discussion objectNameList中类型名个数不能超过300，超过会被截断。
+ 
+ @discussion conversationTypeList 传值时：
+ OC 需转成 NSNumber 传入（例如 @[ @(ConversationType_PRIVATE) ]），
+ Swift 需获取到 rawValue 强转成 NSNumber 传入
+ （例如 let privateType = NSNumber(value: RCConversationType.ConversationType_PRIVATE.rawValue)
+      [privateType]  ）
+ 
+ @remarks 消息操作
+ */
+- (NSArray<RCSearchConversationResult *> *)searchConversationsForAllChannel:(NSArray<NSNumber *> *)conversationTypeList
+                                                   messageType:(NSArray<NSString *> *)objectNameList
+                                                                    keyword:(NSString *)keyword;
+
+
 #pragma mark - 消息状态
 
 
@@ -1652,6 +1782,7 @@
 
  @remarks 会话
  */
+
 - (void)setConversationTypeNotificationLevel:(RCConversationType)conversationType
                                        level:(RCPushNotificationLevel)level
                                      success:(void (^)(void))successBlock
@@ -1667,6 +1798,7 @@
 
  @remarks 会话
  */
+
 - (void)getConversationTypeNotificationLevel:(RCConversationType)conversationType
                                      success:(void (^)(RCPushNotificationLevel level))successBlock
                                        error:(void (^)(RCErrorCode status))errorBlock;
@@ -1684,6 +1816,7 @@
 /*!
  拉取超级群列表后回调功能
  
+ 超级群会话同步状态监听,要在初始化之后, 连接之前设置代理
  @param delegate 代理
 
  @remarks 超级群消息操作

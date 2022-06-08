@@ -15,7 +15,7 @@
 
 #import "RCMessage.h"
 #import <UIKit/UIKit.h>
-
+@class CTTelephonyNetworkInfo;
 /*!
  工具类
  */
@@ -219,6 +219,7 @@
  */
 + (NSString *)currentCarrier;
 
++ (CTTelephonyNetworkInfo *)telephonyNetworkInfo;
 /*!
  获取当前网络类型
 

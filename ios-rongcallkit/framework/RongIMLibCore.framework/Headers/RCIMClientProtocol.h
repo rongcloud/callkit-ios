@@ -65,6 +65,11 @@
         hasPackage:(BOOL)hasPackage;
 
 /*!
+ 离线消息接收完成
+*/
+- (void)onOfflineMessageSyncCompleted;
+
+/*!
  消息被撤回的回调方法
 
  @param messageId 被撤回的消息ID
@@ -217,7 +222,9 @@
 #pragma mark - 会话监听
 
 @protocol RCConversationDelegate <NSObject>
-
+/**
+ 开了消息断档功能之后，sdk 会同步实时会话，实时会话同步完成的回调
+ */
 - (void)conversationDidSync;
 
 @end

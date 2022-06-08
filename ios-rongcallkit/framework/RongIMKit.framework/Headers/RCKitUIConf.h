@@ -34,6 +34,25 @@
 @property (nonatomic, assign) CGSize globalConversationPortraitSize;
 
 /*!
+ SDK会话列表界面聚合会话的头像
+
+ @discussion 如果不设置此项会使用内置默认头像。
+ key: 聚合会话会话类型 RCConversationType
+ value: 图片路径（支持本地路径或者远端url）
+ */
+@property (nonatomic, strong) NSDictionary<NSNumber *, NSString *> *globalConversationCollectionAvatarDic;
+
+/*!
+ SDK会话列表界面聚合会话的标题
+
+ @discussion 如果不设置此项会使用内置默认头像。
+ key: 聚合会话会话类型 RCConversationType
+ value: 聚合会话标题 NSString
+ */
+@property (nonatomic, strong) NSDictionary<NSNumber *, NSString *> *globalConversationCollectionTitleDic;
+
+
+/*!
  SDK会话页面中显示的头像形状，矩形或者圆形
 
  @discussion 默认值为矩形，即RC_USER_AVATAR_RECTANGLE
@@ -60,5 +79,6 @@
 @discussion 开启该属性后， 如果想控制 App 不随系统暗黑模式转变，请参考 https://support.rongcloud.cn/ks/MTE0Mg==
 */
 @property (nonatomic, assign) BOOL enableDarkMode;
+
 @end
 

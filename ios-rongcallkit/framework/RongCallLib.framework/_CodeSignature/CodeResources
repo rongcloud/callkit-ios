@@ -18,7 +18,7 @@
 		</data>
 		<key>Headers/RCCallSession.h</key>
 		<data>
-		VXcOEh5l3AFi1eVB3+Uog9eArlM=
+		9sFexD4yLWH49MEGH+x2ZkUOtDU=
 		</data>
 		<key>Headers/RCCallSummaryMessage.h</key>
 		<data>
@@ -34,7 +34,7 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		QnRij/n597um2g/75Njf/3VB6Zo=
+		3uohKPz8i1tLrgLsR0ur1EVo220=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -80,11 +80,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			VXcOEh5l3AFi1eVB3+Uog9eArlM=
+			9sFexD4yLWH49MEGH+x2ZkUOtDU=
 			</data>
 			<key>hash2</key>
 			<data>
-			xMy4gRGXbcnvXIVhp4+wjIAUbdYvKIRVqCgZDDG6T4I=
+			QnL9kC4ErXwfWcRAoG2TW7lpLu0G/a0NMqvYDTMMwoo=
 			</data>
 		</dict>
 		<key>Headers/RCCallSummaryMessage.h</key>

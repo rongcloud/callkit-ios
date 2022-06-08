@@ -40,6 +40,21 @@
 - (void)callDidDisconnect;
 
 /*!
+ 通话已结束
+ 
+ @param reason 挂断原因
+ @discussion
+ 通话已结束
+ 
+ @warning
+ 这个接口和callDidDisconnect 回调方法相同，增加返回挂断原因。
+ 同时实现本回调，通话已结束将不会再通过callDidDisconnect 处理。
+  
+ @remarks 代理
+*/
+- (void)callDidDisconnectWithReason:(RCCallDisconnectReason )reason ;
+
+/*!
  对端用户正在振铃
  
  @param userId    正在振铃的用户ID
@@ -240,17 +255,39 @@
  */
 - (void)audioLevel:(NSInteger)leavel userID:(NSString *)userID;
 
+
 /*!
- 本地发送视频数据上报
+ 摄像头采集视频帧数据上报
  
- @param sampleBuffer   本地发送视频数据
+ @param pixelBuffer 摄像头采集视频帧数据
  @discussion
- 当前视频通话本地视频数据, 同步返回处理后的同一 sampleBuffer 对象
+ 当前视频通话摄像头采集视频帧数据回调，如果修改了该视频数据，会影响显示本地和发送视频帧数据
  
  @remarks 代理
- @return 处理后的本地视频数据
  */
-- (CMSampleBufferRef)processVideoFrame:(CMSampleBufferRef)sampleBuffer;
+- (void)processCaptureVideoFrame:(CVPixelBufferRef)pixelBuffer;
+
+/*!
+ 发送本地视频帧数据上报
+ 
+ @param pixelBuffer 发送本地视频帧数据
+ @discussion
+ 当前视频通话发送本地视频帧数据回调，如果修改了该视频数据，会影响发送视频帧数据
+ 
+ @remarks 代理
+ */
+- (void)processVideoFrame:(CVPixelBufferRef)pixelBuffer;
+
+/*!
+ 显示本地视频帧数据上报
+ 
+ @param pixelBuffer 显示本地视频数据
+ @discussion
+ 当前视频通话显示本地视频帧数据回调，如果修改了该视频数据，会影响显示本地视频帧数据
+ 
+ @remarks 代理
+ */
+- (void)processDisplayVideoFrame:(CVPixelBufferRef)pixelBuffer;
 
 /*!
  当前通话为视频通话时, 收到远端用户的第一个视频帧的回调

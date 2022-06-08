@@ -205,7 +205,10 @@ typedef enum : NSUInteger {
  会话页面下方的输入工具栏
  */
 @property (nonatomic, strong) RCChatSessionInputBarControl *chatSessionInputBarControl;
-
+/*!
+ 禁用系统表情, 建议在RCConversationViewController 创建后立刻赋值
+ */
+@property (nonatomic, assign) BOOL  disableSystemEmoji;
 /*!
  输入框的默认输入模式
 
@@ -440,13 +443,24 @@ typedef enum : NSUInteger {
 - (void)appendAndDisplayMessage:(RCMessage *)message;
 
 #pragma mark 删除消息
+
+/*!
+ 默认值为 NO 长按只删除本地消息，设置为 YES 时长按删除消息，会把远端的消息也进行删除
+*/
+@property (nonatomic, assign) BOOL needDeleteRemoteMessage;
+
 /*!
  删除消息并更新UI
 
  @param model 消息Cell的数据模型
- @discussion 会话页面只删除本地消息，如果需要删除远端历史消息，需要
+ @discussion
+ v5.2.3 之前 会话页面只删除本地消息，如果需要删除远端历史消息，需要
     1.重写该方法，并调用 super 删除本地消息
     2.调用删除远端消息接口，删除远端消息
+ 
+ v5.2.3及以后，会话页面会根据 needDeleteRemoteMessage 设置进行处理
+    如未设置默认值为NO， 只删除本地消息
+    设置为 YES 时， 会同时删除远端消息
  */
 - (void)deleteMessage:(RCMessageModel *)model;
 
