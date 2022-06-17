@@ -115,7 +115,6 @@
     if (self.currentUUID) {
         return;
     }
-    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayAndRecord error:nil];
     NSUUID *uuid = [[NSUUID alloc] initWithUUIDString:callId];
     self.currentUUID = uuid;
     CXCallUpdate *update = [[CXCallUpdate alloc] init];
@@ -202,6 +201,8 @@
 - (void)provider:(CXProvider *)provider performAnswerCallAction:(CXAnswerCallAction *)action {
     if ([self.currentUUID.UUIDString isEqualToString:action.callUUID.UUIDString]) {
         if ([RCCall sharedRCCall].currentCallSession) {
+            [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayAndRecord error:nil];
+            [[AVAudioSession sharedInstance] setMode:AVAudioSessionModeVoiceChat error:nil];
             self.acceptedFromCallKit = YES;
             [[RCCall sharedRCCall].currentCallSession accept:[RCCall sharedRCCall].currentCallSession.mediaType];
         } else {
