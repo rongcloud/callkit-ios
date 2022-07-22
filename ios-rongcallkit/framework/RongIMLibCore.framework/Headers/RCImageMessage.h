@@ -33,8 +33,12 @@
  图片消息的 URL 地址
 
  @discussion 发送方此字段为图片的本地路径，接收方此字段为网络 URL 地址。
+ 
+ @attention
+ 不再允许外部赋值，为只读属性
+ 本地地址使用 localPath， 远端地址使用 remoteUrl
  */
-@property (nonatomic, copy) NSString *imageUrl;
+@property (nonatomic, copy, readonly) NSString *imageUrl;
 
 /*!
  图片的本地路径

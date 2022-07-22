@@ -175,4 +175,9 @@
  免打扰级别
  */
 @property (nonatomic, assign) RCPushNotificationLevel notificationLevel;
+
+/*!
+ 超级群频道类型，只有 ConversationType 为超级群时该字段有效, 非超级群时为0
+ */
+@property (nonatomic, assign)  RCUltraGroupChannelType channelType;
 @end

@@ -35,6 +35,8 @@ FOUNDATION_EXPORT RCImportanceHw const RCImportanceHwLow;
  */
 @property (nonatomic, copy) NSString *notificationId;
 
+#pragma mark - 小米
+
 /*!
  小米的渠道 ID
  该条消息针对小米使用的推送渠道，如开发者集成了小米推送，需要指定 channelId 时，可向 Android 端研发人员获取，channelId 由开发者自行创建。
@@ -42,33 +44,17 @@ FOUNDATION_EXPORT RCImportanceHw const RCImportanceHwLow;
 @property (nonatomic, copy) NSString *channelIdMi;
 
 /*!
+ 小米 Large icon 链接
+ Large icon 可以出现在大图版和多字版消息中，显示在右边。国内版仅 MIUI12 以上版本支持，以下版本均不支持；国际版支持。图片要求：大小 120 * 120px，格式为 png 或者 jpg 格式。
+ */
+@property (nonatomic, copy) NSString *miLargeIconUrl;
+
+#pragma mark - 华为
+/*!
  华为的渠道 ID
  该条消息针对华为使用的推送渠道，如开发者集成了华为推送，需要指定 channelId 时，可向 Android 端研发人员获取，channelId 由开发者自行创建。
  */
 @property (nonatomic, copy) NSString *channelIdHW;
-
-/*!
- OPPO 的渠道 ID
- 该条消息针对 OPPO 使用的推送渠道，如开发者集成了 OPPO 推送，需要指定 channelId 时，可向 Android 端研发人员获取，channelId 由开发者自行创建。
- */
-@property (nonatomic, copy) NSString *channelIdOPPO;
-
-/*!
- VIVO 推送通道类型
- 开发者集成了 VIVO 推送，需要指定推送类型时，可进行设置。
- 目前可选值 "0"(运营消息) 和  "1"(系统消息)
- */
-@property (nonatomic, copy) NSString *typeVivo;
-
-/*!
- FCM 通知类型推送时所使用的分组 id
- */
-@property (nonatomic, copy) NSString *fcmCollapseKey;
-
-/*!
- FCM 通知类型的推送所使用的通知图片 url
- */
-@property (nonatomic, copy) NSString *fcmImageUrl;
 
 /*!
  华为推送消息级别
@@ -82,17 +68,38 @@ FOUNDATION_EXPORT RCImportanceHw const RCImportanceHwLow;
  */
 @property (nonatomic, copy) NSString *hwImageUrl;
 
+#pragma mark - OPPO
 /*!
- 小米 Large icon 链接
- Large icon 可以出现在大图版和多字版消息中，显示在右边。国内版仅 MIUI12 以上版本支持，以下版本均不支持；国际版支持。图片要求：大小 120 * 120px，格式为 png 或者 jpg 格式。
+ OPPO 的渠道 ID
+ 该条消息针对 OPPO 使用的推送渠道，如开发者集成了 OPPO 推送，需要指定 channelId 时，可向 Android 端研发人员获取，channelId 由开发者自行创建。
  */
-@property (nonatomic, copy) NSString *miLargeIconUrl;
+@property (nonatomic, copy) NSString *channelIdOPPO;
 
+
+#pragma mark - VIVO
+/*!
+ VIVO 推送通道类型
+ 开发者集成了 VIVO 推送，需要指定推送类型时，可进行设置。
+ 目前可选值 "0"(运营消息) 和  "1"(系统消息)
+ */
+@property (nonatomic, copy) NSString *typeVivo;
+
+#pragma mark - FCM
 /*!
  FCM 通知的频道 ID
  该应用程序必须使用此频道 ID 创建一个频道，然后才能收到带有该频道 ID 的任何通知。如果您未在请求中发送此频道 ID，或者如果应用尚未创建提供的频道 ID，则 FCM 使用应用清单中指定的频道 ID。
  */
 @property (nonatomic, copy) NSString *fcmChannelId;
+
+/*!
+ FCM 通知类型推送时所使用的分组 id
+ */
+@property (nonatomic, copy) NSString *fcmCollapseKey;
+
+/*!
+ FCM 通知类型的推送所使用的通知图片 url
+ */
+@property (nonatomic, copy) NSString *fcmImageUrl;
 
 @end
 

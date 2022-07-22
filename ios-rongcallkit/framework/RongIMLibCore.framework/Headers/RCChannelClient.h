@@ -21,6 +21,8 @@
 #import "RCConversationIdentifier.h"
 #import "RCIMClientProtocol.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 /*!
  融云 ConversationChannel 核心类
  
@@ -123,14 +125,14 @@
 
  @remarks 消息操作
  */
-- (RCMessage *)sendMessage:(RCConversationType)conversationType
+- (nullable RCMessage *)sendMessage:(RCConversationType)conversationType
                   targetId:(NSString *)targetId
-                 channelId:(NSString *)channelId
+                 channelId:(nullable NSString *)channelId
                    content:(RCMessageContent *)content
-               pushContent:(NSString *)pushContent
-                  pushData:(NSString *)pushData
-                   success:(void (^)(long messageId))successBlock
-                     error:(void (^)(RCErrorCode nErrorCode, long messageId))errorBlock;
+               pushContent:(nullable NSString *)pushContent
+                  pushData:(nullable NSString *)pushData
+                   success:(nullable void (^)(long messageId))successBlock
+                     error:(nullable void (^)(RCErrorCode nErrorCode, long messageId))errorBlock;
 
 /*!
  发送消息
@@ -164,15 +166,15 @@
 
  @remarks 消息操作
  */
-- (RCMessage *)sendMessage:(RCConversationType)conversationType
+- (nullable RCMessage *)sendMessage:(RCConversationType)conversationType
                   targetId:(NSString *)targetId
-                 channelId:(NSString *)channelId
+                 channelId:(nullable NSString *)channelId
                    content:(RCMessageContent *)content
-               pushContent:(NSString *)pushContent
-                  pushData:(NSString *)pushData
+               pushContent:(nullable NSString *)pushContent
+                  pushData:(nullable NSString *)pushData
                     option:(RCSendMessageOption *)option
-                   success:(void (^)(long messageId))successBlock
-                     error:(void (^)(RCErrorCode nErrorCode, long messageId))errorBlock;
+                   success:(nullable void (^)(long messageId))successBlock
+                     error:(nullable void (^)(RCErrorCode nErrorCode, long messageId))errorBlock;
 
 /*!
  发送媒体消息（图片消息或文件消息）
@@ -212,16 +214,16 @@
 
  @remarks 消息操作
  */
-- (RCMessage *)sendMediaMessage:(RCConversationType)conversationType
+- (nullable RCMessage *)sendMediaMessage:(RCConversationType)conversationType
                        targetId:(NSString *)targetId
-                      channelId:(NSString *)channelId
+                      channelId:(nullable NSString *)channelId
                         content:(RCMessageContent *)content
-                    pushContent:(NSString *)pushContent
-                       pushData:(NSString *)pushData
-                       progress:(void (^)(int progress, long messageId))progressBlock
-                        success:(void (^)(long messageId))successBlock
-                          error:(void (^)(RCErrorCode errorCode, long messageId))errorBlock
-                         cancel:(void (^)(long messageId))cancelBlock;
+                    pushContent:(nullable NSString *)pushContent
+                       pushData:(nullable NSString *)pushData
+                       progress:(nullable void (^)(int progress, long messageId))progressBlock
+                        success:(nullable void (^)(long messageId))successBlock
+                          error:(nullable void (^)(RCErrorCode errorCode, long messageId))errorBlock
+                         cancel:(nullable void (^)(long messageId))cancelBlock;
 
 /*!
  发送媒体消息(上传图片或文件等媒体信息到指定的服务器)
@@ -255,17 +257,17 @@
 
  @remarks 消息操作
  */
-- (RCMessage *)sendMediaMessage:(RCConversationType)conversationType
+- (nullable RCMessage *)sendMediaMessage:(RCConversationType)conversationType
                        targetId:(NSString *)targetId
-                      channelId:(NSString *)channelId
+                      channelId:(nullable NSString *)channelId
                         content:(RCMessageContent *)content
-                    pushContent:(NSString *)pushContent
-                       pushData:(NSString *)pushData
-                  uploadPrepare:(void (^)(RCUploadMediaStatusListener *uploadListener))uploadPrepareBlock
-                       progress:(void (^)(int progress, long messageId))progressBlock
-                        success:(void (^)(long messageId))successBlock
-                          error:(void (^)(RCErrorCode errorCode, long messageId))errorBlock
-                         cancel:(void (^)(long messageId))cancelBlock;
+                    pushContent:(nullable NSString *)pushContent
+                       pushData:(nullable NSString *)pushData
+                  uploadPrepare:(nullable void (^)(RCUploadMediaStatusListener *uploadListener))uploadPrepareBlock
+                       progress:(nullable void (^)(int progress, long messageId))progressBlock
+                        success:(nullable void (^)(long messageId))successBlock
+                          error:(nullable void (^)(RCErrorCode errorCode, long messageId))errorBlock
+                         cancel:(nullable void (^)(long messageId))cancelBlock;
 
 /*!
  插入向外发送的、指定时间的消息（此方法如果 sentTime 有问题会影响消息排序，慎用！！）
@@ -283,9 +285,9 @@
 
  @remarks 消息操作
  */
-- (RCMessage *)insertOutgoingMessage:(RCConversationType)conversationType
+- (nullable RCMessage *)insertOutgoingMessage:(RCConversationType)conversationType
                             targetId:(NSString *)targetId
-                           channelId:(NSString *)channelId
+                           channelId:(nullable NSString *)channelId
                           sentStatus:(RCSentStatus)sentStatus
                              content:(RCMessageContent *)content
                             sentTime:(long long)sentTime;
@@ -307,9 +309,9 @@
 
  @remarks 消息操作
  */
-- (RCMessage *)insertIncomingMessage:(RCConversationType)conversationType
+- (nullable RCMessage *)insertIncomingMessage:(RCConversationType)conversationType
                             targetId:(NSString *)targetId
-                           channelId:(NSString *)channelId
+                           channelId:(nullable NSString *)channelId
                         senderUserId:(NSString *)senderUserId
                       receivedStatus:(RCReceivedStatus)receivedStatus
                              content:(RCMessageContent *)content
@@ -340,15 +342,15 @@
 
  @remarks 消息操作
  */
-- (RCMessage *)sendDirectionalMessage:(RCConversationType)conversationType
+- (nullable RCMessage *)sendDirectionalMessage:(RCConversationType)conversationType
                              targetId:(NSString *)targetId
-                            channelId:(NSString *)channelId
+                            channelId:(nullable NSString *)channelId
                          toUserIdList:(NSArray<NSString *> *)userIdList
                               content:(RCMessageContent *)content
-                          pushContent:(NSString *)pushContent
-                             pushData:(NSString *)pushData
-                              success:(void (^)(long messageId))successBlock
-                                error:(void (^)(RCErrorCode nErrorCode, long messageId))errorBlock;
+                          pushContent:(nullable NSString *)pushContent
+                             pushData:(nullable NSString *)pushData
+                              success:(nullable void (^)(long messageId))successBlock
+                                error:(nullable void (^)(RCErrorCode nErrorCode, long messageId))errorBlock;
 
 /*!
  发送定向消息
@@ -376,16 +378,16 @@
 
  @remarks 消息操作
  */
-- (RCMessage *)sendDirectionalMessage:(RCConversationType)conversationType
+- (nullable RCMessage *)sendDirectionalMessage:(RCConversationType)conversationType
                              targetId:(NSString *)targetId
-                            channelId:(NSString *)channelId
+                            channelId:(nullable NSString *)channelId
                          toUserIdList:(NSArray<NSString *> *)userIdList
                               content:(RCMessageContent *)content
-                          pushContent:(NSString *)pushContent
-                             pushData:(NSString *)pushData
+                          pushContent:(nullable NSString *)pushContent
+                             pushData:(nullable NSString *)pushData
                                option:(RCSendMessageOption *)option
-                              success:(void (^)(long messageId))successBlock
-                                error:(void (^)(RCErrorCode nErrorCode, long messageId))errorBlock;
+                              success:(nullable void (^)(long messageId))successBlock
+                                error:(nullable void (^)(RCErrorCode nErrorCode, long messageId))errorBlock;
 #pragma mark 消息阅读回执
 
 /*!
@@ -408,10 +410,10 @@
  */
 - (void)sendReadReceiptMessage:(RCConversationType)conversationType
                       targetId:(NSString *)targetId
-                     channelId:(NSString *)channelId
+                     channelId:(nullable NSString *)channelId
                           time:(long long)timestamp
-                       success:(void (^)(void))successBlock
-                         error:(void (^)(RCErrorCode nErrorCode))errorBlock;
+                       success:(nullable void (^)(void))successBlock
+                         error:(nullable void (^)(RCErrorCode nErrorCode))errorBlock;
 
 /*!
  发送阅读回执
@@ -429,10 +431,10 @@
  */
 - (void)sendReadReceiptResponse:(RCConversationType)conversationType
                        targetId:(NSString *)targetId
-                      channelId:(NSString *)channelId
+                      channelId:(nullable NSString *)channelId
                     messageList:(NSArray<RCMessage *> *)messageList
-                        success:(void (^)(void))successBlock
-                          error:(void (^)(RCErrorCode nErrorCode))errorBlock;
+                        success:(nullable void (^)(void))successBlock
+                          error:(nullable void (^)(RCErrorCode nErrorCode))errorBlock;
 
 /*!
  同步会话阅读状态（把指定会话里所有发送时间早于 timestamp 的消息置为已读）
@@ -450,10 +452,10 @@
  */
 - (void)syncConversationReadStatus:(RCConversationType)conversationType
                           targetId:(NSString *)targetId
-                         channelId:(NSString *)channelId
+                         channelId:(nullable NSString *)channelId
                               time:(long long)timestamp
-                           success:(void (^)(void))successBlock
-                             error:(void (^)(RCErrorCode nErrorCode))errorBlock;
+                           success:(nullable void (^)(void))successBlock
+                             error:(nullable void (^)(RCErrorCode nErrorCode))errorBlock;
 
 /*!
  上报超级群的已读时间
@@ -468,10 +470,10 @@
  @remarks 超级群
  */
 - (void)syncUltraGroupReadStatus:(NSString *)targetId
-                       channelId:(NSString *)channelId
+                       channelId:(nullable NSString *)channelId
                             time:(long long)timestamp
-                         success:(void (^)(void))successBlock
-                           error:(void (^)(RCErrorCode errorCode))errorBlock;
+                         success:(nullable void (^)(void))successBlock
+                           error:(nullable void (^)(RCErrorCode errorCode))errorBlock;
 #pragma mark - 消息操作
 
 /*!
@@ -489,7 +491,7 @@
 
  @remarks 消息操作
  */
-- (NSArray<RCMessage *> *)getLatestMessages:(RCConversationType)conversationType targetId:(NSString *)targetId channelId:(NSString *)channelId count:(int)count;
+- (nullable NSArray<RCMessage *> *)getLatestMessages:(RCConversationType)conversationType targetId:(NSString *)targetId channelId:(nullable NSString *)channelId count:(int)count;
 
 /*!
  获取会话中，从指定消息之前、指定数量的最新消息实体
@@ -511,9 +513,9 @@
  
  @remarks 消息操作
  */
-- (NSArray<RCMessage *> *)getHistoryMessages:(RCConversationType)conversationType
+- (nullable NSArray<RCMessage *> *)getHistoryMessages:(RCConversationType)conversationType
                                     targetId:(NSString *)targetId
-                                   channelId:(NSString *)channelId
+                                   channelId:(nullable NSString *)channelId
                              oldestMessageId:(long)oldestMessageId
                                        count:(int)count;
 
@@ -538,10 +540,10 @@
  
  @remarks 消息操作
  */
-- (NSArray<RCMessage *> *)getHistoryMessages:(RCConversationType)conversationType
+- (nullable NSArray<RCMessage *> *)getHistoryMessages:(RCConversationType)conversationType
                                     targetId:(NSString *)targetId
-                                   channelId:(NSString *)channelId
-                                  objectName:(NSString *)objectName
+                                   channelId:(nullable NSString *)channelId
+                                  objectName:(nullable NSString *)objectName
                              oldestMessageId:(long)oldestMessageId
                                        count:(int)count;
 
@@ -565,10 +567,10 @@
  
  @remarks 消息操作
  */
-- (NSArray<RCMessage *> *)getHistoryMessages:(RCConversationType)conversationType
+- (nullable NSArray<RCMessage *> *)getHistoryMessages:(RCConversationType)conversationType
                                     targetId:(NSString *)targetId
-                                   channelId:(NSString *)channelId
-                                  objectName:(NSString *)objectName
+                                   channelId:(nullable NSString *)channelId
+                                  objectName:(nullable NSString *)objectName
                                baseMessageId:(long)baseMessageId
                                    isForward:(BOOL)isForward
                                        count:(int)count;
@@ -594,9 +596,9 @@
  
  @remarks 消息操作
  */
-- (NSArray<RCMessage *> *)getHistoryMessages:(RCConversationType)conversationType
+- (nullable NSArray<RCMessage *> *)getHistoryMessages:(RCConversationType)conversationType
                                     targetId:(NSString *)targetId
-                                   channelId:(NSString *)channelId
+                                   channelId:(nullable NSString *)channelId
                                  objectNames:(NSArray<NSString *> *)objectNames
                                     sentTime:(long long)sentTime
                                    isForward:(BOOL)isForward
@@ -621,9 +623,9 @@
  
  @remarks 消息操作
  */
-- (NSArray<RCMessage *> *)getHistoryMessages:(RCConversationType)conversationType
+- (nullable NSArray<RCMessage *> *)getHistoryMessages:(RCConversationType)conversationType
                                     targetId:(NSString *)targetId
-                                   channelId:(NSString *)channelId
+                                   channelId:(nullable NSString *)channelId
                                     sentTime:(long long)sentTime
                                  beforeCount:(int)beforeCount
                                   afterCount:(int)afterCount;
@@ -647,10 +649,10 @@
  */
 - (void)clearRemoteHistoryMessages:(RCConversationType)conversationType
                           targetId:(NSString *)targetId
-                         channelId:(NSString *)channelId
+                         channelId:(nullable NSString *)channelId
                         recordTime:(long long)recordTime
-                           success:(void (^)(void))successBlock
-                             error:(void (^)(RCErrorCode status))errorBlock;
+                           success:(nullable void (^)(void))successBlock
+                             error:(nullable void (^)(RCErrorCode status))errorBlock;
 
 /*!
  清除历史消息
@@ -674,11 +676,11 @@
  */
 - (void)clearHistoryMessages:(RCConversationType)conversationType
                     targetId:(NSString *)targetId
-                   channelId:(NSString *)channelId
+                   channelId:(nullable NSString *)channelId
                   recordTime:(long long)recordTime
                  clearRemote:(BOOL)clearRemote
-                     success:(void (^)(void))successBlock
-                       error:(void (^)(RCErrorCode status))errorBlock;
+                     success:(nullable void (^)(void))successBlock
+                       error:(nullable void (^)(RCErrorCode status))errorBlock;
 
 /*!
  从服务器端获取之前的历史消息
@@ -704,11 +706,11 @@
  */
 - (void)getRemoteHistoryMessages:(RCConversationType)conversationType
                         targetId:(NSString *)targetId
-                       channelId:(NSString *)channelId
+                       channelId:(nullable NSString *)channelId
                       recordTime:(long long)recordTime
                            count:(int)count
-                         success:(void (^)(NSArray *messages, BOOL isRemaining))successBlock
-                           error:(void (^)(RCErrorCode status))errorBlock;
+                         success:(nullable void (^)(NSArray <RCMessage *> *messages, BOOL isRemaining))successBlock
+                           error:(nullable void (^)(RCErrorCode status))errorBlock;
 
 /*!
  从服务器端获取之前的历史消息
@@ -730,10 +732,10 @@
  */
 - (void)getRemoteHistoryMessages:(RCConversationType)conversationType
                         targetId:(NSString *)targetId
-                       channelId:(NSString *)channelId
+                       channelId:(nullable NSString *)channelId
                           option:(RCRemoteHistoryMsgOption *)option
-                         success:(void (^)(NSArray *messages, BOOL isRemaining))successBlock
-                           error:(void (^)(RCErrorCode status))errorBlock;
+                         success:(nullable void (^)(NSArray <RCMessage *> *messages, BOOL isRemaining))successBlock
+                           error:(nullable void (^)(RCErrorCode status))errorBlock;
 
 
 /*!
@@ -754,9 +756,9 @@
  */
 - (void)getMessages:(RCConversationType)conversationType
            targetId:(NSString *)targetId
-          channelId:(NSString *)channelId
+          channelId:(nullable NSString *)channelId
              option:(RCHistoryMessageOption *)option
-           complete:(void (^)(NSArray *messages, RCErrorCode code))complete;
+           complete:(nullable void (^)(NSArray <RCMessage *> * _Nullable messages, RCErrorCode code))complete;
 /*!
  * \~chinese
  获取历史消息
@@ -779,10 +781,10 @@
  */
 - (void)getMessages:(RCConversationType)conversationType
            targetId:(NSString *)targetId
-          channelId:(NSString *)channelId
+          channelId:(nullable NSString *)channelId
              option:(RCHistoryMessageOption *)option
-           complete:(void (^)(NSArray *messages,long long timestamp,BOOL isRemaining, RCErrorCode code))complete
-              error:(void (^)(RCErrorCode status))errorBlock;
+           complete:(nullable void (^)(NSArray <RCMessage *> * _Nullable messages,long long timestamp,BOOL isRemaining, RCErrorCode code))complete
+              error:(nullable void (^)(RCErrorCode status))errorBlock;
 
 /*!
  获取会话中@提醒自己的消息
@@ -798,7 +800,7 @@
 
  @remarks 高级功能
  */
-- (NSArray<RCMessage *> *)getUnreadMentionedMessages:(RCConversationType)conversationType targetId:(NSString *)targetId channelId:(NSString *)channelId;
+- (nullable NSArray<RCMessage *> *)getUnreadMentionedMessages:(RCConversationType)conversationType targetId:(NSString *)targetId channelId:(nullable NSString *)channelId;
 
 /*!
  根据会话 id 获取所有子频道的 @ 未读消息总数
@@ -819,14 +821,14 @@
  @param errorBlock 失败的回调
 
  @discussion
- 此方法只能修改同类型消息
+ 此方法只能修改相同频道的同类型消息，仅能修改自己发送的消息
 
  @remarks 消息操作
  */
 - (void)modifyUltraGroupMessage:(NSString *)messageUId
                  messageContent:(RCMessageContent *)newContent
-                        success:(void (^)(void))successBlock
-                          error:(void (^)(RCErrorCode status))errorBlock;
+                        success:(nullable void (^)(void))successBlock
+                          error:(nullable void (^)(RCErrorCode status))errorBlock;
 
 /**
  更新消息扩展信息
@@ -840,8 +842,8 @@
 */
 - (void)updateUltraGroupMessageExpansion:(NSString *)messageUId
                             expansionDic:(NSDictionary<NSString *, NSString *> *)expansionDic
-                                 success:(void (^)(void))successBlock
-                                   error:(void (^)(RCErrorCode status))errorBlock;
+                                 success:(nullable void (^)(void))successBlock
+                                   error:(nullable void (^)(RCErrorCode status))errorBlock;
 
 /**
  删除消息扩展信息中特定的键值对
@@ -857,8 +859,8 @@
 */
 - (void)removeUltraGroupMessageExpansion:(NSString *)messageUId
                                 keyArray:(NSArray<NSString *> *)keyArray
-                                 success:(void (^)(void))successBlock
-                                   error:(void (^)(RCErrorCode status))errorBlock;
+                                 success:(nullable void (^)(void))successBlock
+                                   error:(nullable void (^)(RCErrorCode status))errorBlock;
 
 /*!
  撤回消息
@@ -869,8 +871,8 @@
  @remarks 高级功能
  */
 - (void)recallUltraGroupMessage:(RCMessage *)message
-                        success:(void (^)(long messageId))successBlock
-                          error:(void (^)(RCErrorCode status))errorBlock;
+                        success:(nullable void (^)(long messageId))successBlock
+                          error:(nullable void (^)(RCErrorCode status))errorBlock;
 
 /*!
  撤回消息
@@ -883,8 +885,8 @@
  */
 - (void)recallUltraGroupMessage:(RCMessage *)message
                        isDelete:(BOOL)isDelete
-                        success:(void (^)(long messageId))successBlock
-                          error:(void (^)(RCErrorCode errorcode))errorBlock;
+                        success:(nullable void (^)(long messageId))successBlock
+                          error:(nullable void (^)(RCErrorCode errorcode))errorBlock;
 /*!
  获取同一个超级群下的批量服务消息（含所有频道）
  获取成功后强制更新本地消息
@@ -894,8 +896,8 @@
  @remarks 高级功能
  */
 - (void)getBatchRemoteUltraGroupMessages:(NSArray <RCMessage*>*)messages
-                                 success:(void (^)(NSArray *matchedMsgList, NSArray *notMatchMsgList))successBlock
-                                   error:(void (^)(RCErrorCode status))errorBlock;
+                                 success:(nullable void (^)(NSArray<RCMessage *> *matchedMsgList, NSArray<RCMessage *> *notMatchMsgList))successBlock
+                                   error:(nullable void (^)(RCErrorCode status))errorBlock;
 
 /**
  * 获取会话里第一条未读消息。
@@ -909,7 +911,7 @@
  *  用户在线接收的超级群未读消息已经保存到本地数据库，可以通过此接口获取到
  *  用户离线的超级群未读消息，用户在线之后不收离线未读消息，通过此接口获取第一条未读消息为空
  */
-- (RCMessage *)getFirstUnreadMessage:(RCConversationType)conversationType targetId:(NSString *)targetId channelId:(NSString *)channelId;
+- (nullable RCMessage *)getFirstUnreadMessage:(RCConversationType)conversationType targetId:(NSString *)targetId channelId:(nullable NSString *)channelId;
 
 /*!
  删除某个会话中的所有消息
@@ -926,9 +928,9 @@
  */
 - (void)deleteMessages:(RCConversationType)conversationType
               targetId:(NSString *)targetId
-             channelId:(NSString *)channelId
-               success:(void (^)(void))successBlock
-                 error:(void (^)(RCErrorCode status))errorBlock;
+             channelId:(nullable NSString *)channelId
+               success:(nullable void (^)(void))successBlock
+                 error:(nullable void (^)(RCErrorCode status))errorBlock;
 
 /**
  批量删除某个会话中的指定远端消息（同时删除对应的本地消息）
@@ -948,10 +950,10 @@
  */
 - (void)deleteRemoteMessage:(RCConversationType)conversationType
                    targetId:(NSString *)targetId
-                  channelId:(NSString *)channelId
+                  channelId:(nullable NSString *)channelId
                    messages:(NSArray<RCMessage *> *)messages
-                    success:(void (^)(void))successBlock
-                      error:(void (^)(RCErrorCode status))errorBlock;
+                    success:(nullable void (^)(void))successBlock
+                      error:(nullable void (^)(RCErrorCode status))errorBlock;
 
 /*!
  删除本地所有 channel 特定时间之前的消息
@@ -975,7 +977,7 @@
  @remarks 消息操作
  */
 - (BOOL)deleteUltraGroupMessages:(NSString *)targetId
-                       channelId:(NSString *)channelId
+                       channelId:(nullable NSString *)channelId
                        timestamp:(long long)timestamp;
 
 /*!
@@ -990,10 +992,10 @@
  @remarks 消息操作
  */
 - (void)deleteRemoteUltraGroupMessages:(NSString *)targetId
-                             channelId:(NSString *)channelId
+                             channelId:(nullable NSString *)channelId
                              timestamp:(long long)timestamp
-                               success:(void (^)(void))successBlock
-                                 error:(void (^)(RCErrorCode status))errorBlock;
+                               success:(nullable void (^)(void))successBlock
+                                 error:(nullable void (^)(RCErrorCode status))errorBlock;
 /*!
  删除某个会话中的所有消息
 
@@ -1004,7 +1006,7 @@
 
  @remarks 消息操作
  */
-- (BOOL)clearMessages:(RCConversationType)conversationType targetId:(NSString *)targetId channelId:(NSString *)channelId;
+- (BOOL)clearMessages:(RCConversationType)conversationType targetId:(NSString *)targetId channelId:(nullable NSString *)channelId;
 
 #pragma mark - 会话列表操作
 /*!
@@ -1022,7 +1024,7 @@
 
  @remarks 会话列表
  */
-- (NSArray<RCConversation *> *)getConversationList:(NSArray<NSNumber *> *)conversationTypeList channelId:(NSString *)channelId;
+- (nullable NSArray<RCConversation *> *)getConversationList:(NSArray<NSNumber *> *)conversationTypeList channelId:(nullable NSString *)channelId;
 
 /*!
  分页获取会话列表
@@ -1039,7 +1041,7 @@
 
  @remarks 会话列表
  */
-- (NSArray<RCConversation *> *)getConversationList:(NSArray<NSNumber *> *)conversationTypeList channelId:(NSString *)channelId count:(int)count startTime:(long long)startTime;
+- (nullable NSArray<RCConversation *> *)getConversationList:(NSArray<NSNumber *> *)conversationTypeList channelId:(nullable NSString *)channelId count:(int)count startTime:(long long)startTime;
 /*!
 获取特定会话下所有频道的会话列表
 
@@ -1052,7 +1054,7 @@
 
 @remarks 会话列表
 */
-- (NSArray<RCConversation *> *)getConversationListForAllChannel:(RCConversationType)conversationType targetId:(NSString *)targetId;
+- (nullable NSArray<RCConversation *> *)getConversationListForAllChannel:(RCConversationType)conversationType targetId:(NSString *)targetId;
 
 /*!
  分页获取特定会话类型下所有 channel 的会话列表
@@ -1064,7 +1066,7 @@
  @discussion 此方法会从本地数据库中，读取会话列表。
  返回的会话列表按照时间从前往后排列，如果有置顶的会话，则置顶的会话会排列在前面。
  */
-- (NSArray<RCConversation *> *)getConversationListForAllChannel:(NSArray *)conversationTypeList count:(int)count startTime:(long long)startTime;
+- (nullable NSArray<RCConversation *> *)getConversationListForAllChannel:(NSArray<NSNumber *> *)conversationTypeList count:(int)count startTime:(long long)startTime;
 
 
 /*!
@@ -1079,7 +1081,7 @@
  @warning  当会话数量多的时候，会有性能问题，所以建议在非主线程调用该接口
  @remarks 会话列表
  */
-- (NSArray<RCConversation *> *)getConversationListForAllChannel:(NSArray *)conversationTypeList;
+- (nullable NSArray<RCConversation *> *)getConversationListForAllChannel:(NSArray<NSNumber *> *)conversationTypeList;
 
 
 
@@ -1093,7 +1095,7 @@
 
  @remarks 会话
  */
-- (RCConversation *)getConversation:(RCConversationType)conversationType targetId:(NSString *)targetId channelId:(NSString *)channelId;
+- (nullable RCConversation *)getConversation:(RCConversationType)conversationType targetId:(NSString *)targetId channelId:(nullable NSString *)channelId;
 
 /*!
  获取会话中的消息数量
@@ -1107,7 +1109,7 @@
 
  @remarks 会话
  */
-- (int)getMessageCount:(RCConversationType)conversationType targetId:(NSString *)targetId channelId:(NSString *)channelId;
+- (int)getMessageCount:(RCConversationType)conversationType targetId:(NSString *)targetId channelId:(nullable NSString *)channelId;
 
 /*!
  删除指定类型的会话
@@ -1123,7 +1125,7 @@
  
  @remarks 会话
  */
-- (BOOL)clearConversations:(NSArray<NSNumber *> *)conversationTypeList channelId:(NSString *)channelId;
+- (BOOL)clearConversations:(NSArray<NSNumber *> *)conversationTypeList channelId:(nullable NSString *)channelId;
 
 /*!
  从本地存储中删除会话
@@ -1138,7 +1140,7 @@
 
  @remarks 会话
  */
-- (BOOL)removeConversation:(RCConversationType)conversationType targetId:(NSString *)targetId channelId:(NSString *)channelId;
+- (BOOL)removeConversation:(RCConversationType)conversationType targetId:(NSString *)targetId channelId:(nullable NSString *)channelId;
 
 /*!
  设置会话的置顶状态
@@ -1153,7 +1155,7 @@
 
  @remarks 会话
  */
-- (BOOL)setConversationToTop:(RCConversationType)conversationType targetId:(NSString *)targetId channelId:(NSString *)channelId isTop:(BOOL)isTop;
+- (BOOL)setConversationToTop:(RCConversationType)conversationType targetId:(NSString *)targetId channelId:(nullable NSString *)channelId isTop:(BOOL)isTop;
 
 /*!
  获取会话的置顶状态
@@ -1165,7 +1167,7 @@
 
  @remarks 会话
  */
-- (BOOL)getConversationTopStatus:(RCConversationIdentifier *)conversationIdentifier channelId:(NSString *)channelId;
+- (BOOL)getConversationTopStatus:(RCConversationIdentifier *)conversationIdentifier channelId:(nullable NSString *)channelId;
 
 /*!
  获取置顶的会话列表
@@ -1177,7 +1179,7 @@
 
  @remarks 会话列表
  */
-- (NSArray<RCConversation *> *)getTopConversationList:(NSArray<NSNumber *> *)conversationTypeList channelId:(NSString *)channelId;
+- (nullable NSArray<RCConversation *> *)getTopConversationList:(NSArray<NSNumber *> *)conversationTypeList channelId:(nullable NSString *)channelId;
 
 #pragma mark 会话中的草稿操作
 
@@ -1191,7 +1193,7 @@
 
  @remarks 会话
  */
-- (NSString *)getTextMessageDraft:(RCConversationType)conversationType targetId:(NSString *)targetId channelId:(NSString *)channelId;
+- (nullable NSString *)getTextMessageDraft:(RCConversationType)conversationType targetId:(NSString *)targetId channelId:(nullable NSString *)channelId;
 
 /*!
  保存草稿信息（用户输入但未发送的暂存消息）
@@ -1206,7 +1208,7 @@
  */
 - (BOOL)saveTextMessageDraft:(RCConversationType)conversationType
                     targetId:(NSString *)targetId
-                   channelId:(NSString *)channelId
+                   channelId:(nullable NSString *)channelId
                      content:(NSString *)content;
 
 /*!
@@ -1219,7 +1221,7 @@
 
  @remarks 会话
  */
-- (BOOL)clearTextMessageDraft:(RCConversationType)conversationType targetId:(NSString *)targetId channelId:(NSString *)channelId;
+- (BOOL)clearTextMessageDraft:(RCConversationType)conversationType targetId:(NSString *)targetId channelId:(nullable NSString *)channelId;
 
 #pragma mark 未读消息数
 
@@ -1232,7 +1234,7 @@
 
  @remarks 会话
  */
-- (int)getTotalUnreadCountWithChannelId:(NSString *)channelId;
+- (int)getTotalUnreadCountWithChannelId:(nullable NSString *)channelId;
 
 /*!
  获取所有的未读消息数（聊天室会话除外）
@@ -1244,7 +1246,7 @@
 
  @remarks 会话
  */
-- (int)getTotalUnreadCountWithChannelId:(NSString *)channelId containBlocked:(BOOL)isContain;
+- (int)getTotalUnreadCountWithChannelId:(nullable NSString *)channelId containBlocked:(BOOL)isContain;
 
 /*!
  获取某个会话内的未读消息数（聊天室会话除外）
@@ -1256,7 +1258,7 @@
 
  @remarks 会话
  */
-- (int)getUnreadCount:(RCConversationType)conversationType targetId:(NSString *)targetId channelId:(NSString *)channelId;
+- (int)getUnreadCount:(RCConversationType)conversationType targetId:(NSString *)targetId channelId:(nullable NSString *)channelId;
 
 /*!
  获取某个会话内的未读消息数
@@ -1270,7 +1272,7 @@
  
  @remarks 会话
  */
-- (int)getUnreadCount:(RCConversationIdentifier *)conversationIdentifier messageClassList:(NSArray <Class> *)messageClassList channelId:(NSString *)channelId;
+- (int)getUnreadCount:(RCConversationIdentifier *)conversationIdentifier messageClassList:(NSArray <Class> *)messageClassList channelId:(nullable NSString *)channelId;
 
 /**
  获取某些类型的会话中所有的未读消息数 （聊天室会话除外）
@@ -1284,7 +1286,7 @@
  
  @remarks 会话
  */
-- (int)getUnreadCount:(NSArray<NSNumber *> *)conversationTypes channelId:(NSString *)channelId containBlocked:(bool)isContain;
+- (int)getUnreadCount:(NSArray<NSNumber *> *)conversationTypes channelId:(nullable NSString *)channelId containBlocked:(bool)isContain;
 
 /*!
  获取某个类型的会话中所有未读的被@的消息数
@@ -1297,7 +1299,7 @@
  
  @remarks 会话
  */
-- (int)getUnreadMentionedCount:(NSArray<NSNumber *> *)conversationTypes channelId:(NSString *)channelId;
+- (int)getUnreadMentionedCount:(NSArray<NSNumber *> *)conversationTypes channelId:(nullable NSString *)channelId;
 
 /*!
  清除某个会话中的未读消息数
@@ -1310,7 +1312,7 @@
  @remarks 会话
  @discussion 此方法不支持超级群的会话类型。
  */
-- (BOOL)clearMessagesUnreadStatus:(RCConversationType)conversationType targetId:(NSString *)targetId channelId:(NSString *)channelId;
+- (BOOL)clearMessagesUnreadStatus:(RCConversationType)conversationType targetId:(NSString *)targetId channelId:(nullable NSString *)channelId;
 
 /*!
  清除某个会话中的未读消息数（该会话在时间戳 timestamp 之前的消息将被置成已读。）
@@ -1325,7 +1327,7 @@
  */
 - (BOOL)clearMessagesUnreadStatus:(RCConversationType)conversationType
                          targetId:(NSString *)targetId
-                        channelId:(NSString *)channelId
+                        channelId:(nullable NSString *)channelId
                              time:(long long)timestamp;
 
 #pragma mark - 会话的消息提醒
@@ -1349,10 +1351,10 @@
  */
 - (void)setConversationNotificationStatus:(RCConversationType)conversationType
                                  targetId:(NSString *)targetId
-                                channelId:(NSString *)channelId
+                                channelId:(nullable NSString *)channelId
                                 isBlocked:(BOOL)isBlocked
-                                  success:(void (^)(RCConversationNotificationStatus nStatus))successBlock
-                                    error:(void (^)(RCErrorCode status))errorBlock __deprecated_msg("已废弃，请使用 [RCChannelClient setConversationChannelNotificationLevel:targetId:channelId:level:success:error:]函数");
+                                  success:(nullable void (^)(RCConversationNotificationStatus nStatus))successBlock
+                                    error:(nullable void (^)(RCErrorCode status))errorBlock __deprecated_msg("已废弃，请使用 [RCChannelClient setConversationChannelNotificationLevel:targetId:channelId:level:success:error:]函数");
 
 
 /*!
@@ -1367,15 +1369,16 @@
 
  @discussion
  如果您需要移除消息通知，level参数传入RCPushNotificationLevelDefault即可
+ 注：超级群通过该接口对具体频道进行免打扰设置
   
  @remarks 会话
  */
 - (void)setConversationChannelNotificationLevel:(RCConversationType)conversationType
                                        targetId:(NSString *)targetId
-                                      channelId:(NSString *)channelId
+                                      channelId:(nullable NSString *)channelId
                                           level:(RCPushNotificationLevel)level
-                                        success:(void (^)(void))successBlock
-                                          error:(void (^)(RCErrorCode status))errorBlock;
+                                        success:(nullable void (^)(void))successBlock
+                                          error:(nullable void (^)(RCErrorCode status))errorBlock;
 
 
 
@@ -1392,9 +1395,9 @@
  */
 - (void)getConversationNotificationStatus:(RCConversationType)conversationType
                                  targetId:(NSString *)targetId
-                                channelId:(NSString *)channelId
-                                  success:(void (^)(RCConversationNotificationStatus nStatus))successBlock
-                                    error:(void (^)(RCErrorCode status))errorBlock;
+                                channelId:(nullable NSString *)channelId
+                                  success:(nullable void (^)(RCConversationNotificationStatus nStatus))successBlock
+                                    error:(nullable void (^)(RCErrorCode status))errorBlock;
 /*!
   查询消息通知级别
 
@@ -1408,9 +1411,9 @@
  */
 - (void)getConversationChannelNotificationLevel:(RCConversationType)conversationType
                                        targetId:(NSString *)targetId
-                                      channelId:(NSString *)channelId
-                                        success:(void (^)(RCPushNotificationLevel level))successBlock
-                                          error:(void (^)(RCErrorCode status))errorBlock;
+                                      channelId:(nullable NSString *)channelId
+                                        success:(nullable void (^)(RCPushNotificationLevel level))successBlock
+                                          error:(nullable void (^)(RCErrorCode status))errorBlock;
 
 /*!
  获取消息免打扰会话列表
@@ -1422,10 +1425,12 @@
 
  @remarks 会话列表
  */
-- (NSArray<RCConversation *> *)getBlockedConversationList:(NSArray<NSNumber *> *)conversationTypeList channelId:(NSString *)channelId;
+- (nullable NSArray<RCConversation *> *)getBlockedConversationList:(NSArray<NSNumber *> *)conversationTypeList channelId:(nullable NSString *)channelId;
 
 /*!
  设置超级群的默认消息状态
+ 一般由管理员设置的接口，针对超级群的所有群成员生效，针对超级群下所有频道生效，优先级较低。如果群成员自己超级群的免打扰级别，那么以群成员自己设置的为准。
+ 
  @param targetId 会话 ID
  @param level 等级
  @param successBlock 设置成功的回调
@@ -1433,8 +1438,8 @@
  */
 - (void)setUltraGroupConversationDefaultNotificationLevel:(NSString *)targetId
                                                     level:(RCPushNotificationLevel)level
-                                                  success:(void (^)(void))successBlock
-                                                    error:(void (^)(RCErrorCode status))errorBlock;
+                                                  success:(nullable void (^)(void))successBlock
+                                                    error:(nullable void (^)(RCErrorCode status))errorBlock;
 /*!
  获取超级群的默认消息状态
 
@@ -1445,8 +1450,8 @@
  @remarks 会话
  */
 - (void)getUltraGroupConversationDefaultNotificationLevel:(NSString *)targetId
-                                                  success:(void (^)(RCPushNotificationLevel level))successBlock
-                                                    error:(void (^)(RCErrorCode status))errorBlock;
+                                                  success:(nullable void (^)(RCPushNotificationLevel level))successBlock
+                                                    error:(nullable void (^)(RCErrorCode status))errorBlock;
 
 
 #pragma mark - 输入状态提醒
@@ -1469,7 +1474,7 @@
  */
 - (void)sendTypingStatus:(RCConversationType)conversationType
                 targetId:(NSString *)targetId
-               channelId:(NSString *)channelId
+               channelId:(nullable NSString *)channelId
              contentType:(NSString *)objectName;
 
 /*!
@@ -1482,10 +1487,10 @@
  @remarks 高级功能
  */
 - (void)sendUltraGroupTypingStatus:(NSString *)targetId
-                         channelId:(NSString *)channelId
+                         channelId:(nullable NSString *)channelId
                       typingStatus:(RCUltraGroupTypingStatus)status
-                           success:(void (^)(void))successBlock
-                             error:(void (^)(RCErrorCode status))errorBlock;
+                           success:(nullable void (^)(void))successBlock
+                             error:(nullable void (^)(RCErrorCode status))errorBlock;
 #pragma mark - 搜索
 
 /*!
@@ -1504,9 +1509,9 @@
  
  @remarks 消息操作
  */
-- (NSArray<RCMessage *> *)searchMessages:(RCConversationType)conversationType
+- (nullable NSArray<RCMessage *> *)searchMessages:(RCConversationType)conversationType
                                 targetId:(NSString *)targetId
-                               channelId:(NSString *)channelId
+                               channelId:(nullable NSString *)channelId
                                  keyword:(NSString *)keyword
                                    count:(int)count
                                startTime:(long long)startTime;
@@ -1529,10 +1534,10 @@
  
  @remarks 消息操作
  */
-- (NSArray<RCMessage *> *)searchMessages:(RCConversationType)conversationType
+- (nullable NSArray<RCMessage *> *)searchMessages:(RCConversationType)conversationType
                                 targetId:(NSString *)targetId
-                               channelId:(NSString *)channelId
-                                 keyword:(NSString *)keyword
+                               channelId:(nullable NSString *)channelId
+                                 keyword:(nullable NSString *)keyword
                                startTime:(long long)startTime
                                  endTime:(long long)endTime
                                   offset:(int)offset
@@ -1554,9 +1559,9 @@
  
  @remarks 消息操作
  */
-- (NSArray<RCMessage *> *)searchMessages:(RCConversationType)conversationType
+- (nullable NSArray<RCMessage *> *)searchMessages:(RCConversationType)conversationType
                                 targetId:(NSString *)targetId
-                               channelId:(NSString *)channelId
+                               channelId:(nullable NSString *)channelId
                                   userId:(NSString *)userId
                                    count:(int)count
                                startTime:(long long)startTime;
@@ -1576,7 +1581,7 @@
  
  @remarks 消息操作
  */
-- (NSArray<RCMessage *> *)searchMessagesForAllChannel:(RCConversationType)conversationType
+- (nullable NSArray<RCMessage *> *)searchMessagesForAllChannel:(RCConversationType)conversationType
                                 targetId:(NSString *)targetId
                                  keyword:(NSString *)keyword
                                    count:(int)count
@@ -1599,7 +1604,7 @@
  
  @remarks 消息操作
  */
-- (NSArray<RCMessage *> *)searchMessagesForAllChannel:(RCConversationType)conversationType
+- (nullable NSArray<RCMessage *> *)searchMessagesForAllChannel:(RCConversationType)conversationType
                                 targetId:(NSString *)targetId
                                  keyword:(NSString *)keyword
                                startTime:(long long)startTime
@@ -1632,8 +1637,8 @@
  
  @remarks 消息操作
  */
-- (NSArray<RCSearchConversationResult *> *)searchConversations:(NSArray<NSNumber *> *)conversationTypeList
-                                                     channelId:(NSString *)channelId
+- (nullable NSArray<RCSearchConversationResult *> *)searchConversations:(NSArray<NSNumber *> *)conversationTypeList
+                                                     channelId:(nullable NSString *)channelId
                                                    messageType:(NSArray<NSString *> *)objectNameList
                                                        keyword:(NSString *)keyword;
 
@@ -1661,7 +1666,7 @@
  
  @remarks 消息操作
  */
-- (NSArray<RCSearchConversationResult *> *)searchConversationsForAllChannel:(NSArray<NSNumber *> *)conversationTypeList
+- (nullable NSArray<RCSearchConversationResult *> *)searchConversationsForAllChannel:(NSArray<NSNumber *> *)conversationTypeList
                                                    messageType:(NSArray<NSString *> *)objectNameList
                                                                     keyword:(NSString *)keyword;
 
@@ -1671,7 +1676,7 @@
 
 /*!
  设置超级群频道的默认消息状态
-
+ 一般由管理员设置的的接口，针对超级群的所有群成员生效，仅针对设置的频道生效，优先级较低。如果群成员自己设置超级群的免打扰级别，那么以群成员自己设置的为准。
  @param targetId                    会话 ID
  @param channelId                   频道 ID
  @param level                       消息通知级别
@@ -1681,10 +1686,10 @@
  @remarks 会话
  */
 - (void)setUltraGroupConversationChannelDefaultNotificationLevel:(NSString *)targetId
-                                                       channelId:(NSString *)channelId
+                                                       channelId:(nullable NSString *)channelId
                                                            level:(RCPushNotificationLevel)level
-                                                         success:(void (^)(void))successBlock
-                                                           error:(void (^)(RCErrorCode status))errorBlock;
+                                                         success:(nullable void (^)(void))successBlock
+                                                           error:(nullable void (^)(RCErrorCode status))errorBlock;
 
 
 /*!
@@ -1698,9 +1703,9 @@
  @remarks 会话
  */
 - (void)getUltraGroupConversationChannelDefaultNotificationLevel:(NSString *)targetId
-                                                       channelId:(NSString *)channelId
-                                                         success:(void (^)(RCPushNotificationLevel level))successBlock
-                                                           error:(void (^)(RCErrorCode status))errorBlock;
+                                                       channelId:(nullable NSString *)channelId
+                                                         success:(nullable void (^)(RCPushNotificationLevel level))successBlock
+                                                           error:(nullable void (^)(RCErrorCode status))errorBlock;
 
 #pragma mark -- 超级群
 /*!
@@ -1719,8 +1724,8 @@
 - (void)setNotificationQuietHoursLevel:(NSString *)startTime
                               spanMins:(int)spanMins
                                  level:(RCPushNotificationQuietHoursLevel)level
-                               success:(void (^)(void))successBlock
-                                 error:(void (^)(RCErrorCode status))errorBlock;
+                               success:(nullable void (^)(void))successBlock
+                                 error:(nullable void (^)(RCErrorCode status))errorBlock;
 
 
 /*!
@@ -1732,8 +1737,8 @@
  
  @remarks 会话
  */
-- (void)getNotificationQuietHoursLevel:(void (^)(NSString *startTime, int spanMins, RCPushNotificationQuietHoursLevel level))successBlock
-                                 error:(void (^)(RCErrorCode status))errorBlock;
+- (void)getNotificationQuietHoursLevel:(nullable void (^)(NSString *startTime, int spanMins, RCPushNotificationQuietHoursLevel level))successBlock
+                                 error:(nullable void (^)(RCErrorCode status))errorBlock;
 
 /*!
  设置会话的消息提醒状态
@@ -1745,14 +1750,15 @@
  @param errorBlock                  设置失败的回调 [status:设置失败的错误码]
 
 @discussion 如要移除消息提醒状态，设置level为RCPushNotificationLevelDefault
+ 注：超级群调用该接口，相当于设置了 channelId 为 空 的频道的免打扰，不会屏蔽整个超级群会话下所有频道的免打扰
 
  @remarks 会话
  */
 - (void)setConversationNotificationLevel:(RCConversationType)conversationType
                                 targetId:(NSString *)targetId
                                    level:(RCPushNotificationLevel)level
-                                 success:(void (^)(void))successBlock
-                                   error:(void (^)(RCErrorCode status))errorBlock;
+                                 success:(nullable void (^)(void))successBlock
+                                   error:(nullable void (^)(RCErrorCode status))errorBlock;
 
 /*!
  获取会话的消息提醒状态
@@ -1766,8 +1772,8 @@
  */
 - (void)getConversationNotificationLevel:(RCConversationType)conversationType
                                 targetId:(NSString *)targetId
-                                 success:(void (^)(RCPushNotificationLevel level))successBlock
-                                   error:(void (^)(RCErrorCode status))errorBlock;
+                                 success:(nullable void (^)(RCPushNotificationLevel level))successBlock
+                                   error:(nullable void (^)(RCErrorCode status))errorBlock;
 
 
 /*!
@@ -1785,8 +1791,8 @@
 
 - (void)setConversationTypeNotificationLevel:(RCConversationType)conversationType
                                        level:(RCPushNotificationLevel)level
-                                     success:(void (^)(void))successBlock
-                                       error:(void (^)(RCErrorCode status))errorBlock;
+                                     success:(nullable void (^)(void))successBlock
+                                       error:(nullable void (^)(RCErrorCode status))errorBlock;
 
 
 /*!
@@ -1800,8 +1806,8 @@
  */
 
 - (void)getConversationTypeNotificationLevel:(RCConversationType)conversationType
-                                     success:(void (^)(RCPushNotificationLevel level))successBlock
-                                       error:(void (^)(RCErrorCode status))errorBlock;
+                                     success:(nullable void (^)(RCPushNotificationLevel level))successBlock
+                                       error:(nullable void (^)(RCErrorCode status))errorBlock;
 
 /*!
  删除已设置的全局时间段消息提醒屏蔽
@@ -1811,7 +1817,8 @@
 
  @remarks 会话
  */
-- (void)removeNotificationQuietHours:(void (^)(void))successBlock error:(void (^)(RCErrorCode status))errorBlock;
+- (void)removeNotificationQuietHours:(nullable void (^)(void))successBlock
+                               error:(nullable void (^)(RCErrorCode status))errorBlock;
 
 /*!
  拉取超级群列表后回调功能
@@ -1824,6 +1831,16 @@
 
 - (void)setUltraGroupConversationDelegate:(id<RCUltraGroupConversationDelegate>)delegate;
 
+/*!
+ 超级群频道信息回调功能
+ 
+ @param delegate 代理
+
+ @remarks 超级群频道操作
+ */
+
+- (void)setUltraGroupChannelDelegate:(id<RCUltraGroupChannelDelegate>)delegate;
+
 
 /*!
  获取指定超级群下所有频道的未读消息总数(子线程回调, 如有UI操作, 请切回主线程)
@@ -1834,8 +1851,8 @@
  @remarks 超级群消息操作
  */
 - (void)getUltraGroupUnreadCount:(NSString *)targetId
-                        success:(void (^)(NSInteger  count))successBlock
-                          error:(void (^)(RCErrorCode status))errorBlock;
+                        success:(nullable void (^)(NSInteger  count))successBlock
+                          error:(nullable void (^)(RCErrorCode status))errorBlock;
 
 /*!
  获取超级群会话类型的所有未读消息数 (子线程回调, 如有UI操作, 请切回主线程)
@@ -1844,8 +1861,8 @@
  @param errorBlock          获取失败的回调 [status:清除失败的错误码]
  @remarks 超级群消息操作
  */
-- (void)getUltraGroupAllUnreadCount:(void (^)(NSInteger count))successBlock
-                              error:(void (^)(RCErrorCode status))errorBlock;
+- (void)getUltraGroupAllUnreadCount:(nullable void (^)(NSInteger count))successBlock
+                              error:(nullable void (^)(RCErrorCode status))errorBlock;
 
 /*!
  获取超级群会话类型的@消息未读数接口 (子线程回调, 如有UI操作, 请切回主线程)
@@ -1854,8 +1871,21 @@
  @param errorBlock          获取失败的回调 [status:清除失败的错误码]
  @remarks 超级群消息操作
  */
-- (void)getUltraGroupAllUnreadMentionedCount:(void (^)(NSInteger  count))successBlock
-                                       error:(void (^)(RCErrorCode status))errorBlock;
+- (void)getUltraGroupAllUnreadMentionedCount:(nullable void (^)(NSInteger  count))successBlock
+                                       error:(nullable void (^)(RCErrorCode status))errorBlock;
+
+/*!
+ 可以获取本地指定超级群下公有频道或者私有频道的列表
+ @param targetId            会话ID
+ @param channelType         频道类型
+ @param successBlock        获取成功的回调 [会话列表]
+ @param errorBlock          获取失败的回调 [status:清除失败的错误码]
+ @remarks 超级群消息操作
+ */
+- (void)getUltraGroupChannelList:(NSString *)targetId
+                     channelType:(RCUltraGroupChannelType)channelType
+                         success:(nullable void (^)(NSArray<RCConversation *>* list))successBlock
+                           error:(nullable void (^)(RCErrorCode status))errorBlock;
 @end
 
-
+NS_ASSUME_NONNULL_END

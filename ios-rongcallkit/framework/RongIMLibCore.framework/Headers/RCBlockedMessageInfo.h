@@ -47,6 +47,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *extra;
 
 /*!
+ 消息的发送时间（Unix 时间戳、毫秒）
+ */
+@property (nonatomic, assign) long long sentTime;
+
+/*!
  RCBlockedMessageInfo 初始化方法
 
  @param  type    会话类型

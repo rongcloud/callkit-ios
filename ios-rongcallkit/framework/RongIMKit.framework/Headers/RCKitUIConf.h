@@ -15,7 +15,7 @@
 /*!
  SDK中全局的导航按钮字体颜色
 
- @discussion 默认值为[UIColor whiteColor]
+ @discussion 默认值为[UIColor blackColor]
  */
 @property (nonatomic, strong) UIColor *globalNavigationBarTintColor;
 

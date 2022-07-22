@@ -8,6 +8,9 @@
 
 #ifndef RCConversationChannelProtocol_h
 #define RCConversationChannelProtocol_h
+
+#import <RongIMLibCore/RCUltraGroupChannelChangeInfo.h>
+
 @protocol RCConversationChannelMessageReceiptDelegate <NSObject>
 @optional
 /*!
@@ -65,5 +68,56 @@
 
 //超级群会话列表与会话最后一条消息同步完成
 - (void)ultraGroupConversationListDidSync;
+@end
+
+@protocol RCUltraGroupChannelDelegate <NSObject>
+
+/*!
+ 超级群类型变更通知
+ 1. 公有频道变私有频道时，公有频道所有用户会收到该通知
+   a. 在私有频道白名单内的用户，收到的变更类型是 PublicToPrivate(公有频道变私有频道前，可以提前将用户加入私有频道白名单)
+   b. 不在私有频道白名单的其他用户，变更类型为 PublicToPrivateUserNotIn
+
+ 2. 私有频道变公有频道时，私有频道白名单中的用户收到通知，变更类型为 PrivateToPublic
+
+ @param infoList        频道变更信息
+ @discussion
+ 当客户端收到频道变更时，会回调此接口，通知发生变化的会话频道列表。
+ 该功能仅支持超级群。
+ */
+- (void)ultraGroupChannelTypeDidChanged:(NSArray<RCUltraGroupChannelChangeTypeInfo *> *)infoList;
+
+/*!
+ 频道白名单用户被移除通知(当前仅支持私有频道)
+ 1. 公有频道时，将用户从私有频道白名单移除时，不通知
+ 2. 私有频道时，将用户从白名单移除时，仅通知私有频道所有用户，含被踢的用户
+ 3. 清理本地数据
+   a. 当被踢用户为当前用户时：用户本地会话删除，本地会话的消息保留
+   b. 当被踢用户为其他人时：不做任何处理
+
+ @param infoList        频道变更信息
+ @discussion
+ 当客户端收到用户被移除频道时，会回调此接口，通知发生变化的会话频道列表。
+ 该功能仅支持超级群。
+ */
+- (void)ultraGroupChannelUserDidKicked:(NSArray<RCUltraGroupChannelUserKickedInfo *> *)infoList;
+
+
+
+/*!
+ 删除频道通知，可以认为是频道解散。
+ 1. 公有频道时，删除频道通知频道中所有人
+ 2. 私有频道时，删除频道通知白名单中所有人
+ 3. 清理本地数据：用户本地会话删除，本地会话的消息保留
+
+ @param infoList        频道变更信息
+ @discussion
+ 当客户端收到频道解散时，会回调此接口，通知发生变化的会话频道列表。
+ 该功能仅支持超级群。
+ */
+- (void)ultraGroupChannelDidDisbanded:(NSArray<RCUltraGroupChannelDisbandedInfo *> *)infoList;
+
+
+
 @end
 #endif /* RCConversationChannelProtocol_h */

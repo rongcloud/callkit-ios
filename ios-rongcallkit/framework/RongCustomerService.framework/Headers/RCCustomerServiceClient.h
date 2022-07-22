@@ -12,6 +12,8 @@
 #import "RCCustomerServiceInfo.h"
 #import "RCCustomerServiceDefine.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface RCCustomerServiceClient : NSObject
 
 + (instancetype)sharedCustomerServiceClient;
@@ -41,12 +43,12 @@
  */
 - (void)startCustomerService:(NSString *)kefuId
                         info:(RCCustomerServiceInfo *)csInfo
-                   onSuccess:(void (^)(RCCustomerServiceConfig *config))successBlock
-                     onError:(void (^)(int errorCode, NSString *errMsg))errorBlock
-                  onModeType:(void (^)(RCCSModeType mode))modeTypeBlock
-            onPullEvaluation:(void (^)(NSString *dialogId))pullEvaluationBlock
-               onSelectGroup:(void (^)(NSArray<RCCustomerServiceGroupItem *> *groupList))selectGroupBlock
-                      onQuit:(void (^)(NSString *quitMsg))quitBlock;
+                   onSuccess:(nullable void (^)(RCCustomerServiceConfig *config))successBlock
+                     onError:(nullable void (^)(int errorCode, NSString *errMsg))errorBlock
+                  onModeType:(nullable void (^)(RCCSModeType mode))modeTypeBlock
+            onPullEvaluation:(nullable void (^)(NSString *dialogId))pullEvaluationBlock
+               onSelectGroup:(nullable void (^)(NSArray<RCCustomerServiceGroupItem *> *groupList))selectGroupBlock
+                      onQuit:(nullable void (^)(NSString *quitMsg))quitBlock;
 
 /*!
  客服后台关于评价相关的客服参数配置
@@ -58,7 +60,7 @@
 
  @remarks 客服
  */
-- (void)getHumanEvaluateCustomerServiceConfig:(void (^)(NSDictionary *evaConfig))evaConfigBlock;
+- (void)getHumanEvaluateCustomerServiceConfig:(nullable void (^)(NSDictionary *evaConfig))evaConfigBlock;
 
 /*!
  结束客服聊天
@@ -120,9 +122,9 @@
  @remarks 客服
  */
 - (void)evaluateCustomerService:(NSString *)kefuId
-                   knownledgeId:(NSString *)knownledgeId
+                   knownledgeId:(nullable NSString *)knownledgeId
                      robotValue:(BOOL)isRobotResolved
-                        suggest:(NSString *)suggest;
+                        suggest:(nullable NSString *)suggest;
 
 /*!
  评价人工客服。
@@ -146,12 +148,12 @@
  @remarks 客服
  */
 - (void)evaluateCustomerService:(NSString *)kefuId
-                       dialogId:(NSString *)dialogId
+                       dialogId:(nullable NSString *)dialogId
                       starValue:(int)value
-                        suggest:(NSString *)suggest
+                        suggest:(nullable NSString *)suggest
                   resolveStatus:(RCCSResolveStatus)resolveStatus
-                        tagText:(NSString *)tagText
-                          extra:(NSDictionary *)extra;
+                        tagText:(nullable NSString *)tagText
+                          extra:(nullable NSDictionary *)extra;
 
 /*!
  通用客服评价，不区分机器人人工
@@ -171,9 +173,9 @@
  @remarks 客服
  */
 - (void)evaluateCustomerService:(NSString *)kefuId
-                       dialogId:(NSString *)dialogId
+                       dialogId:(nullable NSString *)dialogId
                       starValue:(int)value
-                        suggest:(NSString *)suggest
+                        suggest:(nullable NSString *)suggest
                   resolveStatus:(RCCSResolveStatus)resolveStatus;
 
 /*!
@@ -192,6 +194,8 @@
  */
 - (void)leaveMessageCustomerService:(NSString *)kefuId
                     leaveMessageDic:(NSDictionary *)leaveMessageDic
-                            success:(void (^)(void))successBlock
-                            failure:(void (^)(void))failureBlock;
+                            success:(nullable void (^)(void))successBlock
+                            failure:(nullable void (^)(void))failureBlock;
 @end
+
+NS_ASSUME_NONNULL_END

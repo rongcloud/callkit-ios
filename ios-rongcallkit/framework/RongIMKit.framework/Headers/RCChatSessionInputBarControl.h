@@ -461,6 +461,14 @@
  */
 - (void)sightDidFinishRecord:(NSString *)url thumbnail:(UIImage *)image duration:(NSUInteger)duration;
 
+/**
+ 相机录制小视频失败后调用
+
+ @param error 错误
+ @param status AVAssetWriter 状态
+ */
+- (void)sightDidRecordFailedWith:(NSError *)error status:(NSInteger)status;
+
 /*!
  地理位置选择完成之后的回调
  @param location       位置的二维坐标

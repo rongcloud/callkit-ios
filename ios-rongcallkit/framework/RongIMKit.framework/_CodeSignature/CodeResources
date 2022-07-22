@@ -30,7 +30,7 @@
 		</data>
 		<key>Headers/RCChatSessionInputBarControl.h</key>
 		<data>
-		ONwkPZ5QUnDPM8vNV/zRoMADr1s=
+		hy5PFiIf1DkvUtEDFZ3kYyPmaZI=
 		</data>
 		<key>Headers/RCContentView.h</key>
 		<data>
@@ -62,7 +62,7 @@
 		</data>
 		<key>Headers/RCConversationViewController.h</key>
 		<data>
-		bgnzdhnDELRkzP7/YnckS/JfqEY=
+		uutkK9gAkuK3+0YS6CpxbNVOpD8=
 		</data>
 		<key>Headers/RCEmojiBoardView.h</key>
 		<data>
@@ -106,7 +106,7 @@
 		</data>
 		<key>Headers/RCIM+Deprecated.h</key>
 		<data>
-		krlIui5aUa4WyawRSq1mUSveZ4g=
+		bVniTL1bzlUgoUsoaP9zTn7EOe0=
 		</data>
 		<key>Headers/RCIM.h</key>
 		<data>
@@ -150,7 +150,7 @@
 		</data>
 		<key>Headers/RCKitUIConf.h</key>
 		<data>
-		p2HF3V5eQYNSG1ElS38fvsz4DAs=
+		qp6uQvPofNNZR+wBsdYr804AaH8=
 		</data>
 		<key>Headers/RCKitUtility.h</key>
 		<data>
@@ -341,11 +341,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			ONwkPZ5QUnDPM8vNV/zRoMADr1s=
+			hy5PFiIf1DkvUtEDFZ3kYyPmaZI=
 			</data>
 			<key>hash2</key>
 			<data>
-			CeGwo6+b/LT9xpBoFFRh2Aup6OTvgRGGPSXpIK2zknU=
+			RXk3bo2yg6rG5W3MCiYqlrSBohEuL1hMHwCaJUn2DWs=
 			</data>
 		</dict>
 		<key>Headers/RCContentView.h</key>
@@ -429,11 +429,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			bgnzdhnDELRkzP7/YnckS/JfqEY=
+			uutkK9gAkuK3+0YS6CpxbNVOpD8=
 			</data>
 			<key>hash2</key>
 			<data>
-			1ztT0zDs/YaqyRAhRA1qvUNhz9DgKoVHhFjufq7jFgA=
+			rEgGkgAdG6mA2LxU0yUzAZXS9FtaxMinMBJ7ISsVu1Q=
 			</data>
 		</dict>
 		<key>Headers/RCEmojiBoardView.h</key>
@@ -550,11 +550,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			krlIui5aUa4WyawRSq1mUSveZ4g=
+			bVniTL1bzlUgoUsoaP9zTn7EOe0=
 			</data>
 			<key>hash2</key>
 			<data>
-			l3uKeyn0SHhLgP5PCftr7szJWexXrFtPh7V7LeDWIVw=
+			1Fv2zT+a9GqLTfFj71s58mGP0Ejspms6LFoQ9pXAOZs=
 			</data>
 		</dict>
 		<key>Headers/RCIM.h</key>
@@ -671,11 +671,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			p2HF3V5eQYNSG1ElS38fvsz4DAs=
+			qp6uQvPofNNZR+wBsdYr804AaH8=
 			</data>
 			<key>hash2</key>
 			<data>
-			OTTLEgQPnKCmXN2DVUFhSmk6eiZ0nhvq5U1teX+D5F4=
+			0zmNodTl6aiR+I1yHq3j/zX7rXJdct1jYpOVO9SqzeY=
 			</data>
 		</dict>
 		<key>Headers/RCKitUtility.h</key>

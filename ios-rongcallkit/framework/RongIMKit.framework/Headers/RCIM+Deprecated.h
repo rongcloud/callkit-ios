@@ -197,7 +197,7 @@
 /*!
  SDK中全局的导航按钮字体颜色
 
- @discussion 默认值为[UIColor whiteColor]
+ @discussion 默认值为[UIColor blackColor]
  @discussion swift 如果调用宏定义 RCKitConfigCenter 报错，替换为 RCKitConfig 的单例构造方法
  */
 @property (nonatomic, strong) UIColor *globalNavigationBarTintColor __deprecated_msg(

@@ -349,6 +349,9 @@ typedef NS_ENUM(NSInteger, RCErrorCode) {
     //频道内每秒发送消息总量超过限制会收到该错误码，建议延时发送或重试发送
     RC_ULTRA_GROUP_CHANNEL_MESSAGE_EXCEED_LIMIT = 24415,
     
+    //用户不在超级群私有频道中
+    //私有频道下，当用户不在白名单中时往该私有频道中发送消息，会报此错误
+    RC_ULTRA_GROUP_USER_NOT_IN_PRIVATE_CHANNEL = 24416,
     /*
      聊天室设置 KV 失败，出现在两人或者多端同时操作一个 kv。
      如果出现该错误，为避免和其他端同时操作，请延时一定时间再试
@@ -515,6 +518,14 @@ typedef NS_ENUM(NSInteger, RCErrorCode) {
     撤回消息参数无效。请确认撤回消息参数是否正确的填写。
      */
     RC_RECALLMESSAGE_PARAMETER_INVALID = 25101,
+    
+    /*
+    IMLib 撤回消息可以撤回自己发送的消息和别人发送的消息
+    IM 服务有开关，控制只可以撤回自己发送的消息
+    当服务该开关打开时，撤回别人的消息会报这个错误
+    @Since 5.2.4
+    */
+    RC_RECALL_MESSAGE_USER_INVALID = 25107,
 
     /*!
     push 设置参数无效。请确认是否正确的填写了 push 参数。
@@ -897,7 +908,13 @@ typedef NS_ENUM(NSInteger, RCErrorCode) {
      可能原因：开发者调用接口传入的 rtcRoomId 参数类型不对或者参数为 nil。
      处理建议：请检查参数是否合法。
      */
-    INVALID_PARAMETER_RTCROOMID = 34230
+    INVALID_PARAMETER_RTCROOMID = 34230,
+    /*!
+     描述：无效的超级群频道类型。
+     可能原因：开发者调用接口传入的 channelType 参数类型不对。
+     处理建议：请检查参数是否合法。
+     */
+    INVALID_PARAMETER_CHANNEL_TYPE = 34231
 
 };
 
@@ -1503,6 +1520,9 @@ typedef NS_ENUM(NSUInteger, RCMessageBlockType) {
 typedef NS_ENUM(NSInteger, RCPushNotificationLevel) {
     /*!
      全部消息通知（接收全部消息通知 -- 显示指定关闭免打扰功能）
+     @discussion 超级群设置全部消息通知时
+        @ 消息一定收到推送通知
+        普通消息的推送频率受到超级群服务端默认推送频率设置的影响，无法做到所有普通消息都通知
      */
     RCPushNotificationLevelAllMessage = -1,
     /*!
@@ -1542,5 +1562,33 @@ typedef NS_ENUM(NSInteger, RCPushNotificationQuietHoursLevel) {
      */
     RCPushNotificationQuietHoursLevelBlocked = 5,
 };
+
+typedef NS_ENUM(NSInteger, RCUltraGroupChannelType) {
+    /*!
+     超级群公有频道
+     */
+    RCUltraGroupChannelTypePublic = 0,
+    /*!
+     超级群私有频道
+     */
+    RCUltraGroupChannelTypePrivate = 1
+};
+
+
+typedef NS_ENUM(NSInteger, RCUltraGroupChannelChangeType) {
+    /*!
+     超级群公有频道变成了私有频道
+     */
+    RCUltraGroupChannelChangeTypePublicToPrivate = 2,
+    /*!
+     超级群私有频道变成了共有频道
+     */
+    RCUltraGroupChannelChangeTypePrivateToPublic = 3,
+    /*!
+     超级群公有频道变成了私有频道，但是当前用户不再该私有频道中
+     */
+    RCUltraGroupChannelChangeTypePublicToPrivateUserNotIn = 6
+};
+
 
 #endif

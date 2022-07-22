@@ -38,8 +38,8 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)joinChatRoom:(NSString *)targetId
         messageCount:(int)messageCount
-             success:(void (^)(void))successBlock
-               error:(void (^)(RCErrorCode status))errorBlock;
+             success:(nullable void (^)(void))successBlock
+               error:(nullable void (^)(RCErrorCode status))errorBlock;
 
 /*!
  加入已经存在的聊天室（如果聊天室不存在返回错误 23410，人数超限返回错误 23411）
@@ -66,8 +66,8 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)joinExistChatRoom:(NSString *)targetId
              messageCount:(int)messageCount
-                  success:(void (^)(void))successBlock
-                    error:(void (^)(RCErrorCode status))errorBlock;
+                  success:(nullable void (^)(void))successBlock
+                    error:(nullable void (^)(RCErrorCode status))errorBlock;
 
 /*!
  退出聊天室
@@ -80,8 +80,8 @@ NS_ASSUME_NONNULL_BEGIN
  @remarks 聊天室
  */
 - (void)quitChatRoom:(NSString *)targetId
-             success:(void (^)(void))successBlock
-               error:(void (^)(RCErrorCode status))errorBlock;
+             success:(nullable void (^)(void))successBlock
+               error:(nullable void (^)(RCErrorCode status))errorBlock;
 
 /*!
  获取聊天室的信息（包含部分成员信息和当前聊天室中的成员总数）
@@ -104,8 +104,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)getChatRoomInfo:(NSString *)targetId
                   count:(int)count
                   order:(RCChatRoomMemberOrder)order
-                success:(void (^)(RCChatRoomInfo *chatRoomInfo))successBlock
-                  error:(void (^)(RCErrorCode status))errorBlock;
+                success:(nullable void (^)(RCChatRoomInfo *chatRoomInfo))successBlock
+                  error:(nullable void (^)(RCErrorCode status))errorBlock;
 
 /*!
  设置 IMLib 的聊天室状态监听器
@@ -134,8 +134,8 @@ NS_ASSUME_NONNULL_BEGIN
                               recordTime:(long long)recordTime
                                    count:(int)count
                                    order:(RCTimestampOrder)order
-                                 success:(void (^)(NSArray<RCMessage *> *messages, long long syncTime))successBlock
-                                   error:(void (^)(RCErrorCode status))errorBlock;
+                                 success:(nullable void (^)(NSArray<RCMessage *> *messages, long long syncTime))successBlock
+                                   error:(nullable void (^)(RCErrorCode status))errorBlock;
 
 #pragma mark - 聊天室状态存储 (使用前必须先联系商务开通)
 /*!
@@ -197,8 +197,8 @@ NS_ASSUME_NONNULL_BEGIN
         sendNotification:(BOOL)sendNotification
               autoDelete:(BOOL)autoDelete
        notificationExtra:(NSString *)notificationExtra
-                 success:(void (^)(void))successBlock
-                   error:(void (^)(RCErrorCode nErrorCode))errorBlock;
+                 success:(nullable void (^)(void))successBlock
+                   error:(nullable void (^)(RCErrorCode nErrorCode))errorBlock;
 
 /**
  强制设置聊天室自定义属性
@@ -224,8 +224,8 @@ NS_ASSUME_NONNULL_BEGIN
              sendNotification:(BOOL)sendNotification
                    autoDelete:(BOOL)autoDelete
             notificationExtra:(NSString *)notificationExtra
-                      success:(void (^)(void))successBlock
-                        error:(void (^)(RCErrorCode nErrorCode))errorBlock;
+                      success:(nullable void (^)(void))successBlock
+                        error:(nullable void (^)(RCErrorCode nErrorCode))errorBlock;
 
 /**
  批量设置聊天室自定义属性
@@ -245,8 +245,8 @@ NS_ASSUME_NONNULL_BEGIN
                    entries:(NSDictionary<NSString *, NSString *> *)entries
                    isForce:(BOOL)isForce
                 autoDelete:(BOOL)autoDelete
-                   success:(void (^)(void))successBlock
-                     error:(void (^)(RCErrorCode nErrorCode, NSDictionary<NSString *,NSNumber *> *failureEntries))errorBlock;
+                   success:(nullable void (^)(void))successBlock
+                     error:(nullable void (^)(RCErrorCode nErrorCode, NSDictionary<NSString *,NSNumber *> *failureEntries))errorBlock;
 
 /**
  获取聊天室单个属性
@@ -262,8 +262,8 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)getChatRoomEntry:(NSString *)chatroomId
                      key:(NSString *)key
-                 success:(void (^)(NSDictionary<NSString *,NSString *> *entry))successBlock
-                   error:(void (^)(RCErrorCode nErrorCode))errorBlock;
+                 success:(nullable void (^)(NSDictionary<NSString *,NSString *> *entry))successBlock
+                   error:(nullable void (^)(RCErrorCode nErrorCode))errorBlock;
 
 /**
  获取聊天室所有自定义属性
@@ -277,8 +277,8 @@ NS_ASSUME_NONNULL_BEGIN
  @remarks 聊天室
  */
 - (void)getAllChatRoomEntries:(NSString *)chatroomId
-                      success:(void (^)(NSDictionary<NSString *, NSString *> *entry))successBlock
-                        error:(void (^)(RCErrorCode nErrorCode))errorBlock;
+                      success:(nullable void (^)(NSDictionary<NSString *, NSString *> *entry))successBlock
+                        error:(nullable void (^)(RCErrorCode nErrorCode))errorBlock;
 
 /**
  删除聊天室自定义属性
@@ -300,8 +300,8 @@ NS_ASSUME_NONNULL_BEGIN
                         key:(NSString *)key
            sendNotification:(BOOL)sendNotification
           notificationExtra:(NSString *)notificationExtra
-                    success:(void (^)(void))successBlock
-                      error:(void (^)(RCErrorCode nErrorCode))errorBlock;
+                    success:(nullable void (^)(void))successBlock
+                      error:(nullable void (^)(RCErrorCode nErrorCode))errorBlock;
 
 /**
  强制删除聊天室自定义属性
@@ -323,8 +323,8 @@ NS_ASSUME_NONNULL_BEGIN
                              key:(NSString *)key
                 sendNotification:(BOOL)sendNotification
                notificationExtra:(NSString *)notificationExtra
-                         success:(void (^)(void))successBlock
-                           error:(void (^)(RCErrorCode nErrorCode))errorBlock;
+                         success:(nullable void (^)(void))successBlock
+                           error:(nullable void (^)(RCErrorCode nErrorCode))errorBlock;
 
 /**
  批量删除聊天室自定义属性
@@ -342,8 +342,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)removeChatRoomEntries:(NSString *)chatroomId
                          keys:(NSArray<NSString *> *)keys
                       isForce:(BOOL)isForce
-                      success:(void (^)(void))successBlock
-                        error:(void (^)(RCErrorCode nErrorCode, NSDictionary<NSString *, NSNumber *> *failureEntries))errorBlock;
+                      success:(nullable void (^)(void))successBlock
+                        error:(nullable void (^)(RCErrorCode nErrorCode, NSDictionary<NSString *, NSNumber *> *failureEntries))errorBlock;
 
 #pragma mark - 聊天室成员变化监听器
 
@@ -354,7 +354,7 @@ NS_ASSUME_NONNULL_BEGIN
 
  @remarks 功能设置
  */
-@property (nonatomic, weak) id<RCChatRoomMemberDelegate> memberDelegate;
+@property (nonatomic, weak, nullable) id<RCChatRoomMemberDelegate> memberDelegate;
 
 
 
@@ -365,8 +365,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param errorBlock 失败回调
 - (void)bindChatRoom:(NSString *)chatRoomId
          withRTCRoom:(NSString *)rtcRoomId
-             success:(void(^)(void))successBlock
-               error:(void (^)(RCErrorCode nErrorCode))errorBlock;
+             success:(nullable void(^)(void))successBlock
+               error:(nullable void (^)(RCErrorCode nErrorCode))errorBlock;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -28,8 +28,8 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)searchPublicService:(RCSearchType)searchType
                   searchKey:(NSString *)searchKey
-                    success:(void (^)(NSArray<RCPublicServiceProfile *> *accounts))successBlock
-                      error:(void (^)(RCErrorCode status))errorBlock;
+                    success:(nullable void (^)(NSArray<RCPublicServiceProfile *> *accounts))successBlock
+                      error:(nullable void (^)(RCErrorCode status))errorBlock;
 
 /*!
  按类型查找公众服务账号
@@ -46,8 +46,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)searchPublicServiceByType:(RCPublicServiceType)publicServiceType
                        searchType:(RCSearchType)searchType
                         searchKey:(NSString *)searchKey
-                          success:(void (^)(NSArray<RCPublicServiceProfile *> *accounts))successBlock
-                            error:(void (^)(RCErrorCode status))errorBlock;
+                          success:(nullable void (^)(NSArray<RCPublicServiceProfile *> *accounts))successBlock
+                            error:(nullable void (^)(RCErrorCode status))errorBlock;
 
 /*!
  关注公众服务账号
@@ -61,8 +61,8 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)subscribePublicService:(RCPublicServiceType)publicServiceType
                publicServiceId:(NSString *)publicServiceId
-                       success:(void (^)(void))successBlock
-                         error:(void (^)(RCErrorCode status))errorBlock;
+                       success:(nullable void (^)(void))successBlock
+                         error:(nullable void (^)(RCErrorCode status))errorBlock;
 
 /*!
  取消关注公众服务账号
@@ -76,8 +76,8 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)unsubscribePublicService:(RCPublicServiceType)publicServiceType
                  publicServiceId:(NSString *)publicServiceId
-                         success:(void (^)(void))successBlock
-                           error:(void (^)(RCErrorCode status))errorBlock;
+                         success:(nullable void (^)(void))successBlock
+                           error:(nullable void (^)(RCErrorCode status))errorBlock;
 
 /*!
  查询已关注的公众服务账号
@@ -117,8 +117,8 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)getPublicServiceProfile:(NSString *)targetId
                conversationType:(RCConversationType)type
-                      onSuccess:(void (^)(RCPublicServiceProfile *serviceProfile))onSuccess
-                        onError:(void (^)(RCErrorCode errorCode))onError;
+                      onSuccess:(nullable void (^)(RCPublicServiceProfile *serviceProfile))onSuccess
+                        onError:(nullable void (^)(RCErrorCode errorCode))onError;
 
 /*!
  获取公众服务使用的 WebView Controller

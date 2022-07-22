@@ -37,7 +37,7 @@
  升级说明：如果您之前使用了此接口，请参考下面代码把参数从 url 替换成 message。
  if ([currentMessage.content isKindOfClass:[RCImageMessage class]]) {
     RCImageMessage *content = (RCImageMessage *)currentMessage.content;
-    content.imageUrl = remoteUrl;
+    content.remoteUrl = remoteUrl;
     successBlock(content);
  } else if ([currentMessage.content isKindOfClass:[RCFileMessage class]]) {
     RCFileMessage *content = (RCFilemessage *)currentMessage.content;
