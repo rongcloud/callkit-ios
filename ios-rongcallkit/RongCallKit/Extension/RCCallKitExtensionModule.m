@@ -12,6 +12,9 @@
 #import "RCCallKitUtility.h"
 #import "RCCallTipMessageCell.h"
 
+// appkey 默认长度
+static NSInteger kAppkeyLength = 13 ;
+
 @implementation RCCallKitExtensionModule
 
 /*!
@@ -49,7 +52,7 @@
         //  其他端接听显示的消息不可点击
         if (messageModel.conversationType == ConversationType_PRIVATE &&
             callMessage.hangupReason != RCCallDisconnectReasonAcceptByOtherClient) {
-            [[RCCall sharedRCCall] startSingleCall:messageModel.targetId mediaType:callMessage.mediaType];
+            [self startSingleCall:messageModel.targetId mediaType:callMessage.mediaType];
         }
     }
 }
@@ -70,7 +73,7 @@
 
         if (conversationType == ConversationType_PRIVATE) {
             audioItem.tapBlock = ^(RCChatSessionInputBarControl *chatSessionInputBar) {
-                [[RCCall sharedRCCall] startSingleCall:targetId mediaType:RCCallMediaAudio];
+                [self startSingleCall:targetId mediaType:RCCallMediaAudio];
             };
         } else if (conversationType == ConversationType_GROUP || conversationType == ConversationType_DISCUSSION) {
             audioItem.tapBlock = ^(RCChatSessionInputBarControl *chatSessionInputBar) {
@@ -88,11 +91,11 @@
         videoItem.title = RCCallKitLocalizedString(@"VoIPVideoCall");
 
         videoItem.tapBlock = ^(RCChatSessionInputBarControl *chatSessionInputBar) {
-            [[RCCall sharedRCCall] startSingleCall:targetId mediaType:RCCallMediaVideo];
+            [self startSingleCall:targetId mediaType:RCCallMediaVideo];
         };
         if (conversationType == ConversationType_PRIVATE) {
             videoItem.tapBlock = ^(RCChatSessionInputBarControl *chatSessionInputBar) {
-                [[RCCall sharedRCCall] startSingleCall:targetId mediaType:RCCallMediaVideo];
+                [self startSingleCall:targetId mediaType:RCCallMediaVideo];
             };
         } else if (conversationType == ConversationType_GROUP || conversationType == ConversationType_DISCUSSION) {
             videoItem.tapBlock = ^(RCChatSessionInputBarControl *chatSessionInputBar) {
@@ -103,6 +106,27 @@
         [itemList addObject:videoItem];
     }
     return itemList;
+}
+
+- (void)startSingleCall:(NSString *)targetId mediaType:(RCCallMediaType)mediaType {
+    if ([self isCrossCallWithCheckString:targetId]) {
+        [[RCCall sharedRCCall] startSingleCrossCall:targetId mediaType:mediaType];
+    } else {
+        [[RCCall sharedRCCall] startSingleCall:targetId mediaType:mediaType];
+    }
+}
+
+- (BOOL )isCrossCallWithCheckString:(NSString *)targetId {
+    if ([targetId containsString:@"_"]) {
+        NSArray *targetIds = [targetId componentsSeparatedByString:@"_"] ;
+        if (targetIds.count > 1) {
+            NSString *tAppkey = targetIds[0] ;
+            if (tAppkey.length == kAppkeyLength) {
+                return YES;
+            }
+        }
+    }
+    return NO;
 }
 
 - (void)onMessageReceived:(RCMessage *)message {

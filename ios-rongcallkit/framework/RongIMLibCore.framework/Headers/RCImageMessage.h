@@ -18,6 +18,7 @@
  */
 #define RCImageMessageTypeIdentifier @"RC:ImgMsg"
 
+NS_ASSUME_NONNULL_BEGIN
 /*!
  图片消息类
 
@@ -38,17 +39,17 @@
  不再允许外部赋值，为只读属性
  本地地址使用 localPath， 远端地址使用 remoteUrl
  */
-@property (nonatomic, copy, readonly) NSString *imageUrl;
+@property (nonatomic, copy, readonly, nullable) NSString *imageUrl;
 
 /*!
  图片的本地路径
  */
-@property (nonatomic, copy) NSString *localPath;
+@property (nonatomic, copy, nullable) NSString *localPath;
 
 /*!
  图片消息的缩略图
  */
-@property (nonatomic, strong) UIImage *thumbnailImage;
+@property (nonatomic, strong, nullable) UIImage *thumbnailImage;
 
 /*!
  是否发送原图
@@ -60,12 +61,12 @@
 /*!
  图片消息的附加信息
  */
-@property (nonatomic, copy) NSString *extra;
+@property (nonatomic, copy, nullable) NSString *extra;
 
 /*!
  图片消息的原始图片信息
  */
-@property (nonatomic, strong) UIImage *originalImage;
+@property (nonatomic, strong, nullable) UIImage *originalImage;
 
 /*!
  图片消息的原始图片信息
@@ -73,7 +74,7 @@
  发送成功之后基于减少内存的考虑，该字段不再保存原始数据
  发送成功之后请优先使用 localPath 与 remoteUrl 进行展示
  */
-@property (nonatomic, strong, readonly) NSData *originalImageData;
+@property (nonatomic, strong, readonly, nullable) NSData *originalImageData;
 
 /*!
  初始化图片消息
@@ -106,3 +107,5 @@
 + (instancetype)messageWithImageData:(NSData *)imageData;
 
 @end
+
+NS_ASSUME_NONNULL_END

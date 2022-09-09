@@ -10,6 +10,8 @@
 #import <RongIMLibCore/RongIMLibCore.h>
 #import "RCCallCommonDefine.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 /*!
  通话摘要消息的类型名
  */
@@ -40,7 +42,7 @@
 /*!
  通话挂断时包含的用户ID列表
  */
-@property (nonatomic, strong) NSArray *memberIdList;
+@property (nonatomic, strong) NSArray<NSString *> *memberIdList;
 
 /*!
  通话开始时间
@@ -85,10 +87,12 @@
 - (instancetype)initWithCaller:(NSString *)caller
                        inviter:(NSString *)inviter
                      mediaType:(RCCallMediaType)mediaType
-                  memberIdList:(NSArray *)memberIdList
+                  memberIdList:(NSArray<NSString *> *)memberIdList
                      startTime:(long long)startTime
                  connectedTime:(long long)connectedTime
                       duration:(long long)duration
                   hangupReason:(RCCallDisconnectReason)hangupReason;
 
 @end
+
+NS_ASSUME_NONNULL_END

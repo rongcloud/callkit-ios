@@ -13,6 +13,9 @@
  小视频消息的类型名
  */
 #define RCSightMessageTypeIdentifier @"RC:SightMsg"
+
+NS_ASSUME_NONNULL_BEGIN
+
 @class AVAsset;
 /**
  小视频消息类
@@ -26,12 +29,12 @@
 /*!
  本地 URL 地址
  */
-@property (nonatomic, copy) NSString *localPath;
+@property (nonatomic, copy, nullable) NSString *localPath;
 
 /*!
  网络 URL 地址
  */
-@property (nonatomic, readonly) NSString *sightUrl;
+@property (nonatomic, readonly, nullable) NSString *sightUrl;
 
 /**
  视频时长，以秒为单位
@@ -51,7 +54,7 @@
 /*!
  缩略图
  */
-@property (nonatomic, strong, readonly) UIImage *thumbnailImage;
+@property (nonatomic, strong, readonly, nullable) UIImage *thumbnailImage;
 
 /**
  创建小视频消息的便利构造方法
@@ -64,3 +67,5 @@
 + (instancetype)messageWithLocalPath:(NSString *)path thumbnail:(UIImage *)image duration:(NSUInteger)duration;
 
 @end
+
+NS_ASSUME_NONNULL_END

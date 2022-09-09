@@ -10,6 +10,9 @@
 #import "RCGroupMessageReaderV2.h"
 #import "RCMessage.h"
 #import "RCGroupReadReceiptV2Protocol.h"
+
+NS_ASSUME_NONNULL_BEGIN
+
 @interface RCGroupReadReceiptV2Manager : NSObject
 /*!
  获取单例类
@@ -19,7 +22,7 @@
 /*!
  群已读回执代理
  */
-@property (nonatomic, weak) id<RCGroupReadReceiptV2Delegate> groupReadReceiptV2Delegate;
+@property (nonatomic, weak, nullable) id<RCGroupReadReceiptV2Delegate> groupReadReceiptV2Delegate;
 
 /*!
  发送阅读回执
@@ -37,10 +40,10 @@
  */
 - (void)sendReadReceiptResponse:(RCConversationType)conversationType
                        targetId:(NSString *)targetId
-                      channelId:(NSString *)channelId
+                      channelId:(nullable NSString *)channelId
                     messageList:(NSArray<RCMessage *> *)messageList
-                        success:(void (^)(void))successBlock
-                          error:(void (^)(RCErrorCode nErrorCode))errorBlock;
+                        success:(nullable void (^)(void))successBlock
+                          error:(nullable void (^)(RCErrorCode nErrorCode))errorBlock;
 
 /*!
  获取群消息已读用户列表
@@ -54,6 +57,8 @@
  @remarks 高级功能
  */
 - (void)getGroupMessageReaderList:(RCMessage *)message
-                          success:(void (^)(NSArray <RCGroupMessageReaderV2 *> *readerList, int totalCount))successBlock
-                            error:(void (^)(RCErrorCode nErrorCode))errorBlock;
+                          success:(nullable void (^)(NSArray <RCGroupMessageReaderV2 *> * _Nullable readerList, int totalCount))successBlock
+                            error:(nullable void (^)(RCErrorCode nErrorCode))errorBlock;
 @end
+
+NS_ASSUME_NONNULL_END

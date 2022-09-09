@@ -17,6 +17,7 @@
  */
 #define RCProfileNotificationMessageIdentifier @"RC:ProfileNtf"
 
+NS_ASSUME_NONNULL_BEGIN
 /*!
  公众服务账号信息变更消息类
 
@@ -34,7 +35,7 @@
 /*!
  信息变更的数据，可以为任意格式，如 json 数据。
  */
-@property (nonatomic, copy) NSString *data;
+@property (nonatomic, copy, nullable) NSString *data;
 
 /*!
  初始化公众服务账号信息变更消息
@@ -44,6 +45,8 @@
  @param extra       信息变更的附加信息
  @return            公众服务账号信息变更消息的对象
  */
-+ (instancetype)notificationWithOperation:(NSString *)operation data:(NSString *)data extra:(NSString *)extra;
++ (instancetype)notificationWithOperation:(NSString *)operation data:(nullable NSString *)data extra:(nullable NSString *)extra;
 
 @end
+
+NS_ASSUME_NONNULL_END

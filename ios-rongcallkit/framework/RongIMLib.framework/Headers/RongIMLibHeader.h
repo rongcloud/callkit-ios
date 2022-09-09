@@ -14,6 +14,5 @@
 #import <RongDiscussion/RongDiscussion.h>
 #import <RongPublicService/RongPublicService.h>
 #import <RongCustomerService/RongCustomerService.h>
-#import <RongLocation/RongLocation.h>
 
 #endif /* RongIMLibHeader_h */

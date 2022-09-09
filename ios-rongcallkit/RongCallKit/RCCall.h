@@ -68,8 +68,7 @@ UIKIT_EXTERN NSNotificationName const RCCallNewSessionCreationNotification;
  @warning  **已废弃，请勿使用。**
  升级说明：如果您之前使用了此属性，可以直接替换为[RCIM sharedRCIM]的groupMemberDataSource属性，行为和实现完全一致。
  */
-@property (nonatomic, weak) id<RCCallGroupMemberDataSource> groupMemberDataSource __deprecated_msg("已废弃，请勿使用。")
-    ;
+@property (nonatomic, weak) id<RCCallGroupMemberDataSource> groupMemberDataSource DEPRECATED_MSG_ATTRIBUTE("deprecated, please don't use") __attribute__((deprecated));
 
 /*!
  获取融云通话界面组件CallKit的核心类单例
@@ -105,6 +104,15 @@ UIKIT_EXTERN NSNotificationName const RCCallNewSessionCreationNotification;
  @param mediaType 使用的媒体类型
  */
 - (void)startSingleCall:(NSString *)targetId mediaType:(RCCallMediaType)mediaType;
+
+/*!
+ 
+ 发起单人跨应用通话
+
+ @param targetId  对方的用户ID（注意此处ID组成形式为Appkey+UserId, 格式为appkey_userid，注意下划线拼接）
+ @param mediaType 使用的媒体类型
+ */
+- (void)startSingleCrossCall:(NSString *)targetId mediaType:(RCCallMediaType)mediaType;
 
 /*!
  选择成员并发起多人通话

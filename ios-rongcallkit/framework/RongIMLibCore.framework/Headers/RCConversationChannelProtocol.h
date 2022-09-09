@@ -11,6 +11,9 @@
 
 #import <RongIMLibCore/RCUltraGroupChannelChangeInfo.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
+@class RCUserTypingStatus;
 @protocol RCConversationChannelMessageReceiptDelegate <NSObject>
 @optional
 /*!
@@ -59,7 +62,7 @@
 - (void)onTypingStatusChanged:(RCConversationType)conversationType
                      targetId:(NSString *)targetId
                     channelId:(NSString *)channelId
-                       status:(NSArray *)userTypingStatusList;
+                       status:(nullable NSArray<RCUserTypingStatus *> *)userTypingStatusList;
 @end
 
 #pragma mark - 超级群会话代理
@@ -120,4 +123,7 @@
 
 
 @end
+
+NS_ASSUME_NONNULL_END
+
 #endif /* RCConversationChannelProtocol_h */

@@ -17,6 +17,7 @@
  */
 #define RCInformationNotificationMessageIdentifier @"RC:InfoNtf"
 
+NS_ASSUME_NONNULL_BEGIN
 /*!
  通知消息类
 
@@ -38,6 +39,8 @@
  @param extra   通知的附加信息
  @return        通知消息对象
  */
-+ (instancetype)notificationWithMessage:(NSString *)message extra:(NSString *)extra;
++ (instancetype)notificationWithMessage:(NSString *)message extra:(nullable NSString *)extra;
 
 @end
+
+NS_ASSUME_NONNULL_END

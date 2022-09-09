@@ -32,6 +32,7 @@
  */
 #define ContactNotificationMessage_ContactOperationRejectResponse @"RejectResponse"
 
+NS_ASSUME_NONNULL_BEGIN
 /*!
  好友请求消息类
 
@@ -84,6 +85,8 @@
                              sourceUserId:(NSString *)sourceUserId
                              targetUserId:(NSString *)targetUserId
                                   message:(NSString *)message
-                                    extra:(NSString *)extra;
+                                    extra:(nullable NSString *)extra;
 
 @end
+
+NS_ASSUME_NONNULL_END

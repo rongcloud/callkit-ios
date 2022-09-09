@@ -6,19 +6,19 @@
 	<dict>
 		<key>Headers/RCAMRDataConverter.h</key>
 		<data>
-		AVIupQuiJPknNEzDOyHTf4mqi1k=
+		Gz7BofjOyj35Rh0IPTOadaOFFoc=
 		</data>
 		<key>Headers/RCAndroidConfig.h</key>
 		<data>
-		hNrl5GgSSYrAL6gAk7Acegeg8y0=
+		o4tJeMXhlu5NGJqdwmF2OumfOhs=
 		</data>
 		<key>Headers/RCBlockedMessageInfo.h</key>
 		<data>
-		GJLCMKOaDIOvMWtHzYBWc+SnANg=
+		M2nYDQBJEqXXKJF/59JK8ElizUQ=
 		</data>
 		<key>Headers/RCChannelClient.h</key>
 		<data>
-		ty5KD7kYbKEN4TdjohMTKdu8S04=
+		6dIX0FZHIKtD3y1hkYT8dhifls4=
 		</data>
 		<key>Headers/RCClearConversationOption.h</key>
 		<data>
@@ -26,23 +26,23 @@
 		</data>
 		<key>Headers/RCCommandMessage.h</key>
 		<data>
-		1AoWnSjwBfSi07cPfsnIjj1exEg=
+		k2D8iNkbPAZbUvho9X2vseuklQo=
 		</data>
 		<key>Headers/RCCommandNotificationMessage.h</key>
 		<data>
-		SXyigPzeQHPytufKkCuqdaRJ5dw=
+		U3UFRVMcBM7VF+c2AxVgrqNaSYo=
 		</data>
 		<key>Headers/RCContactNotificationMessage.h</key>
 		<data>
-		sb8MhAi0iCZmim7LPrZwfSiXjlA=
+		dYvk+0NwdJE/6xXyUzLS2rJWX6o=
 		</data>
 		<key>Headers/RCConversation.h</key>
 		<data>
-		BamFN+eftHzVvHbaRyc8OtWkuB0=
+		PMR4skNxS8S5EEmWKeegXLNYb/Y=
 		</data>
 		<key>Headers/RCConversationChannelProtocol.h</key>
 		<data>
-		ZjjCVJ4LfQdvFkjUNP8WiDCVtuI=
+		0/Bz2c0HyN/nCnGdHG4e/mbXS7c=
 		</data>
 		<key>Headers/RCConversationIdentifier.h</key>
 		<data>
@@ -50,31 +50,31 @@
 		</data>
 		<key>Headers/RCConversationStatusInfo.h</key>
 		<data>
-		Jr0IUdIdyFMpP1XlXHdPqkWMR9M=
+		aD6/raOnjH97EoT/Vjgb4z8tj30=
 		</data>
 		<key>Headers/RCConversationTagInfo.h</key>
 		<data>
-		HM1KWm1/AtYOFpH0rYLI1Yq4MzE=
+		BEN3TeZmyGzFfWowEkKT732SH1c=
 		</data>
 		<key>Headers/RCCoreClient.h</key>
 		<data>
-		a2rVcC5ryReHOdhGLvQxKW/aOLI=
+		P/KEWH2u+8expvgKO4L0OtPNuww=
 		</data>
 		<key>Headers/RCDownloadItem.h</key>
 		<data>
-		ZPiSelcBbkbw3oZhy0/AEev0ht8=
+		vS0IlZU7O+2qhTka+MeyBzTcRbM=
 		</data>
 		<key>Headers/RCFileMessage.h</key>
 		<data>
-		3kn+lv+Z6FKqcRTV7tv2xZTr4I4=
+		BRAlctDpW/TXE7YQSQx8HlqCo3s=
 		</data>
 		<key>Headers/RCFileUtility.h</key>
 		<data>
-		JxaiENTXCRiTjaGLiZBXJBxO4xU=
+		g1qHo08ujjmwPHcidw2WZl1pzXk=
 		</data>
 		<key>Headers/RCFwLog.h</key>
 		<data>
-		ZpyGDDdAPr5JFObvtufulzbnZF0=
+		4py9g0xZta+W9sx/Ye2HgqzQuj8=
 		</data>
 		<key>Headers/RCGIFMessage.h</key>
 		<data>
@@ -82,11 +82,11 @@
 		</data>
 		<key>Headers/RCGroup.h</key>
 		<data>
-		0HDYoIz60ALjFnGjMh3/DIllFJM=
+		vvGokUfz75PQEXdJ8klZSgfDVok=
 		</data>
 		<key>Headers/RCGroupMessageReaderV2.h</key>
 		<data>
-		+as9ZWjNyf2aqk/qff2YPmARuv4=
+		6ul0ut7eqsLfLki2/l9fNGk1+xY=
 		</data>
 		<key>Headers/RCGroupNotificationMessage.h</key>
 		<data>
@@ -94,15 +94,15 @@
 		</data>
 		<key>Headers/RCGroupReadReceiptInfoV2.h</key>
 		<data>
-		ATIyUu9UCLWt8E17M1gcYcjRyOw=
+		V4f0AuBKt6Mxff1SOgKQP8utp7g=
 		</data>
 		<key>Headers/RCGroupReadReceiptV2Manager.h</key>
 		<data>
-		xp/C6EF0ddB9RzVFaCySURY6hTQ=
+		ItyRcJgHUaGNqC959lO1x80yJT0=
 		</data>
 		<key>Headers/RCGroupReadReceiptV2Protocol.h</key>
 		<data>
-		uEeMDf00cCvrOWTR4v/ribT7VgU=
+		8fnsOKhvHou/YUkfltSTNjsNyDY=
 		</data>
 		<key>Headers/RCHQVoiceMessage.h</key>
 		<data>
@@ -110,11 +110,11 @@
 		</data>
 		<key>Headers/RCHistoryMessageOption.h</key>
 		<data>
-		AQ0CYe03WijPFyiZenvXjg/B3NU=
+		5oDPYh097TLyC/Ms/k9+unFey4g=
 		</data>
 		<key>Headers/RCIMClientProtocol.h</key>
 		<data>
-		+YSrS1x8W1zHd/jJwvrGjkvGX9g=
+		QaJ+SfwuQFvAzu2IfFLlxOf1s24=
 		</data>
 		<key>Headers/RCImageCompressConfig.h</key>
 		<data>
@@ -122,59 +122,63 @@
 		</data>
 		<key>Headers/RCImageMessage.h</key>
 		<data>
-		M0oecdBdt7Gws41P/RFwJPo0OTI=
+		hxTj4XkDj40E91PP5d7XZsViV5I=
 		</data>
 		<key>Headers/RCInformationNotificationMessage.h</key>
 		<data>
-		9zomQm52GGcZ8Im30CTtXDlldLQ=
+		QNWmWnXomcQRViynhBe0DPLm1cc=
 		</data>
 		<key>Headers/RCMediaMessageContent.h</key>
 		<data>
-		a7AuHKj6D1Ckv192AMeIK8Su/Wg=
+		OT+1eJPEj6kRa2pndwpb9KyM1i8=
 		</data>
 		<key>Headers/RCMentionedInfo.h</key>
 		<data>
-		iJ8Mt+G9CvIZdTNuw/njH5Ikh0U=
+		EZMNlfPFg5YAVi8wOm5MYii30Js=
 		</data>
 		<key>Headers/RCMessage.h</key>
 		<data>
-		6N46uy1KPqvcEPqkgGxd/2s1kmE=
+		T5x/Ylj5B1FKsrubn3mt7sDIqmU=
 		</data>
 		<key>Headers/RCMessageConfig.h</key>
 		<data>
-		b8ZW/CAaBBuEjDuWy/h+UCvl7Kc=
+		3j50XePZQhIQvpWmxpDwwO5qsWI=
 		</data>
 		<key>Headers/RCMessageContent.h</key>
 		<data>
-		/c+td1hE0JV2nrXA3J9Y3CrNjRk=
+		y8GpRC1GY5WpyYoTa4xkPtdoW1Y=
+		</data>
+		<key>Headers/RCMessageDigestInfo.h</key>
+		<data>
+		+/L4Qn9xrbkPIIr3gSQWDA0qbCA=
 		</data>
 		<key>Headers/RCMessagePushConfig.h</key>
 		<data>
-		k6s7V8p+JKG1G3cUUFGSqWfuQ3E=
+		73rWqzSLj8bKWGlpAZWgrgj0Cqo=
 		</data>
 		<key>Headers/RCProfileNotificationMessage.h</key>
 		<data>
-		MP9SiKfcuQh9LXR3FMxsLTzZFn8=
+		0lOyzmS1xrQ4qeMABtGIOvkL8fk=
 		</data>
 		<key>Headers/RCPushProfile.h</key>
 		<data>
-		3I4xJgvNaCr7AD4LtNzJrmHal24=
+		i16dnb0JAR4XIcMGt+SkamzoxsY=
 		</data>
 		<key>Headers/RCReadReceiptInfo.h</key>
 		<data>
-		JyFDQSxJY/ABvRBiAGMekXyyj4U=
+		ZWQgvPIOwrIFs4Iv40RU5dCtPE8=
 		</data>
 		<key>Headers/RCRecallNotificationMessage.h</key>
 		<data>
-		jA80IAIentTwJweZ/KJ6kEGzdMw=
+		00vICjw8Gh4q59RTaW02J8f8ZkE=
 		</data>
 		<key>Headers/RCReferenceMessage.h</key>
 		<data>
-		joT5k/ra2aQmIATqSQEC6cx5fgo=
+		jyg8TYQFvJjJZ1/FmFG3plld85U=
 		</data>
 		<key>Headers/RCRemoteHistoryMsgOption.h</key>
 		<data>
-		T/nzUX82K9fZ90mQsHYXzZ+XKVA=
+		HtwkaeIZqRK3ARBOtOrMLykEw80=
 		</data>
 		<key>Headers/RCResumeableDownloader.h</key>
 		<data>
@@ -182,11 +186,11 @@
 		</data>
 		<key>Headers/RCRichContentMessage.h</key>
 		<data>
-		2QUQVjLWaUlerN2FoAe+433PSxE=
+		nt5kJiBPp6TBGD4IgXmvcur6uPg=
 		</data>
 		<key>Headers/RCSearchConversationResult.h</key>
 		<data>
-		QG+FhPydTzS2cQhigbMmIzgye4M=
+		XmaBRbd7jVep11q6GcPX/8/7SdI=
 		</data>
 		<key>Headers/RCSendMessageOption.h</key>
 		<data>
@@ -194,11 +198,11 @@
 		</data>
 		<key>Headers/RCSightMessage.h</key>
 		<data>
-		jyGablttrtwZloLhtjbzi3XkzgQ=
+		ExFCbYVH1qwd6DPuetayn9sI7x4=
 		</data>
 		<key>Headers/RCStatusDefine.h</key>
 		<data>
-		qzAy6Q3Mo90eK+/OmX1sFNpI7XI=
+		JH/bkEJ6/H3lyUvxahnr+V5VknU=
 		</data>
 		<key>Headers/RCStatusMessage.h</key>
 		<data>
@@ -210,7 +214,7 @@
 		</data>
 		<key>Headers/RCTagInfo.h</key>
 		<data>
-		EgX/q+PzHrsM8QVCluionoXsWi0=
+		AFPYAsvj1u/dtTaCreF4I0Xb6PU=
 		</data>
 		<key>Headers/RCTagProtocol.h</key>
 		<data>
@@ -218,7 +222,7 @@
 		</data>
 		<key>Headers/RCTextMessage.h</key>
 		<data>
-		yHZSRRW91wj6LD9OCG5ZizBxmeA=
+		Au3Uoy8jJAGJNKoPW+U2uLfG1+c=
 		</data>
 		<key>Headers/RCUltraGroupChannelChangeInfo.h</key>
 		<data>
@@ -234,23 +238,23 @@
 		</data>
 		<key>Headers/RCUploadImageStatusListener.h</key>
 		<data>
-		OtHms1nSoaQUVebPxrzhq2ilFXg=
+		wLL07JWuzgkj2rmPMkAKmLCV8Hk=
 		</data>
 		<key>Headers/RCUploadMediaStatusListener.h</key>
 		<data>
-		mKUT4nEbmH68er1ldL3oNYtAHNU=
+		5Un3XkiBvMKdvhK5zhjiNAhy2OM=
 		</data>
 		<key>Headers/RCUserInfo.h</key>
 		<data>
-		qLyC/mAslkgHy6MAcsRjBa/bVdM=
+		oNpVv8zN6vouZVIOD2NfrKaU0Pk=
 		</data>
 		<key>Headers/RCUserOnlineStatusInfo.h</key>
 		<data>
-		SAg5Z2mi9aaDw0QUFhK9jovW3EM=
+		wfXLBN60X48e0jHH/pw4tjQZ2tc=
 		</data>
 		<key>Headers/RCUserTypingStatus.h</key>
 		<data>
-		x7qL2bld3Fisb3Re4THyfhS3x8s=
+		AQmX5DDD1YtvQ8Bc5K3W1kIw6Hk=
 		</data>
 		<key>Headers/RCUtilities.h</key>
 		<data>
@@ -258,19 +262,19 @@
 		</data>
 		<key>Headers/RCVoiceMessage.h</key>
 		<data>
-		Gf+MkoSPGP3ylEJnAczZEt9sIqY=
+		KZ04fFlYsSYTZzjqaitgg9Bd3ZM=
 		</data>
 		<key>Headers/RCWatchKitStatusDelegate.h</key>
 		<data>
-		YS4aari0tnRXs/1oIprlMqZPoWs=
+		6mNHcfeAyun8RIuAn85OnfkUxbY=
 		</data>
 		<key>Headers/RCiOSConfig.h</key>
 		<data>
-		waKOi/TpRg/ETWSDx6VZU24rPok=
+		imqN5ET/f0Rq1L/ZPHulDVBYm+o=
 		</data>
 		<key>Headers/RongIMLibCore.h</key>
 		<data>
-		l66dmRpmBz6U4A4DCfwTJLfsWxQ=
+		oceHrvez2tg/x+cikiuQuARbW/8=
 		</data>
 		<key>Headers/interf_dec.h</key>
 		<data>
@@ -295,44 +299,44 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			AVIupQuiJPknNEzDOyHTf4mqi1k=
+			Gz7BofjOyj35Rh0IPTOadaOFFoc=
 			</data>
 			<key>hash2</key>
 			<data>
-			9lam3ciX9Qz3CczNdLDcXiOxZYAfnU5fMHli2pzCIeM=
+			HhL9vEhXBmIOqPGc8ZzltfnLRLEJJrPhNWznl5jrmW8=
 			</data>
 		</dict>
 		<key>Headers/RCAndroidConfig.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			hNrl5GgSSYrAL6gAk7Acegeg8y0=
+			o4tJeMXhlu5NGJqdwmF2OumfOhs=
 			</data>
 			<key>hash2</key>
 			<data>
-			/uBPubOMK0KJzF9Hw3ZdJMun5zAONPBE3kn5c8Qvtlk=
+			4Qgq0JRcOp35GteGyGlSd8tXm7szB2IxIo/1DWhMgKE=
 			</data>
 		</dict>
 		<key>Headers/RCBlockedMessageInfo.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			GJLCMKOaDIOvMWtHzYBWc+SnANg=
+			M2nYDQBJEqXXKJF/59JK8ElizUQ=
 			</data>
 			<key>hash2</key>
 			<data>
-			s6opmd5XZ5B6dWSGMsf94YbEzS49QkrQvfbQhPUxyEA=
+			j8XXNvDRjeyd6Pa/v2Whw5ORPIVgu0JoWQmm9R0dljU=
 			</data>
 		</dict>
 		<key>Headers/RCChannelClient.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			ty5KD7kYbKEN4TdjohMTKdu8S04=
+			6dIX0FZHIKtD3y1hkYT8dhifls4=
 			</data>
 			<key>hash2</key>
 			<data>
-			jy4W+xqfIhFxsNcil78f9tOSEyt9PbXqmfnKb9dKTq0=
+			rr3PO7pGfxcPdjRMH65eDdJj9ox+ZjsIwo/eEHJsby0=
 			</data>
 		</dict>
 		<key>Headers/RCClearConversationOption.h</key>
@@ -350,55 +354,55 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			1AoWnSjwBfSi07cPfsnIjj1exEg=
+			k2D8iNkbPAZbUvho9X2vseuklQo=
 			</data>
 			<key>hash2</key>
 			<data>
-			nACpEqvBNeZWtStMyxLrwt7ScoavuFmQci9pjveW3k8=
+			Zq1bt+dNrcEiBKRuy4p46181i3KkbLfKhK3peIF7+0A=
 			</data>
 		</dict>
 		<key>Headers/RCCommandNotificationMessage.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			SXyigPzeQHPytufKkCuqdaRJ5dw=
+			U3UFRVMcBM7VF+c2AxVgrqNaSYo=
 			</data>
 			<key>hash2</key>
 			<data>
-			RO/TmRSYfkRyFhDcS5EQAMxdjp2V6Ua10BavoqeEe/M=
+			/FJEgWMF8h0x9en1ORNiX84Wfj3UG+Wa6GXSjy9jiWM=
 			</data>
 		</dict>
 		<key>Headers/RCContactNotificationMessage.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			sb8MhAi0iCZmim7LPrZwfSiXjlA=
+			dYvk+0NwdJE/6xXyUzLS2rJWX6o=
 			</data>
 			<key>hash2</key>
 			<data>
-			qxgNs8v0vm2RXqSj5nZIZJ/UHW+Alq2qevH27wv9pAY=
+			otIg6C9RGhH0MyWL11ss/HLUbepNIwbrV0v/I0knfuA=
 			</data>
 		</dict>
 		<key>Headers/RCConversation.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			BamFN+eftHzVvHbaRyc8OtWkuB0=
+			PMR4skNxS8S5EEmWKeegXLNYb/Y=
 			</data>
 			<key>hash2</key>
 			<data>
-			5E9Qte5Dk46k1bbiIvbgHjrsQixMbfXGercJxPVgytU=
+			inmw7WZzkojZ1pSLlOR+xG3hNPAXoD2YUuYDmCoKbZc=
 			</data>
 		</dict>
 		<key>Headers/RCConversationChannelProtocol.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			ZjjCVJ4LfQdvFkjUNP8WiDCVtuI=
+			0/Bz2c0HyN/nCnGdHG4e/mbXS7c=
 			</data>
 			<key>hash2</key>
 			<data>
-			dlw1APap2gvbBdbqZqdwdqOMKqttvlwxy2K+9ICOzmw=
+			gNl83Oho+0MjYIuY4eapMbNOifIwIP047N9JU7YNkJc=
 			</data>
 		</dict>
 		<key>Headers/RCConversationIdentifier.h</key>
@@ -416,77 +420,77 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			Jr0IUdIdyFMpP1XlXHdPqkWMR9M=
+			aD6/raOnjH97EoT/Vjgb4z8tj30=
 			</data>
 			<key>hash2</key>
 			<data>
-			oQGRjUfTNg8eEsIvO/E4Q128htdJvML3DaY7Wc+bK/I=
+			q1ZWQkhJ8LAHJYpZADoVK9ym5iyLpnaZdrapQnmmFFM=
 			</data>
 		</dict>
 		<key>Headers/RCConversationTagInfo.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			HM1KWm1/AtYOFpH0rYLI1Yq4MzE=
+			BEN3TeZmyGzFfWowEkKT732SH1c=
 			</data>
 			<key>hash2</key>
 			<data>
-			ElEjkCvKKe1SDsKoaJF/8OrGEk52ODRa57LvXPyxshc=
+			aUUXh5GwIV1gYv5IdC4Ydw+2R8ZbLRyWfL2S2EIdku0=
 			</data>
 		</dict>
 		<key>Headers/RCCoreClient.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			a2rVcC5ryReHOdhGLvQxKW/aOLI=
+			P/KEWH2u+8expvgKO4L0OtPNuww=
 			</data>
 			<key>hash2</key>
 			<data>
-			1WjdrKzKFHfTiLgbDovLt9vRk5xMx8w61uGIo8quhX4=
+			pAZvxW3qYuxWTuo09Fb8rdhrq6t6P1eby822MxCsc9Y=
 			</data>
 		</dict>
 		<key>Headers/RCDownloadItem.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			ZPiSelcBbkbw3oZhy0/AEev0ht8=
+			vS0IlZU7O+2qhTka+MeyBzTcRbM=
 			</data>
 			<key>hash2</key>
 			<data>
-			hpzT80OfOmjraQBIvRk7UsntiaQOybW+JHlFjkYSlDY=
+			dsoOTr+GmB+Dyxs4zuoWEGk7PRCAETllgjiSsmGznpM=
 			</data>
 		</dict>
 		<key>Headers/RCFileMessage.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			3kn+lv+Z6FKqcRTV7tv2xZTr4I4=
+			BRAlctDpW/TXE7YQSQx8HlqCo3s=
 			</data>
 			<key>hash2</key>
 			<data>
-			OQbLkeUrwQd2QFBGkREdssGXSrYQrMF2mMwBjlaiycE=
+			756q9uEQXW42wFwmM80RmlNTEjLMa/YB5a8LtPAv3p4=
 			</data>
 		</dict>
 		<key>Headers/RCFileUtility.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			JxaiENTXCRiTjaGLiZBXJBxO4xU=
+			g1qHo08ujjmwPHcidw2WZl1pzXk=
 			</data>
 			<key>hash2</key>
 			<data>
-			o3biiE8JtR1lsSx6zDGpkgf0TDLHrEibZnW+aXvmYP4=
+			bNDXB9719KY8F/rfF/TaRX/bXCyxTftm5ChwGqVMIgM=
 			</data>
 		</dict>
 		<key>Headers/RCFwLog.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			ZpyGDDdAPr5JFObvtufulzbnZF0=
+			4py9g0xZta+W9sx/Ye2HgqzQuj8=
 			</data>
 			<key>hash2</key>
 			<data>
-			BrPsSGzpYtsqqHManIAn4yvlra60+pDu+B2BnOtTN4I=
+			am6Xxwj7UaFjAhxUKJlgcmH3jQoV/TvEsV+W+WAlDwI=
 			</data>
 		</dict>
 		<key>Headers/RCGIFMessage.h</key>
@@ -504,22 +508,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			0HDYoIz60ALjFnGjMh3/DIllFJM=
+			vvGokUfz75PQEXdJ8klZSgfDVok=
 			</data>
 			<key>hash2</key>
 			<data>
-			TANe1GcFLy1Qnf8jEIfz/WLM39+SIOlyOBz6GBe2les=
+			qqrEDgjXUd+3fTwUz2kIMJ4hhCRr2SePetI6bwjBdQQ=
 			</data>
 		</dict>
 		<key>Headers/RCGroupMessageReaderV2.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			+as9ZWjNyf2aqk/qff2YPmARuv4=
+			6ul0ut7eqsLfLki2/l9fNGk1+xY=
 			</data>
 			<key>hash2</key>
 			<data>
-			TIgTAjnn5HJsuE4r1nsIxIR1i5MWOricsxPhNS/hMzc=
+			kg0WcPlMn9ChjwBPWzAAQ4bLGZtnnXH8tpBnkxP1nQU=
 			</data>
 		</dict>
 		<key>Headers/RCGroupNotificationMessage.h</key>
@@ -537,33 +541,33 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			ATIyUu9UCLWt8E17M1gcYcjRyOw=
+			V4f0AuBKt6Mxff1SOgKQP8utp7g=
 			</data>
 			<key>hash2</key>
 			<data>
-			C5xHXn3Wn/NXi7N3ltkPBM8MeqMXmwHtcvgbbXuFEN4=
+			WXgsUQcDYft3vnh9i+gXT+to6+rAG3VuR0rLP/yqytA=
 			</data>
 		</dict>
 		<key>Headers/RCGroupReadReceiptV2Manager.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			xp/C6EF0ddB9RzVFaCySURY6hTQ=
+			ItyRcJgHUaGNqC959lO1x80yJT0=
 			</data>
 			<key>hash2</key>
 			<data>
-			TMmhYJa7rrv2WVapiF1RaC0YlOq6g4+cdvEuIOIqweI=
+			+g4i/+i4ld0m7bROZORcTdJs963rPT2Qgl3bUqlX3eQ=
 			</data>
 		</dict>
 		<key>Headers/RCGroupReadReceiptV2Protocol.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			uEeMDf00cCvrOWTR4v/ribT7VgU=
+			8fnsOKhvHou/YUkfltSTNjsNyDY=
 			</data>
 			<key>hash2</key>
 			<data>
-			Kf5agTO/5U6Y3HIZtZgp+b05BHAU06dfvihPWoHzGCM=
+			Wf7T76SzRqh8orvuwbLwf73pGbRN6nJAbwH5MQPqotY=
 			</data>
 		</dict>
 		<key>Headers/RCHQVoiceMessage.h</key>
@@ -581,22 +585,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			AQ0CYe03WijPFyiZenvXjg/B3NU=
+			5oDPYh097TLyC/Ms/k9+unFey4g=
 			</data>
 			<key>hash2</key>
 			<data>
-			W9giDAiAN3FEDCowFR1W7M5z/lNX5fBzsstSMDwkoYE=
+			8W/y6VcGenLTqJcj28hxU6+29/bmyDTk06IiJNYUjmo=
 			</data>
 		</dict>
 		<key>Headers/RCIMClientProtocol.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			+YSrS1x8W1zHd/jJwvrGjkvGX9g=
+			QaJ+SfwuQFvAzu2IfFLlxOf1s24=
 			</data>
 			<key>hash2</key>
 			<data>
-			gtFoU6VxSFJGnoUzVl1T57PI9yEIm3etob/g3ArQmr4=
+			nQrek88uPl5uvDy0+P2aZ0qJwLRJEuhLHue396DGL9M=
 			</data>
 		</dict>
 		<key>Headers/RCImageCompressConfig.h</key>
@@ -614,154 +618,165 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			M0oecdBdt7Gws41P/RFwJPo0OTI=
+			hxTj4XkDj40E91PP5d7XZsViV5I=
 			</data>
 			<key>hash2</key>
 			<data>
-			6VAZabALzU8YXMbHebvBXv6fzFBHQW49+6/vsHXmxDQ=
+			vbfpgz7GobYxINIYvwhFcbWxFefyux2uKnMApeB/CaA=
 			</data>
 		</dict>
 		<key>Headers/RCInformationNotificationMessage.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			9zomQm52GGcZ8Im30CTtXDlldLQ=
+			QNWmWnXomcQRViynhBe0DPLm1cc=
 			</data>
 			<key>hash2</key>
 			<data>
-			2Mh7sjBAuguVlAnXGWjcaCzJqw0b/Sw+OfNogO8Ksk4=
+			k0GwFJEFdc1l5wH1j6ILCeTtvXaagRKEIk9koBpHMmk=
 			</data>
 		</dict>
 		<key>Headers/RCMediaMessageContent.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			a7AuHKj6D1Ckv192AMeIK8Su/Wg=
+			OT+1eJPEj6kRa2pndwpb9KyM1i8=
 			</data>
 			<key>hash2</key>
 			<data>
-			B8TmNzIPK0FDrD8tCkebxnDNHODT/Bu2uFW+uA/6iac=
+			R3DPL3lYKh/Ww+NX9LHk9pPZEAF9NTxBqvX8lEG1esA=
 			</data>
 		</dict>
 		<key>Headers/RCMentionedInfo.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			iJ8Mt+G9CvIZdTNuw/njH5Ikh0U=
+			EZMNlfPFg5YAVi8wOm5MYii30Js=
 			</data>
 			<key>hash2</key>
 			<data>
-			MI3UhxTG8zIx8zTQ1KKYZ5BNR9fJiA3q+Sexu0DvJq4=
+			5fCeGNxQ9Ggj2ODru5tgK8MOjznEJDQs8uFaBxxlszQ=
 			</data>
 		</dict>
 		<key>Headers/RCMessage.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			6N46uy1KPqvcEPqkgGxd/2s1kmE=
+			T5x/Ylj5B1FKsrubn3mt7sDIqmU=
 			</data>
 			<key>hash2</key>
 			<data>
-			s6HnaYisJp91OJJ+mzhfyejHYnNPDLFSLxcZhfrj8Vk=
+			1QZMkCVykC4wXnpocndCOos8QhPbg5nMfwHhSkA2h+s=
 			</data>
 		</dict>
 		<key>Headers/RCMessageConfig.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			b8ZW/CAaBBuEjDuWy/h+UCvl7Kc=
+			3j50XePZQhIQvpWmxpDwwO5qsWI=
 			</data>
 			<key>hash2</key>
 			<data>
-			hEJiUPQ8mQUp9dTJ96wRDKCBS+sygq2W+2ZFUasVEec=
+			Bw5vB+R+TWXK4t2LmeIIbJWwYpZtk7iMYeQE/JjhIDg=
 			</data>
 		</dict>
 		<key>Headers/RCMessageContent.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			/c+td1hE0JV2nrXA3J9Y3CrNjRk=
+			y8GpRC1GY5WpyYoTa4xkPtdoW1Y=
 			</data>
 			<key>hash2</key>
 			<data>
-			HnVBHMBhq08a4jcYv1/RAMwpNQouGnTwg26Uu60f+nQ=
+			zOIGtqvStqaBEbI/dFRAqJ3xKod+jOCCav3vGz3YWME=
+			</data>
+		</dict>
+		<key>Headers/RCMessageDigestInfo.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			+/L4Qn9xrbkPIIr3gSQWDA0qbCA=
+			</data>
+			<key>hash2</key>
+			<data>
+			7qrrYxAgRIqLGVsJWc12mGflcEtWS9ah23II3dGTqi8=
 			</data>
 		</dict>
 		<key>Headers/RCMessagePushConfig.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			k6s7V8p+JKG1G3cUUFGSqWfuQ3E=
+			73rWqzSLj8bKWGlpAZWgrgj0Cqo=
 			</data>
 			<key>hash2</key>
 			<data>
-			YpacJswwNcvvR1pjGHIka7im9mjPSO98pp1t/OcupGk=
+			nl3ZDQ+qmW/8Jk8Pj/WdeimLRu3aSX+elHhMRSbKKrY=
 			</data>
 		</dict>
 		<key>Headers/RCProfileNotificationMessage.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			MP9SiKfcuQh9LXR3FMxsLTzZFn8=
+			0lOyzmS1xrQ4qeMABtGIOvkL8fk=
 			</data>
 			<key>hash2</key>
 			<data>
-			Zd7LqmTccCbya0EuA0K7GTEpG/SpFk0olSqtOk+X9EY=
+			Edvcypdf/josFK3/pjvkLEkXUO2M2+OJNrV/kbQ705s=
 			</data>
 		</dict>
 		<key>Headers/RCPushProfile.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			3I4xJgvNaCr7AD4LtNzJrmHal24=
+			i16dnb0JAR4XIcMGt+SkamzoxsY=
 			</data>
 			<key>hash2</key>
 			<data>
-			FaO5auSTfWLApSr47Euc74vxFQSGtccXj4WyDvmjoPA=
+			fNdQjCszuS8sYCtHLWUupqM3d+XFRleWnorDstsHGgs=
 			</data>
 		</dict>
 		<key>Headers/RCReadReceiptInfo.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			JyFDQSxJY/ABvRBiAGMekXyyj4U=
+			ZWQgvPIOwrIFs4Iv40RU5dCtPE8=
 			</data>
 			<key>hash2</key>
 			<data>
-			h8HlyBx1MainN3fBiM3JgKx9MlpnLrh4RKhxAHSLM+s=
+			3AHnf2vJrQ1dcV5JfZUy1Bs9XGlVsjKRBdPMFvmG4U8=
 			</data>
 		</dict>
 		<key>Headers/RCRecallNotificationMessage.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			jA80IAIentTwJweZ/KJ6kEGzdMw=
+			00vICjw8Gh4q59RTaW02J8f8ZkE=
 			</data>
 			<key>hash2</key>
 			<data>
-			8Rkys05uarm61nVoN/+TvR7OLr+5i02vwIihdEg30Xg=
+			M3gyS9IfSnP+E0LcbLp4I5AArVfJg52/VZ8hxhfwlzY=
 			</data>
 		</dict>
 		<key>Headers/RCReferenceMessage.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			joT5k/ra2aQmIATqSQEC6cx5fgo=
+			jyg8TYQFvJjJZ1/FmFG3plld85U=
 			</data>
 			<key>hash2</key>
 			<data>
-			rL7aVqAbsEd+36NAAAg1QKNu+kz5sQi2U4xj6gt9E3s=
+			z138B/xTwoCnMt1nu2Ag/l3qJhp48jbftAQ4yeqPu2E=
 			</data>
 		</dict>
 		<key>Headers/RCRemoteHistoryMsgOption.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			T/nzUX82K9fZ90mQsHYXzZ+XKVA=
+			HtwkaeIZqRK3ARBOtOrMLykEw80=
 			</data>
 			<key>hash2</key>
 			<data>
-			K9HY7ZMjaJieCHMat87hrHV1lMTxTBdLkJxq1dPzi98=
+			WMRLheO55K9vs3gAICV3/9t55F5R20Vx3/lc6ogy4bI=
 			</data>
 		</dict>
 		<key>Headers/RCResumeableDownloader.h</key>
@@ -779,22 +794,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			2QUQVjLWaUlerN2FoAe+433PSxE=
+			nt5kJiBPp6TBGD4IgXmvcur6uPg=
 			</data>
 			<key>hash2</key>
 			<data>
-			l0WCV0sfGPZIWFt9sRFCI7OteyId2sftZKE4Z4fez3c=
+			9QDIQpkw+rDAuiX6lir9PNlxGggQdoJZLgDik6NSnOQ=
 			</data>
 		</dict>
 		<key>Headers/RCSearchConversationResult.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			QG+FhPydTzS2cQhigbMmIzgye4M=
+			XmaBRbd7jVep11q6GcPX/8/7SdI=
 			</data>
 			<key>hash2</key>
 			<data>
-			FZnYpinwODCO6fB66OUwUBU0nlrJ1Cv5Zb81STZLQxA=
+			fMWub8tKeSMTXBlX+Q4jZ5p5en9KZzICF9ALrVAGjnw=
 			</data>
 		</dict>
 		<key>Headers/RCSendMessageOption.h</key>
@@ -812,22 +827,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			jyGablttrtwZloLhtjbzi3XkzgQ=
+			ExFCbYVH1qwd6DPuetayn9sI7x4=
 			</data>
 			<key>hash2</key>
 			<data>
-			rtMkZM0gId8lpyKEBc3NYN5x8hJCUgEQM55gxnRbp0U=
+			TGHu5wzl6y+2JwAg22eTikG+3cbY6hubgw5OghyGgo0=
 			</data>
 		</dict>
 		<key>Headers/RCStatusDefine.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			qzAy6Q3Mo90eK+/OmX1sFNpI7XI=
+			JH/bkEJ6/H3lyUvxahnr+V5VknU=
 			</data>
 			<key>hash2</key>
 			<data>
-			OV73QpfH+WJEcnp14Q8KFpDqwp/qWVg36xkgYpp0xO4=
+			5C+Ri+5J66x92BQlhJ1SZdfGI59BQOMQxd2DjXtZhwc=
 			</data>
 		</dict>
 		<key>Headers/RCStatusMessage.h</key>
@@ -856,11 +871,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			EgX/q+PzHrsM8QVCluionoXsWi0=
+			AFPYAsvj1u/dtTaCreF4I0Xb6PU=
 			</data>
 			<key>hash2</key>
 			<data>
-			LCrIkQRgwgZLdmLo2l79LiYV4AgeeB15H1GXnDFBlBk=
+			ZsFufZ5+Jh/KHR3YJ93tE+fG+aeWcQKvkFvEvESzmc0=
 			</data>
 		</dict>
 		<key>Headers/RCTagProtocol.h</key>
@@ -878,11 +893,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			yHZSRRW91wj6LD9OCG5ZizBxmeA=
+			Au3Uoy8jJAGJNKoPW+U2uLfG1+c=
 			</data>
 			<key>hash2</key>
 			<data>
-			hpSpwMgIIkWfoFIMieNUUJNqIVA5FK0DWdNZZQRzqzs=
+			PXSt96ss90/vBdAZrAc03Gwfux1il7GYK+//1M0gBcM=
 			</data>
 		</dict>
 		<key>Headers/RCUltraGroupChannelChangeInfo.h</key>
@@ -922,55 +937,55 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			OtHms1nSoaQUVebPxrzhq2ilFXg=
+			wLL07JWuzgkj2rmPMkAKmLCV8Hk=
 			</data>
 			<key>hash2</key>
 			<data>
-			2OwiIBRDCekiwZmWbcHgdyzLgv4wXhsZpKcB1oe/Gxk=
+			vCD+NtTVGe8ZHR0dmBPfH96xao+sJW3tKeEGDVTyZtg=
 			</data>
 		</dict>
 		<key>Headers/RCUploadMediaStatusListener.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			mKUT4nEbmH68er1ldL3oNYtAHNU=
+			5Un3XkiBvMKdvhK5zhjiNAhy2OM=
 			</data>
 			<key>hash2</key>
 			<data>
-			tI1tdG+JwTh+3aOD9mEBJh3UKk9AgW+r6Uc+ZlrQwZg=
+			QOXpFrUsFbUnmrEqPrA9hKsLAoDb2KawV0QU0sHYSEM=
 			</data>
 		</dict>
 		<key>Headers/RCUserInfo.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			qLyC/mAslkgHy6MAcsRjBa/bVdM=
+			oNpVv8zN6vouZVIOD2NfrKaU0Pk=
 			</data>
 			<key>hash2</key>
 			<data>
-			zk9DaZ+iMML3cV2LZ7pUlsmmXk3YnqfpFnzEKFJR7IY=
+			f3B99ezQO3yRd2TzqPYBWxVhszp8LnmKmzEevVsKSIA=
 			</data>
 		</dict>
 		<key>Headers/RCUserOnlineStatusInfo.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			SAg5Z2mi9aaDw0QUFhK9jovW3EM=
+			wfXLBN60X48e0jHH/pw4tjQZ2tc=
 			</data>
 			<key>hash2</key>
 			<data>
-			CGj/gYPhB8pZfoBCcIjqTQri/M6f+yOIxdTKjld+Uis=
+			Fgj/JjRO6E/Qx4OX/h9YzKRnoKHErqbvc0SKUnXiso4=
 			</data>
 		</dict>
 		<key>Headers/RCUserTypingStatus.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			x7qL2bld3Fisb3Re4THyfhS3x8s=
+			AQmX5DDD1YtvQ8Bc5K3W1kIw6Hk=
 			</data>
 			<key>hash2</key>
 			<data>
-			j4cKkNJNHMurAPQvm8Jsa22CfpvlvasaJV5VOinUEgQ=
+			bRLu0WX/tCtNR6p+ISwKBSZvNFJvVdahYu5TinqOQCM=
 			</data>
 		</dict>
 		<key>Headers/RCUtilities.h</key>
@@ -988,44 +1003,44 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			Gf+MkoSPGP3ylEJnAczZEt9sIqY=
+			KZ04fFlYsSYTZzjqaitgg9Bd3ZM=
 			</data>
 			<key>hash2</key>
 			<data>
-			a1V2TnFzVRAxk9361L4lUAbUNMSLfsDKpL7MAQo6xas=
+			ev5zbwAZ2hcFkIp/ThiTZefCOqOROQF48arnoNdOa00=
 			</data>
 		</dict>
 		<key>Headers/RCWatchKitStatusDelegate.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			YS4aari0tnRXs/1oIprlMqZPoWs=
+			6mNHcfeAyun8RIuAn85OnfkUxbY=
 			</data>
 			<key>hash2</key>
 			<data>
-			5qFFpNRxIaRin6NO45vgiIgasGeAtQVnhF+MZ0k2ymw=
+			QcZge+Y3xbAmfTnxALSECnwNMvQ4KHvJhkUwlzXvU2c=
 			</data>
 		</dict>
 		<key>Headers/RCiOSConfig.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			waKOi/TpRg/ETWSDx6VZU24rPok=
+			imqN5ET/f0Rq1L/ZPHulDVBYm+o=
 			</data>
 			<key>hash2</key>
 			<data>
-			47ZiFFVpSQC3I3SejDNNdSHsWjvmBYFBrZm5jb/v300=
+			8aUDn2qH6KBqdrKDrMWazHZHs2EENTupUqCEyqt1c/4=
 			</data>
 		</dict>
 		<key>Headers/RongIMLibCore.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			l66dmRpmBz6U4A4DCfwTJLfsWxQ=
+			oceHrvez2tg/x+cikiuQuARbW/8=
 			</data>
 			<key>hash2</key>
 			<data>
-			gsmY0vl/26ERW9ub52NH6mucvdHerMndD8cTFXxdhCc=
+			TXM8/jY9BPQ6T9tPCQmu6DovdxEkv9yBtNM9p+k2x6o=
 			</data>
 		</dict>
 		<key>Headers/interf_dec.h</key>

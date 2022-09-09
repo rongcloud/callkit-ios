@@ -12,6 +12,8 @@
  文件消息的类型名
  */
 #define RCFileMessageTypeIdentifier @"RC:FileMsg"
+
+NS_ASSUME_NONNULL_BEGIN
 /*!
  文件消息类
  
@@ -24,7 +26,7 @@
 /*!
  文件名
  */
-@property (nonatomic, copy) NSString *name;
+@property (nonatomic, copy, nullable) NSString *name;
 
 /*!
  文件大小，单位为 Byte
@@ -34,17 +36,17 @@
 /*!
  文件类型
  */
-@property (nonatomic, copy) NSString *type;
+@property (nonatomic, copy, nullable) NSString *type;
 
 /*!
  文件的网络地址
  */
-@property (nonatomic, copy) NSString *fileUrl;
+@property (nonatomic, copy, nullable) NSString *fileUrl;
 
 /*!
  文件的本地路径
  */
-@property (nonatomic, copy) NSString *localPath;
+@property (nonatomic, copy, nullable) NSString *localPath;
 
 /*!
  初始化文件消息
@@ -55,3 +57,5 @@
 + (instancetype)messageWithFile:(NSString *)localPath;
 
 @end
+
+NS_ASSUME_NONNULL_END

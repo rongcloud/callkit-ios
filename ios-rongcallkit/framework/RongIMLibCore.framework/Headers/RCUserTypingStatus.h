@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
 /*!
  用户输入状态类
  */
@@ -40,3 +41,5 @@
 - (instancetype)initWithUserId:(NSString *)userId contentType:(NSString *)objectName;
 
 @end
+
+NS_ASSUME_NONNULL_END

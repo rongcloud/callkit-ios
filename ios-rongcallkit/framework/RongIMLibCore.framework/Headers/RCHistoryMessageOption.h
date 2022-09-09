@@ -13,10 +13,10 @@
  RCHistoryMessageOrderDesc - 降序
  RCHistoryMessageOrderAsc - 升序
  */
-typedef enum : NSUInteger {
+typedef NS_ENUM(NSUInteger, RCHistoryMessageOrder) {
     RCHistoryMessageOrderDesc = 0,
     RCHistoryMessageOrderAsc,
-} RCHistoryMessageOrder;
+};
 
 @interface RCHistoryMessageOption : NSObject
 /**

@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
 /**
  已读用户对象
  */
@@ -24,3 +25,5 @@
 @property (nonatomic, assign) long long readTime;
 
 @end
+
+NS_ASSUME_NONNULL_END

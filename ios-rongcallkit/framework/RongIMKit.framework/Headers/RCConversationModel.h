@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <RongIMLib/RongIMLib.h>
+#import <RongIMLibCore/RCStatusDefine.h>
 
 /*!
  会话Cell数据模型的显示类型
@@ -155,6 +156,22 @@ typedef NS_ENUM(NSUInteger, RCConversationModelType) {
 会话中有被@的消息数量
 */
 @property (nonatomic, assign) int mentionedCount;
+
+
+/*!
+ 免打扰级别
+ */
+@property (nonatomic, assign) RCPushNotificationLevel notificationLevel;
+
+/*!
+ 会话中第一条未读消息时间戳（Unix时间戳、毫秒）
+
+ 仅支持 超级群会话
+ @Since 5.2.5
+
+*/
+@property (nonatomic, assign) long long firstUnreadMsgSendTime;
+
 
 /*!
  初始化会话显示数据模型

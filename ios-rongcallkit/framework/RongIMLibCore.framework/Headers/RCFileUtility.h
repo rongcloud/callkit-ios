@@ -14,6 +14,8 @@
 
 #import "RCStatusDefine.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface RCFileUtility : NSObject
 
 /*!
@@ -94,7 +96,7 @@
 
  @return 文件本地存储路径
  */
-+ (NSString *)getFileLocalPath:(NSString *)fileUri;
++ (nullable NSString *)getFileLocalPath:(NSString *)fileUri;
 
 /*!
  关联文件远端 URL 和本地路径
@@ -105,4 +107,7 @@
  */
 + (NSString *)getSightCachePath:(NSString *)sightUrl;
 @end
+
+NS_ASSUME_NONNULL_END
+
 #endif

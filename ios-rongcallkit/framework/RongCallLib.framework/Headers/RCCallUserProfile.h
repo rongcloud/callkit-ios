@@ -10,6 +10,8 @@
 #import <UIKit/UIKit.h>
 #import "RCCallCommonDefine.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 /*!
  用户的通话状态
  */
@@ -65,12 +67,12 @@
 /*!
  用户的视频View
  */
-@property (nonatomic, strong) UIView *videoView;
+@property (nonatomic, strong, nullable) UIView *videoView;
 
 /*!
  音视频用户类型
  */
-@property (nonatomic, assign) NSInteger blinkUserType DEPRECATED_MSG_ATTRIBUTE("即将废弃, 请使用 userType");
+@property (nonatomic, assign) NSInteger blinkUserType DEPRECATED_MSG_ATTRIBUTE("use userType instead") __attribute__((deprecated));
 
 /*!
  音视频用户类型
@@ -85,7 +87,7 @@
 /*!
  用户标签
 */
-@property (nonatomic, strong) NSString *tag;
+@property (nonatomic, strong, nullable) NSString *tag;
 
 /*!
  初始化用户的通话状态
@@ -108,3 +110,5 @@
                      startTime:(long long)startTime;
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -395,7 +395,7 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
 
  @remarks 功能设置
  */
-@property (nonatomic, strong, nullable) id<RCWatchKitStatusDelegate> watchKitStatusDelegate __deprecated_msg("已废弃");
+@property (nonatomic, weak, nullable) id<RCWatchKitStatusDelegate> watchKitStatusDelegate __attribute__((deprecated));
 
 /*!
  媒体文件下载拦截器
@@ -1023,6 +1023,49 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
                          successBlock:(nullable void (^)(RCMessage *successMessage))successBlock
                            errorBlock:(nullable void (^)(RCErrorCode nErrorCode, RCMessage *errorMessage))errorBlock;
 
+/*!
+ 发送定向媒体消息（图片消息或文件消息）
+ 
+ @param message             将要发送的消息实体（需要保证 message 中的 conversationType，targetId，messageContent 是有效值)
+ @param userIdList       接收消息的用户 ID 列表
+ @param pushContent         接收方离线时需要显示的远程推送内容
+ @param pushData            接收方离线时需要在远程推送中携带的非显示数据
+ @param progressBlock       消息发送进度更新的回调 [progress:当前的发送进度, 0 <= progress <= 100, progressMessage:消息实体]
+ @param successBlock        消息发送成功的回调 [successMessage:消息实体]
+ @param errorBlock          消息发送失败的回调 [nErrorCode:发送失败的错误码, errorMessage:消息实体]
+ @param cancelBlock         用户取消了消息发送的回调 [cancelMessage:消息实体]
+ @return                    发送的消息实体
+ 
+ @discussion 当接收方离线并允许远程推送时，会收到远程推送。
+ 远程推送中包含两部分内容，一是 pushContent，用于显示；二是 pushData，用于携带不显示的数据。
+ 
+ SDK 内置的消息类型，如果您将 pushContent 和 pushData 置为 nil，会使用默认的推送格式进行远程推送。
+ 自定义类型的消息，需要您自己设置 pushContent 和 pushData 来定义推送内容，否则将不会进行远程推送。
+ 
+ 如果您需要上传图片到自己的服务器，需要构建一个 RCImageMessage 对象，
+ 并将 RCImageMessage 中的 imageUrl 字段设置为上传成功的 URL 地址，然后使用 RCIMClient 的
+ sendMessage:targetId:content:pushContent:pushData:success:error:方法
+ 或 sendMessage:targetId:content:pushContent:success:error:方法进行发送，不要使用此方法。
+ 
+ 如果您需要上传文件到自己的服务器，构建一个 RCFileMessage 对象，
+ 并将 RCFileMessage 中的 fileUrl 字段设置为上传成功的 URL 地址，然后使用 RCIMClient 的
+ sendMessage:targetId:content:pushContent:pushData:success:error:方法
+ 或 sendMessage:targetId:content:pushContent:success:error:方法进行发送，不要使用此方法。
+ 
+ @warning 如果您使用 IMLib，可以使用此方法发送媒体消息；
+ 如果您使用 IMKit，请使用 RCIM 中的同名方法发送媒体消息，否则不会自动更新 UI。
+ 
+ @remarks 消息操作
+ */
+- (nullable RCMessage *)sendDirectionalMediaMessage:(RCMessage *)message
+                                       toUserIdList:(NSArray<NSString *> *)userIdList
+                                        pushContent:(nullable NSString *)pushContent
+                                           pushData:(nullable NSString *)pushData
+                                           progress:(nullable void (^)(int progress, RCMessage *progressMessage))progressBlock
+                                       successBlock:(nullable void (^)(RCMessage *successMessage))successBlock
+                                         errorBlock:(nullable void (^)(RCErrorCode nErrorCode, RCMessage *errorMessage))errorBlock
+                                             cancel:(nullable void (^)(RCMessage *cancelMessage))cancelBlock;
+
 #pragma mark 消息接收监听
 /*!
  设置 IMLibCore 的消息接收监听器
@@ -1214,7 +1257,7 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
 
  @param conversationType    会话类型
  @param targetId            会话 ID
- @param oldestMessageId     截止的消息 ID
+ @param oldestMessageId     截止的消息 ID [0或-1 代表从最近的发送时间查起]
  @param count               需要获取的消息数量
  @return                    消息实体 RCMessage 对象列表
 
@@ -1239,7 +1282,7 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  @param conversationType    会话类型
  @param targetId            会话 ID
  @param objectName          消息内容的类型名，如果想取全部类型的消息请传 nil
- @param oldestMessageId     截止的消息 ID
+ @param oldestMessageId     截止的消息 ID [0或-1 代表从最近的发送时间查起]
  @param count               需要获取的消息数量
  @return                    消息实体 RCMessage 对象列表
 
@@ -1265,7 +1308,7 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  @param conversationType    会话类型
  @param targetId            会话 ID
  @param objectName          消息内容的类型名，如果想取全部类型的消息请传 nil
- @param baseMessageId       当前的消息 ID
+ @param baseMessageId       当前的消息 ID [0或-1 代表从最近的发送时间查起]
  @param isForward           查询方向 true 为向前，false 为向后
  @param count               需要获取的消息数量
  @return                    消息实体 RCMessage 对象列表
@@ -1470,6 +1513,21 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  @remarks 高级功能
  */
 - (nullable NSArray<RCMessage *> *)getUnreadMentionedMessages:(RCConversationType)conversationType targetId:(NSString *)targetId;
+
+/*!
+获取本地指定会话的未读条数的 @ 消息列表，仅支持群组
+ @param conversationType    会话类型
+ @param targetId            会话 ID
+ @param count           未读的 @ 消息，取值范围 [1,100]
+ @param desc           是否是降序查
+ @discussion 假如有 1000 条未读的 @ 消息，取 100 条未读
+    desc 为 true 时获取后 100 条消息，messageList 的顺序是 901 到 1000
+    desc 为 false 是获取前 100 条消息，messageList 的顺序是 1 到 100
+ 
+ @warning 使用 IMKit 注意在进入会话页面前调用，否则在进入会话清除未读数的接口 clearMessagesUnreadStatus: targetId:
+ 以及 设置消息接收状态接口 setMessageReceivedStatus:receivedStatus:会同步清除被提示信息状态。
+*/
+- (nullable NSArray<RCMessage *> *)getUnreadMentionedMessages:(RCConversationType)conversationType targetId:(NSString *)targetId count:(int)count desc:(BOOL)desc;
 
 /*!
  获取消息的发送时间（Unix 时间戳、毫秒）
@@ -1702,14 +1760,15 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
 - (BOOL)clearConversations:(NSArray<NSNumber *> *)conversationTypeList;
 
 /*!
- 从本地存储中删除会话
+ 删除本地和服务的会话
 
  @param conversationType    会话类型
  @param targetId            会话 ID
- @return                    是否删除成功
+ @return              本地会话是否删除成功
 
- @discussion
- 此方法会从本地存储中删除该会话，但是不会删除会话中的消息。如果此会话中有新的消息，该会话将重新在会话列表中显示，并显示最近的历史消息。
+ @discussion 此方法会删除该会话，但是不会删除会话中的消息。如果此会话中有新的消息，该会话将重新在会话列表中显示，并显示最近的历史消息。
+ @warning 此方法会同时删除本地和服务的会话。如果服务的会话删除失败，本地的会话依然会被删除
+ SDK 在未连接的情况下，删除服务会话会失败
 
  @remarks 会话
  */
@@ -1917,7 +1976,7 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
                                  targetId:(NSString *)targetId
                                 isBlocked:(BOOL)isBlocked
                                   success:(nullable void (^)(RCConversationNotificationStatus nStatus))successBlock
-                                    error:(nullable void (^)(RCErrorCode status))errorBlock __deprecated_msg("已废弃，请使用 [RCChannelClient setConversationChannelNotificationLevel:targetId:channelId:level:success:error:]函数");
+                                    error:(nullable void (^)(RCErrorCode status))errorBlock __deprecated_msg("Use [RCChannelClient setConversationChannelNotificationLevel:targetId:channelId:level:success:error:] instead");
 /*!
  查询会话的消息提醒状态
 
@@ -1964,7 +2023,7 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
 - (void)setNotificationQuietHours:(NSString *)startTime
                          spanMins:(int)spanMins
                           success:(nullable void (^)(void))successBlock
-                            error:(nullable void (^)(RCErrorCode status))errorBlock __deprecated_msg("已废弃，请使用[RCChannelClient  setNotificationQuietHoursLevel:spanMins:level:success:error:]函数");
+                            error:(nullable void (^)(RCErrorCode status))errorBlock __deprecated_msg("Use [RCChannelClient  setNotificationQuietHoursLevel:spanMins:level:success:error:] instead");
 
 
 /*!
@@ -1977,7 +2036,7 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  */
 - (void)removeNotificationQuietHours:(nullable void (^)(void))successBlock
                                error:(nullable void (^)(RCErrorCode status))errorBlock
-__deprecated_msg("已废弃，请使用[RCChannelClient removeNotificationQuietHours:success:error:]函数");
+__deprecated_msg("Use [RCChannelClient removeNotificationQuietHours:success:error:] instead");
 
 /*!
  查询已设置的全局时间段消息提醒屏蔽
@@ -1990,7 +2049,7 @@ __deprecated_msg("已废弃，请使用[RCChannelClient removeNotificationQuietH
  */
 - (void)getNotificationQuietHours:(nullable void (^)(NSString *startTime, int spanMins))successBlock
                             error:(nullable void (^)(RCErrorCode status))errorBlock
-__deprecated_msg("已废弃，请使用 [RCChannelClient getNotificationQuietHoursLevel:error:]函数");
+__deprecated_msg("Use [RCChannelClient getNotificationQuietHoursLevel:error:] instead");
 
 
 
@@ -2240,10 +2299,10 @@ __deprecated_msg("已废弃，请使用 [RCChannelClient getNotificationQuietHou
 
  @remarks 功能设置
  */
-@property (nonatomic, assign) RCSampleRate sampleRate __deprecated_msg("已废弃，请勿使用。");
+@property (nonatomic, assign) RCSampleRate sampleRate __attribute__((deprecated));
 
 /**
-  语音消息类型，默认 RCVoiceMessageTypeOrdinary
+  语音消息类型，默认 RCVoiceMessageTypeHighQuality
 
   @discussion 老版本 SDK 不兼容新版本语音消息
   2.9.19 之前的版本无法播放高音质语音消息；

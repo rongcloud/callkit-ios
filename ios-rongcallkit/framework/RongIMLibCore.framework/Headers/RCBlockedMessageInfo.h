@@ -26,7 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  *  频道 ID
  */
-@property (nonatomic, copy) NSString *channelId;
+@property (nonatomic, copy, nullable) NSString *channelId;
 
 /**
  *  被拦截的消息 UID
@@ -44,12 +44,25 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  *  附加信息
  */
-@property (nonatomic, copy) NSString *extra;
+@property (nonatomic, copy, nullable) NSString *extra;
 
 /*!
  消息的发送时间（Unix 时间戳、毫秒）
  */
 @property (nonatomic, assign) long long sentTime;
+
+/**
+ *  消息源触发类型。0默认，原始消息；1消息扩展；2消息修改
+ */
+@property (nonatomic, assign) NSInteger sourceType;
+
+/**
+ *  源内容 Json 字符串。sourceType 为 1、2 时返回；1扩展内容，2消息内容
+ *  sourceType 为 0，sourceContent 内容为 nil
+ *  sourceType 为 1，sourceContent 是扩展内容，示例 {"mid":"xxx-xxx-xxx-xxx","put":{"key":"敏感词"}}
+ *  sourceType 为 2，sourceContent 是消息修改后内容，示例 {"content":"敏感词"}
+ */
+@property (nonatomic, copy) NSString *sourceContent;
 
 /*!
  RCBlockedMessageInfo 初始化方法

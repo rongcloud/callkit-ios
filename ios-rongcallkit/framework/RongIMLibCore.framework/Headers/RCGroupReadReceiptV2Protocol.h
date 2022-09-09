@@ -9,6 +9,8 @@
 #ifndef RCGroupReadReceiptV2Protocol_h
 #define RCGroupReadReceiptV2Protocol_h
 
+NS_ASSUME_NONNULL_BEGIN
+
 @protocol RCGroupReadReceiptV2Delegate <NSObject>
 
 /*!
@@ -22,11 +24,13 @@
   */
 - (void)onMessageReceiptResponse:(RCConversationType)conversationType
                         targetId:(NSString *)targetId
-                       channelId:(NSString *)channelId
+                       channelId:(nullable NSString *)channelId
                       messageUId:(NSString *)messageUId
                        readCount:(int)readCount
                       totalCount:(int)totalCount;
 
 @end
+
+NS_ASSUME_NONNULL_END
 
 #endif /* RCGroupReadReceiptV2Protocol_h */

@@ -9,6 +9,8 @@
 #import "RCStatusDefine.h"
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface RCPushProfile : NSObject
 
 //是否显示远程推送的内容
@@ -28,8 +30,8 @@
  @param errorBlock        失败回调
  */
 - (void)updateShowPushContentStatus:(BOOL)isShowPushContent
-                            success:(void (^)(void))successBlock
-                              error:(void (^)(RCErrorCode status))errorBlock;
+                            success:(nullable void (^)(void))successBlock
+                              error:(nullable void (^)(RCErrorCode status))errorBlock;
 
 /**
  设置推送内容的自然语言
@@ -39,8 +41,8 @@
  @param errorBlock        失败回调
  */
 - (void)setPushLauguage:(RCPushLauguage)pushLauguage
-                success:(void (^)(void))successBlock
-                  error:(void (^)(RCErrorCode status))errorBlock __deprecated_msg("已废弃，请使用 setPushLauguageCode:success:error");
+                success:(nullable void (^)(void))successBlock
+                  error:(nullable void (^)(RCErrorCode status))errorBlock __deprecated_msg("Use  setPushLauguageCode:success:error instead");
 
 
 /**
@@ -51,8 +53,8 @@
  @param errorBlock        失败回调
  */
 - (void)setPushLauguageCode:(NSString *)lauguage
-                    success:(void (^)(void))successBlock
-                      error:(void (^)(RCErrorCode status))errorBlock;
+                    success:(nullable void (^)(void))successBlock
+                      error:(nullable void (^)(RCErrorCode status))errorBlock;
 
 /**
  设置 Web 端在线时，手机端是否接收推送
@@ -62,7 +64,9 @@
  @param errorBlock        失败回调
  */
 - (void)setPushReceiveStatus:(BOOL)receiveStatus
-                     success:(void (^)(void))successBlock
-                       error:(void (^)(RCErrorCode status))errorBlock;
+                     success:(nullable void (^)(void))successBlock
+                       error:(nullable void (^)(RCErrorCode status))errorBlock;
 
 @end
+
+NS_ASSUME_NONNULL_END

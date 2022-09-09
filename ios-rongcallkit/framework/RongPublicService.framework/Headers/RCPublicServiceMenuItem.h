@@ -54,6 +54,6 @@
 
  @warning **已废弃，请勿使用。**
  */
-+ (NSArray *)menuItemsFromJsonArray:(NSArray *)jsonArray __deprecated_msg("已废弃，请勿使用。");
++ (NSArray *)menuItemsFromJsonArray:(NSArray *)jsonArray __attribute__((deprecated));
 
 @end

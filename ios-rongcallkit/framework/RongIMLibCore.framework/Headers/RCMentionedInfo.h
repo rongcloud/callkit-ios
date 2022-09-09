@@ -9,6 +9,7 @@
 #import "RCStatusDefine.h"
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
 /*!
  消息中的 @ 提醒信息对象
  */
@@ -24,12 +25,12 @@
 
  @discussion 如果 type 是 @ 所有人，则可以传 nil
  */
-@property (nonatomic, strong) NSArray<NSString *> *userIdList;
+@property (nonatomic, strong, nullable) NSArray<NSString *> *userIdList;
 
 /*!
  包含 @ 提醒的消息，本地通知和远程推送显示的内容
  */
-@property (nonatomic, copy) NSString *mentionedContent;
+@property (nonatomic, copy, nullable) NSString *mentionedContent;
 
 /*!
  是否 @ 了我
@@ -46,7 +47,9 @@
  @return @ 提醒信息的对象
  */
 - (instancetype)initWithMentionedType:(RCMentionedType)type
-                           userIdList:(NSArray *)userIdList
-                     mentionedContent:(NSString *)mentionedContent;
+                           userIdList:(nullable NSArray<NSString *> *)userIdList
+                     mentionedContent:(nullable NSString *)mentionedContent;
 
 @end
+
+NS_ASSUME_NONNULL_END

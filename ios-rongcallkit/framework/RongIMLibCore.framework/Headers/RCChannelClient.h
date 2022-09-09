@@ -20,6 +20,7 @@
 #import "RCHistoryMessageOption.h"
 #import "RCConversationIdentifier.h"
 #import "RCIMClientProtocol.h"
+#import "RCMessageDigestInfo.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -499,7 +500,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param conversationType    会话类型
  @param targetId            会话 ID
  @param channelId          所属会话的业务标识
- @param oldestMessageId     截止的消息 ID
+ @param oldestMessageId     截止的消息 ID [0或-1 代表从最近的发送时间查起]
  @param count               需要获取的消息数量
  @return                    消息实体 RCMessage 对象列表
 
@@ -526,7 +527,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param targetId            会话 ID
  @param channelId          所属会话的业务标识
  @param objectName          消息内容的类型名，如果想取全部类型的消息请传 nil
- @param oldestMessageId     截止的消息 ID
+ @param oldestMessageId     截止的消息 ID [0或-1 代表从最近的发送时间查起]
  @param count               需要获取的消息数量
  @return                    消息实体 RCMessage 对象列表
 
@@ -553,7 +554,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param conversationType    会话类型
  @param targetId            会话 ID
  @param objectName          消息内容的类型名，如果想取全部类型的消息请传 nil
- @param baseMessageId       当前的消息 ID
+ @param baseMessageId       当前的消息 ID [0或-1 代表从最近的发送时间查起]
  @param isForward           查询方向 true 为向前，false 为向后
  @param count               需要获取的消息数量
  @return                    消息实体 RCMessage 对象列表
@@ -803,6 +804,24 @@ NS_ASSUME_NONNULL_BEGIN
 - (nullable NSArray<RCMessage *> *)getUnreadMentionedMessages:(RCConversationType)conversationType targetId:(NSString *)targetId channelId:(nullable NSString *)channelId;
 
 /*!
+获取本地指定会话的未读条数的 @ 消息列表，仅支持群组
+ @param conversationType    会话类型
+ @param targetId            会话 ID
+ @param channelId          所属会话的业务标识
+ @param count           未读的 @ 消息，取值范围 [1,100]
+ @param desc           是否是降序查
+ @discussion 假如有 1000 条未读的 @ 消息，取 100 条未读
+    desc 为 true 时获取后 100 条消息，messageList 的顺序是 901 到 1000
+    desc 为 false 是获取前 100 条消息，messageList 的顺序是 1 到 100
+ 
+ @warning 使用 IMKit 注意在进入会话页面前调用，否则在进入会话清除未读数的接口 clearMessagesUnreadStatus: targetId:
+ 以及 设置消息接收状态接口 setMessageReceivedStatus:receivedStatus:会同步清除被提示信息状态。
+*/
+
+- (nullable NSArray<RCMessage *>  *)getUnreadMentionedMessages:(RCConversationType)conversationType targetId:(NSString *)targetId channelId:(nullable NSString *)channelId count:(int)count desc:(BOOL)desc;
+
+
+/*!
  根据会话 id 获取所有子频道的 @ 未读消息总数
  
  @param targetId  会话 ID
@@ -890,7 +909,7 @@ NS_ASSUME_NONNULL_BEGIN
 /*!
  获取同一个超级群下的批量服务消息（含所有频道）
  获取成功后强制更新本地消息
- @param messages      消息列表
+ @param messages      消息列表 [最多20条,每个消息对象需包含ConversationType,targetId,channelId, messageUid,sentTime]
  @param successBlock 成功的回调 [matchedMsgList:成功的消息列表，notMatchMsgList:失败的消息列表]
  @param errorBlock   失败的回调 [errorCode:错误码]
  @remarks 高级功能
@@ -1128,15 +1147,16 @@ NS_ASSUME_NONNULL_BEGIN
 - (BOOL)clearConversations:(NSArray<NSNumber *> *)conversationTypeList channelId:(nullable NSString *)channelId;
 
 /*!
- 从本地存储中删除会话
+ 删除本地和服务的会话
 
  @param conversationType    会话类型
  @param targetId            会话 ID
  @param channelId          所属会话的业务标识
- @return                    是否删除成功
+ @return              本地会话是否删除成功
 
- @discussion
- 此方法会从本地存储中删除该会话，但是不会删除会话中的消息。如果此会话中有新的消息，该会话将重新在会话列表中显示，并显示最近的历史消息。
+ @discussion 此方法会删除该会话，但是不会删除会话中的消息。如果此会话中有新的消息，该会话将重新在会话列表中显示，并显示最近的历史消息。
+ @warning 此方法会同时删除本地和服务的会话。如果服务的会话删除失败，本地的会话依然会被删除
+ SDK 在未连接的情况下，删除服务会话会失败
 
  @remarks 会话
  */
@@ -1354,7 +1374,7 @@ NS_ASSUME_NONNULL_BEGIN
                                 channelId:(nullable NSString *)channelId
                                 isBlocked:(BOOL)isBlocked
                                   success:(nullable void (^)(RCConversationNotificationStatus nStatus))successBlock
-                                    error:(nullable void (^)(RCErrorCode status))errorBlock __deprecated_msg("已废弃，请使用 [RCChannelClient setConversationChannelNotificationLevel:targetId:channelId:level:success:error:]函数");
+                                    error:(nullable void (^)(RCErrorCode status))errorBlock __deprecated_msg("Use [RCChannelClient setConversationChannelNotificationLevel:targetId:channelId:level:success:error:] instead");
 
 
 /*!
@@ -1886,6 +1906,81 @@ NS_ASSUME_NONNULL_BEGIN
                      channelType:(RCUltraGroupChannelType)channelType
                          success:(nullable void (^)(NSArray<RCConversation *>* list))successBlock
                            error:(nullable void (^)(RCErrorCode status))errorBlock;
+#pragma mark - 未读数
+/*!
+  获取会话未读消息数 (子线程回调, 如有UI操作, 请切回主线程)
+  @param conversationTypes   会话类型数组：[单聊、群聊、超级群]
+  @param levels              免打扰类型数组 [RCPushNotificationLevel]
+  @param successBlock        获取成功的回调 [消息数量]
+  @param errorBlock          获取失败的回调 [status:失败的错误码]
+  @remarks 单聊、群聊、超级群消息操作
+  @Since 5.2.5
+ */
+- (void)getUnreadCount:(nonnull NSArray <NSNumber*>*)conversationTypes
+                levels:(nonnull NSArray <NSNumber*>*)levels
+               success:(nullable void (^)(NSInteger count))successBlock
+                 error:(nullable void (^)(RCErrorCode status))errorBlock;
+
+/*!
+ 获取获取会话未读 @消息数 (子线程回调, 如有UI操作, 请切回主线程)
+ @param conversationTypes   会话类型数组：[群聊、超级群]
+ @param levels              免打扰类型数组 [RCPushNotificationLevel]
+ @param successBlock        获取成功的回调 [消息数量]
+ @param errorBlock          获取失败的回调 [status:失败的错误码]
+ @remarks 群聊、超级群消息操作
+ @Since 5.2.5
+ */
+- (void)getUnreadMentionedCount:(nonnull NSArray <NSNumber*>*)conversationTypes
+                         levels:(nonnull NSArray <NSNumber*>*)levels
+                        success:(nullable void (^)(NSInteger count))successBlock
+                          error:(nullable void (^)(RCErrorCode status))errorBlock;
+
+/*!
+ 获取指定超级群会话的未读消息数（包括所有频道) (子线程回调, 如有UI操作, 请切回主线程)
+ @param targetId            超级群会话ID
+ @param levels              免打扰类型数组 [RCPushNotificationLevel]
+ @param successBlock        获取成功的回调 [消息数量]
+ @param errorBlock          获取失败的回调 [status:失败的错误码]
+ @remarks 超级群消息操作
+ @Since 5.2.5
+ */
+- (void)getUltraGroupUnreadCount:(nonnull NSString *)targetId
+                          levels:(nonnull NSArray <NSNumber*>*)levels
+                         success:(nullable void (^)(NSInteger count))successBlock
+                           error:(nullable void (^)(RCErrorCode status))errorBlock;
+
+
+/*!
+ 获取指定超级群会话的未读@消息数（包括所有频道） (子线程回调, 如有UI操作, 请切回主线程)
+ @param targetId            超级群会话ID
+ @param levels              免打扰类型数组 [RCPushNotificationLevel]
+ @param successBlock        获取成功的回调 [消息数量]
+ @param errorBlock          获取失败的回调 [status:失败的错误码]
+ @remarks 超级群消息操作
+ @Since 5.2.5
+ */
+- (void)getUltraGroupUnreadMentionedCount:(nonnull NSString *)targetId
+                                   levels:(nonnull NSArray <NSNumber*>*)levels
+                                  success:(nullable void (^)(NSInteger count))successBlock
+                                    error:(nullable void (^)(RCErrorCode status))errorBlock;
+
+/*!
+获取超级群会话类型未读的 @ 消息摘要列表接口 (子线程回调, 如有UI操作, 请切回主线程)
+@param targetId            会话 ID
+@param channelId           所属会话的业务标识
+@param sendTime            消息发送的时间[毫秒,0代表从第一条开始查询]
+@param count               查询数量 [1 - 50], 超过范围上报 INVALID_PARAMETER_COUNT 错误码
+@param successBlock        获取成功的回调 [消息摘要列表]
+@param errorBlock          获取失败的回调 [status:失败的错误码]
+@remarks 超级群消息操作
+@Since 5.2.5
+*/
+- (void)getUltraGroupUnreadMentionedDigests:(nonnull NSString *)targetId
+                                  channelId:(nullable NSString *)channelId
+                                   sendTime:(long long)sendTime
+                                     count:(NSInteger)count
+                                    success:(nullable void (^)(NSArray<RCMessageDigestInfo*>* digests))successBlock
+                                      error:(nullable void (^)(RCErrorCode status))errorBlock;
 @end
 
 NS_ASSUME_NONNULL_END

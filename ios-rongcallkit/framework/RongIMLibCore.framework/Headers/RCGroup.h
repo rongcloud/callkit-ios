@@ -12,6 +12,7 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
 /*!
  群组信息类
  */
@@ -30,7 +31,7 @@
 /*!
  群组头像的 URL
  */
-@property (nonatomic, copy) NSString *portraitUri;
+@property (nonatomic, copy, nullable) NSString *portraitUri;
 
 /*!
  群组信息的初始化方法
@@ -40,6 +41,8 @@
  @param portraitUri     群组头像的 URL
  @return                群组信息对象
  */
-- (instancetype)initWithGroupId:(NSString *)groupId groupName:(NSString *)groupName portraitUri:(NSString *)portraitUri;
+- (instancetype)initWithGroupId:(NSString *)groupId groupName:(NSString *)groupName portraitUri:(nullable NSString *)portraitUri;
 
 @end
+
+NS_ASSUME_NONNULL_END

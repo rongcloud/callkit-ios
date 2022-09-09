@@ -64,6 +64,8 @@ typedef NS_OPTIONS(NSUInteger, RCLogType) {
     RC_Type_RTC = 1 << 12  // RTC.
 };
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface RCFwLog : NSObject
 
 // should be call init first, otherwise getInstance will return nil.
@@ -75,11 +77,14 @@ typedef NS_OPTIONS(NSUInteger, RCLogType) {
 + (void)setUserId:(NSString *)userId;
 + (void)setLogListener:(void (^)(NSString *log))logBlock;
 + (void)setConsoleLogLevel:(RCFwLogLevel)level;
-+ (NSString *)getIpWithHost:(NSString *)hostName;
+/// 网络状态 100% lost 时， 此方法会阻塞 30s，切记不要在主线程直接调用
++ (nullable NSString *)getIpWithHost:(NSString *)hostName;
+/// 异步获取 ip 地址，内部有切线程处理，子线程执行，主线程回调 callback
++ (void)getIpWithHost:(NSString *)hostName callback:(void (^)(NSString * ipString))callback;
 + (void)setRcDebugLogLevel:(NSInteger)rcDebugLogLevel;
 + (void)setRcDebugLogMaxSize:(long long)rcDebugLogMaxSize;
 + (void)startRealTimelog;
-- (void)uploadLog:(void (^)(int code))errorBlock;
+- (void)uploadLog:(nullable void (^)(int code))errorBlock;
 - (void)uploadDebugLog;
 - (void)write:(RCFwLogLevel)level
          type:(RCLogType)type
@@ -92,3 +97,5 @@ typedef NS_OPTIONS(NSUInteger, RCLogType) {
          keys:(NSArray *)keys
        values:(NSArray *)vals;
 @end
+
+NS_ASSUME_NONNULL_END

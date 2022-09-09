@@ -9,7 +9,9 @@
 #ifndef RCIMClientProtocol_h
 #define RCIMClientProtocol_h
 
-@class RCMessage;
+NS_ASSUME_NONNULL_BEGIN
+
+@class RCMessage, RCUserTypingStatus;
 @class RCConversationStatusInfo;
 @class RCBlockedMessageInfo;
 @class RCUltraGroupTypingStatusInfo;
@@ -41,7 +43,7 @@
  您可以根据left数量来优化您的App体验和性能，比如收到大量消息时等待left为0再刷新UI。
  object为您在设置消息接收监听时的key值。
  */
-- (void)onReceived:(RCMessage *)message left:(int)nLeft object:(id)object;
+- (void)onReceived:(RCMessage *)message left:(int)nLeft object:(nullable id)object;
 
 /**
  接收消息的回调方法
@@ -60,7 +62,7 @@
  */
 - (void)onReceived:(RCMessage *)message
               left:(int)nLeft
-            object:(id)object
+            object:(nullable id)object
            offline:(BOOL)offline
         hasPackage:(BOOL)hasPackage;
 
@@ -76,7 +78,7 @@
 
  @discussion 被撤回的消息会变更为RCRecallNotificationMessage，App需要在UI上刷新这条消息。
  */
-- (void)onMessageRecalled:(long)messageId __deprecated_msg("已废弃，请使用 messageDidRecall:");;
+- (void)onMessageRecalled:(long)messageId __deprecated_msg("Use messageDidRecall: instead");;
 
 /*!
  消息被撤回的回调方法
@@ -112,7 +114,7 @@
 - (void)onMessageReceiptResponse:(RCConversationType)conversationType
                         targetId:(NSString *)targetId
                       messageUId:(NSString *)messageUId
-                      readerList:(NSMutableDictionary *)userIdList;
+                      readerList:(nullable NSMutableDictionary *)userIdList;
 @end
 
 #pragma mark - 发送消息被拦截监听器
@@ -177,7 +179,7 @@
  */
 - (void)onTypingStatusChanged:(RCConversationType)conversationType
                      targetId:(NSString *)targetId
-                       status:(NSArray *)userTypingStatusList;
+                       status:(nullable NSArray<RCUserTypingStatus *> *)userTypingStatusList;
 
 @end
 
@@ -391,5 +393,7 @@
 - (void)onUltraGroupMessageRecalled:(NSArray<RCMessage*>*)messages;
 
 @end
+
+NS_ASSUME_NONNULL_END
 
 #endif /* RCIMClientProtocol_h */

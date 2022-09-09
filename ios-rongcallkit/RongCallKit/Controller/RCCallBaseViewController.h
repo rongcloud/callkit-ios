@@ -230,6 +230,21 @@
                           userIdList:(NSArray *)userIdList;
 
 /*!
+ 初始化ViewController并发起跨应用通话
+
+ @param conversationType 会话类型
+ @param targetId         会话目标ID
+ @param mediaType        通话媒体类型
+ @param userIdList       邀请的用户ID列表（注意此处ID组成形式为Appkey+UserId, 格式为appkey_userid，注意下划线拼接）
+
+ @return ViewController
+ */
+- (instancetype)initWithOutgoingCrossCall:(RCConversationType)conversationType
+                                 targetId:(NSString *)targetId
+                                mediaType:(RCCallMediaType)mediaType
+                               userIdList:(NSArray *)userIdList;
+
+/*!
  初始化已经接通的ViewController
 
  @param callSession 已经接通的通话实体

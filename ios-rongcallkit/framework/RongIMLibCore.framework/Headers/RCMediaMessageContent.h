@@ -8,6 +8,7 @@
 
 #import "RCMessageContent.h"
 
+NS_ASSUME_NONNULL_BEGIN
 /**
  媒体类型消息的父类
 
@@ -21,15 +22,17 @@
 /**
  媒体内容的本地路径（此属性必须有值）
  */
-@property (nonatomic, copy) NSString *localPath;
+@property (nonatomic, copy, nullable) NSString *localPath;
 
 /**
  媒体内容上传服务器后的网络地址（上传成功后 SDK 会为该属性赋值）
  */
-@property (nonatomic, copy) NSString *remoteUrl;
+@property (nonatomic, copy, nullable) NSString *remoteUrl;
 
 /**
  媒体内容的文件名（如不传使用 SDK 中 downloadMediaMessage 方法下载后会默认生成一个名称）
  */
-@property (nonatomic, copy) NSString *name;
+@property (nonatomic, copy, nullable) NSString *name;
 @end
+
+NS_ASSUME_NONNULL_END

@@ -7,7 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "RCGroupMessageReaderV2.h"
+
+NS_ASSUME_NONNULL_BEGIN
+
+@class RCGroupMessageReaderV2;
 @interface RCGroupReadReceiptInfoV2 : NSObject
 /**
  是否已经发送回执
@@ -17,7 +20,7 @@
 /*!
  发送回执的用户 ID 列表
  */
-@property (nonatomic, strong) NSArray <RCGroupMessageReaderV2 *> *readerList;
+@property (nonatomic, strong, nullable) NSArray <RCGroupMessageReaderV2 *> *readerList;
 
 /**
  *  已读人数
@@ -30,3 +33,5 @@
 @property (nonatomic, assign) int totalCount;
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -8,6 +8,8 @@
 #import "RCStatusDefine.h"
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface RCReadReceiptInfo : NSObject
 
 /*!
@@ -23,6 +25,8 @@
 /*!
  发送回执的用户 ID 列表
  */
-@property (nonatomic, strong) NSMutableDictionary *userIdList;
+@property (nonatomic, strong, nullable) NSMutableDictionary *userIdList;
 
 @end
+
+NS_ASSUME_NONNULL_END

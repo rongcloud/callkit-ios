@@ -13,10 +13,10 @@
  RCRemoteHistoryOrderDesc - 降序
  RCRemoteHistoryOrderAsc - 升序
  */
-typedef enum : NSUInteger {
+typedef NS_ENUM(NSUInteger, RCRemoteHistoryOrder) {
     RCRemoteHistoryOrderDesc = 0,
     RCRemoteHistoryOrderAsc,
-} RCRemoteHistoryOrder;
+};
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -39,9 +39,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  拉取顺序
- RCRemoteHistoryOrderDesc： 降序，结合传入的时间戳参数，获取发送时间递增的消息
- RCRemoteHistoryOrderAsc： 升序，结合传入的时间戳参数，获取发送时间递减的消息
- 默认降序
+ RCRemoteHistoryOrderDesc： 降序，结合传入的时间戳参数，获取比时间戳小（早）的消息；
+ RCRemoteHistoryOrderAsc： 升序，结合传入的时间戳参数，获取比时间戳大的消息。
+ 默认降序。
  */
 @property (nonatomic, assign) RCRemoteHistoryOrder order;
 

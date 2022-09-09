@@ -914,7 +914,21 @@ typedef NS_ENUM(NSInteger, RCErrorCode) {
      可能原因：开发者调用接口传入的 channelType 参数类型不对。
      处理建议：请检查参数是否合法。
      */
-    INVALID_PARAMETER_CHANNEL_TYPE = 34231
+    INVALID_PARAMETER_CHANNEL_TYPE = 34231,
+    /*!
+     描述：开发者接口调用时传入的 count 非法。
+     可能原因： count 超出有效范围
+     处理建议：请检查参数是否合法。
+     @Since 5.2.5
+     */
+    INVALID_PARAMETER_COUNT = 34232,
+    /*!
+     描述：开发者接口调用时传入的 sendTime 非法。
+     可能原因： sendTime 超出有效范围
+     处理建议：请检查参数是否合法。
+     @Since 5.2.5
+     */
+    INVALID_PARAMETER_SEND_TIME = 34233,
 
 };
 

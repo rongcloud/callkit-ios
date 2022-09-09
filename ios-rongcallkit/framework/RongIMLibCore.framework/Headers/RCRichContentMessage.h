@@ -18,6 +18,8 @@
  */
 #define RCRichContentMessageTypeIdentifier @"RC:ImgTextMsg"
 
+NS_ASSUME_NONNULL_BEGIN
+
 /*!
  图文消息类
 
@@ -45,7 +47,7 @@
 /*!
  图文消息中包含的需要跳转到的URL
  */
-@property (nonatomic, copy) NSString *url;
+@property (nonatomic, copy, nullable) NSString *url;
 
 /*!
  初始化图文消息
@@ -59,7 +61,7 @@
 + (instancetype)messageWithTitle:(NSString *)title
                           digest:(NSString *)digest
                         imageURL:(NSString *)imageURL
-                           extra:(NSString *)extra;
+                           extra:(nullable NSString *)extra;
 
 /*!
  初始化图文消息
@@ -74,7 +76,9 @@
 + (instancetype)messageWithTitle:(NSString *)title
                           digest:(NSString *)digest
                         imageURL:(NSString *)imageURL
-                             url:(NSString *)url
-                           extra:(NSString *)extra;
+                             url:(nullable NSString *)url
+                           extra:(nullable NSString *)extra;
 
 @end
+
+NS_ASSUME_NONNULL_END

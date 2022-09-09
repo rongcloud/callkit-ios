@@ -12,6 +12,8 @@
 #import "RCCallCommonDefine.h"
 #import "RCCallUserProfile.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 /*!
  通话状态变化的监听器
  */
@@ -241,7 +243,7 @@
  
  @remarks 代理
  */
-- (void)networkTxQuality:(RCCallQuality)txQuality rxQuality:(RCCallQuality)rxQuality remoteUserID:(NSString *)userID;
+- (void)networkTxQuality:(RCCallQuality)txQuality rxQuality:(RCCallQuality)rxQuality remoteUserID:(nullable NSString *)userID;
 
 /*!
  当前通话某用户声音音量回调，该回调方法每两秒触发一次
@@ -253,7 +255,7 @@
  
  @remarks 代理
  */
-- (void)audioLevel:(NSInteger)leavel userID:(NSString *)userID;
+- (void)audioLevel:(NSInteger)leavel userID:(nullable NSString *)userID;
 
 
 /*!
@@ -265,7 +267,7 @@
  
  @remarks 代理
  */
-- (void)processCaptureVideoFrame:(CVPixelBufferRef)pixelBuffer;
+- (void)processCaptureVideoFrame:(nullable CVPixelBufferRef)pixelBuffer;
 
 /*!
  发送本地视频帧数据上报
@@ -276,7 +278,7 @@
  
  @remarks 代理
  */
-- (void)processVideoFrame:(CVPixelBufferRef)pixelBuffer;
+- (void)processVideoFrame:(nullable CVPixelBufferRef)pixelBuffer;
 
 /*!
  显示本地视频帧数据上报
@@ -287,7 +289,7 @@
  
  @remarks 代理
  */
-- (void)processDisplayVideoFrame:(CVPixelBufferRef)pixelBuffer;
+- (void)processDisplayVideoFrame:(nullable CVPixelBufferRef)pixelBuffer;
 
 /*!
  当前通话为视频通话时, 收到远端用户的第一个视频帧的回调
@@ -295,7 +297,7 @@
  
  @remarks 代理
  */
-- (void)receiveRemoteUserVideoFirstKeyFrame:(NSString *)userId;
+- (void)receiveRemoteUserVideoFirstKeyFrame:(nullable NSString *)userId;
 
 /*!
  当前通话为音频或视频通话时, 收到远端用户的第一个音频帧的回调
@@ -303,7 +305,7 @@
  
  @remarks 代理
  */
-- (void)receiveRemoteUserVideoFirstAudioFrame:(NSString *)userId;
+- (void)receiveRemoteUserVideoFirstAudioFrame:(nullable NSString *)userId;
 
 /*!
  对端用户视频分辨率变化的回调
@@ -315,7 +317,7 @@
  
  @remarks 代理
  */
-- (void)remoteUserDidChangeResolution:(NSString *)userId resolution:(CGSize)size;
+- (void)remoteUserDidChangeResolution:(nullable NSString *)userId resolution:(CGSize)size;
 
 @end
 
@@ -335,17 +337,17 @@
 /*!
  通话ID
  */
-@property (nonatomic, strong, readonly) NSString *callId;
+@property (nonatomic, strong, readonly, nullable) NSString *callId;
 
 /*!
  通话的目标会话ID
  */
-@property (nonatomic, strong, readonly) NSString *targetId;
+@property (nonatomic, strong, readonly, nullable) NSString *targetId;
 
 /*!
  RTC会话唯一标识, 用于 Server API
  */
-@property (nonatomic, strong, readonly) NSString *sessionId;
+@property (nonatomic, strong, readonly, nullable) NSString *sessionId;
 
 /*!
  是否是多方通话
@@ -355,7 +357,7 @@
 /*!
  通话的扩展信息
  */
-@property (nonatomic, strong, readonly) NSString *extra;
+@property (nonatomic, strong, readonly, nullable) NSString *extra;
 
 /*!
  通话的当前状态
@@ -365,22 +367,22 @@
 /*!
  通话的最初发起人
  */
-@property (nonatomic, strong, readonly) NSString *caller;
+@property (nonatomic, strong, readonly, nullable) NSString *caller;
 
 /*!
  邀请当前用户加入通话的邀请者
  */
-@property (nonatomic, strong, readonly) NSString *inviter;
+@property (nonatomic, strong, readonly, nullable) NSString *inviter;
 
 /*!
  当前的用户列表
  */
-@property (nonatomic, strong, readonly) NSArray *userProfileList;
+@property (nonatomic, strong, readonly, nullable) NSArray<RCCallUserProfile *> *userProfileList;
 
 /*!
  自己的状态
  */
-@property (nonatomic, strong, readonly) RCCallUserProfile *myProfile;
+@property (nonatomic, strong, readonly, nullable) RCCallUserProfile *myProfile;
 
 /*!
  当前用户使用的媒体类型
@@ -482,7 +484,7 @@
  
  @remarks 通话管理
 */
-- (void)hangup:(void (^)(BOOL isSuccess, NSInteger code))block;
+- (void)hangup:(nullable void (^)(BOOL isSuccess, NSInteger code))block;
 
 /*!
  观察者身份用户, 发布自己的音视频资源
@@ -497,7 +499,7 @@
  
  @remarks 资源管理
  */
-- (void)publishMediaResource:(RCCallMediaType)mediaType complete:(void (^)(BOOL isSuccess, NSInteger code))block;
+- (void)publishMediaResource:(RCCallMediaType)mediaType complete:(nullable void (^)(BOOL isSuccess, NSInteger code))block;
 
 /*!
  正常身份用户, 取消发布自己的音视频资源
@@ -511,7 +513,7 @@
  
  @remarks 资源管理
  */
-- (void)unPublishMediaResource:(void (^)(BOOL isSuccess, NSInteger code))block;
+- (void)unPublishMediaResource:(nullable void (^)(BOOL isSuccess, NSInteger code))block;
 
 /*!
  邀请用户加入通话
@@ -523,7 +525,7 @@
  
  @remarks 通话管理
  */
-- (void)inviteRemoteUsers:(NSArray *)userIdList mediaType:(RCCallMediaType)type;
+- (void)inviteRemoteUsers:(nullable NSArray<NSString *> *)userIdList mediaType:(RCCallMediaType)type;
 
 /*!
  邀请用户加入通话
@@ -536,8 +538,8 @@
  
  @remarks 通话管理
  */
-- (void)inviteRemoteUsers:(NSArray *)userIdList
-           observerIdList:(NSArray *)observerIdList
+- (void)inviteRemoteUsers:(nullable NSArray<NSString *> *)userIdList
+           observerIdList:(nullable NSArray<NSString *> *)observerIdList
                 mediaType:(RCCallMediaType)type;
 
 /*!
@@ -550,7 +552,7 @@
  
  @remarks 视频配置
  */
-- (void)setVideoView:(UIView *)view userId:(NSString *)userId;
+- (void)setVideoView:(nullable UIView *)view userId:(nullable NSString *)userId;
 
 /*!
  设置用户所在的视频View
@@ -565,7 +567,7 @@
  
  @remarks 视频配置
  */
-- (int)setMultiPlatformVideoView:(id<RCRTCDrawer>)view userId:(NSString *)userId;
+- (int)setMultiPlatformVideoView:(nullable id<RCRTCDrawer>)view userId:(nullable NSString *)userId;
 
 /**
  设置用户所在的视频View
@@ -578,7 +580,7 @@
  
  @remarks 视频配置
  */
-- (void)setVideoView:(UIView *)view userId:(NSString *)userId renderMode:(RCCallRenderModel)renderMode;
+- (void)setVideoView:(nullable UIView *)view userId:(nullable NSString *)userId renderMode:(RCCallRenderModel)renderMode;
 
 /*!
  更换自己使用的媒体类型
@@ -672,3 +674,5 @@
 - (BOOL)switchCameraMode;
 
 @end
+
+NS_ASSUME_NONNULL_END

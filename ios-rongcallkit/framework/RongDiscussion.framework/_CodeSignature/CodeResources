@@ -6,11 +6,11 @@
 	<dict>
 		<key>Headers/RCDiscussion.h</key>
 		<data>
-		ZMcZp7AIBiVi+FWhQqopyCM57vM=
+		gDLV5Xf6jOZU+R2u0jWODy7Pfr0=
 		</data>
 		<key>Headers/RCDiscussionClient.h</key>
 		<data>
-		uTHFwL8MaZGoesN2mhTcZ8T00oM=
+		cuGQKJ+iXAkDPrr51a6RblC+znI=
 		</data>
 		<key>Headers/RCDiscussionNotificationMessage.h</key>
 		<data>
@@ -35,22 +35,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			ZMcZp7AIBiVi+FWhQqopyCM57vM=
+			gDLV5Xf6jOZU+R2u0jWODy7Pfr0=
 			</data>
 			<key>hash2</key>
 			<data>
-			r6HkAL7Y07LuVIMNT0r5Hgxv4x23fESWcpz7CRcINdQ=
+			wweJchD933kRgW6/YRDXvXwXgWLqBkZ9LZ8Awm9qWds=
 			</data>
 		</dict>
 		<key>Headers/RCDiscussionClient.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			uTHFwL8MaZGoesN2mhTcZ8T00oM=
+			cuGQKJ+iXAkDPrr51a6RblC+znI=
 			</data>
 			<key>hash2</key>
 			<data>
-			wIueeP2TSOBEK1xgDipmWOORJOIERiTus7PawsXeplo=
+			ufCf81zho5wQP7LoYuQtTMZuygmI/Kxs2OVqyaQtpI4=
 			</data>
 		</dict>
 		<key>Headers/RCDiscussionNotificationMessage.h</key>

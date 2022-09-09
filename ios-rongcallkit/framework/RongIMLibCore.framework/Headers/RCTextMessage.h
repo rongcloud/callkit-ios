@@ -17,6 +17,7 @@
  */
 #define RCTextMessageTypeIdentifier @"RC:TxtMsg"
 
+NS_ASSUME_NONNULL_BEGIN
 /*!
  文本消息类
 
@@ -40,3 +41,5 @@
 + (instancetype)messageWithContent:(NSString *)content;
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -489,7 +489,7 @@
  */
 - (void)locationDidSelect:(CLLocationCoordinate2D)location
              locationName:(NSString *)locationName
-            mapScreenShot:(UIImage *)mapScreenShot __deprecated_msg("已废弃并失效， 请通过实现扩展区位置按钮点击跳转, 设置 RCLocationPickerViewController 的代理 RCLocationPickerViewControllerDelegate，来实现地理位置选择完成之后的代理回调方法");
+            mapScreenShot:(UIImage *)mapScreenShot __deprecated_msg("Use RCLocationPickerViewControllerDelegate on RCLocationPickerViewController instead");
 
 /*!
  相册选择图片列表,返回图片的 NSData
@@ -558,6 +558,6 @@
  */
 - (void)onClickEditPicture:(UIViewController *)rootCtrl
              originalImage:(UIImage *)originalImage
-            editCompletion:(void (^)(UIImage *editedImage))editCompletion __deprecated_msg("已废弃");
+            editCompletion:(void (^)(UIImage *editedImage))editCompletion __attribute__((deprecated));
 
 @end

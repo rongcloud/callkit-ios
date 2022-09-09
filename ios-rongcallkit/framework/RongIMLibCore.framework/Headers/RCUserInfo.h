@@ -12,6 +12,7 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
 /*!
  用户信息类
  */
@@ -30,17 +31,17 @@
 /*!
  用户头像的 URL
  */
-@property (nonatomic, copy) NSString *portraitUri;
+@property (nonatomic, copy, nullable) NSString *portraitUri;
 
 /*!
  用户备注
  */
-@property (nonatomic, copy) NSString *alias;
+@property (nonatomic, copy, nullable) NSString *alias;
 
 /**
  用户信息附加字段
  */
-@property (nonatomic, copy) NSString *extra;
+@property (nonatomic, copy, nullable) NSString *extra;
 
 /*!
  用户信息的初始化方法
@@ -50,6 +51,8 @@
  @param portrait    用户头像的 URL
  @return            用户信息对象
  */
-- (instancetype)initWithUserId:(NSString *)userId name:(NSString *)username portrait:(NSString *)portrait;
+- (instancetype)initWithUserId:(NSString *)userId name:(NSString *)username portrait:(nullable NSString *)portrait;
 
 @end
+
+NS_ASSUME_NONNULL_END

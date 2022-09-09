@@ -17,6 +17,7 @@
  */
 #define RCVoiceMessageTypeIdentifier @"RC:VcMsg"
 
+NS_ASSUME_NONNULL_BEGIN
 /*!
  语音消息类
 
@@ -61,3 +62,5 @@
 + (instancetype)messageWithAudio:(NSData *)audioData duration:(long)duration;
 
 @end
+
+NS_ASSUME_NONNULL_END

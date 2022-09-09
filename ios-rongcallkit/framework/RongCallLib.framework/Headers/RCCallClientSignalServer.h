@@ -11,6 +11,8 @@
 #import <RongCallLib/RongCallLib.h>
 #import "RCCallSummaryMessage.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 /*!
  信令服务代理
  */
@@ -26,7 +28,7 @@
  
  @remarks 代理
  */
-- (void)getUniqueMediaId:(void (^)(NSString *mediaId))successBlock error:(void (^)(int errorCode))errorBlcok;
+- (void)getUniqueMediaId:(nullable void (^)(NSString *mediaId))successBlock error:(nullable void (^)(int errorCode))errorBlcok;
 
 /*!
  发送 VoIP 信令消息
@@ -44,10 +46,10 @@
  */
 - (void)sendVoipSignalMessage:(RCMessageContent *)messageContent
                  toUserIdList:(NSArray<NSString *> *)toUserIdList
-                  pushContent:(NSString *)pushContent
-                     pushData:(NSString *)pushData
-                      success:(void (^)(void))successBlock
-                        error:(void (^)(int errorCode))errorBlcok;
+                  pushContent:(nullable NSString *)pushContent
+                     pushData:(nullable NSString *)pushData
+                      success:(nullable void (^)(void))successBlock
+                        error:(nullable void (^)(int errorCode))errorBlcok;
 
 /*!
  VoIP 通话结束返回的统计信息
@@ -61,5 +63,7 @@
 - (void)onVoipCallSummary:(RCCallSummaryMessage *)summary;
 
 @end
+
+NS_ASSUME_NONNULL_END
 
 #endif /* RCCallClientSignalServer_h */

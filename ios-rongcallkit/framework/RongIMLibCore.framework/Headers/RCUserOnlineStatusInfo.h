@@ -9,6 +9,7 @@
 #import "RCStatusDefine.h"
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
 /*!
  用户在线状态
  */
@@ -35,3 +36,5 @@
 @property (nonatomic, assign) int customerStatus;
 
 @end
+
+NS_ASSUME_NONNULL_END

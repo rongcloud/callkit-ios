@@ -9,6 +9,7 @@
 #import "RCConversation.h"
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
 /*!
  搜索的会话结果
  */
@@ -24,3 +25,5 @@
  */
 @property (nonatomic, assign) int matchCount;
 @end
+
+NS_ASSUME_NONNULL_END

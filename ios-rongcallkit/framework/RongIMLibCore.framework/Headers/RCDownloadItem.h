@@ -56,7 +56,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param error 错误信息对象，成功时为 nil
  @param path 下载完成后文件的路径，此路径为相对路径，相对于沙盒根目录 NSHomeDirectory
  */
-- (void)downloadItem:(RCDownloadItem *)item didCompleteWithError:(NSError *)error filePath:(nullable NSString *)path;
+- (void)downloadItem:(RCDownloadItem *)item didCompleteWithError:(nullable NSError *)error filePath:(nullable NSString *)path;
 @end
 
 @interface RCDownloadItem : NSObject
@@ -79,7 +79,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  文件对应的网络 URL
  */
-@property (nonatomic, strong, readonly) NSURL *URL;
+@property (nonatomic, strong, readonly, nullable) NSURL *URL;
 
 /**
  标识是否可恢复下载。 YES 表示可恢复，支持 Range。 NO 表示不支持 Range。
@@ -89,12 +89,12 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  下载任务的标识符
  */
-@property (nonatomic, copy, readonly) NSString *identify;
+@property (nonatomic, copy, readonly, nullable) NSString *identify;
 
 /**
  下载任务的代理对象
  */
-@property (nonatomic, weak) id<RCDownloadItemDelegate> delegate;
+@property (nonatomic, weak, nullable) id<RCDownloadItemDelegate> delegate;
 
 + (instancetype) new NS_UNAVAILABLE;
 

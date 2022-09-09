@@ -117,6 +117,27 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)setChatRoomStatusDelegate:(id<RCChatRoomStatusDelegate>)delegate;
 
 /*!
+ 添加 IMLib 的聊天室状态监听器
+
+ @param delegate IMLib 聊天室状态监听器
+ */
+- (void)addChatRoomStatusDelegate:(id<RCChatRoomStatusDelegate>)delegate;
+
+/*!
+ 移除 IMLib 的聊天室状态监听器
+
+ @param delegate IMLib 聊天室状态监听器
+ */
+- (void)removeChatRoomStatusDelegate:(id<RCChatRoomStatusDelegate>)delegate;
+
+/*!
+ 获取 IMLib 的聊天室状态监听器
+ 
+ @return 所有 IMLib 聊天室状态监听器
+ */
+- (NSArray <id<RCChatRoomStatusDelegate>> *)allChatRoomStatusDelegates;
+
+/*!
  从服务器端获取聊天室的历史消息
  @param targetId            聊天室ID
  @param recordTime          起始的消息发送时间戳，毫秒

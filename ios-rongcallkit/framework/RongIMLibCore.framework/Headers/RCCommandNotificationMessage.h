@@ -17,6 +17,7 @@
  */
 #define RCCommandNotificationMessageIdentifier @"RC:CmdNtf"
 
+NS_ASSUME_NONNULL_BEGIN
 /*!
  命令提醒消息类
 
@@ -37,7 +38,7 @@
 
  @discussion 命令提醒消息的扩展数据，可以为任意字符串，如存放您定义的 json 数据。
  */
-@property (nonatomic, copy) NSString *data;
+@property (nonatomic, copy, nullable) NSString *data;
 
 /*!
  初始化命令提醒消息
@@ -46,6 +47,8 @@
  @param data    命令的扩展数据
  @return        命令提醒消息对象
  */
-+ (instancetype)notificationWithName:(NSString *)name data:(NSString *)data;
++ (instancetype)notificationWithName:(NSString *)name data:(nullable NSString *)data;
 
 @end
+
+NS_ASSUME_NONNULL_END

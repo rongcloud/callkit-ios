@@ -18,6 +18,8 @@
 #import "RCUserInfo.h"
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /*!
  消息内容的编解码协议
 
@@ -33,7 +35,7 @@
  @discussion
  消息内容通过此方法，将消息中的所有数据，编码成为json数据，返回的json数据将用于网络传输。
  */
-- (NSData *)encode;
+- (nullable NSData *)encode;
 
 /*!
  将json数据的内容反序列化，解码生成可用的消息内容
@@ -63,7 +65,7 @@
 
  @discussion 这里返回的关键内容列表将用于消息搜索，自定义消息必须要实现此接口才能进行搜索。
  */
-- (NSArray<NSString *> *)getSearchableWords;
+- (nullable NSArray<NSString *> *)getSearchableWords;
 @end
 
 /*!
@@ -102,7 +104,7 @@
  如果您使用IMKit，当会话的最后一条消息为自定义消息时，需要通过此方法获取在会话列表展现的内容摘要；
  当App在后台收到消息时，需要通过此方法获取在本地通知中展现的内容摘要。
  */
-- (NSString *)conversationDigest;
+- (nullable NSString *)conversationDigest;
 
 @end
 
@@ -121,12 +123,12 @@
  @discussion
  如果您使用IMKit，可以通过RCIM的enableMessageAttachUserInfo属性设置在每次发送消息中携带发送者的用户信息。
  */
-@property (nonatomic, strong) RCUserInfo *senderUserInfo;
+@property (nonatomic, strong, nullable) RCUserInfo *senderUserInfo;
 
 /*!
  消息中的 @ 提醒信息
  */
-@property (nonatomic, strong) RCMentionedInfo *mentionedInfo;
+@property (nonatomic, strong, nullable) RCMentionedInfo *mentionedInfo;
 
 /**
  设置焚烧时间
@@ -139,7 +141,7 @@
  消息的附加信息
  请确保传入的是 NSString 类型的数据
  */
-@property (nonatomic, copy) NSString *extra;
+@property (nonatomic, copy, nullable) NSString *extra;
 
 /**
  将用户信息编码到字典中
@@ -177,7 +179,10 @@
  @discussion 此字段存放消息内容中未编码的json数据。
  SDK内置的消息，如果消息解码失败，默认会将消息的内容存放到此字段；如果编码和解码正常，此字段会置为nil。
  */
-@property (nonatomic, strong, setter=setRawJSONData:) NSData *rawJSONData;
+@property (nonatomic, strong, nullable, setter=setRawJSONData:) NSData *rawJSONData;
 
 @end
+
+NS_ASSUME_NONNULL_END
+
 #endif

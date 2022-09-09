@@ -13,6 +13,8 @@
 #import "RCCallCommonDefine.h"
 #import "RCCallSession.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 /*!
  CallLib全局通话呼入的监听器
  */
@@ -46,13 +48,13 @@
  
  @remarks 代理
  */
-- (void)didReceiveCallRemoteNotification:(NSString *)callId
-                           inviterUserId:(NSString *)inviterUserId
+- (void)didReceiveCallRemoteNotification:(nullable NSString *)callId
+                           inviterUserId:(nullable NSString *)inviterUserId
                                mediaType:(RCCallMediaType)mediaType
-                              userIdList:(NSArray *)userIdList
-                                userDict:(NSDictionary *)userDict
+                              userIdList:(nullable NSArray<NSString *> *)userIdList
+                                userDict:(nullable NSDictionary *)userDict
                               isVoIPPush:(BOOL)isVoIPPush
-                              pushConfig:(RCMessagePushConfig *)pushConfig;
+                              pushConfig:(nullable RCMessagePushConfig *)pushConfig;
 
 /*!
  接收到取消通话的远程通知的回调
@@ -68,11 +70,11 @@
  
  @remarks 代理
  */
-- (void)didCancelCallRemoteNotification:(NSString *)callId
-                          inviterUserId:(NSString *)inviterUserId
+- (void)didCancelCallRemoteNotification:(nullable NSString *)callId
+                          inviterUserId:(nullable NSString *)inviterUserId
                               mediaType:(RCCallMediaType)mediaType
-                             userIdList:(NSArray *)userIdList
-                             pushConfig:(RCMessagePushConfig *)pushConfig
+                             userIdList:(nullable NSArray<NSString *> *)userIdList
+                             pushConfig:(nullable RCMessagePushConfig *)pushConfig
                          isRemoteCancel:(BOOL)isRemoteCancel;
 
 @optional
@@ -153,12 +155,12 @@
 /*!
  自定义push消息. 应在startCall之前调用
  */
-@property (nonatomic, strong) RCMessagePushConfig *invitePushConfig;
+@property (nonatomic, strong, nullable) RCMessagePushConfig *invitePushConfig;
 
 /*!
  自定义push消息. 应在startCall之前调用
  */
-@property (nonatomic, strong) RCMessagePushConfig *hangupPushConfig;
+@property (nonatomic, strong, nullable) RCMessagePushConfig *hangupPushConfig;
 
 /*!
  呼叫或通话过程中, 当收到手机号系统来电时, 是否挂断当前呼叫或通话, 默认: Yes 挂断
@@ -166,7 +168,7 @@
 @property (nonatomic, assign) BOOL canHangupSystemPhonecall;
 
 /*!
- 多端登录时, 同一UserId的两端加入不同通话的类型, 默认: RCRTCJoinRoomTypeCoexist 多端可共存不同通话
+ 在开启 IM 链接多端登录的前提下，同一 UserId 的不同端先后加入通话的处理行为 默认: RCCallJoinCallTypeKick 将先加入通话用户踢出通话
  */
 @property (nonatomic, assign) RCCallJoinCallType joinCallType;
 
@@ -207,12 +209,34 @@
  @remarks 通话管理
  @return 呼出的通话实体
  */
-- (RCCallSession *)startCall:(RCConversationType)conversationType
+- (nullable RCCallSession *)startCall:(RCConversationType)conversationType
                     targetId:(NSString *)targetId
-                          to:(NSArray *)userIdList
+                          to:(NSArray<NSString *> *)userIdList
                    mediaType:(RCCallMediaType)type
              sessionDelegate:(id<RCCallSessionDelegate>)delegate
-                       extra:(NSString *)extra;
+                       extra:(nullable NSString *)extra;
+
+/*!
+ 发起一个跨应用通话
+ 
+ @param conversationType 会话类型 (仅支持单聊)
+ @param targetId         目标会话ID, 单人呼叫时targetId为被叫端UserId
+ @param userIdList       被叫端的用户ID列表, 数组中仅填写被叫端UserId, 请不要填写主叫端UserId, 否则无法发起呼叫；（注意此处ID组成形式为Appkey+UserId, 格式为appkey_userid，注意下划线拼接）
+ @param type             发起的通话媒体类型
+ @param delegate         通话监听
+ @param extra            附件信息
+ @discussion
+ 发起一个通话
+ 
+ @remarks 通话管理
+ @return 呼出的通话实体
+ */
+- (RCCallSession *)startCrossCall:(RCConversationType)conversationType
+                         targetId:(NSString *)targetId
+                               to:(NSArray *)userIdList
+                        mediaType:(RCCallMediaType)type
+                  sessionDelegate:(id<RCCallSessionDelegate>)delegate
+                            extra:(NSString *)extra;
 
 /*!
  发起一个通话
@@ -230,13 +254,13 @@
  @remarks 通话管理
  @return 呼出的通话实体
  */
-- (RCCallSession *)startCall:(RCConversationType)conversationType
+- (nullable RCCallSession *)startCall:(RCConversationType)conversationType
                     targetId:(NSString *)targetId
-                          to:(NSArray *)userIdList
-              observerIdList:(NSArray *)observerIdList
+                          to:(NSArray<NSString *> *)userIdList
+              observerIdList:(NSArray<NSString *> *)observerIdList
                    mediaType:(RCCallMediaType)type
              sessionDelegate:(id<RCCallSessionDelegate>)delegate
-                       extra:(NSString *)extra;
+                       extra:(nullable NSString *)extra;
 
 /*!
  当前会话类型是否支持音频通话
@@ -311,7 +335,7 @@
 /*!
  当前的通话会话实体
  */
-@property (nonatomic, strong, readonly) RCCallSession *currentCallSession;
+@property (nonatomic, strong, readonly, nullable) RCCallSession *currentCallSession;
 
 /*!
  是否生成通话记录消息，默认为YES
@@ -345,3 +369,5 @@
 + (NSString *)getVersion;
 
 @end
+
+NS_ASSUME_NONNULL_END

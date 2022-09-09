@@ -40,6 +40,6 @@
 
  @warning **已废弃，请勿使用。**
  */
-- (void)decodeWithJsonDictionaryArray:(NSArray *)jsonDictionary __deprecated_msg("已废弃，请勿使用。");
+- (void)decodeWithJsonDictionaryArray:(NSArray *)jsonDictionary __attribute__((deprecated));
 
 @end

@@ -11,6 +11,9 @@
  引用消息的类型名
  */
 #define RCReferenceMessageTypeIdentifier @"RC:ReferenceMsg"
+
+NS_ASSUME_NONNULL_BEGIN
+
 /*!
 引用消息类
 
@@ -31,7 +34,7 @@
 /*!
  被引用消息体
  */
-@property (nonatomic, strong) RCMessageContent *referMsg;
+@property (nonatomic, strong, nullable) RCMessageContent *referMsg;
 
 /*!
  被引用消息的 messageUId。服务器消息唯一 ID（在同一个 Appkey 下全局唯一）
@@ -39,3 +42,5 @@
 @property (nonatomic, strong) NSString *referMsgUid;
 
 @end
+
+NS_ASSUME_NONNULL_END

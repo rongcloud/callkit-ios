@@ -19,6 +19,8 @@
 #import "RCMessageConfig.h"
 #import "RCMessagePushConfig.h"
 #import "RCGroupReadReceiptInfoV2.h"
+
+NS_ASSUME_NONNULL_BEGIN
 /*!
  消息实体类
 
@@ -39,7 +41,7 @@
 /*!
  所属会话的业务标识，长度限制 20 字符
  */
-@property (nonatomic, copy) NSString *channelId;
+@property (nonatomic, copy, nullable) NSString *channelId;
 
 /*!
  消息的 ID
@@ -56,15 +58,15 @@
 /*!
  消息的发送者 ID
  */
-@property (nonatomic, copy) NSString *senderUserId;
+@property (nonatomic, copy, nullable) NSString *senderUserId;
 
 /*!
- 消息的接收状态
+ 消息的接收状态(针对接收的消息生效)
  */
 @property (nonatomic, assign) RCReceivedStatus receivedStatus;
 
 /*!
- 消息的发送状态
+ 消息的发送状态(针对发送的消息生效)
  */
 @property (nonatomic, assign) RCSentStatus sentStatus;
 
@@ -81,36 +83,36 @@
 /*!
  消息的类型名
  */
-@property (nonatomic, copy) NSString *objectName;
+@property (nonatomic, copy, nullable) NSString *objectName;
 
 /*!
  消息的内容
  */
-@property (nonatomic, strong) RCMessageContent *content;
+@property (nonatomic, strong, nullable) RCMessageContent *content;
 
 /*!
  消息的附加字段
  */
-@property (nonatomic, copy) NSString *extra;
+@property (nonatomic, copy, nullable) NSString *extra;
 
 /*!
  全局唯一 ID
 
  @discussion 服务器消息唯一 ID（在同一个 Appkey 下全局唯一）
  */
-@property (nonatomic, copy) NSString *messageUId;
+@property (nonatomic, copy, nullable) NSString *messageUId;
 
 /*!
  阅读回执状态
  */
-@property (nonatomic, strong) RCReadReceiptInfo *readReceiptInfo;
+@property (nonatomic, strong, nullable) RCReadReceiptInfo *readReceiptInfo;
 
 /*!
  群阅读回执状态
  @discussion 如果是调用 RCGroupReadReceiptV2Manager 中方法实现群已读回执功能，此参数才有效，否则请使用 readReceiptInfo 属性获取阅读回执状态
  @discussion 如果使用 IMKit，请用 readReceiptInfo 属性
  */
-@property (nonatomic, strong) RCGroupReadReceiptInfoV2 *groupReadReceiptInfoV2;
+@property (nonatomic, strong, nullable) RCGroupReadReceiptInfoV2 *groupReadReceiptInfoV2;
 
 /*!
  消息配置
@@ -141,7 +143,7 @@
  @discussion 扩展信息只支持单聊和群组，其它会话类型不能设置扩展信息
  @discussion 默认消息扩展字典 key 长度不超过 32 ，value 长度不超过 4096 ，单次设置扩展数量最大为 20，消息的扩展总数不能超过 300
 */
-@property (nonatomic, strong) NSDictionary<NSString *, NSString *> *expansionDic;
+@property (nonatomic, strong, nullable) NSDictionary<NSString *, NSString *> *expansionDic;
 
 /*!
  消息是否被修改
@@ -175,7 +177,7 @@
  */
 - (instancetype)initWithType:(RCConversationType)conversationType
                     targetId:(NSString *)targetId
-                   channelId:(NSString *)channelId
+                   channelId:(nullable NSString *)channelId
                    direction:(RCMessageDirection)messageDirection
                      content:(RCMessageContent *)content;
 
@@ -193,6 +195,9 @@
                     targetId:(NSString *)targetId
                    direction:(RCMessageDirection)messageDirection
                    messageId:(long)messageId
-                     content:(RCMessageContent *)content __deprecated_msg("已废弃，请使用 initWithType:targetId:direction:content:");
+                     content:(RCMessageContent *)content __deprecated_msg("Use initWithType:targetId:direction:content: instead");
 @end
+
+NS_ASSUME_NONNULL_END
+
 #endif

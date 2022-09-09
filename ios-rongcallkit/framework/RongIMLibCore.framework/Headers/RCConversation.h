@@ -13,6 +13,8 @@
 #import "RCMessageContent.h"
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @class RCReadReceiptInfo, RCGroupReadReceiptInfoV2, RCMessageConfig;
 /*!
  会话类
@@ -34,12 +36,12 @@
 /*!
  该会话的业务标识，长度限制 20 字符
  */
-@property (nonatomic, copy) NSString *channelId;
+@property (nonatomic, copy, nullable) NSString *channelId;
 
 /*!
  会话的标题
  */
-@property (nonatomic, copy) NSString *conversationTitle;
+@property (nonatomic, copy, nullable) NSString *conversationTitle;
 
 /*!
  会话中的未读消息数量
@@ -77,17 +79,17 @@
 /*!
  会话中存在的草稿
  */
-@property (nonatomic, copy) NSString *draft;
+@property (nonatomic, copy, nullable) NSString *draft;
 
 /*!
  会话中最后一条消息的类型名
  */
-@property (nonatomic, copy) NSString *objectName;
+@property (nonatomic, copy, nullable) NSString *objectName;
 
 /*!
  会话中最后一条消息的发送者用户 ID
  */
-@property (nonatomic, copy) NSString *senderUserId;
+@property (nonatomic, copy, nullable) NSString *senderUserId;
 
 /*!
  会话中最后一条消息的消息 ID
@@ -97,7 +99,7 @@
 /*!
  会话中最后一条消息的内容
  */
-@property (nonatomic, strong) RCMessageContent *lastestMessage;
+@property (nonatomic, strong, nullable) RCMessageContent *lastestMessage;
 
 /*!
  会话中最后一条消息的方向
@@ -110,14 +112,14 @@
  @discussion 此字段存放最后一条消息内容中未编码的 json 数据。
  SDK 内置的消息，如果消息解码失败，默认会将消息的内容存放到此字段；如果编码和解码正常，此字段会置为 nil。
  */
-@property (nonatomic, strong) NSDictionary *jsonDict;
+@property (nonatomic, strong, nullable) NSDictionary *jsonDict;
 
 /*!
  最后一条消息的全局唯一 ID
 
  @discussion 服务器消息唯一 ID（在同一个Appkey下全局唯一）
  */
-@property (nonatomic, copy) NSString *lastestMessageUId;
+@property (nonatomic, copy, nullable) NSString *lastestMessageUId;
 
 /*!
  会话中是否存在被 @ 的消息
@@ -141,19 +143,19 @@
 /*!
  最后一条消息的阅读回执状态
  */
-@property (nonatomic, strong) RCReadReceiptInfo *latestMessageReadReceiptInfo;
+@property (nonatomic, strong, nullable) RCReadReceiptInfo *latestMessageReadReceiptInfo;
 
 /*!
  最后一条消息的群阅读回执状态
  @discussion 如果是调用 RCGroupReadReceiptV2Manager 中方法实现群已读回执功能，此参数才有效，否则请使用 readReceiptInfo 属性获取阅读回执状态
  @discussion 如果使用 IMKit，请用 readReceiptInfo 属性
  */
-@property (nonatomic, strong) RCGroupReadReceiptInfoV2 *latestMessageGroupReadReceiptInfoV2;
+@property (nonatomic, strong, nullable) RCGroupReadReceiptInfoV2 *latestMessageGroupReadReceiptInfoV2;
 
 /*!
  最后一条消息的消息配置
  */
-@property (nonatomic, strong) RCMessageConfig *latestMessageMessageConfig;
+@property (nonatomic, strong, nullable) RCMessageConfig *latestMessageMessageConfig;
 
 /*!
  最后一条消息是否可以包含扩展信息
@@ -169,7 +171,7 @@
  @discussion 扩展信息只支持单聊和群组，其它会话类型不能设置扩展信息
  @discussion 默认消息扩展字典 key 长度不超过 32 ，value 长度不超过 4096 ，单次设置扩展数量最大为 20，消息的扩展总数不能超过 300
 */
-@property (nonatomic, strong) NSDictionary<NSString *, NSString *> *latestMessageExpansion;
+@property (nonatomic, strong, nullable) NSDictionary<NSString *, NSString *> *latestMessageExpansion;
 
 /*!
  免打扰级别
@@ -180,4 +182,16 @@
  超级群频道类型，只有 ConversationType 为超级群时该字段有效, 非超级群时为0
  */
 @property (nonatomic, assign)  RCUltraGroupChannelType channelType;
+
+/*!
+会话中第一条未读消息时间戳（Unix时间戳、毫秒）
+
+仅支持 超级群会话
+ @Since 5.2.5
+*/
+@property (nonatomic, assign) long long firstUnreadMsgSendTime;
+
+
 @end
+
+NS_ASSUME_NONNULL_END

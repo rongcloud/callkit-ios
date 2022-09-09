@@ -37,6 +37,13 @@
                             userIdList:@[targetId]];
 }
 
+- (instancetype)initWithOutgoingCrossCall:(NSString *)targetId mediaType:(RCCallMediaType)mediaType {
+    return [super initWithOutgoingCrossCall:ConversationType_PRIVATE
+                                   targetId:targetId
+                                  mediaType:mediaType
+                                 userIdList:@[targetId]];
+}
+
 - (instancetype)initWithActiveCall:(RCCallSession *)callSession {
     return [super initWithActiveCall:callSession];
 }

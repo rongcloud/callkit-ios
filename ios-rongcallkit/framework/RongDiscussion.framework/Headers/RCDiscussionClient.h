@@ -32,7 +32,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)createDiscussion:(NSString *)name
               userIdList:(NSArray<NSString *> *)userIdList
                  success:(nullable void (^)(RCDiscussion *discussion))successBlock
-                   error:(nullable void (^)(RCErrorCode status))errorBlock __deprecated_msg("已废弃，请勿使用。");
+                   error:(nullable void (^)(RCErrorCode status))errorBlock __attribute__((deprecated));
 
 /*!
  讨论组加人，将用户加入讨论组
@@ -50,7 +50,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)addMemberToDiscussion:(NSString *)discussionId
                    userIdList:(NSArray<NSString *> *)userIdList
                       success:(nullable void (^)(RCDiscussion *discussion))successBlock
-                        error:(nullable void (^)(RCErrorCode status))errorBlock __deprecated_msg("已废弃，请勿使用。");
+                        error:(nullable void (^)(RCErrorCode status))errorBlock __attribute__((deprecated));
 
 /*!
  讨论组踢人，将用户移出讨论组
@@ -72,7 +72,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)removeMemberFromDiscussion:(NSString *)discussionId
                             userId:(NSString *)userId
                            success:(nullable void (^)(RCDiscussion *discussion))successBlock
-                             error:(nullable void (^)(RCErrorCode status))errorBlock __deprecated_msg("已废弃，请勿使用。");
+                             error:(nullable void (^)(RCErrorCode status))errorBlock __attribute__((deprecated));
 
 /*!
  退出当前讨论组
@@ -85,7 +85,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)quitDiscussion:(NSString *)discussionId
                success:(nullable void (^)(RCDiscussion *discussion))successBlock
-                 error:(nullable void (^)(RCErrorCode status))errorBlock __deprecated_msg("已废弃，请勿使用。");
+                 error:(nullable void (^)(RCErrorCode status))errorBlock __attribute__((deprecated));
 
 /*!
  获取讨论组的信息
@@ -99,7 +99,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)getDiscussion:(NSString *)discussionId
               success:(nullable void (^)(RCDiscussion *discussion))successBlock
-                error:(nullable void (^)(RCErrorCode status))errorBlock __deprecated_msg("已废弃，请勿使用。");
+                error:(nullable void (^)(RCErrorCode status))errorBlock __attribute__((deprecated));
 
 /*!
  设置讨论组名称
@@ -116,7 +116,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)setDiscussionName:(NSString *)discussionId
                      name:(NSString *)discussionName
                   success:(nullable void (^)(void))successBlock
-                    error:(nullable void (^)(RCErrorCode status))errorBlock __deprecated_msg("已废弃，请勿使用。");
+                    error:(nullable void (^)(RCErrorCode status))errorBlock __attribute__((deprecated));
 
 /*!
  设置讨论组是否开放加人权限
@@ -134,7 +134,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)setDiscussionInviteStatus:(NSString *)discussionId
                            isOpen:(BOOL)isOpen
                           success:(nullable void (^)(void))successBlock
-                            error:(nullable void (^)(RCErrorCode status))errorBlock __deprecated_msg("已废弃，请勿使用。");
+                            error:(nullable void (^)(RCErrorCode status))errorBlock __attribute__((deprecated));
 
 @end
 

@@ -42,7 +42,7 @@ NS_ASSUME_NONNULL_BEGIN
 /*!
  所属会话的业务标识
  */
-@property (nonatomic, copy) NSString *channelId;
+@property (nonatomic, copy, nullable) NSString *channelId;
 
 /*!
  会话状态改变的类型
@@ -50,11 +50,18 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) RCConversationStatusType conversationStatusType;
 
 /*!
- 如果 conversationStatusType  = RCConversationStatusType_Mute， conversationStatusvalue = 1
- 是提醒，conversationStatusvalue = 0 是免打扰。  如果 conversationStatusType  = RCConversationStatusType_Top，
- conversationStatusvalue = 0 是不置顶，conversationStatusvalue = 1 是置顶。
+ 如果 conversationStatusType  = RCConversationStatusType_Mute，conversationStatusvalue = 1 是提醒，conversationStatusvalue = 0 是免打扰。
+ 
+ 如果 conversationStatusType  = RCConversationStatusType_Top，conversationStatusvalue = 0 是不置顶，conversationStatusvalue = 1 是置顶。
 */
 @property (nonatomic, assign) int conversationStatusvalue;
+
+/*!
+ 会话免打扰类型
+ 
+ 当 conversationStatusType  = RCConversationStatusType_Mute 时，notificationLevel 值为有效值。
+*/
+@property (nonatomic, assign) RCPushNotificationLevel notificationLevel;
 
 @end
 

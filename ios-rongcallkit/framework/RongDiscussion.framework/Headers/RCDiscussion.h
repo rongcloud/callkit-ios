@@ -52,14 +52,14 @@
 
  @warning **已废弃，请勿使用。**
  */
-@property (nonatomic, assign) __deprecated_msg("已废弃，请勿使用。") int conversationType;
+@property (nonatomic, assign) int conversationType __attribute__((deprecated));
 
 /*!
  讨论组是否允许消息提醒（已废弃，请勿使用）
 
  @warning **已废弃，请勿使用。**
  */
-@property (nonatomic, assign) __deprecated_msg("已废弃，请勿使用。") int pushMessageNotificationStatus;
+@property (nonatomic, assign) int pushMessageNotificationStatus __attribute__((deprecated));
 
 /*!
  讨论组初始化方法

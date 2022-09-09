@@ -13,6 +13,7 @@
  */
 #define RCRecallNotificationMessageIdentifier @"RC:RcNtf"
 
+NS_ASSUME_NONNULL_BEGIN
 /*!
  撤回通知消息类
  @discussion 撤回通知消息，此消息会进行本地存储，但不计入未读消息数。
@@ -59,6 +60,8 @@
 /*!
  被撤回的原消息
 */
-@property (nonatomic, strong) RCMessageContent *originalMessageContent;
+@property (nonatomic, strong, nullable) RCMessageContent *originalMessageContent;
 
 @end
+
+NS_ASSUME_NONNULL_END

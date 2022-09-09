@@ -16,8 +16,8 @@
 #import "RCThemeDefine.h"
 #import <UIKit/UIKit.h>
 #import "RCReferencingView.h"
-#import <RongLocation/RCLocationMessage.h>
 
+@class RCLocationMessage;
 @class RCCustomerServiceInfo,RCPublicServiceMenuItem;
 /*!
  客服服务状态
@@ -419,7 +419,7 @@ typedef enum : NSUInteger {
  如果您需要重写此接口，请注意调用super。
  因 UI 逻辑修改为将原消息移动到会话页面最下方，不删除原消息直接重新发送原消息，但是此方法会重新生成消息发送，故废弃。
  */
-- (void)resendMessage:(RCMessageContent *)messageContent __deprecated_msg("已废弃，请使用 resendMessageWithModel");
+- (void)resendMessage:(RCMessageContent *)messageContent __deprecated_msg("Use resendMessageWithModel instead");
 
 /*!
  重新发送消息
@@ -494,7 +494,7 @@ typedef enum : NSUInteger {
  @param status          发送状态，0表示成功，非0表示失败
  @param messageContent   消息内容
  */
-- (void)didSendMessage:(NSInteger)status content:(RCMessageContent *)messageContent __deprecated_msg("已废弃，请使用 - (void)didSendMessageModel:(NSInteger)status model:(RCMessageModel *)messageModel");
+- (void)didSendMessage:(NSInteger)status content:(RCMessageContent *)messageContent __deprecated_msg("Use - (void)didSendMessageModel:(NSInteger)status model:(RCMessageModel *)messageModel instead");
 
 /*!
  发送消息完成的回调

@@ -512,10 +512,12 @@
 - (void)callDidConnect {
     [self.userCollectionView removeFromSuperview];
     _userCollectionView = nil;
-    if (![self.callSession.caller isEqualToString:currentUserId]) {
-        [self.subUserModelList removeObject:[self getModelInSubUserModelList:currentUserId]];
-        [self.subUserModelList addObject:self.mainModel];
-        self.mainModel = nil;
+    [self.subUserModelList removeAllObjects];
+    for (RCCallUserProfile *userProfile in self.callSession.userProfileList) {
+       if (![userProfile.userId isEqualToString:currentUserId]) {
+           RCCallUserCallInfoModel *userModel = [self generateUserModel:userProfile.userId];
+           [self.subUserModelList addObject:userModel];
+       }
     }
     [self userCollectionView];
     [self updateAllSubUserLayout];

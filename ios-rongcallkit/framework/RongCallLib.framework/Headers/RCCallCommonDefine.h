@@ -50,6 +50,21 @@ typedef NS_ENUM(NSInteger, RCCallMediaType) {
 };
 
 /*!
+ 媒体类型
+ */
+typedef NS_ENUM(NSInteger, RCCallRoomType) {
+    /*!
+     同App通话
+     */
+    RCCallRoomTypeNormalCall = 0,
+    /*!
+     跨App通话
+     */
+    RCCallRoomTypeCrossCall = 7
+};
+
+
+/*!
  通话质量
  */
 typedef NS_ENUM(NSUInteger, RCCallQuality) {
@@ -430,10 +445,6 @@ typedef NS_ENUM(NSUInteger, RCCallJoinCallType) {
      拒绝当前用户加入通话
      */
     RCCallJoinCallTypeRefuse,
-    /*!
-     两端共存, 可同时都在通话中
-     */
-    RCCallJoinCallTypeCoexist
 };
 
 #endif /* RCCallCommonDefine_h */

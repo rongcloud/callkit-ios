@@ -65,6 +65,16 @@
 - (instancetype)initWithOutgoingCall:(NSString *)targetId mediaType:(RCCallMediaType)mediaType;
 
 /*!
+ 初始化单人音视频ViewController并发起跨应用通话
+
+ @param targetId         会话ID（注意此处ID组成形式为Appkey+UserId, 格式为appkey_userid，注意下划线拼接）
+ @param mediaType        通话媒体类型
+
+ @return 单人音视频ViewController
+ */
+- (instancetype)initWithOutgoingCrossCall:(NSString *)targetId mediaType:(RCCallMediaType)mediaType;
+
+/*!
  初始化已经接通的音视频ViewController
 
  @param callSession 已经接通的通话实体

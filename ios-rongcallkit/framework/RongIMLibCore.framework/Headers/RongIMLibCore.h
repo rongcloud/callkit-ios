@@ -57,6 +57,7 @@ FOUNDATION_EXPORT const unsigned char RongIMLibCoreVersionString[];
 #import <RongIMLibCore/RCTagProtocol.h>
 #import <RongIMLibCore/RCBlockedMessageInfo.h>
 #import <RongIMLibCore/RCUltraGroupTypingStatusInfo.h>
+#import <RongIMLibCore/RCMessageDigestInfo.h>
 
 /// 工具类
 #import <RongIMLibCore/RCAMRDataConverter.h>
