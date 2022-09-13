@@ -10,7 +10,6 @@
 		0ADDC74A21B66A6300883EB5 /* RCMultiCallInviteNewUserDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 0ADDC74921B66A6200883EB5 /* RCMultiCallInviteNewUserDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1E5721A125ADD394002FC406 /* RCCallTextButton.h in Headers */ = {isa = PBXBuildFile; fileRef = 1E57219F25ADD394002FC406 /* RCCallTextButton.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1E5721A225ADD394002FC406 /* RCCallTextButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E5721A025ADD394002FC406 /* RCCallTextButton.m */; };
-		272F2F892608A26E0088E841 /* RongLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2704FDC825F8A70100124E78 /* RongLocation.framework */; };
 		272F2F8A2608A26E0088E841 /* RongPublicService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2704FDC925F8A70100124E78 /* RongPublicService.framework */; };
 		272F2F8B2608A26E0088E841 /* RongDiscussion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2704FDC625F8A6F500124E78 /* RongDiscussion.framework */; };
 		272F2F8C2608A26E0088E841 /* RongCustomerService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2704FDC325F8A6F000124E78 /* RongCustomerService.framework */; };
@@ -145,7 +144,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				A6BE1B481CCEFBC700FF6BF7 /* RongCallLib.framework in Frameworks */,
-				272F2F892608A26E0088E841 /* RongLocation.framework in Frameworks */,
 				272F2F8A2608A26E0088E841 /* RongPublicService.framework in Frameworks */,
 				272F2F8B2608A26E0088E841 /* RongDiscussion.framework in Frameworks */,
 				272F2F8C2608A26E0088E841 /* RongCustomerService.framework in Frameworks */,
