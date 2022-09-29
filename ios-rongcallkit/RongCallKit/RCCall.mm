@@ -42,9 +42,9 @@
     }
 #endif
 
-static NSString *const __RongCallKit__Version = @"5.2.5_opensource";
-static NSString *const __RongCallKit__Commit = @"0ad50d95";
-static NSString *const __RongCallKit__Time = @"202209131509";
+static NSString *const __RongCallKit__Version = @"5.2.5.1_opensource";
+static NSString *const __RongCallKit__Commit = @"ce7148dc";
+static NSString *const __RongCallKit__Time = @"202209291633";
 
 @interface RCCall () <RCCallReceiveDelegate>
 
@@ -535,6 +535,10 @@ static NSString *const __RongCallKit__Time = @"202209131509";
             [[UIApplication sharedApplication] presentLocalNotificationNow:callNotification];
         });
     }
+}
+
+- (void)didMissCall:(RCCallSession *)callSession {
+    NSLog(@"[didMissCall] session:%@, reason:%zd", callSession, callSession.disconnectReason);
 }
 
 #pragma mark - alert

@@ -78,6 +78,18 @@ NS_ASSUME_NONNULL_BEGIN
                          isRemoteCancel:(BOOL)isRemoteCancel;
 
 @optional
+
+/*!
+ 接收到通话漏接的回调
+ 
+ @param callSession 呼入的通话实体
+ @discussion
+ 接收到通话漏接的回调
+ 
+ @remarks 代理
+ */
+- (void)didMissCall:(RCCallSession *)callSession;
+
 /*!
  接收到取消通话的远程通知的回调
  

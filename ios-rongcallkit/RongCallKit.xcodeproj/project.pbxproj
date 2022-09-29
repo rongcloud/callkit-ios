@@ -76,7 +76,6 @@
 		2704FDC025F8A6C600124E78 /* RongChatRoom.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RongChatRoom.framework; path = framework/RongChatRoom.framework; sourceTree = "<group>"; };
 		2704FDC325F8A6F000124E78 /* RongCustomerService.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RongCustomerService.framework; path = framework/RongCustomerService.framework; sourceTree = "<group>"; };
 		2704FDC625F8A6F500124E78 /* RongDiscussion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RongDiscussion.framework; path = framework/RongDiscussion.framework; sourceTree = "<group>"; };
-		2704FDC825F8A70100124E78 /* RongLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RongLocation.framework; path = framework/RongLocation.framework; sourceTree = "<group>"; };
 		2704FDC925F8A70100124E78 /* RongPublicService.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RongPublicService.framework; path = framework/RongPublicService.framework; sourceTree = "<group>"; };
 		2745188925F634F000FAE44F /* RongIMKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RongIMKit.framework; path = framework/RongIMKit.framework; sourceTree = "<group>"; };
 		2790CDB925DE4039008CBDD8 /* RongCallKitAdaptiveHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RongCallKitAdaptiveHeader.h; sourceTree = "<group>"; };
@@ -315,7 +314,6 @@
 		A6BE1B451CCEFBAC00FF6BF7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				2704FDC825F8A70100124E78 /* RongLocation.framework */,
 				2704FDC925F8A70100124E78 /* RongPublicService.framework */,
 				2704FDC625F8A6F500124E78 /* RongDiscussion.framework */,
 				2704FDC325F8A6F000124E78 /* RongCustomerService.framework */,
@@ -653,7 +651,6 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_BITCODE = YES;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -693,7 +690,6 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_BITCODE = YES;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
