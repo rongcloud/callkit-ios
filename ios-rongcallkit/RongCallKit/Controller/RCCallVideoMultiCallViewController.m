@@ -89,39 +89,14 @@
 
 - (void)initAllUserModel {
     if (self.callSession.callStatus == RCCallIncoming || self.callSession.callStatus == RCCallRinging) {
-        if ([self inviterHasHangup]) {
-            RCCallUserProfile *firstUserProfile = self.callSession.userProfileList[0];
-            self.mainModel = [self generateUserModel:firstUserProfile.userId];
-            [self.callSession setVideoView:self.backgroundView userId:self.mainModel.userId];
+        self.mainModel = [self generateUserModel:currentUserId];
+        [self.callSession setVideoView:self.backgroundView userId:currentUserId];
 
-            self.subUserModelList = [[NSMutableArray alloc] init];
-            for (RCCallUserProfile *userProfile in self.callSession.userProfileList) {
-                if (![userProfile.userId isEqualToString:firstUserProfile.userId] && userProfile.userType != 2) {
-                    RCCallUserCallInfoModel *userModel = [self generateUserModel:userProfile.userId];
-                    [self.subUserModelList addObject:userModel];
-                }
-            }
-            RCCallUserCallInfoModel *userModel = [self generateUserModel:currentUserId];
-            if (userModel.profile.userType != 2) [self.subUserModelList addObject:userModel];
-        } else {
-            self.mainModel = [self generateUserModel:self.callSession.inviter];
-            [self.callSession setVideoView:self.backgroundView userId:self.mainModel.userId];
-
-            self.subUserModelList = [[NSMutableArray alloc] init];
-            BOOL isContaitSelf = NO;
-            for (RCCallUserProfile *userProfile in self.callSession.userProfileList) {
-                if (![userProfile.userId isEqualToString:self.callSession.inviter] && userProfile.userType != 2) {
-                    RCCallUserCallInfoModel *userModel = [self generateUserModel:userProfile.userId];
-                    [self.subUserModelList addObject:userModel];
-                }
-                if ([userProfile.userId isEqualToString:currentUserId]) {
-                    isContaitSelf = YES;
-                }
-            }
-
-            if (!isContaitSelf) {
-                RCCallUserCallInfoModel *userModel = [self generateUserModel:currentUserId];
-                if (userModel.profile.userType != 2) [self.subUserModelList addObject:userModel];
+        self.subUserModelList = [[NSMutableArray alloc] init];
+        for (RCCallUserProfile *userProfile in self.callSession.userProfileList) {
+            if (userProfile.userType != 2) {
+                RCCallUserCallInfoModel *userModel = [self generateUserModel:userProfile.userId];
+                [self.subUserModelList addObject:userModel];
             }
         }
     } else if (self.callSession.callStatus == RCCallDialing) {
@@ -461,20 +436,22 @@
     self.blurView.hidden = YES;
 
     if (callStatus == RCCallIncoming || callStatus == RCCallRinging) {
-        [self.inviterPortraitView setImageURL:[NSURL URLWithString:self.mainModel.userInfo.portraitUri]];
+        RCUserInfo *inviterInfo = [[RCUserInfoCacheManager sharedManager] getUserInfo:self.callSession.inviter];
+        [self.inviterPortraitView setImageURL:[NSURL URLWithString:inviterInfo.portraitUri]];
         self.inviterPortraitView.frame =
             CGRectMake((self.view.frame.size.width - RCCallHeaderLength) / 2,
                        RCCallTopGGradientHeight + RCCallStatusBarHeight, RCCallHeaderLength, RCCallHeaderLength);
         self.inviterPortraitView.hidden = NO;
 
-        [self.inviterPortraitBgView setImageURL:[NSURL URLWithString:self.mainModel.userInfo.portraitUri]];
+        [self.inviterPortraitBgView setImageURL:[NSURL URLWithString:inviterInfo.portraitUri]];
         self.inviterPortraitBgView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
-        self.inviterNameLabel.text = self.mainModel.userInfo.name;
+        self.inviterNameLabel.text = inviterInfo.name;
         self.inviterNameLabel.frame =
             CGRectMake((self.view.frame.size.width - RCCallNameLabelWidth) / 2,
                        RCCallTopGGradientHeight + RCCallHeaderLength + RCCallTopMargin + RCCallStatusBarHeight,
                        RCCallNameLabelWidth, RCCallLabelHeight);
         self.inviterNameLabel.hidden = NO;
+        [self.callSession setVideoView:self.backgroundView userId:self.mainModel.userId];
     } else {
         self.inviterNameLabel.hidden = YES;
         self.inviterPortraitView.hidden = YES;

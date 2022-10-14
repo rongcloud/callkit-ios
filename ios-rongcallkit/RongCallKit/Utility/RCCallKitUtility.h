@@ -32,7 +32,7 @@ UIColor *dynamic_color(NSInteger light_hex_value, NSInteger dark_hex_value);
 #define RCCallCustomButtonLength 60.0f
 #define RCCallLabelHeight 25.0f
 #define RCCallNameLabelWidth 148.0f
-#define RCCallMiniLabelHeight 18.0f
+#define RCCallMiniLabelHeight 25.0f
 #define RCCallTimeLabelHeight 14.0f
 #define RCCallVerticalMargin 32.0f
 #define RCCallHorizontalMargin 15.f

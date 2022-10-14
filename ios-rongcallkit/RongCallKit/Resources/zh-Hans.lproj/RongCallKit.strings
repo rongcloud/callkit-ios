@@ -23,8 +23,8 @@
 "VoIPCallMute"="静音";
 "VoIPCallSpeaker"="免提";
 "VoIPCallWaitingForRemoteAccept"="正在等待对方接受邀请...";
-"VoIPAudioCallIncoming"="邀请您进行语音通话";
-"VoIPVideoCallIncoming"="邀请您进行视频通话";
+"VoIPAudioCallIncoming"="邀请您进行语音通话...";
+"VoIPVideoCallIncoming"="邀请您进行视频通话...";
 "VoIPAudioCallIncomingWithoutUserName"="您有一个语音通话邀请";
 "VoIPVideoCallIncomingWithoutUserName"="您有一个视频通话邀请";
 "VoIPMultiCallUserCollectionTitle"="群聊成员";
