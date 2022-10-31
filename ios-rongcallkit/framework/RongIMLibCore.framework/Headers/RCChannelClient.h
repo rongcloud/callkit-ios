@@ -918,6 +918,32 @@ NS_ASSUME_NONNULL_BEGIN
                                  success:(nullable void (^)(NSArray<RCMessage *> *matchedMsgList, NSArray<RCMessage *> *notMatchMsgList))successBlock
                                    error:(nullable void (^)(RCErrorCode status))errorBlock;
 
+/*!
+ 批量获取本地消息,支持单聊、群聊、超级群、聊天室会话类型
+ @param conversationType        会话类型[非法报错:INVALID_PARAMETER_CONVERSATIONTYPE]
+ @param targetId                会话ID[非法报错:INVALID_PARAMETER_TARGETID]
+ @param channelId               频道ID(非超级群时传nil)[非法报错:INVALID_PARAMETER_CHANNELID]
+ @param messageUIDs             消息UID列表(最多20条)[数量大于20或为0,类型不对:INVALID_PARAMETER_MESSAGELIST]
+ @param successBlock            成功的回调 [messages:成功的消息列表，mismatch:失败的消息UID列表]
+ @param errorBlock              失败的回调 [errorCode:错误码]
+ 
+ @discussion  mismatch不为空, 则代表本地没有对应的 message:
+ 1. messageUid 可能不是标准的UID字符串,本地无法匹配
+ 2. 超级群默认只同步会话最后一条消息, 可能本地找不到本地对应消息, 可以先调用 getBatchRemoteUltraGroupMessages 从远端拉去一下
+ 3. 聊天室退出之后, 本地消息会被清空, 调用该接口无法拿到本地消息
+ @remarks 高级功能
+ @Since 5.2.6
+
+ */
+- (void)getBatchLocalMessages:(RCConversationType)conversationType
+                     targetId:(NSString *)targetId
+                    channelId:(nullable NSString *)channelId
+                  messageUIDs:(NSArray<NSString *> *)messageUIDs
+                      success:(nullable void (^)(NSArray<RCMessage *> *messages, NSArray<NSString *> *mismatch))successBlock
+                        error:(nullable void (^)(RCErrorCode status))errorBlock;
+
+
+
 /**
  * 获取会话里第一条未读消息。
  *
