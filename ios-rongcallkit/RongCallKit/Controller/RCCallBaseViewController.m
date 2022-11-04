@@ -67,7 +67,7 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
     return self;
 }
 
-- (instancetype)initWithOutgoingCall:(RCConversationType)conversationType isCrossCallType:(BOOL )isCross targetId:(NSString *)targetId mediaType:(RCCallMediaType)mediaType userIdList:(NSArray *)userIdList {
+- (instancetype)initWithOutgoingCall:(RCConversationType)conversationType isCrossCallType:(BOOL)isCross targetId:(NSString *)targetId mediaType:(RCCallMediaType)mediaType userIdList:(NSArray *)userIdList {
     self = [super init];
     if (self) {
         [self willChangeValueForKey:@"callSession"];

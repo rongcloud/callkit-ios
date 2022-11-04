@@ -83,6 +83,11 @@
 @property (nonatomic, strong) UILabel *receiptStatusLabel;
 
 /*!
+ 是否显示头像
+
+ */
+@property (nonatomic, assign) BOOL showPortrait;
+/*!
  设置当前消息Cell的数据模型
 
  @param model 消息Cell的数据模型

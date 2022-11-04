@@ -167,7 +167,7 @@ typedef NS_ENUM(NSUInteger, RCConversationModelType) {
  会话中第一条未读消息时间戳（Unix时间戳、毫秒）
 
  仅支持 超级群会话
- @Since 5.2.5
+ @since 5.2.5
 
 */
 @property (nonatomic, assign) long long firstUnreadMsgSendTime;

@@ -13,7 +13,7 @@
 #import "RCCallTipMessageCell.h"
 
 // appkey 默认长度
-static NSInteger kAppkeyLength = 13 ;
+static NSInteger kAppkeyLength = 13;
 
 @implementation RCCallKitExtensionModule
 
@@ -116,11 +116,11 @@ static NSInteger kAppkeyLength = 13 ;
     }
 }
 
-- (BOOL )isCrossCallWithCheckString:(NSString *)targetId {
+- (BOOL)isCrossCallWithCheckString:(NSString *)targetId {
     if ([targetId containsString:@"_"]) {
-        NSArray *targetIds = [targetId componentsSeparatedByString:@"_"] ;
+        NSArray *targetIds = [targetId componentsSeparatedByString:@"_"];
         if (targetIds.count > 1) {
-            NSString *tAppkey = targetIds[0] ;
+            NSString *tAppkey = targetIds[0];
             if (tAppkey.length == kAppkeyLength) {
                 return YES;
             }
