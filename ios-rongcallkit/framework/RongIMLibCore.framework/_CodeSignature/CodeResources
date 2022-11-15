@@ -18,7 +18,7 @@
 		</data>
 		<key>Headers/RCChannelClient.h</key>
 		<data>
-		6zOSL8ZD4gdcfHuqTXVNOTt1Q5E=
+		ZNN2J7p/fnz4Wr8LydLUYQ6ybFY=
 		</data>
 		<key>Headers/RCClearConversationOption.h</key>
 		<data>
@@ -58,7 +58,7 @@
 		</data>
 		<key>Headers/RCCoreClient.h</key>
 		<data>
-		BQzxWWIDJFI7S/+2nlJpGLw5rWk=
+		Vf2GhFG/L6G45PkmVI8XubJIdhE=
 		</data>
 		<key>Headers/RCDownloadItem.h</key>
 		<data>
@@ -74,7 +74,7 @@
 		</data>
 		<key>Headers/RCFwLog.h</key>
 		<data>
-		4py9g0xZta+W9sx/Ye2HgqzQuj8=
+		hSCee1JazPeRiBrO7Gnpkrq1vws=
 		</data>
 		<key>Headers/RCGIFMessage.h</key>
 		<data>
@@ -336,11 +336,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			6zOSL8ZD4gdcfHuqTXVNOTt1Q5E=
+			ZNN2J7p/fnz4Wr8LydLUYQ6ybFY=
 			</data>
 			<key>hash2</key>
 			<data>
-			OqaZFVbY9ytEH4ELEm1L4J46A4jsCV6t5hIULJ7rnbk=
+			6q9O5WZAQtwShOSmZoL4bs0g1g2DUR8a+QqDLY0YwVk=
 			</data>
 		</dict>
 		<key>Headers/RCClearConversationOption.h</key>
@@ -446,11 +446,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			BQzxWWIDJFI7S/+2nlJpGLw5rWk=
+			Vf2GhFG/L6G45PkmVI8XubJIdhE=
 			</data>
 			<key>hash2</key>
 			<data>
-			oMjbrjmxrb3LGuAdJS/Yka/zylNDX0cXbbiddLP3qtQ=
+			1PWdjvHasvlDpKsm78eC7f1fttlLVv9wk8Zo+1DANBY=
 			</data>
 		</dict>
 		<key>Headers/RCDownloadItem.h</key>
@@ -490,11 +490,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			4py9g0xZta+W9sx/Ye2HgqzQuj8=
+			hSCee1JazPeRiBrO7Gnpkrq1vws=
 			</data>
 			<key>hash2</key>
 			<data>
-			am6Xxwj7UaFjAhxUKJlgcmH3jQoV/TvEsV+W+WAlDwI=
+			ESpCctAiQICCMwn2i1oORrWCvR97hIxJrt7qVMvZ2tg=
 			</data>
 		</dict>
 		<key>Headers/RCGIFMessage.h</key>

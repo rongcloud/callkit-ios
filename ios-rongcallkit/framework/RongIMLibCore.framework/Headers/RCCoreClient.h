@@ -1240,7 +1240,7 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  sentTime            消息发送的 Unix 时间戳，单位为毫秒 ，会影响消息排序
  extra            RCMessage 的额外字段
  
- @discussion 此方法不支持聊天室的会话类型。每批最多处理  500 条消息，超过 500 条返回 NO
+ @discussion 此方法不支持聊天室和超级群的会话类型。每批最多处理  500 条消息，超过 500 条返回 NO
  @discussion 消息的未读会累加到会话的未读数上
 
  @remarks 消息操作

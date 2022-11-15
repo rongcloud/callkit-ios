@@ -496,6 +496,33 @@ NS_ASSUME_NONNULL_BEGIN
                       content:(RCMessageContent *)content
                      sentTime:(long long)sentTime
                    completion:(nullable void(^)(RCMessage * _Nullable message))completion;
+
+/*!
+ 异步插入向外发送的、指定时间的消息（此方法如果 sentTime 有问题会影响消息排序，慎用！！）
+（该消息只插入本地数据库，实际不会发送给服务器和对方）
+
+ @param conversationType    会话类型
+ @param targetId            会话 ID
+ @param channelId          所属会话的业务标识
+ @param canIncludeExpansion 是否支持扩展
+ @param sentStatus          发送状态
+ @param content             消息的内容
+ @param sentTime            消息发送的 Unix 时间戳，单位为毫秒（传 0 会按照本地时间插入）
+ @param completion          异步回调[发送的消息实体]
+
+ @discussion 此方法不支持聊天室的会话类型。如果 sentTime<=0，则被忽略，会以插入时的时间为准。
+
+ @remarks 消息操作
+ */
+- (void)insertOutgoingMessage:(RCConversationType)conversationType
+                     targetId:(NSString *)targetId
+                    channelId:(nullable NSString *)channelId
+          canIncludeExpansion:(BOOL)canIncludeExpansion
+                   sentStatus:(RCSentStatus)sentStatus
+                      content:(RCMessageContent *)content
+                     sentTime:(long long)sentTime
+                   completion:(nullable void(^)(RCMessage * _Nullable message))completion;
+
 /*!
  插入接收的消息（此方法如果 sentTime
  有问题会影响消息排序，慎用！！）（该消息只插入本地数据库，实际不会发送给服务器和对方）
