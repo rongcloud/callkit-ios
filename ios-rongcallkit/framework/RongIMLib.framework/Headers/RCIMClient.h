@@ -2761,7 +2761,7 @@ __deprecated_msg("Use [RCChannelClient getNotificationQuietHoursLevel:error:] in
 - (int)getOfflineMessageDuration;
 
 /**
- 上报客户 App 版本信息。服务端支持按上报的 App 版本处理自定义消息的推送内容。
+ 设置集成 SDK 的用户 App 版本信息。便于融云排查问题时，作为分析依据，属于自愿行为。
  setAppVer 接口需要在 connect 接口前调用
  @param  appVer   用户 APP 的版本信息, String 类型，非空，长度小于 20，示例如  "1.1.0"。
 

@@ -29,7 +29,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 /*!
  包含 @ 提醒的消息，本地通知和远程推送显示的内容
- 如果是 nil , 则按默认格式显示 [有人 @ 你]
  */
 @property (nonatomic, copy, nullable) NSString *mentionedContent;
 
