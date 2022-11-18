@@ -67,7 +67,7 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
     return self;
 }
 
-- (instancetype)initWithOutgoingCall:(RCConversationType)conversationType isCrossCallType:(BOOL )isCross targetId:(NSString *)targetId mediaType:(RCCallMediaType)mediaType userIdList:(NSArray *)userIdList {
+- (instancetype)initWithOutgoingCall:(RCConversationType)conversationType isCrossCallType:(BOOL)isCross targetId:(NSString *)targetId mediaType:(RCCallMediaType)mediaType userIdList:(NSArray *)userIdList {
     self = [super init];
     if (self) {
         [self willChangeValueForKey:@"callSession"];
@@ -774,9 +774,9 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
 }
 
 - (void)cameraCloseButtonClicked {
-    [self didTapCameraCloseButton];
 
     if (!self.callSession.isMultiCall) {
+        [self didTapCameraCloseButton];
         [self.callSession setVideoView:nil userId:[RCIMClient sharedRCIMClient].currentUserInfo.userId];
         [self.callSession setVideoView:nil userId:self.callSession.targetId];
 
@@ -792,6 +792,7 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
     } else {
         [self.callSession setCameraEnabled:!self.callSession.cameraEnabled];
         [self.cameraCloseButton setSelected:!self.callSession.cameraEnabled];
+        [self didTapCameraCloseButton];
     }
 }
 

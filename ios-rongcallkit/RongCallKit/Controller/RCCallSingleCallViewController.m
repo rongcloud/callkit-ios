@@ -31,6 +31,11 @@
 }
 
 - (instancetype)initWithOutgoingCall:(NSString *)targetId mediaType:(RCCallMediaType)mediaType {
+    if (targetId.length == 0) {
+        NSAssert(NO, @"被叫端 id 不能为空");
+        return nil;
+    }
+    
     return [super initWithOutgoingCall:ConversationType_PRIVATE
                               targetId:targetId
                              mediaType:mediaType
@@ -38,6 +43,11 @@
 }
 
 - (instancetype)initWithOutgoingCrossCall:(NSString *)targetId mediaType:(RCCallMediaType)mediaType {
+    if (targetId.length == 0) {
+        NSAssert(NO, @"被叫端 id 不能为空");
+        return nil;
+    }
+    
     return [super initWithOutgoingCrossCall:ConversationType_PRIVATE
                                    targetId:targetId
                                   mediaType:mediaType

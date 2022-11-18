@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-
 #define __FILE_STRING__ [NSString stringWithUTF8String:__FILE__]
 #define __GET_FILENAME__                                                                                               \
     [__FILE_STRING__ substringFromIndex:[__FILE_STRING__ rangeOfString:@"/" options:NSBackwardsSearch].location + 1]
@@ -80,12 +79,12 @@ NS_ASSUME_NONNULL_BEGIN
 /// 网络状态 100% lost 时， 此方法会阻塞 30s，切记不要在主线程直接调用
 + (nullable NSString *)getIpWithHost:(NSString *)hostName;
 /// 异步获取 ip 地址，内部有切线程处理，子线程执行，主线程回调 callback
-+ (void)getIpWithHost:(NSString *)hostName callback:(void (^)(NSString * ipString))callback;
++ (void)getIpWithHost:(NSString *)hostName callback:(void (^)(NSString * _Nullable ipString))callback;
 + (void)setRcDebugLogLevel:(NSInteger)rcDebugLogLevel;
 + (void)setRcDebugLogMaxSize:(long long)rcDebugLogMaxSize;
-+ (void)startRealTimelog;
-- (void)uploadLog:(nullable void (^)(int code))errorBlock;
-- (void)uploadDebugLog;
++ (void)startRealTimelog __deprecated_msg("has been deprecated");
+- (void)uploadLog:(nullable void (^)(int code))errorBlock __deprecated_msg("has been deprecated");
+- (void)uploadDebugLog __deprecated_msg("has been deprecated");
 - (void)write:(RCFwLogLevel)level
          type:(RCLogType)type
           tag:(NSString *)tag

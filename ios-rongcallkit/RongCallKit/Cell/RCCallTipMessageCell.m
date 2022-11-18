@@ -74,7 +74,7 @@
             status = RCCallKitLocalizedString(@"VoIPCallNoResponse");
         }
         // 多语言下英文和阿文 中间都有空格，中文没有空格。
-        NSString *space = [self getSpaceWithLocalLanguage] ;
+        NSString *space = [self getSpaceWithLocalLanguage];
         
         if (message.mediaType == RCCallMediaAudio) {
             [self.messageLabel setText:[NSString stringWithFormat:@" %@%@%@ ", RCCallKitLocalizedString(@"VoIPAudioCall"),space

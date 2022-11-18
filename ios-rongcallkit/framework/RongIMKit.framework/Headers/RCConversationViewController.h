@@ -282,7 +282,7 @@ typedef enum : NSUInteger {
  设置进入聊天室需要获取的历史消息数量（仅在当前会话为聊天室时生效）
 
  @discussion 此属性需要在viewDidLoad之前进行设置。
- -1表示不获取任何历史消息，0表示不特殊设置而使用SDK默认的设置（默认为获取10条），0<messageCount<=50为具体获取的消息数量,最大值为30。注：如果是7.x系统获取历史消息数量不要大于30
+ -1表示不获取任何历史消息，0表示不特殊设置而使用SDK默认的设置（默认为获取10条）。
  */
 @property (nonatomic, assign) int defaultHistoryMessageCountOfChatRoom;
 
