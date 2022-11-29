@@ -21,7 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 /*!
  加入聊天室（如果聊天室不存在则会创建）
 
- @param targetId        聊天室 ID
+ @param targetId        聊天室 ID，最大长度为 64 个字符
  @param messageCount    进入聊天室时获取历史消息的数量，-1 <= messageCount <= 50
  @param successBlock    加入聊天室成功的回调
  @param errorBlock      加入聊天室失败的回调
@@ -46,7 +46,7 @@ NS_ASSUME_NONNULL_BEGIN
 /*!
  加入已经存在的聊天室（如果聊天室不存在返回错误 23410，人数超限返回错误 23411）
 
- @param targetId        聊天室 ID
+ @param targetId        聊天室 ID，最大长度为 64 个字符
  @param messageCount    进入聊天室时获取历史消息的数量，-1 <= messageCount <= 50
  @param successBlock    加入聊天室成功的回调
  @param errorBlock      加入聊天室失败的回调
@@ -74,7 +74,7 @@ NS_ASSUME_NONNULL_BEGIN
 /*!
  退出聊天室
 
- @param targetId                聊天室 ID
+ @param targetId                聊天室 ID，最大长度为 64 个字符
  @param successBlock            退出聊天室成功的回调
  @param errorBlock              退出聊天室失败的回调
  [status:退出聊天室失败的错误码]
@@ -88,7 +88,7 @@ NS_ASSUME_NONNULL_BEGIN
 /*!
  获取聊天室的信息（包含部分成员信息和当前聊天室中的成员总数）
 
- @param targetId     聊天室 ID
+ @param targetId     聊天室 ID，最大长度为 64 个字符
  @param count 需要获取的成员信息的数量（目前获取到的聊天室信息中仅包含不多于 20 人的成员信息，即 0 <= count <=
  20，传入 0 获取到的聊天室信息将或仅包含成员总数，不包含具体的成员列表）
  @param order        需要获取的成员列表的顺序（最早加入或是最晚加入的部分成员）
@@ -141,7 +141,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /*!
  从服务器端获取聊天室的历史消息
- @param targetId            聊天室ID
+ @param targetId            聊天室ID，最大长度为 64 个字符
  @param recordTime          起始的消息发送时间戳，毫秒
  @param count               需要获取的消息数量， 0 < count <= 200
  @param order               拉取顺序，RC_Timestamp_Desc:倒序，RC_Timestamp_ASC:正序
@@ -198,7 +198,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  设置聊天室自定义属性
 
- @param chatroomId   聊天室 ID
+ @param chatroomId   聊天室 ID，最大长度为 64 个字符
  @param key 聊天室属性名称，Key 支持大小写英文字母、数字、部分特殊符号 + = - _ 的组合方式，最大长度 128 个字符
  @param value 聊天室属性对应的值，最大长度 4096 个字符
  @param sendNotification   是否需要发送通知，如果发送通知，聊天室中的其他用户会接收到 RCChatroomKVNotificationMessage
@@ -226,7 +226,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  强制设置聊天室自定义属性
 
- @param chatroomId   聊天室 ID
+ @param chatroomId   聊天室 ID，最大长度为 64 个字符
  @param key 聊天室属性名称，Key 支持大小写英文字母、数字、部分特殊符号 + = - _ 的组合方式，最大长度 128 个字符
  @param value 聊天室属性对应的值，最大长度 4096 个字符
  @param sendNotification   是否需要发送通知，如果发送通知，聊天室中的其他用户会接收到 RCChatroomKVNotificationMessage
@@ -253,7 +253,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  批量设置聊天室自定义属性
 
- @param chatroomId   聊天室 ID
+ @param chatroomId   聊天室 ID，最大长度为 64 个字符
  @param entries   聊天室属性，key 支持大小写英文字母、数字、部分特殊符号 + = - _ 的组合方式，最大长度 128 个字符，value 聊天室属性对应的值，最大长度 4096 个字符，最多一次设置 10 条
  @param isForce   是否强制覆盖
  @param autoDelete   用户掉线或退出时，是否自动删除该 Key、Value 值
@@ -274,7 +274,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  获取聊天室单个属性
 
- @param chatroomId 聊天室 ID
+ @param chatroomId 聊天室 ID，最大长度为 64 个字符
  @param key 聊天室属性名称
  @param successBlock 成功回调
  @param errorBlock 失败回调
@@ -291,7 +291,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  获取聊天室所有自定义属性
 
- @param chatroomId 聊天室 ID
+ @param chatroomId 聊天室 ID，最大长度为 64 个字符
  @param successBlock 成功回调
  @param errorBlock 失败回调
 
@@ -306,7 +306,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  删除聊天室自定义属性
 
- @param chatroomId 聊天室 ID
+ @param chatroomId 聊天室 ID，最大长度为 64 个字符
  @param key 聊天室属性名称
  @param sendNotification   是否需要发送通知，如果发送通知，聊天室中的其他用户会接收到 RCChatroomKVNotificationMessage
  通知消息，消息内容中包含操作类型(type)、属性名称(key)、属性名称对应的值(value)和自定义字段(extra)
@@ -329,7 +329,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  强制删除聊天室自定义属性
 
- @param chatroomId 聊天室 ID
+ @param chatroomId 聊天室 ID，最大长度为 64 个字符
  @param key 聊天室属性名称
  @param sendNotification   是否需要发送通知，如果发送通知，聊天室中的其他用户会接收到 RCChatroomKVNotificationMessage
  通知消息，消息内容中包含操作类型(type)、属性名称(key)、属性名称对应的值(value)和自定义字段(extra)
@@ -352,7 +352,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  批量删除聊天室自定义属性
 
- @param chatroomId   聊天室 ID
+ @param chatroomId   聊天室 ID，最大长度为 64 个字符
  @param keys   聊天室属性名称，最多一次删除 10 条
  @param isForce   是否强制覆盖
  @param successBlock 成功回调
@@ -382,7 +382,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 /// 绑定聊天室ID和RTCRoomID
-/// @param chatRoomId 聊天室ID
+/// @param chatRoomId 聊天室ID，最大长度为 64 个字符
 /// @param rtcRoomId rtc room ID
 /// @param successBlock 成功回调
 /// @param errorBlock 失败回调

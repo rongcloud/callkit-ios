@@ -2489,8 +2489,6 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
 
  @discussion 用于 UI 展示消息为正在发送，对方已接收等状态。
  @discussion 为了保证 UI 正常显示，5.1.8 版本起不再支持 app 将消息状态设置为 SentStatus_SENDING
-
- @discussion 此方法不支持超级群的会话类型。
  
  @remarks 消息操作
  */
@@ -2579,6 +2577,20 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
                       count:(int)count
                   startTime:(long long)startTime
                  completion:(nullable void(^)(NSArray<RCConversation *> *_Nullable conversationList))completion;
+
+/*!
+ 获取所有的未读会话列表（包含单聊、群聊、系统会话）
+ 
+ @param conversationTypeList 会话类型的数组(需要将 RCConversationType 转为 NSNumber 构建 NSArray)
+ @param completion           异步回调[会话 RCConversation 的列表]
+ 
+ @discussion 此方法会从本地数据库中，读取会话列表，包含单聊、群聊、系统会话
+
+ @remarks 会话列表
+ */
+- (void)getUnreadConversationList:(NSArray<NSNumber *> *)conversationTypeList
+                       completion:(nullable void(^)(NSArray<RCConversation *> *_Nullable conversationList))completion;
+
 /*!
  获取单个会话数据
 
