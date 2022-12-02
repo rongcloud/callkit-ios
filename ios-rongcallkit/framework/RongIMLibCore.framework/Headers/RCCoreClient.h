@@ -2579,12 +2579,13 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
                  completion:(nullable void(^)(NSArray<RCConversation *> *_Nullable conversationList))completion;
 
 /*!
- 获取所有的未读会话列表（包含单聊、群聊、系统会话）
+ 获取所有的未读会话列表（支持单聊、群聊、系统会话）
  
  @param conversationTypeList 会话类型的数组(需要将 RCConversationType 转为 NSNumber 构建 NSArray)
  @param completion           异步回调[会话 RCConversation 的列表]
  
- @discussion 此方法会从本地数据库中，读取会话列表，包含单聊、群聊、系统会话
+ @discussion 此方法会从本地数据库中，读取会话列表，支持单聊、群聊、系统会话。
+ 返回的会话列表按照时间从前往后排列，如果有置顶的会话，则置顶的会话会排列在前面。
 
  @remarks 会话列表
  */
