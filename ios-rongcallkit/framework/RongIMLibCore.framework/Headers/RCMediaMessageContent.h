@@ -33,6 +33,11 @@ NS_ASSUME_NONNULL_BEGIN
  媒体内容的文件名（如不传使用 SDK 中 downloadMediaMessage 方法下载后会默认生成一个名称）
  */
 @property (nonatomic, copy, nullable) NSString *name;
+
+/**
+ 通过本地路径获取媒体文件名字，如果本地路径存在，就可以获取到有效值，否则获取为 nil
+ */
+- (nullable NSString *)getNameFromLocalPath;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -2872,7 +2872,7 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
 
  @remarks 会话
  */
-- (void)getTotalUnreadCountWith:(nullable void(^)(int))completion;
+- (void)getTotalUnreadCountWith:(nullable void(^)(int unreadCount))completion;
 
 /*!
  获取某个会话内的未读消息数（聊天室会话除外）
@@ -3707,7 +3707,7 @@ __deprecated_msg("Use [RCChannelClient getNotificationQuietHoursLevel:error:] in
 
  @remarks 数据获取
  */
-- (void)getOfflineMessageDuration:(nullable void(^)(int))completion;
+- (void)getOfflineMessageDuration:(nullable void(^)(int duration))completion;
 
 /**
  上报客户 App 版本信息。服务端支持按上报的 App 版本处理自定义消息的推送内容。
