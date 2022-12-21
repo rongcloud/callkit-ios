@@ -45,6 +45,8 @@ FOUNDATION_EXPORT NSString *const RCKitDispatchRecallMessageNotification;
 
  与RCIMReceiveMessageDelegate的区别:
  RCKitDispatchRecallMessageDetailNotification只要注册都可以收到通知；RCIMReceiveMessageDelegate需要设置监听，并同时只能存在一个监听。
+ 
+ @since 5.3.3
  */
 FOUNDATION_EXPORT NSString *const RCKitDispatchRecallMessageDetailNotification;
 
