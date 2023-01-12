@@ -58,7 +58,7 @@
 		</data>
 		<key>Headers/RCConversationModel.h</key>
 		<data>
-		SqE4WoQkGpIFXzIgvPSoCtjdBSI=
+		arfOy5F16bM092aBBrEEFeHXxT8=
 		</data>
 		<key>Headers/RCConversationStatusView.h</key>
 		<data>
@@ -66,7 +66,7 @@
 		</data>
 		<key>Headers/RCConversationViewController.h</key>
 		<data>
-		qGVOQ4BMbuEkDbLx87v/EAJk4HM=
+		OmbufWQp6wl9rUtdz2+3zyFwHZo=
 		</data>
 		<key>Headers/RCEmojiBoardView.h</key>
 		<data>
@@ -114,7 +114,7 @@
 		</data>
 		<key>Headers/RCIM.h</key>
 		<data>
-		c96JpR1b2aes3WvdgptJOaYA5xY=
+		yMhUpgQ8LRBrtTOF7cvr1gCxADY=
 		</data>
 		<key>Headers/RCImageMessageCell.h</key>
 		<data>
@@ -130,7 +130,7 @@
 		</data>
 		<key>Headers/RCInputContainerView.h</key>
 		<data>
-		sA9LpJwdxYdVulsbyu3N5ryzTtg=
+		3ZtlMgVzBgCyRCaH01JUJyH+5nQ=
 		</data>
 		<key>Headers/RCKitCommonDefine.h</key>
 		<data>
@@ -174,7 +174,7 @@
 		</data>
 		<key>Headers/RCMessageCell.h</key>
 		<data>
-		pa+a0UWojHnjiYWABFvQ2wWtGYI=
+		bZP/aalqx91t+sJahkn6hEbVkdw=
 		</data>
 		<key>Headers/RCMessageCellDelegate.h</key>
 		<data>
@@ -266,7 +266,7 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		vnRdyk1uwIhSDAY5bfD2pRVFnqU=
+		tFuox85TLtP1mhv/SvDuAzG+5tE=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -422,11 +422,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			SqE4WoQkGpIFXzIgvPSoCtjdBSI=
+			arfOy5F16bM092aBBrEEFeHXxT8=
 			</data>
 			<key>hash2</key>
 			<data>
-			S+wDE5EMiN/WjZ9J7InfuvP7LJuFAxBZlBCpgKSmC7s=
+			8pBmiwom6dpqIkqyj5ldt5izmruQSpPpwL75+Sdq8LE=
 			</data>
 		</dict>
 		<key>Headers/RCConversationStatusView.h</key>
@@ -444,11 +444,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			qGVOQ4BMbuEkDbLx87v/EAJk4HM=
+			OmbufWQp6wl9rUtdz2+3zyFwHZo=
 			</data>
 			<key>hash2</key>
 			<data>
-			P+/GQ6sD7hWxB83M7u8kXvP/dVWfyhwPuBM6CdNg044=
+			dPI4whIMZlsWEL3s4w5k3izCSHrbsmhgIRR6za+xqxU=
 			</data>
 		</dict>
 		<key>Headers/RCEmojiBoardView.h</key>
@@ -576,11 +576,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			c96JpR1b2aes3WvdgptJOaYA5xY=
+			yMhUpgQ8LRBrtTOF7cvr1gCxADY=
 			</data>
 			<key>hash2</key>
 			<data>
-			2ALGBrCGQjKhC+SmClhrVOn6RpogR40hjwHuAfw3gTM=
+			QehOBYvdOxwhzIQtxHQiOW0W+5SvqqH9pcUyVgHzi7k=
 			</data>
 		</dict>
 		<key>Headers/RCImageMessageCell.h</key>
@@ -620,11 +620,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			sA9LpJwdxYdVulsbyu3N5ryzTtg=
+			3ZtlMgVzBgCyRCaH01JUJyH+5nQ=
 			</data>
 			<key>hash2</key>
 			<data>
-			oVJ/aV45V49OMCsiHhuN/16DvAbTDqDYlx379ZXjVYk=
+			K8geSp+7M73RYLHrCXoqybm37e1y4kg/eT83vKBAT88=
 			</data>
 		</dict>
 		<key>Headers/RCKitCommonDefine.h</key>
@@ -741,11 +741,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			pa+a0UWojHnjiYWABFvQ2wWtGYI=
+			bZP/aalqx91t+sJahkn6hEbVkdw=
 			</data>
 			<key>hash2</key>
 			<data>
-			Z3Sn4yrrlF/j7EDBTWDeCDJlH9XgjGNb/bZZvNjRMx4=
+			12hILxV6JiaOYKy+4Hks59gyJZ7oXsiVZTWD5w3MSAM=
 			</data>
 		</dict>
 		<key>Headers/RCMessageCellDelegate.h</key>

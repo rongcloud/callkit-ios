@@ -239,9 +239,10 @@
     if (model) {
         NSInteger index = [self.subUserModelList indexOfObject:model];
         if (index != NSNotFound) {
-            NSIndexPath *indexPath = [NSIndexPath indexPathForItem:index inSection:0];
             [self.subUserModelList removeObject:model];
-            [self.userCollectionView deleteItemsAtIndexPaths:[NSArray arrayWithObject:indexPath]];
+            [self updateAllSubUserLayout];
+//            NSIndexPath *indexPath = [NSIndexPath indexPathForItem:index inSection:0];
+//            [self.userCollectionView deleteItemsAtIndexPaths:[NSArray arrayWithObject:indexPath]];
         }
     }
 }
@@ -465,7 +466,6 @@
                        self.view.frame.size.width - RCCallHorizontalMargin * 2, RCCallMiniLabelHeight);
         self.userCollectionTitleLabel.hidden = NO;
         self.userCollectionTitleLabel.text = RCCallKitLocalizedString(@"VoIPAudioCall");
-        ;
         _userCollectionTitleLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size:18];
     }
 

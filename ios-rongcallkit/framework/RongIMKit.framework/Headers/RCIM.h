@@ -37,6 +37,20 @@ FOUNDATION_EXPORT NSString *const RCKitDispatchMessageNotification;
 FOUNDATION_EXPORT NSString *const RCKitDispatchRecallMessageNotification;
 
 /*!
+ @const 消息被撤回的Notification
+
+ @discussion 消息被撤回后，SDK会分发此通知。
+
+ Notification的object为 RCMessage 对象
+
+ 与RCIMReceiveMessageDelegate的区别:
+ RCKitDispatchRecallMessageDetailNotification只要注册都可以收到通知；RCIMReceiveMessageDelegate需要设置监听，并同时只能存在一个监听。
+ 
+ @since 5.3.3
+ */
+FOUNDATION_EXPORT NSString *const RCKitDispatchRecallMessageDetailNotification;
+
+/*!
  @const 连接状态变化的Notification
 
  @discussion SDK连接状态发生变化时，SDK会分发此通知。
@@ -296,7 +310,8 @@ FOUNDATION_EXPORT NSString *const RCKitDispatchConversationStatusChangeNotificat
 
  @param message 被撤回的消息
 
- @discussion 被撤回的消息会变更为RCRecallNotificationMessage，App需要在UI上刷新这条消息。
+ @discussion 如果不删除被撤回的消息，被撤回的原消息会变更为RCRecallNotificationMessage ，参数 message 就是变更后的消息，App需要在UI上刷新这条消息。
+ @discussion 如果删除被撤回的消息，参数 message 就是被撤回的原消息，App需要在UI上找到删除这条消息。
  @discussion 和上面的 - (void)onRCIMMessageRecalled:(long)messageId 功能完全一致，只能选择其中一个使用。
  */
 - (void)messageDidRecall:(RCMessage *)message;

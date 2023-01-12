@@ -92,6 +92,7 @@ NS_ASSUME_NONNULL_BEGIN
  @discussion 如果想发送原图，请设置属性 full 为 YES。
 
  @param imageURI    图片的本地路径
+ @warning imageURI  必须为本地路径，否则构造失败
  @return            图片消息对象
  */
 + (instancetype)messageWithImageURI:(NSString *)imageURI;

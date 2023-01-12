@@ -168,7 +168,6 @@ typedef enum {
     const CGFloat rectY0 = fromRect.origin.y;
     const CGFloat rectY1 = fromRect.origin.y + fromRect.size.height;
     const CGFloat rectYM = fromRect.origin.y + fromRect.size.height * 0.5f;
-    ;
 
     const CGFloat widthPlusArrow = contentSize.width + kCallArrowSize;
     const CGFloat heightPlusArrow = contentSize.height + kCallArrowSize;
@@ -557,7 +556,6 @@ typedef enum {
         const CGFloat arrowX0 = X0;
         const CGFloat arrowX1 = X0 + kCallArrowSize + kEmbedFix;
         const CGFloat arrowY0 = arrowYM - kCallArrowSize;
-        ;
         const CGFloat arrowY1 = arrowYM + kCallArrowSize;
 
         [arrowPath moveToPoint:(CGPoint){arrowX0, arrowYM}];
@@ -574,7 +572,6 @@ typedef enum {
         const CGFloat arrowX0 = X1;
         const CGFloat arrowX1 = X1 - kCallArrowSize - kEmbedFix;
         const CGFloat arrowY0 = arrowYM - kCallArrowSize;
-        ;
         const CGFloat arrowY1 = arrowYM + kCallArrowSize;
 
         [arrowPath moveToPoint:(CGPoint){arrowX0, arrowYM}];

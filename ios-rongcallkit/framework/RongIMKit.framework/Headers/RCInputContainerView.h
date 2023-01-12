@@ -51,6 +51,9 @@
 //是否处于阅后即焚模式
 @property (nonatomic, assign) BOOL destructMessageMode;
 
+// 隐藏表情按钮
+@property(nonatomic, assign) BOOL hideEmojiButton;
+
 @property (nonatomic, weak) id<RCInputContainerViewDelegate> delegate;
 
 - (void)setInputBarStyle:(RCChatSessionInputBarControlStyle)style;
