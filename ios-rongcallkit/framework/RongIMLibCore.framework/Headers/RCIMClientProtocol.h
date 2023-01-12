@@ -85,8 +85,7 @@ NS_ASSUME_NONNULL_BEGIN
 
  @param message 被撤回的消息
 
- @discussion 如果不删除被撤回的消息，被撤回的原消息会变更为RCRecallNotificationMessage ，参数 message 就是变更后的消息，App需要在UI上刷新这条消息。
- @discussion 如果删除被撤回的消息，参数 message 就是被撤回的原消息，App需要在UI上找到删除这条消息。
+ @discussion 被撤回的消息会变更为RCRecallNotificationMessage，App需要在UI上刷新这条消息。
  @discussion 和上面的 - (void)onMessageRecalled:(long)messageId 功能完全一致，只能选择其中一个使用。
  */
 - (void)messageDidRecall:(RCMessage *)message;

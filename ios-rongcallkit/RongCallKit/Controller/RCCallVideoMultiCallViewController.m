@@ -237,15 +237,6 @@
     }
 }
 
-- (void)didTapCameraCloseButton {
-    if ([currentUserId isEqualToString:self.mainModel.userId]) {
-        return ;
-    }
-    
-    RCCallUserCallInfoModel *model = [self getModelInSubUserModelList:currentUserId];
-    [self updateSubUserLayout:model];
-}
-
 - (void)backgroundViewClicked {
     if (self.callSession.callStatus == RCCallActive) {
         self.isFullScreen = !self.isFullScreen;
@@ -703,6 +694,7 @@
                                                                               forIndexPath:indexPath];
     RCCallUserCallInfoModel *userModel = self.subUserModelList[indexPath.row];
     [cell setModel:userModel status:self.callSession.callStatus];
+    [self.callSession setVideoView:(UIView *)cell.headerImageView userId:userModel.userId];
 
     if (self.callSession.callStatus == RCCallIncoming || self.callSession.callStatus == RCCallRinging) {
     } else {
@@ -710,13 +702,7 @@
     }
 
     if (self.callSession.callStatus == RCCallActive && userModel.profile.callStatus == RCCallActive) {
-        /// 本端关闭摄像头，展示当前用户头像
-        if ([userModel.userId isEqualToString:currentUserId] && !self.callSession.cameraEnabled) {
-            [cell.headerImageView setImageURL:[NSURL URLWithString:userModel.userInfo.portraitUri]];
-        } else {
-            [self.callSession setVideoView:(UIView *)cell.headerImageView userId:userModel.userId];
-            cell.headerImageView.image = nil;
-        }
+        cell.headerImageView.image = nil;
     }
     return cell;
 }

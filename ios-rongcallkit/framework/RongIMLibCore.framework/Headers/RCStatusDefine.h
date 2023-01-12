@@ -64,7 +64,6 @@ typedef NS_ENUM(NSInteger, RCConnectErrorCode) {
      用户被封禁
 
      @discussion 请检查您使用的 Token 是否正确，以及对应的 UserId 是否被封禁。
-     @discussion 在 5.2.3 之前版本不支持用户销户功能，旧版本 SDK 销户也会报该错误码；5.2.3 及其以后版本用户销户会报 31029
      */
     RC_CONN_USER_BLOCKED = 31009,
 
@@ -116,28 +115,6 @@ typedef NS_ENUM(NSInteger, RCConnectErrorCode) {
      @discussion 一次性 token 只能连接一次，之后再使用会上报此错误
      */
     RC_CONN_DISPOSABLE_TOKEN_USED = 31027,
-    
-    /*!
-     开发者调用 connectWithToken 时 proxy 服务不可访问
-     
-     @discussion 设置 setProxy，调用 connectWithToken 时， host:port 代理服务不可访问， 返回此错误码时，SDK 不会再继续重连
-     @since 5.3.0
-     */
-    RC_CONN_PROXY_UNAVAILABLE = 31028,
-
-    /*!
-     用户账号已销户
-
-    @discussion 请检查您使用的 Token 是否正确，以及对应的 UserId 是否被销户。
-     */
-    RC_CONN_USER_ABANDON = 31029,
-    
-    /*!
-     APP License 过期
-
-    @discussion 请检查为您部署的 IM 服务 License 是否过期。
-     */
-    RC_CONN_APP_LICENSE_EXPIRED = 31030,
 
     /*!
      SDK 没有初始化
@@ -546,7 +523,7 @@ typedef NS_ENUM(NSInteger, RCErrorCode) {
     IMLib 撤回消息可以撤回自己发送的消息和别人发送的消息
     IM 服务有开关，控制只可以撤回自己发送的消息
     当服务该开关打开时，撤回别人的消息会报这个错误
-    @since 5.2.4
+    @Since 5.2.4
     */
     RC_RECALL_MESSAGE_USER_INVALID = 25107,
 
@@ -942,48 +919,17 @@ typedef NS_ENUM(NSInteger, RCErrorCode) {
      描述：开发者接口调用时传入的 count 非法。
      可能原因： count 超出有效范围
      处理建议：请检查参数是否合法。
-     @since 5.2.5
+     @Since 5.2.5
      */
     INVALID_PARAMETER_COUNT = 34232,
     /*!
      描述：开发者接口调用时传入的 sendTime 非法。
      可能原因： sendTime 超出有效范围
      处理建议：请检查参数是否合法。
-     @since 5.2.5
+     @Since 5.2.5
      */
     INVALID_PARAMETER_SEND_TIME = 34233,
 
-    /*!
-     描述：开发者调用 testProxy 时，代理配置为空或者非法。
-     可能原因： RCIMProxy 不合法
-     处理建议：请检查参数是否合法。
-     @since 5.3.0
-     */
-    INVALID_PARAMETER_PROXY = 34238,
-    
-    /*!
-     描述：开发者接口调用 testProxy 时传入的代理测试服务非法。
-     可能原因： testHost 地址为空或者非法
-     处理建议：请检查参数是否合法。
-     @since 5.3.0
-     */
-    INVALID_PARAMETER_TESTHOST = 34239,
-    
-    /*!
-     描述：开发者接口调用 testProxy 接口时无法联通。
-     可能原因： RCIMProxy host:port 代理地址无法联通或者 testHost 地址无法联通
-     处理建议：请检查 RCIMProxy host:port 代理地址是否可用 或者 testHost 地址是否可用。
-     @since 5.3.0
-     */
-    INVALID_CONNECT_TESTHOST_FAILED = 34240,
-    
-    /**
-     描述：开发者接口调用recallUltraGroupMessage时，撤回了不支持的消息类型。
-     可能原因： 撤回了不支持的消息类型，目前有'RC:RcNtf'。
-     处理建议：请开发者判断MessageContent类型是否支持被撤回。
-     @since 5.3.0
-     */
-    INVALID_PARAMETER_ULTRA_GROUP_MESSAGE_OBJECT_NAME = 34241
 };
 
 typedef NS_ENUM(NSInteger, RCDBErrorCode) {
@@ -1060,17 +1006,7 @@ typedef NS_ENUM(NSInteger, RCConnectionStatus) {
     /*!
      与服务器的连接已断开,用户被封禁
      */
-    ConnectionStatus_DISCONN_EXCEPTION = 16,
-    
-    /*!
-     proxy 服务不可用，SDK 将不会继续连接，用户需要检查 proxy 是否可用，再自行调用 connectWithToken 接口进行连接
-    */
-    ConnectionStatus_PROXY_UNAVAILABLE = 17,
-
-    /*!
-     用户账号已销户，不再进行连接
-     */
-    ConnectionStatus_USER_ABANDON = 19
+    ConnectionStatus_DISCONN_EXCEPTION = 16
 };
 
 #pragma mark RCNetworkStatus - 当前所处的网络
@@ -1470,7 +1406,7 @@ typedef NS_ENUM(NSUInteger, RCSearchType) {
     RCSearchType_INVALID
 };
 
-#pragma mark - RCLogLevel - 日志级别
+#pragma mark RCLogLevel - 日志级别
 /*!
  日志级别
  */
@@ -1507,7 +1443,7 @@ typedef NS_ENUM(NSUInteger, RCLogLevel) {
     RC_Log_Level_Verbose = 5,
 };
 
-#pragma mark - RCTimestampOrder - 历史消息查询顺序
+#pragma mark RCTimestampOrder - 历史消息查询顺序
 /*!
  日志级别
  */
@@ -1523,7 +1459,7 @@ typedef NS_ENUM(NSUInteger, RCTimestampOrder) {
     RC_Timestamp_Asc = 1,
 };
 
-#pragma mark - RCPlatform - 在线平台
+#pragma mark RCPlatform - 在线平台
 /*!
  在线平台
  */
@@ -1554,7 +1490,7 @@ typedef NS_ENUM(NSUInteger, RCPlatform) {
     RCPlatform_PC = 4
 };
 
-#pragma mark - RCPushLauguageType - push 语言设置
+#pragma mark RCPushLauguageType - push 语言设置
 /*!
  push 语言设置
  */
@@ -1573,7 +1509,7 @@ typedef NS_ENUM(NSUInteger, RCPushLauguage) {
     RCPushLauguage_AR_SA
 };
 
-#pragma mark - RCMessageBlockType - 消息被拦截类型
+#pragma mark RCMessageBlockType - 消息被拦截类型
 
 /*!
  消息被拦截类型

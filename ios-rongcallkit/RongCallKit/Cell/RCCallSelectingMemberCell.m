@@ -15,7 +15,7 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         self.selectedImageView = [[UIImageView alloc] init];
-        self.selectedImageView.frame = CGRectMake(10, (55.0 - 20) / 2, 20, 20);
+        self.selectedImageView.frame = CGRectMake(10, 25, 20, 20);
         [self.contentView addSubview:self.selectedImageView];
 
         self.headerImageView = [[RCloudImageView alloc] init];

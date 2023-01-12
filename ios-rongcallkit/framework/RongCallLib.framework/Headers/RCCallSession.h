@@ -54,7 +54,7 @@ NS_ASSUME_NONNULL_BEGIN
   
  @remarks 代理
 */
-- (void)callDidDisconnectWithReason:(RCCallDisconnectReason)reason;
+- (void)callDidDisconnectWithReason:(RCCallDisconnectReason )reason ;
 
 /*!
  对端用户正在振铃
