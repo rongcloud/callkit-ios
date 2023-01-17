@@ -9,6 +9,7 @@
 
 #import <UIKit/UIKit.h>
 #import "RCIM.h"
+#import "RCThemeDefine.h"
 
 /// RCIM 的废弃接口，配置已被移动到 RCKitConfig 类中
 @interface RCIM (Deprecated)

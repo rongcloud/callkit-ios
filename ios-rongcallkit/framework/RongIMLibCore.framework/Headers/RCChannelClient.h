@@ -11,7 +11,6 @@
 #import "RCMessage.h"
 #import "RCSearchConversationResult.h"
 #import "RCStatusDefine.h"
-#import "RCUploadImageStatusListener.h"
 #import "RCUploadMediaStatusListener.h"
 #import "RCUserInfo.h"
 #import "RCSendMessageOption.h"
@@ -513,6 +512,7 @@ NS_ASSUME_NONNULL_BEGIN
  @discussion 此方法不支持聊天室的会话类型。如果 sentTime<=0，则被忽略，会以插入时的时间为准。
 
  @remarks 消息操作
+ @since 5.3.1
  */
 - (void)insertOutgoingMessage:(RCConversationType)conversationType
                      targetId:(NSString *)targetId
@@ -2495,11 +2495,11 @@ NS_ASSUME_NONNULL_BEGIN
  @remarks 消息操作
  */
 - (nullable NSArray<RCMessage *> *)searchMessages:(RCConversationType)conversationType
-                                targetId:(NSString *)targetId
-                               channelId:(nullable NSString *)channelId
-                                 keyword:(NSString *)keyword
-                                   count:(int)count
-                               startTime:(long long)startTime __deprecated_msg("Use [RCChannelClient searchMessages:targetId:channelId:keyword:count:startTime:completion:] instead");
+                                         targetId:(NSString *)targetId
+                                        channelId:(nullable NSString *)channelId
+                                          keyword:(NSString *)keyword
+                                            count:(int)count
+                                        startTime:(long long)startTime __deprecated_msg("Use [RCChannelClient searchMessages:targetId:channelId:keyword:count:startTime:completion:] instead");
 /*!
  根据关键字异步搜索指定会话中的消息
 
@@ -2511,7 +2511,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param startTime        查询 startTime 之前的消息（传 0 表示不限时间）
  @param completion          异步回调[匹配的消息列表]
  
- @discussion 此方法不支持超级群的会话类型。
+ @discussion 超级群会话类型只支持搜索已存储到本地的消息。
  
  @remarks 消息操作
  */
@@ -2536,18 +2536,18 @@ NS_ASSUME_NONNULL_BEGIN
 
  @return 匹配的消息列表
 
- @discussion 此方法不支持超级群的会话类型。
+ @discussion 超级群会话类型只支持搜索已存储到本地的消息。
  
  @remarks 消息操作
  */
 - (nullable NSArray<RCMessage *> *)searchMessages:(RCConversationType)conversationType
-                                targetId:(NSString *)targetId
-                               channelId:(nullable NSString *)channelId
-                                 keyword:(nullable NSString *)keyword
-                               startTime:(long long)startTime
-                                 endTime:(long long)endTime
-                                  offset:(int)offset
-                                   limit:(int)limit __deprecated_msg("Use [RCChannelClient searchMessages:targetId:channelId:keyword:startTime:endTime:offset:limit:completion:] instead");
+                                         targetId:(NSString *)targetId
+                                        channelId:(nullable NSString *)channelId
+                                          keyword:(nullable NSString *)keyword
+                                        startTime:(long long)startTime
+                                          endTime:(long long)endTime
+                                           offset:(int)offset
+                                            limit:(int)limit __deprecated_msg("Use [RCChannelClient searchMessages:targetId:channelId:keyword:startTime:endTime:offset:limit:completion:] instead");
 /*!
  根据时间，偏移量和个数异步搜索指定会话中的消息
 
@@ -2560,7 +2560,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param limit               最大的查询数量，limit 需大于 0，最大值为100，如果大于100，会默认成100。
  @param completion          异步回调[匹配的消息列表]
 
- @discussion 此方法不支持超级群的会话类型。
+ @discussion 超级群会话类型只支持搜索已存储到本地的消息。
  
  @remarks 消息操作
  */
@@ -2586,16 +2586,16 @@ NS_ASSUME_NONNULL_BEGIN
 
  @return 匹配的消息列表
 
- @discussion 此方法不支持超级群的会话类型。
+ @discussion 超级群会话类型只支持搜索已存储到本地的消息。
  
  @remarks 消息操作
  */
 - (nullable NSArray<RCMessage *> *)searchMessages:(RCConversationType)conversationType
-                                targetId:(NSString *)targetId
-                               channelId:(nullable NSString *)channelId
-                                  userId:(NSString *)userId
-                                   count:(int)count
-                               startTime:(long long)startTime __deprecated_msg("Use [RCChannelClient searchMessages:targetId:channelId:userId:count:startTime:completion:] instead");
+                                         targetId:(NSString *)targetId
+                                        channelId:(nullable NSString *)channelId
+                                           userId:(NSString *)userId
+                                            count:(int)count
+                                        startTime:(long long)startTime __deprecated_msg("Use [RCChannelClient searchMessages:targetId:channelId:userId:count:startTime:completion:] instead");
 /*!
  按用户 ID 异步搜索指定会话中的消息
 
@@ -2608,7 +2608,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param completion          异步回调[匹配的消息列表]
 
 
- @discussion 此方法不支持超级群的会话类型。
+ @discussion 超级群会话类型只支持搜索已存储到本地的消息。
  
  @remarks 消息操作
  */
@@ -2631,15 +2631,15 @@ NS_ASSUME_NONNULL_BEGIN
 
  @return 匹配的消息列表
 
- @discussion 此方法不支持超级群的会话类型。
+ @discussion 超级群会话类型只支持搜索已存储到本地的消息。
  
  @remarks 消息操作
  */
 - (nullable NSArray<RCMessage *> *)searchMessagesForAllChannel:(RCConversationType)conversationType
-                                targetId:(NSString *)targetId
-                                 keyword:(NSString *)keyword
-                                   count:(int)count
-                               startTime:(long long)startTime __deprecated_msg("Use [RCChannelClient searchMessagesForAllChannel:targetId:keyword:count:startTime:completion:] instead");
+                                                      targetId:(NSString *)targetId
+                                                       keyword:(NSString *)keyword
+                                                         count:(int)count
+                                                     startTime:(long long)startTime __deprecated_msg("Use [RCChannelClient searchMessagesForAllChannel:targetId:keyword:count:startTime:completion:] instead");
 
 /*!
  异步搜索指定会话中所有 channelId 的消息
@@ -2653,7 +2653,7 @@ NS_ASSUME_NONNULL_BEGIN
 
  @return 匹配的消息列表
 
- @discussion 此方法不支持超级群的会话类型。
+ @discussion 超级群会话类型只支持搜索已存储到本地的消息。
  
  @remarks 消息操作
  */
@@ -2677,17 +2677,17 @@ NS_ASSUME_NONNULL_BEGIN
 
  @return 匹配的消息列表
 
- @discussion 此方法不支持超级群的会话类型。
+ @discussion 超级群会话类型只支持搜索已存储到本地的消息。
  
  @remarks 消息操作
  */
 - (nullable NSArray<RCMessage *> *)searchMessagesForAllChannel:(RCConversationType)conversationType
-                                targetId:(NSString *)targetId
-                                 keyword:(NSString *)keyword
-                               startTime:(long long)startTime
-                                 endTime:(long long)endTime
-                                  offset:(int)offset
-                                   limit:(int)limit __deprecated_msg("Use [RCChannelClient searchMessagesForAllChannel:targetId:keyword:startTime:endTime:offset:limit:completion:] instead");
+                                                      targetId:(NSString *)targetId
+                                                       keyword:(NSString *)keyword
+                                                     startTime:(long long)startTime
+                                                       endTime:(long long)endTime
+                                                        offset:(int)offset
+                                                         limit:(int)limit __deprecated_msg("Use [RCChannelClient searchMessagesForAllChannel:targetId:keyword:startTime:endTime:offset:limit:completion:] instead");
 /*!
  分页异步搜索指定会话中所有 channelId 在指定时间范围内的消息
 
@@ -2701,7 +2701,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param completion          异步回调[匹配的消息列表]
 
 
- @discussion 此方法不支持超级群的会话类型。
+ @discussion 超级群会话类型只支持搜索已存储到本地的消息。
  
  @remarks 消息操作
  */
@@ -2727,7 +2727,7 @@ NS_ASSUME_NONNULL_BEGIN
  @discussion 目前，SDK 内置的文本消息、文件消息、图文消息支持搜索。
  自定义的消息必须要实现 RCMessageContent 的 getSearchableWords 接口才能进行搜索。
 
- @discussion 此方法不支持超级群的会话类型，包含超级群时可能会造成数据异常。
+ @discussion conversationTypeList 包含超级群会话类型时，超级群会话只搜索已存储到本地的消息记录。
  @discussion conversationTypeList中类型个数不能超过300，超过会被截断。
  @discussion objectNameList中类型名个数不能超过300，超过会被截断。
  
@@ -2740,9 +2740,9 @@ NS_ASSUME_NONNULL_BEGIN
  @remarks 消息操作
  */
 - (nullable NSArray<RCSearchConversationResult *> *)searchConversations:(NSArray<NSNumber *> *)conversationTypeList
-                                                     channelId:(nullable NSString *)channelId
-                                                   messageType:(NSArray<NSString *> *)objectNameList
-                                                       keyword:(NSString *)keyword __deprecated_msg("Use [RCChannelClient searchConversations:targetId:messageType:keyword:completion:] instead");
+                                                              channelId:(nullable NSString *)channelId
+                                                            messageType:(NSArray<NSString *> *)objectNameList
+                                                                keyword:(NSString *)keyword __deprecated_msg("Use [RCChannelClient searchConversations:targetId:messageType:keyword:completion:] instead");
 /*!
  根据关键字异步搜索会话
 
@@ -2756,7 +2756,7 @@ NS_ASSUME_NONNULL_BEGIN
  @discussion 目前，SDK 内置的文本消息、文件消息、图文消息支持搜索。
  自定义的消息必须要实现 RCMessageContent 的 getSearchableWords 接口才能进行搜索。
 
- @discussion 此方法不支持超级群的会话类型，包含超级群时可能会造成数据异常。
+ @discussion conversationTypeList 包含超级群会话类型时，超级群会话只搜索已存储到本地的消息记录。
  @discussion conversationTypeList中类型个数不能超过300，超过会被截断。
  @discussion objectNameList中类型名个数不能超过300，超过会被截断。
  
@@ -2779,14 +2779,14 @@ NS_ASSUME_NONNULL_BEGIN
 
  @param conversationTypeList 需要搜索的会话类型列表
  @param objectNameList       需要搜索的消息类型名列表(即每个消息类方法 getObjectName 的返回值)，不能为 nil
- @param keyword              关键字
+ @param keyword              关键字，非空
 
  @return 匹配的会话搜索结果列表
 
  @discussion 目前，SDK 内置的文本消息、文件消息、图文消息支持搜索。
  自定义的消息必须要实现 RCMessageContent 的 getSearchableWords 接口才能进行搜索。
 
- @discussion 此方法不支持超级群的会话类型，包含超级群时可能会造成数据异常。
+ @discussion conversationTypeList 包含超级群会话类型时，超级群会话只搜索已存储到本地的消息记录。
  @discussion conversationTypeList中类型个数不能超过300，超过会被截断。
  @discussion objectNameList中类型名个数不能超过300，超过会被截断。
  
@@ -2799,21 +2799,21 @@ NS_ASSUME_NONNULL_BEGIN
  @remarks 消息操作
  */
 - (nullable NSArray<RCSearchConversationResult *> *)searchConversationsForAllChannel:(NSArray<NSNumber *> *)conversationTypeList
-                                                   messageType:(NSArray<NSString *> *)objectNameList
-                                                                    keyword:(NSString *)keyword __deprecated_msg("Use [RCChannelClient searchConversationsForAllChannel:messageType:keyword:completion:] instead");
+                                                                         messageType:(NSArray<NSString *> *)objectNameList
+                                                                             keyword:(NSString *)keyword __deprecated_msg("Use [RCChannelClient searchConversationsForAllChannel:messageType:keyword:completion:] instead");
 
 /*!
  根据关键字异步搜索特定会话类型下所有 channelId 的会话
 
  @param conversationTypeList 需要搜索的会话类型列表
  @param objectNameList       需要搜索的消息类型名列表(即每个消息类方法 getObjectName 的返回值)，不能为 nil
- @param keyword              关键字
+ @param keyword              关键字，非空
  @param completion           异步回调[匹配的会话搜索结果列表]
 
  @discussion 目前，SDK 内置的文本消息、文件消息、图文消息支持搜索。
  自定义的消息必须要实现 RCMessageContent 的 getSearchableWords 接口才能进行搜索。
 
- @discussion 此方法不支持超级群的会话类型，包含超级群时可能会造成数据异常。
+ @discussion conversationTypeList 包含超级群会话类型时，超级群会话只搜索已存储到本地的消息记录。
  @discussion conversationTypeList中类型个数不能超过300，超过会被截断。
  @discussion objectNameList中类型名个数不能超过300，超过会被截断。
  

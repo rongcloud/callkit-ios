@@ -2631,15 +2631,15 @@ __deprecated_msg("Use [RCChannelClient getNotificationQuietHoursLevel:error:] in
 
  @return 匹配的消息列表
 
- @discussion 此方法不支持超级群的会话类型。
+ @discussion 超级群会话类型只支持搜索已存储到本地的消息。
  
  @remarks 消息操作
  */
 - (nullable NSArray<RCMessage *> *)searchMessages:(RCConversationType)conversationType
-                                targetId:(NSString *)targetId
-                                 keyword:(NSString *)keyword
-                                   count:(int)count
-                               startTime:(long long)startTime;
+                                         targetId:(NSString *)targetId
+                                          keyword:(NSString *)keyword
+                                            count:(int)count
+                                        startTime:(long long)startTime;
 
 /*!
  按用户 ID 搜索指定会话中的消息
@@ -2652,16 +2652,15 @@ __deprecated_msg("Use [RCChannelClient getNotificationQuietHoursLevel:error:] in
 
  @return 匹配的消息列表
  
- @discussion 此方法不支持超级群的会话类型。
+ @discussion 超级群会话类型只支持搜索已存储到本地的消息。
 
  @remarks 消息操作
  */
 - (nullable NSArray<RCMessage *> *)searchMessages:(RCConversationType)conversationType
-                                targetId:(NSString *)targetId
-                                  userId:(NSString *)userId
-                                   count:(int)count
-                               startTime:(long long)startTime;
-
+                                         targetId:(NSString *)targetId
+                                           userId:(NSString *)userId
+                                            count:(int)count
+                                        startTime:(long long)startTime;
 /*!
  根据关键字搜索会话
 
@@ -2673,6 +2672,7 @@ __deprecated_msg("Use [RCChannelClient getNotificationQuietHoursLevel:error:] in
 
  @discussion 目前，SDK 内置的文本消息、文件消息、图文消息支持搜索。
  自定义的消息必须要实现 RCMessageContent 的 getSearchableWords 接口才能进行搜索。
+ @discussion conversationTypeList 包含超级群会话类型时，超级群会话只搜索已存储到本地的消息记录。
  @discussion conversationTypeList中类型个数不能超过300，超过会被截断。
  @discussion objectNameList中类型名个数不能超过300，超过会被截断。
  @discussion conversationTypeList 传值时：
@@ -2684,8 +2684,8 @@ __deprecated_msg("Use [RCChannelClient getNotificationQuietHoursLevel:error:] in
  @remarks 消息操作
  */
 - (nullable NSArray<RCSearchConversationResult *> *)searchConversations:(NSArray<NSNumber *> *)conversationTypeList
-                                                   messageType:(NSArray<NSString *> *)objectNameList
-                                                       keyword:(NSString *)keyword;
+                                                            messageType:(NSArray<NSString *> *)objectNameList
+                                                                keyword:(NSString *)keyword;
 
 #pragma mark - 日志
 

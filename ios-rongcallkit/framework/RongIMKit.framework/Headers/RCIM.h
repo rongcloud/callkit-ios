@@ -6,7 +6,6 @@
 //  Copyright (c) 2015年 RongCloud. All rights reserved.
 //
 
-#import "RCThemeDefine.h"
 #import <Foundation/Foundation.h>
 #import <RongIMLib/RongIMLib.h>
 

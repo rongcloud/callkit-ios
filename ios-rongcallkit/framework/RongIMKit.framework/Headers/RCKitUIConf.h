@@ -80,5 +80,21 @@
 */
 @property (nonatomic, assign) BOOL enableDarkMode;
 
+/*!
+ 文件消息图标配置，key 是文件后缀（例如："png"、"pdf"），value 是本地文件路径
+*/
+@property (nonatomic, copy, readonly) NSDictionary *fileSuffixDictionary;
+
+/*!
+ 注册文件消息图标配置，根据文件后缀，自定义会话中文件消息展示的图标
+ @param types 文件图标字典，key 是文件后缀（例如："png"、"pdf"），value 是本地文件路径
+ @discussion 文件后缀不能带 “.”，支持的后缀可参考：https://support.rongcloud.cn/ks/NTE4
+ @discussion 如果文件路径为空或者路径下的文件不存在，会使用 RongCloud.bundle 中的默认图标。
+ @discussion 本地文件路径下的图片尺寸请参考 RongCloud.bundle 中对应的文件图标。
+ 
+ @since 5.3.4
+ */
+- (BOOL)registerFileSuffixTypes:(NSDictionary<NSString *, NSString *> *)types;
+
 @end
 

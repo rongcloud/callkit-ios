@@ -13,7 +13,6 @@
 #import "RCMessageBaseCell.h"
 #import "RCMessageModel.h"
 #import "RCPluginBoardView.h"
-#import "RCThemeDefine.h"
 #import <UIKit/UIKit.h>
 #import "RCReferencingView.h"
 

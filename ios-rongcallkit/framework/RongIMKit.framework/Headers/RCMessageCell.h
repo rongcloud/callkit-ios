@@ -9,7 +9,6 @@
 #import "RCContentView.h"
 #import "RCMessageBaseCell.h"
 #import "RCMessageCellDelegate.h"
-#import "RCMessageCellNotificationModel.h"
 #import "RCThemeDefine.h"
 #import "RCButton.h"
 #define HeadAndContentSpacing 8

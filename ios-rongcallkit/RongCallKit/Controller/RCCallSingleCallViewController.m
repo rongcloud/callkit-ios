@@ -259,8 +259,8 @@
         self.remoteNameLabel.textAlignment = NSTextAlignmentCenter;
         self.tipsLabel.textAlignment = NSTextAlignmentCenter;
 
-        self.statusView.frame = CGRectMake((self.view.frame.size.width - 17) / 2,
-                                           RCCallTopGGradientHeight + (RCCallHeaderLength - 4) / 2, 17, 4);
+        self.statusView.frame = CGRectMake(0, 0, 17, 4);
+        self.statusView.center = self.remotePortraitView.center;
 
         if (callStatus == RCCallDialing) {
             self.remotePortraitView.alpha = 0.5;

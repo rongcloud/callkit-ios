@@ -52,6 +52,15 @@
 + (UIImage *)imageNamed:(NSString *)name ofBundle:(NSString *)bundleName;
 
 /*!
+ 根据文件类型返回会话中的图标
+ @param type 文件类型
+ @discussion 如果 RCKitUIConf 的 reigsterFileSuffixTypes 中有自定义图标，返回自定义图标，否则，返回 RongCloud.bundle 中的默认图标
+ 
+ @since 5.3.4
+ */
++ (UIImage *)imageWithFileSuffix:(NSString *)type;
+
+/*!
  获取文字显示的尺寸
 
  @param text 文字
