@@ -672,6 +672,7 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  RCMessage 下列属性会被入库，其余属性会被抛弃
  conversationType    会话类型
  targetId            会话 ID
+ messageUId          消息唯一 ID,  此属性入库 5.3.5 开始支持
  messageDirection    消息方向
  senderUserId        发送者 ID
  receivedStatus      接收状态；消息方向为接收方，并且 receivedStatus 为 ReceivedStatus_UNREAD 时，该条消息未读

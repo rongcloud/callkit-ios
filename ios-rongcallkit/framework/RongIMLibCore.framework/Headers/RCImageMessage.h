@@ -42,11 +42,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy, readonly, nullable) NSString *imageUrl;
 
 /*!
- 图片的本地路径
- */
-@property (nonatomic, copy, nullable) NSString *localPath;
-
-/*!
  图片消息的缩略图
  */
 @property (nonatomic, strong, nullable) UIImage *thumbnailImage;
@@ -57,11 +52,6 @@ NS_ASSUME_NONNULL_BEGIN
  @discussion 在发送图片的时候，是否发送原图，默认值为 NO。
  */
 @property (nonatomic, getter=isFull) BOOL full;
-
-/*!
- 图片消息的附加信息
- */
-@property (nonatomic, copy, nullable) NSString *extra;
 
 /*!
  图片消息的原始图片信息

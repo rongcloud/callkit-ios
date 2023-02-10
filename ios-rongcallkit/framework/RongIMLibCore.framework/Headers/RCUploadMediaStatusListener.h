@@ -36,15 +36,23 @@ NS_ASSUME_NONNULL_BEGIN
  请参考下面代码。
 
  升级说明：如果您之前使用了此接口，请参考下面代码把参数从 url 替换成 message。
- if ([currentMessage.content isKindOfClass:[RCImageMessage class]]) {
-    RCImageMessage *content = (RCImageMessage *)currentMessage.content;
-    content.remoteUrl = remoteUrl;
-    successBlock(content);
- } else if ([currentMessage.content isKindOfClass:[RCFileMessage class]]) {
-    RCFileMessage *content = (RCFilemessage *)currentMessage.content;
-    content.fileUrl = remoteUrl;
-    successBlock(content);
+ 
+ uploadPrepare:^(RCUploadMediaStatusListener *uploadListener) {
+
+     if ([currentMessage.content isKindOfClass:[RCImageMessage class]]) {
+        RCImageMessage *content = (RCImageMessage *)uploadListener.currentMessage.content;
+        content.remoteUrl = remoteUrl;
+        uploadListener.successBlock(content);
+     } else if ([currentMessage.content isKindOfClass:[RCFileMessage class]]) {
+        RCFileMessage *content = (RCFilemessage *)uploadListener.currentMessage.content;
+        content.fileUrl = remoteUrl;
+        uploadListener.successBlock(content);
+     } else {
+        //不做处理的，一定回调返回原消息内容，保障发送方法继续执行
+        uploadListener.successBlock(uploadListener.currentMessage.content);
+    }
  }
+ 
  */
 @property (nonatomic, copy, nullable) void (^successBlock)(RCMessageContent *content);
 

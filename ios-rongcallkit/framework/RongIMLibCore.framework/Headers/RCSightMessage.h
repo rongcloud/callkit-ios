@@ -27,11 +27,6 @@ NS_ASSUME_NONNULL_BEGIN
 @interface RCSightMessage : RCMediaMessageContent <NSCoding>
 
 /*!
- 本地 URL 地址
- */
-@property (nonatomic, copy, nullable) NSString *localPath;
-
-/*!
  网络 URL 地址
  */
 @property (nonatomic, readonly, nullable) NSString *sightUrl;

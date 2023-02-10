@@ -1231,6 +1231,7 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  RCMessage 下列属性会被入库，其余属性会被抛弃
  conversationType    会话类型
  targetId            会话 ID
+ messageUId          消息唯一 ID,  此属性入库 5.3.5 开始支持
  messageDirection    消息方向
  senderUserId        发送者 ID
  receivedStatus      接收状态；消息方向为接收方，并且 receivedStatus 为 ReceivedStatus_UNREAD 时，该条消息未读
@@ -1250,6 +1251,7 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  RCMessage 下列属性会被入库，其余属性会被抛弃
  conversationType    会话类型
  targetId            会话 ID
+ messageUId          消息唯一 ID,  此属性入库 5.3.5 开始支持
  messageDirection    消息方向
  senderUserId        发送者 ID
  receivedStatus      接收状态；消息方向为接收方，并且 receivedStatus 为 ReceivedStatus_UNREAD 时，该条消息未读
@@ -1258,12 +1260,42 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  sentTime            消息发送的 Unix 时间戳，单位为毫秒 ，会影响消息排序
  extra            RCMessage 的额外字段
  
+ @param msgs 插入的批量 RCMessage 数据（此方法不执行排重）
+ @param completion 完成回调
+
  @discussion 此方法不支持聊天室和超级群的会话类型。每批最多处理  500 条消息，超过 500 条返回 NO
  @discussion 消息的未读会累加到会话的未读数上
 
  @remarks 消息操作
  */
 - (void)batchInsertMessage:(NSArray<RCMessage *> *)msgs completion:(nullable void(^)(BOOL ret))completion;
+
+/*!
+ 异步批量插入接收的消息（该消息只插入本地数据库，实际不会发送给服务器和对方）
+ RCMessage 下列属性会被入库，其余属性会被抛弃
+ conversationType    会话类型
+ targetId            会话 ID
+ messageUId          消息唯一 ID
+ messageDirection    消息方向
+ senderUserId        发送者 ID
+ receivedStatus      接收状态；消息方向为接收方，并且 receivedStatus 为 ReceivedStatus_UNREAD 时，该条消息未读
+ sentStatus          发送状态
+ content             消息的内容
+ sentTime            消息发送的 Unix 时间戳，单位为毫秒 ，会影响消息排序
+ extra               RCMessage 的额外字段
+ 
+ @param msgs 插入的批量 RCMessage 数据
+ @param checkDuplicate 是否根据 messageUId 排重
+ @param completion 完成回调
+
+ @discussion 此方法不支持聊天室和超级群的会话类型。每批最多处理  500 条消息，超过 500 条返回 NO
+ @discussion 消息的未读会累加到会话的未读数上
+
+ @remarks 消息操作
+ @since 5.3.5
+ */
+
+- (void)batchInsertMessage:(NSArray<RCMessage *> *)msgs checkDuplicate:(BOOL)checkDuplicate completion:(nullable void(^)(BOOL ret))completion;
 
 /*!
  根据文件 URL 地址下载文件内容
@@ -1276,7 +1308,9 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  @param cancelBlock         用户取消了下载的回调
 
  @discussion 用来获取媒体原文件时调用。如果本地缓存中包含此文件，则从本地缓存中直接获取，否则将从服务器端下载。
-
+ 
+ @warning 此方法仅仅是文件下载器，不会操作消息体。
+ 
  @remarks 多媒体下载
 */
 - (void)downloadMediaFile:(NSString *)fileName
@@ -1301,6 +1335,9 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  @param cancelBlock         用户取消了下载的回调
 
  @discussion 用来获取媒体原文件时调用。如果本地缓存中包含此文件，则从本地缓存中直接获取，否则将从服务器端下载。
+ 
+ @warning 此方法仅仅是文件下载器，不会操作消息体。
+ 
  @remarks 多媒体下载
  */
 - (void)downloadMediaFile:(RCConversationType)conversationType
@@ -1323,6 +1360,8 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
 
  @discussion 用来获取媒体原文件时调用。如果本地缓存中包含此文件，则从本地缓存中直接获取，否则将从服务器端下载。
 
+ @warning 多媒体下载成功后，会更新消息体的 localPath。
+ 
  @remarks 多媒体下载
  */
 - (void)downloadMediaMessage:(long)messageId

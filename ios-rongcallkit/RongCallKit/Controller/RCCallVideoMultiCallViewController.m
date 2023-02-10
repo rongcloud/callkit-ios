@@ -89,15 +89,19 @@
 
 - (void)initAllUserModel {
     if (self.callSession.callStatus == RCCallIncoming || self.callSession.callStatus == RCCallRinging) {
-        self.mainModel = [self generateUserModel:currentUserId];
+        self.mainModel = [self generateUserModel:self.callSession.inviter];
         [self.callSession setVideoView:self.backgroundView userId:currentUserId];
-
+        
         self.subUserModelList = [[NSMutableArray alloc] init];
         for (RCCallUserProfile *userProfile in self.callSession.userProfileList) {
-            if (userProfile.userType != 2) {
+            if (![userProfile.userId isEqualToString:self.callSession.inviter] && userProfile.userType != 2) {
                 RCCallUserCallInfoModel *userModel = [self generateUserModel:userProfile.userId];
                 [self.subUserModelList addObject:userModel];
             }
+        }
+        RCCallUserCallInfoModel *userModel = [self generateUserModel:currentUserId];
+        if (userModel.profile.userType != 2) {
+            [self.subUserModelList addObject:userModel];
         }
     } else if (self.callSession.callStatus == RCCallDialing) {
         self.mainModel = [self generateUserModel:currentUserId];
@@ -582,6 +586,12 @@
  通话已接通
  */
 - (void)callDidConnect {
+    if (![self.mainModel.userId isEqualToString:currentUserId] && [self getModelInSubUserModelList:currentUserId] != nil){
+        [self removeSubUserModel:[self getModelInSubUserModelList:currentUserId]];
+        [self addSubUserModel:[self generateUserModel:self.callSession.inviter]];
+        self.mainModel = [self generateUserModel:currentUserId];
+        _mainNameLabel.text = self.mainModel.userInfo.name;
+    }
     [self.userCollectionView removeFromSuperview];
     _userCollectionView = nil;
     [self userCollectionView];

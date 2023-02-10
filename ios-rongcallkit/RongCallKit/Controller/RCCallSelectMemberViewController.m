@@ -108,7 +108,7 @@ typedef void (^CompleteBlock)(NSArray *addUserIdList);
 
     _toolBar.numberLabel.text =
         [NSString stringWithFormat:@"%@ %zi %@", RCCallKitLocalizedString(@"bottom_result_view_choosed_person_prefix"),
-                                   self.selectUserIds.count + 1,
+         self.existUserIdList.count,
                                    RCCallKitLocalizedString(@"bottom_result_view_choosed_person_subfix")];
     _toolBar.numberLabel.textColor = [UIColor colorWithRed:168 / 255.0
                                                      green:168 / 255.0
@@ -319,7 +319,7 @@ typedef void (^CompleteBlock)(NSArray *addUserIdList);
 
     _toolBar.numberLabel.text =
         [NSString stringWithFormat:@"%@ %zi %@", RCCallKitLocalizedString(@"bottom_result_view_choosed_person_prefix"),
-                                   self.selectUserIds.count + 1,
+                                   self.selectUserIds.count + self.existUserIdList.count,
                                    RCCallKitLocalizedString(@"bottom_result_view_choosed_person_subfix")];
 
     if (self.selectUserIds.count > 0) {

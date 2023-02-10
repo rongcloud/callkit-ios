@@ -596,14 +596,25 @@
     if ([userId isEqualToString:self.mainModel.userId]) {
         if (self.callSession.callStatus == RCCallIncoming || self.callSession.callStatus == RCCallRinging ||
             self.callSession.callStatus == RCCallActive) {
-            RCCallUserCallInfoModel *tempModel = self.subUserModelList[0];
-            self.mainModel = tempModel;
+         
             if (self.callSession.callStatus == RCCallIncoming || self.callSession.callStatus == RCCallRinging) {
+                RCCallUserCallInfoModel *tempModel = self.subUserModelList[0];
+                self.mainModel = tempModel;
                 self.inviterNameLabel.text = tempModel.userInfo.name;
+                [self.subUserModelList removeObject:tempModel];
             }
-
-            [self.subUserModelList removeObject:tempModel];
+            else {
+                for (RCCallUserCallInfoModel *userModel in self.subUserModelList) {
+                    if ([userId isEqualToString:userModel.userId]) {
+                        [self.subUserModelList removeObject:userModel];
+                        self.mainModel = [self generateUserModel:currentUserId];
+                        break;
+                    }
+                }
+            }
             [self updateAllSubUserLayout];
+
+
         }
     } else {
         for (RCCallUserCallInfoModel *userModel in self.subUserModelList) {

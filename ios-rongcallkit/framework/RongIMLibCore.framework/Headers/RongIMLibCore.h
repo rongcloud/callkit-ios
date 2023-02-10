@@ -47,6 +47,7 @@ FOUNDATION_EXPORT const unsigned char RongIMLibCoreVersionString[];
 #import <RongIMLibCore/RCHQVoiceMessage.h>
 #import <RongIMLibCore/RCSightMessage.h>
 #import <RongIMLibCore/RCReferenceMessage.h>
+#import <RongIMLibCore/RCCombineMessage.h>
 #import <RongIMLibCore/RCMessageConfig.h>
 #import <RongIMLibCore/RCMessagePushConfig.h>
 #import <RongIMLibCore/RCiOSConfig.h>

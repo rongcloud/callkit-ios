@@ -47,10 +47,13 @@
         self.nameLabel.hidden = YES;
         [self.contentView addSubview:self.nameLabel];
         
-        self.statusView = [[UIImageView alloc] initWithFrame:CGRectZero];
-        [self.statusView setImage:[RCCallKitUtility imageFromVoIPBundle:@"voip/voip_connecting"]];
-        self.statusView.hidden = YES;
-        [self.contentView addSubview:self.statusView];
+        self.statusLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+        self.statusLabel.text = @"连接中";
+        self.statusLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size:13];
+        self.statusLabel.textAlignment = NSTextAlignmentCenter;
+        self.statusLabel.textColor = [UIColor whiteColor];
+        self.statusLabel.hidden = YES;
+        [self.contentView addSubview:self.statusLabel];
 
         _cellNameLabel = [[UILabel alloc] init];
         _cellNameLabel.backgroundColor = [UIColor clearColor];
@@ -109,12 +112,7 @@
     [self.headerImageView setImageURL:[NSURL URLWithString:model.userInfo.portraitUri]];
     [self.nameLabel setText:model.userInfo.name];
     self.headerImageView.hidden = NO;
-    
-    if (callStatus == RCCallDialing || callStatus == RCCallRinging || callStatus == RCCallIncoming) {
-        self.headerImageView.alpha = 0.5;
-    } else {
-        self.headerImageView.alpha = 1.0;
-    }
+
 }
 
 - (void)resetLayout:(CGFloat)nameLabelHeight insideMargin:(CGFloat)insideMargin {
@@ -132,10 +130,25 @@
         self.nameLabel.hidden = YES;
     }
 
-    self.statusView.frame =
-        CGRectMake((self.bounds.size.width - 17) / 2, (self.headerImageView.frame.size.width - 4) / 2, 17, 4);
-    //只有呼出状态需要 ... loading UI
-    self.statusView.hidden = self.callStatus != RCCallDialing;
+    self.statusLabel.frame =
+        CGRectMake((self.bounds.size.width - self.headerImageView.frame.size.width) / 2,0,self.headerImageView.frame.size.width, self.headerImageView.frame.size.width);
+    if (self.callStatus == RCCallIncoming || self.callStatus == RCCallRinging){
+        self.headerImageView.alpha = 1;
+        self.statusLabel.hidden = YES;
+    }
+    else if (self.callStatus == RCCallActive) {
+        if (_model.profile.callStatus == RCCallIncoming || _model.profile.callStatus == RCCallRinging) {
+            self.statusLabel.hidden = NO;
+            self.headerImageView.alpha = 0.5;
+        } else {
+            self.statusLabel.hidden = YES;
+            self.headerImageView.alpha = 1;
+        }
+    }
+    else {
+        self.statusLabel.hidden = NO;
+        self.headerImageView.alpha = 0.5;
+    }
 }
 
 - (void)resetLayoutWithVideo:(CGFloat)nameLabelHeight insideMargin:(CGFloat)insideMargin {
@@ -143,28 +156,28 @@
     self.headerImageView.hidden = NO;
 
     self.nameLabel.frame =
-        CGRectMake(0, self.bounds.size.height - nameLabelHeight - 10, self.bounds.size.width, nameLabelHeight);
+        CGRectMake(0, self.bounds.size.height - nameLabelHeight - 5, self.bounds.size.width, nameLabelHeight);
     if (nameLabelHeight > 0) {
         self.nameLabel.hidden = NO;
     } else {
         self.nameLabel.hidden = YES;
     }
 
-    self.statusView.frame = CGRectMake((self.bounds.size.width - 20.0), 13.5, 17, 4);
+    self.statusLabel.frame = CGRectMake((self.bounds.size.width - self.headerImageView.frame.size.width) / 2,(self.bounds.size.height - self.headerImageView.frame.size.height) / 2,self.headerImageView.frame.size.width, self.headerImageView.frame.size.height);
     //    self.statusView.contentMode = UIViewContentModeScaleAspectFit;
 
-    if (self.callStatus == RCCallIncoming || self.callStatus == RCCallRinging) {
-        self.statusView.hidden = YES;
-        self.nameLabel.hidden = YES;
-    } else {
-        self.nameLabel.hidden = NO;
-        if (self.callStatus == RCCallIncoming ||
-            self.callStatus == RCCallRinging ||
-            self.callStatus == RCCallDialing) {
-            self.statusView.hidden = NO;
+    if (_model.profile.callStatus == RCCallIncoming || _model.profile.callStatus == RCCallRinging ||
+            _model.profile.callStatus == RCCallDialing) {
+        if (self.callStatus == RCCallIncoming || self.callStatus == RCCallRinging) {
+            self.statusLabel.hidden = YES;
+            self.headerImageView.alpha = 1;
         } else {
-            self.statusView.hidden = YES;
+            self.statusLabel.hidden = NO;
+            self.headerImageView.alpha = 0.5;
         }
+    } else {
+        self.statusLabel.hidden = YES;
+        self.headerImageView.alpha = 1;
     }
 }
 @end

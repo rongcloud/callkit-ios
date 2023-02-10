@@ -377,7 +377,7 @@ FOUNDATION_EXPORT NSString *const RCKitDispatchConversationStatusChangeNotificat
  nil，SDK 会对外发送返回的消息内容。如果您使用了RCConversationViewController 中的 willSendMessage:
  方法，请不要重复使用此方法。选择其中一种方式实现您的需求即可。
  */
-- (RCMessageContent *)willSendIMMessage:(RCMessageContent *)messageContent;
+- (RCMessageContent *)willSendIMMessage:(RCMessageContent *)messageContent;__deprecated_msg("Use [RCIMMessageInterceptor interceptWillSendMessage:] instead");
 
 /*!
  发送消息完成的监听器
@@ -390,9 +390,53 @@ FOUNDATION_EXPORT NSString *const RCKitDispatchConversationStatusChangeNotificat
  RCConversationViewController 中的 didSendMessage:content:
  方法，请不要重复使用此方法。选择其中一种方式实现您的需求即可。
  */
-- (void)didSendIMMessage:(RCMessageContent *)messageContent status:(NSInteger)status;
+- (void)didSendIMMessage:(RCMessageContent *)messageContent status:(NSInteger)status;__deprecated_msg("Use [RCIMMessageInterceptor interceptDidSendMessage:] instead");
+
 
 @end
+
+
+#pragma mark - 消息发送拦截
+
+/*!
+ IMKit消息发送拦截
+ @discussion 设置IMKit的消息发送拦截器，可以拦截消息发送前以及消息发送后的结果。
+ 例如消息合并转发，附件上传自己到 App File Server 时，可以使用此拦截器
+ 
+ @warning 如果您使用IMKit，可以设置并实现；
+ @warning 如果您使用- (RCMessageContent *)willSendMessage:(RCMessageContent *)message， 拦截发送消息，推荐使用此拦截器；
+ 
+ 两者根据使用场景二选其一， 多媒体附件上传到 App File Server 时，推荐使用此方式来实现
+ @since 5.3.5
+ */
+@protocol RCIMMessageInterceptor <NSObject>
+
+/*!
+ 准备发送消息的拦截回调
+
+ @param message 准备发送的消息
+ @return YES 用户拦截此次消息，SDK不再做后续处理，NO 交由SDK处理
+ @discussion 此方法在消息准备向外发送时会执行，您可以在此方法中对消息内容进行过滤拦截。
+ @discussion 如果只进行拦截，修改发送内容，修改后， return NO SDK 会继续执行发送。
+ 
+ @since 5.3.5
+ */
+- (BOOL)interceptWillSendMessage:(RCMessage *)message;
+
+@optional
+/*!
+ 发送消息成功的拦截回调
+
+ @param message 发送成功的消息
+ @discussion 此方法在消息向外发送成功后会执行，您可以在此方法中收到回调通知。
+ @discussion message.sentStatus, RCSentStatus 可根据枚举值判断发送成功或失败
+ 
+ @since 5.3.5
+ */
+- (void)interceptDidSendMessage:(RCMessage *)message;
+
+@end
+
 
 #pragma mark - IMKit核心类
 
@@ -587,6 +631,11 @@ FOUNDATION_EXPORT NSString *const RCKitDispatchConversationStatusChangeNotificat
 
 @property (nonatomic, weak) id<RCIMSendMessageDelegate> sendMessageDelegate;
 
+#pragma mark 消息发送监听
+
+/// @since 5.3.5
+@property (nonatomic, weak) id<RCIMMessageInterceptor> messageInterceptor;
+
 #pragma mark 消息发送
 /*!
  发送消息(除图片消息、文件消息外的所有消息)，会自动更新UI
@@ -705,6 +754,43 @@ FOUNDATION_EXPORT NSString *const RCKitDispatchConversationStatusChangeNotificat
                    successBlock:(void (^)(RCMessage *successMessage))successBlock
                      errorBlock:(void (^)(RCErrorCode nErrorCode, RCMessage *errorMessage))errorBlock
                          cancel:(void (^)(RCMessage *cancelMessage))cancelBlock;
+
+
+/*!
+ 发送媒体文件消息，会自动更新UI(上传图片或文件到App指定的服务器)
+ 
+ @param message             将要发送的消息实体（需要保证 message 中的 conversationType，targetId，messageContent 是有效值)
+ @param pushContent         接收方离线时需要显示的远程推送内容
+ @param pushData            接收方离线时需要在远程推送中携带的非显示数据
+ @param uploadPrepareBlock  媒体文件上传监听，可实现 block 自定义处理文件上传
+ [uploadListener:当前的发送进度监听，SDK 通过此监听更新 IMKit UI]
+ @param progressBlock       消息发送进度更新的回调 [progress:当前的发送进度, 0 <= progress <= 100, progressMessage:消息实体]
+ @param successBlock        消息发送成功的回调 [successMessage:消息实体]
+ @param errorBlock          消息发送失败的回调 [nErrorCode:发送失败的错误码, errorMessage:消息实体]
+ @param cancelBlock         用户取消了消息发送的回调 [cancelMessage:消息实体]
+ @return                    发送的消息实体
+ 
+ @discussion 此方法用于上传媒体信息到您自己的服务器
+ 当接收方离线并允许远程推送时，会收到远程推送。
+ 远程推送中包含两部分内容，一是pushContent，用于显示；二是pushData，用于携带不显示的数据。
+ 
+ SDK内置的消息类型，如果您将pushContent和pushData置为nil，会使用默认的推送格式进行远程推送。
+ 自定义类型的消息，需要您自己设置pushContent和pushData来定义推送内容，否则将不会进行远程推送。
+ 
+ @warning 如果您使用IMKit，使用此方法发送媒体文件消息SDK会自动更新UI；
+ 如果您使用IMLib，请使用RCIMClient中的同名方法发送媒体文件消息，不会自动更新UI。
+ 
+ @since 5.3.5
+ */
+
+- (RCMessage *)sendMediaMessage:(RCMessage *)message
+                    pushContent:(NSString *)pushContent
+                       pushData:(NSString *)pushData
+                  uploadPrepare:(void (^)(RCUploadMediaStatusListener *uploadListener))uploadPrepareBlock
+                       progress:(void (^)(int progress, long messageId))progressBlock
+                   successBlock:(void (^)(long messageId))successBlock
+                     errorBlock:(void (^)(RCErrorCode errorCode, long messageId))errorBlock
+                         cancel:(void (^)(long messageId))cancelBlock;
 
 /*!
  取消发送中的媒体信息

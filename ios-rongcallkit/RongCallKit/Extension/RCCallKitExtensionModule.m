@@ -60,7 +60,7 @@ static NSInteger kAppkeyLength = 13;
 - (NSArray<RCExtensionPluginItemInfo *> *)getPluginBoardItemInfoList:(RCConversationType)conversationType
                                                             targetId:(NSString *)targetId {
     NSMutableArray *itemList = [[NSMutableArray alloc] init];
-    if ([targetId isEqualToString:[RCIMClient sharedRCIMClient].currentUserInfo.userId]) {
+    if ([targetId isEqualToString:[RCCoreClient sharedCoreClient].currentUserInfo.userId]) {
         return itemList;
     }
 
