@@ -11,7 +11,7 @@
 #import "RCConversationModel.h"
 #import "RCThemeDefine.h"
 #import <UIKit/UIKit.h>
-
+#import "RCBaseTableView.h"
 @class RCNetworkIndicatorView;
 
 /*!
@@ -87,7 +87,7 @@
 /*!
  列表的TableView
  */
-@property (nonatomic, strong) UITableView *conversationListTableView;
+@property (nonatomic, strong) RCBaseTableView *conversationListTableView;
 
 #pragma mark - 网络连接变化状态提醒
 

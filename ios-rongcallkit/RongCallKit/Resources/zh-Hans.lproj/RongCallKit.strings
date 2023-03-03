@@ -60,6 +60,7 @@
 "VoIPCallRemoteAcceptSystemCall"="对方已接听系统来电";
 "VoIPCallAcceptByOtherClient"="己方其他端已接听";
 "VoIPCallHangupByOtherClient"="己方其他端已挂断";
+"VoIPCallDoSomethingByOtherClient"="其它设备已处理";
 "VoIP_Rejected_By_Blacklist"="已被对方加入黑名单";
 "VoIPCallMediaServerClosed"="音视频服务已关闭";
 "VoIPCallRemoteBusyLineAndShowAdvice"="对方忙，请稍后再拨";

@@ -10,7 +10,7 @@
 		</data>
 		<key>Headers/RCAndroidConfig.h</key>
 		<data>
-		o4tJeMXhlu5NGJqdwmF2OumfOhs=
+		i22f4kJ6QS37xG+fPLfVZxqD69w=
 		</data>
 		<key>Headers/RCBlockedMessageInfo.h</key>
 		<data>
@@ -18,7 +18,11 @@
 		</data>
 		<key>Headers/RCChannelClient.h</key>
 		<data>
-		RoYPMztwmBiYDelFZK3Iyg7zsT4=
+		uxGKzq49o3iHCeOsLk8L7cLAiUw=
+		</data>
+		<key>Headers/RCChannelIdentifier.h</key>
+		<data>
+		/Kra6ZLYDyQtKrCcXEPjOSYcu10=
 		</data>
 		<key>Headers/RCClearConversationOption.h</key>
 		<data>
@@ -162,7 +166,7 @@
 		</data>
 		<key>Headers/RCMessagePushConfig.h</key>
 		<data>
-		73rWqzSLj8bKWGlpAZWgrgj0Cqo=
+		52ACGFbA3bm/fc5ziP22HNkYzfw=
 		</data>
 		<key>Headers/RCProfileNotificationMessage.h</key>
 		<data>
@@ -252,6 +256,10 @@
 		<data>
 		mVbrDPVt4Ko760X1Vi8TeMhoIAQ=
 		</data>
+		<key>Headers/RCUserGroupStatusDelegate.h</key>
+		<data>
+		NK2OSkgahxwFLpnCH3SjRwni/3o=
+		</data>
 		<key>Headers/RCUserInfo.h</key>
 		<data>
 		oNpVv8zN6vouZVIOD2NfrKaU0Pk=
@@ -282,7 +290,7 @@
 		</data>
 		<key>Headers/RongIMLibCore.h</key>
 		<data>
-		t9Wsu713ntO6iISKB7NH3sqIydw=
+		ipoCzbfpPV56/tUPz0UifiVKOZk=
 		</data>
 		<key>Headers/interf_dec.h</key>
 		<data>
@@ -318,11 +326,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			o4tJeMXhlu5NGJqdwmF2OumfOhs=
+			i22f4kJ6QS37xG+fPLfVZxqD69w=
 			</data>
 			<key>hash2</key>
 			<data>
-			4Qgq0JRcOp35GteGyGlSd8tXm7szB2IxIo/1DWhMgKE=
+			GVX0Y9lp9NAhkr6/vzSkmnbFaBMHuCAcl1+VdCWvzIw=
 			</data>
 		</dict>
 		<key>Headers/RCBlockedMessageInfo.h</key>
@@ -340,11 +348,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			RoYPMztwmBiYDelFZK3Iyg7zsT4=
+			uxGKzq49o3iHCeOsLk8L7cLAiUw=
 			</data>
 			<key>hash2</key>
 			<data>
-			/hT5UR4DvMP+olonE32ILC1Ju6Fl/GZRtzi2+9EWKs4=
+			tvcImFUvKppBh187ZV8EW3qnmg0lrQPBZRGtfZk4jWE=
+			</data>
+		</dict>
+		<key>Headers/RCChannelIdentifier.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			/Kra6ZLYDyQtKrCcXEPjOSYcu10=
+			</data>
+			<key>hash2</key>
+			<data>
+			OUw3Jc4nB2+tdmDld3FBWk67zifuaojz3tYZhRhPZSI=
 			</data>
 		</dict>
 		<key>Headers/RCClearConversationOption.h</key>
@@ -736,11 +755,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			73rWqzSLj8bKWGlpAZWgrgj0Cqo=
+			52ACGFbA3bm/fc5ziP22HNkYzfw=
 			</data>
 			<key>hash2</key>
 			<data>
-			nl3ZDQ+qmW/8Jk8Pj/WdeimLRu3aSX+elHhMRSbKKrY=
+			LLpc6ESj22xEcs8gfhlk0TTawnWcpFuK9xnTKV7a1Ag=
 			</data>
 		</dict>
 		<key>Headers/RCProfileNotificationMessage.h</key>
@@ -985,6 +1004,17 @@
 			r6apDUlgrtUcJwlopGxcaXCiSN+SCL9waoLCOYc4Dzw=
 			</data>
 		</dict>
+		<key>Headers/RCUserGroupStatusDelegate.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			NK2OSkgahxwFLpnCH3SjRwni/3o=
+			</data>
+			<key>hash2</key>
+			<data>
+			tzSyllGxKLR6Wk8zdV/dslAXz+x+Qy3AQ/DqcRywSCI=
+			</data>
+		</dict>
 		<key>Headers/RCUserInfo.h</key>
 		<dict>
 			<key>hash</key>
@@ -1066,11 +1096,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			t9Wsu713ntO6iISKB7NH3sqIydw=
+			ipoCzbfpPV56/tUPz0UifiVKOZk=
 			</data>
 			<key>hash2</key>
 			<data>
-			iI0Tp0FWVJCAO8qFmzxo7//+9FQpuMhhlfc7V6xXrcs=
+			u2KiL0ZYhJf7zFgmdirhsduSOg5tWp3YOEnWkND7PsE=
 			</data>
 		</dict>
 		<key>Headers/interf_dec.h</key>

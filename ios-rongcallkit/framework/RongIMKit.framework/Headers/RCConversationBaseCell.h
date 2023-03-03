@@ -8,11 +8,11 @@
 
 #import "RCConversationModel.h"
 #import <UIKit/UIKit.h>
-
+#import "RCBaseTableViewCell.h"
 /*!
  会话Cell基类
  */
-@interface RCConversationBaseCell : UITableViewCell
+@interface RCConversationBaseCell : RCBaseTableViewCell
 
 /*!
  会话Cell的数据模型

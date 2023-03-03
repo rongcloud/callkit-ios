@@ -60,6 +60,7 @@
 "VoIPCallRemoteAcceptSystemCall"="Remote accept system call";
 "VoIPCallAcceptByOtherClient"="Accepted by other client";
 "VoIPCallHangupByOtherClient"="Hanguped by other client";
+"VoIPCallDoSomethingByOtherClient"="Other devices have been answered";
 "VoIP_Rejected_By_Blacklist"="Has been blacklisted by receiver";
 "VoIPCallMediaServerClosed"="Audio and video services are turned off";
 "VoIPCallRemoteBusyLineAndShowAdvice"="The number you have called is busy, please try later";

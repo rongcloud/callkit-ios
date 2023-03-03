@@ -6,11 +6,11 @@
 //  Copyright © 2019 RongCloud. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "RCBaseButton.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface RCButton : UIButton
+@interface RCButton : RCBaseButton
 
 @end
 

@@ -6,11 +6,11 @@
 //  Copyright © 2018年 RongCloud. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "RCBaseImageView.h"
 
 @class RCGIFImage;
 
-@interface RCGIFImageView : UIImageView
+@interface RCGIFImageView : RCBaseImageView
 
 @property (nonatomic, strong) RCGIFImage *animatedImage;
 

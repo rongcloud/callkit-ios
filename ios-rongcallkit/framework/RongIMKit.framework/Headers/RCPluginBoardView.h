@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "RCBaseCollectionView.h"
 @protocol RCPluginBoardViewDelegate;
 
 /*!
@@ -23,7 +23,7 @@
 /*!
  展示所有的功能按钮
  */
-@property (nonatomic, strong) UICollectionView *contentView;
+@property (nonatomic, strong) RCBaseCollectionView *contentView;
 
 /*!
  扩展view ，此视图会覆盖加号区域其他视图，默认隐藏

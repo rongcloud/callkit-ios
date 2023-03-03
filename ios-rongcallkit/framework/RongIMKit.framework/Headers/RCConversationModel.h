@@ -7,8 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <RongIMLib/RongIMLib.h>
-#import <RongIMLibCore/RCStatusDefine.h>
+#import <RongIMLibCore/RongIMLibCore.h>
 
 /*!
  会话Cell数据模型的显示类型

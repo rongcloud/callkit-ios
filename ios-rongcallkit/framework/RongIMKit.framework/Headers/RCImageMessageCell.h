@@ -17,7 +17,7 @@
 /*!
  显示图片缩略图的View
  */
-@property (nonatomic, strong) UIImageView *pictureView;
+@property (nonatomic, strong) RCBaseImageView *pictureView;
 
 /*!
  显示发送进度的View

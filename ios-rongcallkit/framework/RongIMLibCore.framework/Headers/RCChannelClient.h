@@ -20,7 +20,7 @@
 #import "RCConversationIdentifier.h"
 #import "RCIMClientProtocol.h"
 #import "RCMessageDigestInfo.h"
-
+#import "RCUserGroupStatusDelegate.h"
 NS_ASSUME_NONNULL_BEGIN
 
 /*!
@@ -3120,6 +3120,21 @@ NS_ASSUME_NONNULL_BEGIN
                                      count:(NSInteger)count
                                     success:(nullable void (^)(NSArray<RCMessageDigestInfo*>* digests))successBlock
                                       error:(nullable void (^)(RCErrorCode status))errorBlock;
+
+#pragma mark - 用户组
+
+/*!
+ 设置用户组信息回调代理
+ 
+ @param delegate 代理
+
+ @remarks 用户组信息操作
+ 
+ @since 5.4.0
+
+ */
+
+- (void)setUserGroupStatusDelegate:(id<RCUserGroupStatusDelegate>)delegate;
 @end
 
 NS_ASSUME_NONNULL_END

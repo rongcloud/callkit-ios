@@ -22,6 +22,7 @@ FOUNDATION_EXPORT const unsigned char RongIMLibCoreVersionString[];
 #import <RongIMLibCore/RCCoreClient.h>
 #import <RongIMLibCore/RCChannelClient.h>
 #import <RongIMLibCore/RCConversationChannelProtocol.h>
+#import <RongIMLibCore/RCUserGroupStatusDelegate.h>
 #import <RongIMLibCore/RCStatusDefine.h>
 /// 会话相关类
 #import <RongIMLibCore/RCConversation.h>
@@ -54,6 +55,8 @@ FOUNDATION_EXPORT const unsigned char RongIMLibCoreVersionString[];
 #import <RongIMLibCore/RCAndroidConfig.h>
 #import <RongIMLibCore/RCTagInfo.h>
 #import <RongIMLibCore/RCConversationIdentifier.h>
+#import <RongIMLibCore/RCChannelIdentifier.h>
+
 #import <RongIMLibCore/RCConversationTagInfo.h>
 #import <RongIMLibCore/RCTagProtocol.h>
 #import <RongIMLibCore/RCBlockedMessageInfo.h>

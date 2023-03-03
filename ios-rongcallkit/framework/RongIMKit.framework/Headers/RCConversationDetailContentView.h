@@ -7,14 +7,13 @@
 //
 
 #import "RCConversationModel.h"
-#import <RongIMLib/RongIMLib.h>
 #import <UIKit/UIKit.h>
-
+#import "RCBaseImageView.h"
 @interface RCConversationDetailContentView : UIView
 
 @property (nonatomic, strong) UILabel *hightlineLabel;
 
-@property (nonatomic, strong) UIImageView *sentStatusView;
+@property (nonatomic, strong) RCBaseImageView *sentStatusView;
 
 @property (nonatomic, strong) UILabel *messageContentLabel;
 

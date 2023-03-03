@@ -7,10 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "RCiOSConfig.h"
-#import "RCAndroidConfig.h"
 
 NS_ASSUME_NONNULL_BEGIN
+
+@class RCiOSConfig;
+@class RCAndroidConfig;
 
 @interface RCMessagePushConfig : NSObject
 

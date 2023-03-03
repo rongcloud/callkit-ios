@@ -135,4 +135,13 @@
 #import "RongIMKitExtensionModule.h"
 #import "RCAlertView.h"
 #import "RCActionSheetView.h"
+
+//view 基类
+#import "RCBaseTableView.h"
+#import "RCBaseTableViewCell.h"
+#import "RCBaseCollectionView.h"
+#import "RCBaseCollectionViewCell.h"
+#import "RCBaseButton.h"
+#import "RCBaseImageView.h"
+#import "RCBaseNavigationController.h"
 #endif

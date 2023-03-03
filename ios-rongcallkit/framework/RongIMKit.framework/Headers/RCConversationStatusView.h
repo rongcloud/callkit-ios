@@ -8,12 +8,12 @@
 
 #import "RCConversationModel.h"
 #import <UIKit/UIKit.h>
-
+#import "RCBaseImageView.h"
 @interface RCConversationStatusView : UIView
 
-@property (nonatomic, strong) UIImageView *conversationNotificationStatusView;
+@property (nonatomic, strong) RCBaseImageView *conversationNotificationStatusView;
 
-@property (nonatomic, strong) UIImageView *messageReadStatusView;
+@property (nonatomic, strong) RCBaseImageView *messageReadStatusView;
 
 - (void)updateReadStatus:(RCConversationModel *)model;
 

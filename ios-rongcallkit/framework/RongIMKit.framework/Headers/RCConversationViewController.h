@@ -15,6 +15,10 @@
 #import "RCPluginBoardView.h"
 #import <UIKit/UIKit.h>
 #import "RCReferencingView.h"
+#import <RongCustomerService/RongCustomerService.h>
+#import "RCBaseCollectionView.h"
+#import "RCBaseButton.h"
+#import "RCBaseImageView.h"
 
 @class RCLocationMessage;
 @class RCCustomerServiceInfo,RCPublicServiceMenuItem;
@@ -114,7 +118,7 @@ typedef enum : NSUInteger {
 /*!
  会话页面的CollectionView
  */
-@property (nonatomic, strong) UICollectionView *conversationMessageCollectionView;
+@property (nonatomic, strong) RCBaseCollectionView *conversationMessageCollectionView;
 
 #pragma mark 导航栏返回按钮中的未读消息数提示
 /*!
@@ -167,7 +171,7 @@ typedef enum : NSUInteger {
 /*!
  右上角未读消息数提示的按钮
  */
-@property (nonatomic, strong) UIButton *unReadButton;
+@property (nonatomic, strong) RCBaseButton *unReadButton;
 
 /*!
  右上角@消息数提示的Label
@@ -175,12 +179,12 @@ typedef enum : NSUInteger {
 @property (nonatomic, strong) UILabel *unReadMentionedLabel;
 
 
-@property (nonatomic, strong) UIImageView *unreadRightBottomIcon;
+@property (nonatomic, strong) RCBaseImageView *unreadRightBottomIcon;
 
 /*!
  右上角@消息数提示的按钮
  */
-@property (nonatomic, strong) UIButton *unReadMentionedButton;
+@property (nonatomic, strong) RCBaseButton *unReadMentionedButton;
 
 #pragma mark 右下角的未读消息数提示
 /*!

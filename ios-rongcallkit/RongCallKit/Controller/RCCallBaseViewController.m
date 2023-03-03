@@ -1488,7 +1488,7 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
             self.tipsLabel.frame =
                 CGRectMake(RCCallHorizontalMargin,
                            self.view.frame.size.height - RCCallVerticalMargin - RCCallButtonLength * 3.5 -
-                               RCCallInsideMargin * 5 - RCCallLabelHeight,
+                               RCCallInsideMargin * 5 - RCCallLabelHeight - 20,
                            self.view.frame.size.width - RCCallHorizontalMargin * 2, RCCallLabelHeight);
         }
         self.tipsLabel.hidden = NO;

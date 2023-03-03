@@ -7,8 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <RongIMLib/RongIMLib.h>
-
+#import <RongIMLibCore/RongIMLibCore.h>
 @class RCDiscussion,RCPublicServiceProfile;
 /*!
  @const 收到消息的Notification

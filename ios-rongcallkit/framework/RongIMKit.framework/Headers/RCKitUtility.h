@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <RongIMLib/RongIMLib.h>
+#import <RongIMLibCore/RongIMLibCore.h>
 #import <UIKit/UIKit.h>
 #import "RCMessageModel.h"
 
@@ -207,6 +207,13 @@
  @return 未读消息数
  */
 + (int)getConversationUnreadCount:(RCConversationModel *)model;
+
+/*!
+ 会话模型未读的@消息数
+
+ @param model 会话数据模型
+ */
++ (void)getConversationUnreadMentionedCount:(RCConversationModel *)model result:(void(^)(int num))result;
 
 /*!
  会话模型是否包含未读的@消息

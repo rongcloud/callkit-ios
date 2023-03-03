@@ -67,16 +67,20 @@
         } else if (message.hangupReason == RCCallDisconnectReasonRemoteCancel) {
             status = RCCallKitLocalizedString(@"VoIPCallNoResponse");
         } else if (message.hangupReason == RCCallDisconnectReasonAcceptByOtherClient) {
-            status = RCCallKitLocalizedString(@"VoIPCallAcceptByOtherClient");
+            status = RCCallKitLocalizedString(@"VoIPCallDoSomethingByOtherClient");
         } else if (message.hangupReason == RCCallDisconnectReasonRemoteBusyLine) {
             status = RCCallKitLocalizedString(@"VoIPCallRemoteBusyLine");
-        } else {
+        } else if (message.hangupReason == RCCallDisconnectReasonHangupByOtherClient) {
+            status = RCCallKitLocalizedString(@"VoIPCallDoSomethingByOtherClient");
+        }else {
             status = RCCallKitLocalizedString(@"VoIPCallNoResponse");
         }
         // 多语言下英文和阿文 中间都有空格，中文没有空格。
         NSString *space = [self getSpaceWithLocalLanguage];
         
-        if (message.mediaType == RCCallMediaAudio) {
+        if (message.hangupReason == RCCallDisconnectReasonAcceptByOtherClient || message.hangupReason == RCCallDisconnectReasonHangupByOtherClient){
+            [self.messageLabel setText:[NSString stringWithFormat:@" %@ ",status] dataDetectorEnabled:NO];
+        } else if (message.mediaType == RCCallMediaAudio) {
             [self.messageLabel setText:[NSString stringWithFormat:@" %@%@%@ ", RCCallKitLocalizedString(@"VoIPAudioCall"),space
                                                                   ,status]
                    dataDetectorEnabled:NO];

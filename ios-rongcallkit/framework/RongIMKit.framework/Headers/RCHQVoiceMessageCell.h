@@ -16,12 +16,12 @@
 /*!
  语音播放的View
  */
-@property (nonatomic, strong) UIImageView *playVoiceView;
+@property (nonatomic, strong) RCBaseImageView *playVoiceView;
 
 /*!
  显示是否已播放的View
  */
-@property (nonatomic, strong) UIImageView *voiceUnreadTagView;
+@property (nonatomic, strong) RCBaseImageView *voiceUnreadTagView;
 
 /*!
  显示语音时长的Label
