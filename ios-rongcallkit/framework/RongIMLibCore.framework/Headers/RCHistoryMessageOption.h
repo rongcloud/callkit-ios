@@ -26,8 +26,7 @@ typedef NS_ENUM(NSUInteger, RCHistoryMessageOrder) {
 @property (nonatomic, assign) long long recordTime;
 
 /**
- 需要获取的消息数量， 0 < count <= 20
- 超级群可以传入 100
+ 需要获取的消息数量， 1 < count <= 100
  默认 0
  */
 @property (nonatomic, assign) NSInteger count;

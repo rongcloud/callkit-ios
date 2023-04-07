@@ -408,7 +408,7 @@ typedef NS_ENUM(NSInteger, RCErrorCode) {
     RC_CHANNEL_INVALID = 30001,
 
     /*!
-     当前连接不可用
+     当前网络连接不可用，SDK 会做好自动重连，开发者无须处理。
      */
     RC_NETWORK_UNAVAILABLE = 30002,
 

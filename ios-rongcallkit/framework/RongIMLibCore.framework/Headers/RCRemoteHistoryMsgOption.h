@@ -32,7 +32,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) long long recordTime;
 
 /**
- 需要获取的消息数量， 0 < count <= 20
+ 需要获取的消息数量， 1 < count <= 100
  默认 0
  */
 @property (nonatomic, assign) NSInteger count;

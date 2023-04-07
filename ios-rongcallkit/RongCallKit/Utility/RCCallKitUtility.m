@@ -104,7 +104,7 @@ UIColor *dynamic_color(NSInteger light_hex_value, NSInteger dark_hex_value) {
             hangupReasonString = RCCallKitLocalizedString(@"VoIPCallRemoteReject");
             break;
         case RCCallDisconnectReasonRemoteHangup:
-            hangupReasonString = RCCallKitLocalizedString(@"VoIPCallRemoteHangup");
+            hangupReasonString = RCCallKitLocalizedString(@"VoIPCallRemoteReject");
             break;
         case RCCallDisconnectReasonRemoteBusyLine:
             hangupReasonString = RCCallKitLocalizedString(@"VoIPCallRemoteBusyLine");
@@ -152,10 +152,10 @@ UIColor *dynamic_color(NSInteger light_hex_value, NSInteger dark_hex_value) {
             hangupReasonString = RCCallKitLocalizedString(@"VoIPCallRemoteAcceptSystemCall");
             break;
         case RCCallDisconnectReasonAcceptByOtherClient:
-            hangupReasonString = RCCallKitLocalizedString(@"VoIPCallAcceptByOtherClient");
+            hangupReasonString = RCCallKitLocalizedString(@"VoIPCallDoSomethingByOtherClient");
             break;
         case RCCallDisconnectReasonHangupByOtherClient:
-            hangupReasonString = RCCallKitLocalizedString(@"VoIPCallHangupByOtherClient");
+            hangupReasonString = RCCallKitLocalizedString(@"VoIPCallDoSomethingByOtherClient");
             break;
         case RCCallDisconnectReasonAddToBlackList:
             hangupReasonString = RCCallKitLocalizedString(@"VoIP_Rejected_By_Blacklist");

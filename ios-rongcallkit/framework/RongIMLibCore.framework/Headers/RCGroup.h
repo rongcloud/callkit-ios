@@ -33,6 +33,11 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (nonatomic, copy, nullable) NSString *portraitUri;
 
+/**
+ 群组信息附加字段
+ */
+@property (nonatomic, copy, nullable) NSString *extra;
+
 /*!
  群组信息的初始化方法
 

@@ -1,4 +1,4 @@
-/* 
+/*
   RongCallKit.strings
  
   Created by RongCloud on 2020/11/25.
@@ -9,11 +9,11 @@
 "VoIPVideoCall"="视频通话";
 "VoIPAudioCallExistedWarning"="正在进行语音通话，请稍后再试";
 "VoIPVideoCallExistedWarning"="正在进行视频通话，请稍后再试";
-"VoIPCallSelectMember"="选择成员";
-"VoIPAudioCallMaxNumSelectMember"="最多允许%d人同时语音通话";
-"VoIPVideoCallMaxNumSelectMember"="最多允许%d人同时视频通话";
-"VoIPAudioCallMaxNumInviteMember"="每次最多可同时邀请%d人\n加入语音通话";
-"VoIPCallEnd"="通话结束";
+"VoIPCallSelectMember"="添加成员";
+"VoIPAudioCallMaxNumSelectMember"="邀请人数超限，请稍后再试";
+"VoIPVideoCallMaxNumSelectMember"="邀请人数超限，请稍后再试";
+"VoIPCallMaxNumInviteMember"="您最多只能选择%d人";
+"VoIPCallEnd"="通话已结束";
 "VoIPAudioCallCamera"="摄像头";
 "VoIPVideoCallCloseCamera"="关闭摄像头";
 "VoIPVideoCallOpenCamera"="开启摄像头";
@@ -22,7 +22,7 @@
 "VoIPCallAccept"="接听";
 "VoIPCallMute"="静音";
 "VoIPCallSpeaker"="免提";
-"VoIPCallWaitingForRemoteAccept"="正在等待对方接受邀请...";
+"VoIPCallWaitingForRemoteAccept"="等待对方接受邀请...";
 "VoIPAudioCallIncoming"="邀请您进行语音通话...";
 "VoIPVideoCallIncoming"="邀请您进行视频通话...";
 "VoIPAudioCallIncomingWithoutUserName"="您有一个语音通话邀请";
@@ -36,7 +36,8 @@
 "VoIPCallBusyLine"="己方忙";
 "VoIPCallNoResponse"="未接听";
 "VoIPCallEngineUnsupport"="己方不支持当前引擎";
-"VoIPCallLocalNetworkError"="本地网络错误";
+//"VoIPCallLocalNetworkError"="本地网络错误";// 修改为异常挂断
+"VoIPCallLocalNetworkError"="异常挂断";
 "VoIPCallLocalResourceError"="己方获取媒体资源失败";
 "VoIPCallLocalPublishError"="己方发布资源失败";
 "VoIPCallLocalSubscribeError"="己方订阅资源失败";
@@ -50,7 +51,8 @@
 "VoIPCallRemoteBusyLine"="对方忙";
 "VoIPCallRemoteNoResponse"="对方未接听";
 "VoIPCallRemoteEngineUnsupport"="对方不支持当前引擎";
-"VoIPCallRemoteNetworkError"="对方网络错误";
+//"VoIPCallRemoteNetworkError"="对方网络错误"; // 修改为异常挂断
+"VoIPCallRemoteNetworkError"="异常挂断";
 "VoIPCallRemoteResourceError"="对方获取媒体资源失败";
 "VoIPCallRemotePublishError"="对方发布资源失败";
 "VoIPCallRemoteSubscribeError"="对方订阅资源失败";
@@ -58,19 +60,21 @@
 "VoIPCallRemoteInOtherCallError"="己方其他端已在通话中";
 "VoIPCallRemoteKickedByServer"="对方已被禁止通话";
 "VoIPCallRemoteAcceptSystemCall"="对方已接听系统来电";
-"VoIPCallAcceptByOtherClient"="己方其他端已接听";
-"VoIPCallHangupByOtherClient"="己方其他端已挂断";
-"VoIPCallDoSomethingByOtherClient"="其它设备已处理";
+"VoIPCallAcceptByOtherClient"="己方其他端已接听";//替换为其他设备已处理
+"VoIPCallHangupByOtherClient"="己方其他端已挂断";//替换为其他设备已处理
+"VoIPCallDoSomethingByOtherClient"="其他设备已处理";
 "VoIP_Rejected_By_Blacklist"="已被对方加入黑名单";
 "VoIPCallMediaServerClosed"="音视频服务已关闭";
-"VoIPCallRemoteBusyLineAndShowAdvice"="对方忙，请稍后再拨";
+"VoIPCallRemoteBusyLineAndShowAdvice"="对方忙，请稍后再试";
 "VoIPCallRemoteDidInvite"="%@ 加入群聊";
-"bottom_result_view_choosed_person_prefix"="已选择";
-"bottom_result_view_choosed_person_subfix"="人";
+"bottom_result_view_choosed_person_prefix"="已选择"; // 使用”已选择 %zi 人“
+"bottom_result_view_choosed_person_subfix"="人"; // 使用”已选择 %zi 人“
 "Cancel"="取消";
-"OK"="确定";
+"OK"="确认";
+"Confirm"="确定";
 "Connecting..."="连接中...";
-"voip_network_bad"="当前通话网络不佳";
+"voip_network_bad"="网络质量不佳";
+"voip_network_bad_laterTry"="网络质量不佳，请稍后再试";
 "AccessRightTitle"="无法访问";
 "speakerAccessRight"="您没有麦克风访问权限，请前往“设置-隐私-麦克风”选项中，允许访问您的手机麦克风!";
 "cameraAccessRight"="您没有相机访问权限，请前往“设置-隐私-相机”选项中，允许访问您的手机相机!";
@@ -78,9 +82,13 @@
 "LocalNotificationShow"="显示";
 //2020年11月25日 新增key
 "VoIPCall_search_placeholder"="搜索";
-"VoIPCall_invite_audio_push_Content"="%@邀请你进行语音聊天";
-"VoIPCall_invite_video_push_Content"="%@邀请你进行视频聊天";
+"VoIPCall_invite_audio_push_Content"="邀请您进行语音通话";
+"VoIPCall_invite_video_push_Content"="邀请您进行视频通话";
 "VoIPCall_hangup_PushContent"="[结束通话]";
 "VoIPCall_addMembers"="添加成员";
 "VoIPCall_whiteBoard"="白板";
 "VoIPCall_hand_raise"="举手发言";
+// 新增对齐多端
+"bottom_result_view_choosed_person" = "已选择 %zi 人";
+"otherUserSwitchedToVoiceCall" = "对方已切换到语音通话";
+"switchedToVoiceCall" = "已切换到语音通话";

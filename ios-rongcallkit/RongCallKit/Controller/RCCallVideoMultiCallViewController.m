@@ -438,7 +438,11 @@
 
 - (void)resetLayout:(BOOL)isMultiCall mediaType:(RCCallMediaType)mediaType callStatus:(RCCallStatus)sessionCallStatus {
     [super resetLayout:isMultiCall mediaType:mediaType callStatus:sessionCallStatus];
-
+    // 解决多人通话阿语模式下 UI 动画问题
+    NSString *currentLanguageCode = [[NSLocale preferredLanguages] objectAtIndex:0];
+    if ([currentLanguageCode isEqualToString:@"ar"]) {
+        [UICollectionView setAnimationsEnabled:NO];
+    }
     RCCallStatus callStatus = sessionCallStatus;
     if ((callStatus == RCCallIncoming || callStatus == RCCallRinging) &&
         [RCCXCall sharedInstance].acceptedFromCallKit) {
@@ -535,7 +539,6 @@
         self.userCollectionView.hidden = NO;
     } else if (callStatus == RCCallDialing || (callStatus == RCCallActive && !self.isFullScreen)) {
         CGFloat width = (UIScreen.mainScreen.bounds.size.width - 40.0 - 20.0) / 4.5;
-
         self.userCollectionView.frame =
             CGRectMake(0,
                        self.view.frame.size.height - (RCCallButtonBottomMargin * 2 - 2.5 + RCCallButtonLength) -

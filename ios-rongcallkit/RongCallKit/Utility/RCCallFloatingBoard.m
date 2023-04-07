@@ -18,10 +18,10 @@
 @property (nonatomic, strong) NSTimer *activeTimer;
 @property (nonatomic, copy) void (^touchedBlock)(RCCallSession *callSession);
 @property (nonatomic, strong) CTCallCenter *callCenter;
-
 @end
 
 static RCCallFloatingBoard *staticBoard = nil;
+static RCCallBaseViewController *_activeViewController = nil;
 
 static NSString *RCVoipFloatingBoardPosX = @"RCVoipFloatingBoardPosX";
 static NSString *RCVoipFloatingBoardPosY = @"RCVoipFloatingBoardPosY";
@@ -342,15 +342,23 @@ static NSString *RCVoipFloatingBoardPosY = @"RCVoipFloatingBoardPosY";
 - (void)layoutTextUnderImageButton:(UIButton *)button {
     [button.titleLabel setFont:[UIFont systemFontOfSize:15]];
     [button setTitleColor:RongVoIPUIColorFromRGB(0x0195ff) forState:UIControlStateNormal];
+    if ([RCKitUtility isRTL]) {
+        // 当前语言环境为阿拉伯语
+        button.titleEdgeInsets = UIEdgeInsetsMake(0, 0,
+                                                  -button.imageView.frame.size.height - RCCallInsideMargin / 2, -button.imageView.frame.size.width);
+        button.imageEdgeInsets = UIEdgeInsetsMake(-button.titleLabel.intrinsicContentSize.height - RCCallInsideMargin / 2,
+                                                  -button.titleLabel.intrinsicContentSize.width, 0, 0);
+    }else {
+        button.titleEdgeInsets = UIEdgeInsetsMake(0, -button.imageView.frame.size.width,
+                                                  -button.imageView.frame.size.height - RCCallInsideMargin / 2, 0);
+        // button.imageEdgeInsets =
+        // UIEdgeInsetsMake(-button.titleLabel.frame.size.height-offset/2, 0, 0,
+        // -button.titleLabel.frame.size.width);
+        // 由于iOS8中titleLabel的size为0，用上面这样设置有问题，修改一下即可
+        button.imageEdgeInsets = UIEdgeInsetsMake(-button.titleLabel.intrinsicContentSize.height - RCCallInsideMargin / 2,
+                                                  0, 0, -button.titleLabel.intrinsicContentSize.width);
+    }
 
-    button.titleEdgeInsets = UIEdgeInsetsMake(0, -button.imageView.frame.size.width,
-                                              -button.imageView.frame.size.height - RCCallInsideMargin / 2, 0);
-    // button.imageEdgeInsets =
-    // UIEdgeInsetsMake(-button.titleLabel.frame.size.height-offset/2, 0, 0,
-    // -button.titleLabel.frame.size.width);
-    // 由于iOS8中titleLabel的size为0，用上面这样设置有问题，修改一下即可
-    button.imageEdgeInsets = UIEdgeInsetsMake(-button.titleLabel.intrinsicContentSize.height - RCCallInsideMargin / 2,
-                                              0, 0, -button.titleLabel.intrinsicContentSize.width);
 }
 
 - (BOOL)isVideoViewEnabledSession {
@@ -359,6 +367,14 @@ static NSString *RCVoipFloatingBoardPosY = @"RCVoipFloatingBoardPosY";
     } else {
         return NO;
     }
+}
+
++ (RCCallBaseViewController *)activeViewController {
+    return _activeViewController;
+}
+
++ (void)setActiveViewController:(RCCallBaseViewController *)activeViewController {
+    _activeViewController = activeViewController;
 }
 
 /*!

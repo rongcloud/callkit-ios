@@ -106,10 +106,7 @@ typedef void (^CompleteBlock)(NSArray *addUserIdList);
                 [weakVC done];
             }];
 
-    _toolBar.numberLabel.text =
-        [NSString stringWithFormat:@"%@ %zi %@", RCCallKitLocalizedString(@"bottom_result_view_choosed_person_prefix"),
-         self.existUserIdList.count,
-                                   RCCallKitLocalizedString(@"bottom_result_view_choosed_person_subfix")];
+    _toolBar.numberLabel.text = [NSString stringWithFormat:RCCallKitLocalizedString(@"bottom_result_view_choosed_person"), self.existUserIdList.count];
     _toolBar.numberLabel.textColor = [UIColor colorWithRed:168 / 255.0
                                                      green:168 / 255.0
                                                       blue:168 / 255.0
@@ -288,13 +285,13 @@ typedef void (^CompleteBlock)(NSArray *addUserIdList);
 
     if ((self.selectUserIds.count + self.existUserIdList.count > [RCCall sharedRCCall].maxMultiAudioCallUserNumber) &&
         self.mediaType == RCCallMediaAudio) {
-        [self loadErrorAlert:[NSString stringWithFormat:RCCallKitLocalizedString(@"VoIPAudioCallMaxNumSelectMember"),
+        [self loadErrorAlert:[NSString stringWithFormat:RCCallKitLocalizedString(@"VoIPCallMaxNumInviteMember"),
                                                         [RCCall sharedRCCall].maxMultiAudioCallUserNumber]];
         [self.selectUserIds removeObject:userId];
     } else if ((self.selectUserIds.count + self.existUserIdList.count >
                 [RCCall sharedRCCall].maxMultiVideoCallUserNumber) &&
                self.mediaType == RCCallMediaVideo) {
-        [self loadErrorAlert:[NSString stringWithFormat:RCCallKitLocalizedString(@"VoIPVideoCallMaxNumSelectMember"),
+        [self loadErrorAlert:[NSString stringWithFormat:RCCallKitLocalizedString(@"VoIPCallMaxNumInviteMember"),
                                                         [RCCall sharedRCCall].maxMultiVideoCallUserNumber]];
         [self.selectUserIds removeObject:userId];
     }

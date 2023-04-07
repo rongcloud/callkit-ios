@@ -76,7 +76,7 @@ FOUNDATION_EXPORT NSString *const RCLibDispatchReadReceiptNotification;
 
  @remarks 连接
  */
-- (void)initWithAppKey:(NSString *)appKey;
+- (void)initWithAppKey:(NSString *)appKey __deprecated_msg("Use [RCCoreClient initWithAppKey:option:] instead");
 
 /*!
 设置 deviceToken（已兼容 iOS 13），用于远程推送
@@ -150,7 +150,7 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
 
  @remarks 功能设置
  */
-- (BOOL)setServerInfo:(NSString *)naviServer fileServer:(nullable NSString *)fileServer;
+- (BOOL)setServerInfo:(NSString *)naviServer fileServer:(nullable NSString *)fileServer __deprecated_msg("Use [RCCoreClient initWithAppKey:option:] instead");
 
 /**
  设置统计服务器的信息
@@ -170,7 +170,7 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
 
  @remarks 功能设置
  */
-- (BOOL)setStatisticServer:(NSString *)statisticServer;
+- (BOOL)setStatisticServer:(NSString *)statisticServer __deprecated_msg("Use [RCCoreClient initWithAppKey:option:] instead");
 
 #pragma mark - 连接与断开服务器
 
@@ -1288,15 +1288,13 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  @param conversationType    会话类型
  @param targetId            会话 ID
  @param recordTime          截止的消息发送时间戳，毫秒
- @param count               需要获取的消息数量， 0 < count <= 20
+ @param count               需要获取的消息数量， 1 < count <= 100
  @param successBlock        获取成功的回调 [messages:获取到的历史消息数组, isRemaining 是否还有剩余消息 YES
  表示还有剩余，NO 表示无剩余]
  @param errorBlock          获取失败的回调 [status:获取失败的错误码]
 
  @discussion
  此方法从服务器端获取之前的历史消息，但是必须先开通历史消息云存储功能。
- 例如，本地会话中有10条消息，您想拉取更多保存在服务器的消息的话，recordTime 应传入最早的消息的发送时间戳，count 传入
- 2~20 之间的数值。
 
  @discussion 本地数据库可以查到的消息，该接口不会再返回，所以建议先用 getHistoryMessages
  相关接口取本地历史消息，本地消息取完之后再通过该接口获取远端历史消息
@@ -1322,8 +1320,6 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
 
  @discussion
  此方法从服务器端获取之前的历史消息，但是必须先开通历史消息云存储功能。
- 例如，本地会话中有 10 条消息，您想拉取更多保存在服务器的消息的话，recordTime 应传入最早的消息的发送时间戳，count 传入
- 2~20 之间的数值。
 
  @remarks 消息操作
  */

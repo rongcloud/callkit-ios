@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <RongCallLib/RongCallLib.h>
 #import <RongIMLib/RongIMLib.h>
+#import "RCCallBaseViewController.h"
 
 /*!
  最小化显示的悬浮窗
@@ -36,6 +37,11 @@
 @property (nonatomic, strong) RCCallSession *callSession;
 
 /*!
+ 当前的通话的活动窗口
+ */
+@property (nonatomic, strong, class) RCCallBaseViewController *activeViewController;
+
+/*!
  开启悬浮窗
 
  @param callSession  通话实体
@@ -48,5 +54,4 @@
  关闭当前悬浮窗
  */
 + (void)stopCallFloatingBoard;
-
 @end

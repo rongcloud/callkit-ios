@@ -248,7 +248,7 @@ NS_ASSUME_NONNULL_BEGIN
                                to:(NSArray *)userIdList
                         mediaType:(RCCallMediaType)type
                   sessionDelegate:(id<RCCallSessionDelegate>)delegate
-                            extra:(NSString *)extra;
+                            extra:(nullable NSString *)extra;
 
 /*!
  发起一个通话

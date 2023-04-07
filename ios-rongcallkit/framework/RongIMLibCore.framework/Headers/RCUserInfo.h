@@ -51,7 +51,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param portrait    用户头像的 URL
  @return            用户信息对象
  */
-- (instancetype)initWithUserId:(NSString *)userId name:(NSString *)username portrait:(nullable NSString *)portrait;
+- (instancetype)initWithUserId:(NSString *)userId name:(nullable NSString *)username portrait:(nullable NSString *)portrait;
 
 @end
 

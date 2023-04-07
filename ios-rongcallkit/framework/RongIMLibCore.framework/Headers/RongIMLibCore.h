@@ -21,6 +21,8 @@ FOUNDATION_EXPORT const unsigned char RongIMLibCoreVersionString[];
 /// IMLib核心类
 #import <RongIMLibCore/RCCoreClient.h>
 #import <RongIMLibCore/RCChannelClient.h>
+#import <RongIMLibCore/RCCoreClient+Deprecated.h>
+#import <RongIMLibCore/RCChannelClient+Deprecated.h>
 #import <RongIMLibCore/RCConversationChannelProtocol.h>
 #import <RongIMLibCore/RCUserGroupStatusDelegate.h>
 #import <RongIMLibCore/RCStatusDefine.h>
@@ -78,6 +80,7 @@ FOUNDATION_EXPORT const unsigned char RongIMLibCoreVersionString[];
 #import <RongIMLibCore/RCWatchKitStatusDelegate.h>
 #import <RongIMLibCore/RCRemoteHistoryMsgOption.h>
 #import <RongIMLibCore/RCHistoryMessageOption.h>
+#import <RongIMLibCore/RCInitOption.h>
 
 #import <RongIMLibCore/RCFileMessage.h>
 #import <RongIMLibCore/RCFileUtility.h>
