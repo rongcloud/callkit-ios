@@ -173,6 +173,16 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)decodeMentionedInfo:(NSDictionary *)dictionary;
 
+/// 将基类信息编码到字典中
+/// @return 存有基类信息的 Dictionary
+/// @since 5.4.0
+- (NSMutableDictionary *)encodeBaseData;
+
+/// 将消息内容中携带的基类信息解码
+/// @return 存有基类信息的 Dictionary
+/// @since 5.4.0
+- (void)decodeBaseData:(NSDictionary *)dictionary;
+
 /*!
  消息内容的原始json数据
 
@@ -180,6 +190,22 @@ NS_ASSUME_NONNULL_BEGIN
  SDK内置的消息，如果消息解码失败，默认会将消息的内容存放到此字段；如果编码和解码正常，此字段会置为nil。
  */
 @property (nonatomic, strong, nullable, setter=setRawJSONData:) NSData *rawJSONData;
+
+
+#pragma mark - json tools
+
+/// 消息基类提供的安全校验方法 JSON->Map
+/// @param jsonData json 二进制数据
+/// @return 非字典，返回 nil
+/// @since 5.4.0
++ (nullable NSDictionary *)dictionaryFromJsonData:(NSData *)jsonData;
+
+/// 消息基类提供的安全校验方法 JSON->Array
+/// @param jsonData json 二进制数据
+/// @return 非数组，返回 nil
+/// @since 5.4.0
++ (nullable NSArray *)arrayFromJsonData:(NSData *)jsonData;
+
 
 @end
 

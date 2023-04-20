@@ -99,28 +99,50 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
     if (self) {
         [self willChangeValueForKey:@"callSession"];
         
-        NSString *invitePushContent = (mediaType == RCCallMediaAudio ? RCCallKitLocalizedString(@"VoIPCall_invite_audio_push_Content"): RCCallKitLocalizedString(@"VoIPCall_invite_video_push_Content"));
-        
         NSString *hangupPushContent = RCCallKitLocalizedString(@"VoIPCall_hangup_PushContent");
-
+        
         RCMessagePushConfig *invitePushConfig = [self getPushConfig];
         RCMessagePushConfig *hangupPushConfig = [self getPushConfig];
         
+        RCUserInfo *userInfo =
+            [[RCUserInfoCacheManager sharedManager] getUserInfo: [RCIMClient sharedRCIMClient].currentUserInfo.userId];
+        NSString *invitePushContent;
         if (conversationType == ConversationType_PRIVATE) {
-            if (!invitePushConfig.pushTitle.length) {
-                invitePushConfig.pushTitle = [RCIMClient sharedRCIMClient].currentUserInfo.name;
+            if (userInfo) {
+                invitePushContent =
+                (mediaType == RCCallMediaAudio ? RCCallKitLocalizedString(@"VoIPCall_invite_audio_push_Content"): RCCallKitLocalizedString(@"VoIPCall_invite_video_push_Content"));
+                if (!invitePushConfig.pushTitle.length) {
+                    invitePushConfig.pushTitle = [RCIMClient sharedRCIMClient].currentUserInfo.name;
+                }
+                if (!hangupPushConfig.pushTitle.length) {
+                    hangupPushConfig.pushTitle = [RCIMClient sharedRCIMClient].currentUserInfo.name;
+                }
+            }
+            else {
+                invitePushContent = mediaType == RCCallMediaVideo ?
+                    RCCallKitLocalizedString(@"VoIPVideoCallIncomingWithoutUserName") :
+                    RCCallKitLocalizedString(@"VoIPAudioCallIncomingWithoutUserName");
             }
             if (!invitePushConfig.pushContent.length) {
                 invitePushConfig.pushContent = invitePushContent;
             }
-            if (!hangupPushConfig.pushTitle.length) {
-                hangupPushConfig.pushTitle = [RCIMClient sharedRCIMClient].currentUserInfo.name;
-            }
             if (!hangupPushConfig.pushContent.length) {
                 hangupPushConfig.pushContent = hangupPushContent;
             }
-        } else {
+        }
+        else {
             RCGroup *groupInfo = [[RCUserInfoCacheManager sharedManager] getGroupInfo:targetId];
+            if (userInfo) {
+                invitePushContent =
+                    [NSString stringWithFormat:@"%@ %@",[RCIMClient sharedRCIMClient].currentUserInfo.name, mediaType == RCCallMediaAudio ?
+                                                   RCCallKitLocalizedString(@"VoIPCall_invite_audio_push_Content") :
+                                                   RCCallKitLocalizedString(@"VoIPCall_invite_video_push_Content")];
+            }
+            else {
+                invitePushContent = mediaType == RCCallMediaVideo ?
+                    RCCallKitLocalizedString(@"VoIPVideoCallIncomingWithoutUserName") :
+                    RCCallKitLocalizedString(@"VoIPAudioCallIncomingWithoutUserName");
+            }
             if (!invitePushConfig.pushTitle.length) {
                 invitePushConfig.pushTitle = groupInfo.groupName;
             }

@@ -10,7 +10,7 @@
 		</data>
 		<key>Headers/RCAndroidConfig.h</key>
 		<data>
-		i22f4kJ6QS37xG+fPLfVZxqD69w=
+		DDq3b9qT/R3pWJQRHcPHDNnX/l8=
 		</data>
 		<key>Headers/RCBlockedMessageInfo.h</key>
 		<data>
@@ -74,7 +74,7 @@
 		</data>
 		<key>Headers/RCCoreClient.h</key>
 		<data>
-		T+OdfxQ6Sxi3wPwJi9XcP1E2N40=
+		sau3BQLYf5nyaV9JBiw0HJZfqMA=
 		</data>
 		<key>Headers/RCDownloadItem.h</key>
 		<data>
@@ -150,7 +150,7 @@
 		</data>
 		<key>Headers/RCInitOption.h</key>
 		<data>
-		7HyKmefPLFICoUZJFa/Ormy7sFU=
+		QROSEEVYCrXrn65XDwOSS14DVao=
 		</data>
 		<key>Headers/RCMediaMessageContent.h</key>
 		<data>
@@ -170,7 +170,7 @@
 		</data>
 		<key>Headers/RCMessageContent.h</key>
 		<data>
-		y8GpRC1GY5WpyYoTa4xkPtdoW1Y=
+		+Ez6zp5aZJvrvx2pEPBJ4TlsQ08=
 		</data>
 		<key>Headers/RCMessageDigestInfo.h</key>
 		<data>
@@ -314,7 +314,7 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		hJxACAAUIDKr5dND5moWdjLaFfA=
+		TMZLkg7JA8XWUhR364rmHe8VynU=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -338,11 +338,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			i22f4kJ6QS37xG+fPLfVZxqD69w=
+			DDq3b9qT/R3pWJQRHcPHDNnX/l8=
 			</data>
 			<key>hash2</key>
 			<data>
-			GVX0Y9lp9NAhkr6/vzSkmnbFaBMHuCAcl1+VdCWvzIw=
+			0GzYN0TCT5eCmqAQ3Wm8kBUeCCuAdjyl7unZaII1oTA=
 			</data>
 		</dict>
 		<key>Headers/RCBlockedMessageInfo.h</key>
@@ -514,11 +514,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			T+OdfxQ6Sxi3wPwJi9XcP1E2N40=
+			sau3BQLYf5nyaV9JBiw0HJZfqMA=
 			</data>
 			<key>hash2</key>
 			<data>
-			J63swYIiKSJcM6b33/Gyo1CvvsKv0nE0IHx6JlRrjhg=
+			Oimoc673i+6dmZo1aguHp/VASPjYk7jGr2XAIDcr9OQ=
 			</data>
 		</dict>
 		<key>Headers/RCDownloadItem.h</key>
@@ -723,11 +723,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			7HyKmefPLFICoUZJFa/Ormy7sFU=
+			QROSEEVYCrXrn65XDwOSS14DVao=
 			</data>
 			<key>hash2</key>
 			<data>
-			CZuI8FRIKwXWI+4y0GS0TEGJUKJcL92hZ8HbDnLbuvI=
+			Yev5bosrniB2BCdes3XRauozCuqCGsZpbgybGswVBpg=
 			</data>
 		</dict>
 		<key>Headers/RCMediaMessageContent.h</key>
@@ -778,11 +778,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			y8GpRC1GY5WpyYoTa4xkPtdoW1Y=
+			+Ez6zp5aZJvrvx2pEPBJ4TlsQ08=
 			</data>
 			<key>hash2</key>
 			<data>
-			zOIGtqvStqaBEbI/dFRAqJ3xKod+jOCCav3vGz3YWME=
+			mJT9MGXrtfEQCQhkz61uQepD/8uFow4WGDt+rAZYF58=
 			</data>
 		</dict>
 		<key>Headers/RCMessageDigestInfo.h</key>

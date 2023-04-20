@@ -240,6 +240,11 @@
 - (void)endVoiceRecord;
 
 /*!
+ 结束讯飞语音录入
+ */
+- (void)endVoiceTransfer;
+
+/*!
  设置输入框的输入状态
 
  @param status          输入框状态
@@ -386,6 +391,13 @@
  @param inputTextView 文本输入框
  */
 - (void)inputTextViewDidChange:(UITextView *)inputTextView;
+
+/*!
+ 输入框中内容已经发生变化的回调-讯飞
+
+ @param inputTextView 文本输入框
+ */
+- (void)inputTextViewDidChangeOnEndVoiceTransfer:(UITextView *)inputTextView;
 
 /*!
  公众服务菜单的点击回调

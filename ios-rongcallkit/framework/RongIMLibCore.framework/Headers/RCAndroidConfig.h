@@ -99,6 +99,21 @@ FOUNDATION_EXPORT RCImportanceHw const RCImportanceHwLow;
  */
 @property (nonatomic, copy, nullable) NSString *typeVivo;
 
+/*!
+ Vivo 推送消息分类
+ 
+ 系统消息分类
+ 即时消息[IM],账号与资产[ACCOUNT],日程待办[TODO],设备信息[DEVICE_REMINDER],订单与物流[ORDER],订阅提醒[SUBSCRIPTION]
+ 运营消息分类
+ 新闻[NEWS],内容推荐[CONTENT],运营活动[MARKETING],社交动态[SOCIAL]
+ 更多信息请参考 Vivo 消息分类标准文档: https://dev.vivo.com.cn/documentCenter/doc/359
+ 
+ @discussion 默认值为 null，如果为 null，则以服务配置为准
+ 
+ @since 5.4.2
+ */
+@property (nonatomic, copy, nullable) NSString *categoryVivo;
+
 #pragma mark - FCM
 /*!
  FCM 通知的频道 ID

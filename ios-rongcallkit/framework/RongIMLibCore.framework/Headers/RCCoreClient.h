@@ -184,9 +184,8 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  @discussion
  naviServer 必须为有效的服务器地址，fileServer 如果想使用默认的，可以传 nil。
  naviServer 和 fileServer 的格式说明：
- 1、如果使用 https，则设置为 https://cn.xxx.com:port 或 https://cn.xxx.com 格式，其中域名部分也可以是
- IP，如果不指定端口，将默认使用 443 端口。
- 2、如果使用 http，则设置为 cn.xxx.com:port 或 cn.xxx.com 格式，其中域名部分也可以是 IP，如果不指定端口，将默认使用 80
+ 1、如果使用 https，则设置为 https://cn.xxx.com:port 或 https://cn.xxx.com 或  cn.xxx.com【SDK 默认使用 https】，其中域名部分也可以是 IP，如果不指定端口，将默认使用 443 端口。
+ 2、如果使用 http，则设置为 http://cn.xxx.com:port 或 http://cn.xxx.com 格式，其中域名部分也可以是 IP，如果不指定端口，将默认使用 80
  端口。（iOS 默认只能使⽤ HTTPS 协议。如果您使⽤ http 协议，请参考 iOS 开发
  ⽂档中的 ATS 设置说明。链接如下：https://support.rongcloud.cn/ks/OTQ1 ）
  @discussion 本接口和 initWithAppKey:option: 中 RCInitOption 传入的 naviServer 和 fileServer 效果一致，任一种设置都生效
@@ -206,9 +205,8 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  @discussion
  statisticServer 必须为有效的服务器地址，否则会造成推送等业务不能正常使用。
  格式说明：
- 1、如果使用 https，则设置为 https://cn.xxx.com:port 或 https://cn.xxx.com 格式，其中域名部分也可以是
- IP，如果不指定端口，将默认使用 443 端口。
- 2、如果使用 http，则设置为 cn.xxx.com:port 或 cn.xxx.com 格式，其中域名部分也可以是 IP，如果不指定端口，将默认使用 80
+ 1、如果使用 https，则设置为 https://cn.xxx.com:port 或 https://cn.xxx.com 或  cn.xxx.com【SDK 默认使用 https】，其中域名部分也可以是 IP，如果不指定端口，将默认使用 443 端口。
+ 2、如果使用 http，则设置为 http://cn.xxx.com:port 或 http://cn.xxx.com 格式，其中域名部分也可以是 IP，如果不指定端口，将默认使用 80
  端口。（iOS 默认只能使⽤ HTTPS 协议。如果您使⽤ http 协议，请参考 iOS 开发
  ⽂档中的 ATS 设置说明。链接如下：https://support.rongcloud.cn/ks/OTQ1 ）
  @discussion 本接口和 initWithAppKey:option: 中 RCInitOption 传入的 statisticServer 效果一致，任一种设置都生效
