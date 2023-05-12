@@ -8,6 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "RCThemeDefine.h"
+typedef NS_ENUM(NSInteger, RCKitInterfaceLayoutDirection) {
+    RCKitInterfaceLayoutDirectionUnspecified,
+    RCKitInterfaceLayoutDirectionLeftToRight,
+    RCKitInterfaceLayoutDirectionRightToLeft,
+};
 
 @interface RCKitUIConf : NSObject
 #pragma mark 头像显示
@@ -79,6 +84,13 @@
 @discussion 开启该属性后， 如果想控制 App 不随系统暗黑模式转变，请参考 https://support.rongcloud.cn/ks/MTE0Mg==
 */
 @property (nonatomic, assign) BOOL enableDarkMode;
+
+/*!
+ SDK UI 布局方向
+
+ @discussion 默认值为 RCKitInterfaceLayoutDirectionUnspecified
+ */
+@property (nonatomic, assign) RCKitInterfaceLayoutDirection layoutDirection;
 
 /*!
  文件消息图标配置，key 是文件后缀（例如："png"、"pdf"），value 是本地文件路径

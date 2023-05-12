@@ -7,11 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "RCBaseView.h"
 /*!
  消息内容的View
  */
-@interface RCContentView : UIView
+@interface RCContentView : RCBaseView
 
 @property (nonatomic, assign) CGSize contentSize;
 

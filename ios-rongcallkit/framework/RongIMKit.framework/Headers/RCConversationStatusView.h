@@ -9,7 +9,8 @@
 #import "RCConversationModel.h"
 #import <UIKit/UIKit.h>
 #import "RCBaseImageView.h"
-@interface RCConversationStatusView : UIView
+#import "RCBaseView.h"
+@interface RCConversationStatusView : RCBaseView
 
 @property (nonatomic, strong) RCBaseImageView *conversationNotificationStatusView;
 

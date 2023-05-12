@@ -337,6 +337,7 @@ static NSString *RCVoipFloatingBoardPosY = @"RCVoipFloatingBoardPosY";
     _videoView = nil;
     _window = nil;
     staticBoard = nil;
+    _activeViewController = nil;
 }
 
 - (void)layoutTextUnderImageButton:(UIButton *)button {

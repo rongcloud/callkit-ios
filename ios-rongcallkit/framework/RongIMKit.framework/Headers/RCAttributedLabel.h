@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "RCBaseLabel.h"
 /**
  *  RCAttributedDataSource
  */
@@ -48,7 +48,7 @@
 /**
  *  RCAttributedLabel
  */
-@interface RCAttributedLabel : UILabel <RCAttributedDataSource, UIGestureRecognizerDelegate>
+@interface RCAttributedLabel : RCBaseLabel <RCAttributedDataSource, UIGestureRecognizerDelegate>
 /**
  * 可以通过设置attributeDataSource或者attributeDictionary、highlightedAttributeDictionary来自定义不同文本的字体颜色
  */

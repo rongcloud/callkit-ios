@@ -791,7 +791,7 @@ FOUNDATION_EXPORT NSString *const RCKitDispatchConversationStatusChangeNotificat
  自定义类型的消息，需要您自己设置pushContent和pushData来定义推送内容，否则将不会进行远程推送。
  
  @warning 如果您使用IMKit，使用此方法发送媒体文件消息SDK会自动更新UI；
- 如果您使用IMLib，请使用RCIMClient中的同名方法发送媒体文件消息，不会自动更新UI。
+ 如果您使用IMLib，请使用 RCCoreClient 中的同名方法发送媒体文件消息，不会自动更新UI。
  
  @since 5.3.5
  */

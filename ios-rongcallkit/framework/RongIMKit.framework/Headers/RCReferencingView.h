@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "RCMessageModel.h"
 #import "RCBaseButton.h"
+#import "RCBaseView.h"
+#import "RCBaseLabel.h"
 @class RCReferencingView;
 
 @protocol RCReferencingViewDelegate <NSObject>
@@ -19,7 +21,7 @@
 
 @end
 
-@interface RCReferencingView : UIView
+@interface RCReferencingView : RCBaseView
 
 /*!
  关闭引用 button
@@ -29,12 +31,12 @@
 /*!
  被引用消息发送者名称
 */
-@property (nonatomic, strong) UILabel *nameLabel;
+@property (nonatomic, strong) RCBaseLabel *nameLabel;
 
 /*!
  被引用消息内容文本 label
  */
-@property (nonatomic, strong) UILabel *textLabel;
+@property (nonatomic, strong) RCBaseLabel *textLabel;
 
 /*!
  被引用消息体

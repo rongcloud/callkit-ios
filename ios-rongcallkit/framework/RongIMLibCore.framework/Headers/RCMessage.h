@@ -133,14 +133,14 @@ NS_ASSUME_NONNULL_BEGIN
  消息是否可以包含扩展信息
  
  @discussion 该属性在消息发送时确定，发送之后不能再做修改
- @discussion 扩展信息只支持单聊和群组，其它会话类型不能设置扩展信息
+ @discussion 扩展信息只支持单聊、群聊、超级群，其它会话类型不能设置扩展信息
 */
 @property (nonatomic, assign) BOOL canIncludeExpansion;
 
 /*!
  消息扩展信息列表
  
- @discussion 扩展信息只支持单聊和群组，其它会话类型不能设置扩展信息
+ @discussion 扩展信息只支持单聊、群聊、超级群，其它会话类型不能设置扩展信息
  @discussion 默认消息扩展字典 key 长度不超过 32 ，value 长度不超过 4096 ，单次设置扩展数量最大为 20，消息的扩展总数不能超过 300
 */
 @property (nonatomic, strong, nullable) NSDictionary<NSString *, NSString *> *expansionDic;

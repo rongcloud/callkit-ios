@@ -683,7 +683,11 @@ typedef NS_ENUM(NSInteger, RCErrorCode) {
      超级群频道不存在
      */
     RC_ULTRA_GROUP_CHANNEL_NOT_EXIST = 34024,
-    
+    /*!
+     扩展消息失败，因为消息中的会话类别与入参的会话类别不匹配
+     */
+    RC_MESSAGE_EXPAND_CONVERSATION_TYPE_NOT_MATCH = 34025,
+
     /*!
      超级群扩展消息，但是原始消息不存在
      */

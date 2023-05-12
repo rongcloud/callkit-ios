@@ -178,8 +178,8 @@ NS_ASSUME_NONNULL_BEGIN
  @param content             消息的内容
  @param pushContent         接收方离线时需要显示的远程推送内容
  @param pushData            接收方离线时需要在远程推送中携带的非显示数据
- @param uploadPrepareBlock  媒体文件上传进度更新的 IMKit 监听
- [uploadListener:当前的发送进度监听，SDK 通过此监听更新 IMKit UI]
+ @param uploadPrepareBlock  媒体文件上传进度更新的监听
+ [uploadListener:当前的发送进度监听]
  @param progressBlock       消息发送进度更新的回调 [progress:当前的发送进度, 0
  <= progress <= 100, messageId:消息的ID]
  @param successBlock        消息发送成功的回调 [messageId:消息的 ID]
@@ -188,7 +188,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param cancelBlock         用户取消了消息发送的回调 [messageId:消息的 ID]
  @return                    发送的消息实体
  
- @discussion 此方法仅用于 IMKit。
+ @discussion
  如果您需要上传图片到自己的服务器并使用 IMLibCore，构建一个 RCImageMessage 对象，
  并将 RCImageMessage 中的 imageUrl 字段设置为上传成功的 URL 地址，然后使用 RCCoreClient 的
  sendMessage:targetId:content:pushContent:pushData:success:error:方法
@@ -253,8 +253,8 @@ NS_ASSUME_NONNULL_BEGIN
  @param message             将要发送的消息实体（需要保证 message 中的 conversationType，targetId，messageContent 是有效值)
  @param pushContent         接收方离线时需要显示的远程推送内容
  @param pushData            接收方离线时需要在远程推送中携带的非显示数据
- @param uploadPrepareBlock  媒体文件上传进度更新的 IMKit 监听
- [uploadListener:当前的发送进度监听，SDK 通过此监听更新 IMKit UI]
+ @param uploadPrepareBlock  媒体文件上传进度更新的监听
+ [uploadListener:当前的发送进度监听]
  @param progressBlock       消息发送进度更新的回调 [progress:当前的发送进度, 0
  <= progress <= 100, messageId:消息的ID]
  @param successBlock        消息发送成功的回调 [messageId:消息的 ID]
@@ -263,7 +263,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param cancelBlock         用户取消了消息发送的回调 [messageId:消息的 ID]
  @return                    发送的消息实体
  
- @discussion 此方法仅用于 IMKit。
+ @discussion
  如果您需要上传图片到自己的服务器并使用 IMLibCore，构建一个 RCImageMessage 对象，
  并将 RCImageMessage 中的 imageUrl 字段设置为上传成功的 URL 地址，然后使用 RCCoreClient 的
  sendMessage:targetId:content:pushContent:pushData:success:error:方法

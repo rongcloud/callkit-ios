@@ -51,7 +51,7 @@
 /*!
  输入工具栏
  */
-@interface RCChatSessionInputBarControl : UIView
+@interface RCChatSessionInputBarControl : RCBaseView
 
 #pragma mark - 会话属性
 
@@ -151,6 +151,12 @@
  输入工具栏底部的 SafeArea view；当前设备没有 SafeArea，则该 view 为 nil
  */
 @property (nonatomic, strong, readonly) UIView *safeAreaView;
+
+/**
+ 输入工具栏上面的线
+ @since 5.6.0，合入 5.3.6
+ */
+@property (nonatomic, strong, readonly) CALayer *topLineLayer;
 
 /*!
  View即将显示的回调

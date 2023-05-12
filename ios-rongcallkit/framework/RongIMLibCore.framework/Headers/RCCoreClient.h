@@ -184,7 +184,7 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  @discussion
  naviServer 必须为有效的服务器地址，fileServer 如果想使用默认的，可以传 nil。
  naviServer 和 fileServer 的格式说明：
- 1、如果使用 https，则设置为 https://cn.xxx.com:port 或 https://cn.xxx.com 或  cn.xxx.com【SDK 默认使用 https】，其中域名部分也可以是 IP，如果不指定端口，将默认使用 443 端口。
+ 1、如果使用 https，则设置为 https://cn.xxx.com:port" 或 https://cn.xxx.com 或  cn.xxx.com【SDK 默认使用 https】，其中域名部分也可以是 IP，如果不指定端口，将默认使用 443 端口。
  2、如果使用 http，则设置为 http://cn.xxx.com:port 或 http://cn.xxx.com 格式，其中域名部分也可以是 IP，如果不指定端口，将默认使用 80
  端口。（iOS 默认只能使⽤ HTTPS 协议。如果您使⽤ http 协议，请参考 iOS 开发
  ⽂档中的 ATS 设置说明。链接如下：https://support.rongcloud.cn/ks/OTQ1 ）
@@ -646,8 +646,8 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  @param pushContent         接收方离线时需要显示的远程推送内容
  @param pushData            接收方离线时需要在远程推送中携带的非显示数据
  @param attachedBlock          入库回调[message: 已存数据库的消息体]
- @param uploadPrepareBlock  媒体文件上传进度更新的 IMKit 监听
- [uploadListener:当前的发送进度监听，SDK 通过此监听更新 IMKit UI]
+ @param uploadPrepareBlock  媒体文件上传进度更新的监听
+ [uploadListener:当前的发送进度监听]
  @param progressBlock       消息发送进度更新的回调 [progress:当前的发送进度, 0
  <= progress <= 100, messageId:消息的ID]
  @param successBlock        消息发送成功的回调 [messageId:消息的 ID]
@@ -655,7 +655,7 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  messageId:消息的 ID]
  @param cancelBlock         用户取消了消息发送的回调 [messageId:消息的 ID]
 
- @discussion 此方法仅用于 IMKit。
+ @discussion
  如果您需要上传图片到自己的服务器并使用 IMLibCore，构建一个 RCImageMessage 对象，
  并将 RCImageMessage 中的 imageUrl 字段设置为上传成功的 URL 地址，然后使用 RCCoreClient 的
  sendMessage:targetId:content:pushContent:pushData:success:error:方法
@@ -688,8 +688,8 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  @param pushContent         接收方离线时需要显示的远程推送内容
  @param pushData            接收方离线时需要在远程推送中携带的非显示数据
  @param attachedBlock          入库回调[message: 已存数据库的消息体]
- @param uploadPrepareBlock  媒体文件上传进度更新的 IMKit 监听
- [uploadListener:当前的发送进度监听，SDK 通过此监听更新 IMKit UI]
+ @param uploadPrepareBlock  媒体文件上传进度更新的监听
+ [uploadListener:当前的发送进度监听]
  @param progressBlock       消息发送进度更新的回调 [progress:当前的发送进度, 0
  <= progress <= 100, messageId:消息的ID]
  @param successBlock        消息发送成功的回调 [messageId:消息的 ID]
@@ -697,7 +697,7 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  messageId:消息的 ID]
  @param cancelBlock         用户取消了消息发送的回调 [messageId:消息的 ID]
 
- @discussion 此方法仅用于 IMKit。
+ @discussion
  如果您需要上传图片到自己的服务器并使用 IMLibCore，构建一个 RCImageMessage 对象，
  并将 RCImageMessage 中的 imageUrl 字段设置为上传成功的 URL 地址，然后使用 RCCoreClient 的
  sendMessage:targetId:content:pushContent:pushData:success:error:方法
@@ -793,6 +793,51 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
 - (void)sendMediaMessage:(RCMessage *)message
              pushContent:(nullable NSString *)pushContent
                 pushData:(nullable NSString *)pushData
+                attached:(nullable void(^)(RCMessage *_Nullable message))attachedBlock
+                progress:(nullable void (^)(int progress, RCMessage *progressMessage))progressBlock
+            successBlock:(nullable void (^)(RCMessage *successMessage))successBlock
+              errorBlock:(nullable void (^)(RCErrorCode nErrorCode, RCMessage *errorMessage))errorBlock
+                  cancel:(nullable void (^)(RCMessage *cancelMessage))cancelBlock;
+
+/*!
+ 异步发送媒体消息（图片消息或文件消息）
+ 
+ @param message             将要发送的消息实体（需要保证 message 中的 conversationType，targetId，messageContent 是有效值)
+ @param pushContent         接收方离线时需要显示的远程推送内容
+ @param pushData            接收方离线时需要在远程推送中携带的非显示数据
+ @param option              消息的相关配置
+ @param attachedBlock          入库回调[message: 已存数据库的消息体]
+ @param progressBlock       消息发送进度更新的回调 [progress:当前的发送进度, 0 <= progress <= 100, progressMessage:消息实体]
+ @param successBlock        消息发送成功的回调 [successMessage:消息实体]
+ @param errorBlock          消息发送失败的回调 [nErrorCode:发送失败的错误码, errorMessage:消息实体]
+ @param cancelBlock         用户取消了消息发送的回调 [cancelMessage:消息实体]
+
+ @discussion 当接收方离线并允许远程推送时，会收到远程推送。
+ 远程推送中包含两部分内容，一是 pushContent，用于显示；二是 pushData，用于携带不显示的数据。
+ 
+ SDK 内置的消息类型，如果您将 pushContent 和 pushData 置为 nil，会使用默认的推送格式进行远程推送。
+ 自定义类型的消息，需要您自己设置 pushContent 和 pushData 来定义推送内容，否则将不会进行远程推送。
+ 
+ 如果您需要上传图片到自己的服务器，需要构建一个 RCImageMessage 对象，
+ 并将 RCImageMessage 中的 imageUrl 字段设置为上传成功的 URL 地址，然后使用 RCCoreClient 的
+ sendMessage:targetId:content:pushContent:pushData:success:error:方法
+ 或 sendMessage:targetId:content:pushContent:success:error:方法进行发送，不要使用此方法。
+ 
+ 如果您需要上传文件到自己的服务器，构建一个 RCFileMessage 对象，
+ 并将 RCFileMessage 中的 fileUrl 字段设置为上传成功的 URL 地址，然后使用 RCCoreClient 的
+ sendMessage:targetId:content:pushContent:pushData:success:error:方法
+ 或 sendMessage:targetId:content:pushContent:success:error:方法进行发送，不要使用此方法。
+ 
+ @warning 如果您使用 IMLibCore，可以使用此方法发送媒体消息；
+ 如果您使用 IMKit，请使用 RCIM 中的同名方法发送媒体消息，否则不会自动更新 UI。
+ 
+ @remarks 消息操作
+ @since 5.4.4
+ */
+- (void)sendMediaMessage:(RCMessage *)message
+             pushContent:(nullable NSString *)pushContent
+                pushData:(nullable NSString *)pushData
+                  option:(nullable RCSendMessageOption *)option
                 attached:(nullable void(^)(RCMessage *_Nullable message))attachedBlock
                 progress:(nullable void (^)(int progress, RCMessage *progressMessage))progressBlock
             successBlock:(nullable void (^)(RCMessage *successMessage))successBlock
