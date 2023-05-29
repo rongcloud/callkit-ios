@@ -77,4 +77,87 @@ typedef NS_ENUM(NSInteger, RCChatRoomMemberActionType) {
     RC_ChatRoom_Member_Join = 1,
 };
 
+
+
+#pragma mark RCChatRoomEvent - 聊天室事件
+/*!
+ 聊天室多端登录同步时，消息中的状态
+ */
+typedef NS_ENUM(NSInteger, RCChatRoomSyncStatus) {
+    /*!
+     多端登录同步用户离开聊天室，
+     1. 同一用户在一终端离开聊天室，通知另一终端
+     2. 用户多端加入聊天室场景：用户在 Android 端加入聊天室，在 Web 端登录后又加入一个新的聊天室，自动将用户从上一个聊天室踢出
+     被踢出聊天室中的所有成员，包括被踢出用户
+     */
+    RCChatRoomSyncStatusQuit = 0,
+    
+    /*!
+     多端登录同步用户加入聊天室，
+     同一用户在一终端加入聊天室，通知另一终端
+     */
+    RCChatRoomSyncStatusJoin = 1
+};
+
+/*!
+ 聊天室解封/封禁用户消息，操作类型枚举
+ */
+typedef NS_ENUM(NSInteger, RCChatRoomMemberOperateType) {
+    /*!
+     解封
+     */
+    RCChatRoomMemberOperateTypeDeblock = 0,
+    
+    /*!
+     封禁
+     */
+    RCChatRoomMemberOperateTypeBlocked = 1
+};
+
+
+/*!
+ 聊天室禁言相关消息，操作类型枚举
+ */
+typedef NS_ENUM(NSInteger, RCChatRoomMemberBanType) {
+    /*!
+     解除指定聊天室中用户禁言
+     */
+    RCChatRoomMemberBanTypeUnmuteUsers = 0,
+    
+    /*!
+     禁言指定聊天室中用户
+     */
+    RCChatRoomMemberBanTypeMuteUsers = 1,
+    
+    /*!
+     解除聊天室全体禁言
+     */
+    RCChatRoomMemberBanTypeUnmuteAll = 2,
+    
+    /*!
+     聊天室全体禁言
+     */
+    RCChatRoomMemberBanTypeMuteAll = 3,
+    
+    /*!
+     移出禁言用户白名单
+     */
+    RCChatRoomMemberBanTypeRemoveWhitelist = 4,
+    
+    /*!
+     添加禁言用户白名单
+     */
+    RCChatRoomMemberBanTypeAddWhitelist = 5,
+    
+    /*!
+     解除用户聊天室全局禁言
+     */
+    RCChatRoomMemberBanTypeUnmuteGlobal = 6,
+    
+    /*!
+     用户聊天室全局禁言
+     */
+    RCChatRoomMemberBanTypeMuteGlobal = 7
+};
+
 #endif /* RCChatRoomEnumDefine_h */

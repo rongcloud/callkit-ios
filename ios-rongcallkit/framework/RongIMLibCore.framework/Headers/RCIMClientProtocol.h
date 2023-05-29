@@ -110,7 +110,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param messageUId       请求已读回执的消息ID
  @param conversationType conversationType
  @param targetId         targetId
- @param userIdList 已读userId列表
+ @param userIdList 已读userId列表，字典类型 key:userId,value:readTime，例如：{"uid100001":1683708891523}
  */
 - (void)onMessageReceiptResponse:(RCConversationType)conversationType
                         targetId:(NSString *)targetId

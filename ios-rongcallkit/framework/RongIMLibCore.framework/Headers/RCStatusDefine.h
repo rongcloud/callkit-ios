@@ -592,19 +592,19 @@ typedef NS_ENUM(NSInteger, RCErrorCode) {
     
     /**
      * 查询的公共服务信息不存在。
-     * <p>请确认查询的公共服务的类型和公共服务 id 是否匹配。</p>
+     * 请确认查询的公共服务的类型和公共服务 id 是否匹配。
      */
     RC_PUBLIC_SERVICE_PROFILE_NOT_EXIST = 34007,
     
     /**
     * 消息不能被扩展。
-    * <p>消息在发送时，RCMessage 对象的属性 canIncludeExpansion 置为 YES 才能进行扩展。</p>
+    * 消息在发送时，RCMessage 对象的属性 canIncludeExpansion 置为 YES 才能进行扩展。
     */
     RC_MESSAGE_CANT_EXPAND = 34008,
 
     /**
     * 消息扩展失败。
-    * <p>一般是网络原因导致的，请确保网络状态良好，并且融云 SDK 连接正常</p>
+    * 一般是网络原因导致的，请确保网络状态良好，并且融云 SDK 连接正常
     */
     RC_MESSAGE_EXPAND_FAIL = 34009,
     
@@ -645,7 +645,7 @@ typedef NS_ENUM(NSInteger, RCErrorCode) {
     
     /*!
      消息处理失败
-     * <p>一般是消息处理为 nil </p>
+     * 一般是消息处理为 nil
      */
     RC_MESSAGE_NULL_EXCEPTION = 34017,
     
@@ -657,7 +657,7 @@ typedef NS_ENUM(NSInteger, RCErrorCode) {
     /**
      * 文件已过期或被清理
      * 小视频文件默认存储 7 天，其它文件默认存储 6个月。到期后自动清理。
-     * 如果小视频文件需要存储更长时间，可在[融云开发者后台](https://developer.rongcloud.cn/advance/index)的 **服务管理-> 小视频-> 服务设置** 中开通小视频高级版功能，开通后小视频文件，默认存储 6 个月。
+     * 如果小视频文件需要存储更长时间，可在[融云开发者后台]( https://developer.rongcloud.cn/advance/index )的 **服务管理-> 小视频-> 服务设置** 中开通小视频高级版功能，开通后小视频文件，默认存储 6 个月。
      */
     RC_FILE_EXPIRED = 34020,
     
@@ -1558,7 +1558,26 @@ typedef NS_ENUM(NSUInteger, RCPlatform) {
     RCPlatform_PC = 4
 };
 
-#pragma mark - RCPushLauguageType - push 语言设置
+#pragma mark - RCPushLanguageType - push 语言设置
+
+/*!
+ push 语言设置
+ */
+typedef NS_ENUM(NSUInteger, RCPushLanguage) {
+    /*!
+     英文
+     */
+    RCPushLanguage_EN_US = 1,
+    /*!
+     中文
+     */
+    RCPushLanguage_ZH_CN = 2,
+    /*!
+     阿拉伯文
+     */
+    RCPushLanguage_AR_SA
+};
+
 /*!
  push 语言设置
  */
@@ -1575,7 +1594,7 @@ typedef NS_ENUM(NSUInteger, RCPushLauguage) {
      阿拉伯文
      */
     RCPushLauguage_AR_SA
-};
+} __deprecated_msg("Use RCPushLanguage instead");
 
 #pragma mark - RCMessageBlockType - 消息被拦截类型
 
@@ -1636,7 +1655,7 @@ typedef NS_ENUM(NSInteger, RCPushNotificationQuietHoursLevel) {
      */
     RCPushNotificationQuietHoursLevelDefault = 0,
     /*!
-     群聊超级群仅@消息通知，单聊代表消息不通知
+     群聊超级群仅 @ 消息通知，单聊代表消息不通知
      */
     RCPushNotificationQuietHoursLevelMention = 1,
     /*!

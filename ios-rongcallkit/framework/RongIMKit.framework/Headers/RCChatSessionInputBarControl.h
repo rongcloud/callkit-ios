@@ -154,7 +154,7 @@
 
 /**
  输入工具栏上面的线
- @since 5.6.0，合入 5.3.6
+ @since 5.4.4，合入 5.3.6
  */
 @property (nonatomic, strong, readonly) CALayer *topLineLayer;
 

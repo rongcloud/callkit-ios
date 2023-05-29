@@ -6,8 +6,8 @@
 //  Copyright (c) 2015年 RongCloud. All rights reserved.
 //
 
-#ifndef RongIMLib_RCwatchKitStatusDelegate_h
-#define RongIMLib_RCwatchKitStatusDelegate_h
+#ifndef RongIMLib_RCWatchKitStatusDelegate_h
+#define RongIMLib_RCWatchKitStatusDelegate_h
 
 /*!
  用于 Apple Watch 的 IMLib 事务监听器

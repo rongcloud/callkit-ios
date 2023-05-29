@@ -159,7 +159,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)decodeUserInfo:(NSDictionary *)dictionary;
 
 /**
- 将@提醒信息编码到字典中
+ 将 @ 提醒信息编码到字典中
 
  @param mentionedInfo 要编码的@信息
  @return 存有@信息的 Dictionary
@@ -167,7 +167,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSDictionary *)encodeMentionedInfo:(RCMentionedInfo *)mentionedInfo;
 
 /*!
- 将消息内容中携带的@提醒信息解码
+ 将消息内容中携带的 @ 提醒信息解码
 
  @param dictionary @提醒信息的Dictionary
  */
@@ -179,7 +179,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSMutableDictionary *)encodeBaseData;
 
 /// 将消息内容中携带的基类信息解码
-/// @return 存有基类信息的 Dictionary
+/// @param 存有基类信息的 Dictionary
 /// @since 5.4.0
 - (void)decodeBaseData:(NSDictionary *)dictionary;
 

@@ -1067,7 +1067,7 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  @param successBlock 撤回成功的回调 [messageId:撤回的消息 ID，该消息已经变更为新的消息]
  @param errorBlock   撤回失败的回调 [errorCode:撤回失败错误码]
 
- @warning 仅支持单聊、群组和讨论组。
+ @warning 仅支持单聊、群组、聊天室和讨论组。
 
  @remarks 高级功能
  */
@@ -1082,6 +1082,7 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  @param message      需要撤回的消息
  @param successBlock 撤回成功的回调 [messageId:撤回的消息 ID，该消息已经变更为新的消息]
  @param errorBlock   撤回失败的回调 [errorCode:撤回失败错误码]
+ @warning 仅支持单聊、群组、聊天室和讨论组。
  @remarks 高级功能
  */
 - (void)recallMessage:(RCMessage *)message

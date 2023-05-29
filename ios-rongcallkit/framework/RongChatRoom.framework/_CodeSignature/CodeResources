@@ -6,11 +6,11 @@
 	<dict>
 		<key>Headers/RCChatRoomClient.h</key>
 		<data>
-		THCJJiwXWAKVi3c3mvGdn2DdtRo=
+		25v0Ph1haOPgLj6sf7YdRS/awFc=
 		</data>
 		<key>Headers/RCChatRoomEnumDefine.h</key>
 		<data>
-		Yjs8pfXQzvOjbRA2fFQ2D0jdGzU=
+		CR3ylYaaT27Dv5haSVnvWYkAsfY=
 		</data>
 		<key>Headers/RCChatRoomInfo.h</key>
 		<data>
@@ -20,13 +20,25 @@
 		<data>
 		Mk6gmoSSTfdvG+I3tFiPy/+mAQA=
 		</data>
+		<key>Headers/RCChatRoomMemberBanEvent.h</key>
+		<data>
+		6xrwUadn/ok/l9BeN/OP3FqUid4=
+		</data>
+		<key>Headers/RCChatRoomMemberBlockEvent.h</key>
+		<data>
+		kl/ISDncrFFOTQnWCEq5ihYM39U=
+		</data>
 		<key>Headers/RCChatRoomMemberInfo.h</key>
 		<data>
 		C4yY5FtRTsQqehIunLABQK7IFY0=
 		</data>
 		<key>Headers/RCChatRoomProtocol.h</key>
 		<data>
-		GpiJz1GZ6kAgtfJ/1jxp3+unC4k=
+		ziCIX+4mpNNlWaOz7NzEW1PZB4M=
+		</data>
+		<key>Headers/RCChatRoomSyncEvent.h</key>
+		<data>
+		BF1X0bQS1U9pTg6JsKiouacegOs=
 		</data>
 		<key>Headers/RCChatroomKVNotificationMessage.h</key>
 		<data>
@@ -34,7 +46,7 @@
 		</data>
 		<key>Headers/RongChatRoom.h</key>
 		<data>
-		4UUKY8coOEsvQfHghs7wIFh3yQ8=
+		bfxii+/mFFBR+2XU9Ylh9Zs08H8=
 		</data>
 		<key>Info.plist</key>
 		<data>
@@ -51,22 +63,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			THCJJiwXWAKVi3c3mvGdn2DdtRo=
+			25v0Ph1haOPgLj6sf7YdRS/awFc=
 			</data>
 			<key>hash2</key>
 			<data>
-			rNgfwKCbci3ttS+FXque+bT1uiXVK46ggGWxyXC56mM=
+			O2tHZM+k9GCNUQunJT8rCJTipFDjDYepcdb1WLD9/gY=
 			</data>
 		</dict>
 		<key>Headers/RCChatRoomEnumDefine.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			Yjs8pfXQzvOjbRA2fFQ2D0jdGzU=
+			CR3ylYaaT27Dv5haSVnvWYkAsfY=
 			</data>
 			<key>hash2</key>
 			<data>
-			4REqhBkjsPSe7O09bWosFhqN+MHMWg8wkXNEX9uvBoE=
+			Vsgw/9ygWMbQT9xOUmFNeGDinDVKXaFhWlV1BMmqLkg=
 			</data>
 		</dict>
 		<key>Headers/RCChatRoomInfo.h</key>
@@ -91,6 +103,28 @@
 			4Z+oCjr3QnIgJrkeriks4TyoLh0UJv2NAlJ3QP0bFjk=
 			</data>
 		</dict>
+		<key>Headers/RCChatRoomMemberBanEvent.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			6xrwUadn/ok/l9BeN/OP3FqUid4=
+			</data>
+			<key>hash2</key>
+			<data>
+			STBOC1FRskLb8M4GxaIUGYuV8kVCfoYOcz0ZINW57Tw=
+			</data>
+		</dict>
+		<key>Headers/RCChatRoomMemberBlockEvent.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			kl/ISDncrFFOTQnWCEq5ihYM39U=
+			</data>
+			<key>hash2</key>
+			<data>
+			fAw/5mf4KgR9kzfIx4rDQtRJZY16ZJC86j7psjme1ao=
+			</data>
+		</dict>
 		<key>Headers/RCChatRoomMemberInfo.h</key>
 		<dict>
 			<key>hash</key>
@@ -106,11 +140,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			GpiJz1GZ6kAgtfJ/1jxp3+unC4k=
+			ziCIX+4mpNNlWaOz7NzEW1PZB4M=
 			</data>
 			<key>hash2</key>
 			<data>
-			0tYBgfKkLNcPd+9sjraUISjRhiJupRnDK9V5f6l6EsY=
+			KHjSQO66mT/x1o/8dmYAb5/371BgonAekkf3HKLFfMQ=
+			</data>
+		</dict>
+		<key>Headers/RCChatRoomSyncEvent.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			BF1X0bQS1U9pTg6JsKiouacegOs=
+			</data>
+			<key>hash2</key>
+			<data>
+			RpMzkJUbvTp7PdPLzEO0RE9VRJ17F/lJAg8LEhhGroI=
 			</data>
 		</dict>
 		<key>Headers/RCChatroomKVNotificationMessage.h</key>
@@ -128,11 +173,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			4UUKY8coOEsvQfHghs7wIFh3yQ8=
+			bfxii+/mFFBR+2XU9Ylh9Zs08H8=
 			</data>
 			<key>hash2</key>
 			<data>
-			S5W8zQuRwgeH7231NGOFA9NP0RqDkZk48OhSnRf2GTo=
+			Q9v0txnU8Zz0M9MdV2K6Caake2ofCgccm6K8+tRJtBk=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

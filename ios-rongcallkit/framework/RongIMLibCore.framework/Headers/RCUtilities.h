@@ -62,7 +62,7 @@
 + (UIImage *)imageByScalingAndCropSize:(UIImage *)image targetSize:(CGSize)targetSize;
 
 /*!
-根据配置压缩图片，如果设置了[RCCoreClient sharedCoreClient].imageCompressConfig ，就按照此设置进行压缩。如果没有设置，就按照RCConfigg.plis文件中的配置进行压缩。
+根据配置压缩图片，如果设置了 [RCCoreClient sharedCoreClient].imageCompressConfig ，就按照此设置进行压缩。如果没有设置，就按照 RCConfig.plis 文件中的配置进行压缩。
  
  @param image           原图片
  @return          压缩后的图片
@@ -95,7 +95,7 @@
  @param image               image
  @param maxDataLength       maxDataLength
 
- @return                    nsdate
+ @return                    NSData
  */
 + (NSData *)compressedImageWithMaxDataLength:(UIImage *)image maxDataLength:(CGFloat)maxDataLength;
 
@@ -106,7 +106,7 @@
  @param targetSize      targetSize
  @param maxDataLen      maxDataLen
 
- @return                image nsdata
+ @return                image NSData
  */
 + (NSData *)compressedImageAndScalingSize:(UIImage *)image targetSize:(CGSize)targetSize maxDataLen:(CGFloat)maxDataLen;
 
@@ -117,7 +117,7 @@
  @param targetSize      targetSize
  @param percent         percent
 
- @return                image nsdata
+ @return                image NSData
  */
 + (NSData *)compressedImageAndScalingSize:(UIImage *)image targetSize:(CGSize)targetSize percent:(CGFloat)percent;
 /*!
@@ -126,7 +126,7 @@
  @param image           image
  @param percent         percent
 
- @return                image nsdata
+ @return                image NSData
  */
 + (NSData *)compressedImage:(UIImage *)image percent:(CGFloat)percent;
 

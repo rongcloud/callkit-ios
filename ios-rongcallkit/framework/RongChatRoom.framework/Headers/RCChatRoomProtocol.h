@@ -9,7 +9,10 @@
 #ifndef RCChatRoomProtocol_h
 #define RCChatRoomProtocol_h
 
+NS_ASSUME_NONNULL_BEGIN
+
 @class RCChatRoomMemberAction;
+@class RCChatRoomSyncEvent, RCChatRoomMemberBlockEvent, RCChatRoomMemberBanEvent;
 
 typedef NS_ENUM(NSUInteger, RCChatRoomDestroyType) {
     /*!
@@ -131,4 +134,93 @@ typedef NS_ENUM(NSUInteger, RCChatRoomDestroyType) {
 
 @end
 
+
+
+#pragma mark - 聊天室事件通知
+
+/**
+ @discussion 聊天室事件通知
+ @discussion 封禁、解封、禁言、解除禁言、多端同步相关事件等
+ 
+ @since 5.4.5
+ */
+
+@protocol RCChatRoomNotifyEventDelegate <NSObject>
+
+/**
+ @discussion 多端登录相关事件通知回调，包含三种通知 case
+ 
+ 1. 多端登录情况，一端加入聊天室，需要通知另一终端
+ 指定聊天室中所有成员，包括当前加入用户
+ 
+ 2. 多端登录情况，一端退出聊天室，需要通知另一终端
+ 指定聊天室中所有成员，包括当前退出用户
+ 
+ 3. 用户多端加入聊天室场景：用户在 iOS 端加入聊天室，在 Web 端登录后又加入一个新的聊天室，自动将用户从上一个聊天室踢出
+ 被踢出聊天室中的所有成员，包括被踢出用户
+ 注：case 3 如果开通了一个用户可加入多个聊天室的情况不会进行通知
+ 
+ @param event 聊天室 RCChatRoomSyncEvent
+ */
+- (void)chatRoomNotifyMultiLoginSync:(RCChatRoomSyncEvent *)event;
+
+/**
+ @discussion 封禁用户相关事件通知回调, 包含两种通知 case
+ 
+ 1. 封禁用户，聊天室中所有成员，包括被封禁用户
+ 注：
+ * 封禁后用户被自动踢出聊天室
+ * 封禁后用户不会再收到被踢出的通知
+ * 是否通知封禁本人外的其他成员，取决于 server API 的入参 needNotify（默认为 false 不通知其他成员）
+ 
+ 
+ 2. 解除封禁，被解除封禁的成员
+ 注：
+ * 用户未在线时，再登录时不会收到通知
+ * 服务端仅对主动解除封禁做通知，封禁时间到了，自动解除的不通知， 此刻调用加入聊天室接口可成功
+ * 服务端仅对解除封禁的本人做通知，聊天室内其他成员不会收到通知，此处不受 server API 的入参 needNotify 影响
+
+ @discussion 封禁时长最大值为43200分钟/1个月, 最小值1分钟
+ @param event 聊天室 RCChatRoomMemberBlockEvent
+ */
+- (void)chatRoomNotifyBlock:(RCChatRoomMemberBlockEvent *)event;
+
+/**
+ @discussion 禁言相关事件通知回调，包含以下 case
+ 
+ 注：
+ * 禁言，受到白名单保护，即白名单中用户不会被禁言
+ * 是否通知禁言本人外的其他成员，取决于 server API 的入参 needNotify（默认为 false 不通知其他成员）
+ 1. 禁言指定聊天室中用户，指定聊天室中任何成员
+ 2. 解除指定聊天室中用户禁言，指定聊天室中任何成员
+ 
+ 注：
+ * 全体禁言，也受到白名单保护，即白名单中用户不会被禁言
+ * 是否通知禁言本人外的其他成员，取决于 server API 的入参 needNotify（默认为 false 不通知其他成员）
+ 3. 聊天室全体禁言，针对聊天室中所有成员
+ 4. 解除聊天室全体禁言，针对聊天室中所有成员
+ 
+ 注：
+ * 白名单是聊天室维度，添加后，用户在此聊天室内无法被设置禁言，即被保护
+ 生命周期跟随聊天室，销毁后，清空白名单，重建聊天室时，需要再次调用接口添加
+ * 是否通知禁言本人外的其他成员，取决于 server API 的入参 needNotify（默认为 false 不通知其他成员）
+ 5. 添加禁言用户白名单，对应聊天室中所有成员
+ 6. 移出禁言用户白名单，对应聊天室中所有成员
+ 
+ 注：
+ * 全局禁言是最高优先级，全局禁言后，禁言用户在所有聊天室内都无法发言，即便配置白名单也不行
+ * 只有全局禁言或解除全局禁言的用户，可以收到通知，其余成员不会收到通知，此处不受 server API 的入参 needNotify 影响
+ 7. 用户聊天室全局禁言，指定全局禁言用户
+ 8. 解除用户聊天室全局禁言，指定解除全局禁言用户
+ 
+ @discussion 禁言时长最大值为43200分钟/1个月, 最小值1分钟
+ @param event 聊天室 RCChatRoomMemberBanEvent
+ */
+- (void)chatRoomNotifyBan:(RCChatRoomMemberBanEvent *)event;
+
+@end
+
+NS_ASSUME_NONNULL_END
+
 #endif /* RCChatRoomProtocol_h */
+

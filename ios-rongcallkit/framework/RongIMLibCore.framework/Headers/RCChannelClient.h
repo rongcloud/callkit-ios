@@ -567,8 +567,9 @@ NS_ASSUME_NONNULL_BEGIN
  如：
  oldestMessageId 为 10，count 为 2，会返回 messageId 为 9 和 8 的 RCMessage 对象列表。
 
- @discussion 此方法不支持超级群的会话类型。
- 
+ @discussion 该方法仅获取本地数据库中的消息
+ @discussion 超级群不会接收离线消息，超级群调用该接口会出现消息断档的情况，请使用断档消息接口获取超级群消息。
+
  @remarks 消息操作
  @since 5.3.0
  */
@@ -596,7 +597,8 @@ NS_ASSUME_NONNULL_BEGIN
  的值，会将该会话中的所有消息返回。
  如：oldestMessageId 为 10，count 为 2，会返回 messageId 为 9 和 8 的 RCMessage 对象列表。
 
- @discussion 此方法不支持超级群的会话类型。
+ @discussion 该方法仅获取本地数据库中的消息
+ @discussion 超级群不会接收离线消息，超级群调用该接口会出现消息断档的情况，请使用断档消息接口获取超级群消息。
  
  @remarks 消息操作
  @since 5.3.0
@@ -625,8 +627,9 @@ NS_ASSUME_NONNULL_BEGIN
  之前或之后的、指定数量、消息类型和查询方向的最新消息实体，返回的消息实体按照时间从新到旧排列。
  返回的消息中不包含 baseMessageId 对应的那条消息，如果会话中的消息数量小于参数 count 的值，会将该会话中的所有消息返回。
 
+ @discussion 该方法仅获取本地数据库中的消息
  @discussion 超级群不会接收离线消息，超级群调用该接口会出现消息断档的情况，请使用断档消息接口获取超级群消息。
- 
+
  @remarks 消息操作
  @since 5.3.0
  */
@@ -656,8 +659,9 @@ NS_ASSUME_NONNULL_BEGIN
  之前或之后的、指定数量、指定消息类型（多个）的消息实体列表，返回的消息实体按照时间从新到旧排列。
  返回的消息中不包含 sentTime 对应的那条消息，如果会话中的消息数量小于参数 count 的值，会将该会话中的所有消息返回。
 
+ @discussion 该方法仅获取本地数据库中的消息
  @discussion 超级群不会接收离线消息，超级群调用该接口会出现消息断档的情况，请使用断档消息接口获取超级群消息。
- 
+
  @remarks 消息操作
  @since 5.3.0
  */
@@ -682,10 +686,8 @@ NS_ASSUME_NONNULL_BEGIN
  @param afterCount          指定消息的后部分消息数量
  @param completion          异步回调[消息实体 RCMessage 对象列表]
  
- @discussion
- 获取该会话的这条消息及这条消息前 beforeCount 条和后 afterCount 条消息,如前后消息不够则返回实际数量的消息。
-
- @discussion 此方法不支持超级群的会话类型。
+ @discussion 该方法仅获取本地数据库中的消息
+ @discussion 超级群不会接收离线消息，超级群调用该接口会出现消息断档的情况，请使用断档消息接口获取超级群消息。
  
  @remarks 消息操作
  @since 5.3.0

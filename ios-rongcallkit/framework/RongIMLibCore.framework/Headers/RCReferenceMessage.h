@@ -37,7 +37,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong, nullable) RCMessageContent *referMsg;
 
 /*!
- 被引用消息的 messageUId。服务器消息唯一 ID（在同一个 Appkey 下全局唯一）
+ 被引用消息的 messageUId。服务器消息唯一 ID（在同一个 AppKey 下全局唯一）
  */
 @property (nonatomic, strong) NSString *referMsgUid;
 

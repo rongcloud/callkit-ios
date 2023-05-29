@@ -44,7 +44,7 @@ NS_ASSUME_NONNULL_BEGIN
         content.remoteUrl = remoteUrl;
         uploadListener.successBlock(content);
      } else if ([currentMessage.content isKindOfClass:[RCFileMessage class]]) {
-        RCFileMessage *content = (RCFilemessage *)uploadListener.currentMessage.content;
+        RCFileMessage *content = (RCFileMessage *)uploadListener.currentMessage.content;
         content.fileUrl = remoteUrl;
         uploadListener.successBlock(content);
      } else {

@@ -98,7 +98,7 @@ NS_ASSUME_NONNULL_BEGIN
 /*!
  全局唯一 ID
 
- @discussion 服务器消息唯一 ID（在同一个 Appkey 下全局唯一）
+ @discussion 服务器消息唯一 ID（在同一个 AppKey 下全局唯一）
  */
 @property (nonatomic, copy, nullable) NSString *messageUId;
 

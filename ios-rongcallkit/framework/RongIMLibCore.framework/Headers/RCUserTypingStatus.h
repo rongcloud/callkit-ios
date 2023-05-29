@@ -28,6 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (nonatomic, copy) NSString *contentType;
 
+/// 用户输入状态消息发送时间
 @property (nonatomic, assign) long long sentTime;
 
 /*!

@@ -95,9 +95,9 @@ FOUNDATION_EXPORT const unsigned char RongIMLibCoreVersionString[];
 // log
 #import <RongIMLibCore/RCFwLog.h>
 
-// Downlad
+// Download
 #import <RongIMLibCore/RCDownloadItem.h>
-#import <RongIMLibCore/RCResumeableDownloader.h>
+#import <RongIMLibCore/RCResumableDownloader.h>
 
 // Socks proxy
 #import <RongIMLibCore/RCIMProxy.h>

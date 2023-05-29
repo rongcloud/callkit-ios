@@ -290,17 +290,24 @@ typedef enum : NSUInteger {
 @property (nonatomic, assign) int defaultHistoryMessageCountOfChatRoom;
 
 /*!
- 设置进入会话页面后下拉刷新从远端获取消息的条数，默认是 10，defaultRemoteHistoryMessageCount 传入 2~20 之间的数值。
+ 设置进入会话页面后下拉刷新从远端获取消息的条数，默认是 10，defaultMessageCount 传入 1 < count <= 100 之间的数值。
  @discussion 此属性需要在viewDidLoad之前进行设置。
  */
-@property (nonatomic, assign) int defaultRemoteHistoryMessageCount;
+@property (nonatomic, assign) int defaultMessageCount;
+
+
+/*!
+ 设置进入会话页面后下拉刷新从远端获取消息的条数，默认是 10，defaultRemoteHistoryMessageCount 传入 1 < count <= 100 之间的数值。
+ @discussion 此属性需要在viewDidLoad之前进行设置。
+ */
+@property (nonatomic, assign) int defaultRemoteHistoryMessageCount __attribute__((deprecated("此属性已被弃用，请使用 defaultMessageCount")));
 
 /*!
  设置进入会话页面后下拉刷新从本地数据库取的消息的条数，默认是 10。
  @discussion 此属性需要在viewDidLoad之前进行设置。
  从 5.2.4 及之后版本， SDK 加载消息的个数使用 defaultRemoteHistoryMessageCount， 请勿再使用该字段。
  */
-@property (nonatomic, assign) int defaultLocalHistoryMessageCount;
+@property (nonatomic, assign) int defaultLocalHistoryMessageCount __attribute__((deprecated("此属性已被弃用，请使用 defaultMessageCount")));
 
 /*!
  加载消息类型（不支持聊天室）

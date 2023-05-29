@@ -390,6 +390,35 @@ NS_ASSUME_NONNULL_BEGIN
          withRTCRoom:(NSString *)rtcRoomId
              success:(nullable void(^)(void))successBlock
                error:(nullable void (^)(RCErrorCode nErrorCode))errorBlock;
+
+#pragma mark - 聊天室事件通知监听器
+
+/**
+ 添加 IMLib 的聊天室事件通知监听器
+
+ @discussion 聊天室事件通知
+ @discussion 封禁、解封、禁言、解除禁言、多端同步相关事件等
+ @param delegate IMLib 聊天室事件通知监听器
+ 
+ @since 5.4.5
+ */
+- (void)addChatRoomNotifyEventDelegate:(id<RCChatRoomNotifyEventDelegate>)delegate;
+
+/**
+ 移除 IMLib 的聊天室事件通知监听器
+
+ @param delegate IMLib 聊天室事件通知监听器
+ @since 5.4.5
+ */
+- (void)removeChatRoomNotifyEventDelegate:(id<RCChatRoomNotifyEventDelegate>)delegate;
+
+/**
+ 返回 IMLib 的聊天室事件通知监听器
+
+ @since 5.4.5
+ */
+- (NSArray<id<RCChatRoomNotifyEventDelegate>> *)allChatRoomNotifyEventDelegates;
+
 @end
 
 NS_ASSUME_NONNULL_END

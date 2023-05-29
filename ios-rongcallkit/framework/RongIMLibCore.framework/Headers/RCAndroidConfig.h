@@ -63,7 +63,7 @@ FOUNDATION_EXPORT RCImportanceHw const RCImportanceHwLow;
 
 /*!
  华为通知栏消息右侧大图标 URL
- 如果不设置，则不展示通知栏右侧图标。URL使用的协议必须是HTTPS协议，取值样例：https://example.com/image.png。
+ 如果不设置，则不展示通知栏右侧图标，URL 使用的协议必须是 HTTPS 协议。
  图标文件须小于 512KB，图标建议规格大小：40dp x 40dp，弧角大小为 8dp，超出建议规格大小的图标会存在图片压缩或显示不全的情况。
  */
 @property (nonatomic, copy, nullable) NSString *hwImageUrl;

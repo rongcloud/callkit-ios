@@ -94,17 +94,17 @@ NS_ASSUME_NONNULL_BEGIN
 /*!
  会话中最后一条消息的消息 ID
  */
-@property (nonatomic, assign) long lastestMessageId;
+@property (nonatomic, assign) long latestMessageId;
 
 /*!
  会话中最后一条消息的内容
  */
-@property (nonatomic, strong, nullable) RCMessageContent *lastestMessage;
+@property (nonatomic, strong, nullable) RCMessageContent *latestMessage;
 
 /*!
  会话中最后一条消息的方向
  */
-@property (nonatomic, assign) RCMessageDirection lastestMessageDirection;
+@property (nonatomic, assign) RCMessageDirection latestMessageDirection;
 
 /*!
  会话中最后一条消息的 json Dictionary
@@ -117,9 +117,9 @@ NS_ASSUME_NONNULL_BEGIN
 /*!
  最后一条消息的全局唯一 ID
 
- @discussion 服务器消息唯一 ID（在同一个Appkey下全局唯一）
+ @discussion 服务器消息唯一 ID（在同一个 AppKey 下全局唯一）
  */
-@property (nonatomic, copy, nullable) NSString *lastestMessageUId;
+@property (nonatomic, copy, nullable) NSString *latestMessageUId;
 
 /*!
  会话中是否存在被 @ 的消息
@@ -129,11 +129,19 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign, readonly) BOOL hasUnreadMentioned;
 
 /*!
-会话中 @ 消息的个数
+会话中 @ 消息的总个数（包含 @ 我的个数和 @ 所有人的个数）
 
 @discussion 在清除会话未读数（clearMessagesUnreadStatus:targetId:）的时候，会将此值置成 0。
 */
 @property (nonatomic, assign) int mentionedCount;
+
+/*!
+超级群会话中 @ 我的消息的个数
+
+@discussion 只有超级群获取频道列表时有效
+@discussion 在清除会话未读数（clearMessagesUnreadStatus:targetId:）的时候，会将此值置成 0。
+*/
+@property (nonatomic, assign) int mentionedMeCount;
 
 /*!
 会话是否是免打扰状态
@@ -191,6 +199,32 @@ NS_ASSUME_NONNULL_BEGIN
 */
 @property (nonatomic, assign) long long firstUnreadMsgSendTime;
 
+
+@end
+
+@interface RCConversation (deprecated)
+
+/*!
+ 会话中最后一条消息的消息 ID
+ */
+@property (nonatomic, assign) long lastestMessageId __deprecated_msg("Use latestMessageId instead");
+
+/*!
+ 会话中最后一条消息的内容
+ */
+@property (nonatomic, strong, nullable) RCMessageContent *lastestMessage __deprecated_msg("Use latestMessage instead");
+
+/*!
+ 会话中最后一条消息的方向
+ */
+@property (nonatomic, assign) RCMessageDirection lastestMessageDirection __deprecated_msg("Use latestMessageDirection instead");
+
+/*!
+ 最后一条消息的全局唯一 ID
+
+ @discussion 服务器消息唯一 ID（在同一个 AppKey 下全局唯一）
+ */
+@property (nonatomic, copy, nullable) NSString *lastestMessageUId __deprecated_msg("Use latestMessageUId instead");
 
 @end
 

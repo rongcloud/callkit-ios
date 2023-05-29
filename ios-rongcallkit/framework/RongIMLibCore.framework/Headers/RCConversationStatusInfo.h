@@ -50,11 +50,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) RCConversationStatusType conversationStatusType;
 
 /*!
- 如果 conversationStatusType  = RCConversationStatusType_Mute，conversationStatusvalue = 1 是提醒，conversationStatusvalue = 0 是免打扰。
+ 如果 conversationStatusType  = RCConversationStatusType_Mute，conversationStatusValue = 1 是提醒，conversationStatusValue = 0 是免打扰。
  
- 如果 conversationStatusType  = RCConversationStatusType_Top，conversationStatusvalue = 0 是不置顶，conversationStatusvalue = 1 是置顶。
+ 如果 conversationStatusType  = RCConversationStatusType_Top，conversationStatusValue = 0 是不置顶，conversationStatusValue = 1 是置顶。
 */
-@property (nonatomic, assign) int conversationStatusvalue;
+@property (nonatomic, assign) int conversationStatusValue;
 
 /*!
  会话免打扰类型
@@ -62,6 +62,12 @@ NS_ASSUME_NONNULL_BEGIN
  当 conversationStatusType  = RCConversationStatusType_Mute 时，notificationLevel 值为有效值。
 */
 @property (nonatomic, assign) RCPushNotificationLevel notificationLevel;
+
+@end
+
+@interface RCConversationStatusInfo (deprecated)
+
+@property (nonatomic, assign) int conversationStatusvalue __deprecated_msg("Use conversationStatusValue instead");
 
 @end
 
