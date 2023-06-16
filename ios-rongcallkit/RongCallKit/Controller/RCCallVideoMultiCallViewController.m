@@ -459,6 +459,10 @@
             CGRectMake((self.view.frame.size.width - RCCallHeaderLength) / 2,
                        RCCallTopGGradientHeight + RCCallStatusBarHeight, RCCallHeaderLength, RCCallHeaderLength);
         self.inviterPortraitView.hidden = NO;
+        if (RCKitConfigCenter.ui.globalConversationAvatarStyle == RC_USER_AVATAR_CYCLE &&
+            RCKitConfigCenter.ui.globalMessageAvatarStyle == RC_USER_AVATAR_CYCLE) {
+            self.inviterPortraitView.layer.cornerRadius = RCCallHeaderLength/2;
+        }
 
         [self.inviterPortraitBgView setImageURL:[NSURL URLWithString:inviterInfo.portraitUri]];
         self.inviterPortraitBgView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);

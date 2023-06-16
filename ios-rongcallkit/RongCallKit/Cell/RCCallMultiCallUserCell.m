@@ -12,11 +12,8 @@
 #import "RongCallKitAdaptiveHeader.h"
 
 @interface RCCallMultiCallUserCell ()
-
 @property (nonatomic, strong) RCCallUserCallInfoModel *model;
 @property (nonatomic, assign) RCCallStatus callStatus;
-@property (nonatomic, strong) UIVisualEffectView *blurView;
-
 @end
 
 @implementation RCCallMultiCallUserCell
@@ -24,48 +21,9 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
         self.contentView.backgroundColor = [UIColor clearColor];
-    
-        self.headerImageView = [[RCloudImageView alloc] initWithFrame:CGRectZero];
-        self.headerImageView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
-        self.headerImageView.contentMode = UIViewContentModeScaleAspectFill;
-        self.headerImageView.clipsToBounds = YES;
-        self.headerImageView.layer.borderWidth = 1;
-        self.headerImageView.layer.borderColor = [[UIColor whiteColor] CGColor];
-        
-        UIVisualEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
-        self.blurView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
-        self.blurView.frame = self.headerImageView.frame;
-        [self.headerImageView setPlaceholderImage:[RCCallKitUtility imageFromVoIPBundle:@"default_portrait_msg"]];
-        self.headerImageView.hidden = YES;
         [self.contentView addSubview:self.headerImageView];
-
-        self.nameLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-        self.nameLabel.textColor = [UIColor whiteColor];
-        self.nameLabel.textAlignment = NSTextAlignmentCenter;
-        self.nameLabel.backgroundColor = [UIColor clearColor];
-        self.nameLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size:14];
-        self.nameLabel.hidden = YES;
         [self.contentView addSubview:self.nameLabel];
-        
-        self.statusLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-        self.statusLabel.text = @"连接中";
-        self.statusLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size:13];
-        self.statusLabel.textAlignment = NSTextAlignmentCenter;
-        self.statusLabel.textColor = [UIColor whiteColor];
-        self.statusLabel.hidden = YES;
         [self.contentView addSubview:self.statusLabel];
-
-        _cellNameLabel = [[UILabel alloc] init];
-        _cellNameLabel.backgroundColor = [UIColor clearColor];
-        _cellNameLabel.textColor = [UIColor whiteColor];
-        _cellNameLabel.layer.shadowOpacity = 0.8;
-        _cellNameLabel.layer.shadowRadius = 3.0;
-        _cellNameLabel.layer.shadowColor = [UIColor darkGrayColor].CGColor;
-        _cellNameLabel.layer.shadowOffset = CGSizeMake(0, 1);
-        _cellNameLabel.font = [UIFont systemFontOfSize:14];
-        _cellNameLabel.textAlignment = NSTextAlignmentCenter;
-        _cellNameLabel.frame =
-            CGRectMake(0, self.frame.size.height - 16 - RCCallInsideMargin, self.frame.size.width, 16);
         [self.contentView addSubview:self.cellNameLabel];
     }
     return self;
@@ -77,30 +35,18 @@
 
     CGFloat nameLabelHeight = 16;
     CGFloat insideMargin = 5;
+    
+    if (callStatus == RCCallIncoming || callStatus == RCCallRinging || model.profile.mediaType == RCCallMediaVideo) {
+        nameLabelHeight = 0;
+        insideMargin = 0;
+    }
 
     if ((callStatus == RCCallDialing || callStatus == RCCallActive) && model.profile.mediaType == RCCallMediaVideo) {
         
     } else {
-        self.headerImageView.layer.borderWidth = 1;
-        self.headerImageView.layer.borderColor = [UIColor whiteColor].CGColor;
-        self.headerImageView.layer.masksToBounds = YES;
-        if (RCKitConfigCenter.ui.globalConversationAvatarStyle == RC_USER_AVATAR_CYCLE &&
-            RCKitConfigCenter.ui.globalMessageAvatarStyle == RC_USER_AVATAR_CYCLE) {
-            self.headerImageView.layer.cornerRadius =
-                MIN(self.bounds.size.width, self.bounds.size.height - nameLabelHeight - insideMargin) / 2;
-        } else {
-            self.headerImageView.layer.cornerRadius = 4.f;
-        }
         self.headerImageView.backgroundColor = [[UIColor clearColor] colorWithAlphaComponent:1.0];
         self.headerImageView.layer.edgeAntialiasingMask =
             kCALayerLeftEdge | kCALayerRightEdge | kCALayerBottomEdge | kCALayerTopEdge;
-    }
-
-    if (callStatus == RCCallIncoming ||
-        callStatus == RCCallRinging ||
-        model.profile.mediaType == RCCallMediaVideo) {
-        nameLabelHeight = 0;
-        insideMargin = 0;
     }
 
     if (model.profile.mediaType == RCCallMediaAudio) {
@@ -120,7 +66,12 @@
 
     self.headerImageView.frame = CGRectMake((self.bounds.size.width - minLength) / 2, 0, minLength, minLength);
     self.headerImageView.hidden = NO;
-
+    
+    if (RCKitConfigCenter.ui.globalConversationAvatarStyle == RC_USER_AVATAR_CYCLE &&
+        RCKitConfigCenter.ui.globalMessageAvatarStyle == RC_USER_AVATAR_CYCLE) {
+        self.headerImageView.layer.cornerRadius = minLength/2;
+    }
+    
     self.nameLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size:11];
     self.nameLabel.frame =
         CGRectMake(0, self.bounds.size.height - nameLabelHeight, self.bounds.size.width, nameLabelHeight);
@@ -164,11 +115,13 @@
     }
 
     self.statusLabel.frame = CGRectMake((self.bounds.size.width - self.headerImageView.frame.size.width) / 2,(self.bounds.size.height - self.headerImageView.frame.size.height) / 2,self.headerImageView.frame.size.width, self.headerImageView.frame.size.height);
-    //    self.statusView.contentMode = UIViewContentModeScaleAspectFit;
 
-    if (_model.profile.callStatus == RCCallIncoming || _model.profile.callStatus == RCCallRinging ||
-            _model.profile.callStatus == RCCallDialing) {
-        if (self.callStatus == RCCallIncoming || self.callStatus == RCCallRinging) {
+    if (_model.profile.callStatus == RCCallIncoming ||
+        _model.profile.callStatus == RCCallRinging ||
+        _model.profile.callStatus == RCCallDialing) {
+        
+        if (self.callStatus == RCCallIncoming ||
+            self.callStatus == RCCallRinging) {
             self.statusLabel.hidden = YES;
             self.headerImageView.alpha = 1;
         } else {
@@ -180,4 +133,61 @@
         self.headerImageView.alpha = 1;
     }
 }
+
+- (RCloudImageView *)headerImageView {
+    if (!_headerImageView) {
+        _headerImageView = [[RCloudImageView alloc] initWithFrame:CGRectZero];
+        _headerImageView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+        _headerImageView.contentMode = UIViewContentModeScaleAspectFill;
+        _headerImageView.layer.masksToBounds = YES;
+        _headerImageView.layer.borderWidth = 1;
+        _headerImageView.layer.borderColor = [[UIColor whiteColor] CGColor];
+        [_headerImageView setPlaceholderImage:[RCCallKitUtility imageFromVoIPBundle:@"default_portrait_msg"]];
+        _headerImageView.hidden = YES;
+    }
+    return _headerImageView;
+}
+
+- (UILabel *)nameLabel {
+    if (!_nameLabel) {
+        _nameLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+        _nameLabel.textColor = [UIColor whiteColor];
+        _nameLabel.textAlignment = NSTextAlignmentCenter;
+        _nameLabel.backgroundColor = [UIColor clearColor];
+        _nameLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size:14];
+        _nameLabel.hidden = YES;
+    }
+    return _nameLabel;
+}
+
+- (UILabel *)statusLabel {
+    if (!_statusLabel) {
+        _statusLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+        _statusLabel.text = @"连接中";
+        _statusLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size:13];
+        _statusLabel.textAlignment = NSTextAlignmentCenter;
+        _statusLabel.textColor = [UIColor whiteColor];
+        _statusLabel.hidden = YES;
+    }
+    return _statusLabel;
+    
+}
+
+- (UILabel *)cellNameLabel {
+    if (!_cellNameLabel) {
+        _cellNameLabel = [[UILabel alloc] init];
+        _cellNameLabel.backgroundColor = [UIColor clearColor];
+        _cellNameLabel.textColor = [UIColor whiteColor];
+        _cellNameLabel.layer.shadowOpacity = 0.8;
+        _cellNameLabel.layer.shadowRadius = 3.0;
+        _cellNameLabel.layer.shadowColor = [UIColor darkGrayColor].CGColor;
+        _cellNameLabel.layer.shadowOffset = CGSizeMake(0, 1);
+        _cellNameLabel.font = [UIFont systemFontOfSize:14];
+        _cellNameLabel.textAlignment = NSTextAlignmentCenter;
+        _cellNameLabel.frame =
+            CGRectMake(0, self.bounds.size.height - 16 - RCCallInsideMargin, self.bounds.size.width, 16);
+    }
+    return _cellNameLabel;
+}
+
 @end

@@ -1,6 +1,0 @@
-framework module RongCallLib {
-  umbrella header "RongCallLib.h"
-
-  export *
-  module * { export * }
-}
