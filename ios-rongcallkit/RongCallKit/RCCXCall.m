@@ -100,7 +100,9 @@
 //RCCallKit_Delete_Start
 #if PUBLIC
 #else
-    [self.provider reportOutgoingCallWithUUID:self.currentUUID connectedAtDate:nil];
+    if (self.currentUUID){
+        [self.provider reportOutgoingCallWithUUID:self.currentUUID connectedAtDate:nil];
+    }
 #endif
     //RCCallKit_Delete_end
 }
