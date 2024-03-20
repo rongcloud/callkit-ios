@@ -26,6 +26,7 @@
 		983FBC4320BD41010084841D /* RCVideoCollectionViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 983FBC4120BD41010084841D /* RCVideoCollectionViewLayout.m */; };
 		98A609D120B56EB200BB5158 /* RCCallToolBar.h in Headers */ = {isa = PBXBuildFile; fileRef = 98A609CF20B56EB200BB5158 /* RCCallToolBar.h */; };
 		98A609D220B56EB200BB5158 /* RCCallToolBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 98A609D020B56EB200BB5158 /* RCCallToolBar.m */; };
+		998BF9972B51354B00785582 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 998BF9962B51354B00785582 /* PrivacyInfo.xcprivacy */; };
 		9CE36FD6200F5FDC0068263B /* RCCXCall.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CE36FD4200F5FDC0068263B /* RCCXCall.h */; };
 		9CE36FD7200F5FDC0068263B /* RCCXCall.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CE36FD5200F5FDC0068263B /* RCCXCall.m */; };
 		A68AFAE91CCEFF5B00F16B3D /* RCCallDetailMessageCell.h in Headers */ = {isa = PBXBuildFile; fileRef = A68AFAE51CCEFF5B00F16B3D /* RCCallDetailMessageCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -90,6 +91,7 @@
 		983FBC4120BD41010084841D /* RCVideoCollectionViewLayout.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCVideoCollectionViewLayout.m; sourceTree = "<group>"; };
 		98A609CF20B56EB200BB5158 /* RCCallToolBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCCallToolBar.h; sourceTree = "<group>"; };
 		98A609D020B56EB200BB5158 /* RCCallToolBar.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCCallToolBar.m; sourceTree = "<group>"; };
+		998BF9962B51354B00785582 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		9CE36FD4200F5FDC0068263B /* RCCXCall.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCCXCall.h; sourceTree = "<group>"; };
 		9CE36FD5200F5FDC0068263B /* RCCXCall.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCCXCall.m; sourceTree = "<group>"; };
 		A68AFAE51CCEFF5B00F16B3D /* RCCallDetailMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCCallDetailMessageCell.h; sourceTree = "<group>"; };
@@ -306,6 +308,7 @@
 		A6BE1B3C1CCEFAB700FF6BF7 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
+				998BF9962B51354B00785582 /* PrivacyInfo.xcprivacy */,
 				A6BE1A531CCE561200FF6BF7 /* Info.plist */,
 			);
 			name = "Support Files";
@@ -457,6 +460,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				998BF9972B51354B00785582 /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
