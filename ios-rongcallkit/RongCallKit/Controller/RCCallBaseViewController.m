@@ -240,6 +240,7 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
 
 - (void)dealloc {
     [self stopPlayRing];
+    [self stopActiveTimer];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
