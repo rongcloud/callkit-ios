@@ -227,7 +227,9 @@ typedef void (^CompleteBlock)(NSArray *addUserIdList);
 
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.resultUserIdList.count;
+    NSInteger count = tableView == self.tableView ? self.listingUserIdList.count :self.resultUserIdList.count;
+//    return self.resultUserIdList.count;
+    return count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -235,6 +237,9 @@ typedef void (^CompleteBlock)(NSArray *addUserIdList);
     static NSString *reusableSearchID = @"RongVoIPSelectMembersCellsId";
     NSString *resuseID = tableView == self.tableView ? reusableID : reusableSearchID;
     RCCallSelectingMemberCell *cell = [self.tableView dequeueReusableCellWithIdentifier:resuseID];
+    
+    NSArray *userIds = (tableView == self.tableView ? self.listingUserIdList :self.resultUserIdList);
+    
 
     if (self.resultUserIdList.count != self.listingUserIdList.count) {
         cell = [self.tableView dequeueReusableCellWithIdentifier:reusableSearchID];
@@ -244,7 +249,8 @@ typedef void (^CompleteBlock)(NSArray *addUserIdList);
     }
     cell.tintColor = [UIColor colorWithRed:58 / 255.0 green:145 / 255.0 blue:243 / 255.0 alpha:1 / 1.0];
 
-    NSString *userId = self.resultUserIdList[indexPath.row];
+//    NSString *userId = userIds[indexPath.row];
+    NSString *userId = [userIds objectAtIndex:indexPath.row];
     if ([self.existUserIdList containsObject:userId]) {
         [cell.selectedImageView setImage:[RCCallKitUtility imageFromVoIPBundle:@"voip/deselect.png"]];
     } else if ([self.selectUserIds containsObject:userId]) {
@@ -274,7 +280,9 @@ typedef void (^CompleteBlock)(NSArray *addUserIdList);
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSString *userId = self.resultUserIdList[indexPath.row];
+    
+    NSArray *userIds = (tableView == self.tableView ? self.listingUserIdList :self.resultUserIdList);
+    NSString *userId = [userIds objectAtIndex:indexPath.row];
     if (![self.existUserIdList containsObject:userId]) {
         if ([self.selectUserIds containsObject:userId]) {
             [self.selectUserIds removeObject:userId];
@@ -363,11 +371,11 @@ typedef void (^CompleteBlock)(NSArray *addUserIdList);
     NSDictionary *userInfoDic = notification.object;
     NSString *updateUserId = userInfoDic[@"userId"];
 
-    for (NSString *userId in self.resultUserIdList) {
+    for (NSString *userId in self.listingUserIdList) {
         if ([updateUserId isEqualToString:userId]) {
             __weak typeof(self) weakSelf = self;
             dispatch_async(dispatch_get_main_queue(), ^{
-                NSIndexPath *index = [NSIndexPath indexPathForRow:[weakSelf.resultUserIdList indexOfObject:userId]
+                NSIndexPath *index = [NSIndexPath indexPathForRow:[weakSelf.listingUserIdList indexOfObject:userId]
                                                         inSection:0];
                 UITableViewCell *cell = [weakSelf.tableView cellForRowAtIndexPath:index];
                 if (cell) {
