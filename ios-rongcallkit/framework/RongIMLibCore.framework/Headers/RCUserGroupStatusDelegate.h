@@ -23,8 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
  
  - Since: 5.4.0
  */
-- (void)userGroupDisbandFrom:(RCConversationIdentifier *)identifier
-                userGroupIds:(NSArray<NSString *> *)userGroupIds;
+- (void)userGroupDisbandFrom:(RCConversationIdentifier *)identifier userGroupIds:(NSArray<NSString *> *)userGroupIds;
 
 /*!
  当前用户被添加到超级群下的用户组
@@ -34,8 +33,7 @@ NS_ASSUME_NONNULL_BEGIN
  
  - Since: 5.4.0
  */
-- (void)userAddedTo:(RCConversationIdentifier *)identifier
-       userGroupIds:(NSArray<NSString *> *)userGroupIds;
+- (void)userAddedTo:(RCConversationIdentifier *)identifier userGroupIds:(NSArray<NSString *> *)userGroupIds;
 
 /*!
  当前用户从到超级群下的用户组中被移除
@@ -45,8 +43,7 @@ NS_ASSUME_NONNULL_BEGIN
  
  - Since: 5.4.0
  */
-- (void)userRemovedFrom:(RCConversationIdentifier *)identifier
-           userGroupIds:(NSArray<NSString *> *)userGroupIds;
+- (void)userRemovedFrom:(RCConversationIdentifier *)identifier userGroupIds:(NSArray<NSString *> *)userGroupIds;
 
 
 /*!

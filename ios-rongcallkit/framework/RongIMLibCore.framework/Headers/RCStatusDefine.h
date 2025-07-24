@@ -58,15 +58,15 @@ typedef NS_ENUM(NSInteger, RCConnectionStatus) {
     /// 自动连接超时，SDK 将不会继续连接，用户需要做超时处理，再自行调用 connectWithToken 接口进行连接
     ConnectionStatus_Timeout = 14,
 
-    /// Token无效
+    /// Token 无效
     /// Token 无效一般有两种原因。一是 token 错误，请您检查客户端初始化使用的 AppKey 和您服务器获取 token 使用的 AppKey
     /// 是否一致；二是 token 过期，是因为您在开发者后台设置了 token 过期时间，您需要请求您的服务器重新获取 token
     /// 并再次用新的 token 建立连接。
     ConnectionStatus_TOKEN_INCORRECT = 15,
 
-    /// 与服务器的连接已断开,用户被封禁
+    /// 与服务器的连接已断开，用户被封禁
     ConnectionStatus_DISCONN_EXCEPTION = 16,
-    
+
     /// proxy 服务不可用，SDK 将不会继续连接，用户需要检查 proxy 是否可用，再自行调用 connectWithToken 接口进行连接
     ConnectionStatus_PROXY_UNAVAILABLE = 17,
 
@@ -123,9 +123,9 @@ typedef NS_ENUM(NSUInteger, RCConversationType) {
     ConversationType_SYSTEM = 6,
 
     /// 应用内公众服务会话
-    /// 
+    ///
     /// 客服 2.0 使用应用内公众服务会话（ConversationType_APPSERVICE）的方式实现。
-    /// 即客服 2.0  会话是其中一个应用内公众服务会话， 这种方式我们目前不推荐，
+    /// 即客服 2.0  会话是其中一个应用内公众服务会话，这种方式我们目前不推荐，
     /// 请尽快升级到新客服，升级方法请参考官网的客服文档。文档链接
     /// https://docs.rongcloud.cn/services/public/app/prepare/
     ConversationType_APPSERVICE = 7,
@@ -135,7 +135,7 @@ typedef NS_ENUM(NSUInteger, RCConversationType) {
 
     /// 推送服务会话
     ConversationType_PUSHSERVICE = 9,
-    
+
     /// 超级群
     ConversationType_ULTRAGROUP = 10,
 
@@ -291,7 +291,7 @@ typedef NS_ENUM(NSUInteger, RCMentionedType) {
 typedef NS_ENUM(NSInteger, RCMessageAuditType) {
     /// 不需要审核
     RCMessageAuditTypeDisallow = 0,
-    
+
     /// 需要审核
     RCMessageAuditTypeAllow = 1,
 };
@@ -300,7 +300,7 @@ typedef NS_ENUM(NSInteger, RCMessageAuditType) {
 /// 语音消息采样率
 typedef NS_ENUM(NSInteger, RCSampleRate) {
     /// 8KHz
-    RCSample_Rate_8000 = 1, 
+    RCSample_Rate_8000 = 1,
     /// 16KHz
     RCSample_Rate_16000 = 2,
 };
@@ -366,10 +366,10 @@ typedef NS_ENUM(NSUInteger, RCLogLevel) {
 
 /// 日志级别
 typedef NS_ENUM(NSUInteger, RCTimestampOrder) {
-    /// 降序, 按照时间戳从大到小
+    /// 降序，按照时间戳从大到小
     RC_Timestamp_Desc = 0,
 
-    /// 升序, 按照时间戳从小到大
+    /// 升序，按照时间戳从小到大
     RC_Timestamp_Asc = 1,
 };
 
@@ -391,10 +391,10 @@ typedef NS_ENUM(NSUInteger, RCPlatform) {
 
     /// PC
     RCPlatform_PC = 4,
-    
+
     /// 小程序
     RCPlatform_MiniWeb = 5,
-    
+
     /// 鸿蒙
     RCPlatform_HarmonyOS = 6,
 };
@@ -430,7 +430,7 @@ typedef NS_ENUM(NSUInteger, RCMessageBlockType) {
 
     /// 自定义敏感词拦截：命中了客户在融云自定义的敏感词
     RCMessageBlockTypeCustom = 2,
-    
+
     /// 第三方审核拦截：命中了第三方（数美）或消息回调服务决定不下发的状态
     RCMessageBlockTypeThirdParty = 3,
 };
@@ -441,7 +441,7 @@ typedef NS_ENUM(NSInteger, RCPushNotificationLevel) {
     /// @ 消息一定收到推送通知
     /// 普通消息的推送频率受到超级群服务端默认推送频率设置的影响，无法做到所有普通消息都通知
     RCPushNotificationLevelAllMessage = -1,
-    /// 未设置（向上查询群或者APP级别设置）,存量数据中0表示未设置
+    /// 未设置（向上查询群或者 APP 级别设置）,存量数据中 0 表示未设置
     RCPushNotificationLevelDefault = 0,
     /// 群聊，超级群 @所有人 或者 @成员列表有自己 时通知；单聊代表消息不通知
     RCPushNotificationLevelMention = 1,
@@ -454,7 +454,7 @@ typedef NS_ENUM(NSInteger, RCPushNotificationLevel) {
 };
 
 typedef NS_ENUM(NSInteger, RCPushNotificationQuietHoursLevel) {
-    /// 未设置（向上查询群或者APP级别设置）
+    /// 未设置（向上查询群或者 APP 级别设置）
     RCPushNotificationQuietHoursLevelDefault = 0,
     /// 群聊超级群仅 @ 消息通知，单聊代表消息不通知
     RCPushNotificationQuietHoursLevelMention = 1,
@@ -478,6 +478,44 @@ typedef NS_ENUM(NSInteger, RCUltraGroupChannelChangeType) {
     /// 超级群公有频道变成了私有频道，但是当前用户不再该私有频道中
     RCUltraGroupChannelChangeTypePublicToPrivateUserNotIn = 6
 };
+
+/// 排序。
+///
+/// - Since: 5.20.0
+typedef NS_ENUM(NSInteger, RCOrder) { RCOrderDescending = 0, RCOrderAscending };
+
+@class RCConversation;
+typedef void (^RCConversationListCompletion)(NSArray<RCConversation *> *conversations, RCErrorCode code);
+
+@class RCMessage;
+typedef void (^RCMessageListCompletion)(NSArray<RCMessage *> *messages, RCErrorCode code);
+typedef void (^RCSearchMessageListCompletion)(NSArray<RCMessage *> *messages, NSUInteger matchCount, RCErrorCode code);
+
+#pragma mark - 翻译
+
+/// 翻译类型。
+///
+/// - Since: 5.24.0
+typedef NS_ENUM(NSInteger, RCTranslateMode) {
+    /// 高速翻译，主要采用机器翻译。
+    RCTranslateModeMechanical = 0,
+    /// 智能翻译。
+    RCTranslateModeIntelligent = 1
+};
+
+/// 会话翻译方式。
+///
+/// - Since: 5.24.0
+typedef NS_ENUM(NSInteger, RCTranslateStrategy) {
+    /// 默认，会跟随用户级别的自动翻译方式。
+    RCTranslateStrategyDefault = 0,
+    /// 自动翻译。
+    RCTranslateStrategyAutoOn = 1,
+    /// 手动翻译。
+    RCTranslateStrategyAutoOff = 2,
+};
+
+@class RCTranslateItem;
 
 
 #endif

@@ -55,7 +55,7 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
     dispatch_queue_t queue;
     BOOL hangupButtonClick;
 }
-
+@property (nonatomic, assign) long long deltaTime;
 @property (nonatomic, strong) NSTimer *activeTimer;
 @property (nonatomic, strong) AVAudioPlayer *audioPlayer;
 @property (nonatomic, assign) BOOL needPlayingAlertAfterForeground;
@@ -90,6 +90,7 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
         self.needPlayingRingAfterForeground = YES;
         self.receivedFirstKeyFrame = NO;
         hangupButtonClick = NO;
+        _deltaTime = [[RCIMClient sharedRCIMClient] getDeltaTime];
     }
     return self;
 }
@@ -196,6 +197,7 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
         [RCCallKitUtility setScreenForceOn];
         [_callSession setMinimized:NO];
         hangupButtonClick = NO;
+        _deltaTime = [[RCIMClient sharedRCIMClient] getDeltaTime];
     }
     return self;
 }
@@ -517,7 +519,8 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
 
 - (void)updateActiveTimer {
     if (hangupButtonClick) return;
-    long sec = ([[NSDate date] timeIntervalSince1970] * 1000 - self.callSession.connectedTime) / 1000;
+    long long millsec = [[NSDate date] timeIntervalSince1970] * 1000 - self.deltaTime - self.callSession.connectedTime;
+    long sec = millsec / 1000;
     self.timeLabel.text = [RCCallKitUtility getReadableStringForTime:sec];
 
     if (sec >= 3600 && self.timeLabel.frame.size.width != 80) {

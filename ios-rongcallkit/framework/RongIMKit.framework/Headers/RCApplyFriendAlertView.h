@@ -6,8 +6,8 @@
 //  Copyright © 2024 RongCloud. All rights reserved.
 //
 
-#import <RongIMKit/RCBaseView.h>
-#import <RongIMKit/RCTextView.h>
+#import "RCBaseView.h"
+#import "RCTextView.h"
 NS_ASSUME_NONNULL_BEGIN
 
 typedef void(^RCApplyFriendAlertBlock)(NSString *);

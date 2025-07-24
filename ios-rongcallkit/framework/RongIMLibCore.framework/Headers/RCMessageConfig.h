@@ -12,11 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface RCMessageConfig : NSObject
 
-/// 是否关闭通知
-///
-/// YES: 关闭通知（不发送通知）
-/// NO: 不关闭通知（发送通知）
-/// 默认 NO
+/// 是否关闭远程推送和本地通知，默认值 NO
+/// 设置为 YES 禁用该条消息的远程推送和本地通知
 @property (nonatomic, assign) BOOL disableNotification;
 
 @end

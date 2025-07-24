@@ -5,7 +5,7 @@
 //  Created by zgh on 2024/8/16.
 //
 
-#import <RongIMKit/RCBaseCellViewModel.h>
+#import "RCBaseCellViewModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
 /// 资料页 cellViewModel

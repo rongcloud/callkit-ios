@@ -49,6 +49,7 @@
 #import <RongIMKit/RCMessageCellTool.h>
 #import <RongIMKit/RCHQVoiceMessageCell.h>
 #import <RongIMKit/RCComplexTextMessageCell.h>
+#import <RongIMKit/RCStreamMessageCell.h>
 
 /// 工具类
 #import <RongIMKit/RCKitUtility.h>
@@ -149,6 +150,35 @@
 
 #import <RongIMKit/RCUserProfileDefine.h>
 
+#import <RongIMKit/RCGroupNoticeViewController.h>
+#import <RongIMKit/RCGroupNoticeViewModel.h>
+
+#import <RongIMKit/RCGroupNotificationViewModel.h>
+#import <RongIMKit/RCGroupNotificationViewController.h>
+#import <RongIMKit/RCGroupNotificationCell.h>
+#import <RongIMKit/RCGroupNotificationCellViewModel.h>
+#import <RongIMKit/RCMyGroupsViewController.h>
+#import <RongIMKit/RCMyGroupsViewModel.h>
+#import <RongIMKit/RCGroupInfoCellViewModel.h>
+#import <RongIMKit/RCGroupListCell.h>
+#import <RongIMKit/RCFriendListPermanentCell.h>
+
+#import <RongIMKit/RCGroupFollowsViewController.h>
+#import <RongIMKit/RCGroupFollowsViewModel.h>
+#import <RongIMKit/RCSelectGroupMemberViewController.h>
+#import <RongIMKit/RCSelectGroupMemberViewModel.h>
+#import <RongIMKit/RCGroupManagementViewController.h>
+#import <RongIMKit/RCGroupManagementViewModel.h>
+#import <RongIMKit/RCGroupManagerListController.h>
+#import <RongIMKit/RCGroupManagerListViewModel.h>
+#import <RongIMKit/RCGroupTransferViewController.h>
+#import <RongIMKit/RCGroupTransferViewModel.h>
+#import <RongIMKit/RCSearchGroupsViewModel.h>
+#import <RongIMKit/RCSearchGroupsViewController.h>
+#import <RongIMKit/RCMyGroupsView.h>
+
+// STT
+#import <RongIMKit/RCSTTContentViewModel.h>
 #else
 /// IMKit核心类
 #import "RCIM.h"
@@ -189,6 +219,7 @@
 #import "RCMessageCellTool.h"
 #import "RCHQVoiceMessageCell.h"
 #import "RCComplexTextMessageCell.h"
+#import "RCStreamMessageCell.h"
 
 
 /// 工具类
@@ -291,4 +322,36 @@
 
 #import "RCUserProfileDefine.h"
 
+
+#import "RCGroupNoticeViewController.h"
+#import "RCGroupNoticeViewModel.h"
+
+//2024-11-14
+#import "RCGroupNotificationViewModel.h"
+#import "RCGroupNotificationViewController.h"
+#import "RCGroupNotificationCell.h"
+#import "RCGroupNotificationCellViewModel.h"
+#import "RCMyGroupsViewController.h"
+#import "RCMyGroupsViewModel.h"
+#import "RCGroupInfoCellViewModel.h"
+
+#import "RCGroupListCell.h"
+#import "RCFriendListPermanentCell.h"
+
+#import "RCGroupFollowsViewController.h"
+#import "RCGroupFollowsViewModel.h"
+#import "RCSelectGroupMemberViewController.h"
+#import "RCSelectGroupMemberViewModel.h"
+#import "RCGroupManagementViewController.h"
+#import "RCGroupManagementViewModel.h"
+#import "RCGroupManagerListController.h"
+#import "RCGroupManagerListViewModel.h"
+#import "RCGroupTransferViewController.h"
+#import "RCGroupTransferViewModel.h"
+#import "RCSearchGroupsViewModel.h"
+#import "RCSearchGroupsViewController.h"
+#import "RCMyGroupsView.h"
+
+// STT
+#import "RCSTTContentViewModel.h"
 #endif

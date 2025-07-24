@@ -64,12 +64,15 @@
 
 - (void)startCallId:(NSString *)callId userId:(NSString *)userId {
     NSUUID *uuid = [[NSUUID alloc] initWithUUIDString:callId];
-    self.currentUUID = uuid;
+    self.currentUUID = uuid ?: [NSUUID UUID];
+    if (!self.currentUUID) {
+        return;
+    }
 //RCCallKit_Delete_Start
 #if PUBLIC
 #else
     CXHandle *handle = [[CXHandle alloc] initWithType:CXHandleTypeGeneric value:userId];
-    CXStartCallAction *startAction = [[CXStartCallAction alloc] initWithCallUUID:uuid handle:handle];
+    CXStartCallAction *startAction = [[CXStartCallAction alloc] initWithCallUUID:self.currentUUID handle:handle];
     NSArray *array = [userId componentsSeparatedByString:@":::"];
     if (array.count == 1) {
         startAction.contactIdentifier = [[RCUserInfoCacheManager sharedManager] getUserInfo:userId].name;
@@ -91,7 +94,7 @@
     [self.controller requestTransaction:transaction
                              completion:^(NSError *_Nullable error){
                              }];
-    [self.provider reportOutgoingCallWithUUID:uuid startedConnectingAtDate:nil];
+    [self.provider reportOutgoingCallWithUUID:self.currentUUID startedConnectingAtDate:nil];
 #endif
     //RCCallKit_Delete_end
 }
@@ -118,7 +121,10 @@
         return;
     }
     NSUUID *uuid = [[NSUUID alloc] initWithUUIDString:callId];
-    self.currentUUID = uuid;
+    self.currentUUID = uuid ?: [NSUUID UUID];
+    if (!self.currentUUID) {
+        return;
+    }
     CXCallUpdate *update = [[CXCallUpdate alloc] init];
     update.supportsHolding = NO;
     NSString *localizedCallerName = [[RCUserInfoCacheManager sharedManager] getUserInfo:inviterId].name;
@@ -139,7 +145,7 @@
     if (isVideo) {
         update.hasVideo = YES;
     }
-    [self.provider reportNewIncomingCallWithUUID:uuid
+    [self.provider reportNewIncomingCallWithUUID:self.currentUUID
                                           update:update
                                       completion:^(NSError *_Nullable error) {
                                           if (error == nil) {

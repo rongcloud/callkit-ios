@@ -19,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) BOOL removeWhiteList;
 
 /// 是否移除特别关注群成员，默认为移除
-@property (nonatomic, assign) BOOL removeFollow;  
+@property (nonatomic, assign) BOOL removeFollow;
 
 @end
 

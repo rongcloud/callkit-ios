@@ -3,7 +3,7 @@
 //  RongCustomerService
 //
 //  Created by Qi on 2021/8/24.
-//  Copyright © 2021 张改红. All rights reserved.
+//  Copyright © 2021 张改红。All rights reserved.
 //
 
 #ifndef RCCustomerServiceDefine_h

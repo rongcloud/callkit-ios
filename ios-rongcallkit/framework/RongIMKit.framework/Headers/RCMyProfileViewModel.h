@@ -5,7 +5,7 @@
 //  Created by zgh on 2024/8/16.
 //
 
-#import <RongIMKit/RCProfileViewModel.h>
+#import "RCProfileViewModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 /// 当前用户资料 ViewModel

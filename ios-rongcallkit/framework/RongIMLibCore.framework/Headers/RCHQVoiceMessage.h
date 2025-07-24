@@ -32,4 +32,25 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+@class RCSpeechToTextInfo;
+
+/// 语音转文本。
+///
+/// - Since: 5.22.0
+@interface RCHQVoiceMessage (STT)
+
+/// 语音转文本信息。
+@property (nonatomic, readonly, strong, nullable) RCSpeechToTextInfo *sttInfo;
+
+/// 声道数量 [仅单声道支持 STT 功能]。
+@property (nonatomic, readonly, assign) NSUInteger numberOfChannels;
+
+/// 采样率 [仅 8000, 16000 支持 STT 功能]。
+@property (nonatomic, readonly, assign) NSUInteger sampleRate;
+
+/// 编码格式。
+@property (nonatomic, readonly, copy, nullable) NSString *format;
+
+@end
+
 NS_ASSUME_NONNULL_END

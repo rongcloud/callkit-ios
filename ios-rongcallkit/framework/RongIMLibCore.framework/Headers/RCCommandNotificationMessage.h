@@ -21,7 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// 此消息会进行存储，但不计入未读消息数。
 /// 与 RCCommandMessage 的区别是，此消息会进行存储并在界面上显示。
-/// 
+///
 /// - Remark: 通知类消息
 @interface RCCommandNotificationMessage : RCMessageContent <NSCoding>
 

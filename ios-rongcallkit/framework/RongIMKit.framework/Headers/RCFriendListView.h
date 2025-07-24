@@ -5,7 +5,7 @@
 //  Created by RobinCui on 2024/8/16.
 //
 
-#import <RongIMKit/RCBaseView.h>
+#import "RCBaseView.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

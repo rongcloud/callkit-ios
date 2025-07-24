@@ -12,12 +12,26 @@
 
 #import <Foundation/Foundation.h>
 
+/// 用户类型。
+///
+/// - Since: 5.22.0
+typedef NS_ENUM(NSInteger, RCUserType) {
+    /// 正常用户。
+    RCUserTypeNormal = 0,
+    /// 机器人。
+    RCUserTypeRobot = 1,
+};
+
 NS_ASSUME_NONNULL_BEGIN
+
 /// 用户信息类
 @interface RCUserInfo : NSObject <NSCoding>
 
 /// 用户 ID
 @property (nonatomic, copy) NSString *userId;
+
+/// 用户类型，默认为 `RCUserTypeNormal`。
+@property (nonatomic, assign) RCUserType userType;
 
 /// 用户名称
 @property (nonatomic, copy) NSString *name;
@@ -37,7 +51,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// - Parameter username: 用户名称
 /// - Parameter portrait: 用户头像的 URL
 /// - Returns: 用户信息对象
-- (instancetype)initWithUserId:(NSString *)userId name:(nullable NSString *)username portrait:(nullable NSString *)portrait;
+- (instancetype)initWithUserId:(NSString *)userId
+                          name:(nullable NSString *)username
+                      portrait:(nullable NSString *)portrait;
 
 @end
 

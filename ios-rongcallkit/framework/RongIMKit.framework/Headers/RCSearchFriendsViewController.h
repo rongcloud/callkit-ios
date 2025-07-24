@@ -5,8 +5,8 @@
 //  Created by RobinCui on 2024/9/4.
 //  Copyright © 2024 RongCloud. All rights reserved.
 //
-#import <RongIMKit/RCBaseViewController.h>
-#import <RongIMKit/RCSearchFriendsViewModel.h>
+#import "RCBaseViewController.h"
+#import "RCSearchFriendsViewModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 /// 搜索好友列表

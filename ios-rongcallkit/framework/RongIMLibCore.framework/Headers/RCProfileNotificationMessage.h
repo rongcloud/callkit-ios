@@ -35,7 +35,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// - Parameter data: 信息变更的数据
 /// - Parameter extra: 信息变更的附加信息
 /// - Returns: 公众服务账号信息变更消息的对象
-+ (instancetype)notificationWithOperation:(NSString *)operation data:(nullable NSString *)data extra:(nullable NSString *)extra;
++ (instancetype)notificationWithOperation:(NSString *)operation
+                                     data:(nullable NSString *)data
+                                    extra:(nullable NSString *)extra;
 
 @end
 

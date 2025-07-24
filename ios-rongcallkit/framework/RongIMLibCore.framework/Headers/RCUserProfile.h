@@ -42,7 +42,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// 头像地址
 ///
 /// 长度不超过 128 个字符
-@property (nonatomic, copy) NSString *portraitUri;
+@property (nonatomic, copy, nullable) NSString *portraitUri;
 
 /// 用户应用号
 ///
@@ -52,12 +52,12 @@ NS_ASSUME_NONNULL_BEGIN
 /// 电子邮件
 ///
 /// 长度不超过 128 个字符
-@property (nonatomic, copy) NSString *email;
+@property (nonatomic, copy, nullable) NSString *email;
 
 /// 生日
 ///
 /// 长度不超过 32 个字符
-@property (nonatomic, copy) NSString *birthday;
+@property (nonatomic, copy, nullable) NSString *birthday;
 
 /// 性别
 @property (nonatomic, assign) RCUserGender gender;
@@ -65,7 +65,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// 所在地
 ///
 /// 长度不超过 32 个字符
-@property (nonatomic, copy) NSString *location;
+@property (nonatomic, copy, nullable) NSString *location;
 
 /// 角色
 ///
@@ -80,7 +80,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// 自定义用户扩展信息
 ///
 /// 设置时请确保字典 key 值已在开发者后台配置过。
-@property (nonatomic, copy) NSDictionary<NSString *, NSString *> *userExtProfile;
+@property (nonatomic, copy, nullable) NSDictionary<NSString *, NSString *> *userExtProfile;
 
 @end
 

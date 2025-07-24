@@ -29,8 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
  - Parameter memberId:        成员 ID
  - Parameter action:            成员加入或退出
  */
-- (instancetype)initWithMemberId:(NSString *)memberId
-                          action:(RCChatRoomMemberActionType)action;
+- (instancetype)initWithMemberId:(NSString *)memberId action:(RCChatRoomMemberActionType)action;
 
 @end
 

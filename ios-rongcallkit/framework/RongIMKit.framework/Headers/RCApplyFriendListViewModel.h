@@ -7,12 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <RongIMKit/RCBaseViewModel.h>
-#import <RongIMKit/RCListViewModelProtocol.h>
-#import <RongIMKit/RCNavigationItemsViewModel.h>
-#import <RongIMKit/RCCellViewModelProtocol.h>
-#import <RongIMKit/RCApplyFriendCellViewModel.h>
-#import <RongIMKit/RCApplyFriendSectionItem.h>
+#import "RCBaseViewModel.h"
+#import "RCListViewModelProtocol.h"
+#import "RCNavigationItemsViewModel.h"
+#import "RCCellViewModelProtocol.h"
+#import "RCApplyFriendCellViewModel.h"
+#import "RCApplyFriendSectionItem.h"
 #import <RongIMLibCore/RongIMLibCore.h>
 NS_ASSUME_NONNULL_BEGIN
 

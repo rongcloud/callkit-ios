@@ -3,7 +3,7 @@
 //  RongIMLib
 //
 //  Created by LiFei on 2016/12/1.
-//  Copyright © 2016年 RongCloud. All rights reserved.
+//  Copyright © 2016 年 RongCloud. All rights reserved.
 //
 
 #import <RongIMLibCore/RongIMLibCore.h>
@@ -30,9 +30,6 @@ NS_ASSUME_NONNULL_BEGIN
 /// 视频时长，以秒为单位
 @property (nonatomic, assign, readonly) NSUInteger duration;
 
-/// 小视频文件名
-@property (nonatomic, copy) NSString *name;
-
 /// 文件大小
 @property (nonatomic, assign, readonly) long long size;
 
@@ -44,9 +41,9 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// - Parameter path: 视频文件本地路径
 /// - Parameter image: 视频首帧缩略图
-/// - Parameter duration: 视频时长， 以秒为单位
+/// - Parameter duration: 视频时长，以秒为单位
 /// - Returns: 视频消息实例变量
-/// 
+///
 + (instancetype)messageWithLocalPath:(NSString *)path thumbnail:(UIImage *)image duration:(NSUInteger)duration;
 
 @end

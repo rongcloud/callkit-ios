@@ -19,16 +19,16 @@ typedef NS_ENUM(NSInteger, RCSubscribeType) {
     ///
     /// - Since: 5.10.0
     RCSubscribeTypeUserProfile = 2,
-    
+
     /// 好友在线状态（好友无需主动订阅）
     /// - Since:
     RCSubscribeTypeFriendOnlineStatus = 3,
-    
+
     /// 好友用户信息变更（好友无需主动订阅）
     /// - Since:
     RCSubscribeTypeFriendUserProfile = 4,
-    
-    /// 无效枚举值， 业务上不用
+
+    /// 无效枚举值，业务上不用
     RCSubscribeTypeInvalid
 };
 
@@ -49,7 +49,7 @@ typedef NS_ENUM(NSInteger, RCSubscribeOperationType) {
 @property (nonatomic, assign) RCSubscribeOperationType operationType;
 /// 订阅时间，unix 毫秒
 @property (nonatomic, assign) long long subscribeTime;
-/// 订阅有效时长，单位秒 [60s ~ 30天]
+/// 订阅有效时长，单位秒 [60s ~ 30 天]
 @property (nonatomic, assign) NSInteger expiry;
 
 @end

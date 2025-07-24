@@ -17,10 +17,10 @@ NS_ASSUME_NONNULL_BEGIN
 /// 当订阅事件发生变化时调用此方法。
 /// 功能说明：当任何订阅的事件发生变化时，此方法将被触发。
 /// 可以通过实现此方法来处理事件的变化，例如更新用户界面或处理新的数据。
-/// 通常，该方法在后台线程中被调用，因此更新UI时需要切换到主线程。
+/// 通常，该方法在后台线程中被调用，因此更新 UI 时需要切换到主线程。
 ///
 /// - Parameter subscribeEvents: 订阅事件的列表，包含所有发生变化的事件。
-/// - Remark: 订阅过期没有通知， 开发者需自行关注过期时间
+/// - Remark: 订阅过期没有通知，开发者需自行关注过期时间
 /// - Since: 5.8.1
 - (void)onEventChange:(NSArray<RCSubscribeInfoEvent *> *)subscribeEvents;
 

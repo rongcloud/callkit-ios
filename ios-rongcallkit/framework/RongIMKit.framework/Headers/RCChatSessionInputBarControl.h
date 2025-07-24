@@ -551,6 +551,8 @@
  */
 - (void)chatSessionInputBarStatusChanged:(KBottomBarStatus)bottomBarStatus;
 
+- (void)didSetDraft:(NSDictionary *)info;
+
 @end
 
 @protocol RCChatSessionInputBarControlDataSource <NSObject>
@@ -570,6 +572,12 @@
  - Returns: 用户信息
  */
 - (RCUserInfo *)getSelectingUserInfo:(NSString *)userId;
+
+/*!
+ 获取需要存入草稿的信息
+ - Returns: 草稿信息
+ */
+- (NSDictionary *)getDraftExtraInfo;
 
 @end
 

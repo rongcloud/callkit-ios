@@ -5,11 +5,11 @@
 //  Created by zgh on 2024/8/16.
 //
 
-#import <RongIMKit/RCBaseViewModel.h>
+#import "RCBaseViewModel.h"
 #import <RongIMLibCore/RongIMLibCore.h>
-#import <RongIMKit/RCProfileCellViewModel.h>
-#import <RongIMKit/RCListViewModelProtocol.h>
-#import <RongIMKit/RCProfileFooterViewModel.h>
+#import "RCProfileCellViewModel.h"
+#import "RCListViewModelProtocol.h"
+#import "RCProfileFooterViewModel.h"
 
 @class RCProfileViewModel;
 NS_ASSUME_NONNULL_BEGIN

@@ -3,7 +3,7 @@
 //  RongChatRoom
 //
 //  Created by 张改红 on 2020/8/12.
-//  Copyright © 2020 张改红. All rights reserved.
+//  Copyright © 2020 张改红。All rights reserved.
 //
 
 #ifndef RCChatRoomProtocol_h
@@ -45,7 +45,8 @@ typedef NS_ENUM(NSUInteger, RCChatRoomDestroyType) {
  */
 - (void)onChatRoomJoined:(NSString *)chatroomId response:(RCJoinChatRoomResponse *)response;
 
-- (void)onChatRoomJoined:(NSString *)chatroomId __deprecated_msg("Use [RCChatRoomStatusDelegate onChatRoomJoined:response:] instead");
+- (void)onChatRoomJoined:(NSString *)chatroomId
+    __deprecated_msg("Use [RCChatRoomStatusDelegate onChatRoomJoined:response:] instead");
 
 /*!
  加入聊天室失败的回调
@@ -85,6 +86,8 @@ typedef NS_ENUM(NSUInteger, RCChatRoomDestroyType) {
 
 #pragma mark - 聊天室 KV 状态变化
 
+@class RCChatroomKVChangeInfo;
+
 /**
  IMLib 聊天室 KV 状态变化监听器
  
@@ -115,6 +118,15 @@ typedef NS_ENUM(NSUInteger, RCChatRoomDestroyType) {
  - Parameter entry: KV 字典
  */
 - (void)chatRoomKVDidRemove:(NSString *)roomId entry:(NSDictionary<NSString *, NSString *> *)entry;
+
+/**
+ 聊天室 KV 变化的回调。
+ 本回调包含 `chatRoomKVDidUpdate:entry:` 和 `chatRoomKVDidRemove:entry:` 的回调数据。
+
+ - Parameter roomId: 聊天室 ID。
+ - Parameter changeInfos: 发生变化的 KV，严格按照聊天室属性设置时的顺序。
+ */
+- (void)chatRoomKVDidChange:(NSString *)roomId changeInfos:(NSArray<RCChatroomKVChangeInfo *> *)changeInfos;
 
 @end
 
@@ -147,7 +159,6 @@ typedef NS_ENUM(NSUInteger, RCChatRoomDestroyType) {
 - (void)memberDidChange:(RCChatRoomMemberActionModel *)actionModel;
 
 @end
-
 
 
 #pragma mark - 聊天室事件通知
@@ -242,4 +253,3 @@ typedef NS_ENUM(NSUInteger, RCChatRoomDestroyType) {
 NS_ASSUME_NONNULL_END
 
 #endif /* RCChatRoomProtocol_h */
-

@@ -24,13 +24,13 @@ NS_ASSUME_NONNULL_BEGIN
 /// 起始的消息发送时间戳，毫秒 默认 0
 @property (nonatomic, assign) long long recordTime;
 
-/// 需要获取的消息数量， 1 < count <= 100 默认 0
+/// 需要获取的消息数量，1 < count <= 100 默认 0
 @property (nonatomic, assign) NSInteger count;
 
 /// 拉取顺序
-/// 
-/// RCRemoteHistoryOrderDesc： 降序，结合传入的时间戳参数，获取比时间戳小（早）的消息；
-/// RCRemoteHistoryOrderAsc： 升序，结合传入的时间戳参数，获取比时间戳大的消息。
+///
+/// RCRemoteHistoryOrderDesc：降序，结合传入的时间戳参数，获取比时间戳小（早）的消息；
+/// RCRemoteHistoryOrderAsc：升序，结合传入的时间戳参数，获取比时间戳大的消息。
 /// 默认降序。
 @property (nonatomic, assign) RCRemoteHistoryOrder order;
 

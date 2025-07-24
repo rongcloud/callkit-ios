@@ -71,6 +71,12 @@ NS_ASSUME_NONNULL_BEGIN
              tableView:(UITableView *)tableView
           didSelectRow:(NSIndexPath *)indexPath;
 
+/// 返回 cell 高度
+///
+/// - Parameters tableView: tableView
+/// - Parameters indexPath: indexPath
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath;
+
 /// 分区数量
 ///
 /// - Returns: 分区数量

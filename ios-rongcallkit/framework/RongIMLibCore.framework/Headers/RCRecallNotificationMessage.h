@@ -3,7 +3,7 @@
 //  RongIMLib
 //
 //  Created by litao on 16/7/15.
-//  Copyright © 2016年 RongCloud. All rights reserved.
+//  Copyright © 2016 年 RongCloud. All rights reserved.
 //
 
 #import <RongIMLibCore/RongIMLibCore.h>
@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 撤回通知消息类
 /// 撤回通知消息，此消息会进行本地存储，但不计入未读消息数。
-/// 
+///
 /// - Remark: 通知类消息
 @interface RCRecallNotificationMessage : RCMessageContent <NSCoding>
 

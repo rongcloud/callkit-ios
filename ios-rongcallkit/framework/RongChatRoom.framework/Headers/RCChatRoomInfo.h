@@ -3,7 +3,7 @@
 //  RongIMLib
 //
 //  Created by 岑裕 on 16/1/11.
-//  Copyright © 2016年 RongCloud. All rights reserved.
+//  Copyright © 2016 年 RongCloud. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -30,7 +30,7 @@
   如果成员类型为RC_ChatRoom_Member_Asc，则为最早加入的成员列表，按成员加入时间升序排列；
  如果成员类型为RC_ChatRoom_Member_Desc，则为最晚加入的成员列表，按成员加入时间降序排列。
  */
-@property (nonatomic, strong) NSArray <RCChatRoomMemberInfo *> *memberInfoArray;
+@property (nonatomic, strong) NSArray<RCChatRoomMemberInfo *> *memberInfoArray;
 
 /*!
  当前聊天室的成员总数

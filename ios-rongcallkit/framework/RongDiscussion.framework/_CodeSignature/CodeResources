@@ -10,15 +10,15 @@
 		</data>
 		<key>Headers/RCDiscussionClient.h</key>
 		<data>
-		cuGQKJ+iXAkDPrr51a6RblC+znI=
+		bgUdpDGhPuEM9wabJJSbES5caAU=
 		</data>
 		<key>Headers/RCDiscussionNotificationMessage.h</key>
 		<data>
-		kC0yKy0ow6ccuVgJOrLYWYpp+EQ=
+		qdPHB9jH8axll3K3lfTuo3mxzBI=
 		</data>
 		<key>Headers/RongDiscussion.h</key>
 		<data>
-		7CUdmnkfDc6FR5ywmOziVOFrW2Y=
+		GWYH3z1vZsZ4ZApfwXfLWzqDwXY=
 		</data>
 		<key>Info.plist</key>
 		<data>
@@ -46,33 +46,33 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			cuGQKJ+iXAkDPrr51a6RblC+znI=
+			bgUdpDGhPuEM9wabJJSbES5caAU=
 			</data>
 			<key>hash2</key>
 			<data>
-			ufCf81zho5wQP7LoYuQtTMZuygmI/Kxs2OVqyaQtpI4=
+			pqliMPzap8U42OM/8X0amljBl07b4RYg1Ueq5rSIuPw=
 			</data>
 		</dict>
 		<key>Headers/RCDiscussionNotificationMessage.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			kC0yKy0ow6ccuVgJOrLYWYpp+EQ=
+			qdPHB9jH8axll3K3lfTuo3mxzBI=
 			</data>
 			<key>hash2</key>
 			<data>
-			4UQQZurDdYeybLQB41R0nCxwhfOltWgTykcVMYWv6tY=
+			oNJNjI8GYod/H1mn20l/taI1To8VbcR0ZBHA6ONRKmM=
 			</data>
 		</dict>
 		<key>Headers/RongDiscussion.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			7CUdmnkfDc6FR5ywmOziVOFrW2Y=
+			GWYH3z1vZsZ4ZApfwXfLWzqDwXY=
 			</data>
 			<key>hash2</key>
 			<data>
-			vr9V9ZupppTDVgz4CtX7gRM5gorhPF6UjWIPsXCk8Z4=
+			2DtqguEaKwbyWtTZ0mQosi6F0m5Z8IMamMBFI6QhnoA=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

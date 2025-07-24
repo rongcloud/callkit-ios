@@ -28,17 +28,17 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol RCMessageCoding <NSObject>
 @required
 
-/// 将消息内容序列化，编码成为可传输的json数据
+/// 将消息内容序列化，编码成为可传输的 json 数据
 
 ///
-/// 消息内容通过此方法，将消息中的所有数据，编码成为json数据，返回的json数据将用于网络传输。
+/// 消息内容通过此方法，将消息中的所有数据，编码成为 json 数据，返回的 json 数据将用于网络传输。
 - (nullable NSData *)encode;
 
-/// 将json数据的内容反序列化，解码生成可用的消息内容
+/// 将 json 数据的内容反序列化，解码生成可用的消息内容
 ///
-/// - Parameter data: 消息中的原始json数据
+/// - Parameter data: 消息中的原始 json 数据
 ///
-/// 网络传输的json数据，会通过此方法解码，获取消息内容中的所有数据，生成有效的消息内容。
+/// 网络传输的 json 数据，会通过此方法解码，获取消息内容中的所有数据，生成有效的消息内容。
 - (void)decodeWithData:(NSData *)data;
 
 /// 返回消息的类型名
@@ -46,7 +46,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// - Returns: 消息的类型名
 ///
 /// 您定义的消息类型名，需要在各个平台上保持一致，以保证消息互通。
-/// - Warning: 请勿使用 @ "RC:"开头的类型名，以免和SDK默认的消息名称冲突
+/// - Warning: 请勿使用 @ "RC:"开头的类型名，以免和 SDK 默认的消息名称冲突
 + (NSString *)getObjectName;
 
 /// 返回可搜索的关键内容列表
@@ -83,8 +83,8 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// - Returns: 会话列表和本地通知中显示的消息内容摘要
 ///
-/// 如果您使用IMKit，当会话的最后一条消息为自定义消息时，需要通过此方法获取在会话列表展现的内容摘要；
-/// 当App在后台收到消息时，需要通过此方法获取在本地通知中展现的内容摘要。
+/// 如果您使用 IMKit，当会话的最后一条消息为自定义消息时，需要通过此方法获取在会话列表展现的内容摘要；
+/// 当 App 在后台收到消息时，需要通过此方法获取在本地通知中展现的内容摘要。
 - (nullable NSString *)conversationDigest;
 
 @end
@@ -99,14 +99,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 消息内容中携带的发送者的用户信息
 ///
-/// 如果您使用IMKit，可以通过RCIM的enableMessageAttachUserInfo属性设置在每次发送消息中携带发送者的用户信息。
+/// 如果您使用 IMKit，可以通过 RCIM 的 enableMessageAttachUserInfo 属性设置在每次发送消息中携带发送者的用户信息。
 @property (nonatomic, strong, nullable) RCUserInfo *senderUserInfo;
 
 /// 消息中的 @ 提醒信息
 @property (nonatomic, strong, nullable) RCMentionedInfo *mentionedInfo;
 
 /// 消息的审核配置
-@property (nonatomic, strong) RCMessageAuditInfo *auditInfo;
+@property (nonatomic, strong, nullable) RCMessageAuditInfo *auditInfo;
 
 /// 设置焚烧时间
 ///
@@ -118,15 +118,15 @@ NS_ASSUME_NONNULL_BEGIN
 /// 请确保传入的是 NSString 类型的数据
 @property (nonatomic, copy, nullable) NSString *extra;
 
- /// 将用户信息编码到字典中
+/// 将用户信息编码到字典中
 ///
- /// - Parameter userInfo: 要编码的用户信息
- /// - Returns: 存有用户信息的 Dictionary
+/// - Parameter userInfo: 要编码的用户信息
+/// - Returns: 存有用户信息的 Dictionary
 - (NSDictionary *)encodeUserInfo:(RCUserInfo *)userInfo;
 
 /// 将消息内容中携带的用户信息解码
 ///
-/// - Parameter dictionary: 用户信息的Dictionary
+/// - Parameter dictionary: 用户信息的 Dictionary
 - (void)decodeUserInfo:(NSDictionary *)dictionary;
 
 /// 将 @ 提醒信息编码到字典中
@@ -137,7 +137,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 将消息内容中携带的 @ 提醒信息解码
 ///
-/// - Parameter dictionary: @提醒信息的Dictionary
+/// - Parameter dictionary: @提醒信息的 Dictionary
 - (void)decodeMentionedInfo:(NSDictionary *)dictionary;
 
 
@@ -188,10 +188,10 @@ NS_ASSUME_NONNULL_BEGIN
 /// - Since: 5.4.0
 - (void)decodeBaseData:(NSDictionary *)dictionary;
 
-/// 消息内容的原始json数据
+/// 消息内容的原始 json 数据
 ///
-/// 此字段存放消息内容中未编码的json数据。
-/// SDK内置的消息，如果消息解码失败，默认会将消息的内容存放到此字段；如果编码和解码正常，此字段会置为nil。
+/// 此字段存放消息内容中未编码的 json 数据。
+/// SDK 内置的消息，如果消息解码失败，默认会将消息的内容存放到此字段；如果编码和解码正常，此字段会置为 nil。
 @property (nonatomic, strong, nullable, setter=setRawJSONData:) NSData *rawJSONData;
 
 

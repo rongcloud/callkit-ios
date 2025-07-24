@@ -14,9 +14,6 @@ NS_ASSUME_NONNULL_BEGIN
 /// - Since: 5.4.0
 @interface RCChannelIdentifier : RCConversationIdentifier
 
-/// channel ID
-@property (nonatomic, copy) NSString *channelId;
-
 @end
 
 NS_ASSUME_NONNULL_END

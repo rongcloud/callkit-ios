@@ -3,7 +3,7 @@
 //  RongIMLib
 //
 //  Created by litao on 16/2/25.
-//  Copyright © 2016年 RongCloud. All rights reserved.
+//  Copyright © 2016 年 RongCloud. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -44,7 +44,7 @@
 /*!
  人工服务的评价选项
  */
-@property (nonatomic, strong) NSArray <RCEvaluateItem *> *humanEvaluateItems;
+@property (nonatomic, strong) NSArray<RCEvaluateItem *> *humanEvaluateItems;
 
 /*!
  客服无应答提示时间间隔

@@ -6,7 +6,7 @@
 //  Copyright © 2024 RongCloud. All rights reserved.
 //
 
-#import <RongIMKit/RCNavigationItemsViewModel.h>
+#import "RCNavigationItemsViewModel.h"
 
 typedef NS_ENUM(NSInteger ,RCApplicationCategory) {
     RCApplicationCategoryBoth,

@@ -14,6 +14,8 @@
 #import "RCBaseTableView.h"
 @class RCNetworkIndicatorView;
 
+NS_ASSUME_NONNULL_BEGIN
+
 /// 会话列表界面类
 @interface RCConversationListViewController : RCBaseViewController <UITableViewDataSource, UITableViewDelegate>
 
@@ -27,7 +29,7 @@
 /// - Returns: 会话列表对象
 /// 聚合为一条显示指的是，将指定会话类型的所有会话在会话列表中聚合显示成一条，点击进入会显示该会话类型的所有会话列表。
 - (instancetype)initWithDisplayConversationTypes:(NSArray *)displayConversationTypeArray
-                      collectionConversationType:(NSArray *)collectionConversationTypeArray;
+                      collectionConversationType:(nullable NSArray *)collectionConversationTypeArray;
 
 #pragma mark - 设置需要显示和聚合显示的会话类型
 
@@ -38,7 +40,7 @@
 
 /// 列表中需要聚合为一条显示的会话类型数组
 /// 数组中的元素为RCConversationType转换的NSNumber
-@property (nonatomic, strong) NSArray *collectionConversationTypeArray;
+@property (nonatomic, strong, nullable) NSArray *collectionConversationTypeArray;
 
 /// 设置在列表中需要显示的会话类型
 /// - Parameter conversationTypeArray: 列表中需要显示的会话类型数组(需要将RCConversationType转为NSNumber构建Array)
@@ -47,7 +49,7 @@
 
 /// 设置在列表中需要聚合为一条显示的会话类型
 /// - Parameter conversationTypeArray: 列表中需要聚合为一条显示的会话类型数组(需要将RCConversationType转为NSNumber构建Array)
-- (void)setCollectionConversationType:(NSArray *)conversationTypeArray;
+- (void)setCollectionConversationType:(nullable NSArray *)conversationTypeArray;
 
 /// 当前会话列表是否为从聚合Cell点击进入的子会话列表
 /// 您在点击会话列表中的聚合Cell跳转到到子会话列表时，需要将此属性设置为YES。
@@ -215,3 +217,4 @@
 - (void)notifyUpdateUnreadMessageCount;
 
 @end
+NS_ASSUME_NONNULL_END

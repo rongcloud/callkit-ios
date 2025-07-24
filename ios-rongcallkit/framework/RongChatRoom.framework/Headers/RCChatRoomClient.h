@@ -21,29 +21,6 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark - 聊天室操作
 
 /*!
- 加入聊天室（如果聊天室不存在则会创建）
-
- - Parameter targetId:        聊天室 ID，最大长度为 64 个字符
- - Parameter messageCount:    进入聊天室时获取历史消息的数量，-1 <= messageCount <= 50
- - Parameter successBlock:    加入聊天室成功的回调
- - Parameter errorBlock:      加入聊天室失败的回调 [status: 加入聊天室失败的错误码]
-
- 可以通过传入的 messageCount 设置加入聊天室成功之后需要获取的历史消息数量。
- -1 表示不获取任何历史消息，0 表示不特殊设置而使用SDK默认的设置（默认为获取 10 条），0 < messageCount <= 50
- 为具体获取的消息数量,最大值为 50。注：如果是 7.x 系统获取历史消息数量不要大于 30
- 
- 从5.3.1版本开始， 加入聊天室后，断网重新加入聊天室默认获取聊天室消息条数，为主动加入时获取的历史消息条数。由于每次传入的条数固定, 可能会导致消息重复，App 需要做消息排重。
- 
- - Warning: 没有加入过的聊天室(或杀死 app 重新打开)，调用该接口会把该聊天室本地的消息与 KV 清除
- 
- - Remark: 聊天室
- */
-- (void)joinChatRoom:(NSString *)targetId
-        messageCount:(int)messageCount
-             success:(nullable void (^)(void))successBlock
-               error:(nullable void (^)(RCErrorCode status))errorBlock __deprecated_msg("Use [RCChatRoomClient joinExistChatRoom:messageCount:successBlock:errorBlock:] instead");
-
-/*!
   加入聊天室（如果聊天室不存在则会创建）
 
  - Parameter targetId:        聊天室 ID，最大长度为 64 个字符
@@ -95,27 +72,6 @@ NS_ASSUME_NONNULL_BEGIN
              successBlock:(nullable void (^)(RCJoinChatRoomResponse *response))successBlock
                errorBlock:(nullable void (^)(RCErrorCode status))errorBlock;
 
-
-/*!
- 加入已经存在的聊天室（如果聊天室不存在返回错误 23410，人数超限返回错误 23411）
-
- - Parameter targetId:        聊天室 ID，最大长度为 64 个字符
- - Parameter messageCount:    进入聊天室时获取历史消息的数量，-1 <= messageCount <= 50
- - Parameter successBlock:    加入聊天室成功的回调
- - Parameter errorBlock:      加入聊天室失败的回调 [status: 加入聊天室失败的错误码]
-
- 可以通过传入的 messageCount 设置加入聊天室成功之后，需要获取的历史消息数量。
- -1 表示不获取任何历史消息，0 表示不特殊设置而使用SDK默认的设置（默认为获取 10 条），0 < messageCount <= 50
- 为具体获取的消息数量，最大值为 50。
- 没有加入过的聊天室(或杀死 app 重新打开)，调用该接口会把该聊天室本地的消息与 KV 清除
- 
- - Remark: 聊天室
- */
-- (void)joinExistChatRoom:(NSString *)targetId
-             messageCount:(int)messageCount
-                  success:(nullable void (^)(void))successBlock
-                    error:(nullable void (^)(RCErrorCode status))errorBlock __deprecated_msg("Use [RCChatRoomClient joinExistChatRoom:messageCount:successBlock:errorBlock:] instead");
-
 /*!
  退出聊天室
 
@@ -153,34 +109,26 @@ NS_ASSUME_NONNULL_BEGIN
                   error:(nullable void (^)(RCErrorCode status))errorBlock;
 
 /*!
- 设置 IMLib 的聊天室状态监听器
-
- - Parameter delegate: IMLib 聊天室状态监听器
-
- - Remark: 聊天室
- */
-- (void)setChatRoomStatusDelegate:(id<RCChatRoomStatusDelegate>)delegate;
-
-/*!
  添加 IMLib 的聊天室状态监听器
 
  - Parameter delegate: IMLib 聊天室状态监听器
  */
-- (void)addChatRoomStatusDelegate:(id<RCChatRoomStatusDelegate>)delegate;
+- (void)addChatRoomStatusDelegate:(id<RCChatRoomStatusDelegate>)delegate NS_SWIFT_NAME(addChatRoomStatusDelegate(_:));
 
 /*!
  移除 IMLib 的聊天室状态监听器
 
  - Parameter delegate: IMLib 聊天室状态监听器
  */
-- (void)removeChatRoomStatusDelegate:(id<RCChatRoomStatusDelegate>)delegate;
+- (void)removeChatRoomStatusDelegate:(id<RCChatRoomStatusDelegate>)delegate
+    NS_SWIFT_NAME(removeChatRoomStatusDelegate(_:));
 
 /*!
  获取 IMLib 的聊天室状态监听器
  
  - Returns: 所有 IMLib 聊天室状态监听器
  */
-- (NSArray <id<RCChatRoomStatusDelegate>> *)allChatRoomStatusDelegates;
+- (NSArray<id<RCChatRoomStatusDelegate>> *)allChatRoomStatusDelegates;
 
 /*!
  从服务器端获取聊天室的历史消息
@@ -199,42 +147,34 @@ NS_ASSUME_NONNULL_BEGIN
                               recordTime:(long long)recordTime
                                    count:(int)count
                                    order:(RCTimestampOrder)order
-                                 success:(nullable void (^)(NSArray<RCMessage *> *messages, long long syncTime))successBlock
+                                 success:(nullable void (^)(NSArray<RCMessage *> *messages,
+                                                            long long syncTime))successBlock
                                    error:(nullable void (^)(RCErrorCode status))errorBlock;
 
 #pragma mark - 聊天室状态存储 (使用前必须先联系商务开通)
-/*!
-设置聊天室 KV 状态变化监听器
-
-- Parameter delegate: 聊天室 KV 状态变化的监听器
-
-可以设置并实现此 delegate 来进行聊天室状态变化的监听 。SDK 会在回调中通知您聊天室状态的改变。
-
-- Remark: 功能设置
-*/
-- (void)setRCChatRoomKVStatusChangeDelegate:(id<RCChatRoomKVStatusChangeDelegate>)delegate;
 
 /*!
  添加聊天室 KV 状态变化监听
 
  - Parameter delegate: 代理
  */
-- (void)addChatRoomKVStatusChangeDelegate:(id<RCChatRoomKVStatusChangeDelegate>)delegate;
+- (void)addChatRoomKVStatusChangeDelegate:(id<RCChatRoomKVStatusChangeDelegate>)delegate
+    NS_SWIFT_NAME(addChatRoomKVStatusChangeDelegate(_:));
 
 /*!
  移除聊天室 KV 状态变化监听
 
  - Parameter delegate: 代理
  */
-- (void)removeChatRoomKVStatusChangeDelegate:(id<RCChatRoomKVStatusChangeDelegate>)delegate;
+- (void)removeChatRoomKVStatusChangeDelegate:(id<RCChatRoomKVStatusChangeDelegate>)delegate
+    NS_SWIFT_NAME(removeChatRoomKVStatusChangeDelegate(_:));
 
 /*!
  获取聊天室 KV 状态变化监听
  
  - Returns: 所有聊天室 KV 状态变化的监听器
  */
-- (NSArray <id<RCChatRoomKVStatusChangeDelegate>> *)allChatRoomKVStatusChangeDelegates;
-
+- (NSArray<id<RCChatRoomKVStatusChangeDelegate>> *)allChatRoomKVStatusChangeDelegates;
 
 
 /**
@@ -261,7 +201,7 @@ NS_ASSUME_NONNULL_BEGIN
                    value:(NSString *)value
         sendNotification:(BOOL)sendNotification
               autoDelete:(BOOL)autoDelete
-       notificationExtra:(NSString *)notificationExtra
+       notificationExtra:(nullable NSString *)notificationExtra
                  success:(nullable void (^)(void))successBlock
                    error:(nullable void (^)(RCErrorCode nErrorCode))errorBlock;
 
@@ -288,7 +228,7 @@ NS_ASSUME_NONNULL_BEGIN
                         value:(NSString *)value
              sendNotification:(BOOL)sendNotification
                    autoDelete:(BOOL)autoDelete
-            notificationExtra:(NSString *)notificationExtra
+            notificationExtra:(nullable NSString *)notificationExtra
                       success:(nullable void (^)(void))successBlock
                         error:(nullable void (^)(RCErrorCode nErrorCode))errorBlock;
 
@@ -311,7 +251,8 @@ NS_ASSUME_NONNULL_BEGIN
                    isForce:(BOOL)isForce
                 autoDelete:(BOOL)autoDelete
                    success:(nullable void (^)(void))successBlock
-                     error:(nullable void (^)(RCErrorCode nErrorCode, NSDictionary<NSString *,NSNumber *> *failureEntries))errorBlock;
+                     error:(nullable void (^)(RCErrorCode nErrorCode,
+                                              NSDictionary<NSString *, NSNumber *> *failureEntries))errorBlock;
 
 /**
  获取聊天室单个属性
@@ -327,7 +268,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)getChatRoomEntry:(NSString *)chatroomId
                      key:(NSString *)key
-                 success:(nullable void (^)(NSDictionary<NSString *,NSString *> *entry))successBlock
+                 success:(nullable void (^)(NSDictionary<NSString *, NSString *> *entry))successBlock
                    error:(nullable void (^)(RCErrorCode nErrorCode))errorBlock;
 
 /**
@@ -364,7 +305,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)removeChatRoomEntry:(NSString *)chatroomId
                         key:(NSString *)key
            sendNotification:(BOOL)sendNotification
-          notificationExtra:(NSString *)notificationExtra
+          notificationExtra:(nullable NSString *)notificationExtra
                     success:(nullable void (^)(void))successBlock
                       error:(nullable void (^)(RCErrorCode nErrorCode))errorBlock;
 
@@ -387,7 +328,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)forceRemoveChatRoomEntry:(NSString *)chatroomId
                              key:(NSString *)key
                 sendNotification:(BOOL)sendNotification
-               notificationExtra:(NSString *)notificationExtra
+               notificationExtra:(nullable NSString *)notificationExtra
                          success:(nullable void (^)(void))successBlock
                            error:(nullable void (^)(RCErrorCode nErrorCode))errorBlock;
 
@@ -408,7 +349,8 @@ NS_ASSUME_NONNULL_BEGIN
                          keys:(NSArray<NSString *> *)keys
                       isForce:(BOOL)isForce
                       success:(nullable void (^)(void))successBlock
-                        error:(nullable void (^)(RCErrorCode nErrorCode, NSDictionary<NSString *, NSNumber *> *failureEntries))errorBlock;
+                        error:(nullable void (^)(RCErrorCode nErrorCode,
+                                                 NSDictionary<NSString *, NSNumber *> *failureEntries))errorBlock;
 
 #pragma mark - 聊天室成员变化监听器
 
@@ -422,15 +364,14 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, weak, nullable) id<RCChatRoomMemberDelegate> memberDelegate;
 
 
-
-/// 绑定聊天室ID和RTCRoomID
-/// - Parameter chatRoomId: 聊天室ID，最大长度为 64 个字符
+/// 绑定聊天室 ID 和 RTCRoomID
+/// - Parameter chatRoomId: 聊天室 ID，最大长度为 64 个字符
 /// - Parameter rtcRoomId: rtc room ID
 /// - Parameter successBlock: 成功回调
 /// - Parameter errorBlock: 失败回调
 - (void)bindChatRoom:(NSString *)chatRoomId
          withRTCRoom:(NSString *)rtcRoomId
-             success:(nullable void(^)(void))successBlock
+             success:(nullable void (^)(void))successBlock
                error:(nullable void (^)(RCErrorCode nErrorCode))errorBlock;
 
 #pragma mark - 聊天室事件通知监听器
@@ -444,7 +385,8 @@ NS_ASSUME_NONNULL_BEGIN
  
  - Since: 5.4.5
  */
-- (void)addChatRoomNotifyEventDelegate:(id<RCChatRoomNotifyEventDelegate>)delegate;
+- (void)addChatRoomNotifyEventDelegate:(id<RCChatRoomNotifyEventDelegate>)delegate
+    NS_SWIFT_NAME(addChatRoomNotifyEventDelegate(_:));
 
 /**
  移除 IMLib 的聊天室事件通知监听器
@@ -452,7 +394,8 @@ NS_ASSUME_NONNULL_BEGIN
  - Parameter delegate: IMLib 聊天室事件通知监听器
  - Since: 5.4.5
  */
-- (void)removeChatRoomNotifyEventDelegate:(id<RCChatRoomNotifyEventDelegate>)delegate;
+- (void)removeChatRoomNotifyEventDelegate:(id<RCChatRoomNotifyEventDelegate>)delegate
+    NS_SWIFT_NAME(removeChatRoomNotifyEventDelegate(_:));
 
 /**
  返回 IMLib 的聊天室事件通知监听器

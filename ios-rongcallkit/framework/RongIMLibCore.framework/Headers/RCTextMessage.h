@@ -16,7 +16,7 @@
 #define RCTextMessageTypeIdentifier @"RC:TxtMsg"
 
 NS_ASSUME_NONNULL_BEGIN
-
+@class RCTranslateInfo;
 /// 文本消息类
 ///
 /// 文本消息类，此消息会进行存储并计入未读消息数。
@@ -26,6 +26,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 文本消息的内容
 @property (nonatomic, copy) NSString *content;
+
+/// 翻译信息。
+///
+/// - Since: 5.24.0
+@property (nonatomic, strong) RCTranslateInfo *translateInfo;
 
 /// 初始化文本消息
 ///

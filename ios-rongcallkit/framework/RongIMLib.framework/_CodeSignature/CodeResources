@@ -6,15 +6,15 @@
 	<dict>
 		<key>Headers/RCIMClient.h</key>
 		<data>
-		/piqtzrKpRtswsxaZnQc4aBpgNU=
+		bFjMxzCLhULQqln090AbLirPglM=
 		</data>
 		<key>Headers/RongIMLib.h</key>
 		<data>
-		70bjYZBqWF/8KHRDdrBX4eNHVVQ=
+		YJkCtjbkdU1OXB3LbTkuXTNriXA=
 		</data>
 		<key>Headers/RongIMLibHeader.h</key>
 		<data>
-		K3VY4dj49D9fWYiX13o+U4wVSIs=
+		Tp2GrtxDkawbM+ehNaHn1bd0qho=
 		</data>
 		<key>Info.plist</key>
 		<data>
@@ -31,33 +31,33 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			/piqtzrKpRtswsxaZnQc4aBpgNU=
+			bFjMxzCLhULQqln090AbLirPglM=
 			</data>
 			<key>hash2</key>
 			<data>
-			AYDuH7IyC8sBY7xhD84EEd6tx++b6T565i1Le1ChcYM=
+			1fLXzk/lQqdmR+PahoUWSLCc4I9nuyjjm9wwAHbjA6E=
 			</data>
 		</dict>
 		<key>Headers/RongIMLib.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			70bjYZBqWF/8KHRDdrBX4eNHVVQ=
+			YJkCtjbkdU1OXB3LbTkuXTNriXA=
 			</data>
 			<key>hash2</key>
 			<data>
-			eRAVeTyGADHianQ185cqBiQiK/uj/NDcN+lOW6lnf9c=
+			C/c/fee5vE1944OYzXWL6Q641YXqpGDabdWhiEpo2wM=
 			</data>
 		</dict>
 		<key>Headers/RongIMLibHeader.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			K3VY4dj49D9fWYiX13o+U4wVSIs=
+			Tp2GrtxDkawbM+ehNaHn1bd0qho=
 			</data>
 			<key>hash2</key>
 			<data>
-			g741YjSFJIleQqjIfRkv2SNpzqOtwPChH362fYfNSb4=
+			lcGqecT8uRh31/bzOESkUp2j80N9sidW578F4lnobL8=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

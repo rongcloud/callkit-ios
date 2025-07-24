@@ -47,7 +47,7 @@ FOUNDATION_EXPORT NSString *const RCLibDispatchReadReceiptNotification;
 
  您需要通过 sharedRCIMClient 方法，获取单例对象。
  */
-@interface RCIMClient : NSObject
+__deprecated_msg("Use RCCoreClient instead") @interface RCIMClient : NSObject
 
 /*!
  获取融云通讯能力库 IMLib 的核心类单例
@@ -150,7 +150,9 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
 
  - Remark: 功能设置
  */
-- (BOOL)setServerInfo:(NSString *)naviServer fileServer:(nullable NSString *)fileServer __deprecated_msg("Use [RCCoreClient initWithAppKey:option:] instead");
+- (BOOL)setServerInfo:(NSString *)naviServer
+           fileServer:(nullable NSString *)fileServer
+    __deprecated_msg("Use [RCCoreClient initWithAppKey:option:] instead");
 
 /**
  设置统计服务器的信息
@@ -170,7 +172,8 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
 
  - Remark: 功能设置
  */
-- (BOOL)setStatisticServer:(NSString *)statisticServer __deprecated_msg("Use [RCCoreClient initWithAppKey:option:] instead");
+- (BOOL)setStatisticServer:(NSString *)statisticServer
+    __deprecated_msg("Use [RCCoreClient initWithAppKey:option:] instead");
 
 #pragma mark - 连接与断开服务器
 
@@ -436,12 +439,12 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  - Remark: 消息操作
  */
 - (nullable RCMessage *)sendMessage:(RCConversationType)conversationType
-                  targetId:(NSString *)targetId
-                   content:(RCMessageContent *)content
-               pushContent:(nullable NSString *)pushContent
-                  pushData:(nullable NSString *)pushData
-                   success:(nullable void (^)(long messageId))successBlock
-                     error:(nullable void (^)(RCErrorCode nErrorCode, long messageId))errorBlock;
+                           targetId:(NSString *)targetId
+                            content:(RCMessageContent *)content
+                        pushContent:(nullable NSString *)pushContent
+                           pushData:(nullable NSString *)pushData
+                            success:(nullable void (^)(long messageId))successBlock
+                              error:(nullable void (^)(RCErrorCode nErrorCode, long messageId))errorBlock;
 
 /*!
  发送消息
@@ -475,13 +478,13 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  - Remark: 消息操作
  */
 - (nullable RCMessage *)sendMessage:(RCConversationType)conversationType
-                  targetId:(NSString *)targetId
-                   content:(RCMessageContent *)content
-               pushContent:(nullable NSString *)pushContent
-                  pushData:(nullable NSString *)pushData
-                    option:(RCSendMessageOption *)option
-                   success:(nullable void (^)(long messageId))successBlock
-                     error:(nullable void (^)(RCErrorCode nErrorCode, long messageId))errorBlock;
+                           targetId:(NSString *)targetId
+                            content:(RCMessageContent *)content
+                        pushContent:(nullable NSString *)pushContent
+                           pushData:(nullable NSString *)pushData
+                             option:(RCSendMessageOption *)option
+                            success:(nullable void (^)(long messageId))successBlock
+                              error:(nullable void (^)(RCErrorCode nErrorCode, long messageId))errorBlock;
 
 /*!
  发送媒体消息（图片消息或文件消息）
@@ -521,14 +524,14 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  - Remark: 消息操作
  */
 - (nullable RCMessage *)sendMediaMessage:(RCConversationType)conversationType
-                       targetId:(NSString *)targetId
-                        content:(RCMessageContent *)content
-                    pushContent:(nullable NSString *)pushContent
-                       pushData:(nullable NSString *)pushData
-                       progress:(nullable void (^)(int progress, long messageId))progressBlock
-                        success:(nullable void (^)(long messageId))successBlock
-                          error:(nullable void (^)(RCErrorCode errorCode, long messageId))errorBlock
-                         cancel:(nullable void (^)(long messageId))cancelBlock;
+                                targetId:(NSString *)targetId
+                                 content:(RCMessageContent *)content
+                             pushContent:(nullable NSString *)pushContent
+                                pushData:(nullable NSString *)pushData
+                                progress:(nullable void (^)(int progress, long messageId))progressBlock
+                                 success:(nullable void (^)(long messageId))successBlock
+                                   error:(nullable void (^)(RCErrorCode errorCode, long messageId))errorBlock
+                                  cancel:(nullable void (^)(long messageId))cancelBlock;
 
 /*!
  发送媒体消息(上传图片或文件等媒体信息到指定的服务器)
@@ -562,15 +565,16 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  - Remark: 消息操作
  */
 - (nullable RCMessage *)sendMediaMessage:(RCConversationType)conversationType
-                       targetId:(NSString *)targetId
-                        content:(RCMessageContent *)content
-                    pushContent:(nullable NSString *)pushContent
-                       pushData:(nullable NSString *)pushData
-                  uploadPrepare:(nullable void (^)(RCUploadMediaStatusListener *uploadListener))uploadPrepareBlock
-                       progress:(nullable void (^)(int progress, long messageId))progressBlock
-                        success:(nullable void (^)(long messageId))successBlock
-                          error:(nullable void (^)(RCErrorCode errorCode, long messageId))errorBlock
-                         cancel:(nullable void (^)(long messageId))cancelBlock;
+                                targetId:(NSString *)targetId
+                                 content:(RCMessageContent *)content
+                             pushContent:(nullable NSString *)pushContent
+                                pushData:(nullable NSString *)pushData
+                           uploadPrepare:
+                               (nullable void (^)(RCUploadMediaStatusListener *uploadListener))uploadPrepareBlock
+                                progress:(nullable void (^)(int progress, long messageId))progressBlock
+                                 success:(nullable void (^)(long messageId))successBlock
+                                   error:(nullable void (^)(RCErrorCode errorCode, long messageId))errorBlock
+                                  cancel:(nullable void (^)(long messageId))cancelBlock;
 /*!
  发送消息
  
@@ -599,10 +603,10 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  - Remark: 消息操作
  */
 - (nullable RCMessage *)sendMessage:(RCMessage *)message
-               pushContent:(nullable NSString *)pushContent
-                  pushData:(nullable NSString *)pushData
-              successBlock:(nullable void (^)(RCMessage *successMessage))successBlock
-                errorBlock:(nullable void (^)(RCErrorCode nErrorCode, RCMessage *errorMessage))errorBlock;
+                        pushContent:(nullable NSString *)pushContent
+                           pushData:(nullable NSString *)pushData
+                       successBlock:(nullable void (^)(RCMessage *successMessage))successBlock
+                         errorBlock:(nullable void (^)(RCErrorCode nErrorCode, RCMessage *errorMessage))errorBlock;
 
 /*!
  发送媒体消息（图片消息或文件消息）
@@ -638,13 +642,12 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  - Remark: 消息操作
  */
 - (nullable RCMessage *)sendMediaMessage:(RCMessage *)message
-                    pushContent:(nullable NSString *)pushContent
-                       pushData:(nullable NSString *)pushData
-                       progress:(nullable void (^)(int progress, RCMessage *progressMessage))progressBlock
-                   successBlock:(nullable void (^)(RCMessage *successMessage))successBlock
-                     errorBlock:(nullable void (^)(RCErrorCode nErrorCode, RCMessage *errorMessage))errorBlock
-                         cancel:(nullable void (^)(RCMessage *cancelMessage))cancelBlock;
-
+                             pushContent:(nullable NSString *)pushContent
+                                pushData:(nullable NSString *)pushData
+                                progress:(nullable void (^)(int progress, RCMessage *progressMessage))progressBlock
+                            successBlock:(nullable void (^)(RCMessage *successMessage))successBlock
+                              errorBlock:(nullable void (^)(RCErrorCode nErrorCode, RCMessage *errorMessage))errorBlock
+                                  cancel:(nullable void (^)(RCMessage *cancelMessage))cancelBlock;
 
 
 /*!
@@ -693,9 +696,9 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  - Remark: 消息操作
  */
 - (nullable RCMessage *)insertOutgoingMessage:(RCConversationType)conversationType
-                            targetId:(NSString *)targetId
-                          sentStatus:(RCSentStatus)sentStatus
-                             content:(RCMessageContent *)content;
+                                     targetId:(NSString *)targetId
+                                   sentStatus:(RCSentStatus)sentStatus
+                                      content:(RCMessageContent *)content;
 /*!
  插入向外发送的、指定时间的消息（此方法如果 sentTime 有问题会影响消息排序，慎用！！）
 （该消息只插入本地数据库，实际不会发送给服务器和对方）
@@ -712,10 +715,10 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  - Remark: 消息操作
  */
 - (nullable RCMessage *)insertOutgoingMessage:(RCConversationType)conversationType
-                            targetId:(NSString *)targetId
-                          sentStatus:(RCSentStatus)sentStatus
-                             content:(RCMessageContent *)content
-                            sentTime:(long long)sentTime;
+                                     targetId:(NSString *)targetId
+                                   sentStatus:(RCSentStatus)sentStatus
+                                      content:(RCMessageContent *)content
+                                     sentTime:(long long)sentTime;
 
 /*!
  插入接收的消息（该消息只插入本地数据库，实际不会发送给服务器和对方）
@@ -732,10 +735,10 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  - Remark: 消息操作
  */
 - (nullable RCMessage *)insertIncomingMessage:(RCConversationType)conversationType
-                            targetId:(NSString *)targetId
-                        senderUserId:(NSString *)senderUserId
-                      receivedStatus:(RCReceivedStatus)receivedStatus
-                             content:(RCMessageContent *)content;
+                                     targetId:(NSString *)targetId
+                                 senderUserId:(NSString *)senderUserId
+                               receivedStatus:(RCReceivedStatus)receivedStatus
+                                      content:(RCMessageContent *)content;
 
 /*!
  插入接收的消息（此方法如果 sentTime
@@ -754,11 +757,11 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  - Remark: 消息操作
  */
 - (nullable RCMessage *)insertIncomingMessage:(RCConversationType)conversationType
-                            targetId:(NSString *)targetId
-                        senderUserId:(NSString *)senderUserId
-                      receivedStatus:(RCReceivedStatus)receivedStatus
-                             content:(RCMessageContent *)content
-                            sentTime:(long long)sentTime;
+                                     targetId:(NSString *)targetId
+                                 senderUserId:(NSString *)senderUserId
+                               receivedStatus:(RCReceivedStatus)receivedStatus
+                                      content:(RCMessageContent *)content
+                                     sentTime:(long long)sentTime;
 
 /*!
  根据文件 URL 地址下载文件内容
@@ -872,13 +875,13 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  - Remark: 消息操作
  */
 - (nullable RCMessage *)sendDirectionalMessage:(RCConversationType)conversationType
-                             targetId:(NSString *)targetId
-                         toUserIdList:(NSArray<NSString *> *)userIdList
-                              content:(RCMessageContent *)content
-                          pushContent:(nullable NSString *)pushContent
-                             pushData:(nullable NSString *)pushData
-                              success:(nullable void (^)(long messageId))successBlock
-                                error:(nullable void (^)(RCErrorCode nErrorCode, long messageId))errorBlock;
+                                      targetId:(NSString *)targetId
+                                  toUserIdList:(NSArray<NSString *> *)userIdList
+                                       content:(RCMessageContent *)content
+                                   pushContent:(nullable NSString *)pushContent
+                                      pushData:(nullable NSString *)pushData
+                                       success:(nullable void (^)(long messageId))successBlock
+                                         error:(nullable void (^)(RCErrorCode nErrorCode, long messageId))errorBlock;
 
 /*!
  发送定向消息
@@ -899,11 +902,12 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  - Remark: 消息操作
  */
 - (nullable RCMessage *)sendDirectionalMessage:(RCMessage *)message
-                         toUserIdList:(NSArray<NSString *> *)userIdList
-                          pushContent:(nullable NSString *)pushContent
-                             pushData:(nullable NSString *)pushData
-                         successBlock:(nullable void (^)(RCMessage *successMessage))successBlock
-                           errorBlock:(nullable void (^)(RCErrorCode nErrorCode, RCMessage *errorMessage))errorBlock;
+                                  toUserIdList:(NSArray<NSString *> *)userIdList
+                                   pushContent:(nullable NSString *)pushContent
+                                      pushData:(nullable NSString *)pushData
+                                  successBlock:(nullable void (^)(RCMessage *successMessage))successBlock
+                                    errorBlock:
+                                        (nullable void (^)(RCErrorCode nErrorCode, RCMessage *errorMessage))errorBlock;
 
 /*!
  发送定向媒体消息（图片消息或文件消息）
@@ -939,14 +943,15 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  
  - Remark: 消息操作
  */
-- (nullable RCMessage *)sendDirectionalMediaMessage:(RCMessage *)message
-                                       toUserIdList:(NSArray<NSString *> *)userIdList
-                                        pushContent:(nullable NSString *)pushContent
-                                           pushData:(nullable NSString *)pushData
-                                           progress:(nullable void (^)(int progress, RCMessage *progressMessage))progressBlock
-                                       successBlock:(nullable void (^)(RCMessage *successMessage))successBlock
-                                         errorBlock:(nullable void (^)(RCErrorCode nErrorCode, RCMessage *errorMessage))errorBlock
-                                             cancel:(nullable void (^)(RCMessage *cancelMessage))cancelBlock;
+- (nullable RCMessage *)
+    sendDirectionalMediaMessage:(RCMessage *)message
+                   toUserIdList:(NSArray<NSString *> *)userIdList
+                    pushContent:(nullable NSString *)pushContent
+                       pushData:(nullable NSString *)pushData
+                       progress:(nullable void (^)(int progress, RCMessage *progressMessage))progressBlock
+                   successBlock:(nullable void (^)(RCMessage *successMessage))successBlock
+                     errorBlock:(nullable void (^)(RCErrorCode nErrorCode, RCMessage *errorMessage))errorBlock
+                         cancel:(nullable void (^)(RCMessage *cancelMessage))cancelBlock;
 
 #pragma mark 消息接收监听
 /*!
@@ -1096,7 +1101,9 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
 
  - Remark: 消息操作
  */
-- (nullable NSArray<RCMessage *> *)getLatestMessages:(RCConversationType)conversationType targetId:(NSString *)targetId count:(int)count;
+- (nullable NSArray<RCMessage *> *)getLatestMessages:(RCConversationType)conversationType
+                                            targetId:(NSString *)targetId
+                                               count:(int)count;
 
 /*!
  获取会话中，从指定消息之前、指定数量的最新消息实体
@@ -1118,9 +1125,9 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  - Remark: 消息操作
  */
 - (nullable NSArray<RCMessage *> *)getHistoryMessages:(RCConversationType)conversationType
-                       targetId:(NSString *)targetId
-                oldestMessageId:(long)oldestMessageId
-                          count:(int)count;
+                                             targetId:(NSString *)targetId
+                                      oldestMessageId:(long)oldestMessageId
+                                                count:(int)count;
 
 /*!
  获取会话中，从指定消息之前、指定数量的、指定消息类型的最新消息实体
@@ -1143,10 +1150,10 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  - Remark: 消息操作
  */
 - (nullable NSArray<RCMessage *> *)getHistoryMessages:(RCConversationType)conversationType
-                       targetId:(NSString *)targetId
-                     objectName:(nullable NSString *)objectName
-                oldestMessageId:(long)oldestMessageId
-                          count:(int)count;
+                                             targetId:(NSString *)targetId
+                                           objectName:(nullable NSString *)objectName
+                                      oldestMessageId:(long)oldestMessageId
+                                                count:(int)count;
 
 /*!
  获取会话中，指定消息、指定数量、指定消息类型、向前或向后查找的消息实体列表
@@ -1169,11 +1176,11 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  - Remark: 消息操作
  */
 - (nullable NSArray<RCMessage *> *)getHistoryMessages:(RCConversationType)conversationType
-                       targetId:(NSString *)targetId
-                     objectName:(nullable NSString *)objectName
-                  baseMessageId:(long)baseMessageId
-                      isForward:(BOOL)isForward
-                          count:(int)count;
+                                             targetId:(NSString *)targetId
+                                           objectName:(nullable NSString *)objectName
+                                        baseMessageId:(long)baseMessageId
+                                            isForward:(BOOL)isForward
+                                                count:(int)count;
 
 /*!
  获取会话中，指定时间、指定数量、指定消息类型（多个）、向前或向后查找的消息实体列表
@@ -1196,11 +1203,11 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  - Remark: 消息操作
  */
 - (nullable NSArray<RCMessage *> *)getHistoryMessages:(RCConversationType)conversationType
-                       targetId:(NSString *)targetId
-                    objectNames:(NSArray<NSString *> *)objectNames
-                       sentTime:(long long)sentTime
-                      isForward:(BOOL)isForward
-                          count:(int)count;
+                                             targetId:(NSString *)targetId
+                                          objectNames:(NSArray<NSString *> *)objectNames
+                                             sentTime:(long long)sentTime
+                                            isForward:(BOOL)isForward
+                                                count:(int)count;
 
 /*!
  在会话中搜索指定消息的前 beforeCount 数量和后 afterCount
@@ -1221,10 +1228,10 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  - Remark: 消息操作
  */
 - (nullable NSArray<RCMessage *> *)getHistoryMessages:(RCConversationType)conversationType
-                       targetId:(NSString *)targetId
-                       sentTime:(long long)sentTime
-                    beforeCount:(int)beforeCount
-                     afterCount:(int)afterCount;
+                                             targetId:(NSString *)targetId
+                                             sentTime:(long long)sentTime
+                                          beforeCount:(int)beforeCount
+                                           afterCount:(int)afterCount;
 
 /*!
  从服务器端清除历史消息
@@ -1341,7 +1348,8 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
                               recordTime:(long long)recordTime
                                    count:(int)count
                                    order:(RCTimestampOrder)order
-                                 success:(nullable void (^)(NSArray<RCMessage *> *messages, long long syncTime))successBlock
+                                 success:(nullable void (^)(NSArray<RCMessage *> *messages,
+                                                            long long syncTime))successBlock
                                    error:(nullable void (^)(RCErrorCode status))errorBlock;
 
 /*!
@@ -1357,7 +1365,8 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
 
  - Remark: 高级功能
  */
-- (nullable NSArray<RCMessage *> *)getUnreadMentionedMessages:(RCConversationType)conversationType targetId:(NSString *)targetId;
+- (nullable NSArray<RCMessage *> *)getUnreadMentionedMessages:(RCConversationType)conversationType
+                                                     targetId:(NSString *)targetId;
 
 /*!
  获取消息的发送时间（Unix 时间戳、毫秒）
@@ -1548,7 +1557,9 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
 
  - Remark: 会话列表
  */
-- (nullable NSArray<RCConversation *> *)getConversationList:(NSArray<NSNumber *> *)conversationTypeList count:(int)count startTime:(long long)startTime;
+- (nullable NSArray<RCConversation *> *)getConversationList:(NSArray<NSNumber *> *)conversationTypeList
+                                                      count:(int)count
+                                                  startTime:(long long)startTime;
 
 /*!
  获取单个会话数据
@@ -1776,7 +1787,8 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
                                  targetId:(NSString *)targetId
                                 isBlocked:(BOOL)isBlocked
                                   success:(nullable void (^)(RCConversationNotificationStatus nStatus))successBlock
-                                    error:(nullable void (^)(RCErrorCode status))errorBlock __deprecated_msg("Use [RCChannelClient setConversationNotificationLevel:targetId:level:success:error:] instead");
+                                    error:(nullable void (^)(RCErrorCode status))errorBlock
+    __deprecated_msg("Use [RCChannelClient setConversationNotificationLevel:targetId:level:success:error:] instead");
 
 /*!
  查询会话的消息提醒状态
@@ -1825,7 +1837,7 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
                          spanMins:(int)spanMins
                           success:(nullable void (^)(void))successBlock
                             error:(nullable void (^)(RCErrorCode status))errorBlock
-                            __deprecated_msg("Use [RCChannelClient  setNotificationQuietHoursLevel:spanMins:level:success:error:] instead");
+    __deprecated_msg("Use [RCChannelClient  setNotificationQuietHoursLevel:spanMins:level:success:error:] instead");
 
 /*!
  删除已设置的全局时间段消息提醒屏蔽
@@ -1837,7 +1849,7 @@ deviceToken 是系统提供的，从苹果服务器获取的，用于 APNs 远�
  */
 - (void)removeNotificationQuietHours:(nullable void (^)(void))successBlock
                                error:(nullable void (^)(RCErrorCode status))errorBlock
-__deprecated_msg("Use [RCChannelClient removeNotificationQuietHours:success:error:] instead");
+    __deprecated_msg("Use [RCChannelClient removeNotificationQuietHours:success:error:] instead");
 /*!
  查询已设置的全局时间段消息提醒屏蔽
 
@@ -1849,7 +1861,8 @@ __deprecated_msg("Use [RCChannelClient removeNotificationQuietHours:success:erro
  */
 - (void)getNotificationQuietHours:(nullable void (^)(NSString *startTime, int spanMins))successBlock
                             error:(nullable void (^)(RCErrorCode status))errorBlock
-__deprecated_msg("Use [RCChannelClient getNotificationQuietHoursLevel:error:] instead");;
+    __deprecated_msg("Use [RCChannelClient getNotificationQuietHoursLevel:error:] instead");
+;
 
 #pragma mark - 输入状态提醒
 
@@ -2080,7 +2093,8 @@ __deprecated_msg("Use [RCChannelClient getNotificationQuietHoursLevel:error:] in
 - (void)joinChatRoom:(NSString *)targetId
         messageCount:(int)messageCount
              success:(nullable void (^)(void))successBlock
-               error:(nullable void (^)(RCErrorCode status))errorBlock __deprecated_msg("Use [RCChatRoomClient joinChatRoom:messageCount:successBlock:errorBlock:] instead");
+               error:(nullable void (^)(RCErrorCode status))errorBlock
+    __deprecated_msg("Use [RCChatRoomClient joinChatRoom:messageCount:successBlock:errorBlock:] instead");
 
 /*!
  加入已经存在的聊天室（如果聊天室不存在返回错误 23410，人数超限返回错误 23411）
@@ -2106,7 +2120,8 @@ __deprecated_msg("Use [RCChannelClient getNotificationQuietHoursLevel:error:] in
 - (void)joinExistChatRoom:(NSString *)targetId
              messageCount:(int)messageCount
                   success:(nullable void (^)(void))successBlock
-                    error:(nullable void (^)(RCErrorCode status))errorBlock __deprecated_msg("Use [RCChatRoomClient joinExistChatRoom:messageCount:successBlock:errorBlock:] instead");
+                    error:(nullable void (^)(RCErrorCode status))errorBlock
+    __deprecated_msg("Use [RCChatRoomClient joinExistChatRoom:messageCount:successBlock:errorBlock:] instead");
 
 /*!
  退出聊天室
@@ -2170,7 +2185,7 @@ __deprecated_msg("Use [RCChannelClient getNotificationQuietHoursLevel:error:] in
  */
 - (void)searchPublicService:(RCSearchType)searchType
                   searchKey:(NSString *)searchKey
-                    success:(nullable void (^)(NSArray <RCPublicServiceProfile *> *accounts))successBlock
+                    success:(nullable void (^)(NSArray<RCPublicServiceProfile *> *accounts))successBlock
                       error:(nullable void (^)(RCErrorCode status))errorBlock;
 
 /*!
@@ -2188,7 +2203,7 @@ __deprecated_msg("Use [RCChannelClient getNotificationQuietHoursLevel:error:] in
 - (void)searchPublicServiceByType:(RCPublicServiceType)publicServiceType
                        searchType:(RCSearchType)searchType
                         searchKey:(NSString *)searchKey
-                          success:(nullable void (^)(NSArray <RCPublicServiceProfile *> *accounts))successBlock
+                          success:(nullable void (^)(NSArray<RCPublicServiceProfile *> *accounts))successBlock
                             error:(nullable void (^)(RCErrorCode status))errorBlock;
 
 /*!
@@ -2242,7 +2257,7 @@ __deprecated_msg("Use [RCChannelClient getNotificationQuietHoursLevel:error:] in
  - Remark: 公众号
  */
 - (nullable RCPublicServiceProfile *)getPublicServiceProfile:(RCPublicServiceType)publicServiceType
-                                    publicServiceId:(NSString *)publicServiceId;
+                                             publicServiceId:(NSString *)publicServiceId;
 
 /*!
  获取公众服务账号信息
@@ -2848,7 +2863,7 @@ __deprecated_msg("Use [RCChannelClient getNotificationQuietHoursLevel:error:] in
  */
 - (void)getChatRoomEntry:(NSString *)chatroomId
                      key:(NSString *)key
-                 success:(nullable void (^)(NSDictionary<NSString *,NSString *> *entry))successBlock
+                 success:(nullable void (^)(NSDictionary<NSString *, NSString *> *entry))successBlock
                    error:(nullable void (^)(RCErrorCode nErrorCode))errorBlock;
 
 /**
@@ -2863,7 +2878,7 @@ __deprecated_msg("Use [RCChannelClient getNotificationQuietHoursLevel:error:] in
  - Remark: 聊天室
  */
 - (void)getAllChatRoomEntries:(NSString *)chatroomId
-                      success:(nullable void (^)(NSDictionary<NSString *,NSString *> *entry))successBlock
+                      success:(nullable void (^)(NSDictionary<NSString *, NSString *> *entry))successBlock
                         error:(nullable void (^)(RCErrorCode nErrorCode))errorBlock;
 
 /**

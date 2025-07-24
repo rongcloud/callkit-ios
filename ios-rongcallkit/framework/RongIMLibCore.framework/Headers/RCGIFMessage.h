@@ -3,7 +3,7 @@
 //  RongIMLib
 //
 //  Created by liyan on 2018/12/20.
-//  Copyright © 2018年 RongCloud. All rights reserved.
+//  Copyright © 2018 年 RongCloud. All rights reserved.
 //
 
 #import <RongIMLibCore/RongIMLibCore.h>
@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// GIF 消息
 ///
 /// GIF 消息类，此消息会进行存储并计入未读消息数。
-/// 
+///
 /// - Remark: 内容类消息
 @interface RCGIFMessage : RCMediaMessageContent
 

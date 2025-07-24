@@ -8,9 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import <RongIMLibCore/RongIMLibCore.h>
-#import <RongIMKit/RCCellViewModelProtocol.h>
-#import <RongIMKit/RCBaseCellViewModel.h>
-#import <RongIMKit/RCListViewModelProtocol.h>
+#import "RCCellViewModelProtocol.h"
+#import "RCBaseCellViewModel.h"
+#import "RCListViewModelProtocol.h"
 
 NS_ASSUME_NONNULL_BEGIN
 typedef NS_ENUM(NSInteger, RCFriendApplyCellStyle) {

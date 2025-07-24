@@ -24,7 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 /// 默认构造
-/// - Parameter receivedStatus: DB 读取的状态值； 传 0 表示 未读。
+/// - Parameter receivedStatus: DB 读取的状态值；传 0 表示 未读。
 ///
 /// 构造未读状态，代码如下：
 /// RCReceivedStatusInfo *statusInfo = [[RCReceivedStatusInfo alloc] initWithReceivedStatus:0];

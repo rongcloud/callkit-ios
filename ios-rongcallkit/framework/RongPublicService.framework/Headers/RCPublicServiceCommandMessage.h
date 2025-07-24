@@ -3,7 +3,7 @@
 //  RongIMLib
 //
 //  Created by litao on 15/6/23.
-//  Copyright (c) 2015年 RongCloud. All rights reserved.
+//  Copyright (c) 2015 年 RongCloud. All rights reserved.
 //
 
 #import <RongIMLibCore/RongIMLibCore.h>

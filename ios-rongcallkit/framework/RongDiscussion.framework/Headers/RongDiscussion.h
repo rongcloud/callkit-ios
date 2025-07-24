@@ -3,7 +3,7 @@
 //  RongDiscussion
 //
 //  Created by 张改红 on 2020/8/19.
-//  Copyright © 2020 张改红. All rights reserved.
+//  Copyright © 2020 张改红。All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -19,4 +19,3 @@ FOUNDATION_EXPORT const unsigned char RongDiscussionVersionString[];
 #import <RongDiscussion/RCDiscussionClient.h>
 #import <RongDiscussion/RCDiscussionNotificationMessage.h>
 #import <RongDiscussion/RCDiscussion.h>
-

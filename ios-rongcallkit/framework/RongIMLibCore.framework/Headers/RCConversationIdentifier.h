@@ -27,8 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// - Parameter type: 会话类型
 /// - Parameter targetId: 会话 ID
-- (instancetype)initWithConversationIdentifier:(RCConversationType)type
-                                      targetId:(NSString *)targetId;
+- (instancetype)initWithConversationIdentifier:(RCConversationType)type targetId:(NSString *)targetId;
 
 /// 初始化方法
 ///
@@ -38,7 +37,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// - Since: 5.6.7
 - (instancetype)initWithConversationIdentifier:(RCConversationType)type
                                       targetId:(NSString *)targetId
-                                     channelId:(NSString *)channelId;
+                                     channelId:(nullable NSString *)channelId;
 
 @end
 

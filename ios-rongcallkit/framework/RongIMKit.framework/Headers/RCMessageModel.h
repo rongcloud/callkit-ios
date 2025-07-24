@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <RongIMLibCore/RongIMLibCore.h>
 
+NS_ASSUME_NONNULL_BEGIN
 /*!
  消息Cell的数据模型类
  */
@@ -27,7 +28,7 @@
 /*!
  用户信息
  */
-@property (nonatomic, strong) RCUserInfo *userInfo;
+@property (nonatomic, strong, nullable) RCUserInfo *userInfo;
 
 /*!
  会话类型
@@ -60,7 +61,7 @@
 @property (nonatomic, assign) RCReceivedStatus receivedStatus __deprecated_msg("Use receivedStatusInfo instead");
 
 /// 消息的接收状态类(针对接收的消息生效)
-@property (nonatomic, strong) RCReceivedStatusInfo *receivedStatusInfo;
+@property (nonatomic, strong, nullable) RCReceivedStatusInfo *receivedStatusInfo;
 
 /*!
  消息的发送状态
@@ -90,12 +91,12 @@
 /*!
  阅读回执状态
  */
-@property (nonatomic, strong) RCReadReceiptInfo *readReceiptInfo;
+@property (nonatomic, strong, nullable) RCReadReceiptInfo *readReceiptInfo;
 
 /*!
  消息的附加字段
  */
-@property (nonatomic, copy) NSString *extra;
+@property (nonatomic, copy, nullable) NSString *extra;
 
 /*!
  消息展示时的Cell高度
@@ -108,7 +109,7 @@
 
   服务器消息唯一ID（在同一个Appkey下全局唯一）
  */
-@property (nonatomic, copy) NSString *messageUId;
+@property (nonatomic, copy, nullable) NSString *messageUId;
 
 /*!
  消息是否可以发送请求回执
@@ -135,8 +136,11 @@
  
   扩展信息只支持单聊和群组，其它会话类型不能设置扩展信息
 */
-@property (nonatomic, strong) NSDictionary<NSString *, NSString *> *expansionDic;
-
+@property (nonatomic, strong, nullable) NSDictionary<NSString *, NSString *> *expansionDic;
+/*!
+ 媒体消息上传进度
+*/
+@property (nonatomic, assign) NSInteger uploadProgress;
 /*!
  初始化消息Cell的数据模型
 
@@ -153,3 +157,4 @@
  */
 - (instancetype)initWithMessage:(RCMessage *)rcMessage;
 @end
+NS_ASSUME_NONNULL_END

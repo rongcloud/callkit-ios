@@ -3,7 +3,7 @@
 //  RongPublicService
 //
 //  Created by 张改红 on 2020/9/10.
-//  Copyright © 2020 张改红. All rights reserved.
+//  Copyright © 2020 张改红。All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -100,7 +100,7 @@ NS_ASSUME_NONNULL_BEGIN
  - Remark: 公众号
  */
 - (nullable RCPublicServiceProfile *)getPublicServiceProfile:(RCPublicServiceType)publicServiceType
-                                    publicServiceId:(NSString *)publicServiceId;
+                                             publicServiceId:(NSString *)publicServiceId;
 
 /*!
  获取公众服务账号信息
@@ -121,6 +121,7 @@ NS_ASSUME_NONNULL_BEGIN
                         onError:(nullable void (^)(RCErrorCode errorCode))onError;
 
 /*!
+ 接口已废弃，请参考 IMKit 开源代码中的 RCPublicServiceWebViewController.h/.m
  获取公众服务使用的 WebView Controller
 
  - Parameter URLString: 准备打开的 URL
@@ -132,7 +133,8 @@ NS_ASSUME_NONNULL_BEGIN
 
  - Remark: 公众号
  */
-- (nullable UIViewController *)getPublicServiceWebViewController:(NSString *)URLString;
+- (nullable UIViewController *)getPublicServiceWebViewController:(NSString *)URLString
+    __deprecated_msg("has been deprecated");
 
 @end
 

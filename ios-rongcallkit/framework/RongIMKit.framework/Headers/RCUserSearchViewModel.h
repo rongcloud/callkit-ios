@@ -6,11 +6,11 @@
 //  Copyright © 2024 RongCloud. All rights reserved.
 //
 
-#import <RongIMKit/RCBaseViewModel.h>
-#import <RongIMKit/RCListViewModelProtocol.h>
-#import <RongIMKit/RCNavigationItemsViewModel.h>
-#import <RongIMKit/RCCellViewModelProtocol.h>
-#import <RongIMKit/RCSearchUserProfileViewModel.h>
+#import "RCBaseViewModel.h"
+#import "RCListViewModelProtocol.h"
+#import "RCNavigationItemsViewModel.h"
+#import "RCCellViewModelProtocol.h"
+#import "RCSearchUserProfileViewModel.h"
 #import <RongIMLibCore/RongIMLibCore.h>
 
 NS_ASSUME_NONNULL_BEGIN

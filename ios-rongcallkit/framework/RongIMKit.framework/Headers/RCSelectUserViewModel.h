@@ -6,10 +6,10 @@
 //  Copyright © 2024 RongCloud. All rights reserved.
 //
 
-#import <RongIMKit/RCBaseViewModel.h>
-#import <RongIMKit/RCSearchBarViewModel.h>
-#import <RongIMKit/RCListViewModelProtocol.h>
-#import <RongIMKit/RCSelectUserCellViewModel.h>
+#import "RCBaseViewModel.h"
+#import "RCSearchBarViewModel.h"
+#import "RCListViewModelProtocol.h"
+#import "RCSelectUserCellViewModel.h"
 
 @class RCSelectUserViewModel;
 typedef NS_ENUM(NSUInteger, RCSelectUserType) {
@@ -97,6 +97,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 单次最多可选择数量，默认 30, 0 < maxSelectCount <= 100
 @property (nonatomic, assign, setter=setMaxSelectCount:) NSInteger maxSelectCount;
+
+@property (nonatomic, copy) void (^selectionDidCompelteBlock)(NSArray <NSString *>*selectUserIds, UIViewController *selectVC);
 
 /// 配置 searchBar
 - (UISearchBar *)configureSearchBarForViewController:(UIViewController *)viewController;

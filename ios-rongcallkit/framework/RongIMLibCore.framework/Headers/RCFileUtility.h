@@ -79,8 +79,10 @@ NS_ASSUME_NONNULL_BEGIN
  */
 + (BOOL)saveFile:(NSString *)filePath content:(NSData *)content;
 
-/// 文件唯一存储地址
-+ (NSString *)getUniqueFileName:(NSString *)baseFileName;
+/// 文件唯一存储地址，用于解决文件重命名冲突处理。
+/// 如果 filePath 对应的本地文件不存在，则返回 filePath。
+/// 如果 filePath 对应的本地文件存在，则在 filePath 的名字后面增加 (1)，数字会累加，直到找到文件不存在的路径。
++ (NSString *)uniqueFilePath:(NSString *)filePath;
 
 /*!
  根据文件名获取文件类型
@@ -103,6 +105,21 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 移除非法字符（../name.txt, ../..name.txt => name.txt）
 + (NSString *)recheckFileName:(NSString *)fileName;
+
+/// 媒体消息文件名字生成规则，主要用于文件下载。
+/// 1. 获取 remoteUrl 属性中的 attname 字段对应的文件名。
+/// 2. 获取 remoteUrl 链接中最后一段作为文件名。
+/// 3. 对 remoteUrl 做 md5 作为文件名。
+/// 将上面取到的文件名做 urlDecode。
++ (NSString *)getFileNameFromRemoteURL:(NSString *)remoteURL;
+
+@end
+
+@interface RCFileUtility (Deprecated)
+
+/// 文件唯一存储地址
++ (NSString *)getUniqueFileName:(NSString *)baseFileName __deprecated_msg("Use uniqueFilePath: instead.");
+
 @end
 
 NS_ASSUME_NONNULL_END

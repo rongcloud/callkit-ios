@@ -13,6 +13,19 @@
 
 /// RCIM 的废弃接口，配置已被移动到 RCKitConfig 类中
 @interface RCIM (Deprecated)
+
+#pragma mark -- 初始化
+/// 初始化融云SDK
+///
+/// - Parameter appKey:  从融云开发者平台创建应用后获取到的App Key
+///
+/// 您在使用融云SDK所有功能（包括显示SDK中或者继承于SDK的View）之前，您必须先调用此方法初始化SDK。
+/// 在App整个生命周期中，您只需要执行一次初始化。
+///
+/// - Warning: 如果您使用IMKit，请使用此方法初始化SDK；
+/// 如果您使用IMLib，请使用RCIMClient中的同名方法初始化，而不要使用此方法。
+- (void)initWithAppKey:(NSString *)appKey __deprecated_msg("Use [RCIM initWithAppKey:option:] instead");
+
 #pragma mark - Config
 
 #pragma mark 消息通知提醒
@@ -256,4 +269,53 @@
 */
 @property (nonatomic, assign) BOOL enableDarkMode __deprecated_msg(
 "Use RCKitConfigCenter.ui.enableDarkMode instead");
+
+/// 更新群组信息
+/// - Parameter groupInfo: 群组信息，groupId 必填，否则更新失败
+/// - Parameter success: 成功回调
+/// - Parameter error: 失败回调
+///
+/// - Since: 5.12.2
+- (void)updateGroupInfo:(RCGroupInfo *)groupInfo
+                success:(void (^)(void))successBlock
+                  error:(void (^)(RCErrorCode errorCode, NSString *errorKey))errorBlock NS_SWIFT_NAME(updateGroupInfo(_:success:error:))__deprecated_msg("Use -[RCIM updateGroupInfo:successBlock:errorBlock:] instead");
+
+/// 设置群成员资料
+/// - Parameter groupId: 群组ID
+/// - Parameter userId: 用户ID， 必填项，支持传入当前登录用户 ID
+/// - Parameter nickname: 用户昵称，非必填项，长度不超过 64 个字符，传 nil 或 空字符串表示移除用户昵称
+/// - Parameter extra: 附加信息，非必填项，长度不超过 128 个字符
+/// - Parameter successBlock: 成功回调
+/// - Parameter errorBlock: 失败回调
+///
+/// - Since: 5.12.2
+- (void)setGroupMemberInfo:(NSString *)groupId
+                    userId:(NSString *)userId
+                  nickname:(nullable NSString *)nickname
+                     extra:(nullable NSString *)extra
+                   success:(void (^)(void))successBlock
+                     error:(void (^)(RCErrorCode errorCode))errorBlock __deprecated_msg("Use -[RCIM setGroupMemberInfo:userId:nickname:extra:successBlock:errorBlock:] instead");
+/// 修改自己的用户信息
+///
+/// - Parameter profile: 用户信息
+/// - Parameter successBlock: 成功的回调
+/// - Parameter errorBlock: 失败的回调
+///
+/// - Since: 5.12.2
+- (void)updateMyUserProfile:(RCUserProfile *)profile
+                    success:(void (^)(void))successBlock
+                      error:(nullable void (^)(RCErrorCode errorCode, NSString * _Nullable errorKey))errorBlock __deprecated_msg("Use -[RCIM updateMyUserProfile:successBlock:errorBlock:] instead");
+/// 好友信息设置
+/// - Parameter userId: 用户ID
+/// - Parameter remark: 好友备注，最多为 64 个字符，不传或为空时清除备注名。
+/// - Parameter extProfile: 扩展信息
+/// - Parameter successBlock: 成功回调
+/// - Parameter errorBlock: 失败回调
+///
+/// - Since: 5.12.2
+- (void)setFriendInfo:(NSString *)userId
+               remark:(nullable NSString *)remark
+           extProfile:(nullable NSDictionary<NSString *, NSString*> *)extProfile
+              success:(void (^)(void))successBlock
+                error:(void (^)(RCErrorCode errorCode))errorBlock __deprecated_msg("Use -[RCIM setFriendInfo:remark:extProfile:successBlock:errorBlock:] instead");
 @end

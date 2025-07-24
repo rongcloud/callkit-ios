@@ -37,7 +37,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// 优先使用 MessagePushConfig 的 pushContent。
 ///
 /// 如果一个接口 RCMessage 和 pushContent 同时存在，且 MessagePushConfig.pushContent 为有效值，会优先使用  MessagePushConfig.pushContent 当做最终的 pushContent。
-/// 例如  sendMessage 、 sendMediaMessage、recallMessage 接口。
+/// 例如  sendMessage、sendMediaMessage、recallMessage 接口。
 @property (nonatomic, copy, nullable) NSString *pushContent;
 
 
@@ -46,7 +46,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// 优先使用 MessagePushConfig 的 pushData。
 ///
 /// 如果一个接口 RCMessage 和 pushData 同时存在，且 MessagePushConfig.pushData 为有效值，会优先使用 MessagePushConfig.pushData 当做最终的 pushData.
-/// 例如  sendMessage 、 sendMediaMessage 接口。
+/// 例如  sendMessage、sendMediaMessage 接口。
 @property (nonatomic, copy, nullable) NSString *pushData;
 
 /// 是否强制显示通知详情
@@ -56,9 +56,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 推送模板 ID
 ///
-/// 设置后根据目标用户通过 SDK `RCPushProfile` 中的`setPushLanguageCode`设置的语言环境，匹配模板中设置的语言内容进行推送，未匹配成功时使用默认内容进行推送。
+/// 设置后根据目标用户通过 SDK `RCPushProfile` 中的 `setPushLanguageCode` 设置的语言环境，匹配模板中设置的语言内容进行推送，未匹配成功时使用默认内容进行推送。
 ///
-/// 模板内容在“开发者后台-自定义推送文案”中进行设置。
+/// 模板内容在“开发者后台 - 自定义推送文案”中进行设置。
 ///
 /// - Warning：RCMessagePushConfig 中的 Title 和 PushContent 优先级高于模板 ID（templateId）中对应的标题和推送内容。
 @property (nonatomic, copy, nullable) NSString *templateId;

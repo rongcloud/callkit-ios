@@ -20,7 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// 通知消息类
 ///
 /// 通知消息类，此消息会进行存储，但不计入未读消息数。
-/// 
+///
 /// - Remark: 通知类消息
 @interface RCInformationNotificationMessage : RCMessageContent <NSCoding>
 

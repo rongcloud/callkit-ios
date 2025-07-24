@@ -15,17 +15,17 @@ NS_ASSUME_NONNULL_BEGIN
 /// "active"   主动通知（默认的）：默认的通知，即人们可能想知道的，类似最喜欢的体育比赛的最新比分
 /// "time-sensitive" 时效性通知：需要人们立刻注意的通知，类似账户安全问题或快递动态
 /// "critical" 重要通知：关于个人健康或直接影响到设备拥有者的公共安全事件且需要立刻关注的，这类通知很少，一般是来自公共政府机构或健康 App
-static NSString * const kInterruptionLevel_passive = @"passive";
-static NSString * const kInterruptionLevel_active = @"active";
-static NSString * const kInterruptionLevel_time_sensitive = @"time-sensitive";
-static NSString * const kInterruptionLevel_critical = @"critical";
+static NSString *const kInterruptionLevel_passive = @"passive";
+static NSString *const kInterruptionLevel_active = @"active";
+static NSString *const kInterruptionLevel_time_sensitive = @"time-sensitive";
+static NSString *const kInterruptionLevel_critical = @"critical";
 
 @interface RCiOSConfig : NSObject
 
 /// iOS 平台通知栏分组 ID
 ///
 /// 相同的 thread-id 推送分为一组
-/// 
+///
 /// iOS10 开始支持
 @property (nonatomic, copy, nullable) NSString *threadId;
 
@@ -44,7 +44,7 @@ static NSString * const kInterruptionLevel_critical = @"critical";
 /// iOS 富文本推送内容
 @property (nonatomic, copy, nullable) NSString *richMediaUri;
 
-/// iOS 推送级别. 默认值 "active"
+/// iOS 推送级别。默认值 "active"
 /// "passive" 被动通知：即并不需要及时关注的通知，类似餐馆推荐通知
 /// "active"   主动通知（默认的）：默认的通知，即人们可能想知道的，类似最喜欢的体育比赛的最新比分
 /// "time-sensitive" 时效性通知：需要人们立刻注意的通知，类似账户安全问题或快递动态

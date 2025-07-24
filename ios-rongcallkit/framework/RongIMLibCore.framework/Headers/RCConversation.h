@@ -10,13 +10,14 @@
 //  RCConversation.h
 //  Created by Heq.Shinoda on 14-6-13.
 
-#import <RongIMLibCore/RCMessageContent.h>
 #import <Foundation/Foundation.h>
+
+#import <RongIMLibCore/RCMessageContent.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
 @class RCReadReceiptInfo, RCGroupReadReceiptInfoV2, RCMessageConfig;
-@class RCReceivedStatusInfo;
+@class RCReceivedStatusInfo, RCMessage;
 
 /// 会话类，包含会话的所有属性。
 @interface RCConversation : NSObject <NSCoding>
@@ -47,20 +48,20 @@ NS_ASSUME_NONNULL_BEGIN
 /// 会话中最后一条消息的接收状态
 @property (nonatomic, assign) RCReceivedStatus receivedStatus __deprecated_msg("Use receivedStatusInfo instead");
 
-/// 会话中最后一条消息的接收状态类(针对接收的消息生效)
+/// 会话中最后一条消息的接收状态类 (针对接收的消息生效)
 /// - Since: 5.6.8
 @property (nonatomic, strong, nullable) RCReceivedStatusInfo *receivedStatusInfo;
 
 /// 会话中最后一条消息的发送状态
 @property (nonatomic, assign) RCSentStatus sentStatus;
 
-/// 会话中最后一条消息的接收时间（Unix时间戳、毫秒）
+/// 会话中最后一条消息的接收时间（Unix 时间戳、毫秒）
 @property (nonatomic, assign) long long receivedTime;
 
-/// 会话中最后一条消息的发送时间（Unix时间戳、毫秒）
+/// 会话中最后一条消息的发送时间（Unix 时间戳、毫秒）
 @property (nonatomic, assign) long long sentTime;
 
-/// 会话的操作时间（Unix时间戳、毫秒），用于分页获取会话列表时传入的时间戳
+/// 会话的操作时间（Unix 时间戳、毫秒），用于分页获取会话列表时传入的时间戳
 /// 初始值与 sentTime 相同，置顶等操作会更新此时间戳
 /// - Since: 5.6.7
 @property (nonatomic, assign) long long operationTime;
@@ -79,6 +80,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 会话中最后一条消息的内容
 @property (nonatomic, strong, nullable) RCMessageContent *latestMessage;
+
+/// 会话中最后一条的完整消息体
+@property (nonatomic, strong, readonly, nullable) RCMessage *latestRCMessage;
 
 /// 会话中最后一条消息的方向
 @property (nonatomic, assign) RCMessageDirection latestMessageDirection;
@@ -105,7 +109,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) int mentionedCount;
 
 /// 超级群会话中 @ 我的消息的个数
-/// 
+///
 /// 只有超级群获取频道列表时有效
 /// 在清除会话未读数（clearMessagesUnreadStatus:targetId:）的时候，会将此值置成 0。
 @property (nonatomic, assign) int mentionedMeCount;
@@ -126,28 +130,33 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong, nullable) RCMessageConfig *latestMessageMessageConfig;
 
 /// 最后一条消息是否可以包含扩展信息
-/// 
+///
 /// 该属性在消息发送时确定，发送之后不能再做修改
 /// 扩展信息只支持单聊和群组，其它会话类型不能设置扩展信息
 @property (nonatomic, assign) BOOL latestMessageCanIncludeExpansion;
 
 /// 最后一条消息的扩展信息列表
-/// 
+///
 /// 扩展信息只支持单聊和群组，其它会话类型不能设置扩展信息
-/// 默认消息扩展字典 key 长度不超过 32 ，value 长度不超过 4096 ，单次设置扩展数量最大为 20，消息的扩展总数不能超过 300
+/// 默认消息扩展字典 key 长度不超过 32，value 长度不超过 4096，单次设置扩展数量最大为 20，消息的扩展总数不能超过 300
 @property (nonatomic, strong, nullable) NSDictionary<NSString *, NSString *> *latestMessageExpansion;
 
 /// 免打扰级别
 @property (nonatomic, assign) RCPushNotificationLevel notificationLevel;
 
-/// 超级群频道类型，只有 ConversationType 为超级群时该字段有效, 非超级群时为0
-@property (nonatomic, assign)  RCUltraGroupChannelType channelType;
+/// 超级群频道类型，只有 ConversationType 为超级群时该字段有效，非超级群时为 0
+@property (nonatomic, assign) RCUltraGroupChannelType channelType;
 
-/// 会话中第一条未读消息时间戳（Unix时间戳、毫秒）
-/// 
+/// 会话中第一条未读消息时间戳（Unix 时间戳、毫秒）
+///
 /// 仅支持 超级群会话
 /// - Since: 5.2.5
 @property (nonatomic, assign) long long firstUnreadMsgSendTime;
+
+/// 文本消息翻译方式。
+///
+/// - Since: 5.24.0
+@property (nonatomic, assign) RCTranslateStrategy translateStrategy;
 
 @end
 
@@ -160,7 +169,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong, nullable) RCMessageContent *lastestMessage __deprecated_msg("Use latestMessage instead");
 
 /// 会话中最后一条消息的方向
-@property (nonatomic, assign) RCMessageDirection lastestMessageDirection __deprecated_msg("Use latestMessageDirection instead");
+@property (nonatomic, assign)
+    RCMessageDirection lastestMessageDirection __deprecated_msg("Use latestMessageDirection instead");
 
 /// 最后一条消息的全局唯一 ID
 ///

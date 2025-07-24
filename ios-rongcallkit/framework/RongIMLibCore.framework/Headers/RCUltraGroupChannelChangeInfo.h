@@ -21,7 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 时间
 @property (nonatomic, assign) long long time;
- 
+
 @end
 
 
@@ -47,7 +47,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) RCUltraGroupChannelType channelType;
 
 @end
-
 
 
 @interface RCUltraGroupChannelDisbandedInfo : NSObject

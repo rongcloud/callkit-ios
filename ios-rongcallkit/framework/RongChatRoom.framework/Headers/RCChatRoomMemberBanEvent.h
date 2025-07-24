@@ -29,10 +29,10 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (nonatomic, assign) RCChatRoomMemberBanType banType;
 
-/// 禁言的总时间（禁言的操作有此字段）(毫秒) ，最大值为43200分钟（1个月）, 最小值1分钟
+/// 禁言的总时间（禁言的操作有此字段）(毫秒) ，最大值为 43200 分钟（1 个月）, 最小值 1 分钟
 @property (nonatomic, assign) NSInteger durationTime;
 
-/// 操作时间(毫秒时间戳)
+/// 操作时间 (毫秒时间戳)
 @property (nonatomic, assign) long long operateTime;
 
 /// 禁言/解禁言用户 ID 列表

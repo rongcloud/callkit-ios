@@ -3,7 +3,7 @@
 //  RongDiscussion
 //
 //  Created by 张改红 on 2020/8/18.
-//  Copyright © 2020 张改红. All rights reserved.
+//  Copyright © 2020 张改红。All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -139,4 +139,3 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 NS_ASSUME_NONNULL_END
-

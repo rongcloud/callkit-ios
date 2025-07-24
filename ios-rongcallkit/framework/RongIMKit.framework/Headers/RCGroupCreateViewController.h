@@ -6,8 +6,8 @@
 //  Copyright © 2024 RongCloud. All rights reserved.
 //
 
-#import <RongIMKit/RongIMKit.h>
-#import <RongIMKit/RCGroupCreateViewModel.h>
+#import "RCBaseViewController.h"
+#import "RCGroupCreateViewModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 /// 创建群组

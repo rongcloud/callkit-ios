@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// 消息审核配置
 @interface RCMessageAuditInfo : NSObject
 
-/// 是否送审 （消息回调是否送给三方审核）
+/// 是否送审（消息回调是否送给三方审核）
 @property (nonatomic, assign) RCMessageAuditType auditType;
 
 /// 项目标识

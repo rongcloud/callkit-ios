@@ -5,8 +5,8 @@
 //  Created by RobinCui on 2024/8/16.
 //
 
-#import <RongIMKit/RCBaseViewController.h>
-#import <RongIMKit/RCFriendListViewModel.h>
+#import "RCBaseViewController.h"
+#import "RCFriendListViewModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 /// 好友列表

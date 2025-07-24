@@ -225,7 +225,7 @@
 /// 判断一张照片是否是含透明像素的照片
 ///
 /// - Parameter image: 原始照片
-/// - Returns: 是否包含透明像素，YES 包含， NO 不包含
+/// - Returns: 是否包含透明像素，YES 包含，NO 不包含
 + (BOOL)isOpaque:(UIImage *)image;
 
 /// URL 编码
@@ -238,7 +238,7 @@
 /// 检查字符串是否符合聊天室属性名称的格式
 ///
 /// - Parameter key: 聊天室属性名称
-/// - Returns: 是否符合聊天室属性名称的格式，YES 符合， NO 不符合
+/// - Returns: 是否符合聊天室属性名称的格式，YES 符合，NO 不符合
 ///
 /// Key 支持大小写英文字母、数字、部分特殊符号 + = - _ 的组合方式
 + (BOOL)checkChatroomKey:(NSString *)key;
@@ -259,7 +259,7 @@
 + (NSString *)getDeviceId:(NSString *)appKey;
 
 /// 根据字符串生成 md5
-/// - Parameter bateNum: MD5位数
+/// - Parameter bateNum: MD5 位数
 /// - Parameter isLowercaseStr: 是否生成小写字符串
 /// - Returns: MD5
 + (NSString *)md5EncryptStr:(NSString *)str bateNum:(NSInteger)bateNum isLowercaseStr:(BOOL)isLowercaseStr;
@@ -273,7 +273,7 @@
 
 + (NSDictionary *)getModuleVersionInfo;
 
-/// 将字典或者数组转换成字符串,能去打印的换行 '\n' 以及空格
+/// 将字典或者数组转换成字符串，能去打印的换行 '\n' 以及空格
 /// - Parameter objc: 必须是字典或者是数组
 + (NSString *)jsonFromObject:(id)objc;
 

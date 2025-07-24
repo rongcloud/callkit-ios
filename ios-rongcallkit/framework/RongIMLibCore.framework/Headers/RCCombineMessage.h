@@ -23,20 +23,20 @@ NS_ASSUME_NONNULL_BEGIN
 /// - Remark: 内容类消息
 @interface RCCombineMessage : RCMediaMessageContent
 
-/// 转发的消息展示的缩略内容列表 (格式是发送者 ：缩略内容)
+/// 转发的消息展示的缩略内容列表 (格式是发送者：缩略内容)
 @property (nonatomic, strong) NSArray *summaryList;
 
-/// 转发的全部消息的发送者名称列表 （单聊是经过排重的，群聊是群组名称）
+/// 转发的全部消息的发送者名称列表（单聊是经过排重的，群聊是群组名称）
 @property (nonatomic, strong) NSArray *nameList;
 
-/// 转发的消息会话类型 （目前仅支持单聊和群聊）
+/// 转发的消息会话类型（目前仅支持单聊和群聊）
 @property (nonatomic, assign) RCConversationType conversationType;
 
 
 /// 初始化 RCCombineMessage 消息
 ///
 /// - Parameter summaryList: 转发的消息展示的缩略内容列表
-/// - Parameter nameList: 转发的全部消息的发送者名称列表 （单聊是经过排重的，群聊是群组名称）
+/// - Parameter nameList: 转发的全部消息的发送者名称列表（单聊是经过排重的，群聊是群组名称）
 /// - Parameter conversationType: 转发的消息会话类型
 /// - Parameter content: 转发的内容
 ///

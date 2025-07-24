@@ -3,7 +3,7 @@
 //  RongIMLib
 //
 //  Created by 珏王 on 16/5/23.
-//  Copyright © 2016年 RongCloud. All rights reserved.
+//  Copyright © 2016 年 RongCloud. All rights reserved.
 //
 
 #import <RongIMLibCore/RongIMLibCore.h>
@@ -20,9 +20,6 @@ NS_ASSUME_NONNULL_BEGIN
 /// - Remark: 内容类消息
 @interface RCFileMessage : RCMediaMessageContent <NSCoding>
 
-/// 文件名
-@property (nonatomic, copy, nullable) NSString *name;
-
 /// 文件大小，单位为 Byte
 @property (nonatomic, assign) long long size;
 
@@ -31,10 +28,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 文件的网络地址
 @property (nonatomic, copy, nullable) NSString *fileUrl;
-
-/// 文件的本地路径
-@property (nonatomic, copy, nullable) NSString *localPath;
-
 
 /// 初始化文件消息
 ///

@@ -28,7 +28,7 @@
 /// 群组通知消息类
 ///
 /// 群组通知消息类，此消息会进行存储，但不计入未读消息数。
-/// 
+///
 /// - Remark: 通知类消息
 @interface RCGroupNotificationMessage : RCMessageContent <NSCoding>
 
@@ -46,7 +46,7 @@
 
 /// 当前操作的目标对象
 ///
-/// 
+///
 /// 当前操作的目标对象，如被当前操作目标用户的用户 ID 或变更后的群主名称等。
 @property (nonatomic, copy) NSString *data;
 
@@ -64,7 +64,7 @@
 /// - Returns: 群组通知消息对象
 ///
 /// 群组关系由开发者维护，所有的群组操作都由您的服务器自己管理和维护。
-/// 所以群组通知的操作名和目标对象、消息内容、扩展信息您均可以自己定制，只要您发送方和接收方针对具体字段内容做好UI显示即可。
+/// 所以群组通知的操作名和目标对象、消息内容、扩展信息您均可以自己定制，只要您发送方和接收方针对具体字段内容做好 UI 显示即可。
 + (instancetype)notificationWithOperation:(NSString *)operation
                            operatorUserId:(NSString *)operatorUserId
                                      data:(NSString *)data

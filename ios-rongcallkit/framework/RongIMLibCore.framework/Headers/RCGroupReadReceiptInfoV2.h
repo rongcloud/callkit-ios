@@ -19,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) BOOL hasRespond;
 
 /// 发送回执的用户 ID 列表
-@property (nonatomic, strong, nullable) NSArray <RCGroupMessageReaderV2 *> *readerList;
+@property (nonatomic, strong, nullable) NSArray<RCGroupMessageReaderV2 *> *readerList;
 
 /// 已读人数
 @property (nonatomic, assign) int readCount;

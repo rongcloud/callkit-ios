@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <RongIMKit/RCBaseViewModel.h>
-#import <RongIMKit/RCButtonItem.h>
+#import "RCBaseViewModel.h"
+#import "RCButtonItem.h"
 @class RCProfileFooterViewModel;
 NS_ASSUME_NONNULL_BEGIN
 

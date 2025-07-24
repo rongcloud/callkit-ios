@@ -16,7 +16,9 @@ typedef NS_ENUM(NSUInteger, RCConversationStatusType) {
     RCConversationStatusType_Mute = 1,
 
     /// 置顶
-    RCConversationStatusType_Top = 2
+    RCConversationStatusType_Top = 2,
+    /// 翻译
+    RCConversationStatusType_Translation = 4
 };
 
 NS_ASSUME_NONNULL_BEGIN
@@ -39,6 +41,13 @@ NS_ASSUME_NONNULL_BEGIN
  如果 conversationStatusType  = RCConversationStatusType_Mute，conversationStatusValue = 1 是提醒，conversationStatusValue = 0 是免打扰。
  
  如果 conversationStatusType  = RCConversationStatusType_Top，conversationStatusValue = 0 是不置顶，conversationStatusValue = 1 是置顶。
+ 
+ 如果 conversationStatusType  = RCConversationStatusType_Translation，conversationStatusValue 代表以下功能：
+ RCTranslateStrategyDefault = 0, 默认，会跟随用户级别的自动翻译方式。
+ RCTranslateStrategyAutoOn = 1,自动翻译
+ RCTranslateStrategyAutoOff = 2， 手动翻译
+
+ 
 */
 @property (nonatomic, assign) int conversationStatusValue;
 

@@ -6,7 +6,7 @@
 //  Copyright © 2024 RongCloud. All rights reserved.
 //
 
-#import <RongIMKit/RCProfileCellViewModel.h>
+#import "RCProfileCellViewModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 /// 资料页开关 cellViewModel

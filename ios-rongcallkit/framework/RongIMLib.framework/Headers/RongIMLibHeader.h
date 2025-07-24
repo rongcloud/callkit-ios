@@ -9,10 +9,10 @@
 #ifndef RongIMLibHeader_h
 #define RongIMLibHeader_h
 
-#import <RongIMLibCore/RongIMLibCore.h>
 #import <RongChatRoom/RongChatRoom.h>
-#import <RongDiscussion/RongDiscussion.h>
-#import <RongPublicService/RongPublicService.h>
 #import <RongCustomerService/RongCustomerService.h>
+#import <RongDiscussion/RongDiscussion.h>
+#import <RongIMLibCore/RongIMLibCore.h>
+#import <RongPublicService/RongPublicService.h>
 
 #endif /* RongIMLibHeader_h */

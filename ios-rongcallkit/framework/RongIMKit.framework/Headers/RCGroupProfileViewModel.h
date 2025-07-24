@@ -6,7 +6,7 @@
 //  Copyright © 2024 RongCloud. All rights reserved.
 //
 
-#import <RongIMKit/RongIMKit.h>
+#import "RCProfileViewModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 /// 群组资料 ViewModel

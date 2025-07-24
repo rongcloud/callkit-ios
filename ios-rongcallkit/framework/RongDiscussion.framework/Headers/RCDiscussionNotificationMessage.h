@@ -76,7 +76,8 @@ typedef NS_ENUM(NSInteger, RCDiscussionNotificationType) {
  @return            讨论组通知对象
  */
 + (instancetype)notificationWithType:(RCDiscussionNotificationType)type
-operator:(NSString *)operatorId
+    operator
+                                    :(NSString *)operatorId
                            extension:(NSString *)extension;
 
 @end

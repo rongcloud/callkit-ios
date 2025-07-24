@@ -3,7 +3,7 @@
 //  RongIMLib
 //
 //  Created by 岑裕 on 16/1/8.
-//  Copyright © 2016年 RongCloud. All rights reserved.
+//  Copyright © 2016 年 RongCloud. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -27,7 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 初始化用户输入状态对象
 ///
-/// - Parameter userId: 当前正在输入的用户ID
+/// - Parameter userId: 当前正在输入的用户 ID
 /// - Parameter objectName: 当前正在输入的消息类型名
 ///
 /// - Returns: 用户输入状态对象

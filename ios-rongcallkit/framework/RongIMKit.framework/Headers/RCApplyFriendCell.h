@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <RongIMKit/RCBaseTableViewCell.h>
-#import <RongIMKit/RCApplyFriendCellViewModel.h>
+#import "RCBaseTableViewCell.h"
+#import "RCApplyFriendCellViewModel.h"
 
 UIKIT_EXTERN NSString * _Nullable const RCFriendApplyCellIdentifier;
 UIKIT_EXTERN NSInteger const RCFriendApplyCellMargin;

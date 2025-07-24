@@ -28,7 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)onMessageReceiptRequest:(RCConversationType)conversationType
                        targetId:(NSString *)targetId
-                      channelId:(NSString *)channelId
+                      channelId:(nullable NSString *)channelId
                      messageUId:(NSString *)messageUId;
 
 /*!
@@ -41,7 +41,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)onMessageReceiptResponse:(RCConversationType)conversationType
                         targetId:(NSString *)targetId
-                       channelId:(NSString *)channelId
+                       channelId:(nullable NSString *)channelId
                       messageUId:(NSString *)messageUId
                       readerList:(NSMutableDictionary *)userIdList;
 
@@ -60,13 +60,13 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)onTypingStatusChanged:(RCConversationType)conversationType
                      targetId:(NSString *)targetId
-                    channelId:(NSString *)channelId
+                    channelId:(nullable NSString *)channelId
                        status:(nullable NSArray<RCUserTypingStatus *> *)userTypingStatusList;
 @end
 
 #pragma mark - 超级群会话代理
 
-@protocol RCUltraGroupConversationDelegate<NSObject>
+@protocol RCUltraGroupConversationDelegate <NSObject>
 
 //超级群会话列表与会话最后一条消息同步完成
 - (void)ultraGroupConversationListDidSync;
@@ -105,7 +105,6 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)ultraGroupChannelUserDidKicked:(NSArray<RCUltraGroupChannelUserKickedInfo *> *)infoList;
 
 
-
 /*!
  删除频道通知，可以认为是频道解散。
  1. 公有频道时，删除频道通知频道中所有人
@@ -118,7 +117,6 @@ NS_ASSUME_NONNULL_BEGIN
  该功能仅支持超级群。
  */
 - (void)ultraGroupChannelDidDisbanded:(NSArray<RCUltraGroupChannelDisbandedInfo *> *)infoList;
-
 
 
 @end

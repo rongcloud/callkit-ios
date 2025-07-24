@@ -13,10 +13,10 @@ NS_ASSUME_NONNULL_BEGIN
 @interface RCIMProxy : NSObject
 
 // socks 代理地址
-@property(nonatomic, copy, readonly) NSString *host;
+@property (nonatomic, copy, readonly) NSString *host;
 
 // socks 代理端口号
-@property(nonatomic, assign, readonly) NSInteger port;
+@property (nonatomic, assign, readonly) NSInteger port;
 
 /*
  *  用户名和密码
@@ -26,10 +26,10 @@ NS_ASSUME_NONNULL_BEGIN
  *
  */
 // 代理认证的用户名，默认为空字符串
-@property(nonatomic, copy, readonly) NSString *userName;
+@property (nonatomic, copy, readonly) NSString *userName;
 // 代理认证的密码，默认为空字符串
-@property(nonatomic, copy, readonly) NSString *password;
-    
+@property (nonatomic, copy, readonly) NSString *password;
+
 // 合法性检测，自身为空则不合法、host 为空则不合法、port <=0 则不合法
 - (BOOL)isValid;
 
@@ -37,7 +37,10 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithHost:(NSString *)host port:(NSInteger)port;
 
 // 默认构造，认证方式连接代理
-- (instancetype)initWithHost:(NSString *)host port:(NSInteger)port userName:(NSString *)userName password:(NSString *)password;
+- (instancetype)initWithHost:(NSString *)host
+                        port:(NSInteger)port
+                    userName:(NSString *)userName
+                    password:(NSString *)password;
 
 
 + (instancetype)new NS_UNAVAILABLE;

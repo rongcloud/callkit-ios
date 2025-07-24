@@ -21,7 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 @optional
 
 /// 群组操作回调
-/// - Parameter groupId: 群组ID
+/// - Parameter groupId: 群组 ID
 /// - Parameter operatorInfo: 操作者信息。服务端 api 操作踢出时为空。
 /// - Parameter groupInfo: 群组信息，仅在操作类型为创建群组时有效。
 /// - Parameter operation: 操作类型
@@ -42,10 +42,35 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)onGroupInfoChanged:(RCGroupMemberInfo *)operatorInfo
                  groupInfo:(RCGroupInfo *)groupInfo
                 updateKeys:(NSArray<RCGroupInfoKeys> *)updateKeys
+             operationTime:(long long)operationTime
+    __deprecated_msg(
+        "Use [RCGroupEventDelegate onGroupInfoChanged:fullGroupInfo:changedGroupInfo:operationTime:] instead");
+
+/// 群组资料变更回调
+/// - Parameter operatorInfo: 操作者信息
+/// - Parameter fullGroupInfo: 全量群组信息
+/// - Parameter changedGroupInfo: 内容有变更的群组信息
+/// - Parameter operationTime: 操作时间
+- (void)onGroupInfoChanged:(RCGroupMemberInfo *)operatorInfo
+             fullGroupInfo:(RCGroupInfo *)fullGroupInfo
+          changedGroupInfo:(RCGroupInfo *)changedGroupInfo
+             operationTime:(long long)operationTime
+    __deprecated_msg(
+        "Use [RCGroupEventDelegate onGroupInfoChanged:fullGroupInfo:changedProperties:operationTime:] instead");
+
+/// 群组资料变更回调
+/// - Parameter operatorInfo: 操作者信息
+/// - Parameter fullGroupInfo: 全量群组信息
+/// - Parameter properties: 群组信息有变更的属性
+/// - Parameter operationTime: 操作时间
+/// - Since: 5.22.0
+- (void)onGroupInfoChanged:(RCGroupMemberInfo *)operatorInfo
+             fullGroupInfo:(RCGroupInfo *)fullGroupInfo
+         changedProperties:(NSArray<NSString *> *)properties
              operationTime:(long long)operationTime;
 
 /// 群成员资料变更回调
-/// - Parameter groupId: 群组ID
+/// - Parameter groupId: 群组 ID
 /// - Parameter operatorInfo: 操作人成员资料
 /// - Parameter memberInfo: 有变更的群成员资料
 /// - Parameter operationTime: 操作时间
@@ -61,7 +86,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)onGroupApplicationEvent:(RCGroupApplicationInfo *)event;
 
 /// 群备注名更新多端同步回调事件
-/// - Parameter groupId: 群组ID
+/// - Parameter groupId: 群组 ID
 /// - Parameter operationType: 操作类型，添加或移除
 /// - Parameter groupRemark: 群备注名
 /// - Parameter operationTime: 操作时间
@@ -71,9 +96,9 @@ NS_ASSUME_NONNULL_BEGIN
                    operationTime:(long long)operationTime;
 
 /// 群成员特别关注变更多端同步回调事件
-/// - Parameter groupId: 群组ID
-/// - Parameter operationType: 操作类型，添加或移除 
-/// - Parameter userIds: 用户ID列表
+/// - Parameter groupId: 群组 ID
+/// - Parameter operationType: 操作类型，添加或移除
+/// - Parameter userIds: 用户 ID 列表
 /// - Parameter operationTime: 操作时间
 - (void)onGroupFollowsChangedSync:(NSString *)groupId
                     operationType:(RCGroupOperationType)operationType

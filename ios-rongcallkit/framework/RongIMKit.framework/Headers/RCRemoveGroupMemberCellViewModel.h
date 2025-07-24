@@ -6,8 +6,8 @@
 //  Copyright © 2024 RongCloud. All rights reserved.
 //
 
-#import <RongIMKit/RCBaseCellViewModel.h>
-#import <RongIMKit/RCUserProfileDefine.h>
+#import "RCBaseCellViewModel.h"
+#import "RCUserProfileDefine.h"
 #import <RongIMLibCore/RongIMLibCore.h>
 
 NS_ASSUME_NONNULL_BEGIN
@@ -23,6 +23,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// cell 当前选择状态
 @property (nonatomic, assign, readonly) RCSelectState selectState;
+
+/// 隐藏角色显示
+@property (nonatomic, assign) BOOL hiddenRole;
 
 /// 注册 cell
 + (void)registerCellForTableView:(UITableView *)tableView;

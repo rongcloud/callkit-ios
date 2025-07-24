@@ -3,7 +3,7 @@
 //  RongPublicService
 //
 //  Created by 张改红 on 2020/9/10.
-//  Copyright © 2020 张改红. All rights reserved.
+//  Copyright © 2020 张改红。All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

@@ -5,7 +5,7 @@
 //  Created by xugang on 14-9-19.
 //  Copyright (c) 2014年 Heq.Shinoda. All rights reserved.
 //
-
+#import <Foundation/Foundation.h>
 /*!
  头像显示的形状
  */

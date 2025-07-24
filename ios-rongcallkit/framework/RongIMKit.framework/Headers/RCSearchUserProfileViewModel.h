@@ -6,7 +6,7 @@
 //  Copyright © 2024 RongCloud. All rights reserved.
 //
 #import <UIKit/UIKit.h>
-#import <RongIMKit/RCBaseViewModel.h>
+#import "RCBaseViewModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 @protocol RCSearchUserProfileViewModelDelegate <NSObject>

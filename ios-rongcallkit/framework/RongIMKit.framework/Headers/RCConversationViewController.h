@@ -23,6 +23,7 @@
 @class RCLocationMessage;
 @class RCCustomerServiceInfo,RCPublicServiceMenuItem;
 
+NS_ASSUME_NONNULL_BEGIN
 /// 客服服务状态
 typedef NS_ENUM(NSUInteger, RCCustomerServiceStatus) {
     /// 无客服服务
@@ -70,7 +71,7 @@ typedef enum : NSUInteger {
 @property (nonatomic, copy) NSString *targetId;
 
 /// 目标频道ID
-@property (nonatomic, copy) NSString *channelId;
+@property (nonatomic, copy, nullable) NSString *channelId;
 
 #pragma mark - 会话页面属性
 
@@ -91,7 +92,7 @@ typedef enum : NSUInteger {
 /// 需要统计未读数的会话类型数组（在导航栏的返回按钮中显示）
 /// 此属性表明在导航栏的返回按钮中需要统计显示哪部分的会话类型的未读数。
 /// (需要将RCConversationType转为NSNumber构建Array)
-@property (nonatomic, strong) NSArray *displayConversationTypeArray;
+@property (nonatomic, strong, nullable) NSArray *displayConversationTypeArray;
 
 /// 更新导航栏返回按钮中显示的未读消息数
 /// 如果您重写此方法，需要注意调用super。
@@ -273,7 +274,7 @@ typedef enum : NSUInteger {
 /// SDK内置的消息类型，如果您将pushContent置为nil，会使用默认的推送格式进行远程推送。
 /// 自定义类型的消息，需要您自己设置pushContent来定义推送内容，否则将不会进行远程推送。
 /// 如果您需要设置发送的pushData，可以使用RCIM的发送消息接口。
-- (void)sendMessage:(RCMessageContent *)messageContent pushContent:(NSString *)pushContent;
+- (void)sendMessage:(RCMessageContent *)messageContent pushContent:(nullable NSString *)pushContent;
 
 /// 发送媒体消息(上传图片或文件到App指定的服务器)
 /// - Parameter messageContent: 消息的内容
@@ -283,7 +284,7 @@ typedef enum : NSUInteger {
 /// 需要您在该回调中上传媒体信息（图片或文件），并通过uploadListener监听通知SDK同步显示上传进度。
 /// 如果appUpload设置为NO，将会和普通媒体消息的发送一致，上传到融云默认的服务器并发送。
 - (void)sendMediaMessage:(RCMessageContent *)messageContent
-             pushContent:(NSString *)pushContent
+             pushContent:(nullable NSString *)pushContent
                appUpload:(BOOL)appUpload;
 
 /// 上传媒体信息到App指定的服务器的回调
@@ -352,7 +353,7 @@ typedef enum : NSUInteger {
 /// - Returns: 修改后的消息内容
 /// 此回调在消息准备向外发送时会回调，您可以在此回调中对消息内容进行过滤和修改等操作。
 /// 如果此回调的返回值不为nil，SDK会对外发送返回的消息内容。
-- (RCMessageContent *)willSendMessage:(RCMessageContent *)messageContent;
+- (nullable RCMessageContent *)willSendMessage:(RCMessageContent *)messageContent;
 
 /// 发送消息完成的回调
 /// - Parameter status:          发送状态，0表示成功，非0表示失败
@@ -440,6 +441,19 @@ typedef enum : NSUInteger {
 /// SDK在此点击事件中，针对SDK中自带的图片、语音、位置等消息有默认的处理，如查看、播放等。
 /// 您在重写此回调时，如果想保留SDK原有的功能，需要注意调用super。
 - (void)didTapMessageCell:(RCMessageModel *)model;
+
+
+/// 长按Cell中的语音转文本内容的回调
+/// - Parameters:
+/// - Parameter model: 消息Cell的数据模型
+/// - Parameter view:  长按区域的View
+- (void)didLongTouchSTTInfo:(RCMessageModel *)model inView:(UIView *)view;
+
+/// 获取长按Cell中的语音转文本时的菜单
+/// - Parameter model: 消息Cell的数据模型
+/// SDK在此长按事件中，会展示此方法返回的菜单。
+/// 您在重写此回调时，如果想保留SDK原有的功能，需要注意调用super。
+- (NSArray<UIMenuItem *> *)getLongTouchSTTInfoMenuList:(RCMessageModel *)model;
 
 /// 长按Cell中的消息内容的回调
 /// - Parameter model: 消息Cell的数据模型
@@ -591,3 +605,4 @@ typedef enum : NSUInteger {
 - (void)forwardMessage:(NSInteger)index completed:(void (^)(NSArray<RCConversation *> *conversationList))completedBlock;
 
 @end
+NS_ASSUME_NONNULL_END

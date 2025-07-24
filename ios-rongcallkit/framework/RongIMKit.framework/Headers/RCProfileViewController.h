@@ -5,8 +5,8 @@
 //  Created by zgh on 2024/8/19.
 //
 
-#import <RongIMKit/RCBaseViewController.h>
-#import <RongIMKit/RCProfileViewModel.h>
+#import "RCBaseViewController.h"
+#import "RCProfileViewModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
 /// 资料页 VC

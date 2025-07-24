@@ -18,7 +18,7 @@ FOUNDATION_EXPORT double RongIMLibCoreVersionNumber;
 //! Project version string for RongIMLibCore.
 FOUNDATION_EXPORT const unsigned char RongIMLibCoreVersionString[];
 
-/// IMLib核心类
+/// IMLib 核心类
 #import <RongIMLibCore/RCCoreClient.h>
 #import <RongIMLibCore/RCChannelClient.h>
 #import <RongIMLibCore/RCCoreClient+Deprecated.h>
@@ -27,6 +27,7 @@ FOUNDATION_EXPORT const unsigned char RongIMLibCoreVersionString[];
 #import <RongIMLibCore/RCUserGroupStatusDelegate.h>
 #import <RongIMLibCore/RCStatusDefine.h>
 #import <RongIMLibCore/RCErrorCode.h>
+#import <RongIMLibCore/RCAppSettings.h>
 
 /// 会话相关类
 #import <RongIMLibCore/RCConversation.h>
@@ -62,6 +63,7 @@ FOUNDATION_EXPORT const unsigned char RongIMLibCoreVersionString[];
 #import <RongIMLibCore/RCTagInfo.h>
 #import <RongIMLibCore/RCConversationIdentifier.h>
 #import <RongIMLibCore/RCChannelIdentifier.h>
+#import <RongIMLibCore/RCMessageIdentifier.h>
 
 #import <RongIMLibCore/RCConversationTagInfo.h>
 #import <RongIMLibCore/RCTagProtocol.h>
@@ -69,6 +71,7 @@ FOUNDATION_EXPORT const unsigned char RongIMLibCoreVersionString[];
 #import <RongIMLibCore/RCUltraGroupTypingStatusInfo.h>
 #import <RongIMLibCore/RCMessageDigestInfo.h>
 #import <RongIMLibCore/RCReceivedStatusInfo.h>
+#import <RongIMLibCore/RCNotificationQuietHoursSetting.h>
 
 /// 工具类
 #import <RongIMLibCore/RCAMRDataConverter.h>
@@ -86,11 +89,16 @@ FOUNDATION_EXPORT const unsigned char RongIMLibCoreVersionString[];
 #import <RongIMLibCore/RCHistoryMessageOption.h>
 #import <RongIMLibCore/RCInitOption.h>
 #import <RongIMLibCore/RCClearMessageOption.h>
+#import <RongIMLibCore/RCLocalConfiguration.h>
+#import <RongIMLibCore/RCConversationTopOption.h>
+#import <RongIMLibCore/RCConversationFilterOption.h>
 
 #import <RongIMLibCore/RCFileMessage.h>
 #import <RongIMLibCore/RCFileUtility.h>
-#import <RongIMLibCore/RCReadReceiptInfo.h>
 #import <RongIMLibCore/RCUserOnlineStatusInfo.h>
+
+// 已读回执
+#import <RongIMLibCore/RCReadReceiptInfo.h>
 #import <RongIMLibCore/RCConversationStatusInfo.h>
 #import <RongIMLibCore/RCGroupMessageReaderV2.h>
 #import <RongIMLibCore/RCGroupReadReceiptV2Manager.h>
@@ -99,6 +107,12 @@ FOUNDATION_EXPORT const unsigned char RongIMLibCoreVersionString[];
 #import <RongIMLibCore/RCConversationUnreadInfo.h>
 #import <RongIMLibCore/RCReadReceiptMessage.h>
 #import <RongIMLibCore/RCSyncReadStatusMessage.h>
+#import <RongIMLibCore/RCReadReceiptUser.h>
+#import <RongIMLibCore/RCReadReceiptInfoV5.h>
+#import <RongIMLibCore/RCReadReceiptUsersOption.h>
+#import <RongIMLibCore/RCReadReceiptUsersResult.h>
+#import <RongIMLibCore/RCReadReceiptResponseV5.h>
+#import <RongIMLibCore/RCReadReceiptDefine.h>
 
 // log
 #import <RongIMLibCore/RCFwLog.h>
@@ -128,3 +142,19 @@ FOUNDATION_EXPORT const unsigned char RongIMLibCoreVersionString[];
 // Friend
 #import <RongIMLibCore/RCFriendInfo.h>
 #import <RongIMLibCore/RCFriendRelationInfo.h>
+
+// Stream Message
+#import <RongIMLibCore/RCStreamMessage.h>
+#import <RongIMLibCore/RCStreamMessageRequestParams.h>
+
+// Search Message
+#import <RongIMLibCore/RCSearchMessageParams.h>
+
+// Speech To Text
+#import <RongIMLibCore/RCSpeechToTextInfo.h>
+#import <RongIMLibCore/RCSpeechToTextDelegate.h>
+
+// Translation
+#import <RongIMLibCore/RCTranslationDelegate.h>
+#import <RongIMLibCore/RCTranslateParams.h>
+#import <RongIMLibCore/RCTranslateResult.h>

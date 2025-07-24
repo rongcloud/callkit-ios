@@ -29,12 +29,12 @@ NS_ASSUME_NONNULL_BEGIN
 /// 好友请求消息类
 ///
 /// 好友请求消息类，此消息会进行存储，但不计入未读消息数。
-/// 
+///
 /// - Remark: 通知类消息
 @interface RCContactNotificationMessage : RCMessageContent <NSCoding>
 
 /// 好友请求的当前操作名
-/// 
+///
 /// 好友请求当前的操作名称，您可以使用预定义好的操作名，也可以是您自己定义的任何操作名。
 /// 预定义的操作名：ContactNotificationMessage_ContactOperationRequest、ContactNotificationMessage_ContactOperationAcceptResponse、ContactNotificationMessage_ContactOperationRejectResponse。
 @property (nonatomic, copy) NSString *operation;

@@ -6,7 +6,7 @@
 //  Copyright © 2024 RongCloud. All rights reserved.
 //
 
-#import <RongIMKit/RCApplyFriendCell.h>
+#import "RCApplyFriendCell.h"
 
 UIKIT_EXTERN NSString * _Nullable const RCFriendApplyOperationCellIdentifier;
 

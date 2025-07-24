@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <RongIMKit/RCApplyFriendListViewModel.h>
-#import <RongIMKit/RCBaseViewController.h>
+#import "RCApplyFriendListViewModel.h"
+#import "RCBaseViewController.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

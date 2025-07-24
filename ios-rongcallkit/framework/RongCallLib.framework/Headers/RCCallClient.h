@@ -350,6 +350,16 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong, readonly, nullable) RCCallSession *currentCallSession;
 
 /*!
+ @remarks 上次通话的通话会话静态实体
+ 
+ @discussion
+ 5.8.0版本callLib修改
+ currentCallSession有效生命周期由开始通话直到下次通话开始为止，变为了由开始通话直到这次通话结束为止
+ 为了弥补这个逻辑缺失，新增了lastCallSession，从这次通话回调结束以后生效，直到下次通话结束失效
+ */
+@property (nonatomic, strong, readonly, nullable) RCCallSessionSnapshot *lastCallSession;
+
+/*!
  是否生成通话记录消息，默认为YES
  */
 @property (nonatomic, assign) BOOL enableCallSummary;

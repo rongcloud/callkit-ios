@@ -6,7 +6,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <RongIMKit/RCCellViewModelProtocol.h>
+#import "RCCellViewModelProtocol.h"
 
 
 NS_ASSUME_NONNULL_BEGIN

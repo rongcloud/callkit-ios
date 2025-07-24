@@ -18,6 +18,6 @@ FOUNDATION_EXPORT double RongIMLibVersionNumber;
 //! Project version string for RongIMLib.
 FOUNDATION_EXPORT const unsigned char RongIMLibVersionString[];
 
-/// IMLib核心类
+/// IMLib 核心类
 #import <RongIMLib/RCIMClient.h>
 #import <RongIMLib/RongIMLibHeader.h>

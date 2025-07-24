@@ -3,7 +3,7 @@
 //  RongIMLib
 //
 //  Created by 杜立召 on 16/8/22.
-//  Copyright © 2016年 RongCloud. All rights reserved.
+//  Copyright © 2016 年 RongCloud. All rights reserved.
 //
 
 #import "RCMessageContent.h"

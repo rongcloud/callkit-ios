@@ -65,31 +65,31 @@ typedef NS_ENUM(NSInteger, RCGroupMemberRole) {
 typedef NS_ENUM(NSInteger, RCGroupOperation) {
     /// 创建群
     RCGroupOperationCreate = 0,
-    
+
     /// 加入
     RCGroupOperationJoin = 1,
-    
+
     /// 踢出
     RCGroupOperationKick = 2,
-    
+
     /// 退出
     RCGroupOperationQuit = 3,
-    
+
     /// 解散
     RCGroupOperationDismiss = 4,
-    
+
     /// 添加管理员
     RCGroupOperationAddManager = 5,
-    
+
     /// 移除管理员
     RCGroupOperationRemoveManager = 6,
-    
+
     /// 转让群主
     RCGroupOperationTransferGroupOwner = 7,
 };
 
 /// 群申请状态
-typedef NS_ENUM (NSInteger, RCGroupApplicationStatus) {
+typedef NS_ENUM(NSInteger, RCGroupApplicationStatus) {
     /// 管理员待处理
     RCGroupApplicationStatusManagerUnHandled = 0,
     /// 管理员已拒绝
@@ -125,13 +125,12 @@ typedef NS_ENUM(NSInteger, RCGroupApplicationDirection) {
 };
 
 /// 群申请类型
-typedef NS_ENUM (NSInteger, RCGroupApplicationType) {
+typedef NS_ENUM(NSInteger, RCGroupApplicationType) {
     /// 主动加入群组
     RCGroupApplicationTypeApplication = 0,
     /// 被邀请加入群组
     RCGroupApplicationTypeInvitation = 1,
 };
-
 
 
 #endif /* RCGroupEnum_h */

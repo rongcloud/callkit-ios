@@ -35,7 +35,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// - Parameter portraitUri: 群组头像的 URL
 ///
 /// - Returns: 群组信息对象
-- (instancetype)initWithGroupId:(NSString *)groupId groupName:(NSString *)groupName portraitUri:(nullable NSString *)portraitUri;
+- (instancetype)initWithGroupId:(NSString *)groupId
+                      groupName:(NSString *)groupName
+                    portraitUri:(nullable NSString *)portraitUri;
 
 @end
 

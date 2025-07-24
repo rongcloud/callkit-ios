@@ -9,7 +9,11 @@
 #ifndef RCGroupReadReceiptV2Protocol_h
 #define RCGroupReadReceiptV2Protocol_h
 
+#import <RongIMLibCore/RCStatusDefine.h>
+
 NS_ASSUME_NONNULL_BEGIN
+
+@class RCMessage;
 
 @protocol RCGroupReadReceiptV2Delegate <NSObject>
 
@@ -68,8 +72,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// - Parameters:
 ///   - message: 消息
 ///   - offline: 是否离线
-- (void)onSyncConversationReadStatus:(RCMessage *)message
-                             offline:(BOOL)offline;
+- (void)onSyncConversationReadStatus:(RCMessage *)message offline:(BOOL)offline;
 
 
 /// V4 同步已读状态
@@ -84,6 +87,23 @@ NS_ASSUME_NONNULL_BEGIN
                           readTime:(long long)readTime;
 
 @end
+
+@class RCReadReceiptResponseV5;
+
+/// 已读回执 V5 事件代理。
+@protocol RCReadReceiptV5Delegate <NSObject>
+
+@optional
+
+/// 已读回执变更通知。
+///
+/// - Parameter responses: 消息已读回执信息。
+///
+/// - Since: 5.20.0
+- (void)didReceiveMessageReadReceiptResponses:(NSArray<RCReadReceiptResponseV5 *> *)responses;
+
+@end
+
 NS_ASSUME_NONNULL_END
 
 #endif /* RCGroupReadReceiptV2Protocol_h */

@@ -78,7 +78,8 @@ NS_ASSUME_NONNULL_BEGIN
 
  被撤回的消息会变更为RCRecallNotificationMessage，App需要在UI上刷新这条消息。
  */
-- (void)onMessageRecalled:(long)messageId __deprecated_msg("Use messageDidRecall: instead");;
+- (void)onMessageRecalled:(long)messageId __deprecated_msg("Use messageDidRecall: instead");
+;
 
 /*!
  消息被撤回的回调方法
@@ -229,6 +230,11 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)conversationDidSync;
 
+@optional
+/// 调用接口 -[RCCoreClient getRemoteConversationListWithSuccess:error:] 获取远端会话列表的回调
+/// - Parameter code: RC_SUCCESS 获取成功，其他值获取失败
+- (void)remoteConversationListDidSync:(RCErrorCode)code;
+
 @end
 
 #pragma mark - 会话状态同步
@@ -238,6 +244,13 @@ NS_ASSUME_NONNULL_BEGIN
  设置代理请参考 RCIMClient 的 setRCConversationStatusChangeDelegate: 方法。
  */
 @protocol RCConversationStatusChangeDelegate <NSObject>
+
+@optional
+
+/// 会话状态同步完成。
+///
+/// - Since: 5.7.8
+- (void)conversationStatusDidSync:(RCErrorCode)code;
 
 /**
  IMLib 会话状态同步的回调
@@ -263,8 +276,7 @@ NS_ASSUME_NONNULL_BEGIN
 
  expansionDic 只包含更新的键值对，不是全部的数据。如果想获取全部的键值对，请使用 message 的 expansionDic 属性。
 */
-- (void)messageExpansionDidUpdate:(NSDictionary<NSString *, NSString *> *)expansionDic
-                              message:(RCMessage *)message;
+- (void)messageExpansionDidUpdate:(NSDictionary<NSString *, NSString *> *)expansionDic message:(RCMessage *)message;
 
 /**
  消息扩展信息删除的回调
@@ -273,8 +285,7 @@ NS_ASSUME_NONNULL_BEGIN
  - Parameter message: 消息
 
 */
-- (void)messageExpansionDidRemove:(NSArray<NSString *> *)keyArray
-                            message:(RCMessage *)message;
+- (void)messageExpansionDidRemove:(NSArray<NSString *> *)keyArray message:(RCMessage *)message;
 
 @end
 
@@ -342,7 +353,7 @@ NS_ASSUME_NONNULL_BEGIN
  - Since: 5.8.0
  */
 - (void)onDownloadRequest:(nonnull NSMutableURLRequest *)request
-withRequestHandler:(void (^)(NSMutableURLRequest * _Nonnull handledRequest))requestHandler;
+       withRequestHandler:(void (^)(NSMutableURLRequest *_Nonnull handledRequest))requestHandler;
 
 /**
  上传前的异步回调
@@ -353,7 +364,7 @@ withRequestHandler:(void (^)(NSMutableURLRequest * _Nonnull handledRequest))requ
  - Since: 5.8.0
  */
 - (void)onUploadRequest:(nonnull NSMutableURLRequest *)request
-withRequestHandler:(void (^)(NSMutableURLRequest * _Nonnull handledRequest))requestHandler;
+     withRequestHandler:(void (^)(NSMutableURLRequest *_Nonnull handledRequest))requestHandler;
 
 
 @end
@@ -387,7 +398,7 @@ withRequestHandler:(void (^)(NSMutableURLRequest * _Nonnull handledRequest))requ
 
  当客户端收到用户输入状态的变化时，会回调此接口，通知发生变化的会话以及当前正在输入的RCUltraGroupTypingStatusInfo列表。
  */
-- (void)onUltraGroupTypingStatusChanged:(NSArray<RCUltraGroupTypingStatusInfo*>*)infoArr;
+- (void)onUltraGroupTypingStatusChanged:(NSArray<RCUltraGroupTypingStatusInfo *> *)infoArr;
 @end
 
 /*!
@@ -400,21 +411,21 @@ withRequestHandler:(void (^)(NSMutableURLRequest * _Nonnull handledRequest))requ
  
  - Parameter messages: 消息集合
  */
-- (void)onUltraGroupMessageExpansionUpdated:(NSArray<RCMessage*>*)messages;
+- (void)onUltraGroupMessageExpansionUpdated:(NSArray<RCMessage *> *)messages;
 
 /*!
  消息内容发生变更
  
  - Parameter messages: 消息集合
  */
-- (void)onUltraGroupMessageModified:(NSArray<RCMessage*>*)messages;
+- (void)onUltraGroupMessageModified:(NSArray<RCMessage *> *)messages;
 
 /*!
  消息撤回
  
  - Parameter messages: 消息集合
  */
-- (void)onUltraGroupMessageRecalled:(NSArray<RCMessage*>*)messages;
+- (void)onUltraGroupMessageRecalled:(NSArray<RCMessage *> *)messages;
 
 @end
 
@@ -446,6 +457,44 @@ withRequestHandler:(void (^)(NSMutableURLRequest * _Nonnull handledRequest))requ
  - Since: 5.10.4
  */
 - (void)databaseIsUpgrading:(int)progress;
+@end
+
+@class RCStreamMessageChunkInfo;
+
+/// 流式消息事件代理。
+/// - Since: 5.16.0
+@protocol RCStreamMessageRequestEventDelegate <NSObject>
+
+@optional
+
+/// 请求准备完成回调，如果该消息之前是异常中止的，会清理异常数据。
+- (void)didReceiveInitEventWithMessageUId:(NSString *)messageUId;
+
+/// 收到流式消息请求增量数据的回调。
+- (void)didReceiveDeltaEventWithMessage:(RCMessage *)message chunkInfo:(RCStreamMessageChunkInfo *)chunkInfo;
+
+/// 收到流式消息请求接收完成的回调。
+- (void)didReceiveCompleteEventWithMessageUId:(NSString *)messageUId code:(RCErrorCode)code;
+
+@end
+
+/// 用户级别事件代理。
+///
+/// - Warning: 需要开启用户级别设置。
+/// 可以用 `RCCoreClient` 的 `getAppSettings` 接口，查询相关配置 `isUserSettingsEnabled`。
+///
+/// - Since: 5.7.8
+@protocol RCUserSettingsDelegate <NSObject>
+
+@optional
+
+/// 用户级别的所有配置信息同步完成回调。
+///
+/// - Note: 在连接成功后，SDK 会同步当前用户的所有配置，同步完成后回调该方法。
+///
+/// - Parameter code: 错误码。
+- (void)userSettingsDidSync:(RCErrorCode)code;
+
 @end
 
 NS_ASSUME_NONNULL_END

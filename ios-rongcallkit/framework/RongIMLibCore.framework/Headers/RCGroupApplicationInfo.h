@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// 群申请事件
 @interface RCGroupApplicationInfo : NSObject
 
-/// 群组ID
+/// 群组 ID
 @property (nonatomic, copy) NSString *groupId;
 
 /// 入群者信息

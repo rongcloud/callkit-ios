@@ -44,7 +44,7 @@
 
  - Note: 子菜单为RCPublicServiceMenuItem的数组
  */
-@property (nonatomic, strong) NSArray <RCPublicServiceMenuItem *> *subMenuItems;
+@property (nonatomic, strong) NSArray<RCPublicServiceMenuItem *> *subMenuItems;
 
 /*!
  将菜单项的json数组解码（已废弃，请勿使用）

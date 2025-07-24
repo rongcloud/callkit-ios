@@ -6,8 +6,8 @@
 //  Copyright © 2024 RongCloud. All rights reserved.
 //
 
-#import <RongIMKit/RCProfileCellViewModel.h>
-#import <RongIMKit/RCGroupMembersCollectionViewModel.h>
+#import "RCProfileCellViewModel.h"
+#import "RCGroupMembersCollectionViewModel.h"
 NS_ASSUME_NONNULL_BEGIN
 /// 群资料页成员展示 cellViewModel
 /// - Since: 5.12.0

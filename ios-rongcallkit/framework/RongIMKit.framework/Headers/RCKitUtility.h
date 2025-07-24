@@ -364,4 +364,28 @@
   优先返回 alias，如果 alias 没有值，返回 name
  */
 + (NSString *)getDisplayName:(RCUserInfo *)userInfo;
+
+
+/// 本地化字符串
+/// - Parameters:
+///   - key: key
+///   - table: 本地化文件名
++ (NSString *)localizedString:(NSString *)key table:(NSString *)table;
+
+/// 查找文件
+/// - Parameter name: 文件名[先找根目录, 再找framework]
++ (NSString *)filePathForName:(NSString *)name;
+
+/// 按照名称查找bundle
+/// - Parameter bundleName: 名称[先找根目录, 再找framework]
++ (NSString *)bundlePathWithName:(NSString *)bundleName;
+
+/// 获取公众号 WebViewController
+/// - Parameter URLString: URL
++ (nullable UIViewController *)getPublicServiceWebViewController:(NSString *)URLString;
+
++ (NSString *)formatStreamDigest:(RCMessage *)message;
+
+//判断是否是暗黑模式
++ (BOOL)isDarkMode;
 @end

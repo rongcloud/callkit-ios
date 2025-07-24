@@ -47,7 +47,7 @@ FOUNDATION_EXPORT RCGroupInfoKeys const RCGroupInfoKeysExtProfile;
 /// 群名称
 @property (nonatomic, copy) NSString *groupName;
 
-/// 群头像 URL 地址，长度不超过 128 个字符
+/// 群头像 URL 地址，长度不超过 1024 个字符
 @property (nonatomic, copy, nullable) NSString *portraitUri;
 
 /// 群简介，长度不超过 512 个字符

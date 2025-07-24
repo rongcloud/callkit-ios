@@ -31,6 +31,8 @@ typedef NS_ENUM(NSUInteger, RCConversationModelType) {
     RC_CONVERSATION_MODEL_TYPE_PUBLIC_SERVICE = 4
 };
 
+NS_ASSUME_NONNULL_BEGIN
+
 /*!
  会话Cell的数据模型类
  */
@@ -44,7 +46,7 @@ typedef NS_ENUM(NSUInteger, RCConversationModelType) {
 /*!
  用户自定义的扩展数据
  */
-@property (nonatomic, strong) id extend;
+@property (nonatomic, strong, nullable) id extend;
 
 /*!
  会话类型
@@ -59,12 +61,12 @@ typedef NS_ENUM(NSUInteger, RCConversationModelType) {
 /*!
  目标频道会话ID
  */
-@property (nonatomic, copy) NSString *channelId;
+@property (nonatomic, copy, nullable) NSString *channelId;
 
 /*!
  会话的标题
  */
-@property (nonatomic, copy) NSString *conversationTitle;
+@property (nonatomic, copy, nullable) NSString *conversationTitle;
 
 /*!
  会话中的未读消息数
@@ -84,12 +86,12 @@ typedef NS_ENUM(NSUInteger, RCConversationModelType) {
 /*!
  置顶Cell的背景颜色
  */
-@property (nonatomic, strong) UIColor *topCellBackgroundColor;
+@property (nonatomic, strong, nullable) UIColor *topCellBackgroundColor;
 
 /*!
  非置顶的Cell的背景颜色
  */
-@property (nonatomic, strong) UIColor *cellBackgroundColor;
+@property (nonatomic, strong, nullable) UIColor *cellBackgroundColor;
 
 /*!
  会话中最后一条消息的接收状态
@@ -97,7 +99,7 @@ typedef NS_ENUM(NSUInteger, RCConversationModelType) {
 @property (nonatomic, assign) RCReceivedStatus receivedStatus __deprecated_msg("Use receivedStatusInfo instead");
 
 /// 消息的接收状态类(针对接收的消息生效)
-@property (nonatomic, strong) RCReceivedStatusInfo *receivedStatusInfo;
+@property (nonatomic, strong, nullable) RCReceivedStatusInfo *receivedStatusInfo;
 
 /*!
  会话中最后一条消息的发送状态
@@ -122,17 +124,17 @@ typedef NS_ENUM(NSUInteger, RCConversationModelType) {
 /*!
  会话中存在的草稿
  */
-@property (nonatomic, copy) NSString *draft;
+@property (nonatomic, copy, nullable) NSString *draft;
 
 /*!
  会话中最后一条消息的类型名
  */
-@property (nonatomic, copy) NSString *objectName;
+@property (nonatomic, copy, nullable) NSString *objectName;
 
 /*!
  会话中最后一条消息的发送者用户ID
  */
-@property (nonatomic, copy) NSString *senderUserId;
+@property (nonatomic, copy, nullable) NSString *senderUserId;
 
 /*!
  会话中最后一条消息的消息ID
@@ -142,7 +144,7 @@ typedef NS_ENUM(NSUInteger, RCConversationModelType) {
 /*!
  会话中最后一条消息的内容
  */
-@property (nonatomic, strong) RCMessageContent *lastestMessage;
+@property (nonatomic, strong, nullable) RCMessageContent *lastestMessage;
 
 /*!
  会话中最后一条消息的方向
@@ -152,7 +154,7 @@ typedef NS_ENUM(NSUInteger, RCConversationModelType) {
 /*!
  会话中最后一条消息的json Dictionary
  */
-@property (nonatomic, strong) NSDictionary *jsonDict;
+@property (nonatomic, strong, nullable) NSDictionary *jsonDict;
 
 /*!
  会话中有被提及的消息（有@你的消息）
@@ -187,7 +189,7 @@ typedef NS_ENUM(NSUInteger, RCConversationModelType) {
  - Parameter extend:                用户自定义的扩展数据
  - Returns: 会话Cell的数据模型对象
  */
-- (instancetype)initWithConversation:(RCConversation *)conversation extend:(id)extend;
+- (instancetype)initWithConversation:(RCConversation *)conversation extend:(nullable id)extend;
 
 /*!
  更新数据模型中的消息
@@ -205,3 +207,4 @@ typedef NS_ENUM(NSUInteger, RCConversationModelType) {
  */
 - (BOOL)isMatching:(RCConversationType)conversationType targetId:(NSString *)targetId;
 @end
+NS_ASSUME_NONNULL_END

@@ -3,7 +3,7 @@
 //  RongEnterpriseApp
 //
 //  Created by zhaobingdong on 2018/5/15.
-//  Copyright © 2018年 rongcloud. All rights reserved.
+//  Copyright © 2018 年 rongcloud. All rights reserved.
 //
 ///
 /// - Warning: 此类不支持异步拦截下载 [RCDownloadInterceptor onDownloadRequest:withRequestHandler:]
@@ -14,8 +14,11 @@
 #import <RongIMLibCore/RCDownloadItem.h>
 
 NS_ASSUME_NONNULL_BEGIN
+
 @class RCMessage;
-@protocol RCResumableDownloaderDelegate <NSObject>
+
+__deprecated_msg("Use [RCCoreClient downloadMediaFile:mediaUrl:progress:success:error:cancel:] instead")
+    @protocol RCResumableDownloaderDelegate<NSObject>
 
 /**
  下载完成后调用
@@ -29,11 +32,11 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 __deprecated_msg("Use [RCCoreClient downloadMediaFile:mediaUrl:progress:success:error:cancel:] instead")
-///
-/// - Warning: 此类不支持异步拦截下载 [RCDownloadInterceptor onDownloadRequest:withRequestHandler:]
-/// - Warning: Since 5.8.0 开始支持同步拦截下载 [RCDownloadInterceptor onDownloadRequest:]
-///
-@interface RCResumableDownloader : NSObject
+    ///
+    /// - Warning: 此类不支持异步拦截下载 [RCDownloadInterceptor onDownloadRequest:withRequestHandler:]
+    /// - Warning: Since 5.8.0 开始支持同步拦截下载 [RCDownloadInterceptor onDownloadRequest:]
+    ///
+    @interface RCResumableDownloader : NSObject
 
 /**
  创建 RCResumableDownloader 实例
@@ -75,7 +78,7 @@ __deprecated_msg("Use [RCCoreClient downloadMediaFile:mediaUrl:progress:success:
 @end
 
 __deprecated_msg("Use RCResumableDownloaderDelegate instead")
-@protocol RCResumeableDownloaderDelegate <RCResumableDownloaderDelegate>
+    @protocol RCResumeableDownloaderDelegate<RCResumableDownloaderDelegate>
 @end
 
 typedef RCResumableDownloader RCResumeableDownloader __deprecated_msg("Use RCResumableDownloader instead");

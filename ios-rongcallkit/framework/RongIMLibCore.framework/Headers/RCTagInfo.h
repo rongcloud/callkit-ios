@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *tagId;
 
 /// 标签名称
-@property (nonatomic, copy)  NSString *tagName;
+@property (nonatomic, copy) NSString *tagName;
 
 /// 该标签下的会话个数
 @property (nonatomic, assign) NSInteger count;
@@ -30,8 +30,7 @@ NS_ASSUME_NONNULL_BEGIN
  - Parameter tagId: 标签 id
  - Parameter tagName: 标签名称
  */
-- (instancetype)initWithTagInfo:(NSString *)tagId
-                        tagName:(NSString *)tagName;
+- (instancetype)initWithTagInfo:(NSString *)tagId tagName:(NSString *)tagName;
 @end
 
 NS_ASSUME_NONNULL_END

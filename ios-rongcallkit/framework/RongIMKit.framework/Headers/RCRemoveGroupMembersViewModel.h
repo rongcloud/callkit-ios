@@ -6,10 +6,10 @@
 //  Copyright © 2024 RongCloud. All rights reserved.
 //
 
-#import <RongIMKit/RCBaseViewModel.h>
-#import <RongIMKit/RCRemoveGroupMemberCellViewModel.h>
-#import <RongIMKit/RCListViewModelProtocol.h>
-#import <RongIMKit/RCSearchBarViewModel.h>
+#import "RCBaseViewModel.h"
+#import "RCRemoveGroupMemberCellViewModel.h"
+#import "RCListViewModelProtocol.h"
+#import "RCSearchBarViewModel.h"
 
 @class RCRemoveGroupMembersViewModel;
 NS_ASSUME_NONNULL_BEGIN

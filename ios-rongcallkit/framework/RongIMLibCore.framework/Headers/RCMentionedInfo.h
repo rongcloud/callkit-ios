@@ -3,7 +3,7 @@
 //  RongIMLib
 //
 //  Created by 杜立召 on 16/7/6.
-//  Copyright © 2016年 RongCloud. All rights reserved.
+//  Copyright © 2016 年 RongCloud. All rights reserved.
 //
 
 #import <RongIMLibCore/RCStatusDefine.h>
@@ -23,7 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong, nullable) NSArray<NSString *> *userIdList;
 
 /// 包含 @ 提醒的消息，本地通知和远程推送显示的内容
-/// 
+///
 /// 如果是 nil , 则按默认格式显示 [有人 @ 你]
 @property (nonatomic, copy, nullable) NSString *mentionedContent;
 

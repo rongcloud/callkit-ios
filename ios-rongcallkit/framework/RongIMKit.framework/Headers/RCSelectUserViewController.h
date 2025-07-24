@@ -6,8 +6,8 @@
 //  Copyright © 2024 RongCloud. All rights reserved.
 //
 
-#import <RongIMKit/RCBaseViewController.h>
-#import <RongIMKit/RCSelectUserViewModel.h>
+#import "RCBaseViewController.h"
+#import "RCSelectUserViewModel.h"
 NS_ASSUME_NONNULL_BEGIN
 /// 选择联系人
 /// - Since: 5.12.0

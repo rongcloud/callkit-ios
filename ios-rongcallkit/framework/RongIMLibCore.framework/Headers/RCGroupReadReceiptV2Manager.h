@@ -53,7 +53,8 @@ NS_ASSUME_NONNULL_BEGIN
  - Remark: 高级功能
  */
 - (void)getGroupMessageReaderList:(RCMessage *)message
-                          success:(nullable void (^)(NSArray <RCGroupMessageReaderV2 *> * _Nullable readerList, int totalCount))successBlock
+                          success:(nullable void (^)(NSArray<RCGroupMessageReaderV2 *> *_Nullable readerList,
+                                                     int totalCount))successBlock
                             error:(nullable void (^)(RCErrorCode nErrorCode))errorBlock;
 @end
 

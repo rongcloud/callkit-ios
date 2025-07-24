@@ -3,7 +3,7 @@
 //  RongEnterpriseApp
 //
 //  Created by zhaobingdong on 2018/5/15.
-//  Copyright © 2018年 rongcloud. All rights reserved.
+//  Copyright © 2018 年 rongcloud. All rights reserved.
 //
 ///
 /// - Warning: 此类不支持异步拦截下载 [RCDownloadInterceptor onDownloadRequest:withRequestHandler:]
@@ -60,29 +60,34 @@ NS_ASSUME_NONNULL_BEGIN
  - Parameter error: 错误信息对象，成功时为 nil
  - Parameter path: 下载完成后文件的路径，此路径为相对路径，相对于沙盒根目录 NSHomeDirectory
  */
-- (void)downloadItem:(RCDownloadItem *)item didCompleteWithError:(nullable NSError *)error filePath:(nullable NSString *)path;
+- (void)downloadItem:(RCDownloadItem *)item
+    didCompleteWithError:(nullable NSError *)error
+                filePath:(nullable NSString *)path;
 @end
 
 __deprecated_msg("Use [RCCoreClient getDownloadInfo:] instead")
-///
-/// - Warning: 此类不支持异步拦截下载 [RCDownloadInterceptor onDownloadRequest:withRequestHandler:]
-/// - Warning: Since 5.8.0 开始支持同步拦截下载 [RCDownloadInterceptor onDownloadRequest:]
-///
-@interface RCDownloadItem : NSObject
+    ///
+    /// - Warning: 此类不支持异步拦截下载 [RCDownloadInterceptor onDownloadRequest:withRequestHandler:]
+    /// - Warning: Since 5.8.0 开始支持同步拦截下载 [RCDownloadInterceptor onDownloadRequest:]
+    ///
+    @interface RCDownloadItem : NSObject
 
 /// 下载状态
-@property (nonatomic, assign, readonly) RCDownloadItemState state __deprecated_msg("Use [RCDownloadInfo getDownloadInfo:] instead");
+@property (nonatomic, assign, readonly)
+    RCDownloadItemState state __deprecated_msg("Use [RCDownloadInfo getDownloadInfo:] instead");
 
 /// 文件总大小 单位字节
-@property (nonatomic, assign, readonly) long long totalLength __deprecated_msg("Use [RCDownloadInfo totalLength] instead");
+@property (nonatomic, assign, readonly)
+    long long totalLength __deprecated_msg("Use [RCDownloadInfo totalLength] instead");
 
 /// 文件当前的大小
-@property (nonatomic, assign, readonly) long long currentLength __deprecated_msg("Use [RCDownloadInfo totalLength] currentLength");
+@property (nonatomic, assign, readonly)
+    long long currentLength __deprecated_msg("Use [RCDownloadInfo totalLength] currentLength");
 
 /// 文件对应的网络 URL
 @property (nonatomic, strong, readonly, nullable) NSURL *URL;
 
-/// 标识是否可恢复下载。 YES 表示可恢复，支持 Range。 NO 表示不支持 Range。
+/// 标识是否可恢复下载。YES 表示可恢复，支持 Range。NO 表示不支持 Range。
 @property (nonatomic, assign, readonly) BOOL resumable;
 
 /// 下载任务的标识符
@@ -91,10 +96,11 @@ __deprecated_msg("Use [RCCoreClient getDownloadInfo:] instead")
 /// 下载任务的代理对象
 @property (nonatomic, weak, nullable) id<RCDownloadItemDelegate> delegate;
 
-+ (instancetype) new NS_UNAVAILABLE;
++ (instancetype)new NS_UNAVAILABLE;
 
 /// 开始下载
-- (void)downLoad __deprecated_msg("Use [RCCoreClient downloadMediaFile:mediaUrl:progress:success:error:cancel:] instead");
+- (void)
+    downLoad __deprecated_msg("Use [RCCoreClient downloadMediaFile:mediaUrl:progress:success:error:cancel:] instead");
 
 /// 暂停下载
 - (void)suspend __deprecated_msg("Use [RCCoreClient pauseDownloadMediaUrl:successBlock:errorBlock:] instead");

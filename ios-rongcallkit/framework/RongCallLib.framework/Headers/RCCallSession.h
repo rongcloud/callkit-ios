@@ -675,4 +675,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+/*!
+ 静态通话实体
+ 从属性依赖callEngine取值的RCCallSession中，copy一个不依赖callEngine的静态对象
+ */
+@interface RCCallSessionSnapshot : RCCallSession
+/// 从其他对象拷贝
+- (instancetype)initWithSession:(RCCallSession *)session;
+@end
+
 NS_ASSUME_NONNULL_END

@@ -6,9 +6,9 @@
 //  Copyright © 2024 RongCloud. All rights reserved.
 //
 
-#import <RongIMKit/RCBaseViewModel.h>
+#import "RCBaseViewModel.h"
 #import <RongIMLibcore/RongIMLibcore.h>
-#import <RongIMKit/RCCollectionViewModelProtocol.h>
+#import "RCCollectionViewModelProtocol.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -52,6 +52,18 @@ NS_ASSUME_NONNULL_BEGIN
 /// - Since: 5.12.0
 - (BOOL)groupMembersCollectionViewModel:(RCGroupMembersCollectionViewModel *)viewModel
                         didSelectRemove:(UIViewController*)viewController;
+
+/// 添加群成员
+///
+/// - Parameters viewModel: viewModel
+/// - Parameters viewController: 当前 VC
+/// - Returns: App是否处理[YES : SDK不再处理, NO: SDK处理]
+///
+/// - Since: 5.12.0
+- (BOOL)groupMembersCollectionViewModel:(RCGroupMembersCollectionViewModel *)viewModel
+                         didInviteUsers:(NSArray<NSString *> *)userIds
+                            processCode:(RCErrorCode)processCode
+                         viewController:(UIViewController*)viewController;
 @end
 
 /// 群资料页成员展示 ViewModel
@@ -63,6 +75,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 代理
 @property (nonatomic, weak) id<RCCollectionViewModelResponder> responder;
+
+/// 群id
+@property (nonatomic, copy, readonly) NSString *groupId;
 
 /// 数据源
 @property (nonatomic, strong, readonly) NSArray <RCGroupMemberInfo *> *members;

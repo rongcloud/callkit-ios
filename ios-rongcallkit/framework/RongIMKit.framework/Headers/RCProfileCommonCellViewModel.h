@@ -5,7 +5,7 @@
 //  Created by zgh on 2024/8/16.
 //
 
-#import <RongIMKit/RCProfileCellViewModel.h>
+#import "RCProfileCellViewModel.h"
 #import <UIKit/UIKit.h>
 #import <RongIMLibCore/RongIMLibCore.h>
 NS_ASSUME_NONNULL_BEGIN
@@ -38,6 +38,9 @@ typedef NS_ENUM(NSUInteger, RCUProfileCellType) {
 
 /// cell 类型
 @property (nonatomic, assign) RCUProfileCellType type;
+
+/// 注册 cell
++ (void)registerCellForTableView:(UITableView *)tableView;
 
 /// 实例化 RCProfileCommonCellViewModel
 ///

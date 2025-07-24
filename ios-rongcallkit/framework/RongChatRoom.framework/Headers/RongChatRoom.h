@@ -3,7 +3,7 @@
 //  RongChatRoom
 //
 //  Created by 张改红 on 2020/8/12.
-//  Copyright © 2020 张改红. All rights reserved.
+//  Copyright © 2020 张改红。All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -22,6 +22,7 @@ FOUNDATION_EXPORT const unsigned char RongChatRoomVersionString[];
 #import <RongChatRoom/RCChatRoomInfo.h>
 #import <RongChatRoom/RCChatroomKVNotificationMessage.h>
 #import <RongChatRoom/RCChatRoomMemberInfo.h>
+#import <RongChatRoom/RCChatroomKVChangeInfo.h>
 
 #import <RongChatRoom/RCChatRoomMemberAction.h>
 #import <RongChatRoom/RCChatRoomMemberActionModel.h>
@@ -29,3 +30,5 @@ FOUNDATION_EXPORT const unsigned char RongChatRoomVersionString[];
 #import <RongChatRoom/RCChatRoomMemberBlockEvent.h>
 #import <RongChatRoom/RCChatRoomMemberBanEvent.h>
 #import <RongChatRoom/RCJoinChatRoomResponse.h>
+
+#import <RongChatRoom/RCChatRoomClient+Deprecated.h>
