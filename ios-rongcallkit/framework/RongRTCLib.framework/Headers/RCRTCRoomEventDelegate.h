@@ -17,6 +17,7 @@
 @class RCRTCVideoInputStream;
 @class RCRTCRoom;
 @class RCRTCCDNInputStream;
+@class RCRTCASR;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -26,6 +27,29 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol RCRTCRoomEventDelegate <NSObject>
 
 @optional
+
+/*!
+ 语音识别服务开启通知回调
+ 
+ @remarks 代理
+ */
+- (void)didReceiveStartASR;
+
+/*!
+ 语音识别服务停止通知回调
+ 
+ @remarks 代理
+ */
+- (void)didReceiveStopASR;
+
+/*!
+ 语音识别信息回调
+ 
+ @param asrContent 语音识别信息
+ 
+ @remarks 代理
+ */
+- (void)didReceiveASRContent:(RCRTCASRContent *)asrContent;
 
 /*!
  远端用户加入通知
@@ -341,6 +365,7 @@ NS_ASSUME_NONNULL_BEGIN
  @remarks 代理
  */
 - (void)didFinishOtherRoom:(NSString *)roomId userId:(NSString *)userId;
+
 
 @end
 

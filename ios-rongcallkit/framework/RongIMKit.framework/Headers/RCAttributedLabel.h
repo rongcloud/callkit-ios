@@ -90,6 +90,12 @@
  */
 @property (nonatomic, readonly, assign) NSTextCheckingType currentTextCheckingType;
 /**
+ *  “已编辑”后缀的范围标记。默认 {NSNotFound, 0}。
+ *  当需要为系统追加的“（已编辑）”后缀着色时，由分类 Edit 设置该范围，
+ *  文本生成阶段会据此进行灰色样式渲染
+ */
+@property (nonatomic, assign, readonly) NSRange rc_editedSuffixRange;
+/**
  *  setTextdataDetectorEnabled
  *
  *  - Parameter text:                text

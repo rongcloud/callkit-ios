@@ -266,6 +266,8 @@
  */
 - (void)resetToDefaultStatus;
 
+- (void)clearInputData;
+
 /*!
  内容区域大小发生变化。
 

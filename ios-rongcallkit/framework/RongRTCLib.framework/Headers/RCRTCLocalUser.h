@@ -518,6 +518,52 @@ NS_ASSUME_NONNULL_BEGIN
 */
 - (RCRTCCode)sendSEI:(NSString *)SEI;
 
+/*!
+ 开启语音识别服务
+ 
+ @param completion 开启语音识别服务回调
+ 
+ @discussion
+ 开启语音识别服务，如果房间内没有人发布流，则无法开启语音识别服务，SDK 会在有人发布流后补偿进行开启语音识别服务
+ 
+ @remarks 语音识别
+ */
+- (void)startASR:(nullable RCRTCOperationCallback)completion;
+
+/*!
+ 停止语音识别服务
+ 
+ @param completion 停止语音识别服务回调
+ 
+ @discussion
+ 停止语音识别服务
+ 
+ @remarks 语音识别
+ */
+- (void)stopASR:(nullable RCRTCOperationCallback)completion;
+
+/*!
+ 获取语音识别服务是否可用
+ 
+ @return YES 表示语音识别服务已经开启，NO 表示语音识别服务已经停止
+ 
+ @discussion
+ 获取语音识别服务是否可用，非实时查询接口，根据端上缓存进行的判断
+ 
+ @remarks 语音识别
+ */
+- (BOOL)asrIsAvailable;
+
+/*!
+ 设置是否接收语音识别信息
+ @param enable 是否接收语音识别信息
+ 
+ @discussion
+ 设置接收语音识别信息时候，会通过 RCRTCRoomEventDelegate 的 didReceiveASRContent 回调返回语音识别结果
+ 
+ @remarks 语音识别
+ */
+- (int)setEnableASR:(BOOL)enable;
 
 @end
 

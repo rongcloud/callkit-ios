@@ -141,6 +141,12 @@ NS_ASSUME_NONNULL_BEGIN
  媒体消息上传进度
 */
 @property (nonatomic, assign) NSInteger uploadProgress;
+
+/// 消息是否已被编辑
+@property (nonatomic, assign) BOOL hasChanged;
+
+/// 消息编辑信息
+@property (nonatomic, strong) RCMessageModifyInfo *modifyInfo;
 /*!
  初始化消息Cell的数据模型
 

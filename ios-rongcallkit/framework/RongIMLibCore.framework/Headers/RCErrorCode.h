@@ -21,6 +21,10 @@ typedef NS_ENUM(NSInteger, RCErrorCode) {
     ///
     REJECTED_BY_BLACKLIST = 405,
 
+    /// 对方开启了只接收白名单的信息，但己方不在白名单中，发送消息失败
+    ///
+    NOT_IN_WHITELIST = 407,
+
     /// 鉴权错误
     ///
     RC_SERVICE_REQUEST_UNAUTHORIZED = 1004,
@@ -29,6 +33,31 @@ typedef NS_ENUM(NSInteger, RCErrorCode) {
     ///
     /// - Since: 5.6.2
     RC_CONVERSATION_NOT_SUPPORT_MESSAGE = 20109,
+
+    /// 消息内容存在敏感词
+    ///
+    /// - Since: 5.26.0
+    RC_DANGEROUS_CONTENT = 20112,
+
+    /// 消息内容未通过审核
+    ///
+    /// - Since: 5.26.0
+    RC_CONTENT_REVIEW_REJECTED = 20113,
+
+    /// 消息超过可修改时间
+    ///
+    /// - Since: 5.26.0
+    MESSAGE_OVER_MODIFY_TIME_FAIL = 20114,
+
+    /// 消息尺寸超出限制
+    ///
+    /// - Since: 5.26.0
+    RC_MESSAGE_SIZE_EXCEEDED = 20115,
+
+    /// 消息不支持修改
+    ///
+    /// - Since: 5.26.0
+    MESSAGE_UNSUPPORTED_MODIFY = 20116,
 
     ///  appkey 的数据中心与请求云控的数据中心不匹配
     ///
@@ -63,7 +92,7 @@ typedef NS_ENUM(NSInteger, RCErrorCode) {
     ///
     RC_MSG_REPLACED_SENSITIVE_WORD = 21502,
 
-    /// 超级群扩展消息，但是原始消息不存在。
+    /// 原始消息不存在。
     ///
     /// - Since: 5.2.0
     RC_ORIGINAL_MESSAGE_NOT_EXIST = 22201,
@@ -1174,6 +1203,11 @@ typedef NS_ENUM(NSInteger, RCErrorCode) {
     ///
     /// - Since: 5.20.0
     MESSAGE_READ_RECEIPT_NOT_SUPPORT = 34029,
+
+    /// 在下载文件时遇到了 403 禁止访问的错误
+    ///
+    /// - Solution encountered a 403 Forbidden error while downloading the file!
+    RC_MEDIA_DOWNLOAD_FORBIDDEN = 34030,
 
     /// 连接时 connection option 为空
     ///

@@ -25,6 +25,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @class RCReceivedStatusInfo;
+@class RCMessageModifyInfo;
+
 /// 消息实体类
 ///
 /// 包含消息的所有属性。
@@ -49,9 +51,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 消息的发送者 ID
 @property (nonatomic, copy, nullable) NSString *senderUserId;
-
-/// 消息的接收状态 (针对接收的消息生效)
-@property (nonatomic, assign) RCReceivedStatus receivedStatus __deprecated_msg("Use receivedStatusInfo instead");
 
 /// 消息的接收状态类 (针对接收的消息生效)
 /// - Since: 5.6.8
@@ -119,8 +118,14 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong, nullable) NSDictionary<NSString *, NSString *> *expansionDic;
 
 /// 消息是否被修改
-/// - Warning: 仅超级群支持
+///
+/// - Note: 从 5.26.0 开始，支持全部类型的消息变更状态。
 @property (nonatomic, assign) BOOL hasChanged;
+
+/// 消息修改信息。
+///
+/// @since 5.26.0
+@property (nonatomic, readonly, strong) RCMessageModifyInfo *modifyInfo;
 
 /// 消息已读回执操作标识。
 ///
@@ -166,19 +171,6 @@ NS_ASSUME_NONNULL_BEGIN
                    direction:(RCMessageDirection)messageDirection
                      content:(RCMessageContent *)content;
 
-/// RCMessage 初始化方法（已废弃，请不要使用该接口构造消息发送）
-///
-/// - Parameter conversationType: 会话类型
-/// - Parameter targetId: 会话 ID
-/// - Parameter messageDirection: 消息的方向
-/// - Parameter messageId: 消息的 ID（如果是发送该消息初始值请设置为 -1）
-/// - Parameter content: 消息的内容
-- (instancetype)initWithType:(RCConversationType)conversationType
-                    targetId:(NSString *)targetId
-                   direction:(RCMessageDirection)messageDirection
-                   messageId:(long)messageId
-                     content:(RCMessageContent *)content
-    __deprecated_msg("Use initWithType:targetId:direction:content: instead");
 @end
 
 @class RCMessageIdentifier;

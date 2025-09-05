@@ -16,7 +16,12 @@ NS_ASSUME_NONNULL_BEGIN
 @interface RCAppSettings : NSObject
 
 /// 语音转文字功能是否开启。
-- (BOOL)isSpeechToTextEnable;
+@property (nonatomic, readonly, assign) BOOL isSpeechToTextEnable;
+
+/// 消息可编辑的有效时间，单位：分钟。
+///
+/// - Since: 5.26.0
+@property (nonatomic, readonly, assign) NSInteger messageModifiableMinutes;
 
 @end
 

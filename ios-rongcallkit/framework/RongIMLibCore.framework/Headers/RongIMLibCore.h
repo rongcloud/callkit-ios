@@ -42,6 +42,7 @@ FOUNDATION_EXPORT const unsigned char RongIMLibCoreVersionString[];
 #import <RongIMLibCore/RCGIFMessage.h>
 #import <RongIMLibCore/RCInformationNotificationMessage.h>
 #import <RongIMLibCore/RCMessage.h>
+#import <RongIMLibCore/RCMessage+RCDeprecated.h>
 #import <RongIMLibCore/RCMessageContent.h>
 #import <RongIMLibCore/RCMediaMessageContent.h>
 #import <RongIMLibCore/RCProfileNotificationMessage.h>
@@ -64,6 +65,10 @@ FOUNDATION_EXPORT const unsigned char RongIMLibCoreVersionString[];
 #import <RongIMLibCore/RCConversationIdentifier.h>
 #import <RongIMLibCore/RCChannelIdentifier.h>
 #import <RongIMLibCore/RCMessageIdentifier.h>
+#import <RongIMLibCore/RCMessageResult.h>
+#import <RongIMLibCore/RCMessageModifyInfo.h>
+#import <RongIMLibCore/RCModifyMessageParams.h>
+#import <RongIMLibCore/RCRefreshReferenceMessageParams.h>
 
 #import <RongIMLibCore/RCConversationTagInfo.h>
 #import <RongIMLibCore/RCTagProtocol.h>
@@ -92,6 +97,7 @@ FOUNDATION_EXPORT const unsigned char RongIMLibCoreVersionString[];
 #import <RongIMLibCore/RCLocalConfiguration.h>
 #import <RongIMLibCore/RCConversationTopOption.h>
 #import <RongIMLibCore/RCConversationFilterOption.h>
+#import <RongIMLibCore/RCConversationBatchDeletionParams.h>
 
 #import <RongIMLibCore/RCFileMessage.h>
 #import <RongIMLibCore/RCFileUtility.h>

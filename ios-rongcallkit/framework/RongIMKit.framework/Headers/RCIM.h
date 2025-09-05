@@ -98,6 +98,17 @@ FOUNDATION_EXPORT NSString *const RCKitMessageDestructingNotification;
 /// - Remark: 事件监听
 FOUNDATION_EXPORT NSString *const RCKitDispatchConversationStatusChangeNotification;
 
+/// 收到消息修改的 Notification。
+/// 
+/// 收到消息修改之后，IMKit 会分发此通知。
+/// 
+/// Notification 的 object 是 `RCMessage` 对象的数组，userInfo 为 nil。
+/// 
+/// 收到这个消息之后可以更新您的消息状态。
+/// 
+/// - Remark: 事件监听
+FOUNDATION_EXPORT NSString *const RCKitDispatchMessagesModifiedNotification;
+
 /// 收到会话草稿更新通知。
 ///
 /// Notification 的 userInfo 结构是 @{ @"conversationType": @(conversationType), @"targetId": targetId, @"channelId": channelId}

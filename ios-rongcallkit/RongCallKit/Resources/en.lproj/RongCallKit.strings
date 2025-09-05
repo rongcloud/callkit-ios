@@ -92,3 +92,5 @@
 "bottom_result_view_choosed_person" = "%zi members selected";
 "otherUserSwitchedToVoiceCall" = "Other user switched to voice call";
 "switchedToVoiceCall" = "Switched to voice call";
+"subtitle" = "CC";
+"subtitle_error_tip"="Failed to turn on subtitles. Please retry later.";

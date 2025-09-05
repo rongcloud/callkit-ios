@@ -56,6 +56,11 @@ UIKIT_EXTERN NSNotificationName const RCCallNewSessionCreationNotification;
 @property (nonatomic, assign) BOOL canIncomingCall;
 
 /*!
+ 设置是否显示语音识别 UI，默认: YES 显示语音识别 UI，请通话前设置，避免引发 UI 显示错误
+*/
+@property (nonatomic, assign) BOOL displayASRUI;
+
+/*!
  多人音视频通话邀请用户代理
  
  @discussion 如果实现该代理则多人音视频通话界面将有用户自己定义否则使用 RongCallKit 自带的选人界面

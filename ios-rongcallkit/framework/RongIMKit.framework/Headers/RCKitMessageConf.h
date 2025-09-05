@@ -124,5 +124,13 @@
 
 @property (nonatomic, strong) RCKitTranslationConfig *translationConfig;
 
+/// 是否开启消息编辑功能，默认为 NO
+@property (nonatomic, assign) BOOL enableEditMessage;
+
+/// 已编辑文本的颜色
+/// 默认： 0x7C838E ，暗黑： 0xFFFFFF
+/// 可通过 RCDYCOLOR 宏设置正常和暗黑的颜色
+@property (nonatomic, strong) UIColor *editedTextColor;
+
 @end
 

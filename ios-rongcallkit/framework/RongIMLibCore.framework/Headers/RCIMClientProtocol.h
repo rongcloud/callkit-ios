@@ -79,7 +79,6 @@ NS_ASSUME_NONNULL_BEGIN
  被撤回的消息会变更为RCRecallNotificationMessage，App需要在UI上刷新这条消息。
  */
 - (void)onMessageRecalled:(long)messageId __deprecated_msg("Use messageDidRecall: instead");
-;
 
 /*!
  消息被撤回的回调方法
@@ -117,6 +116,20 @@ NS_ASSUME_NONNULL_BEGIN
                         targetId:(NSString *)targetId
                       messageUId:(NSString *)messageUId
                       readerList:(nullable NSMutableDictionary *)userIdList;
+
+/// 消息修改回调。
+///
+/// - Parameters:
+///   - messages: 被修改的消息数组。
+///
+/// - Since: 5.26.0
+- (void)onMessagesModified:(NSArray<RCMessage *> *)messages;
+
+/// 离线的消息修改记录同步完成。
+///
+/// - Since: 5.26.0
+- (void)onModifiedMessageSyncCompleted;
+
 @end
 
 #pragma mark - 发送消息被拦截监听器

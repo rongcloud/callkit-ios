@@ -100,6 +100,11 @@
 @property (nonatomic, strong) RCCallTextButton *cameraSwitchButton;
 
 /*!
+ ASR Button
+ */
+@property (nonatomic, strong) UIButton *asrButton;
+
+/*!
  + Button
  */
 @property (nonatomic, strong) UIButton *addButton;
@@ -193,6 +198,11 @@
 - (void)inviteUserButtonClicked;
 
 - (void)whiteBoardButtonClicked;
+
+/*!
+ 点击语音识别按钮
+*/
+- (void)realTimeSubtitleButtonClicked;
 
 /*!
  点击接听按钮

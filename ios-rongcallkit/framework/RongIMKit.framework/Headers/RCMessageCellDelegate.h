@@ -112,6 +112,10 @@
 */
 - (void)didTapReferencedContentView:(RCMessageModel *)model;
 
+///  消息编辑失败后，点击重试按钮的回调
+///  - Parameter model: 消息Cell的数据模型
+- (void)didTapEditRetryButton:(RCMessageModel *)model;
+
 #pragma mark - 客服机器人评价
 /*!
  机器人解答问题，点击是否解决问题的回调

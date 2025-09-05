@@ -307,4 +307,59 @@ UIColor *dynamic_color(NSInteger light_hex_value, NSInteger dark_hex_value) {
     return [NSBundle mainBundle];
 }
 
++ (NSString *)localizedString:(NSString *)key table:(NSString *)table {
+    
+    NSString *language = [[NSLocale preferredLanguages] firstObject];
+    if (language.length == 0) {
+        return key;
+    }
+    NSString *fileNamePrefix = @"en";
+    if([language hasPrefix:@"zh"]) {
+        fileNamePrefix = @"zh-Hans";
+    } else if ([language hasPrefix:@"ar"]) {
+        fileNamePrefix = @"ar";
+    }
+    NSString *fullName = [NSString stringWithFormat:@"%@.strings", table];
+  
+    NSBundle *mainBundle = [NSBundle mainBundle];
+    NSString *path = [mainBundle pathForResource:fileNamePrefix ofType:@"lproj"];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSString *filePath = [path stringByAppendingPathComponent:fullName];
+    if (![fileManager fileExistsAtPath:filePath]) {
+        NSBundle *frameworkBundle = [NSBundle bundleForClass:[self class]];
+        path = [frameworkBundle pathForResource:fileNamePrefix ofType:@"lproj"];
+    }
+    
+    NSBundle *bundle = [NSBundle bundleWithPath:path];
+    NSString *localizedString = [bundle localizedStringForKey:key value:nil table:table];
+    if (!localizedString) {
+        localizedString = key;
+    }
+    return localizedString;
+}
+
++ (NSString *)fileName:(NSString *)fileName ofBundle:(NSString *)bundleName {
+    NSString *bundlePath = nil;
+    NSString *bundleNameString = [bundleName stringByDeletingPathExtension];
+    NSURL *rootBundleURL = [[NSBundle mainBundle] URLForResource:bundleNameString withExtension:@"bundle"];
+    if (rootBundleURL) {
+        NSString *resourcePath = [[NSBundle mainBundle] resourcePath];
+        bundlePath = [resourcePath stringByAppendingPathComponent:bundleName];
+    } else {
+        NSBundle *innerBundle = [NSBundle bundleForClass:[self class]];
+        NSString *resourcePath = [innerBundle resourcePath];
+        bundlePath = [resourcePath stringByAppendingPathComponent:bundleName];
+    }
+    NSString *filePath = [bundlePath stringByAppendingPathComponent:fileName];
+    return filePath;
+}
+
++ (BOOL)isArabic {
+    NSString *preferredLanguage = [[NSLocale preferredLanguages] firstObject];
+    if ([preferredLanguage hasPrefix:@"ar"]) {
+        return YES;
+    }
+    return NO;
+}
+
 @end

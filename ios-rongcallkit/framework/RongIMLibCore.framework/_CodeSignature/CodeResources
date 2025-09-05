@@ -14,7 +14,7 @@
 		</data>
 		<key>Headers/RCAppSettings.h</key>
 		<data>
-		igWU0bFdcNs24WHUQVWlBiy9dWg=
+		jI42/rFTbRryF2/6PJnJqysfkuk=
 		</data>
 		<key>Headers/RCBlockedMessageInfo.h</key>
 		<data>
@@ -64,6 +64,10 @@
 		<data>
 		42Vz9RnmMFVa36sqjNPuREUiu0E=
 		</data>
+		<key>Headers/RCConversationBatchDeletionParams.h</key>
+		<data>
+		ierysRWHSV3Mhj3q3WeZDehAXz0=
+		</data>
 		<key>Headers/RCConversationChannelProtocol.h</key>
 		<data>
 		6V1FUR6wdSWWG9BSxaxipgTzPm0=
@@ -98,7 +102,7 @@
 		</data>
 		<key>Headers/RCCoreClient.h</key>
 		<data>
-		5PRay+HPwU/jz62LpzOG0ETwFjo=
+		ndeQSij48kw3HhHT0iQvZsTO7qs=
 		</data>
 		<key>Headers/RCDownloadInfo.h</key>
 		<data>
@@ -110,7 +114,7 @@
 		</data>
 		<key>Headers/RCErrorCode.h</key>
 		<data>
-		xlR4WkLUb7FCSYB7KWkja50UbmA=
+		K8bC2HmNfS4Di6pHRZM0FhzL7E4=
 		</data>
 		<key>Headers/RCFileMessage.h</key>
 		<data>
@@ -210,7 +214,7 @@
 		</data>
 		<key>Headers/RCIMClientProtocol.h</key>
 		<data>
-		xSoeYQYBbd5XVnjcbrTFXFpDKnQ=
+		zTLV5ITU8Qn07V58fxZsELDyIAk=
 		</data>
 		<key>Headers/RCIMProxy.h</key>
 		<data>
@@ -244,9 +248,13 @@
 		<data>
 		FGCpXD+OKYVMg/3XyM3JvLPY97w=
 		</data>
+		<key>Headers/RCMessage+RCDeprecated.h</key>
+		<data>
+		ubOdPYwxdgbIu1DKUfPUaIPxWLU=
+		</data>
 		<key>Headers/RCMessage.h</key>
 		<data>
-		bN3g2SL7V0pr9wwYgc8DihcVjE8=
+		RvSx/iSWy/KEBTK5GzmSEX5oIpo=
 		</data>
 		<key>Headers/RCMessageAuditInfo.h</key>
 		<data>
@@ -268,9 +276,21 @@
 		<data>
 		0P93XhqW0vFR9Af4kzrfOeF3GyI=
 		</data>
+		<key>Headers/RCMessageModifyInfo.h</key>
+		<data>
+		7n8pWzhEOkgQzzE6XW7TOpaX+ZM=
+		</data>
 		<key>Headers/RCMessagePushConfig.h</key>
 		<data>
 		RoZcF78FoAY3i94NlQoHV52MXZ0=
+		</data>
+		<key>Headers/RCMessageResult.h</key>
+		<data>
+		KWK/ydltlWQCmE3hgk+pbr5Pfyk=
+		</data>
+		<key>Headers/RCModifyMessageParams.h</key>
+		<data>
+		nm/Pm52Z5EmjgvG+Xt7aIKD+rkI=
 		</data>
 		<key>Headers/RCNotificationQuietHoursSetting.h</key>
 		<data>
@@ -342,7 +362,11 @@
 		</data>
 		<key>Headers/RCReferenceMessage.h</key>
 		<data>
-		ytj6qdnOywn1R7pGWquW//hp9Jk=
+		Bdn+cCdml+RnNC0zW8Jj9lxUOqs=
+		</data>
+		<key>Headers/RCRefreshReferenceMessageParams.h</key>
+		<data>
+		gP1JHQ1flcuu5XTzzmK899fI5AA=
 		</data>
 		<key>Headers/RCRemoteHistoryMsgOption.h</key>
 		<data>
@@ -462,7 +486,7 @@
 		</data>
 		<key>Headers/RCUploadMediaStatusListener.h</key>
 		<data>
-		n+zXP+gT/9R6AOEsS4xpQbNc9nE=
+		ZgPOmadlM9LnCWp8Mgk6sv5tMw8=
 		</data>
 		<key>Headers/RCUserGroupStatusDelegate.h</key>
 		<data>
@@ -498,7 +522,7 @@
 		</data>
 		<key>Headers/RongIMLibCore.h</key>
 		<data>
-		3+O6uF0ue1qpUi5QOyRhNIsKpzM=
+		ocG1lmUuoVUj8EtZJeglNciUmqw=
 		</data>
 		<key>Info.plist</key>
 		<data>
@@ -541,11 +565,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			igWU0bFdcNs24WHUQVWlBiy9dWg=
+			jI42/rFTbRryF2/6PJnJqysfkuk=
 			</data>
 			<key>hash2</key>
 			<data>
-			3pwY17egxcZ/tZUjIUK2hK8J3NoSmwxlHrbMOlXbJoQ=
+			dzq/52v9JWVTkQPwEOquVc5cs9YobTY5LE6CwuQxlWk=
 			</data>
 		</dict>
 		<key>Headers/RCBlockedMessageInfo.h</key>
@@ -680,6 +704,17 @@
 			hWXRrWVX6SH4GcliWXUPZEvAo1DS9hvc+ZQKtAzsPv4=
 			</data>
 		</dict>
+		<key>Headers/RCConversationBatchDeletionParams.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			ierysRWHSV3Mhj3q3WeZDehAXz0=
+			</data>
+			<key>hash2</key>
+			<data>
+			NYt6u3uUXExosrIw0YlHHGfe5G8Ak4ClwRqLyibbtAM=
+			</data>
+		</dict>
 		<key>Headers/RCConversationChannelProtocol.h</key>
 		<dict>
 			<key>hash</key>
@@ -772,11 +807,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			5PRay+HPwU/jz62LpzOG0ETwFjo=
+			ndeQSij48kw3HhHT0iQvZsTO7qs=
 			</data>
 			<key>hash2</key>
 			<data>
-			yHOxGRTxIVmhZyatGnCyMMmI3dJ2kqoJ0dCocSgWA0U=
+			OutTksSJdg6yBC0m2kqpdba8M0FJuHUbMFARmnDz4dk=
 			</data>
 		</dict>
 		<key>Headers/RCDownloadInfo.h</key>
@@ -805,11 +840,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			xlR4WkLUb7FCSYB7KWkja50UbmA=
+			K8bC2HmNfS4Di6pHRZM0FhzL7E4=
 			</data>
 			<key>hash2</key>
 			<data>
-			30xKS5YhCAe/hz3ws9IoWt252lf4lOeBuAjcgDFDkuo=
+			j6caJQUYnjfYcFKz4uoYB1y6KE38Zc3uzr41Pq4JcWY=
 			</data>
 		</dict>
 		<key>Headers/RCFileMessage.h</key>
@@ -1080,11 +1115,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			xSoeYQYBbd5XVnjcbrTFXFpDKnQ=
+			zTLV5ITU8Qn07V58fxZsELDyIAk=
 			</data>
 			<key>hash2</key>
 			<data>
-			IjUsBaTKTSeTaBIsrmkPfHebFj5P6P6Yqj6LrgNxsBo=
+			MdBBs5Vw8KSETZiXXLxWswek5Q4tn+keaNzhJmpCNCg=
 			</data>
 		</dict>
 		<key>Headers/RCIMProxy.h</key>
@@ -1175,15 +1210,26 @@
 			OA3sVERqlHxoGbTuBPlvIh44PaO0AFPsQmJP3EKlIX0=
 			</data>
 		</dict>
+		<key>Headers/RCMessage+RCDeprecated.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			ubOdPYwxdgbIu1DKUfPUaIPxWLU=
+			</data>
+			<key>hash2</key>
+			<data>
+			/TIHY9IVGx7E/Do6NujIHtU1URnlO/5Uv3FVEdIu484=
+			</data>
+		</dict>
 		<key>Headers/RCMessage.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			bN3g2SL7V0pr9wwYgc8DihcVjE8=
+			RvSx/iSWy/KEBTK5GzmSEX5oIpo=
 			</data>
 			<key>hash2</key>
 			<data>
-			aku3b1Vtg08h/wQfGNFm3d4tpAsteRR4w9dB4vj40I4=
+			FdVcTfJ30WDKUVfRiy4VpSOfJAwS8WO1qKWqF7vVssU=
 			</data>
 		</dict>
 		<key>Headers/RCMessageAuditInfo.h</key>
@@ -1241,6 +1287,17 @@
 			kA7PS6t36rtSffP09iyKC9M+tO5YZfUiMclqtkdmn7g=
 			</data>
 		</dict>
+		<key>Headers/RCMessageModifyInfo.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			7n8pWzhEOkgQzzE6XW7TOpaX+ZM=
+			</data>
+			<key>hash2</key>
+			<data>
+			yr9XpRmwA0mAcJi1WHJmiwET9u4aVFnu7/f+wmQsmx4=
+			</data>
+		</dict>
 		<key>Headers/RCMessagePushConfig.h</key>
 		<dict>
 			<key>hash</key>
@@ -1250,6 +1307,28 @@
 			<key>hash2</key>
 			<data>
 			kDGYEfFUGgVFiA2vkoeyv9KwlhEarhTG/u1Y3dYj3hw=
+			</data>
+		</dict>
+		<key>Headers/RCMessageResult.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			KWK/ydltlWQCmE3hgk+pbr5Pfyk=
+			</data>
+			<key>hash2</key>
+			<data>
+			jRhYoRSaPSxvAYvCv8e7Jz4UXnjSexEz3tS1nTcR0PQ=
+			</data>
+		</dict>
+		<key>Headers/RCModifyMessageParams.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			nm/Pm52Z5EmjgvG+Xt7aIKD+rkI=
+			</data>
+			<key>hash2</key>
+			<data>
+			XwGwJ72DRqB16hyI40Nh3xBdDi2E8HiM/3K1jNnBdag=
 			</data>
 		</dict>
 		<key>Headers/RCNotificationQuietHoursSetting.h</key>
@@ -1443,11 +1522,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			ytj6qdnOywn1R7pGWquW//hp9Jk=
+			Bdn+cCdml+RnNC0zW8Jj9lxUOqs=
 			</data>
 			<key>hash2</key>
 			<data>
-			8Su1fGBbhmka0xKMQ6XjgCOqJlvltumTc+Gwwg2QBFQ=
+			tGd31CycEEpjKUbH45qfmK1/Iq7fOPQWYqiaIT0PoDs=
+			</data>
+		</dict>
+		<key>Headers/RCRefreshReferenceMessageParams.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			gP1JHQ1flcuu5XTzzmK899fI5AA=
+			</data>
+			<key>hash2</key>
+			<data>
+			X3+DC0ZUCB3vDbks/r++SgexgA0Ang+HsmJELwVsW14=
 			</data>
 		</dict>
 		<key>Headers/RCRemoteHistoryMsgOption.h</key>
@@ -1773,11 +1863,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			n+zXP+gT/9R6AOEsS4xpQbNc9nE=
+			ZgPOmadlM9LnCWp8Mgk6sv5tMw8=
 			</data>
 			<key>hash2</key>
 			<data>
-			9JNxm7pMFm9xihmsdCgCZVYlxNs/nXolLjiJcp4Ho3w=
+			1tamIiW2yJaqcCVIkYmFFiq8E480rtlMYHPmZk+AE9A=
 			</data>
 		</dict>
 		<key>Headers/RCUserGroupStatusDelegate.h</key>
@@ -1872,11 +1962,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			3+O6uF0ue1qpUi5QOyRhNIsKpzM=
+			ocG1lmUuoVUj8EtZJeglNciUmqw=
 			</data>
 			<key>hash2</key>
 			<data>
-			+yaklVgUz/D5dA9fFF99aAndG0vpE8ibj6CLfxZoOc4=
+			tHYCHkLW/eKnqa5JzGSO3tMubloHsQA2hCkId35RmRQ=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

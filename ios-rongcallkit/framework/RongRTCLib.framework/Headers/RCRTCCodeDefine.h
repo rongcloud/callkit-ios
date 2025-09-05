@@ -112,6 +112,10 @@ typedef NS_ENUM(NSInteger, RCRTCCode) {
      */
     RCRTCCodeLiveUrlNotInCurrentRoom = 50033,
     /*!
+     请检查当前是否开通了语音识别服务
+     */
+    RCRTCCodeASRNotAvailable= 50034,
+    /*!
      RTCConnection 为空
      */
     RCRTCCodeRTCConnectionIsNil = 50065,

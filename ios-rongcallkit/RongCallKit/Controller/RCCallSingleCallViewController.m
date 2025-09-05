@@ -15,7 +15,7 @@
 #import "RCUserInfoCacheManager.h"
 #import "RCloudImageView.h"
 
-#define currentUserId ([RCIMClient sharedRCIMClient].currentUserInfo.userId)
+#define currentUserId ([RCCoreClient sharedCoreClient].currentUserInfo.userId)
 @interface RCCallSingleCallViewController ()
 
 @property (nonatomic, strong) RCUserInfo *remoteUserInfo;
@@ -181,7 +181,7 @@
 
 - (void)subVideoViewClicked {
     if ([self.remoteUserInfo.userId isEqualToString:self.callSession.targetId]) {
-        RCUserInfo *userInfo = [RCIMClient sharedRCIMClient].currentUserInfo;
+        RCUserInfo *userInfo = [RCCoreClient sharedCoreClient].currentUserInfo;
 
         self.remoteUserInfo = userInfo;
         [self.remoteNameLabel setText:userInfo.name];
@@ -198,7 +198,7 @@
         [self.remoteNameLabel setText:userInfo.name];
         [self.remotePortraitView setImageURL:[NSURL URLWithString:userInfo.portraitUri]];
 
-        [self.callSession setVideoView:self.subVideoView userId:[RCIMClient sharedRCIMClient].currentUserInfo.userId];
+        [self.callSession setVideoView:self.subVideoView userId:[RCCoreClient sharedCoreClient].currentUserInfo.userId];
         [self.callSession setVideoView:self.mainVideoView userId:self.remoteUserInfo.userId];
     }
 }
@@ -375,7 +375,7 @@
                                RCCallVerticalMargin, RCCallHeaderLength, RCCallHeaderLength * 1.5);
             }
             [self.callSession setVideoView:self.subVideoView
-                                    userId:[RCIMClient sharedRCIMClient].currentUserInfo.userId];
+                                    userId:[RCCoreClient sharedCoreClient].currentUserInfo.userId];
             self.subVideoView.hidden = NO;
         }
 
@@ -450,6 +450,7 @@
             self.remoteNameLabel.hidden = self.isFullScreen;
             self.timeLabel.hidden = self.isFullScreen;
             self.signalImageView.hidden = self.isFullScreen;
+            self.asrButton.hidden = self.isFullScreen;
         }
     }
 }

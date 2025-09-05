@@ -61,6 +61,7 @@
 		A6BE1B3A1CCEFAAC00FF6BF7 /* RCCallKitUtility.h in Headers */ = {isa = PBXBuildFile; fileRef = A6BE1B1C1CCEFAAC00FF6BF7 /* RCCallKitUtility.h */; };
 		A6BE1B3B1CCEFAAC00FF6BF7 /* RCCallKitUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = A6BE1B1D1CCEFAAC00FF6BF7 /* RCCallKitUtility.m */; };
 		A6BE1B481CCEFBC700FF6BF7 /* RongCallLib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6BE1B461CCEFBC700FF6BF7 /* RongCallLib.framework */; };
+		E5E1BFCF2E4AD22300DDB7A6 /* RongCallKit.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5AC79E59256F5A5900B06789 /* RongCallKit.strings */; };
 		F8235CDD1CE5B2A100C95B26 /* RCloudImageLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = F8235CD91CE5B2A100C95B26 /* RCloudImageLoader.h */; };
 		F8235CDE1CE5B2A100C95B26 /* RCloudImageView.h in Headers */ = {isa = PBXBuildFile; fileRef = F8235CDA1CE5B2A100C95B26 /* RCloudImageView.h */; };
 		F8235CDF1CE5B2A100C95B26 /* RCUserInfoCacheManager.h in Headers */ = {isa = PBXBuildFile; fileRef = F8235CDB1CE5B2A100C95B26 /* RCUserInfoCacheManager.h */; };
@@ -461,6 +462,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				998BF9972B51354B00785582 /* PrivacyInfo.xcprivacy in Resources */,
+				E5E1BFCF2E4AD22300DDB7A6 /* RongCallKit.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

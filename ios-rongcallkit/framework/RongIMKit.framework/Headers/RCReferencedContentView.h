@@ -10,6 +10,7 @@
 #import "RCMessageModel.h"
 #import "RCBaseImageView.h"
 #import "RCBaseLabel.h"
+#import "RCAttributedLabel.h"
 #define name_and_image_view_space 5
 @protocol RCReferencedContentViewDelegate <NSObject>
 @optional

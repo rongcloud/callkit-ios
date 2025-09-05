@@ -62,6 +62,8 @@ NS_ASSUME_NONNULL_BEGIN
 @class RCSearchMessageParams;
 @class RCSubscribeEvent, RCSubscribeInfoEvent, RCSubscribeEventRequest;
 @class RCMessageIdentifier;
+@class RCConversationBatchDeletionParams;
+@class RCAppSettings;
 @protocol RCSubscribeEventDelegate;
 
 /// 收到已读回执的 Notification
@@ -586,17 +588,6 @@ FOUNDATION_EXPORT NSString *const RCLibDispatchReadReceiptNotification;
 /// messageId:消息的 ID]
 /// - Parameter cancelBlock: 用户取消了消息发送的回调 [messageId:消息的 ID]
 ///
-///
-/// 如果您需要上传图片到自己的服务器并使用 IMLibCore，构建一个 RCImageMessage 对象，
-/// 并将 RCImageMessage 中的 imageUrl 字段设置为上传成功的 URL 地址，然后使用 RCCoreClient 的
-/// sendMessage:targetId:content:pushContent:pushData:success:error:方法
-/// 或 sendMessage:targetId:content:pushContent:success:error:方法进行发送，不要使用此方法。
-///
-/// 如果您需要上传文件到自己的服务器并使用 IMLibCore，构建一个 RCFileMessage 对象，
-/// 并将 RCFileMessage 中的 fileUrl 字段设置为上传成功的 URL 地址，然后使用 RCCoreClient 的
-/// sendMessage:targetId:content:pushContent:pushData:success:error:方法
-/// 或 sendMessage:targetId:content:pushContent:success:error:方法进行发送，不要使用此方法。
-///
 /// - Remark: 消息操作
 /// - Since: 5.3.0
 - (void)sendMediaMessage:(RCConversationType)conversationType
@@ -625,17 +616,6 @@ FOUNDATION_EXPORT NSString *const RCLibDispatchReadReceiptNotification;
 /// - Parameter errorBlock: 消息发送失败的回调 [errorCode:发送失败的错误码，
 /// messageId:消息的 ID]
 /// - Parameter cancelBlock: 用户取消了消息发送的回调 [messageId:消息的 ID]
-///
-///
-/// 如果您需要上传图片到自己的服务器并使用 IMLibCore，构建一个 RCImageMessage 对象，
-/// 并将 RCImageMessage 中的 imageUrl 字段设置为上传成功的 URL 地址，然后使用 RCCoreClient 的
-/// sendMessage:targetId:content:pushContent:pushData:success:error:方法
-/// 或 sendMessage:targetId:content:pushContent:success:error:方法进行发送，不要使用此方法。
-///
-/// 如果您需要上传文件到自己的服务器并使用 IMLibCore，构建一个 RCFileMessage 对象，
-/// 并将 RCFileMessage 中的 fileUrl 字段设置为上传成功的 URL 地址，然后使用 RCCoreClient 的
-/// sendMessage:targetId:content:pushContent:pushData:success:error:方法
-/// 或 sendMessage:targetId:content:pushContent:success:error:方法进行发送，不要使用此方法。
 ///
 /// - Remark: 消息操作
 /// - Since: 5.3.0
@@ -2075,6 +2055,18 @@ FOUNDATION_EXPORT NSString *const RCLibDispatchReadReceiptNotification;
             isDeleteRemote:(BOOL)isDeleteRemote
                    success:(nullable void (^)(void))successBlock
                      error:(nullable void (^)(RCErrorCode errorCode))errorBlock;
+
+
+/// 批量删除会话
+/// - Parameters: RCConversationBatchDeletionParams: 批量删除会话的参数
+///   - params: 批量删除会话的参数，具体参数请参考 `RCConversationBatchDeletionParams` 类
+///   - successBlock: 删除成功的回调
+///   - errorBlock: 删除失败的回调 [携带错误码]
+///   - Since 5.26.0
+- (void)batchDeleteConversations:(RCConversationBatchDeletionParams *)params
+                         success:(nullable void (^)(void))successBlock
+                           error:(nullable void (^)(RCErrorCode errorCode))errorBlock;
+
 
 /// 异步设置会话的置顶状态
 ///
@@ -4207,6 +4199,41 @@ FOUNDATION_EXPORT NSString *const RCLibDispatchReadReceiptNotification;
 ///
 /// - Since: 5.7.8
 - (void)removeUserSettingsDelegate:(id<RCUserSettingsDelegate>)delegate NS_SWIFT_NAME(removeUserSettingsDelegate(_:));
+
+@end
+
+@class RCMessageResult;
+@class RCModifyMessageParams;
+@class RCRefreshReferenceMessageParams;
+
+/// 消息编辑。
+///
+/// - Since: 5.26.0
+@interface RCCoreClient (RCMessageModify)
+
+/// 消息修改。
+///
+/// - Parameters:
+///   - params: 消息修改参数对象。
+///   - completionHandler: 回调结果。
+- (void)modifyMessageWithParams:(RCModifyMessageParams *)params
+              completionHandler:(void (^)(RCMessage *message, RCErrorCode code))completionHandler;
+
+/// 批量查询需要刷新的引用消息。
+///
+/// - Parameter params: 刷新引用消息参数对象。
+/// - Parameter localMessageBlock: 获取到的本地消息回调。
+/// - Parameter remoteMessageBlock: 获取到的远端消息回调。
+/// - Parameter errorBlock: 错误回调。
+///
+/// - Note:
+///     通过 `params.messageUIds` 获取的消息分为两部分：
+///     1. 先从本地查找消息，查询到之后，将结果通过 `localMessageBlock` 回调返回。
+///     2. 本地没有查到的消息，会从服务器查询，并将结果通过 `remoteMessageBlock` 回调返回。
+- (void)refreshReferenceMessageWithParams:(RCRefreshReferenceMessageParams *)params
+                        localMessageBlock:(void (^)(NSArray<RCMessageResult *> *results))localMessageBlock
+                       remoteMessageBlock:(void (^)(NSArray<RCMessageResult *> *results))remoteMessageBlock
+                               errorBlock:(void (^)(RCErrorCode code))errorBlock;
 
 @end
 

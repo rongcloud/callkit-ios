@@ -19,6 +19,8 @@
 #import "RCBaseCollectionView.h"
 #import "RCBaseButton.h"
 #import "RCBaseImageView.h"
+#import "RCEditInputBarControl.h"
+#import "RCFullScreenEditView.h"
 
 @class RCLocationMessage;
 @class RCCustomerServiceInfo,RCPublicServiceMenuItem;
@@ -153,6 +155,12 @@ typedef enum : NSUInteger {
 
 /// 会话页面下方的输入工具栏
 @property (nonatomic, strong) RCChatSessionInputBarControl *chatSessionInputBarControl;
+
+/// 消息编辑普通输入框控件
+@property (nonatomic, strong) RCEditInputBarControl *editInputBarControl;
+
+/// 消息编辑全屏编辑视图
+@property (nonatomic, strong, nullable) RCFullScreenEditView *fullScreenEditView;
 
 /// 禁用系统表情, 建议在RCConversationViewController 创建后立刻赋值
 @property (nonatomic, assign) BOOL  disableSystemEmoji;
@@ -603,6 +611,8 @@ typedef enum : NSUInteger {
 /// - Parameter completedBlock:   返回需要转发到的会话的列表。
 /// 开发者如果想更换转发消息的选择会话界面，可以重写此方法，弹出自定义的选择会话界面，选择结束之后，调用completedBlock传入选中的会话即可。
 - (void)forwardMessage:(NSInteger)index completed:(void (^)(NSArray<RCConversation *> *conversationList))completedBlock;
+
+- (void)addMentionedUserToCurrentInput:(RCUserInfo *)userInfo;
 
 @end
 NS_ASSUME_NONNULL_END

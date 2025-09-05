@@ -9,6 +9,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import <Foundation/Foundation.h>
 #import <RongIMLibCore/RongIMLibCore.h>
+#import <RongRTCLib/RongRTCLib.h>
 #import "RCCallClientSignalServer.h"
 #import "RCCallCommonDefine.h"
 #import "RCCallSession.h"
@@ -154,6 +155,45 @@ NS_ASSUME_NONNULL_BEGIN
     DEPRECATED_MSG_ATTRIBUTE(
         "use didReceiveCallRemoteNotification:inviterUserId:mediaType:userIdList:userDict:isVoIPPush:pushConfig: "
         "instead");
+
+@end
+
+/*!
+ 语音识别监听器
+ */
+@protocol RCCallASRDelegate <NSObject>
+
+@optional
+
+/*!
+ 语音识别错误通知回调
+ 
+ @remarks 代理
+ */
+- (void)didASRError:(NSInteger)code;
+
+/*!
+ 语音识别服务开启通知回调
+ 
+ @remarks 代理
+ */
+- (void)didReceiveStartASR;
+
+/*!
+ 语音识别服务停止通知回调
+ 
+ @remarks 代理
+ */
+- (void)didReceiveStopASR;
+
+/*!
+ 语音识别信息回调
+ 
+ @param asrContent 语音识别信息
+ 
+ @remarks 代理
+ */
+- (void)didReceiveASRContent:(RCRTCASRContent *)asrContent;
 
 @end
 
@@ -391,6 +431,65 @@ NS_ASSUME_NONNULL_BEGIN
 @remarks 通话设置
  */
 - (void)setPreconnectEnabled:(BOOL)preconnectEnabled;
+
+/*!
+ 设置语音识别监听器
+ 
+ @param delegate 语音识别监听器
+ @discussion
+ 设置语音识别监听器
+ 
+ @remarks 语音识别设置
+ */
+- (void)setASRDelegate:(id<RCCallASRDelegate>)delegate;
+
+/*!
+ 设置语音识别源语言
+ 
+ @param languageCode 语言代码
+ @discussion
+ 设置语音识别源语言
+ 
+ @remarks 语音识别设置
+ */
+- (void)setSrcLanguageCode:(NSString *)languageCode;
+
+/*!
+ 开启语音识别服务
+ 
+ @param completion 开启语音识别服务回调
+ 
+ @discussion
+ 开启语音识别服务，如果房间内没有人发布流，则无法开启语音识别服务，SDK 会在有人发布流后补偿进行开启语音识别服务
+ 
+ @remarks 语音识别
+ */
+- (void)startASR:(void (^)(BOOL success, NSInteger code))completion;
+
+/*!
+ 停止语音识别服务
+ 
+ @param completion 停止语音识别服务回调
+ 
+ @discussion
+ 停止语音识别服务
+ 
+ @remarks 语音识别设置
+ */
+- (void)stopASR:(void (^)(BOOL success, NSInteger code))completion;
+
+/*!
+ 设置是否打开语音识别
+ 
+@param enable YES 打开, NO 关闭
+@return 返回值，0 代表成功
+@discussion
+1. 通话接通后，可以通过此接口打开或关闭语音识别功能；
+2. 默认关闭语音识别功能，开启后会在通话过程中自动识别用户语音并转换为文字。
+ 
+@remarks 语音识别设置
+ */
+- (int)setEnableASR:(BOOL)enable;
 
 /*!
  获取 SDK 版本号

@@ -76,3 +76,5 @@
 "VoIPCallDoSomethingByOtherClient"="تم الرد على الأجهزة الأخرى .";
 "otherUserSwitchedToVoiceCall" = "المستخدم الآخر حول المكالمة الى مكالمة صوتية ";
 "switchedToVoiceCall" = "حول إلى مكالمة صوتية ";
+"subtitle" = "CC";
+"subtitle_error_tip"="Failed to turn on subtitles. Please retry later.";

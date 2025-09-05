@@ -48,7 +48,7 @@ static NSString *RCVoipFloatingBoardPosY = @"RCVoipFloatingBoardPosY";
     if (self.callSession.callStatus == RCCallHangup) {
         [self performSelector:@selector(clearCallFloatingBoard) withObject:nil afterDelay:2];
     }
-    _deltaTime = [[RCIMClient sharedRCIMClient] getDeltaTime];
+    _deltaTime = [[RCCoreClient sharedCoreClient] getDeltaTime];
     [self updateActiveTimer];
     [self startActiveTimer];
     [self updateBoard];
@@ -144,7 +144,7 @@ static NSString *RCVoipFloatingBoardPosY = @"RCVoipFloatingBoardPosY";
     if ([self isVideoViewEnabledSession]) {
         if (self.callSession.callStatus == RCCallActive) {
             [self.callSession setVideoView:self.videoView userId:self.callSession.targetId];
-            [self.callSession setVideoView:nil userId:[RCIMClient sharedRCIMClient].currentUserInfo.userId];
+            [self.callSession setVideoView:nil userId:[RCCoreClient sharedCoreClient].currentUserInfo.userId];
         } else if (self.callSession.callStatus == RCCallHangup) {
             UILabel *videoStopTips =
                 [[UILabel alloc] initWithFrame:CGRectMake(0, self.videoView.frame.size.height / 2 - 10,

@@ -18,6 +18,7 @@
 #define NameAndContentSpace 2
 #define NameHeight 14
 @class RCloudImageView;
+@class RCCircularLoadingView;
 
 /*!
  展示的消息Cell类
@@ -59,6 +60,18 @@
  显示发送失败状态的View
  */
 @property (nonatomic, strong) RCButton *messageFailedStatusView;
+
+/// 消息编辑状态的 view，包含更新中、更新失败等状态
+@property (nonatomic, strong) UIView *editStatusContentView;
+
+/// 消息编辑状态的 label
+@property (nonatomic, strong) UILabel *editStatusLabel;
+
+/// 消息编辑失败时，显示的按钮
+@property (nonatomic, strong) UIButton *editRetryButton;
+
+
+@property (nonatomic, strong) RCCircularLoadingView *editCircularLoadingView;
 
 /*!
  消息发送指示View
@@ -127,4 +140,5 @@
 点击消息视图 messageContentView 回调
 */
 - (void)didTapMessageContentView;
+
 @end

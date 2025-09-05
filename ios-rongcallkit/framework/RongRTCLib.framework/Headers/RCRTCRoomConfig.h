@@ -14,6 +14,11 @@ NS_ASSUME_NONNULL_BEGIN
 @interface RCRTCRoomConfig : NSObject
 
 /*!
+ 语音识别源语言
+ */
+@property (nonatomic, copy) NSString *srcLanguageCode;
+
+/*!
  加入房间场景, 默认值: RCRTCRoomTypeNormal
  */
 @property (nonatomic, assign) RCRTCRoomType roomType;

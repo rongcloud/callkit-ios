@@ -92,3 +92,5 @@
 "bottom_result_view_choosed_person" = "已选择 %zi 人";
 "otherUserSwitchedToVoiceCall" = "对方已切换到语音通话";
 "switchedToVoiceCall" = "已切换到语音通话";
+"subtitle" = "字幕";
+"subtitle_error_tip" = "打开字幕失败，请稍后再试。";

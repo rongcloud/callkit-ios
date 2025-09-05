@@ -181,6 +181,11 @@ NS_ASSUME_NONNULL_BEGIN
 */
 @property (nonatomic, assign) long long firstUnreadMsgSendTime;
 
+/// 最后一条消息 messageUId。
+///
+/// - Since: 5.20.0
+@property (nonatomic, copy, nullable) NSString *latestMessageUId;
+
 
 /*!
  初始化会话显示数据模型

@@ -57,7 +57,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy, nullable) void (^successBlock)(RCMessageContent *content);
 
 /*!
- 上传成功需要调用的 block [errorCode:上传失败的错误码，非 0 整数]
+ 上传失败需要调用的 block [errorCode:上传失败的错误码，非 0 整数]
  */
 @property (nonatomic, copy, nullable) void (^errorBlock)(RCErrorCode errorCode);
 

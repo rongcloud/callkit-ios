@@ -633,6 +633,30 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+@interface RCRTCASRContent : NSObject
+/**
+ 当前语音识别关联用户的 ID
+ */
+@property (nonatomic, copy) NSString *userId;
+/**
+ 当前语音识别的 ID, 用于关联当前语音识别结果
+ */
+@property (nonatomic, copy) NSString *msgId;
+/**
+ 当前语音识别的时间戳, 单位为秒
+ */
+@property (nonatomic, assign) NSTimeInterval timeUTC;
+/**
+ 当前语音识别结果
+ */
+@property (nonatomic, copy) NSString *msg;
+/**
+ 当前语音识别是否结束, 如果为 YES, 则表示当前语音识别已结束
+ */
+@property (nonatomic, assign) BOOL isEnd;
+
+@end
+
 NS_ASSUME_NONNULL_END
 
 /*!
