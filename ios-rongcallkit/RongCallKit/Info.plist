@@ -15,7 +15,7 @@
 	<key>CFBundlePackageType</key>
 	<string>FMWK</string>
 	<key>CFBundleShortVersionString</key>
-	<string>5.26.0</string>
+	<string>5.28.0</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
@@ -23,10 +23,10 @@
 	<key>NSPrincipalClass</key>
 	<string></string>
 	<key>RCVersion</key>
-	<string>5.26.0</string>
+	<string>5.28.0</string>
 	<key>RCCommitId</key>
-	<string>cdb4cd8e6</string>
+	<string>56e7a2215</string>
 	<key>RCDate</key>
-	<string>202509041304</string>
+	<string>202509261346</string>
 </dict>
 </plist>

@@ -657,6 +657,34 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+@interface RCRTCRealtimeTranslationContent : NSObject
+/**
+ 当前语音翻译的目标语言码
+ */
+@property (nonatomic, copy) NSString *destLangCode;
+/**
+ 当前语音翻译关联用户的 ID
+ */
+@property (nonatomic, copy) NSString *userId;
+/**
+ 当前语音翻译的 ID, 用于关联当前语音识别和语音翻译结果
+ */
+@property (nonatomic, copy) NSString *msgId;
+/**
+ 当前语音翻译的时间戳, 单位为秒
+ */
+@property (nonatomic, assign) NSTimeInterval timeUTC;
+/**
+ 当前语音翻译结果
+ */
+@property (nonatomic, copy) NSString *msg;
+/**
+ 当前语音翻译是否结束, 如果为 YES, 则表示当前语音翻译已结束
+ */
+@property (nonatomic, assign) BOOL isEnd;
+
+@end
+
 NS_ASSUME_NONNULL_END
 
 /*!

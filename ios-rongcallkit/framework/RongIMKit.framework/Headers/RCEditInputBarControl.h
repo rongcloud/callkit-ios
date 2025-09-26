@@ -104,6 +104,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// 当前底部面板的状态
 @property (nonatomic, assign, readonly) KBottomBarStatus currentBottomBarStatus;
 
+/// 编辑输入框的配置信息
+@property (nonatomic, strong) RCEditInputBarConfig *inputBarConfig;
+
 /// 初始化方法
 - (instancetype)initWithIsFullScreen:(BOOL)isFullScreen;
 
@@ -148,7 +151,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// - Parameter text: 文本内容
 - (void)setEditText:(NSString *)text;
 
-/// 恢复输入焦点（用于模态页面消失后）
+/// 恢复输入焦点
 - (void)restoreFocus;
 
 /// 隐藏底部面板，包含表情面板或键盘
@@ -160,15 +163,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 重置编辑控件，清空编辑内容
 - (void)resetEditInputBar;
-
-#pragma mark - 状态保存和恢复
-
-/// 获取当前编辑状态数据（用于保存编辑状态）
-- (NSDictionary *)stateData;
-
-/// 从状态数据恢复编辑状态（用于恢复编辑状态）
-/// - Parameter stateData: 之前保存的状态数据
-- (BOOL)restoreFromStateData:(NSDictionary *)stateData;
 
 /// 检查是否有编辑内容
 - (BOOL)hasContent;

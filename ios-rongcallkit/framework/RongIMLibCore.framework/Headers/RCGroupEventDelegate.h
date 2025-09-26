@@ -27,6 +27,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// - Parameter operation: 操作类型
 /// - Parameter memberInfos: 目标用户信息列表
 /// - Parameter operationTime: 操作时间
+/// - Warning 在该回调中，`groupInfo` 的 `remark`、`role`、`joinedTime` 字段不会返回有效值，它们可能为空或为默认值。
+/// 如需获取这些字段，请通过` -[RCCoreClient getGroupsInfo:success:error:]` 接口查询。
 - (void)onGroupOperation:(NSString *)groupId
             operatorInfo:(nullable RCGroupMemberInfo *)operatorInfo
                groupInfo:(nullable RCGroupInfo *)groupInfo
@@ -64,6 +66,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// - Parameter properties: 群组信息有变更的属性
 /// - Parameter operationTime: 操作时间
 /// - Since: 5.22.0
+/// - Warning 在该回调中，`fullGroupInfo` 的 `remark`、`role`、`joinedTime` 字段不会返回有效值，它们可能为空或为默认值。
+/// 如需获取这些字段，请通过` -[RCCoreClient getGroupsInfo:success:error:]` 接口查询。
 - (void)onGroupInfoChanged:(RCGroupMemberInfo *)operatorInfo
              fullGroupInfo:(RCGroupInfo *)fullGroupInfo
          changedProperties:(NSArray<NSString *> *)properties

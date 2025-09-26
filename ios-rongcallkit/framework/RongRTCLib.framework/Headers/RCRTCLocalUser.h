@@ -555,6 +555,28 @@ NS_ASSUME_NONNULL_BEGIN
 - (BOOL)asrIsAvailable;
 
 /*!
+ 开启语音翻译
+ @param destLangCode 翻译目标语言码
+ 
+ @discussion
+ 1. 语音翻译依赖语音识别服务，需要在收到 RCRTCRoomEventDelegate 的 didReceiveStartASR 回调后，调用开启语音翻译
+ 2. 开启语音翻译，会通过 RCRTCRoomEventDelegate 的 didReceiveRealtimeTranslationContent 回调返回语音翻译结果
+ 
+ @remarks 语音识别
+ */
+- (void)startRealtimeTranslation:(NSString *)destLangCode copmletion:(nullable RCRTCOperationCallback)completion;
+
+/*!
+ 关闭语音翻译
+ 
+ @discussion
+ 关闭语音翻译
+ 
+ @remarks 语音识别
+ */
+- (void)stopRealtimeTranslation:(nullable RCRTCOperationCallback)completion;
+
+/*!
  设置是否接收语音识别信息
  @param enable 是否接收语音识别信息
  

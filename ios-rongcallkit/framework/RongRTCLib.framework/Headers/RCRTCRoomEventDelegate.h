@@ -52,6 +52,15 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)didReceiveASRContent:(RCRTCASRContent *)asrContent;
 
 /*!
+ 语音翻译结果回调
+ 
+ @param content 语音翻译结果
+ 
+ @remarks 代理
+ */
+- (void)didReceiveRealtimeTranslationContent:(RCRTCRealtimeTranslationContent *)content;
+
+/*!
  远端用户加入通知
  
  @param user 加入的用户信息

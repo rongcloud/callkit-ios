@@ -88,9 +88,21 @@
 "VoIPCall_addMembers"="Select Members";
 "VoIPCall_whiteBoard"="white board";
 "VoIPCall_hand_raise"="Raise  hand to speak";
+"VoIPCall_invite_signal_call"=" invite you to call";
+"VoIPCall_invite_group_call"=" invite you to group call";
 
 "bottom_result_view_choosed_person" = "%zi members selected";
 "otherUserSwitchedToVoiceCall" = "Other user switched to voice call";
 "switchedToVoiceCall" = "Switched to voice call";
 "subtitle" = "CC";
 "subtitle_error_tip"="Failed to turn on subtitles. Please retry later.";
+"subtitle_translation_error_tip" = "The translation function cannot be enabled. Please try again or contact customer service.";
+"subtitle_caption" = "Caption";
+"subtitle_translation_setting" = "Translation Setting";
+"subtitle_translation_display" = "Translation Display";
+"subtitle_bilingual_captions" = "Bilingual Captions";
+"subtitle_translation_display_none" = "Do not translate";
+"subtitle_translation_display_chinese" = "简体中文(Simplified Chinese)";
+"subtitle_translation_display_english" = "English";
+"subtitle_translation_display_arabic" = " العربية(Arabic)";
+

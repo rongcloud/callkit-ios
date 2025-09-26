@@ -362,4 +362,11 @@ UIColor *dynamic_color(NSInteger light_hex_value, NSInteger dark_hex_value) {
     return NO;
 }
 
++ (BOOL)firstCharIsArabic:(NSString *)text {
+    unichar firstChar = [text characterAtIndex:0];
+    BOOL isArabicChar = (firstChar >= 0x0600 && firstChar <= 0x06FF) ||
+                           (firstChar >= 0x0750 && firstChar <= 0x077F);
+    return isArabicChar;
+}
+
 @end
