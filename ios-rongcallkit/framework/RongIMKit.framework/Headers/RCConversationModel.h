@@ -126,6 +126,9 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (nonatomic, copy, nullable) NSString *draft;
 
+/// 会话中存在的编辑草稿
+@property (nonatomic, strong, nullable) RCEditedMessageDraft *editedMessageDraft;
+
 /*!
  会话中最后一条消息的类型名
  */

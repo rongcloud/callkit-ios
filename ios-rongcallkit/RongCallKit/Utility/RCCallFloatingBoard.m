@@ -12,6 +12,7 @@
 #import <UIKit/UIKit.h>
 #import "RCCXCall.h"
 #import "RCCallKitUtility.h"
+#import "RongCallKit/RongCallKit-Swift.h"
 
 @interface RCCallFloatingBoard () <RCCallSessionDelegate>
 
@@ -63,7 +64,13 @@ static NSString *RCVoipFloatingBoardPosY = @"RCVoipFloatingBoardPosY";
     self.callCenter = [[CTCallCenter alloc] init];
     self.callCenter.callEventHandler = ^(CTCall *call) {
         if ([call.callState isEqualToString:CTCallStateConnected]) {
+#if PUBLIC
+            if (@available(iOS 17.4, *)) {
+                [[RCLCKCenter shareInstance] hangupIfNeedWithUUID:call.callID];
+            }
+#else
             [[RCCXCall sharedInstance] hangupIfNeedWithUUID:call.callID];
+#endif
         }
     };
 }
@@ -392,7 +399,13 @@ static NSString *RCVoipFloatingBoardPosY = @"RCVoipFloatingBoardPosY";
  通话已结束
  */
 - (void)callDidDisconnect {
+#if PUBLIC
+    if (@available(iOS 17.4, *)) {
+        [[RCLCKCenter shareInstance] endConversation];
+    }
+#else
     [[RCCXCall sharedInstance] endCXCall];
+#endif
     [self updateBoard];
     [self hideCallFloatingBoard];
     [self performSelector:@selector(clearCallFloatingBoard) withObject:nil afterDelay:2];

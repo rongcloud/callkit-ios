@@ -94,4 +94,6 @@ UIColor *dynamic_color(NSInteger light_hex_value, NSInteger dark_hex_value);
 
 + (BOOL)isArabic;
 
++ (BOOL)firstCharIsArabic:(NSString *)text;
+
 @end

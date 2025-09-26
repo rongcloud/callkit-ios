@@ -98,10 +98,14 @@ FOUNDATION_EXPORT const unsigned char RongIMLibCoreVersionString[];
 #import <RongIMLibCore/RCConversationTopOption.h>
 #import <RongIMLibCore/RCConversationFilterOption.h>
 #import <RongIMLibCore/RCConversationBatchDeletionParams.h>
+#import <RongIMLibCore/RCGetUnreadMentionMeConversationListParams.h>
 
 #import <RongIMLibCore/RCFileMessage.h>
 #import <RongIMLibCore/RCFileUtility.h>
 #import <RongIMLibCore/RCUserOnlineStatusInfo.h>
+#import <RongIMLibCore/RCSubscribeUserOnlineStatus.h>
+#import <RongIMLibCore/RCPlatformOnlineStatus.h>
+#import <RongIMLibCore/RCEditedMessageDraft.h>
 
 // 已读回执
 #import <RongIMLibCore/RCReadReceiptInfo.h>

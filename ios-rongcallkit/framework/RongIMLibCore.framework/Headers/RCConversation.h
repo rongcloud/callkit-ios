@@ -18,6 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class RCReadReceiptInfo, RCGroupReadReceiptInfoV2, RCMessageConfig;
 @class RCReceivedStatusInfo, RCMessage;
+@class RCEditedMessageDraft;
 
 /// 会话类，包含会话的所有属性。
 @interface RCConversation : NSObject <NSCoding>
@@ -157,6 +158,8 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// - Since: 5.24.0
 @property (nonatomic, assign) RCTranslateStrategy translateStrategy;
+
+@property (nonatomic, strong) RCEditedMessageDraft *editedMessageDraft;
 
 @end
 

@@ -64,6 +64,9 @@ NS_ASSUME_NONNULL_BEGIN
 @class RCMessageIdentifier;
 @class RCConversationBatchDeletionParams;
 @class RCAppSettings;
+@class RCGetUnreadMentionMeConversationListParams;
+@class RCSubscribeUserOnlineStatus;
+@class RCEditedMessageDraft;
 @protocol RCSubscribeEventDelegate;
 
 /// 收到已读回执的 Notification
@@ -89,7 +92,7 @@ FOUNDATION_EXPORT NSString *const RCLibDispatchReadReceiptNotification;
 #pragma mark - IMLibCore 核心类
 
 /// 融云 IMLibCore 核心类
-///
+///  
 /// 您需要通过 sharedCoreClient 方法，获取单例对象。
 @interface RCCoreClient : NSObject
 
@@ -257,6 +260,35 @@ FOUNDATION_EXPORT NSString *const RCLibDispatchReadReceiptNotification;
                     token:(NSString *)token
                 timeLimit:(int)timeLimit
                  dbOpened:(nullable void (^)(RCDBErrorCode code))dbOpenedBlock
+                  success:(nullable void (^)(NSString *userId))successBlock
+                    error:(nullable void (^)(RCConnectErrorCode errorCode))errorBlock;
+
+/// 与融云服务器建立连接。
+///
+/// - Parameter userId: 融云服务器的用户 ID，与 `token` 对应。
+/// - Parameter token: 融云服务器端的用户身份令牌。
+/// - Parameter timeLimit: SDK 连接的超时时间，单位：秒。
+///     timeLimit 大于 0 时，SDK 最多连接 timeLimit 秒，超时时返回 `RC_CONNECT_TIMEOUT` 错误，并不再重连。
+///     timeLimit 小于或等于 0 时，直到连接成功或者出现 SDK 无法处理的错误（如 token 非法）。
+/// - Parameter dbOpenedBlock: 本地消息数据库打开的回调。
+/// - Parameter dbCreatedBlock: 本地消息数据库是否是重建的回调。
+/// - Parameter successBlock: 连接建立成功的回调 [ userId: 当前连接成功所用的用户 ID]。
+/// - Parameter errorBlock: 连接建立失败的回调，触发该回调代表 SDK 无法继续重连 [errorCode: 连接失败的错误码]。对于 errorBlock 需要特定关心 tokenIncorrect 的情况：
+///     一是 token 错误，请您检查客户端初始化使用的 AppKey 和您服务器获取 token 使用的 AppKey 是否一致；
+///     二是 token 过期，是因为您在开发者后台设置了 token 过期时间，您需要请求您的服务器重新获取 token 并再次用新的 token 建立连接。但要注意避免无限循环，以免影响 App 用户体验。
+///
+/// - Note:
+///     连接成功后，SDK 将接管所有的重连处理。当因为网络原因断线的情况下，SDK 会不停重连直到连接成功为止，不需要您做额外的连接操作。
+///
+/// - Warning:
+///     此方法的回调线程是 SDK 的内部线程，不是该接口的调用线程。您如果需要进行 UI 操作，请注意切换到主线程。
+///
+/// - Since: 5.28.0
+- (void)connectWithUserId:(NSString *)userId
+                    token:(NSString *)token
+                timeLimit:(int)timeLimit
+                 dbOpened:(nullable void (^)(RCDBErrorCode code))dbOpenedBlock
+                dbCreated:(nullable void (^)(BOOL isRecreated))dbCreatedBlock
                   success:(nullable void (^)(NSString *userId))successBlock
                     error:(nullable void (^)(RCConnectErrorCode errorCode))errorBlock;
 
@@ -1892,6 +1924,16 @@ FOUNDATION_EXPORT NSString *const RCLibDispatchReadReceiptNotification;
 
 #pragma mark - 会话列表操作
 
+/// 获取 @我未读消息的会话列表
+/// - Parameters: param 详见 RCGetUnreadMentionMeConversationListParams 定义
+///   - completion: 异步回调 [会话 RCConversation 的列表] [code : 获取是否成功，0 表示成功，非 0 表示失败]
+///
+/// - Since: 5.28.0
+- (void)getUnreadMentionMeConversationList:(RCGetUnreadMentionMeConversationListParams *)params
+                                completion:(nullable void(^)(NSArray<RCConversation *> *conversations,
+                                                             RCErrorCode code))completion;
+
+
 /// 拉取远端会话列表
 /// - Parameters:
 ///   - successBlock: 接口调用成功的回调
@@ -3298,6 +3340,14 @@ FOUNDATION_EXPORT NSString *const RCLibDispatchReadReceiptNotification;
 - (void)removeSubscribeEventDelegate:(id<RCSubscribeEventDelegate>)delegate
     NS_SWIFT_NAME(removeSubscribeEventDelegate(_:));
 
+/// 查询已订阅用户的在线状态
+/// - Parameters:
+///   - userIds: 用户id集合，限制范围在 [0 ~ 200] 超出限制或者长度为0 会报错 34215
+///   - completion: 结果回调
+/// - Since: 5.28.0
+- (void)getSubscribeUsersOnlineStatus:(NSArray<NSString *> *)userIds
+                           completion:(void(^)(RCErrorCode code,
+                                               NSArray <RCSubscribeUserOnlineStatus *> *status))completion;
 #pragma mark - 用户信息托管
 
 /// 设置自己的信息访问权限
@@ -3931,6 +3981,33 @@ FOUNDATION_EXPORT NSString *const RCLibDispatchReadReceiptNotification;
 - (void)requestStreamMessageWithParams:(RCStreamMessageRequestParams *)params
                      completionHandler:(void (^)(RCErrorCode code))completionHandler;
 
+
+
+/// 保存撤回消息编辑草稿
+/// @param draft 详见 RCEditedMessageDraft 定义
+/// @param identifier - identifier.type 只允许单聊，群聊，超级群，identifier.targetId 必填参数，identifier.channeld 非必填
+/// @param completion 结果回调
+///
+/// - Since 5.28.0
+- (void)saveEditedMessageDraft:(nullable RCEditedMessageDraft *)draft
+                    identifier:(RCConversationIdentifier *)identifier
+                    completion:(void(^)(RCErrorCode code))completion;
+
+/// 获取撤回消息编辑草稿
+/// @param identifier identifier.type 只允许单聊，群聊，超级群，identifier.targetId 必填参数，identifier.channeld 非必填
+/// @param completion 结果回调
+///
+/// - Since 5.28.0
+- (void)getEditedMessageDraft:(RCConversationIdentifier *)identifier
+                   completion:(void(^)(RCErrorCode code, RCEditedMessageDraft * _Nullable draft))completion;
+
+/// 清除撤回消息编辑草稿
+/// @param identifier identifier.type 只允许单聊，群聊，超级群，identifier.targetId 必填参数，identifier.channeld 非必填
+/// @param completion 结果回调
+///
+/// - Since 5.28.0
+- (void)clearEditedMessageDraft:(RCConversationIdentifier *)identifier
+                     completion:(void(^)(RCErrorCode code))completion;
 @end
 
 @protocol RCReadReceiptV5Delegate;

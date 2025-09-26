@@ -70,7 +70,8 @@
 "VoIPCall_addMembers"="اختر الأعضاء";
 "VoIPCall_whiteBoard"="السبورة البيضاء";
 "VoIPCall_hand_raise"="ارفع يدك للتحدث";
-
+"VoIPCall_invite_signal_call"=" invite you to call";
+"VoIPCall_invite_group_call"=" invite you to group call";
 
 "bottom_result_view_choosed_person" = "تم اختيار  %zi أشخاص";
 "VoIPCallDoSomethingByOtherClient"="تم الرد على الأجهزة الأخرى .";
@@ -78,3 +79,12 @@
 "switchedToVoiceCall" = "حول إلى مكالمة صوتية ";
 "subtitle" = "CC";
 "subtitle_error_tip"="Failed to turn on subtitles. Please retry later.";
+"subtitle_translation_error_tip" = "لا يمكن تمكين خدمة الترجمة. يرجى المحاولة مرة أخرى أو الاتصال بخدمة العملاء.";
+"subtitle_caption" = "شرح الصورة";
+"subtitle_translation_setting" = "إعدادات الترجمة";
+"subtitle_translation_display" = "عرض الترجمة";
+"subtitle_bilingual_captions" = "شرحات ثنائية اللغة";
+"subtitle_translation_display_none" = "لا تتجمّد";
+"subtitle_translation_display_chinese" = "简体中文(الصينية المبسطة)";
+"subtitle_translation_display_english" = "English(الإنجليزية)";
+"subtitle_translation_display_arabic" = "العربية";

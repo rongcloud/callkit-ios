@@ -2,7 +2,7 @@
 //  RCConversationBatchDeletionParams.h
 //  RongIMLibCore
 //
-//  Created by huan xu on 2025/8/5.
+//  Created by RongCloud on 2025/8/5.
 //  Copyright © 2025 RongCloud. All rights reserved.
 //
 

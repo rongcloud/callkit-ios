@@ -154,7 +154,7 @@
 		</data>
 		<key>Headers/RCConversationModel.h</key>
 		<data>
-		PB73k4wOhxiNOP8trzCZKDiOyLo=
+		zqJ7BdOpPYPxrGs+Y3GqvIuKB34=
 		</data>
 		<key>Headers/RCConversationStatusView.h</key>
 		<data>
@@ -166,11 +166,11 @@
 		</data>
 		<key>Headers/RCEditInputBarConfig.h</key>
 		<data>
-		I/eXw+dKGi9NQ6BSSf38CrPucjA=
+		Zc29Yn+ynzWjpDxwXFPAHoQoTFc=
 		</data>
 		<key>Headers/RCEditInputBarControl.h</key>
 		<data>
-		jMhpCuG/EVpukRyepzGWoqemWqk=
+		B84lPjyEuE+zAWeXLHZtjPj5o58=
 		</data>
 		<key>Headers/RCEditInputContainerView.h</key>
 		<data>
@@ -407,6 +407,10 @@
 		<key>Headers/RCListViewModelProtocol.h</key>
 		<data>
 		2ZXmSDyFv7r+Faf0YHVLPqyoHKo=
+		</data>
+		<key>Headers/RCMentionedStringRangeInfo.h</key>
+		<data>
+		cEk3EAoDhQInMDAcmJUw+p/JfLE=
 		</data>
 		<key>Headers/RCMenuContainerView.h</key>
 		<data>
@@ -654,11 +658,11 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		Rzw5+TsiC+qNp6tIi/kSI7xq5Mo=
+		EB/ltjBtAnxWvvseHw5c04srpt4=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
-		AQzD6JawyZvE4Fx9Cc+bmmBcriM=
+		vf92/cftHQY2rt1OvchLeG940Ew=
 		</data>
 		<key>PrivacyInfo.xcprivacy</key>
 		<data>
@@ -1259,6 +1263,14 @@
 		<key>RongCloud.bundle/edit_confirm_dark@3x.png</key>
 		<data>
 		gJsIWMbmo2sROmScZ0bXcvlOt08=
+		</data>
+		<key>RongCloud.bundle/edit_draft@2x.png</key>
+		<data>
+		VckV4kBCK0UuUMZQh1lvRkPSqyg=
+		</data>
+		<key>RongCloud.bundle/edit_draft@3x.png</key>
+		<data>
+		xJUox3kiUikZWU64aovajdXG5sM=
 		</data>
 		<key>RongCloud.bundle/edit_emoji@2x.png</key>
 		<data>
@@ -3281,11 +3293,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			PB73k4wOhxiNOP8trzCZKDiOyLo=
+			zqJ7BdOpPYPxrGs+Y3GqvIuKB34=
 			</data>
 			<key>hash2</key>
 			<data>
-			xxbSELphYCbNjNjfRl0RHSJy+VimW9ANtRsIqBIcX0s=
+			x9Ii82lkcYk2Z213KKjDLAq6XCHKMEPGIuQy7UxEULY=
 			</data>
 		</dict>
 		<key>Headers/RCConversationStatusView.h</key>
@@ -3314,22 +3326,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			I/eXw+dKGi9NQ6BSSf38CrPucjA=
+			Zc29Yn+ynzWjpDxwXFPAHoQoTFc=
 			</data>
 			<key>hash2</key>
 			<data>
-			C6HthMDOizRyDsopK3+rqjaR7Y+eyR2pn1RNz1Ck9R4=
+			XBdPjP9EQTkH4v5LeSCOqR/2nvLbRvaaBLgAXPLH9c0=
 			</data>
 		</dict>
 		<key>Headers/RCEditInputBarControl.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			jMhpCuG/EVpukRyepzGWoqemWqk=
+			B84lPjyEuE+zAWeXLHZtjPj5o58=
 			</data>
 			<key>hash2</key>
 			<data>
-			/XHJiQ38VDMEMQa0S9GJ2Tu0GNRx7nEJofmqQKlWI78=
+			9KOBdb/pyUOa5d9hsltmOuuzwDdRJfwSRvA52vAmwmk=
 			</data>
 		</dict>
 		<key>Headers/RCEditInputContainerView.h</key>
@@ -3979,6 +3991,17 @@
 			<key>hash2</key>
 			<data>
 			JiJeatWyaEYzNy/r31f+rPKlHrFQn0ne4yvmp2WRljk=
+			</data>
+		</dict>
+		<key>Headers/RCMentionedStringRangeInfo.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			cEk3EAoDhQInMDAcmJUw+p/JfLE=
+			</data>
+			<key>hash2</key>
+			<data>
+			AAQO947GIjAisLAsScEeBNWMrFshL6XpWc8xoo7cbJg=
 			</data>
 		</dict>
 		<key>Headers/RCMenuContainerView.h</key>
@@ -4656,11 +4679,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			AQzD6JawyZvE4Fx9Cc+bmmBcriM=
+			vf92/cftHQY2rt1OvchLeG940Ew=
 			</data>
 			<key>hash2</key>
 			<data>
-			zK4p2dPW5V0ZCzArVrQi6AHPZWTu7Mi0fUkTMlGwNsw=
+			cFOGwH++3S9qLjzI6mi1khoQgEf3+n3I4whqjn9wl/s=
 			</data>
 		</dict>
 		<key>PrivacyInfo.xcprivacy</key>
@@ -6311,6 +6334,28 @@
 			<key>hash2</key>
 			<data>
 			ZXWWwj/QUOK9d0Yjov76LOFCCtppOmAW4sBqpXYuGs4=
+			</data>
+		</dict>
+		<key>RongCloud.bundle/edit_draft@2x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			VckV4kBCK0UuUMZQh1lvRkPSqyg=
+			</data>
+			<key>hash2</key>
+			<data>
+			EhY5ng5dfIWUkg3rfz/rRbTjqLdT0RhIicQ3WvBfzGs=
+			</data>
+		</dict>
+		<key>RongCloud.bundle/edit_draft@3x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			xJUox3kiUikZWU64aovajdXG5sM=
+			</data>
+			<key>hash2</key>
+			<data>
+			pgaVDXAeiz53uSMjY41X1K/9p3/1+Bi92gGhiFUSAu8=
 			</data>
 		</dict>
 		<key>RongCloud.bundle/edit_emoji@2x.png</key>

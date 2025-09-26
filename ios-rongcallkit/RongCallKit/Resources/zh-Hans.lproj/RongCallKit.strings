@@ -88,9 +88,20 @@
 "VoIPCall_addMembers"="添加成员";
 "VoIPCall_whiteBoard"="白板";
 "VoIPCall_hand_raise"="举手发言";
+"VoIPCall_invite_signal_call"="邀请您进行通话";
+"VoIPCall_invite_group_call"="邀请您进行多人通话";
 // 新增对齐多端
 "bottom_result_view_choosed_person" = "已选择 %zi 人";
 "otherUserSwitchedToVoiceCall" = "对方已切换到语音通话";
 "switchedToVoiceCall" = "已切换到语音通话";
 "subtitle" = "字幕";
 "subtitle_error_tip" = "打开字幕失败，请稍后再试。";
+"subtitle_translation_error_tip" = "打开翻译失败，请稍后再试。";
+"subtitle_caption" = "字幕设置";
+"subtitle_translation_setting" = "翻译设置";
+"subtitle_translation_display" = "翻译显示";
+"subtitle_bilingual_captions" = "字幕同时显示双语言";
+"subtitle_translation_display_none" = "不翻译";
+"subtitle_translation_display_chinese" = "简体中文";
+"subtitle_translation_display_english" = "English(英文)";
+"subtitle_translation_display_arabic" = " العربية(阿拉伯语)";

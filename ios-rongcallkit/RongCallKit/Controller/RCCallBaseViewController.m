@@ -12,6 +12,7 @@
 #import <CoreTelephony/CTCallCenter.h>
 #import <RongCallLib/RongCallLib.h>
 #import <RongIMLib/RongIMLib.h>
+#import <objc/runtime.h>
 #import "KxCallMenu.h"
 #import "RCCXCall.h"
 #import "RCCall.h"
@@ -19,6 +20,9 @@
 #import "RCCallKitUtility.h"
 #import "RCUserInfoCacheManager.h"
 #import "RCloudImageView.h"
+#import "RCCallASRConfigController.h"
+#import "RCCallASRContentView.h"
+#import "RongCallKit/RongCallKit-Swift.h"
 
 // 解除循环引用
 @interface RCCallProxy : NSProxy
@@ -61,17 +65,19 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
 @property (nonatomic, strong) CTCallCenter *callCenter;
 @property (nonatomic, strong) UIView *topGradientView;
 @property (nonatomic, strong) UIView *bottomGradientView;
-@property (nonatomic, strong) UIAlertController *alertController;
 @property (nonatomic, assign) BOOL backCamera;
 @property (nonatomic, weak) NSTimer *vibrateTimer;
 @property (nonatomic, strong, readonly) NSString *reportDesc;
 @property (nonatomic, assign) BOOL receivedFirstKeyFrame;
 
-@property (nonatomic, strong) RCloudImageView *asrAvatarImageView;
-@property (nonatomic, strong) UILabel *asrNameLabel;
-@property (nonatomic, strong) UITextView *asrTextView;
 @property (nonatomic, strong) UIView *asrView;
 @property (nonatomic, strong) NSLayoutConstraint *asrViewBottomConstraint;
+@property (nonatomic, strong) NSLayoutConstraint *asrContentViewOneBottomConstraint;
+@property (nonatomic, strong) NSLayoutConstraint *asrContentViewTwoBottomConstraint;
+@property (nonatomic, strong) RCCallASRContentView *asrContentViewOne;
+@property (nonatomic, strong) RCCallASRContentView *asrContentViewTwo;
+@property (nonatomic, copy) NSString *destLangCode;
+@property (nonatomic, assign) BOOL displayDualLangUI;
 
 @end
 
@@ -575,194 +581,9 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
 
 - (void)muteButtonClicked {
     [self didTapMuteButton];
-
-    [self.callSession setMuted:!self.callSession.isMuted];
+    BOOL mute = !self.callSession.isMuted;
+    [self.callSession setMuted:mute];
     [self.muteButton setSelected:self.callSession.isMuted];
-}
-
-- (UIButton *)asrButton {
-    if (![RCCall sharedRCCall].displayASRUI) {
-        return nil;
-    }
-    if (!_asrButton) {
-        _asrButton = [[UIButton alloc] init];
-        _asrButton.frame = CGRectMake(RCCallHorizontalMargin, RCCallMiniButtonTopMargin + RCCallStatusBarHeight + RCCallMiniButtonLength + RCCallHorizontalMargin, 50, 30);
-        _asrButton.backgroundColor = [UIColor colorWithWhite:1.0 alpha:0.8];
-        _asrButton.clipsToBounds = YES;
-        _asrButton.layer.cornerRadius = 10;
-        
-        _asrButton.titleLabel.font = [UIFont systemFontOfSize:12];
-        [_asrButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        [_asrButton setTitleColor:[UIColor blackColor] forState:UIControlStateSelected];
-        [_asrButton setTitle:RCCallKitLocalizedString(@"subtitle") forState:UIControlStateNormal];
-        [_asrButton setTitle:RCCallKitLocalizedString(@"subtitle") forState:UIControlStateSelected];
-        
-        [_asrButton setImage:[RCCallKitUtility imageFromVoIPBundle:@"voip/invisible.png"] forState:UIControlStateNormal];
-        [_asrButton setImage:[RCCallKitUtility imageFromVoIPBundle:@"voip/invisible.png"] forState:UIControlStateHighlighted];
-        [_asrButton setImage:[RCCallKitUtility imageFromVoIPBundle:@"voip/invisible.png"] forState:UIControlStateSelected];
-
-        CGFloat spacing = 1.0; // 文字和图片的间距
-        CGSize titleSize = _asrButton.titleLabel.intrinsicContentSize;
-        CGSize imageSize = _asrButton.imageView.frame.size;
-        
-        if ([RCCallKitUtility isArabic]) {
-            _asrButton.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, spacing);
-            _asrButton.imageEdgeInsets = UIEdgeInsetsMake(_asrButton.frame.size.height / 2 - imageSize.height / 2, spacing, _asrButton.frame.size.height / 2 - imageSize.height / 2, 0);
-        } else {
-            _asrButton.titleEdgeInsets = UIEdgeInsetsMake(0, -imageSize.width, 0, imageSize.width + spacing);
-            _asrButton.imageEdgeInsets = UIEdgeInsetsMake(_asrButton.frame.size.height / 2 - imageSize.height / 2, titleSize.width + spacing, _asrButton.frame.size.height / 2 - imageSize.height / 2, -titleSize.width);
-        }
-       
-        [_asrButton addTarget:self action:@selector(asrButtonClicked) forControlEvents:UIControlEventTouchUpInside];
-        
-        [self.view addSubview:_asrButton];
-        _asrButton.hidden = YES;
-    }
-    return _asrButton;
-}
-
-- (void)asrButtonClicked {
-    if (self.asrView.hidden) {
-        [_asrButton setImage:[RCCallKitUtility imageFromVoIPBundle:@"voip/visible.png"] forState:UIControlStateNormal];
-        [_asrButton setImage:[RCCallKitUtility imageFromVoIPBundle:@"voip/visible.png"] forState:UIControlStateHighlighted];
-        [_asrButton setImage:[RCCallKitUtility imageFromVoIPBundle:@"voip/visible.png"] forState:UIControlStateSelected];
-        self.asrView.hidden = NO;
-        [_asrAvatarImageView setPlaceholderImage:nil];
-        _asrNameLabel.text = @"";
-        _asrTextView.text = @"";
-        
-        [[RCCallClient sharedRCCallClient] startASR:^(BOOL success, NSInteger code) {
-            if (success) {
-                [[RCCallClient sharedRCCallClient] setEnableASR:YES];
-            } else {
-                [RCAlertView showAlertController:RCCallKitLocalizedString(@"subtitle")
-                                         message:RCCallKitLocalizedString(@"subtitle_error_tip")
-                                    actionTitles:nil
-                                     cancelTitle:RCCallKitLocalizedString(@"OK")
-                                    confirmTitle:nil
-                                  preferredStyle:UIAlertControllerStyleAlert
-                                    actionsBlock:nil cancelBlock:^{
-                    [self hiddenasrView];
-                }
-                                    confirmBlock:nil
-                                inViewController:self];
-            }
-        }];
-        
-    } else {
-        [self hiddenasrView];
-    }
-}
-
-- (void)closeASRButtonClicked {
-    [self hiddenasrView];
-}
-
-- (void)hiddenasrView {
-    [_asrButton setImage:[RCCallKitUtility imageFromVoIPBundle:@"voip/invisible.png"] forState:UIControlStateNormal];
-    [_asrButton setImage:[RCCallKitUtility imageFromVoIPBundle:@"voip/invisible.png"] forState:UIControlStateHighlighted];
-    [_asrButton setImage:[RCCallKitUtility imageFromVoIPBundle:@"voip/invisible.png"] forState:UIControlStateSelected];
-    self.asrView.hidden = YES;
-    [[RCCallClient sharedRCCallClient] setEnableASR:NO];
-}
-
-- (UIView *)asrView {
-    if (!_asrView) {
-        _asrView = [[UIView alloc] init];
-        _asrView.translatesAutoresizingMaskIntoConstraints = NO;
-        _asrView.backgroundColor = [UIColor colorWithWhite:1.0 alpha:0.8];
-        _asrView.layer.cornerRadius = 10;
-        _asrView.clipsToBounds = YES;
-        UIPanGestureRecognizer * panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(doASRMoveAction:)];
-        [_asrView addGestureRecognizer:panGestureRecognizer];
-        _asrView.hidden = YES;
-        [self.view addSubview:_asrView];
-        
-        _asrAvatarImageView = [[RCloudImageView alloc] init];
-        _asrAvatarImageView.layer.masksToBounds = YES;
-        if (RCKitConfigCenter.ui.globalConversationAvatarStyle == RC_USER_AVATAR_CYCLE &&
-            RCKitConfigCenter.ui.globalMessageAvatarStyle == RC_USER_AVATAR_CYCLE) {
-            _asrAvatarImageView.layer.cornerRadius = 20.f;
-        } else {
-            _asrAvatarImageView.layer.cornerRadius = 4.f;
-        }
-        _asrAvatarImageView.translatesAutoresizingMaskIntoConstraints = NO;
-        [_asrView addSubview:_asrAvatarImageView];
-        
-        UIButton *closeButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        closeButton.translatesAutoresizingMaskIntoConstraints = NO;
-        [closeButton setImage:[RCCallKitUtility imageFromVoIPBundle:@"voip/close.png"] forState:UIControlStateNormal];
-        closeButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleBottomMargin;
-        [closeButton addTarget:self action:@selector(closeASRButtonClicked) forControlEvents:UIControlEventTouchUpInside];
-        [_asrView addSubview:closeButton];
-        
-        _asrNameLabel = [[UILabel alloc] init];
-        _asrNameLabel.translatesAutoresizingMaskIntoConstraints = NO;
-        _asrNameLabel.font = [UIFont systemFontOfSize:12];
-        _asrNameLabel.textColor = [UIColor blackColor];
-        _asrNameLabel.lineBreakMode = NSLineBreakByTruncatingTail;
-        [_asrView addSubview:_asrNameLabel];
-
-        _asrTextView = [[UITextView alloc] init];
-        _asrTextView.translatesAutoresizingMaskIntoConstraints = NO;
-        _asrTextView.textContainer.lineFragmentPadding = 0;
-        _asrTextView.textContainerInset = UIEdgeInsetsMake(0, 0, 0, 0);
-        _asrTextView.layer.borderWidth = 0;
-        _asrTextView.showsVerticalScrollIndicator = NO;
-        _asrTextView.showsHorizontalScrollIndicator = NO;
-        _asrTextView.userInteractionEnabled = NO;
-        _asrTextView.backgroundColor = [UIColor clearColor];
-        _asrTextView.font = [UIFont systemFontOfSize:12];
-        _asrTextView.textColor = [UIColor blackColor];
-        [_asrView addSubview:_asrTextView];
-        
-        // 约束
-        self.asrViewBottomConstraint = [_asrView.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor constant:-180];
-        [NSLayoutConstraint activateConstraints:@[
-            [_asrView.leadingAnchor constraintEqualToAnchor:self.view.leadingAnchor constant:15],
-            [_asrView.trailingAnchor constraintEqualToAnchor:self.view.trailingAnchor constant:-15],
-            self.asrViewBottomConstraint,
-            [_asrView.heightAnchor constraintEqualToConstant:115],
-            
-            [_asrAvatarImageView.leadingAnchor constraintEqualToAnchor:_asrView.leadingAnchor constant:15],
-            [_asrAvatarImageView.topAnchor constraintEqualToAnchor:_asrView.topAnchor constant:15],
-            [_asrAvatarImageView.widthAnchor constraintEqualToConstant:40],
-            [_asrAvatarImageView.heightAnchor constraintEqualToConstant:40],
-
-            [_asrNameLabel.leadingAnchor constraintEqualToAnchor:_asrAvatarImageView.trailingAnchor constant:8],
-            [_asrNameLabel.centerYAnchor constraintEqualToAnchor:_asrAvatarImageView.centerYAnchor],
-            [_asrNameLabel.widthAnchor constraintEqualToConstant:80],
-            [_asrNameLabel.heightAnchor constraintEqualToConstant:21],
-            
-            [closeButton.trailingAnchor constraintEqualToAnchor:_asrView.trailingAnchor constant:-10],
-            [closeButton.topAnchor constraintEqualToAnchor:_asrView.topAnchor constant:10],
-            [closeButton.widthAnchor constraintEqualToConstant:16],
-            [closeButton.heightAnchor constraintEqualToConstant:16],
-
-            [_asrTextView.leadingAnchor constraintEqualToAnchor:_asrView.leadingAnchor constant:15],
-            [_asrTextView.topAnchor constraintEqualToAnchor:_asrAvatarImageView.bottomAnchor constant:15],
-            [_asrTextView.trailingAnchor constraintEqualToAnchor:_asrView.trailingAnchor constant:-15],
-            [_asrTextView.bottomAnchor constraintEqualToAnchor:_asrView.bottomAnchor constant:-15]
-        ]];
-    }
-    return _asrView;
-}
-
-- (void)doASRMoveAction:(UIPanGestureRecognizer *)recognizer {
-    UIView *draggedView = recognizer.view;
-    CGPoint translation = [recognizer translationInView:self.view];
-    
-    CGPoint newCenter = CGPointMake(
-        draggedView.center.x + translation.x,
-        draggedView.center.y + translation.y
-    );
-    newCenter.x = MAX(draggedView.frame.size.width / 2 + 15, MIN(newCenter.x, self.view.bounds.size.width - draggedView.frame.size.width / 2 - 15));
-    newCenter.y = MAX(draggedView.frame.size.height / 2, MIN(newCenter.y, self.view.bounds.size.height - draggedView.frame.size.height / 2));
-    
-    draggedView.center = newCenter;
-    self.asrViewBottomConstraint.constant += translation.y;
-    [recognizer setTranslation:CGPointZero inView:self.view];
-    [self.view layoutIfNeeded];
 }
 
 - (UIButton *)addButton {
@@ -791,18 +612,18 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
                                                       target:self
                                                       action:@selector(inviteUserButtonClicked)];
     KxCallMenuItem *whiteBoardItem =
-        [KxCallMenuItem menuItem:RCCallKitLocalizedString(@"VoIPCall_whiteBoard")
-                           image:[RCCallKitUtility imageFromVoIPBundle:@"voip/whiteboard.png"]
-                          target:self
-                          action:@selector(whiteBoardButtonClicked)];
+    [KxCallMenuItem menuItem:RCCallKitLocalizedString(@"VoIPCall_whiteBoard")
+                       image:[RCCallKitUtility imageFromVoIPBundle:@"voip/whiteboard.png"]
+                      target:self
+                      action:@selector(whiteBoardButtonClicked)];
     KxCallMenuItem *handupItem = [KxCallMenuItem menuItem:RCCallKitLocalizedString(@"VoIPCall_hand_raise")
                                                     image:[RCCallKitUtility imageFromVoIPBundle:@"voip/handup.png"]
                                                    target:self
                                                    action:@selector(handUpButtonClicked)];
-
+    
     NSMutableArray *menuItems = [NSMutableArray new];
     [menuItems addObject:addMemberItem];
-
+    
     UIBarButtonItem *rightBarButton = self.navigationItem.rightBarButtonItems[1];
     CGRect targetFrame = rightBarButton.customView.frame;
     targetFrame.origin.y = targetFrame.origin.y + 15;
@@ -903,9 +724,7 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
 
 - (void)speakerButtonClicked {
     [self didTapSpeakerButton];
-
-    [self.callSession setSpeakerEnabled:!self.callSession.speakerEnabled];
-    [self.speakerButton setSelected:self.callSession.speakerEnabled];
+    [self setSpeakerEnable:!self.callSession.speakerEnabled];
 }
 
 - (RCCallTextButton *)acceptButton {
@@ -934,7 +753,6 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
 - (void)acceptButtonClicked {
     [self didTapAcceptButton];
     [[RCCXCall sharedInstance] answerCXCall];
-
     if (!self.callSession) {
         [self callDidDisconnect];
     } else {
@@ -1249,7 +1067,7 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
             //            [self layoutTextUnderImageButton:self.speakerButton];
             self.speakerButton.hidden = NO;
             [self.speakerButton setSelected:self.callSession.speakerEnabled];
-            if ([self isHeadsetPluggedIn]) [self reloadSpeakerRoute:NO];
+            [self.speakerButton setEnabled:![self isHeadsetPluggedIn]];
         } else if (callStatus == RCCallDialing) {
             self.speakerButton.frame =
                 CGRectMake(xRTL,
@@ -1258,7 +1076,7 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
                            RCCallCustomButtonLength, RCCallCustomButtonLength);
             //            [self layoutTextUnderImageButton:self.speakerButton];
             self.speakerButton.hidden = NO;
-            if ([self isHeadsetPluggedIn]) [self reloadSpeakerRoute:NO];
+            [self.speakerButton setEnabled:![self isHeadsetPluggedIn]];
         } else if (callStatus != RCCallHangup) {
             self.speakerButton.hidden = YES;
         }
@@ -1402,7 +1220,7 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
                            RCCallCustomButtonLength, RCCallCustomButtonLength);
             //            [self layoutTextUnderImageButton:self.speakerButton];
             self.speakerButton.hidden = NO;
-            if ([self isHeadsetPluggedIn]) [self reloadSpeakerRoute:NO];
+            [self.speakerButton setEnabled:![self isHeadsetPluggedIn]];
         } else if (callStatus != RCCallHangup) {
             self.speakerButton.hidden = YES;
         }
@@ -1569,13 +1387,13 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
                            RCCallCustomButtonLength, RCCallCustomButtonLength);
             //            [self layoutTextUnderImageButton:self.speakerButton];
             self.speakerButton.hidden = NO;
-            if ([self isHeadsetPluggedIn]) [self reloadSpeakerRoute:NO];
+            [self.speakerButton setEnabled:![self isHeadsetPluggedIn]];
         } else if (callStatus != RCCallHangup) {
             self.speakerButton.hidden = YES;
         }
 
         if (callStatus == RCCallActive) {
-            if ([self isHeadsetPluggedIn]) [self reloadSpeakerRoute:NO];
+            [self.speakerButton setEnabled:![self isHeadsetPluggedIn]];
         }
 
         if (callStatus == RCCallDialing) {
@@ -1664,7 +1482,7 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
                            RCCallCustomButtonLength, RCCallCustomButtonLength);
             //            [self layoutTextUnderImageButton:self.speakerButton];
             self.speakerButton.hidden = YES;
-            if ([self isHeadsetPluggedIn]) [self reloadSpeakerRoute:NO];
+            [self.speakerButton setEnabled:![self isHeadsetPluggedIn]];
         } else if (callStatus != RCCallHangup) {
             self.speakerButton.hidden = YES;
         }
@@ -1691,15 +1509,6 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
         } else if (callStatus != RCCallHangup) {
             self.cameraSwitchButton.hidden = YES;
         }
-
-        //        if (callStatus == RCCallActive) {
-        //            self.inviteUserButton.frame =
-        //            CGRectMake(self.view.frame.size.width - RCCallHorizontalMargin / 2 - RCCallButtonLength / 2,
-        //                       RCCallVerticalMargin, RCCallButtonLength / 2, RCCallButtonLength / 2);
-        //            self.inviteUserButton.hidden = NO;
-        //        } else if (callStatus != RCCallHangup) {
-        //            self.inviteUserButton.hidden = YES;
-        //        }
 
         if (callStatus == RCCallActive) {
             self.addButton.frame = CGRectMake(
@@ -1841,6 +1650,228 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
                                               -button.titleLabel.intrinsicContentSize.width);
 }
 
+#pragma mark - ASR
+
+- (UIButton *)asrButton {
+    if (![RCCall sharedRCCall].displayASRUI) {
+        return nil;
+    }
+    if (!_asrButton) {
+        _asrButton = [[UIButton alloc] init];
+        _asrButton.frame = CGRectMake(RCCallHorizontalMargin, RCCallMiniButtonTopMargin + RCCallStatusBarHeight + RCCallMiniButtonLength + RCCallHorizontalMargin, 50, 30);
+        _asrButton.backgroundColor = [UIColor colorWithWhite:1.0 alpha:0.8];
+        _asrButton.clipsToBounds = YES;
+        _asrButton.layer.cornerRadius = 10;
+        
+        _asrButton.titleLabel.font = [UIFont systemFontOfSize:12];
+        [_asrButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [_asrButton setTitleColor:[UIColor blackColor] forState:UIControlStateSelected];
+        [_asrButton setTitle:RCCallKitLocalizedString(@"subtitle") forState:UIControlStateNormal];
+        [_asrButton setTitle:RCCallKitLocalizedString(@"subtitle") forState:UIControlStateSelected];
+        
+        [_asrButton setImage:[RCCallKitUtility imageFromVoIPBundle:@"voip/invisible.png"] forState:UIControlStateNormal];
+        [_asrButton setImage:[RCCallKitUtility imageFromVoIPBundle:@"voip/invisible.png"] forState:UIControlStateHighlighted];
+        [_asrButton setImage:[RCCallKitUtility imageFromVoIPBundle:@"voip/invisible.png"] forState:UIControlStateSelected];
+
+        CGFloat spacing = 1.0; // 文字和图片的间距
+        CGSize titleSize = _asrButton.titleLabel.intrinsicContentSize;
+        CGSize imageSize = _asrButton.imageView.frame.size;
+        
+        if ([RCCallKitUtility isArabic]) {
+            _asrButton.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, spacing);
+            _asrButton.imageEdgeInsets = UIEdgeInsetsMake(_asrButton.frame.size.height / 2 - imageSize.height / 2, spacing, _asrButton.frame.size.height / 2 - imageSize.height / 2, 0);
+        } else {
+            _asrButton.titleEdgeInsets = UIEdgeInsetsMake(0, -imageSize.width, 0, imageSize.width + spacing);
+            _asrButton.imageEdgeInsets = UIEdgeInsetsMake(_asrButton.frame.size.height / 2 - imageSize.height / 2, titleSize.width + spacing, _asrButton.frame.size.height / 2 - imageSize.height / 2, -titleSize.width);
+        }
+       
+        [_asrButton addTarget:self action:@selector(asrButtonClicked) forControlEvents:UIControlEventTouchUpInside];
+        
+        [self.view addSubview:_asrButton];
+        _asrButton.hidden = YES;
+    }
+    return _asrButton;
+}
+
+- (void)asrButtonClicked {
+    if (self.asrView.hidden) {
+        [self displayASRView];
+        
+        [[RCCallClient sharedRCCallClient] startASR:^(BOOL success, NSInteger code) {
+            if (success) {
+                [[RCCallClient sharedRCCallClient] setEnableASR:YES];
+            } else {
+                [RCAlertView showAlertController:RCCallKitLocalizedString(@"subtitle")
+                                         message:RCCallKitLocalizedString(@"subtitle_error_tip")
+                                    actionTitles:nil
+                                     cancelTitle:RCCallKitLocalizedString(@"OK")
+                                    confirmTitle:nil
+                                  preferredStyle:UIAlertControllerStyleAlert
+                                    actionsBlock:nil cancelBlock:^{
+                    [self hiddenASRView];
+                }
+                                    confirmBlock:nil
+                                inViewController:self];
+            }
+        }];
+        
+    } else {
+        [self hiddenASRView];
+        [[RCCallClient sharedRCCallClient] setEnableASR:NO];
+    }
+}
+
+- (void)displayASRView {
+    [_asrButton setImage:[RCCallKitUtility imageFromVoIPBundle:@"voip/visible.png"] forState:UIControlStateNormal];
+    [_asrButton setImage:[RCCallKitUtility imageFromVoIPBundle:@"voip/visible.png"] forState:UIControlStateHighlighted];
+    [_asrButton setImage:[RCCallKitUtility imageFromVoIPBundle:@"voip/visible.png"] forState:UIControlStateSelected];
+    self.asrView.hidden = NO;
+}
+
+- (void)closeASRButtonClicked {
+    [self hiddenASRView];
+    [[RCCallClient sharedRCCallClient] setEnableASR:NO];
+}
+
+- (void)hiddenASRView {
+    [_asrButton setImage:[RCCallKitUtility imageFromVoIPBundle:@"voip/invisible.png"] forState:UIControlStateNormal];
+    [_asrButton setImage:[RCCallKitUtility imageFromVoIPBundle:@"voip/invisible.png"] forState:UIControlStateHighlighted];
+    [_asrButton setImage:[RCCallKitUtility imageFromVoIPBundle:@"voip/invisible.png"] forState:UIControlStateSelected];
+    self.asrView.hidden = YES;
+}
+
+- (UIView *)asrView {
+    if (!_asrView) {
+        _asrView = [[UIView alloc] init];
+        _asrView.translatesAutoresizingMaskIntoConstraints = NO;
+        _asrView.backgroundColor = [UIColor colorWithWhite:1.0 alpha:0.8];
+        _asrView.layer.cornerRadius = 10;
+        _asrView.clipsToBounds = YES;
+        UIPanGestureRecognizer * panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handleASRMoveAction:)];
+        [_asrView addGestureRecognizer:panGestureRecognizer];
+        
+        UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleASRTap:)];
+        tapGesture.numberOfTapsRequired = 1; // 单击
+        [_asrView addGestureRecognizer:tapGesture];
+        
+        _asrView.hidden = YES;
+        [self.view addSubview:_asrView];
+        
+        UIButton *closeButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        closeButton.translatesAutoresizingMaskIntoConstraints = NO;
+        [closeButton setImage:[RCCallKitUtility imageFromVoIPBundle:@"voip/close.png"] forState:UIControlStateNormal];
+        closeButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleBottomMargin;
+        [closeButton addTarget:self action:@selector(closeASRButtonClicked) forControlEvents:UIControlEventTouchUpInside];
+        [_asrView addSubview:closeButton];
+        
+        _asrContentViewOne = [[RCCallASRContentView alloc] initWithDislayASRTextView:!self.destLangCode.length || (self.destLangCode.length && self.displayDualLangUI) dislayASRTranslationTextView:self.destLangCode.length];
+        [_asrView addSubview:_asrContentViewOne];
+        
+        _asrContentViewTwo = [[RCCallASRContentView alloc] initWithDislayASRTextView:!self.destLangCode.length || (self.destLangCode.length && self.displayDualLangUI) dislayASRTranslationTextView:self.destLangCode.length];
+        [_asrView addSubview:_asrContentViewTwo];
+        _asrContentViewTwo.hidden = YES;
+        
+        // 约束
+        self.asrViewBottomConstraint = [_asrView.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor constant:-180];
+        self.asrContentViewOneBottomConstraint = [_asrContentViewOne.bottomAnchor constraintEqualToAnchor:_asrView.bottomAnchor constant:-15];
+        self.asrContentViewTwoBottomConstraint = [_asrContentViewTwo.bottomAnchor constraintEqualToAnchor:_asrView.bottomAnchor constant:-15];
+        
+        [NSLayoutConstraint activateConstraints:@[
+            [_asrView.leadingAnchor constraintEqualToAnchor:self.view.leadingAnchor constant:15],
+            [_asrView.trailingAnchor constraintEqualToAnchor:self.view.trailingAnchor constant:-15],
+            self.asrViewBottomConstraint,
+            
+            [closeButton.trailingAnchor constraintEqualToAnchor:_asrView.trailingAnchor constant:-5],
+            [closeButton.topAnchor constraintEqualToAnchor:_asrView.topAnchor constant:5],
+            [closeButton.widthAnchor constraintEqualToConstant:20],
+            [closeButton.heightAnchor constraintEqualToConstant:20],
+
+            [_asrContentViewOne.leadingAnchor constraintEqualToAnchor:_asrView.leadingAnchor constant:15],
+            [_asrContentViewOne.topAnchor constraintEqualToAnchor:_asrView.topAnchor constant:15],
+            [_asrContentViewOne.trailingAnchor constraintEqualToAnchor:_asrView.trailingAnchor constant:-15],
+            
+            [_asrContentViewTwo.leadingAnchor constraintEqualToAnchor:_asrView.leadingAnchor constant:15],
+            [_asrContentViewTwo.topAnchor constraintEqualToAnchor:_asrContentViewOne.bottomAnchor constant:15],
+            [_asrContentViewTwo.trailingAnchor constraintEqualToAnchor:_asrView.trailingAnchor constant:-15],
+            self.asrContentViewOneBottomConstraint,
+        ]];
+    }
+    return _asrView;
+}
+
+- (void)handleASRMoveAction:(UIPanGestureRecognizer *)recognizer {
+    UIView *draggedView = recognizer.view;
+    CGPoint translation = [recognizer translationInView:self.view];
+    
+    CGPoint newCenter = CGPointMake(
+        draggedView.center.x + translation.x,
+        draggedView.center.y + translation.y
+    );
+    newCenter.x = MAX(draggedView.frame.size.width / 2 + 15, MIN(newCenter.x, self.view.bounds.size.width - draggedView.frame.size.width / 2 - 15));
+    newCenter.y = MAX(draggedView.frame.size.height / 2, MIN(newCenter.y, self.view.bounds.size.height - draggedView.frame.size.height / 2));
+    
+    draggedView.center = newCenter;
+    self.asrViewBottomConstraint.constant += translation.y;
+    [recognizer setTranslation:CGPointZero inView:self.view];
+    [self.view layoutIfNeeded];
+}
+
+- (void)handleASRTap:(UITapGestureRecognizer *)gesture {
+    RCCallASRConfigController *asrConfig = [[RCCallASRConfigController alloc] init];
+    asrConfig.destLangCode = self.destLangCode ?: @"none";
+    asrConfig.displayDualLangUI = self.displayDualLangUI;
+    asrConfig.configCallback = ^(NSString *destLangCode, BOOL displayDualLangUI) {
+        self.destLangCode = destLangCode;
+        self.displayDualLangUI = displayDualLangUI;
+        [_asrContentViewOne updateWithDislayASRTextView:!self.destLangCode.length || (self.destLangCode.length && self.displayDualLangUI) dislayASRTranslationTextView:self.destLangCode.length];
+        [_asrContentViewTwo updateWithDislayASRTextView:!self.destLangCode.length || (self.destLangCode.length && self.displayDualLangUI) dislayASRTranslationTextView:self.destLangCode.length];
+        if (self.destLangCode.length) {
+            [[RCCallClient sharedRCCallClient] startRealtimeTranslation:self.destLangCode copmletion:^(BOOL success, NSInteger code) {
+                if (!success) {
+                    [RCAlertView showAlertController:RCCallKitLocalizedString(@"subtitle")
+                                             message:RCCallKitLocalizedString(@"subtitle_translation_error_tip")
+                                        actionTitles:nil
+                                         cancelTitle:RCCallKitLocalizedString(@"OK")
+                                        confirmTitle:nil
+                                      preferredStyle:UIAlertControllerStyleAlert
+                                        actionsBlock:nil cancelBlock:^{
+                        self.destLangCode = nil;
+                        [_asrContentViewOne updateWithDislayASRTextView:!self.destLangCode.length || (self.destLangCode.length && self.displayDualLangUI) dislayASRTranslationTextView:self.destLangCode.length];
+                        [_asrContentViewTwo updateWithDislayASRTextView:!self.destLangCode.length || (self.destLangCode.length && self.displayDualLangUI) dislayASRTranslationTextView:self.destLangCode.length];
+                    }
+                                        confirmBlock:nil
+                                    inViewController:self];
+                }
+            }];
+        } else {
+            [[RCCallClient sharedRCCallClient] stopRealtimeTranslation:^(BOOL success, NSInteger code) {}];
+        }
+        
+    };
+    UINavigationController *rootVC = [[UINavigationController alloc] initWithRootViewController:asrConfig];
+    rootVC.modalPresentationStyle = UIModalPresentationFullScreen;
+    [self presentViewController:rootVC animated:YES completion:nil];
+}
+
+- (void)displayASRContentViewTwo:(BOOL)display {
+    if (_asrContentViewTwo.hidden == !display) {
+        return;
+    }
+    [_asrContentViewTwo resetContent];
+    _asrContentViewTwo.hidden = !display;
+    if (self.asrContentViewOneBottomConstraint) {
+        self.asrContentViewOneBottomConstraint.active = !display;
+    }
+    if (self.asrContentViewTwoBottomConstraint) {
+        self.asrContentViewTwoBottomConstraint.active = display;
+    }
+    [self.view setNeedsLayout];
+    [self.view layoutIfNeeded];
+    [UIView animateWithDuration:0.3 animations:^{
+        [self.view layoutIfNeeded];
+    }];
+}
+
 #pragma mark - RCCallSessionDelegate
 /*!
  通话已接通
@@ -1863,7 +1894,13 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
  */
 - (void)callDidDisconnect {
     [self callWillDisconnect];
+#if PUBLIC
+    if (@available(iOS 17.4, *)) {
+        [[RCLCKCenter shareInstance] endConversation];
+    }
+#else
     [[RCCXCall sharedInstance] endCXCall];
+#endif
     [RCCallKitUtility clearScreenForceOnStatus];
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
     [RCCXCall sharedInstance].acceptedFromCallKit = NO;
@@ -2124,20 +2161,83 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
 }
 
 - (void)didReceiveASRContent:(RCRTCASRContent *)asrContent {
-    if (_asrTextView) {
-        _asrTextView.text = asrContent.msg;
-        CGFloat bottomOffset = _asrTextView.contentSize.height - _asrTextView.bounds.size.height;
-        [_asrTextView setContentOffset:CGPointMake(0, MAX(0, bottomOffset)) animated:YES];
+    BOOL setAsrContentViewOne = NO;
+    
+    if ([_asrContentViewOne.userId isEqualToString:asrContent.userId]) {
+        setAsrContentViewOne = YES;
+    } else if ([_asrContentViewTwo.userId isEqualToString:asrContent.userId]) {
+        setAsrContentViewOne = NO;
+    } else if (!_asrContentViewOne.userId.length) {
+        setAsrContentViewOne = YES;
+    } else if (!_asrContentViewTwo.userId.length) {
+        setAsrContentViewOne = NO;
+    } else if (_asrContentViewOne.timeUTC < _asrContentViewTwo.timeUTC) {
+        setAsrContentViewOne = YES;
     }
-    if (_asrAvatarImageView && _asrNameLabel) {
+    
+    if (setAsrContentViewOne) {
+        _asrContentViewOne.userId = asrContent.userId;
+        _asrContentViewOne.msgId = asrContent.msgId;
+        _asrContentViewOne.timeUTC = asrContent.timeUTC;
+        _asrContentViewOne.asrTextView.text = asrContent.msg;
+        if ([RCCallKitUtility firstCharIsArabic:asrContent.msg]) {
+            _asrContentViewOne.asrTextView.textAlignment = NSTextAlignmentRight;
+        } else {
+            _asrContentViewOne.asrTextView.textAlignment = NSTextAlignmentLeft;
+        }
+        CGFloat bottomOffset = _asrContentViewOne.asrTextView.contentSize.height - _asrContentViewOne.asrTextView.bounds.size.height;
+        [_asrContentViewOne.asrTextView setContentOffset:CGPointMake(0, MAX(0, bottomOffset)) animated:YES];
         RCUserInfo *userInfo = [[RCUserInfoCacheManager sharedManager] getUserInfo:asrContent.userId];
         if (userInfo) {
-            [_asrNameLabel setText:userInfo.name ?: userInfo.userId];
-            [_asrAvatarImageView setImageURL:[NSURL URLWithString:userInfo.portraitUri]];
+            [_asrContentViewOne.asrNameLabel setText:userInfo.name ?: userInfo.userId];
+            [_asrContentViewOne.asrAvatarImageView setImageURL:[NSURL URLWithString:userInfo.portraitUri]];
         } else {
-            [_asrNameLabel setText:asrContent.userId ?: @""];
-            [_asrAvatarImageView setPlaceholderImage:[RCCallKitUtility getDefaultPortraitImage]];
+            [_asrContentViewOne.asrNameLabel setText:asrContent.userId ?: @""];
+            [_asrContentViewOne.asrAvatarImageView setPlaceholderImage:[RCCallKitUtility getDefaultPortraitImage]];
         }
+    } else {
+        [self displayASRContentViewTwo:YES];
+        _asrContentViewTwo.userId = asrContent.userId;
+        _asrContentViewTwo.msgId = asrContent.msgId;
+        _asrContentViewTwo.timeUTC = asrContent.timeUTC;
+        _asrContentViewTwo.asrTextView.text = asrContent.msg;
+        if ([RCCallKitUtility firstCharIsArabic:asrContent.msg]) {
+            _asrContentViewTwo.asrTextView.textAlignment = NSTextAlignmentRight;
+        } else {
+            _asrContentViewTwo.asrTextView.textAlignment = NSTextAlignmentLeft;
+        }
+        CGFloat bottomOffset = _asrContentViewTwo.asrTextView.contentSize.height - _asrContentViewTwo.asrTextView.bounds.size.height;
+        [_asrContentViewTwo.asrTextView setContentOffset:CGPointMake(0, MAX(0, bottomOffset)) animated:YES];
+        RCUserInfo *userInfo = [[RCUserInfoCacheManager sharedManager] getUserInfo:asrContent.userId];
+        if (userInfo) {
+            [_asrContentViewTwo.asrNameLabel setText:userInfo.name ?: userInfo.userId];
+            [_asrContentViewTwo.asrAvatarImageView setImageURL:[NSURL URLWithString:userInfo.portraitUri]];
+        } else {
+            [_asrContentViewTwo.asrNameLabel setText:asrContent.userId ?: @""];
+            [_asrContentViewTwo.asrAvatarImageView setPlaceholderImage:[RCCallKitUtility getDefaultPortraitImage]];
+        }
+    }
+}
+
+- (void)didReceiveRealtimeTranslationContent:(RCRTCRealtimeTranslationContent *)content {
+    if ([_asrContentViewOne.userId isEqualToString:content.userId]) {
+        _asrContentViewOne.asrTranslationTextView.text = content.msg;
+        if ([RCCallKitUtility firstCharIsArabic:content.msg]) {
+            _asrContentViewOne.asrTranslationTextView.textAlignment = NSTextAlignmentRight;
+        } else {
+            _asrContentViewOne.asrTranslationTextView.textAlignment = NSTextAlignmentLeft;
+        }
+        CGFloat bottomOffset = _asrContentViewOne.asrTranslationTextView.contentSize.height - _asrContentViewOne.asrTranslationTextView.bounds.size.height;
+        [_asrContentViewOne.asrTranslationTextView setContentOffset:CGPointMake(0, MAX(0, bottomOffset)) animated:YES];
+    } else if ([_asrContentViewTwo.userId isEqualToString:content.userId]) {
+        _asrContentViewTwo.asrTranslationTextView.text = content.msg;
+        if ([RCCallKitUtility firstCharIsArabic:content.msg]) {
+            _asrContentViewTwo.asrTranslationTextView.textAlignment = NSTextAlignmentRight;
+        } else {
+            _asrContentViewTwo.asrTranslationTextView.textAlignment = NSTextAlignmentLeft;
+        }
+        CGFloat bottomOffset = _asrContentViewTwo.asrTranslationTextView.contentSize.height - _asrContentViewTwo.asrTranslationTextView.bounds.size.height;
+        [_asrContentViewTwo.asrTranslationTextView setContentOffset:CGPointMake(0, MAX(0, bottomOffset)) animated:YES];
     }
 }
 
@@ -2167,7 +2267,13 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
     self.callCenter = [[CTCallCenter alloc] init];
     self.callCenter.callEventHandler = ^(CTCall *call) {
         if ([call.callState isEqualToString:CTCallStateConnected]) {
+#if PUBLIC
+            if (@available(iOS 17.4, *)) {
+                [[RCLCKCenter shareInstance] hangupIfNeedWithUUID:call.callID];
+            }
+#else
             [[RCCXCall sharedInstance] hangupIfNeedWithUUID:call.callID];
+#endif
         }
     };
 }
@@ -2181,16 +2287,19 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
         case AVAudioSessionRouteChangeReasonUnknown:
             break;
         case AVAudioSessionRouteChangeReasonCategoryChange:  //3
-            break;
         case AVAudioSessionRouteChangeReasonNewDeviceAvailable:    //1
         case AVAudioSessionRouteChangeReasonOldDeviceUnavailable:  //2
         case AVAudioSessionRouteChangeReasonOverride:              //4
         {
-            if ([port.portType isEqualToString:AVAudioSessionPortBuiltInReceiver] ||
-                [port.portType isEqualToString:AVAudioSessionPortBuiltInSpeaker]) {
-                [self reloadSpeakerRoute:YES];
+            if ([self isHeadsetPluggedIn]) {
+                [self.speakerButton setEnabled:NO];
+                return;
+            }
+            [self.speakerButton setEnabled:YES];
+            if ([port.portType isEqualToString:AVAudioSessionPortBuiltInSpeaker]) {
+                [self.speakerButton setSelected:YES];
             } else {
-                [self reloadSpeakerRoute:NO];
+                [self.speakerButton setSelected:NO];
             }
         } break;
         case AVAudioSessionRouteChangeReasonWakeFromSleep:  //6
@@ -2202,12 +2311,6 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
         default:
             break;
     }
-}
-
-- (void)reloadSpeakerRoute:(BOOL)enable {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        self.speakerButton.enabled = enable;
-    });
 }
 
 - (BOOL)isHeadsetPluggedIn {

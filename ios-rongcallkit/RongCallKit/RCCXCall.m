@@ -63,14 +63,14 @@
 }
 
 - (void)startCallId:(NSString *)callId userId:(NSString *)userId {
+//RCCallKit_Delete_Start
+#if PUBLIC
+#else
     NSUUID *uuid = [[NSUUID alloc] initWithUUIDString:callId];
     self.currentUUID = uuid ?: [NSUUID UUID];
     if (!self.currentUUID) {
         return;
     }
-//RCCallKit_Delete_Start
-#if PUBLIC
-#else
     CXHandle *handle = [[CXHandle alloc] initWithType:CXHandleTypeGeneric value:userId];
     CXStartCallAction *startAction = [[CXStartCallAction alloc] initWithCallUUID:self.currentUUID handle:handle];
     NSArray *array = [userId componentsSeparatedByString:@":::"];
@@ -194,7 +194,7 @@
 }
 
 - (void)hangupIfNeedWithUUID:(NSString *)UUID {
-    if (UUID.length == 0) {
+    if (UUID.length == 0 || !self.currentUUID) {
         return;
     }
     if (![UUID isEqualToString:self.currentUUID.UUIDString]) {

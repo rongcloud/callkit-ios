@@ -195,6 +195,15 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)didReceiveASRContent:(RCRTCASRContent *)asrContent;
 
+/*!
+ 语音翻译内容回调
+ 
+ @param content 语音翻译内容
+ 
+ @remarks 代理
+ */
+- (void)didReceiveRealtimeTranslationContent:(RCRTCRealtimeTranslationContent *)content;
+
 @end
 
 @class RCMessagePushConfig;
@@ -464,7 +473,7 @@ NS_ASSUME_NONNULL_BEGIN
  
  @remarks 语音识别
  */
-- (void)startASR:(void (^)(BOOL success, NSInteger code))completion;
+- (void)startASR:(nullable void (^)(BOOL success, NSInteger code))completion;
 
 /*!
  停止语音识别服务
@@ -476,7 +485,7 @@ NS_ASSUME_NONNULL_BEGIN
  
  @remarks 语音识别设置
  */
-- (void)stopASR:(void (^)(BOOL success, NSInteger code))completion;
+- (void)stopASR:(nullable void (^)(BOOL success, NSInteger code))completion;
 
 /*!
  设置是否打开语音识别
@@ -490,6 +499,28 @@ NS_ASSUME_NONNULL_BEGIN
 @remarks 语音识别设置
  */
 - (int)setEnableASR:(BOOL)enable;
+
+/*!
+ 开启语音翻译
+ @param destLangCode 翻译目标语言码
+ 
+ @discussion
+ 1. 语音翻译依赖语音识别服务，需要在收到 RCCallASRDelegate 的 didReceiveStartASR 回调后，调用开启语音翻译
+ 2. 开启语音翻译，会通过 RCCallASRDelegate 的 didReceiveRealtimeTranslationContent 回调返回语音翻译结果
+ 
+ @remarks 语音识别设置
+ */
+- (void)startRealtimeTranslation:(NSString *)destLangCode copmletion:(nullable void (^)(BOOL success, NSInteger code))completion;
+
+/*!
+ 关闭语音翻译
+ 
+ @discussion
+ 关闭语音翻译
+ 
+ @remarks 语音识别设置
+ */
+- (void)stopRealtimeTranslation:(nullable void (^)(BOOL success, NSInteger code))completion;
 
 /*!
  获取 SDK 版本号

@@ -7,8 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-
-@class RCMentionedInfo;
+#import "RCMentionedStringRangeInfo.h"
+#import <RongIMLibCore/RCReferenceMessage.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -29,11 +29,17 @@ NS_ASSUME_NONNULL_BEGIN
 /// 被引用消息内容
 @property (nonatomic, copy, nullable) NSString *referencedContent;
 
-/// @信息
-@property (nonatomic, strong, nullable) RCMentionedInfo *mentionedInfo;
+/// 被引用消息的状态。
+@property (nonatomic, assign) RCReferenceMessageStatus referencedMsgStatus;
 
-/// 缓存的编辑信息，用于恢复编辑状态时，传入 messageUId 和 cachedStateData
-@property (nonatomic, copy, nullable) NSDictionary *cachedStateData;
+/// @ 信息
+@property (nonatomic, copy, nullable) NSArray<RCMentionedStringRangeInfo *> *mentionedRangeInfo;
+
+/// 初始化
+- (instancetype)initWithData:(NSString *)data;
+
+/// 序列化为字典
+- (NSString *)encode;
 
 @end
 
