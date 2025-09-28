@@ -16,3 +16,9 @@
 #import "RongIMKit.h"
 
 #endif
+
+#if __has_include("RongCallKit/RongCallKit-Swift.h")
+#import "RongCallKit/RongCallKit-Swift.h"
+#else
+#import "RongCallKit-Swift.h"
+#endif

@@ -44,6 +44,5 @@ FOUNDATION_EXPORT const unsigned char RongCallKitVersionString[];
 #import "RCCallTipMessageCell.h"
 #import "RCCallUserCallInfoModel.h"
 #import "RCCallVideoMultiCallViewController.h"
-#import "RongCallKit-Swift.h"
 
 #endif

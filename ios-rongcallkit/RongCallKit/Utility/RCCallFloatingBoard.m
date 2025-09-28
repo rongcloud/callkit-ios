@@ -12,7 +12,7 @@
 #import <UIKit/UIKit.h>
 #import "RCCXCall.h"
 #import "RCCallKitUtility.h"
-#import "RongCallKit/RongCallKit-Swift.h"
+#import "RongCallKitAdaptiveHeader.h"
 
 @interface RCCallFloatingBoard () <RCCallSessionDelegate>
 
