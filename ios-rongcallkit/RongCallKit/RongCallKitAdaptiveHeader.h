@@ -1,6 +1,5 @@
 //
-//  RongCallKitAdaptiveHeader.h
-//  RongIMKit
+//  RongCloudRTCOpenSourceAdaptiveHeader.h
 //
 //  Created by Sin on 2021/1/21.
 //  Copyright © 2021 RongCloud. All rights reserved.
@@ -17,8 +16,8 @@
 
 #endif
 
-#if __has_include("RongCallKit/RongCallKit-Swift.h")
-#import "RongCallKit/RongCallKit-Swift.h"
+#if __has_include("RongCloudRTCOpenSource/RongCloudRTCOpenSource-Swift.h")
+#import "RongCloudRTCOpenSource/RongCloudRTCOpenSource-Swift.h"
 #else
-#import "RongCallKit-Swift.h"
+#import "RongCloudRTCOpenSource-Swift.h"
 #endif
