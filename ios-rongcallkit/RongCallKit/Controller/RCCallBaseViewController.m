@@ -22,7 +22,7 @@
 #import "RCloudImageView.h"
 #import "RCCallASRConfigController.h"
 #import "RCCallASRContentView.h"
-#import "RongCallKitAdaptiveHeader.h"
+#import "RongCallKitSwiftAdaptiveHeader.h"
 
 // 解除循环引用
 @interface RCCallProxy : NSProxy

@@ -18,7 +18,7 @@
 #import "RCCallTipMessageCell.h"
 #import "RCCallVideoMultiCallViewController.h"
 #import "RCUserInfoCacheManager.h"
-#import "RongCallKitAdaptiveHeader.h"
+#import "RongCallKitSwiftAdaptiveHeader.h"
 #if __IPHONE_10_0
 #import <UserNotifications/UserNotifications.h>
 #endif
@@ -42,8 +42,8 @@
 #endif
 
 static NSString *const __RongCallKit__Version = @"5.28.0_opensource";
-static NSString *const __RongCallKit__Commit = @"ce18041b5";
-static NSString *const __RongCallKit__Time = @"202509281513";
+static NSString *const __RongCallKit__Commit = @"4fe2bacf9";
+static NSString *const __RongCallKit__Time = @"202510091705";
 
 @interface RCCall () <RCCallReceiveDelegate, RCLCKCenterDelegate>
 

@@ -61,6 +61,7 @@
 		A6BE1B3A1CCEFAAC00FF6BF7 /* RCCallKitUtility.h in Headers */ = {isa = PBXBuildFile; fileRef = A6BE1B1C1CCEFAAC00FF6BF7 /* RCCallKitUtility.h */; };
 		A6BE1B3B1CCEFAAC00FF6BF7 /* RCCallKitUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = A6BE1B1D1CCEFAAC00FF6BF7 /* RCCallKitUtility.m */; };
 		A6BE1B481CCEFBC700FF6BF7 /* RongCallLib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6BE1B461CCEFBC700FF6BF7 /* RongCallLib.framework */; };
+		E536BC8D2E97AF8600E7E613 /* RongCallKitSwiftAdaptiveHeader.h in Headers */ = {isa = PBXBuildFile; fileRef = E536BC8C2E97AF8600E7E613 /* RongCallKitSwiftAdaptiveHeader.h */; };
 		E53AB2D62E2FADB30049C0DE /* RCLCK.swift in Sources */ = {isa = PBXBuildFile; fileRef = E53AB2D52E2FADB30049C0DE /* RCLCK.swift */; };
 		E5B2D5BD2E6832D900A257EF /* RCCallASRConfigController.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B2D5BC2E6832D800A257EF /* RCCallASRConfigController.m */; };
 		E5B2D5BE2E6832D900A257EF /* RCCallASRConfigController.h in Headers */ = {isa = PBXBuildFile; fileRef = E5B2D5BB2E6832D800A257EF /* RCCallASRConfigController.h */; };
@@ -138,6 +139,7 @@
 		B2B0B1702480D096007DAFF4 /* after_build.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = after_build.sh; sourceTree = "<group>"; };
 		B2B0B1712480D096007DAFF4 /* before_build.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = before_build.sh; sourceTree = "<group>"; };
 		E50FA9972595BEC7001A8A53 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/RongCallKit.strings; sourceTree = "<group>"; };
+		E536BC8C2E97AF8600E7E613 /* RongCallKitSwiftAdaptiveHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RongCallKitSwiftAdaptiveHeader.h; sourceTree = "<group>"; };
 		E53AB2D52E2FADB30049C0DE /* RCLCK.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RCLCK.swift; sourceTree = "<group>"; };
 		E5B2D5BB2E6832D800A257EF /* RCCallASRConfigController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCCallASRConfigController.h; sourceTree = "<group>"; };
 		E5B2D5BC2E6832D800A257EF /* RCCallASRConfigController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCCallASRConfigController.m; sourceTree = "<group>"; };
@@ -245,6 +247,7 @@
 				9CE36FD5200F5FDC0068263B /* RCCXCall.m */,
 				E53AB2D52E2FADB30049C0DE /* RCLCK.swift */,
 				0ADDC74921B66A6200883EB5 /* RCMultiCallInviteNewUserDelegate.h */,
+				E536BC8C2E97AF8600E7E613 /* RongCallKitSwiftAdaptiveHeader.h */,
 				2790CDB925DE4039008CBDD8 /* RongCallKitAdaptiveHeader.h */,
 				A6BE1B3C1CCEFAB700FF6BF7 /* Support Files */,
 			);
@@ -381,6 +384,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E536BC8D2E97AF8600E7E613 /* RongCallKitSwiftAdaptiveHeader.h in Headers */,
 				0ADDC74A21B66A6300883EB5 /* RCMultiCallInviteNewUserDelegate.h in Headers */,
 				A6BE1B361CCEFAAC00FF6BF7 /* RCCall.h in Headers */,
 				A6BE1B2A1CCEFAAC00FF6BF7 /* RCCallSelectMemberViewController.h in Headers */,
