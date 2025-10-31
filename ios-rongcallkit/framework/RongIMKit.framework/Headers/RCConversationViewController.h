@@ -508,6 +508,8 @@ typedef enum : NSUInteger {
 /// - Returns: 是否执行内部逻辑，返回 YES 不执行 SDK 内部逻辑，NO 执行 SDK 内部逻辑，
 - (BOOL)didTapCommonPhrasesButton;
 
+- (void)didTapReceiptStatusView:(RCMessageModel *)model;
+
 #pragma mark - 语音消息、图片消息、位置消息、文件消息显示与操作
 
 /// 开始录制语音消息的回调

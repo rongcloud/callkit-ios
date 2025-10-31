@@ -147,6 +147,22 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 消息编辑信息
 @property (nonatomic, strong) RCMessageModifyInfo *modifyInfo;
+
+/// 消息已读回执操作标识。
+///
+/// - Note: 消息已读回执 V5 专用
+/// - Since: 5.30.0
+@property (nonatomic, assign) BOOL needReceipt;
+
+/// 已读回执是否已发送。
+///
+/// - Note: 消息已读回执 V5 专用
+/// - Since: 5.30.0
+@property (nonatomic, assign) BOOL sentReceipt;
+
+/// 已读 V5 信息
+@property (nonatomic, strong) RCReadReceiptInfoV5 *readReceiptInfoV5;
+
 /*!
  初始化消息Cell的数据模型
 

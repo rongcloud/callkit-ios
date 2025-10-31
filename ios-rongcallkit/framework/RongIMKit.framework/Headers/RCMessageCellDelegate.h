@@ -96,6 +96,11 @@
  */
 - (void)didTapReceiptCountView:(RCMessageModel *)model;
 
+/// 点击消息回执状态 View 的回调
+/// - Parameter model: 消息 Cell 的数据模型
+/// - Note: 仅支持群组和讨论组
+- (void)didTapReceiptStatusView:(RCMessageModel *)model;
+
 /*!
  点击媒体消息取消发送按钮
 

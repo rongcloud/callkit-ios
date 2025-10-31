@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <RongIMLibCore/RCStatusDefine.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -22,6 +23,11 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// - Since: 5.26.0
 @property (nonatomic, readonly, assign) NSInteger messageModifiableMinutes;
+
+/// 已读回执版本
+///
+/// - Since: 5.30.0
+@property (nonatomic, readonly, assign) RCGroupReadReceiptVersion readReceiptVersion;
 
 @end
 

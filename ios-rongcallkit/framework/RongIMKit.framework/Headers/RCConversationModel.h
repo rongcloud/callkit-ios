@@ -189,6 +189,13 @@ NS_ASSUME_NONNULL_BEGIN
 /// - Since: 5.20.0
 @property (nonatomic, copy, nullable) NSString *latestMessageUId;
 
+/// 消息已读回执 v5 操作标识。
+///
+/// - Since: 5.30.0
+@property (nonatomic, assign) BOOL needReceipt;
+
+/// 消息已读回执 v5 信息
+@property (nonatomic, strong) RCReadReceiptInfoV5 *readReceiptInfoV5;
 
 /*!
  初始化会话显示数据模型

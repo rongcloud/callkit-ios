@@ -6,13 +6,17 @@
 //
 
 #import "RCKitUtility.h"
-
+#import "RCIMKitThemeManager.h"
 #ifndef RCKitCommonDefine_h
 #define RCKitCommonDefine_h
 
 #define RCLocalizedString(key) [RCKitUtility localizedString:(key) table:@"RongCloudKit"]
 #define RCResourceImage(value) [RCKitUtility imageNamed:(value) ofBundle:@"RongCloud.bundle"]
 #define RCResourceColor(key, colorStr) [RCKitUtility color:(key) originalColor:(colorStr)]
+
+#define RCDynamicImage(key, name) [RCIMKitThemeManager dynamicImage:key defaultImageName:name]
+#define RCDynamicColor(key, lightHex, darkHex) [RCIMKitThemeManager dynamicColor:key lightColor:lightHex darkColor:darkHex]
+#define RCDynamicResourceColor(key, resourceKeyString, colorHex) [RCIMKitThemeManager dynamicColor:key resourceKey:resourceKeyString originalColor:colorHex]
 
 #pragma mark - Screen Size
 #define SCREEN_HEIGHT [[UIScreen mainScreen] bounds].size.height

@@ -13,6 +13,7 @@
 #import "RCButton.h"
 #import "RCBaseButton.h"
 #import "RCBaseImageView.h"
+#import "RCReadReceiptProgressView.h"
 #define HeadAndContentSpacing 8
 #define PortraitViewEdgeSpace 12//头像与屏幕边缘距离
 #define NameAndContentSpace 2
@@ -97,6 +98,12 @@
 @property (nonatomic, strong) UILabel *receiptStatusLabel;
 
 /*!
+ 已读回执进度视图（V5 版本）
+ 用于显示群组消息已读进度
+ */
+@property (strong, nonatomic) RCReadReceiptProgressView *receiptProgressView;
+
+/*!
  是否显示头像
 
  */
@@ -123,6 +130,13 @@
 - Parameter show: 消息Cell的数据模型
 */
 - (void)showBubbleBackgroundView:(BOOL)show;
+
+/*!
+ 获取默认的消息气泡背景图片
+ 
+ @return 消息气泡背景图片
+ */
+- (UIImage *)getDefaultMessageCellBackgroundImage;
 
 /*!
 阅后即焚的回调

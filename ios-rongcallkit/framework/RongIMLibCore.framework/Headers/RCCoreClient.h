@@ -4073,7 +4073,7 @@ FOUNDATION_EXPORT NSString *const RCLibDispatchReadReceiptNotification;
 - (void)getMessagesReadReceiptUsersByPageV5:(RCConversationIdentifier *)identifier
                                  messageUId:(NSString *)messageUId
                                      option:(RCReadReceiptUsersOption *)option
-                                 completion:(RCReadReceiptUserListCompletion)completion;
+                                 completion:(RCMessageReadDetailCompletion)completion;
 
 /// 查询指定的用户列表已读回执状态。
 ///
@@ -4090,7 +4090,7 @@ FOUNDATION_EXPORT NSString *const RCLibDispatchReadReceiptNotification;
 - (void)getMessagesReadReceiptByUsersV5:(RCConversationIdentifier *)identifier
                              messageUId:(NSString *)messageUId
                                 userIds:(NSArray<NSString *> *)userIds
-                             completion:(RCReadReceiptUserListCompletion)completion;
+                             completion:(RCMessageReadDetailCompletion)completion;
 
 /// 添加已读回执 V5 事件监听。
 ///

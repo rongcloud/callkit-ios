@@ -7,8 +7,7 @@
 //
 
 #import "RCBaseImageView.h"
-
-@class RCGIFImage;
+#import "RCGIFImage.h"
 
 @interface RCGIFImageView : RCBaseImageView
 

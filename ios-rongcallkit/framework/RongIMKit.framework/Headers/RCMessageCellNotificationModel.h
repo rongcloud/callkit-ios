@@ -19,7 +19,10 @@ UIKIT_EXTERN NSString *const CONVERSATION_CELL_STATUS_SEND_HASREAD;
 
 UIKIT_EXTERN NSString *const CONVERSATION_CELL_STATUS_SEND_READCOUNT; //已读数
 
+UIKIT_EXTERN NSString *const CONVERSATION_CELL_STATUS_SEND_READ_RECEIPT_INFO_V5; //已读回执 V5 信息
+
 #import <Foundation/Foundation.h>
+#import <RongIMLibCore/RCReadReceiptInfoV5.h>
 
 /// 消息Cell状态更新通知的数据模型
 @interface RCMessageCellNotificationModel : NSObject
@@ -32,5 +35,8 @@ UIKIT_EXTERN NSString *const CONVERSATION_CELL_STATUS_SEND_READCOUNT; //已读�
 
 /// 进度
 @property (nonatomic) NSInteger progress;
+
+/// 已读回执 v5 信息
+@property (nonatomic, strong) RCReadReceiptInfoV5 *readReceiptInfoV5;
 
 @end

@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class RCReadReceiptUsersResult;
 @class RCReadReceiptUsersOption;
 
-typedef void (^RCReadReceiptUserListCompletion)(RCReadReceiptUsersResult *_Nullable result, RCErrorCode code);
+typedef void (^RCMessageReadDetailCompletion)(RCReadReceiptUsersResult *_Nullable result, RCErrorCode code);
 
 typedef void (^RCReadReceiptInfoListCompletion)(NSArray<RCReadReceiptInfoV5 *> *_Nullable infoList, RCErrorCode code);
 
