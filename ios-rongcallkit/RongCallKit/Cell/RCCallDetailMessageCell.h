@@ -6,15 +6,7 @@
 //  Copyright © 2016年 RongCloud. All rights reserved.
 //
 
-#if __has_include(<RongIMKit/RongIMKit.h>)
-
-#import <RongIMKit/RongIMKit.h>
-
-#else
-
-#import "RongIMKit.h"
-
-#endif
+#import "RongCallKitAdaptiveHeader.h"
 
 /*!
  通话摘要的消息Cell

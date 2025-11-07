@@ -9,7 +9,11 @@
 import Foundation
 import AVFoundation
 import LiveCommunicationKit
+#if canImport(RongCloudOpenSource)
 import RongCloudOpenSource
+#else
+import RongIMKit
+#endif
 
 let kCallNewSession = Notification.Name(rawValue: "RCCallNewSessionCreation Notification")
 
