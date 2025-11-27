@@ -451,4 +451,19 @@ typedef NS_ENUM(NSUInteger, RCCallJoinCallType) {
     RCCallJoinCallTypeRefuse,
 };
 
+
+/*!
+ 忙线处理策略
+ */
+typedef NS_ENUM(NSUInteger, RCCallBusyCallPolicy) {
+    /*!
+     主叫响应忙线拒绝，默认逻辑
+     */
+    RCCallBusyCallPolicyDefault,
+    /*!
+     主叫忽略被叫忙线拒绝，直到呼叫超时
+     */
+    RCCallBusyCallPolicyIgnore,
+};
+
 #endif /* RCCallCommonDefine_h */

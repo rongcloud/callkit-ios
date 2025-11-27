@@ -63,11 +63,14 @@ NS_ASSUME_NONNULL_BEGIN
 @class RCSubscribeEvent, RCSubscribeInfoEvent, RCSubscribeEventRequest;
 @class RCMessageIdentifier;
 @class RCConversationBatchDeletionParams;
-@class RCAppSettings;
+@class RCRobotInfo;
+@class RCGetGroupMembersOption;
+@class RCConversationsContainingRobotsOption;
 @class RCGetUnreadMentionMeConversationListParams;
 @class RCSubscribeUserOnlineStatus;
 @class RCEditedMessageDraft;
 @protocol RCSubscribeEventDelegate;
+@protocol RCRobotEventDelegate;
 
 /// 收到已读回执的 Notification
 ///
@@ -3414,6 +3417,38 @@ FOUNDATION_EXPORT NSString *const RCLibDispatchReadReceiptNotification;
                             success:(nullable void (^)(RCUserProfile *userProfile))successBlock
                               error:(nullable void (^)(RCErrorCode errorCode))errorBlock;
 
+#pragma mark - 机器人管理
+
+/// 添加机器人监听
+/// - Parameter delegate: 机器人事件监听代理
+/// - Since: 5.28.0
+- (void)addRobotEventDelegate:(id<RCRobotEventDelegate>)delegate;
+
+/// 移除机器人监听
+/// @param delegate 机器人事件监听代理
+/// - Since: 5.28.0
+- (void)removeRobotEventDelegate:(id<RCRobotEventDelegate>)delegate;
+
+/// 获取应用下的所有机器人信息列表
+/// - Parameter completion: 结果回调
+/// - Since 5.28.0
+- (void)getAllRobots:(void(^)(RCErrorCode errorCode, NSArray<RCRobotInfo *> *_Nullable robots))completion;
+
+/// 获取单个机器人信息
+/// - Parameters:
+///   - robotId: 机器人id
+///   - completion: 结果回调
+/// - Since 5.28.0
+- (void)getRobotById:(NSString *)robotId
+          completion:(void(^)(RCErrorCode errorCode, RCRobotInfo *_Nullable robot))completion;
+            
+/// 获取包含机器人的会话列表
+/// - Parameter completion: 结果回调
+/// - Since 5.28.0
+- (void)getConversationsIncludingRobots:(RCConversationsContainingRobotsOption *)option
+                             completion:(nullable void(^)(RCErrorCode errorCode,
+                                                          NSArray<RCConversation *> *_Nullable conversations))completion;
+
 #pragma mark - 数据库
 
 /// 添加数据库状态监听器（连接前调用）
@@ -3571,7 +3606,7 @@ FOUNDATION_EXPORT NSString *const RCLibDispatchReadReceiptNotification;
 /// - Since: 5.12.0
 - (void)getGroupMembersByRole:(NSString *)groupId
                          role:(RCGroupMemberRole)role
-                       option:(RCPagingQueryOption *)option
+                       option:(RCGetGroupMembersOption *)option
                       success:(void (^)(RCPagingQueryResult<RCGroupMemberInfo *> *result))successBlock
                         error:(void (^)(RCErrorCode errorCode))errorBlock
     NS_SWIFT_NAME(getGroupMembersByRole(_:role:option:success:error:));

@@ -19,6 +19,7 @@ FOUNDATION_EXPORT const unsigned char RongCallKitVersionString[];
 
 #if __has_include(<RongCallKit/RCCall.h>)
 
+#import <RongCallKit/RCAdapteRongIMKitHeader.h>
 #import <RongCallKit/RCCall.h>
 #import <RongCallKit/RCCallAudioMultiCallViewController.h>
 #import <RongCallKit/RCCallBaseViewController.h>
@@ -33,6 +34,7 @@ FOUNDATION_EXPORT const unsigned char RongCallKitVersionString[];
 
 #else
 
+#import "RCAdapteRongIMKitHeader.h"
 #import "RCCall.h"
 #import "RCCallAudioMultiCallViewController.h"
 #import "RCCallBaseViewController.h"

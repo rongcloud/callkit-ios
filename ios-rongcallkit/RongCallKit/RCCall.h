@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <RongCallLib/RongCallLib.h>
 #import "RCMultiCallInviteNewUserDelegate.h"
-#import "RongCallKitAdaptiveHeader.h"
+#import "RCAdapteRongIMKitHeader.h"
 
 #define RCCallGroupMemberDataSource RCIMGroupMemberDataSource  //接口向后兼容
 

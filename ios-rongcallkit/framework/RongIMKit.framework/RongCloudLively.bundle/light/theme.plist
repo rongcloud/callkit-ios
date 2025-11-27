@@ -152,7 +152,7 @@ Comment.png</string>
 		<string>up.png</string>
 		<key>conversation_unread_button_arrow_img</key>
 		<string>arrow.png</string>
-		<key>conversation_at_button_arrow_img</key>
+		<key>conversation_mention_button_arrow_img</key>
 		<string>arrow_red.png</string>
 		<key>conversation_unread_button_bubble_img</key>
 		<string>bubble.png</string>

@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class RCConversationStatusInfo;
 @class RCBlockedMessageInfo;
 @class RCUltraGroupTypingStatusInfo;
+@class RCRobotInfo;
 
 #pragma mark - 消息接收监听器
 
@@ -507,6 +508,19 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// - Parameter code: 错误码。
 - (void)userSettingsDidSync:(RCErrorCode)code;
+
+@end
+
+/// 机器人事件代理。
+/// - Since: 5.28.0
+@protocol RCRobotEventDelegate <NSObject>
+
+/// 机器人同步完成回调
+/// 
+/// - Parameter code: 错误码
+/// - Parameter robots: 连接后同步服务器的增量机器人数组
+- (void)onRobotSyncCompleted:(RCErrorCode)code
+                      robots:(NSArray<RCRobotInfo *> *_Nullable)robots;
 
 @end
 

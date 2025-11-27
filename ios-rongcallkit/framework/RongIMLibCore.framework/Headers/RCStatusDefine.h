@@ -518,25 +518,25 @@ typedef NS_ENUM(NSInteger, RCTranslateStrategy) {
 @class RCTranslateItem;
 
 /**
- 群已读回执功能版本
+ 消息已读回执功能版本
  */
-typedef NS_ENUM(NSInteger, RCGroupReadReceiptVersion) {
+typedef NS_ENUM(NSInteger, RCMessageReadReceiptVersion) {
     /**
-     群已读回执功能版本1
+     消息已读回执功能版本1
      */
-    RCGroupReadReceiptVersion1 = 0,
+    RCMessageReadReceiptVersion1 = 0,
     /**
-     群已读回执功能版本2
+     消息已读回执功能版本2
      */
-    RCGroupReadReceiptVersion2 = 1,
+    RCMessageReadReceiptVersion2 = 1,
     /**
-     群已读回执功能版本4
+     消息已读回执功能版本4
      */
-    RCGroupReadReceiptVersion4 = 3,
+    RCMessageReadReceiptVersion4 = 3,
     /**
-     已读回执功能版本5
+     消息读回执功能版本5
      */
-    RCGroupReadReceiptVersion5 = 4,
+    RCMessageReadReceiptVersion5 = 4,
 };
 
 

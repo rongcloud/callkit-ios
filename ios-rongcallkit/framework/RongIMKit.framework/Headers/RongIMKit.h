@@ -193,6 +193,9 @@
 #import <RongIMKit/RCIMKitTheme.h>
 #import <RongIMKit/RCIMKitThemeManager.h>
 #import <RongIMKit/RCMenuItem.h>
+
+#import <RongIMKit/RCOnlineStatusView.h>
+
 #else
 /// IMKit核心类
 #import "RCIM.h"
@@ -382,4 +385,7 @@
 #import "RCIMKitTheme.h"
 #import "RCIMKitThemeManager.h"
 #import "RCMenuItem.h"
+
+#import "RCOnlineStatusView.h"
+
 #endif

@@ -494,6 +494,16 @@ NS_ASSUME_NONNULL_BEGIN
  */
 + (NSString *)getVersion;
 
+/*!
+ 获取 SDK 是否为私有云版本
+
+ @return SDK 是否为私有云版本
+
+ @remarks RCRTCEngine：参数配置
+ */
+
++ (BOOL)isPrivateSDK;
+
 @end
 
 NS_ASSUME_NONNULL_END

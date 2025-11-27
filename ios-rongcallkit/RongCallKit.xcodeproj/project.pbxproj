@@ -17,7 +17,6 @@
 		272F2F8E2608A26E0088E841 /* RongIMLibCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2704FDBD25F8A6A000124E78 /* RongIMLibCore.framework */; };
 		272F2F8F2608A26E0088E841 /* RongIMLib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2704FDBA25F8A66D00124E78 /* RongIMLib.framework */; };
 		272F2F902608A26E0088E841 /* RongIMKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2745188925F634F000FAE44F /* RongIMKit.framework */; };
-		2790CDBA25DE4039008CBDD8 /* RongCallKitAdaptiveHeader.h in Headers */ = {isa = PBXBuildFile; fileRef = 2790CDB925DE4039008CBDD8 /* RongCallKitAdaptiveHeader.h */; };
 		390467EF20738446007CE8DE /* UICollectionView+BackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 390467ED20738446007CE8DE /* UICollectionView+BackgroundView.m */; };
 		390467F020738446007CE8DE /* UICollectionView+BackgroundView.h in Headers */ = {isa = PBXBuildFile; fileRef = 390467EE20738446007CE8DE /* UICollectionView+BackgroundView.h */; };
 		3933DF5C206117A100C80615 /* KxCallMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 3933DF5A206117A100C80615 /* KxCallMenu.m */; };
@@ -61,8 +60,9 @@
 		A6BE1B3A1CCEFAAC00FF6BF7 /* RCCallKitUtility.h in Headers */ = {isa = PBXBuildFile; fileRef = A6BE1B1C1CCEFAAC00FF6BF7 /* RCCallKitUtility.h */; };
 		A6BE1B3B1CCEFAAC00FF6BF7 /* RCCallKitUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = A6BE1B1D1CCEFAAC00FF6BF7 /* RCCallKitUtility.m */; };
 		A6BE1B481CCEFBC700FF6BF7 /* RongCallLib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6BE1B461CCEFBC700FF6BF7 /* RongCallLib.framework */; };
-		E536BC8D2E97AF8600E7E613 /* RongCallKitSwiftAdaptiveHeader.h in Headers */ = {isa = PBXBuildFile; fileRef = E536BC8C2E97AF8600E7E613 /* RongCallKitSwiftAdaptiveHeader.h */; };
 		E53AB2D62E2FADB30049C0DE /* RCLCK.swift in Sources */ = {isa = PBXBuildFile; fileRef = E53AB2D52E2FADB30049C0DE /* RCLCK.swift */; };
+		E59AFC652EBDEC7300BEC9A2 /* RCAdapteRongIMKitHeader.h in Headers */ = {isa = PBXBuildFile; fileRef = E59AFC642EBDEC7300BEC9A2 /* RCAdapteRongIMKitHeader.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E59AFC662EBDEC7300BEC9A2 /* RCAdapteRongCallKitSwiftHeader.h in Headers */ = {isa = PBXBuildFile; fileRef = E59AFC632EBDEC7300BEC9A2 /* RCAdapteRongCallKitSwiftHeader.h */; };
 		E5B2D5BD2E6832D900A257EF /* RCCallASRConfigController.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B2D5BC2E6832D800A257EF /* RCCallASRConfigController.m */; };
 		E5B2D5BE2E6832D900A257EF /* RCCallASRConfigController.h in Headers */ = {isa = PBXBuildFile; fileRef = E5B2D5BB2E6832D800A257EF /* RCCallASRConfigController.h */; };
 		E5B2D5C12E69299F00A257EF /* RCCallASRContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B2D5C02E69299F00A257EF /* RCCallASRContentView.m */; };
@@ -86,7 +86,6 @@
 		2704FDC625F8A6F500124E78 /* RongDiscussion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RongDiscussion.framework; path = framework/RongDiscussion.framework; sourceTree = "<group>"; };
 		2704FDC925F8A70100124E78 /* RongPublicService.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RongPublicService.framework; path = framework/RongPublicService.framework; sourceTree = "<group>"; };
 		2745188925F634F000FAE44F /* RongIMKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RongIMKit.framework; path = framework/RongIMKit.framework; sourceTree = "<group>"; };
-		2790CDB925DE4039008CBDD8 /* RongCallKitAdaptiveHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RongCallKitAdaptiveHeader.h; sourceTree = "<group>"; };
 		390467ED20738446007CE8DE /* UICollectionView+BackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UICollectionView+BackgroundView.m"; sourceTree = "<group>"; };
 		390467EE20738446007CE8DE /* UICollectionView+BackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UICollectionView+BackgroundView.h"; sourceTree = "<group>"; };
 		3933DF5A206117A100C80615 /* KxCallMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KxCallMenu.m; sourceTree = "<group>"; };
@@ -139,8 +138,9 @@
 		B2B0B1702480D096007DAFF4 /* after_build.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = after_build.sh; sourceTree = "<group>"; };
 		B2B0B1712480D096007DAFF4 /* before_build.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = before_build.sh; sourceTree = "<group>"; };
 		E50FA9972595BEC7001A8A53 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/RongCallKit.strings; sourceTree = "<group>"; };
-		E536BC8C2E97AF8600E7E613 /* RongCallKitSwiftAdaptiveHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RongCallKitSwiftAdaptiveHeader.h; sourceTree = "<group>"; };
 		E53AB2D52E2FADB30049C0DE /* RCLCK.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RCLCK.swift; sourceTree = "<group>"; };
+		E59AFC632EBDEC7300BEC9A2 /* RCAdapteRongCallKitSwiftHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCAdapteRongCallKitSwiftHeader.h; sourceTree = "<group>"; };
+		E59AFC642EBDEC7300BEC9A2 /* RCAdapteRongIMKitHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCAdapteRongIMKitHeader.h; sourceTree = "<group>"; };
 		E5B2D5BB2E6832D800A257EF /* RCCallASRConfigController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCCallASRConfigController.h; sourceTree = "<group>"; };
 		E5B2D5BC2E6832D800A257EF /* RCCallASRConfigController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCCallASRConfigController.m; sourceTree = "<group>"; };
 		E5B2D5BF2E69299F00A257EF /* RCCallASRContentView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCCallASRContentView.h; sourceTree = "<group>"; };
@@ -241,14 +241,14 @@
 				F8235CD71CE5B29200C95B26 /* Header */,
 				5AC79E58256F5A5900B06789 /* Resources */,
 				A6BE1A511CCE561200FF6BF7 /* RongCallKit.h */,
+				E59AFC632EBDEC7300BEC9A2 /* RCAdapteRongCallKitSwiftHeader.h */,
+				E59AFC642EBDEC7300BEC9A2 /* RCAdapteRongIMKitHeader.h */,
 				A6BE1B171CCEFAAC00FF6BF7 /* RCCall.h */,
 				A6BE1B181CCEFAAC00FF6BF7 /* RCCall.mm */,
 				9CE36FD4200F5FDC0068263B /* RCCXCall.h */,
 				9CE36FD5200F5FDC0068263B /* RCCXCall.m */,
 				E53AB2D52E2FADB30049C0DE /* RCLCK.swift */,
 				0ADDC74921B66A6200883EB5 /* RCMultiCallInviteNewUserDelegate.h */,
-				E536BC8C2E97AF8600E7E613 /* RongCallKitSwiftAdaptiveHeader.h */,
-				2790CDB925DE4039008CBDD8 /* RongCallKitAdaptiveHeader.h */,
 				A6BE1B3C1CCEFAB700FF6BF7 /* Support Files */,
 			);
 			path = RongCallKit;
@@ -384,7 +384,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E536BC8D2E97AF8600E7E613 /* RongCallKitSwiftAdaptiveHeader.h in Headers */,
+				E59AFC652EBDEC7300BEC9A2 /* RCAdapteRongIMKitHeader.h in Headers */,
 				0ADDC74A21B66A6300883EB5 /* RCMultiCallInviteNewUserDelegate.h in Headers */,
 				A6BE1B361CCEFAAC00FF6BF7 /* RCCall.h in Headers */,
 				A6BE1B2A1CCEFAAC00FF6BF7 /* RCCallSelectMemberViewController.h in Headers */,
@@ -401,7 +401,6 @@
 				1E5721A125ADD394002FC406 /* RCCallTextButton.h in Headers */,
 				E5B2D5BE2E6832D900A257EF /* RCCallASRConfigController.h in Headers */,
 				A6BE1B201CCEFAAC00FF6BF7 /* RCCallMultiCallUserCell.h in Headers */,
-				2790CDBA25DE4039008CBDD8 /* RongCallKitAdaptiveHeader.h in Headers */,
 				9CE36FD6200F5FDC0068263B /* RCCXCall.h in Headers */,
 				F8235CDD1CE5B2A100C95B26 /* RCloudImageLoader.h in Headers */,
 				A68AFAE91CCEFF5B00F16B3D /* RCCallDetailMessageCell.h in Headers */,
@@ -414,6 +413,7 @@
 				F8235CDF1CE5B2A100C95B26 /* RCUserInfoCacheManager.h in Headers */,
 				A6BE1B301CCEFAAC00FF6BF7 /* RCAudioMultiCallUserCollectionLayout.h in Headers */,
 				F8D2904C1D2790E3002BFA65 /* RCCallKitExtensionModule.h in Headers */,
+				E59AFC662EBDEC7300BEC9A2 /* RCAdapteRongCallKitSwiftHeader.h in Headers */,
 				A6BE1B221CCEFAAC00FF6BF7 /* RCCallSelectingMemberCell.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

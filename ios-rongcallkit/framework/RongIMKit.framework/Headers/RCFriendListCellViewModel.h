@@ -19,6 +19,12 @@ NS_ASSUME_NONNULL_BEGIN
 /// 好友信息
 @property (nonatomic, strong) RCFriendInfo *friendInfo;
 
+/// 是否显示在线状态
+@property (nonatomic, assign) BOOL displayOnlineStatus;
+
+/// 在线状态
+@property (nonatomic, strong) RCSubscribeUserOnlineStatus *onlineStatus;
+
 /// 注册 cell
 + (void)registerCellForTableView:(UITableView *)tableView;
 
@@ -27,6 +33,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 刷新好友
 - (void)refreshWithFriend:(RCFriendInfo *)friendInfo;
+
+/// 刷新在线状态
+- (void)refreshOnlineStatus:(RCSubscribeUserOnlineStatus *)onlineStatus;
+
 @end
 
 NS_ASSUME_NONNULL_END

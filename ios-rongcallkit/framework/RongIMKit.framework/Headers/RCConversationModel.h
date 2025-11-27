@@ -197,6 +197,14 @@ NS_ASSUME_NONNULL_BEGIN
 /// 消息已读回执 v5 信息
 @property (nonatomic, strong) RCReadReceiptInfoV5 *readReceiptInfoV5;
 
+/// 是否显示用户在线状态
+@property (nonatomic, assign) BOOL displayOnlineStatus;
+
+/// 用户在线状态
+/// - Note: 只在单聊类型会话中显示在线状态，其他类型会话不显示在线状态
+/// - Since: 5.32.0
+@property (nonatomic, strong) RCSubscribeUserOnlineStatus *onlineStatus;
+
 /*!
  初始化会话显示数据模型
 

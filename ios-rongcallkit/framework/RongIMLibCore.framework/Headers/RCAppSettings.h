@@ -27,7 +27,22 @@ NS_ASSUME_NONNULL_BEGIN
 /// 已读回执版本
 ///
 /// - Since: 5.30.0
-@property (nonatomic, readonly, assign) RCGroupReadReceiptVersion readReceiptVersion;
+@property (nonatomic, readonly, assign) RCMessageReadReceiptVersion readReceiptVersion;
+
+/// 用户托管功能是否开启
+///
+/// - Since: 5.32.0
+@property (nonatomic, readonly, assign) BOOL isUserProfileEnable;
+
+/// 在线状态订阅功能是否开启
+///
+/// - Since: 5.32.0
+@property (nonatomic, readonly, assign) BOOL isOnlineStatusSubscribeEnable;
+
+//// 好友在线状态变更通知功能是否开启
+///
+/// - Since: 5.32.0
+@property (nonatomic, readonly, assign) BOOL isFriendOnlineStatusSubscribeEnable;
 
 @end
 

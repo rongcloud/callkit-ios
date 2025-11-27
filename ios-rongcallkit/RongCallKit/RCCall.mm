@@ -18,7 +18,7 @@
 #import "RCCallTipMessageCell.h"
 #import "RCCallVideoMultiCallViewController.h"
 #import "RCUserInfoCacheManager.h"
-#import "RongCallKitSwiftAdaptiveHeader.h"
+#import "RCAdapteRongCallKitSwiftHeader.h"
 #if __IPHONE_10_0
 #import <UserNotifications/UserNotifications.h>
 #endif
@@ -41,9 +41,9 @@
     }
 #endif
 
-static NSString *const __RongCallKit__Version = @"5.30.0_opensource";
-static NSString *const __RongCallKit__Commit = @"5c3741e19";
-static NSString *const __RongCallKit__Time = @"202510301836";
+static NSString *const __RongCallKit__Version = @"5.32.0_opensource";
+static NSString *const __RongCallKit__Commit = @"626e657bc";
+static NSString *const __RongCallKit__Time = @"202511271140";
 
 @interface RCCall () <RCCallReceiveDelegate, RCLCKCenterDelegate>
 
@@ -68,7 +68,7 @@ static NSString *const __RongCallKit__Time = @"202510301836";
             pRongVoIP.maxMultiAudioCallUserNumber = 20;
             pRongVoIP.maxMultiVideoCallUserNumber = 7;
             pRongVoIP.canIncomingCall = YES;
-            pRongVoIP.displayASRUI = YES;
+            pRongVoIP.displayASRUI = [RCRTCEngine isPrivateSDK] ? NO : YES;
             pRongVoIP.callWindows = [[NSMutableArray alloc] init];
             pRongVoIP.locationNotificationMap = [[NSMutableDictionary alloc] init];
             [pRongVoIP registerNotification];

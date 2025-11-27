@@ -34,6 +34,10 @@ NS_ASSUME_NONNULL_BEGIN
 /// 我群身份
 @property (nonatomic, assign) RCGroupMemberRole role;
 
+/// 是否是机器人
+/// - Since 5.28.0
+@property (nonatomic, assign) BOOL isRobot;
+
 @end
 
 NS_ASSUME_NONNULL_END

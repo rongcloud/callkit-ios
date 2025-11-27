@@ -86,6 +86,21 @@ NS_ASSUME_NONNULL_BEGIN
                error:(nullable void (^)(RCErrorCode status))errorBlock;
 
 /*!
+ 退出聊天室
+
+ - Parameter targetId:                聊天室 ID，最大长度为 64 个字符
+ - Parameter extra:                   附加信息，默认最大长度为 128 个字符，服务可配置
+ - Parameter successBlock:            退出聊天室成功的回调
+ - Parameter errorBlock:              退出聊天室失败的回调 [status:退出聊天室失败的错误码]
+
+ - Remark: 聊天室
+ */
+- (void)quitChatRoom:(NSString *)targetId
+               extra:(nullable NSString *)extra
+             success:(nullable void (^)(void))successBlock
+               error:(nullable void (^)(RCErrorCode status))errorBlock;
+
+/*!
  获取聊天室的信息（包含部分成员信息和当前聊天室中的成员总数）
 
  - Parameter targetId:     聊天室 ID，最大长度为 64 个字符

@@ -159,6 +159,14 @@ NS_ASSUME_NONNULL_BEGIN
 /// - Since: 5.24.0
 @property (nonatomic, assign) RCTranslateStrategy translateStrategy;
 
+/// 是否包含机器人
+///
+/// - Since: 5.28.0
+@property (nonatomic, assign) BOOL includeRobot;
+
+/// 修改消息草稿
+///
+/// - Since:5.28.0
 @property (nonatomic, strong) RCEditedMessageDraft *editedMessageDraft;
 
 @end

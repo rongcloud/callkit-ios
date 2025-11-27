@@ -90,7 +90,7 @@
 		</data>
 		<key>Headers/RCBaseTableViewCell.h</key>
 		<data>
-		xdWaPjPRiGJS97qw7oBRCL3OhNI=
+		TVhqfnKiq+RuChV85IthtSaCy2s=
 		</data>
 		<key>Headers/RCBaseTableViewController.h</key>
 		<data>
@@ -142,7 +142,7 @@
 		</data>
 		<key>Headers/RCConversationCell.h</key>
 		<data>
-		Qk4ntymxWm1xPrQ0sS+U4NtIERo=
+		of7MAFvM4u4MIvk9YbBj/FmV8wo=
 		</data>
 		<key>Headers/RCConversationDetailContentView.h</key>
 		<data>
@@ -154,7 +154,7 @@
 		</data>
 		<key>Headers/RCConversationModel.h</key>
 		<data>
-		Ve4leFVcwC3SpyRI2vaGP9qDxo0=
+		TQwIQREBu1XfFQTcRPLxamZfnQo=
 		</data>
 		<key>Headers/RCConversationStatusView.h</key>
 		<data>
@@ -174,7 +174,7 @@
 		</data>
 		<key>Headers/RCEditInputContainerView.h</key>
 		<data>
-		8ZfSsyW305xEGVxTO00x2P2Cvlw=
+		OcRoIdzz5Ji+2Q9VTtl1hF18zl4=
 		</data>
 		<key>Headers/RCEmojiBoardView.h</key>
 		<data>
@@ -206,11 +206,11 @@
 		</data>
 		<key>Headers/RCFriendListCellViewModel.h</key>
 		<data>
-		PedMrm/x/OmQm+iYkKyGl2h1GhU=
+		1aU5ZtelONL2NWLw/K6llC/78S8=
 		</data>
 		<key>Headers/RCFriendListPermanentCell.h</key>
 		<data>
-		1M/BzIWZXo4KLFAGOCvE4bpGjrU=
+		cUo8NgypYs4ZNgi6vYzMIWfTTIw=
 		</data>
 		<key>Headers/RCFriendListPermanentCellViewModel.h</key>
 		<data>
@@ -362,7 +362,7 @@
 		</data>
 		<key>Headers/RCIM.h</key>
 		<data>
-		8FLXN2dLN1NKT43vek6wX4FbqB8=
+		VY957C4HWY1uHuQyzfQWed9loSg=
 		</data>
 		<key>Headers/RCIMKitTheme.h</key>
 		<data>
@@ -410,7 +410,7 @@
 		</data>
 		<key>Headers/RCKitUIConf.h</key>
 		<data>
-		LWAMPoxkL4sBicWC79eTmSEVOCU=
+		3XQttdXU2Ey662oBVsjzi6BtR+o=
 		</data>
 		<key>Headers/RCKitUtility.h</key>
 		<data>
@@ -507,6 +507,10 @@
 		<key>Headers/RCNavigationItemsViewModel.h</key>
 		<data>
 		K2t+WWf5PGE3AeVwM+YLKVnHJB8=
+		</data>
+		<key>Headers/RCOnlineStatusView.h</key>
+		<data>
+		fyS5syfaoF7V/hdB6yjmFvCEG1o=
 		</data>
 		<key>Headers/RCPluginBoardView.h</key>
 		<data>
@@ -706,7 +710,7 @@
 		</data>
 		<key>Headers/RongIMKit.h</key>
 		<data>
-		Hiu+4peLyWoFNlCW20+pppYh7Wk=
+		P/Ft3HSTynR2zhuBi+X8Y4NQ3L0=
 		</data>
 		<key>Headers/RongIMKitExtensionModule.h</key>
 		<data>
@@ -3606,7 +3610,7 @@
 		</data>
 		<key>RongCloudLively.bundle/dark/theme.plist</key>
 		<data>
-		HyudfRCfJpdZthhWTkue8l8qGcQ=
+		gafN87hqwRu3IW9ueFKa6dIdudY=
 		</data>
 		<key>RongCloudLively.bundle/light/resources/Comment@2x.png</key>
 		<data>
@@ -4842,7 +4846,7 @@
 		</data>
 		<key>RongCloudLively.bundle/light/theme.plist</key>
 		<data>
-		mnO8NvgVB05lix1cFvo9KcD5vIs=
+		tPYSMnYvsJ93p9NnHzqa8T5jv/0=
 		</data>
 		<key>ar.lproj/RongCloudKit.strings</key>
 		<dict>
@@ -5109,11 +5113,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			xdWaPjPRiGJS97qw7oBRCL3OhNI=
+			TVhqfnKiq+RuChV85IthtSaCy2s=
 			</data>
 			<key>hash2</key>
 			<data>
-			E3bkOQHB/n2oMAdvOlzkJbvm0knMvU/yHod2OJXH8rc=
+			FJXt5T7DxwRAWZYYwUrnRvIu+4N1uP4e8DewfLFZ4/M=
 			</data>
 		</dict>
 		<key>Headers/RCBaseTableViewController.h</key>
@@ -5252,11 +5256,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			Qk4ntymxWm1xPrQ0sS+U4NtIERo=
+			of7MAFvM4u4MIvk9YbBj/FmV8wo=
 			</data>
 			<key>hash2</key>
 			<data>
-			Mr5t3J8k9bm19qV1Kk5p/I3fNL0cLGGg9fdMPBhB+LY=
+			sUBXhRqtxWfCC4yfrjlPuEyPnrX7Bzt6/bSPRg2a/NI=
 			</data>
 		</dict>
 		<key>Headers/RCConversationDetailContentView.h</key>
@@ -5285,11 +5289,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			Ve4leFVcwC3SpyRI2vaGP9qDxo0=
+			TQwIQREBu1XfFQTcRPLxamZfnQo=
 			</data>
 			<key>hash2</key>
 			<data>
-			BPUmdOrztIIGACNdpLvbNUru1A/pHOOUmw9/b8x7UaQ=
+			gd1G24xRUJh3M+tSYX3b3NcNcWwbERiacL2drr4Y5Uk=
 			</data>
 		</dict>
 		<key>Headers/RCConversationStatusView.h</key>
@@ -5340,11 +5344,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			8ZfSsyW305xEGVxTO00x2P2Cvlw=
+			OcRoIdzz5Ji+2Q9VTtl1hF18zl4=
 			</data>
 			<key>hash2</key>
 			<data>
-			C0/CXusW7yGziK7baU9Ad7Nv97gEzWaRrBTMfBvsuLs=
+			YRlpkUqgYHq/UYnKzOgqwuF+ngoWLy/FvFo32tcZrew=
 			</data>
 		</dict>
 		<key>Headers/RCEmojiBoardView.h</key>
@@ -5428,22 +5432,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			PedMrm/x/OmQm+iYkKyGl2h1GhU=
+			1aU5ZtelONL2NWLw/K6llC/78S8=
 			</data>
 			<key>hash2</key>
 			<data>
-			NBDsRqJPqW2a1Pz8R17ugLnrxaND5DDTRSv6VJzwQNQ=
+			zirQrTpmF+al/5DaTiedbGNGAeri3irNj1uylex19Hc=
 			</data>
 		</dict>
 		<key>Headers/RCFriendListPermanentCell.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			1M/BzIWZXo4KLFAGOCvE4bpGjrU=
+			cUo8NgypYs4ZNgi6vYzMIWfTTIw=
 			</data>
 			<key>hash2</key>
 			<data>
-			E32cvHOtcpKCk/fCebq1IeR3mA2123H6ENuq58C1cos=
+			+DKwiUFK5Rak0COVrFlb8H/PmdnjMvveZrKunsoEZ7I=
 			</data>
 		</dict>
 		<key>Headers/RCFriendListPermanentCellViewModel.h</key>
@@ -5857,11 +5861,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			8FLXN2dLN1NKT43vek6wX4FbqB8=
+			VY957C4HWY1uHuQyzfQWed9loSg=
 			</data>
 			<key>hash2</key>
 			<data>
-			16uxexrVBb3UEzsaPkpGfc0eGsfUw30ixPVqFs6GtXU=
+			uCjlnRvqfQl3EM5EiZvgnfTnw38h4ErJYicHBePCwSQ=
 			</data>
 		</dict>
 		<key>Headers/RCIMKitTheme.h</key>
@@ -5989,11 +5993,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			LWAMPoxkL4sBicWC79eTmSEVOCU=
+			3XQttdXU2Ey662oBVsjzi6BtR+o=
 			</data>
 			<key>hash2</key>
 			<data>
-			M8QDobacKC6uk5hXes7WDD7Aah4S0sazfDZ+4OGfpUk=
+			/k7JMioPdlqPtEBlYuG+UvjXqKqDZYYPKssBt2MaUJg=
 			</data>
 		</dict>
 		<key>Headers/RCKitUtility.h</key>
@@ -6258,6 +6262,17 @@
 			<key>hash2</key>
 			<data>
 			dW8+GyXEMAF9xcHgO4yHQSW1XiAOtRy3KxEFB6TalFI=
+			</data>
+		</dict>
+		<key>Headers/RCOnlineStatusView.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			fyS5syfaoF7V/hdB6yjmFvCEG1o=
+			</data>
+			<key>hash2</key>
+			<data>
+			xtg5lSpMIuwj8eZ7dSRRzZIleopzlVuRzS3XRg/Unoc=
 			</data>
 		</dict>
 		<key>Headers/RCPluginBoardView.h</key>
@@ -6803,11 +6818,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			Hiu+4peLyWoFNlCW20+pppYh7Wk=
+			P/Ft3HSTynR2zhuBi+X8Y4NQ3L0=
 			</data>
 			<key>hash2</key>
 			<data>
-			PPvQ5VnSYRSRCZ3Tx8o9cOEj37pUUZTrGGEwbfXsN1c=
+			xBY/Iwg7tjNJzWrai8rzdeUCDI86gavDilF1UXDzVfQ=
 			</data>
 		</dict>
 		<key>Headers/RongIMKitExtensionModule.h</key>
@@ -14767,11 +14782,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			HyudfRCfJpdZthhWTkue8l8qGcQ=
+			gafN87hqwRu3IW9ueFKa6dIdudY=
 			</data>
 			<key>hash2</key>
 			<data>
-			LQm8dp2o3gJrFMFHstpyXRfN/bDiWDLdFJvZe5p/+Yk=
+			0eJCu9eTxVqwbZVN9S74J4HsmbK4D2WKn+M1wyGW6LQ=
 			</data>
 		</dict>
 		<key>RongCloudLively.bundle/light/resources/Comment@2x.png</key>
@@ -18166,11 +18181,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			mnO8NvgVB05lix1cFvo9KcD5vIs=
+			tPYSMnYvsJ93p9NnHzqa8T5jv/0=
 			</data>
 			<key>hash2</key>
 			<data>
-			DzSL2RLEw+EXcpDQ74ExwUpcw8DX4AXJETttOCheSLc=
+			+pzy0N7WBXDhUF1AVQI1APCLFliLi7XBrgkfmkxhZ1M=
 			</data>
 		</dict>
 		<key>ar.lproj/RongCloudKit.strings</key>

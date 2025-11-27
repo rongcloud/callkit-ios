@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <RongCallLib/RongCallLib.h>
-#import "RongCallKitAdaptiveHeader.h"
+#import "RCAdapteRongIMKitHeader.h"
 
 /*!
  CallKit 插件类

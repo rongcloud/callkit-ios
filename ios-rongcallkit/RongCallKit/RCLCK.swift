@@ -10,7 +10,7 @@ import Foundation
 import AVFoundation
 import LiveCommunicationKit
 #if canImport(RongCloudOpenSource)
-import RongCloudOpenSource
+import RongCloudOpenSource.RongIMKit
 #else
 import RongIMKit
 #endif
@@ -93,6 +93,74 @@ let kCallNewSession = Notification.Name(rawValue: "RCCallNewSessionCreation Noti
         hasJoined = false
     }
     
+    /// 将 callId 转换为有效的 UUID，如果 callId 不是有效的 UUID，则生成一个新的 UUID
+    /// - Parameter callId: 原始 callId 字符串
+    /// - Returns: 有效的 UUID 对象和是否是新生成的标识
+    private func normalizeCallIdToUUID(_ callId: String) -> (uuid: UUID, isGenerated: Bool) {
+        // 首先尝试直接解析为 UUID
+        if let uuid = UUID(uuidString: callId) {
+            return (uuid, false)
+        }
+        
+        // 如果 callId 不是有效的 UUID，尝试从字符串生成稳定的 UUID
+        // 使用 MD5 哈希确保相同 callId 总是生成相同的 UUID
+        let normalizedCallId = callId.trimmingCharacters(in: .whitespacesAndNewlines)
+        
+        // 如果 callId 为空，直接生成新的 UUID
+        if normalizedCallId.isEmpty {
+            let newUUID = UUID()
+            delegate?.didLogLCK?("callId is empty, generated new UUID: \(newUUID.uuidString)")
+            return (newUUID, true)
+        }
+        
+        // 使用 callId 的哈希值生成稳定的 UUID
+        let uuidString = generateUUIDFromString(normalizedCallId)
+        if let uuid = UUID(uuidString: uuidString) {
+            delegate?.didLogLCK?("callId '\(callId)' is not a valid UUID, generated stable UUID: \(uuidString)")
+            return (uuid, true)
+        }
+        
+        // 如果仍然失败，生成一个完全随机的 UUID
+        let fallbackUUID = UUID()
+        delegate?.didLogLCK?("Failed to generate UUID from callId '\(callId)', using random UUID: \(fallbackUUID.uuidString)")
+        return (fallbackUUID, true)
+    }
+    
+    /// 从字符串生成稳定的 UUID（使用字符串哈希）
+    /// - Parameter string: 输入字符串
+    /// - Returns: UUID 格式的字符串
+    private func generateUUIDFromString(_ string: String) -> String {
+        // 使用简单的哈希算法生成稳定的 UUID
+        // 使用多个哈希值组合确保唯一性
+        var hash1: UInt64 = 0
+        var hash2: UInt64 = 0
+        
+        // 计算字符串的哈希值
+        for (index, char) in string.utf8.enumerated() {
+            let value = UInt64(char)
+            hash1 = hash1 &* 31 &+ value
+            hash2 = hash2 &* 37 &+ UInt64(index) &* value
+        }
+        
+        // 使用字符串长度和内容生成第三个哈希值
+        let hash3 = UInt64(string.count) &* 17 &+ hash1 &* 7
+        
+        // 将哈希值转换为十六进制字符串
+        let hex1 = String(format: "%016llx", hash1)
+        let hex2 = String(format: "%016llx", hash2)
+        let hex3 = String(format: "%016llx", hash3)
+        
+        // 组合哈希值并格式化为 UUID 格式 (8-4-4-4-12)
+        let combinedHex = (hex1 + hex2 + hex3).prefix(32)
+        let uuidString = String(format: "%@-%@-%@-%@-%@",
+                               String(combinedHex.prefix(8)),
+                               String(combinedHex.dropFirst(8).prefix(4)),
+                               String(combinedHex.dropFirst(12).prefix(4)),
+                               String(combinedHex.dropFirst(16).prefix(4)),
+                               String(combinedHex.dropFirst(20).prefix(12)))
+        return uuidString
+    }
+    
     @objc public func reportIncomingCall(_ callId: String, inviterId: String, userIdList: [String], isGroup: Bool, isVideo: Bool) {
         let state = UIApplication.shared.applicationState
         delegate?.didLogLCK?("reportIncomingCall callId: \(callId) inviterId: \(inviterId) appState: \(state)")
@@ -112,9 +180,10 @@ let kCallNewSession = Notification.Name(rawValue: "RCCallNewSessionCreation Noti
                 } else {
                     update.capabilities = [.playingTones]
                 }
-                guard let uuid = UUID(uuidString: callId) else {
-                    delegate?.didLogLCK?("Invalid callId format: \(callId)")
-                    return
+                // 使用容错方法将 callId 转换为有效的 UUID
+                let (uuid, isGenerated) = normalizeCallIdToUUID(callId)
+                if isGenerated {
+                    delegate?.didLogLCK?("callId '\(callId)' was normalized to UUID: \(uuid.uuidString)")
                 }
                 try await conversationManager.reportNewIncomingConversation(uuid: uuid, update: update)
                 // 变量的设置在LiveCommunication展示之后，保证后续操作的状态正确
@@ -129,11 +198,12 @@ let kCallNewSession = Notification.Name(rawValue: "RCCallNewSessionCreation Noti
     
     @objc public func hangupIfNeedWithUUID(_ uuid: String) {
         delegate?.didLogLCK?("hangupIfNeedWithUUID called with UUID: \(uuid)")
-        // 验证传入的 UUID 格式
-        guard UUID(uuidString: uuid) != nil else {
-            delegate?.didLogLCK?("Invalid UUID format: \(uuid)")
-            return
+        // 使用容错方法将 uuid 字符串转换为有效的 UUID
+        let (normalizedUUID, isGenerated) = normalizeCallIdToUUID(uuid)
+        if isGenerated {
+            delegate?.didLogLCK?("UUID string '\(uuid)' was normalized to: \(normalizedUUID.uuidString)")
         }
+        
         // 如果当前没有活跃的 LiveCommunicationKit 通话，直接返回
         guard let currentUUID = conversationUUID else {
             delegate?.didLogLCK?("No active conversation, ignoring hangup request")
@@ -141,7 +211,7 @@ let kCallNewSession = Notification.Name(rawValue: "RCCallNewSessionCreation Noti
         }
         delegate?.didLogLCK?("Current conversation UUID: \(currentUUID.uuidString)")
         // 如果传入的 UUID 与当前 LiveCommunicationKit 通话的 UUID 不匹配
-        if uuid != currentUUID.uuidString {
+        if normalizedUUID != currentUUID {
             delegate?.didLogLCK?("Hanging up current call due to different UUID")
             endConversation()
         } else {

@@ -89,10 +89,10 @@ typedef NS_ENUM(NSInteger, RCEditHeightMode) {
 - (NSString *)getInputText;
 
 /// 让输入框成为第一响应者
-- (void)becomeFirstResponder;
+- (void)becomeInputViewFirstResponder;
 
 /// 让输入框失去第一响应者
-- (void)resignFirstResponder;
+- (void)resignInputViewFirstResponder;
 
 /// 设置输入容器的可用状态（包含UI和交互状态）
 /// - Parameter enabled: 是否可用

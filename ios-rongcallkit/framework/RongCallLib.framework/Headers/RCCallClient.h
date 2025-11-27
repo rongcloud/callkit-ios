@@ -523,6 +523,15 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)stopRealtimeTranslation:(nullable void (^)(BOOL success, NSInteger code))completion;
 
 /*!
+ 设置忙线处理策略
+ 
+ @param busyCallPolicy 忙线处理策略
+ @discussion
+ 默认值：RCCallBusyCallPolicyDefault 主叫响应拒绝，结束呼叫
+ */
+- (void)setBusyCallPolicy:(RCCallBusyCallPolicy)busyCallPolicy;
+
+/*!
  获取 SDK 版本号
 
  @return 版本号

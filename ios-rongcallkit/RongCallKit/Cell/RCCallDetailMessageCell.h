@@ -6,7 +6,7 @@
 //  Copyright © 2016年 RongCloud. All rights reserved.
 //
 
-#import "RongCallKitAdaptiveHeader.h"
+#import "RCAdapteRongIMKitHeader.h"
 
 /*!
  通话摘要的消息Cell

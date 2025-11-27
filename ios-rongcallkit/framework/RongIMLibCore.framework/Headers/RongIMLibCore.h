@@ -98,6 +98,9 @@ FOUNDATION_EXPORT const unsigned char RongIMLibCoreVersionString[];
 #import <RongIMLibCore/RCConversationTopOption.h>
 #import <RongIMLibCore/RCConversationFilterOption.h>
 #import <RongIMLibCore/RCConversationBatchDeletionParams.h>
+#import <RongIMLibCore/RCRobotInfo.h>
+#import <RongIMLibCore/RCGetGroupMembersOption.h>
+#import <RongIMLibCore/RCConversationsContainingRobotsOption.h>
 #import <RongIMLibCore/RCGetUnreadMentionMeConversationListParams.h>
 
 #import <RongIMLibCore/RCFileMessage.h>

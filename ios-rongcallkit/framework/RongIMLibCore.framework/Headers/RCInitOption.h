@@ -23,6 +23,8 @@ typedef NS_ENUM(NSInteger, RCAreaCode) {
     RCAreaCodeSG_A __deprecated_msg("Use RCAreaCodeSG_B instead") = RCAreaCodeSG_B,
     /// 沙特数据中心
     RCAreaCodeSA = 5,
+    /// 阿曼数据中心
+    RCAreaCodeOman = 6,
     /// 无效枚举值，业务上不用
     RCAreaCodeInvalid
 };

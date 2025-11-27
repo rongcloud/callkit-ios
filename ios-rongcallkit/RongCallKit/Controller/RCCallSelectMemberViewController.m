@@ -13,7 +13,7 @@
 #import "RCCallSelectingMemberCell.h"
 #import "RCCallToolBar.h"
 #import "RCUserInfoCacheManager.h"
-#import "RongCallKitAdaptiveHeader.h"
+#import "RCAdapteRongIMKitHeader.h"
 
 #define FakeNavigationBarHeight 64
 
