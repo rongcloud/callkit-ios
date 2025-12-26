@@ -6,19 +6,18 @@
 //  Copyright © 2024 RongCloud. All rights reserved.
 //
 
-#import "RCBaseTableViewCell.h"
+#import "RCStackTableViewCell.h"
 #import "RCOnlineStatusView.h"
 UIKIT_EXTERN NSString * _Nullable const RCFriendListPermanentCellIdentifier;
 @class RCloudImageView;
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface RCFriendListPermanentCell : RCBaseTableViewCell
+@interface RCFriendListPermanentCell : RCStackTableViewCell
 /*!
 消息发送者的用户头像
 */
 @property (nonatomic, strong) RCloudImageView *portraitImageView;
-@property (nonatomic, strong) UIStackView *contentStackView;
 @property (nonatomic, strong) RCOnlineStatusView *onlineStatusView;
 @property (nonatomic, strong) UILabel *labName;
 - (void)showPortraitByImage:(UIImage *)image;

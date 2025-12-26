@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, weak) id delegate;
 - (void)loadingWithTip:(NSString *)tip;
 - (void)stopLoading;
+- (void)removeSeparatorLineIfNeed:(NSArray *)array;
 @end
 
 NS_ASSUME_NONNULL_END

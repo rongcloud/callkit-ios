@@ -163,7 +163,7 @@
 - (UILabel *)statusLabel {
     if (!_statusLabel) {
         _statusLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-        _statusLabel.text = @"连接中";
+        _statusLabel.text = RCCallKitLocalizedString(@"Connecting...");
         _statusLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size:13];
         _statusLabel.textAlignment = NSTextAlignmentCenter;
         _statusLabel.textColor = [UIColor whiteColor];

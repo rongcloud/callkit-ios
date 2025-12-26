@@ -106,7 +106,7 @@
 		</data>
 		<key>Headers/RCCoreClient.h</key>
 		<data>
-		2m79Dv5X2E6BQHRhakR1QFuTPdo=
+		44Ni2DZJ/TCVyOXFfIik7uIU5OM=
 		</data>
 		<key>Headers/RCDownloadInfo.h</key>
 		<data>
@@ -242,7 +242,7 @@
 		</data>
 		<key>Headers/RCImageMessage.h</key>
 		<data>
-		FfkTCd3fBNZoH3A/oszzJsDQas8=
+		ZGVuGa9wxqTEnRyn+vAB/9kOHtg=
 		</data>
 		<key>Headers/RCInformationNotificationMessage.h</key>
 		<data>
@@ -402,7 +402,7 @@
 		</data>
 		<key>Headers/RCRobotInfo.h</key>
 		<data>
-		/BB8HDyZbAiFHndgH6eLlYcezOU=
+		XCihya04w7BN2kfRbYOdjbL7NJo=
 		</data>
 		<key>Headers/RCSearchConversationResult.h</key>
 		<data>
@@ -418,7 +418,7 @@
 		</data>
 		<key>Headers/RCSightMessage.h</key>
 		<data>
-		X+C2pbi8+J4ha/YfJw22dRNGMU8=
+		EWxAAscnwhsg2iYIDztxdgaQKLE=
 		</data>
 		<key>Headers/RCSpeechToTextDelegate.h</key>
 		<data>
@@ -846,11 +846,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			2m79Dv5X2E6BQHRhakR1QFuTPdo=
+			44Ni2DZJ/TCVyOXFfIik7uIU5OM=
 			</data>
 			<key>hash2</key>
 			<data>
-			29RRQeKvwpwrLvRs6GHT/DzHIUyXZk+oiFbRX1ie6hY=
+			gnVpJl8kHpZcs2o7CrIDmnNyjqGUmkQNjcAfZtI/CfI=
 			</data>
 		</dict>
 		<key>Headers/RCDownloadInfo.h</key>
@@ -1220,11 +1220,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			FfkTCd3fBNZoH3A/oszzJsDQas8=
+			ZGVuGa9wxqTEnRyn+vAB/9kOHtg=
 			</data>
 			<key>hash2</key>
 			<data>
-			jtxJ3TdJZFEuSTh9jiGPpIVxqkb1uWJpTMD5VXIZbVk=
+			yGQ1MPHIscWZr9MFVDtJRXErrHwwMhut0uTmMnuqreM=
 			</data>
 		</dict>
 		<key>Headers/RCInformationNotificationMessage.h</key>
@@ -1660,11 +1660,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			/BB8HDyZbAiFHndgH6eLlYcezOU=
+			XCihya04w7BN2kfRbYOdjbL7NJo=
 			</data>
 			<key>hash2</key>
 			<data>
-			WsyiLQlyfv3Gwo6F1Cm66F2krvPDNAYmd5PfMn1TSU8=
+			uaI+gXIZAAp2KLJU02OZoegjgoIF9SdilwasR8li+mo=
 			</data>
 		</dict>
 		<key>Headers/RCSearchConversationResult.h</key>
@@ -1704,11 +1704,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			X+C2pbi8+J4ha/YfJw22dRNGMU8=
+			EWxAAscnwhsg2iYIDztxdgaQKLE=
 			</data>
 			<key>hash2</key>
 			<data>
-			UGCvVddFO/v1JHahQvD4aHJtiPvmYDonRxJoEOypdSg=
+			Ho2G+ayvU5JXNrawUHQaKUvn9XpqE1+A0hr5SaCBz/A=
 			</data>
 		</dict>
 		<key>Headers/RCSpeechToTextDelegate.h</key>

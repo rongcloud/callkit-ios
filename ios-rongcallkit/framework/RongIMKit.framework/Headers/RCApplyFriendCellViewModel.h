@@ -49,12 +49,12 @@ typedef NS_ENUM(NSInteger, RCFriendApplyCellStyle) {
 /// 注册 cell
 + (void)registerCellForTableView:(UITableView *)tableView;
 
-/// 配置收起尺寸
-- (void)configureFolderRemarkSize:(CGSize)size;
 
-/// 配置展开尺寸
-- (void)configureExpandRemarkSize:(CGSize)size;
-
+/// 根据备注内容的尺寸确定是否显示"展开按钮"
+/// - Parameters:
+///   - size: 当前size
+///   - natureSize: 实际size
+- (BOOL)shouldHideExpandButton:(CGSize)size natureSize:(CGSize)natureSize;
 /// 绑定响应者
 - (void)bindResponder:(UIViewController <RCListViewModelResponder>*)responder;
 

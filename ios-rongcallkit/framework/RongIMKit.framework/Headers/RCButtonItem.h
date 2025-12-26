@@ -26,6 +26,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// 按钮边框颜色
 @property (nonatomic, strong, nullable) UIColor *borderColor;
 
+/// 按钮图片
+@property (nonatomic, strong, nullable) UIImage *buttonIcon;
+
 /// 按钮点击回调
 @property (nonatomic, copy) void (^clickBlock)(void);
 

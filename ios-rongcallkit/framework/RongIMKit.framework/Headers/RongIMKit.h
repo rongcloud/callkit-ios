@@ -196,6 +196,15 @@
 
 #import <RongIMKit/RCOnlineStatusView.h>
 
+#import <RongIMKit/RCGroupMemberAdditionalCellViewModel.h>
+#import <RongIMKit/RCGroupMemberAdditionalCell.h>
+#import <RongIMKit/RCPaddingTableViewCell.h>
+#import <RongIMKit/RCSizeCalculateLabel.h>
+#import <RongIMKit/RCSearchBarListView.h>
+#import <RongIMKit/RCSelectUserView.h>
+#import <RongIMKit/RCGroupMentionViewModel.h>
+#import <RongIMKit/RCGroupMentionViewController.h>
+#import <RongIMKit/RCStackTableViewCell.h>
 #else
 /// IMKit核心类
 #import "RCIM.h"
@@ -388,4 +397,13 @@
 
 #import "RCOnlineStatusView.h"
 
+#import "RCGroupMemberAdditionalCellViewModel.h"
+#import "RCGroupMemberAdditionalCell.h"
+#import "RCPaddingTableViewCell.h"
+#import "RCSizeCalculateLabel.h"
+#import "RCSearchBarListView.h"
+#import "RCSelectUserView.h"
+#import "RCGroupMentionViewModel.h"
+#import "RCGroupMentionViewController.h"
+#import "RCStackTableViewCell.h"
 #endif

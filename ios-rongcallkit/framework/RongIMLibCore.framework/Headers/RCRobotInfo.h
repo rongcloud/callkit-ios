@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
-///- Since 5.28.0
+///- Since 5.32.0
 @interface RCRobotInfo : NSObject
 /// 机器人 ID
 @property (nonatomic, copy)NSString *robotId;

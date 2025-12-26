@@ -6,7 +6,7 @@
 //  Copyright © 2024 RongCloud. All rights reserved.
 //
 
-#import "RCBaseTableViewCell.h"
+#import "RCPaddingTableViewCell.h"
 #import "RCGroupNotificationCellViewModel.h"
 @class RCloudImageView;
 UIKIT_EXTERN NSString * _Nullable const RCGroupNotificationCellIdentifier;
@@ -16,7 +16,7 @@ UIKIT_EXTERN NSInteger const RCGroupNotificationCellVerticalMargin;
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface RCGroupNotificationCell : RCBaseTableViewCell
+@interface RCGroupNotificationCell : RCPaddingTableViewCell
 /*!
 消息发送者的用户头像
 */
@@ -30,9 +30,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 确认按钮
 @property (nonatomic, strong) UIButton *btnApprove;
-
-
-@property (nonatomic, strong) UIView *buttonsContainer;
 
 /// 更新Cell 信息
 /// - Parameter viewModel: vm

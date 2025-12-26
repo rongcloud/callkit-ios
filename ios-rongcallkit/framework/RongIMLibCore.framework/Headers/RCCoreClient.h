@@ -315,7 +315,7 @@ FOUNDATION_EXPORT NSString *const RCLibDispatchReadReceiptNotification;
 ///
 /// - Remark: 连接
 /// - Since: 5.0.0
-- (void)disconnect:(BOOL)isReceivePush;
+- (void)disconnect:(BOOL)isReceivePush __deprecated_msg("Use [RCCoreClient disconnect] instead");;
 
 /// 断开与融云服务器的连接，但仍然接收远程推送
 ///
@@ -353,7 +353,29 @@ FOUNDATION_EXPORT NSString *const RCLibDispatchReadReceiptNotification;
 ///
 /// - Remark: 连接
 /// - Since: 5.0.0
-- (void)logout;
+- (void)logout __deprecated_msg("Use [RCCoreClient logout:] instead");
+
+/// 断开与融云服务器的连接，并不再接收远程推送，并在断开连接后通过回调通知结果
+///
+///
+/// 因为 SDK 在前后台切换或者网络出现异常都会自动重连，会保证连接的可靠性。
+/// 所以除非您的 App 逻辑需要登出，否则一般不需要调用此方法进行手动断开。
+///
+/// - Warning: 如果您使用 IMKit，请使用此方法断开与融云服务器的连接；
+/// 如果您使用 IMLibCore，请使用 RCCoreClient 中的同名方法断开与融云服务器的连接，而不要使用此方法。
+///
+/// [[RCCoreClient sharedCoreClient] disconnect:YES] 与 [[RCCoreClient sharedCoreClient]
+/// disconnect] 完全一致；
+/// [[RCCoreClient sharedCoreClient] disconnect:NO] 与 [[RCCoreClient sharedCoreClient]
+/// logout:^(RCErrorCode code){}] 完全一致。
+/// 您只需要按照您的需求，使用 与 disconnect 以及 logout: 两个接口其中一个即可。
+///
+/// - Parameter completion: 断开连接结果的回调，SDK 会主动切换主线程，RC_SUCCESS 代表断开连接成功
+///
+/// - Remark: 连接
+/// - Since: 5.34.0
+- (void)logout:(void(^)(RCErrorCode code))completion;
+
 
 /// 设置断线重连时是否踢出当前正在重连的设备
 ///
@@ -1925,6 +1947,21 @@ FOUNDATION_EXPORT NSString *const RCLibDispatchReadReceiptNotification;
 /// - Since: 5.0.0
 - (void)messageStopDestruct:(RCMessage *)message;
 
+///  修改消息内容
+///
+/// - Parameter messageId: 消息id，必传参数，SDK会进行参数合法校验
+/// - Parameter content: 消息的内容，必传参数，SDK会进行参数合法校验
+/// - Parameter objectName: 消息类型，必传参数，SDK会进行参数合法校验
+/// - Parameter searchWords: 搜索文本内容列表，可选参数，如果 objectName 为空，searchWords 也不会更新
+/// - Parameter completion: 执行结果回调，通过 RCErrorCode 确认是否更新成功
+///
+/// - Since: 5.34.0
+- (void)setMessageContent:(long long)messageId
+                  content:(RCMessageContent *)content
+               objectName:(NSString *)objectName
+              searchWords:(nullable NSArray <NSString *> *)searchWords
+               completion:(nullable void(^)(RCErrorCode code))completion;
+
 #pragma mark - 会话列表操作
 
 /// 获取 @我未读消息的会话列表
@@ -3421,30 +3458,30 @@ FOUNDATION_EXPORT NSString *const RCLibDispatchReadReceiptNotification;
 
 /// 添加机器人监听
 /// - Parameter delegate: 机器人事件监听代理
-/// - Since: 5.28.0
+/// - Since: 5.32.0
 - (void)addRobotEventDelegate:(id<RCRobotEventDelegate>)delegate;
 
 /// 移除机器人监听
 /// @param delegate 机器人事件监听代理
-/// - Since: 5.28.0
+/// - Since: 5.32.0
 - (void)removeRobotEventDelegate:(id<RCRobotEventDelegate>)delegate;
 
 /// 获取应用下的所有机器人信息列表
 /// - Parameter completion: 结果回调
-/// - Since 5.28.0
+/// - Since 5.32.0
 - (void)getAllRobots:(void(^)(RCErrorCode errorCode, NSArray<RCRobotInfo *> *_Nullable robots))completion;
 
 /// 获取单个机器人信息
 /// - Parameters:
 ///   - robotId: 机器人id
 ///   - completion: 结果回调
-/// - Since 5.28.0
+/// - Since 5.32.0
 - (void)getRobotById:(NSString *)robotId
           completion:(void(^)(RCErrorCode errorCode, RCRobotInfo *_Nullable robot))completion;
             
 /// 获取包含机器人的会话列表
 /// - Parameter completion: 结果回调
-/// - Since 5.28.0
+/// - Since 5.32.0
 - (void)getConversationsIncludingRobots:(RCConversationsContainingRobotsOption *)option
                              completion:(nullable void(^)(RCErrorCode errorCode,
                                                           NSArray<RCConversation *> *_Nullable conversations))completion;

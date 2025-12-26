@@ -33,9 +33,6 @@ typedef NS_ENUM(NSUInteger, RCUProfileCellType) {
 /// 隐藏箭头
 @property (nonatomic, assign) BOOL hiddenArrow;
 
-/// 隐藏分割线
-@property (nonatomic, assign) BOOL hiddenSeparatorLine;
-
 /// cell 类型
 @property (nonatomic, assign) RCUProfileCellType type;
 

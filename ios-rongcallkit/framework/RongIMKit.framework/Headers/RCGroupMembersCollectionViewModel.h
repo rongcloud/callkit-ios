@@ -12,7 +12,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-#define RCGroupMembersCollectionViewModelItemWidth 64
+#define RCGroupMembersCollectionViewModelItemWidth 48
 #define RCGroupMembersCollectionViewModelItemHeight 70
 #define RCGroupMembersCollectionViewModelLineSpace 12
 #define RCGroupMembersCollectionViewModelPortraitLineCount 5

@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "RCBaseTableViewCell.h"
+#import "RCPaddingTableViewCell.h"
 #import "RCApplyFriendCellViewModel.h"
-
+#import "RCSizeCalculateLabel.h"
 UIKIT_EXTERN NSString * _Nullable const RCFriendApplyCellIdentifier;
 UIKIT_EXTERN NSInteger const RCFriendApplyCellMargin;
 
@@ -19,17 +19,18 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 好友申请操作 cell
 /// - Since:5.12.0
-@interface RCApplyFriendCell : RCBaseTableViewCell
+@interface RCApplyFriendCell : RCPaddingTableViewCell
 /*!
 消息发送者的用户头像
 */
 @property (nonatomic, strong) RCloudImageView *portraitImageView;
 @property (nonatomic, strong) UILabel *labName;
-@property (nonatomic, strong) UILabel *labRemark;
+@property (nonatomic, strong) RCSizeCalculateLabel *labRemark;
 @property (nonatomic, strong) UIButton *btnExpand;
-@property (nonatomic, strong) UIView *buttonsContainer;
 @property (nonatomic, strong) UILabel *labStatus;
 @property (nonatomic, strong) RCApplyFriendCellViewModel *viewModel;
+/// 顶部容器 title + status(buttons)
+@property (nonatomic, strong) UIStackView *topStackView;
 
 - (void)updateWithViewModel:(RCApplyFriendCellViewModel *)viewModel;
 @end

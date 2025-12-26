@@ -23,6 +23,10 @@ NS_ASSUME_NONNULL_BEGIN
 /// 隐藏箭头
 @property (nonatomic, assign) BOOL hiddenArrow;
 
+
+/// 指定本地 cellPortraitImage (设置后将不再使用 memberInfo.portraitUri)
+@property (nonatomic, strong, nullable) UIImage *cellPortraitImage;
+
 /// 注册 cell
 + (void)registerCellForTableView:(UITableView *)tableView;
 

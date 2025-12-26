@@ -33,8 +33,12 @@ NS_ASSUME_NONNULL_BEGIN
 /// 文件大小
 @property (nonatomic, assign, readonly) long long size;
 
-/// 缩略图
-@property (nonatomic, strong, readonly, nullable) UIImage *thumbnailImage;
+/// 缩略图对象
+@property (nonatomic, strong, nullable) UIImage *thumbnailImage;
+
+/// 缩略图的 Base64 字符串，根据 thumbnailImage 属性生成，当 thumbnailImage 重新设置时，该字段会自动更新。
+/// - Note: 允许用户主动设置该字段，设置后需要用户维护缩略图数据的完整性，否则可能导致接收端缩略图显示异常。
+@property (nonatomic, copy, nullable) NSString *thumbnailBase64String;
 
 
 /// 创建小视频消息的便利构造方法

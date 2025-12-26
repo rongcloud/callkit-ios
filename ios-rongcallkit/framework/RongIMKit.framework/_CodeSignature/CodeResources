@@ -22,15 +22,15 @@
 		</data>
 		<key>Headers/RCApplyFriendCell.h</key>
 		<data>
-		ulp7RxTuZL3MdZjP7SuuXq5faWg=
+		GuBk6vC4dYJfuSbhkN52QeNfHJw=
 		</data>
 		<key>Headers/RCApplyFriendCellViewModel.h</key>
 		<data>
-		wL84G14p+86kYz+iSdM8NcxHXfo=
+		bUlebYUDRcYH9OUQa6cDIAEsvRE=
 		</data>
 		<key>Headers/RCApplyFriendListView.h</key>
 		<data>
-		dCop3tOGgzvMjsZ27iG9p1PCA0g=
+		ZLRzhiMfvr8aGm7JZ3T9qk3OZUE=
 		</data>
 		<key>Headers/RCApplyFriendListViewController.h</key>
 		<data>
@@ -62,7 +62,7 @@
 		</data>
 		<key>Headers/RCBaseCellViewModel.h</key>
 		<data>
-		e5Efzz2eppkUKrfs8+FDkMpwy5Y=
+		0b4HJmEzhbIh1Lfm6sh/q5fY4cg=
 		</data>
 		<key>Headers/RCBaseCollectionView.h</key>
 		<data>
@@ -98,7 +98,7 @@
 		</data>
 		<key>Headers/RCBaseView.h</key>
 		<data>
-		hmX0dYmTxRbUhTTvWyIqjereqds=
+		CCKspC2p0N+lsZznJIsQFHDzf8w=
 		</data>
 		<key>Headers/RCBaseViewController.h</key>
 		<data>
@@ -106,7 +106,7 @@
 		</data>
 		<key>Headers/RCBaseViewModel.h</key>
 		<data>
-		nlOH/qcdx0q4mkz7dNzK/sOMAeM=
+		a0GWeFFO+FFG4KNXIG/gt0pwDiQ=
 		</data>
 		<key>Headers/RCButton.h</key>
 		<data>
@@ -114,7 +114,7 @@
 		</data>
 		<key>Headers/RCButtonItem.h</key>
 		<data>
-		VI/uTy112X4JKImCH29oP/QBWF0=
+		MTR0URI3r3q7MXAZVfXkKbJ4UQI=
 		</data>
 		<key>Headers/RCCellViewModelProtocol.h</key>
 		<data>
@@ -210,7 +210,7 @@
 		</data>
 		<key>Headers/RCFriendListPermanentCell.h</key>
 		<data>
-		cUo8NgypYs4ZNgi6vYzMIWfTTIw=
+		Fo5behZgZUm5wXwFi1h+sYZD2Lk=
 		</data>
 		<key>Headers/RCFriendListPermanentCellViewModel.h</key>
 		<data>
@@ -218,7 +218,7 @@
 		</data>
 		<key>Headers/RCFriendListView.h</key>
 		<data>
-		xAqqI2KLcNleSqxInXowldVUdzY=
+		xlc05Qw9dcDwMXLZitDcI72nLOI=
 		</data>
 		<key>Headers/RCFriendListViewController.h</key>
 		<data>
@@ -288,9 +288,17 @@
 		<data>
 		atn1lpgnaEv9XDsPW3E9a506Ic0=
 		</data>
+		<key>Headers/RCGroupMemberAdditionalCell.h</key>
+		<data>
+		KTrfnbEQTI6D6ui9jg2C0uBKW4Y=
+		</data>
+		<key>Headers/RCGroupMemberAdditionalCellViewModel.h</key>
+		<data>
+		7uvxcl2Vy5tqtiLZ3Whj/OUfHeA=
+		</data>
 		<key>Headers/RCGroupMemberCellViewModel.h</key>
 		<data>
-		z+i+VBNgbBJJmcUFtoQYjm9hBAU=
+		PqcW4erbj33BOQKRHXUpDWwS4Vk=
 		</data>
 		<key>Headers/RCGroupMemberListViewController.h</key>
 		<data>
@@ -302,7 +310,15 @@
 		</data>
 		<key>Headers/RCGroupMembersCollectionViewModel.h</key>
 		<data>
-		GXfusRTmpG4XdyNS1GU3O2wqOJA=
+		GdejJJtAmAXReDwwAvnVEQmBnhg=
+		</data>
+		<key>Headers/RCGroupMentionViewController.h</key>
+		<data>
+		GoI0JjvxFa9NCn23tvpaOmQMM/8=
+		</data>
+		<key>Headers/RCGroupMentionViewModel.h</key>
+		<data>
+		aQQFeZtZd+JGmxgs5DkHFAD12iU=
 		</data>
 		<key>Headers/RCGroupNoticeViewController.h</key>
 		<data>
@@ -314,7 +330,7 @@
 		</data>
 		<key>Headers/RCGroupNotificationCell.h</key>
 		<data>
-		gbiaS/TA10I5KqVJiusiwM0sXQA=
+		kHSbEnJ5YKutuLN6nHgEJNenTaQ=
 		</data>
 		<key>Headers/RCGroupNotificationCellViewModel.h</key>
 		<data>
@@ -326,7 +342,7 @@
 		</data>
 		<key>Headers/RCGroupNotificationView.h</key>
 		<data>
-		egplcJsyTAIDL+sY7p8xpMpOmJg=
+		iWZvmAWOmfxFxUXADc7v0Kn8Q8o=
 		</data>
 		<key>Headers/RCGroupNotificationViewController.h</key>
 		<data>
@@ -362,7 +378,7 @@
 		</data>
 		<key>Headers/RCIM.h</key>
 		<data>
-		VY957C4HWY1uHuQyzfQWed9loSg=
+		u4uxYvTtBop8wRXbhMWG1qfd23I=
 		</data>
 		<key>Headers/RCIMKitTheme.h</key>
 		<data>
@@ -490,7 +506,7 @@
 		</data>
 		<key>Headers/RCMyGroupsView.h</key>
 		<data>
-		JMo79o88bjPp5xY3Lb5m3DYbuaw=
+		T6dZbtvMlBo5jqlwYrAIEj88EZI=
 		</data>
 		<key>Headers/RCMyGroupsViewController.h</key>
 		<data>
@@ -512,6 +528,10 @@
 		<data>
 		fyS5syfaoF7V/hdB6yjmFvCEG1o=
 		</data>
+		<key>Headers/RCPaddingTableViewCell.h</key>
+		<data>
+		5K6Nntjqaw21BwYXpOLqxnvMajg=
+		</data>
 		<key>Headers/RCPluginBoardView.h</key>
 		<data>
 		iBurmsoekfDnlqKwaGCmFWC4Vz4=
@@ -522,7 +542,7 @@
 		</data>
 		<key>Headers/RCProfileCommonCellViewModel.h</key>
 		<data>
-		8UMDKcNb7aT610wZAj1vPA3AWoI=
+		KcujKI7glY/hE66lJiX6bXFQxT8=
 		</data>
 		<key>Headers/RCProfileFooterViewModel.h</key>
 		<data>
@@ -596,6 +616,10 @@
 		<data>
 		TZ9K54BOvKKnvmjz6o5jL4fupg8=
 		</data>
+		<key>Headers/RCSearchBarListView.h</key>
+		<data>
+		f3DdlANvnJhD/1NBmxP6+L65v2U=
+		</data>
 		<key>Headers/RCSearchBarViewModel.h</key>
 		<data>
 		hpxFgP1ytChma5Eioi9Exg6LpUo=
@@ -632,6 +656,10 @@
 		<data>
 		WBLsJZcCK3PgbznuZTqVNW0d3QY=
 		</data>
+		<key>Headers/RCSelectUserView.h</key>
+		<data>
+		yIItt/ehjUjsF2p1MOG8dVzBrX4=
+		</data>
 		<key>Headers/RCSelectUserViewController.h</key>
 		<data>
 		izxb0NPIIjStC4v3QFxS98V5aeE=
@@ -639,6 +667,14 @@
 		<key>Headers/RCSelectUserViewModel.h</key>
 		<data>
 		E8zs/KO4jf4YsUMxdylUQeuuRwQ=
+		</data>
+		<key>Headers/RCSizeCalculateLabel.h</key>
+		<data>
+		ceALTOsjWi5EHf+x2jJTmLe5Gm8=
+		</data>
+		<key>Headers/RCStackTableViewCell.h</key>
+		<data>
+		nRIZUXrXAkouuXU6Da1HQ3Cg2qI=
 		</data>
 		<key>Headers/RCStreamMessageCell.h</key>
 		<data>
@@ -686,7 +722,7 @@
 		</data>
 		<key>Headers/RCUserSearchView.h</key>
 		<data>
-		cq768HiK3HcajVrDGPSaUQvW8sU=
+		jvW9mcNcBP5zuDOaQwNOXEjwFtE=
 		</data>
 		<key>Headers/RCUserSearchViewController.h</key>
 		<data>
@@ -710,7 +746,7 @@
 		</data>
 		<key>Headers/RongIMKit.h</key>
 		<data>
-		P/Ft3HSTynR2zhuBi+X8Y4NQ3L0=
+		hTR3nZSiXRWlF9yODFb6E6bWoKk=
 		</data>
 		<key>Headers/RongIMKitExtensionModule.h</key>
 		<data>
@@ -1696,6 +1732,38 @@
 		<data>
 		n0/D0zVH48XxsGbauISfImaDx0k=
 		</data>
+		<key>RongCloud.bundle/group_follow_remove_btn@2x.png</key>
+		<data>
+		lJooz5CZXUpqoj1jSG4iiKzvk4A=
+		</data>
+		<key>RongCloud.bundle/group_follow_remove_btn@3x.png</key>
+		<data>
+		6xrI2CKgYbsohY3Kgz3grpNhL/A=
+		</data>
+		<key>RongCloud.bundle/group_follow_remove_btn_dark@2x.png</key>
+		<data>
+		qzsNZLuTLC+MggEBer8dOCxq31U=
+		</data>
+		<key>RongCloud.bundle/group_follow_remove_btn_dark@3x.png</key>
+		<data>
+		NjKG98k+TwTZH+DnmM6Vu4856ds=
+		</data>
+		<key>RongCloud.bundle/group_manage_add_member@2x.png</key>
+		<data>
+		smBxk1CxUC9+6vNPv2LTrEorw/o=
+		</data>
+		<key>RongCloud.bundle/group_manage_add_member@3x.png</key>
+		<data>
+		FBWUi6X4uQApCRR+9JXMG8xSEJk=
+		</data>
+		<key>RongCloud.bundle/group_manage_add_member_dark@2x.png</key>
+		<data>
+		IzUfi31mIDhW4j/2cHq18fEJamM=
+		</data>
+		<key>RongCloud.bundle/group_manage_add_member_dark@3x.png</key>
+		<data>
+		5T+L0akGb8URsw+dbtt4vpKkZ2E=
+		</data>
 		<key>RongCloud.bundle/group_member_add.png</key>
 		<data>
 		mtNpc1kTt/afoGz/iKJSdE3moWY=
@@ -1735,6 +1803,22 @@
 		<key>RongCloud.bundle/group_member_remove_dark@3x.png</key>
 		<data>
 		EsW97wQmAhheBZgBLG2D/snC8kc=
+		</data>
+		<key>RongCloud.bundle/group_mention_all@2x.png</key>
+		<data>
+		nNSO1GighZFtqTRkrsLA3qBPZIg=
+		</data>
+		<key>RongCloud.bundle/group_mention_all@3x.png</key>
+		<data>
+		p9OBDG4Z/YoI7oNn7H5PJUGGClU=
+		</data>
+		<key>RongCloud.bundle/group_mention_all_dark@2x.png</key>
+		<data>
+		UmsfWUwGUWCg01noJ2wj2xAFzWg=
+		</data>
+		<key>RongCloud.bundle/group_mention_all_dark@3x.png</key>
+		<data>
+		vrQ0SYXGDtA8c2SnsU9T4C3V+pM=
 		</data>
 		<key>RongCloud.bundle/icon_sight_close.png</key>
 		<data>
@@ -2968,6 +3052,22 @@
 		<data>
 		8PzV5G67PCDyKJRtTCkHGygtWwI=
 		</data>
+		<key>RongCloudLively.bundle/dark/resources/Comment@2x.png</key>
+		<data>
+		yOiQsQqOHERWh8Js1ocPYiPVlXU=
+		</data>
+		<key>RongCloudLively.bundle/dark/resources/Comment@3x.png</key>
+		<data>
+		/XDfkI2xOTTQa889iiGSijN+UE0=
+		</data>
+		<key>RongCloudLively.bundle/dark/resources/Comment_highlighted@2x.png</key>
+		<data>
+		jLiHkXk6cqqjuceVpYkA/ceN/DE=
+		</data>
+		<key>RongCloudLively.bundle/dark/resources/Comment_highlighted@3x.png</key>
+		<data>
+		YGwVQJ2WNJpe8cbhIu5RXBDfPhw=
+		</data>
 		<key>RongCloudLively.bundle/dark/resources/add@2x.png</key>
 		<data>
 		M0XNdnbpRbske3T4AK0DT/+w/PQ=
@@ -3018,27 +3118,27 @@
 		</data>
 		<key>RongCloudLively.bundle/dark/resources/chat_from_bg_normal@2x.png</key>
 		<data>
-		byUofMy+goS1CG1aXOg1LS9Sbhg=
+		sKj3QAo8X1a0uxhpjC5NhAf1Cd4=
 		</data>
 		<key>RongCloudLively.bundle/dark/resources/chat_from_bg_normal@3x.png</key>
 		<data>
-		OGJmNPRus3Vo0xN/zrPpDnE4XZQ=
+		tpKu8liDzE+cOiuPT2oPZEQAD+8=
 		</data>
 		<key>RongCloudLively.bundle/dark/resources/chat_to_bg_normal@2x.png</key>
 		<data>
-		EGxrCV8jg3c9sb1GdWDItTu37Qc=
+		uu3GwB9DcAL7ygZq7NtsuYO6n5w=
 		</data>
 		<key>RongCloudLively.bundle/dark/resources/chat_to_bg_normal@3x.png</key>
 		<data>
-		fVyD57rAo1ZRfLJfNushDKeNdLs=
+		rMjDZSDklieHh5JfoYRTXe2U2Eg=
 		</data>
 		<key>RongCloudLively.bundle/dark/resources/chat_to_bg_white@2x.png</key>
 		<data>
-		KO04AqnWpx8YsVCIwq+JK11weFY=
+		kz/kQn9gU4C8oGZ4kxtIvc1Swxg=
 		</data>
 		<key>RongCloudLively.bundle/dark/resources/chat_to_bg_white@3x.png</key>
 		<data>
-		sO6QJPi0SWlzqvnF0UGYkj4hQoc=
+		jDPKj11URUrj6t8qZ+8CP9is35A=
 		</data>
 		<key>RongCloudLively.bundle/dark/resources/close_burn@2x.png</key>
 		<data>
@@ -3127,6 +3227,14 @@
 		<key>RongCloudLively.bundle/dark/resources/default_portrait_msg@3x.png</key>
 		<data>
 		IQt6T1F0oE6sNxNiJNePL+ujck8=
+		</data>
+		<key>RongCloudLively.bundle/dark/resources/disable_select@2x.png</key>
+		<data>
+		P4KfX52CWHNomTgv5XkYxMExAlE=
+		</data>
+		<key>RongCloudLively.bundle/dark/resources/disable_select@3x.png</key>
+		<data>
+		ugaTlngcwma/ECu9YVEiK+KhO2k=
 		</data>
 		<key>RongCloudLively.bundle/dark/resources/edit_cancel@2x.png</key>
 		<data>
@@ -3224,6 +3332,30 @@
 		<data>
 		l4qEAJ94PGZxLqOzBhla9Hgf7Xs=
 		</data>
+		<key>RongCloudLively.bundle/dark/resources/friend_apply_more@2x.png</key>
+		<data>
+		8D3Vc/CS7tMvUMYnci1BJAsXCY4=
+		</data>
+		<key>RongCloudLively.bundle/dark/resources/friend_apply_more@3x.png</key>
+		<data>
+		cHe0b5BX7dQS60IlXR5EHPQgFGs=
+		</data>
+		<key>RongCloudLively.bundle/dark/resources/friend_list_add_new@2x.png</key>
+		<data>
+		Hwfh1eEU822lLK4USEuG6klV4X8=
+		</data>
+		<key>RongCloudLively.bundle/dark/resources/friend_list_add_new@3x.png</key>
+		<data>
+		4r1UYXmyjoKcHMue18IuXm1N4Q4=
+		</data>
+		<key>RongCloudLively.bundle/dark/resources/friend_not_exist@2x.png</key>
+		<data>
+		+Cgrac1sbdYGsgc6NJ/TI1SywJs=
+		</data>
+		<key>RongCloudLively.bundle/dark/resources/friend_not_exist@3x.png</key>
+		<data>
+		duBXjx9CsYcbbRRTkFTDcyfiUf4=
+		</data>
 		<key>RongCloudLively.bundle/dark/resources/from_burn_picture@2x.png</key>
 		<data>
 		hun6S+OLDL3SgulWnMnIppMZqBQ=
@@ -3263,6 +3395,54 @@
 		<key>RongCloudLively.bundle/dark/resources/from_voice_3@3x.png</key>
 		<data>
 		KcOk9Z1DZvOHSiTQOVjPlnjrmnk=
+		</data>
+		<key>RongCloudLively.bundle/dark/resources/gender_cell_check@2x.png</key>
+		<data>
+		l+9IeVVb/RkwWrNQUuQRxbCOgDQ=
+		</data>
+		<key>RongCloudLively.bundle/dark/resources/gender_cell_check@3x.png</key>
+		<data>
+		K7Ytm7wxl8dTjDTtO3YQTh7yLTc=
+		</data>
+		<key>RongCloudLively.bundle/dark/resources/group_follow_remove_btn@2x.png</key>
+		<data>
+		qzsNZLuTLC+MggEBer8dOCxq31U=
+		</data>
+		<key>RongCloudLively.bundle/dark/resources/group_follow_remove_btn@3x.png</key>
+		<data>
+		NjKG98k+TwTZH+DnmM6Vu4856ds=
+		</data>
+		<key>RongCloudLively.bundle/dark/resources/group_manage_add_member@2x.png</key>
+		<data>
+		IzUfi31mIDhW4j/2cHq18fEJamM=
+		</data>
+		<key>RongCloudLively.bundle/dark/resources/group_manage_add_member@3x.png</key>
+		<data>
+		5T+L0akGb8URsw+dbtt4vpKkZ2E=
+		</data>
+		<key>RongCloudLively.bundle/dark/resources/group_member_add@2x.png</key>
+		<data>
+		lxjkXC0F2mG7INeuNDbwzGec3zM=
+		</data>
+		<key>RongCloudLively.bundle/dark/resources/group_member_add@3x.png</key>
+		<data>
+		6IftD74lGws6FnXSCkURsOxWm58=
+		</data>
+		<key>RongCloudLively.bundle/dark/resources/group_member_remove@2x.png</key>
+		<data>
+		FUz3WUfv4Cu+C7h8tvfLBVjfd8w=
+		</data>
+		<key>RongCloudLively.bundle/dark/resources/group_member_remove@3x.png</key>
+		<data>
+		+QaaxfWlo8RYQAakfVbzIysO7yw=
+		</data>
+		<key>RongCloudLively.bundle/dark/resources/group_mention_all@2x.png</key>
+		<data>
+		UmsfWUwGUWCg01noJ2wj2xAFzWg=
+		</data>
+		<key>RongCloudLively.bundle/dark/resources/group_mention_all@3x.png</key>
+		<data>
+		vrQ0SYXGDtA8c2SnsU9T4C3V+pM=
 		</data>
 		<key>RongCloudLively.bundle/dark/resources/inputbar_add@2x.png</key>
 		<data>
@@ -3386,43 +3566,51 @@
 		</data>
 		<key>RongCloudLively.bundle/dark/resources/plugin_item_burn@2x.png</key>
 		<data>
-		B3tJief+FOthTBg832B8OtovYmU=
+		uwLTdUXAbqbkNoT0UR8ZtboFRuA=
 		</data>
 		<key>RongCloudLively.bundle/dark/resources/plugin_item_burn@3x.png</key>
 		<data>
-		5+pP9Vvhv2UomjoYXJgs78indTw=
+		dFsY0JbBVA7LQfqUatJH6Uc3C70=
 		</data>
 		<key>RongCloudLively.bundle/dark/resources/plugin_item_burn_highlighted@2x.png</key>
 		<data>
-		6PdNqvfaQsAGMpWYI4SN85QzYuY=
+		dIyYBbsqdlSmdZNcy68POEy7RbE=
 		</data>
 		<key>RongCloudLively.bundle/dark/resources/plugin_item_burn_highlighted@3x.png</key>
 		<data>
-		rwuiWQHG+y3tDrVmjKJa24kwILI=
+		QL43flZx2n+bdP+mFbBAE13THJM=
 		</data>
 		<key>RongCloudLively.bundle/dark/resources/plugin_item_camera@2x.png</key>
 		<data>
-		fw4d26RfQ6c+5xjhi2CqtMkzypo=
+		8m71uL7bvjVsZtj48z5kib1jM/c=
 		</data>
 		<key>RongCloudLively.bundle/dark/resources/plugin_item_camera@3x.png</key>
 		<data>
-		5kS9i+7SWNUzdFVHHLgIlQCx9HM=
+		U5kwD/YpAuofGeJS0LdbAvxSq8k=
 		</data>
 		<key>RongCloudLively.bundle/dark/resources/plugin_item_camera_highlighted@2x.png</key>
 		<data>
-		+dAg14mFZiVPI9VIjThOnOjrlZQ=
+		+CXlt5JQhfV9Q6eosacb42KL9kA=
 		</data>
 		<key>RongCloudLively.bundle/dark/resources/plugin_item_camera_highlighted@3x.png</key>
 		<data>
-		OoxW3tu+UE+qTqiiyf9M+c890Fg=
+		NOa0bErcBn6xSDvymjUDb4P/C98=
 		</data>
 		<key>RongCloudLively.bundle/dark/resources/plugin_item_card@2x.png</key>
 		<data>
-		QM1/QtfTPUccf+D/A8PVRgnLO5Y=
+		tUnL77QgQQTqpQlpgWpvR6R2R30=
 		</data>
 		<key>RongCloudLively.bundle/dark/resources/plugin_item_card@3x.png</key>
 		<data>
-		hOxbvQ+2DXK56x42shBrFGsTWN8=
+		vqDul0Hg+s70A0JOh1HQSurQL+k=
+		</data>
+		<key>RongCloudLively.bundle/dark/resources/plugin_item_card_highlighted.@2x.png</key>
+		<data>
+		vvvXHoCsG7kVI8XdX1+Bth79Esw=
+		</data>
+		<key>RongCloudLively.bundle/dark/resources/plugin_item_card_highlighted.@3x.png</key>
+		<data>
+		4UoubrcQpKc2uLacBz0OfN2viYs=
 		</data>
 		<key>RongCloudLively.bundle/dark/resources/plugin_item_card_highlighted@2x.png</key>
 		<data>
@@ -3434,51 +3622,51 @@
 		</data>
 		<key>RongCloudLively.bundle/dark/resources/plugin_item_file@2x.png</key>
 		<data>
-		IwMLwt7AcXWJvAeeLtbRGX9ea/g=
+		Xrcln4ICbUAi1OjtqM6bhKH5Nvc=
 		</data>
 		<key>RongCloudLively.bundle/dark/resources/plugin_item_file@3x.png</key>
 		<data>
-		VSUmPHO6HPUSiALbDcaSATwxdRw=
+		tdpKpP9UiglWK+Q0w+nI6e9vr6U=
 		</data>
 		<key>RongCloudLively.bundle/dark/resources/plugin_item_file_highlighted@2x.png</key>
 		<data>
-		1v4cXAH/JISpR1CPti7Q+940MNQ=
+		e8KaHzvJvJk9TbQKeMTOS3ztgR8=
 		</data>
 		<key>RongCloudLively.bundle/dark/resources/plugin_item_file_highlighted@3x.png</key>
 		<data>
-		pun2weOqfNpEB8nMcGZ7nk9G590=
+		ESy47mxbTpSp9Oo/nunukXN4cNo=
 		</data>
 		<key>RongCloudLively.bundle/dark/resources/plugin_item_location@2x.png</key>
 		<data>
-		X2MABicjXJIzyuoHmlB7V8ph+OQ=
+		MD2rAe4FiZ8WcHrsNl4swY52nuY=
 		</data>
 		<key>RongCloudLively.bundle/dark/resources/plugin_item_location@3x.png</key>
 		<data>
-		JvElJfAKhTmowwRzkTgBQJXBNlw=
+		EWomcVFoT1fM8w0e8DJzjFvOa9E=
 		</data>
 		<key>RongCloudLively.bundle/dark/resources/plugin_item_location_highlighted@2x.png</key>
 		<data>
-		zlSXlYyHd/Z8g8azxJa24UtGPuw=
+		J1Vp8isCxHYNzhJE3oYovMwIOfU=
 		</data>
 		<key>RongCloudLively.bundle/dark/resources/plugin_item_location_highlighted@3x.png</key>
 		<data>
-		LVvQ6mO++gxTwZHc6fvO43zuKQg=
+		AUp6CBK69qN/Cb3LtD+4W9mydFo=
 		</data>
 		<key>RongCloudLively.bundle/dark/resources/plugin_item_picture@2x.png</key>
 		<data>
-		x1YXINIFWS7n0Poy8C3FqSokCcw=
+		03E1vwaR+pfFLvqk1Ilvu9mrXcc=
 		</data>
 		<key>RongCloudLively.bundle/dark/resources/plugin_item_picture@3x.png</key>
 		<data>
-		1JtuIpa2n7CaM8RIt2AbyWoEJlQ=
+		j4TyGobB5wObG53rSsgCyeBGNI0=
 		</data>
 		<key>RongCloudLively.bundle/dark/resources/plugin_item_picture_highlighted@2x.png</key>
 		<data>
-		wHSGp6HE6u0EWozDHT1wn+gM2m4=
+		lAlE97NdDXXUaYXjbl3w73oADaE=
 		</data>
 		<key>RongCloudLively.bundle/dark/resources/plugin_item_picture_highlighted@3x.png</key>
 		<data>
-		eMbOphJUP1Hab4TYqGT+EDvXVwg=
+		w+/rELyWsf9RUBHH4N9RVrkR9YA=
 		</data>
 		<key>RongCloudLively.bundle/dark/resources/portrait_kefu@2x.png</key>
 		<data>
@@ -3506,11 +3694,11 @@
 		</data>
 		<key>RongCloudLively.bundle/dark/resources/rc_conversation_list_msg_sending@2x.png</key>
 		<data>
-		rrV4cQU/nZ1DkQLMMf37JF0C0F0=
+		4zRzZiSbJR4OgIx306j2a+ms6WI=
 		</data>
 		<key>RongCloudLively.bundle/dark/resources/rc_conversation_list_msg_sending@3x.png</key>
 		<data>
-		tDZeL8f4Z3/zFMY7cS/rfvC1OQU=
+		r4m1K8RkBqoHGQbRlN0OdO0mUQg=
 		</data>
 		<key>RongCloudLively.bundle/dark/resources/rc_setting@2x.png</key>
 		<data>
@@ -3586,11 +3774,19 @@
 		</data>
 		<key>RongCloudLively.bundle/dark/resources/up@2x.png</key>
 		<data>
-		DiIxeo3TJ+dbd6seGUz+WpxFOGQ=
+		kfzxCX6sRUQ2IxR8JJv0dWTM2aQ=
 		</data>
 		<key>RongCloudLively.bundle/dark/resources/up@3x.png</key>
 		<data>
-		VB44aNSevGNk4Li9DHfKuWDkm58=
+		rxfXmftauVBZJsAbEN/arrNN+OI=
+		</data>
+		<key>RongCloudLively.bundle/dark/resources/user_detail_start_chat@2x.png</key>
+		<data>
+		gEdZOR0mOQ91ztVRFbzVES2NyQQ=
+		</data>
+		<key>RongCloudLively.bundle/dark/resources/user_detail_start_chat@3x.png</key>
+		<data>
+		UHA0SokX9mOJo3EaOj9XX4oGpT4=
 		</data>
 		<key>RongCloudLively.bundle/dark/resources/voice_burn@2x.png</key>
 		<data>
@@ -3610,23 +3806,23 @@
 		</data>
 		<key>RongCloudLively.bundle/dark/theme.plist</key>
 		<data>
-		gafN87hqwRu3IW9ueFKa6dIdudY=
+		s6OuTvXCsxnkU24WxnUnfsAeL0o=
 		</data>
 		<key>RongCloudLively.bundle/light/resources/Comment@2x.png</key>
 		<data>
-		4La08engq2d5tTv4scXOJazMsgU=
+		JqykDrpVD4qF14Hdw4yJSog3Plk=
 		</data>
 		<key>RongCloudLively.bundle/light/resources/Comment@3x.png</key>
 		<data>
-		LchquheyWVFsI+kasPzb9CtJNaQ=
+		12+I9fwwLMiqXNAM3xHw8XBCrUY=
 		</data>
 		<key>RongCloudLively.bundle/light/resources/Comment_highlighted@2x.png</key>
 		<data>
-		My8E687GXhA7d8JnvvWAhp66Zpc=
+		1r93HnGA1jGzSk2ZzQDxu0Eha6I=
 		</data>
 		<key>RongCloudLively.bundle/light/resources/Comment_highlighted@3x.png</key>
 		<data>
-		MGXvSBDNFVlv5uHtvR0nQDfg3HE=
+		2R+6jAYwv/drUn8Ym8CLsIdvYuI=
 		</data>
 		<key>RongCloudLively.bundle/light/resources/ExcelFile@2x.png</key>
 		<data>
@@ -3798,11 +3994,11 @@
 		</data>
 		<key>RongCloudLively.bundle/light/resources/chat_to_bg_white@2x.png</key>
 		<data>
-		uIS9ROJXjW9AUQNzgAIVVsvu2ns=
+		Bl+IDoztpyt6YjMMN3+BDaSxZ1U=
 		</data>
 		<key>RongCloudLively.bundle/light/resources/chat_to_bg_white@3x.png</key>
 		<data>
-		GtG/FvdQqAiydK2lTLYlpHcrqu0=
+		NJVsJNDJNPvlmCNqeXjiH/qIAsY=
 		</data>
 		<key>RongCloudLively.bundle/light/resources/close_burn@2x.png</key>
 		<data>
@@ -3932,6 +4128,14 @@
 		<data>
 		5bHigNN2O5XCsJTKghzuNB3BuMA=
 		</data>
+		<key>RongCloudLively.bundle/light/resources/disable_select@2x.png</key>
+		<data>
+		az+YoFGLe1EkRal5iUNeIdj2r4k=
+		</data>
+		<key>RongCloudLively.bundle/light/resources/disable_select@3x.png</key>
+		<data>
+		fnSyhCT0dDmfAmRseItR4ygMLao=
+		</data>
 		<key>RongCloudLively.bundle/light/resources/edit_cancel@2x.png</key>
 		<data>
 		RmwUQXwOWuCEUmQf6qaIfSfnnKY=
@@ -4036,6 +4240,30 @@
 		<data>
 		iUJauza1r8cS1bItu54WesnmO4Q=
 		</data>
+		<key>RongCloudLively.bundle/light/resources/friend_apply_more@2x.png</key>
+		<data>
+		yCSbEGx5rStnOq0+gS/E6fLZvtU=
+		</data>
+		<key>RongCloudLively.bundle/light/resources/friend_apply_more@3x.png</key>
+		<data>
+		mLuJrEbiaP6Sdrz5ZGYk4DqmAZo=
+		</data>
+		<key>RongCloudLively.bundle/light/resources/friend_list_add_new@2x.png</key>
+		<data>
+		iD5NBt7SdiUZcCDxFSz3P+9q1VA=
+		</data>
+		<key>RongCloudLively.bundle/light/resources/friend_list_add_new@3x.png</key>
+		<data>
+		f1sbwdqfNOvpZdRgwiI0eMk39gc=
+		</data>
+		<key>RongCloudLively.bundle/light/resources/friend_not_exist@2x.png</key>
+		<data>
+		32kScA2Z8axfyLtNop8qefrFsZM=
+		</data>
+		<key>RongCloudLively.bundle/light/resources/friend_not_exist@3x.png</key>
+		<data>
+		se1mhgrOtRHzTDFzdyhn7hxiu/4=
+		</data>
 		<key>RongCloudLively.bundle/light/resources/from_burn_picture@2x.png</key>
 		<data>
 		Tsr1aScB3pRQVZVpeSeSRKgdUj0=
@@ -4076,6 +4304,14 @@
 		<data>
 		V4C4Icf732e+66nspYOhGdoMOh0=
 		</data>
+		<key>RongCloudLively.bundle/light/resources/gender_cell_check@2x.png</key>
+		<data>
+		MYekVf2tsq9XdtYkEcBjUDNDEtU=
+		</data>
+		<key>RongCloudLively.bundle/light/resources/gender_cell_check@3x.png</key>
+		<data>
+		lKUfC33laXhPijBhb8FpKaq/rF0=
+		</data>
 		<key>RongCloudLively.bundle/light/resources/gif_loadfailed@2x.png</key>
 		<data>
 		E8WinX8hlG8OLcF+c3YCo+cm2Y0=
@@ -4107,6 +4343,46 @@
 		<key>RongCloudLively.bundle/light/resources/gif_needload@3x.png</key>
 		<data>
 		8cZ25ugGEWm0Y2jqMkU5M2+Hmy0=
+		</data>
+		<key>RongCloudLively.bundle/light/resources/group_follow_remove_btn@2x.png</key>
+		<data>
+		lJooz5CZXUpqoj1jSG4iiKzvk4A=
+		</data>
+		<key>RongCloudLively.bundle/light/resources/group_follow_remove_btn@3x.png</key>
+		<data>
+		6xrI2CKgYbsohY3Kgz3grpNhL/A=
+		</data>
+		<key>RongCloudLively.bundle/light/resources/group_manage_add_member@2x.png</key>
+		<data>
+		smBxk1CxUC9+6vNPv2LTrEorw/o=
+		</data>
+		<key>RongCloudLively.bundle/light/resources/group_manage_add_member@3x.png</key>
+		<data>
+		FBWUi6X4uQApCRR+9JXMG8xSEJk=
+		</data>
+		<key>RongCloudLively.bundle/light/resources/group_member_add@2x.png</key>
+		<data>
+		lDbnTkWKFKS3YptBNPSxu8t5I3E=
+		</data>
+		<key>RongCloudLively.bundle/light/resources/group_member_add@3x.png</key>
+		<data>
+		sLSTe+0kgyvChkBA5pxPI1MOLvo=
+		</data>
+		<key>RongCloudLively.bundle/light/resources/group_member_remove@2x.png</key>
+		<data>
+		LF3x5oygIqdulZev203YP7fuqMQ=
+		</data>
+		<key>RongCloudLively.bundle/light/resources/group_member_remove@3x.png</key>
+		<data>
+		94uTdvU+hwOTKsaP490lFNZJ25s=
+		</data>
+		<key>RongCloudLively.bundle/light/resources/group_mention_all@2x.png</key>
+		<data>
+		nNSO1GighZFtqTRkrsLA3qBPZIg=
+		</data>
+		<key>RongCloudLively.bundle/light/resources/group_mention_all@3x.png</key>
+		<data>
+		p9OBDG4Z/YoI7oNn7H5PJUGGClU=
 		</data>
 		<key>RongCloudLively.bundle/light/resources/icon_account@2x.png</key>
 		<data>
@@ -4442,99 +4718,99 @@
 		</data>
 		<key>RongCloudLively.bundle/light/resources/plugin_item_burn@2x.png</key>
 		<data>
-		YXSOOKP6r2z2mLbAcJfpn5Hutjc=
+		Go3yDWCTdqqdN6dHAfwRdz6dZ9w=
 		</data>
 		<key>RongCloudLively.bundle/light/resources/plugin_item_burn@3x.png</key>
 		<data>
-		/5xLVlniPjDOJjSRnrTm576uTOk=
+		fDwZnQgtJ/33AwTchxR4C0u2oaQ=
 		</data>
 		<key>RongCloudLively.bundle/light/resources/plugin_item_burn_highlighted@2x.png</key>
 		<data>
-		5lRmKAHDSgt0kzc7dynoBP5jpm0=
+		sHzsmZxsgNvolDq6uVg0IT0o2QI=
 		</data>
 		<key>RongCloudLively.bundle/light/resources/plugin_item_burn_highlighted@3x.png</key>
 		<data>
-		Sx1dz5NvdNKw+ww86SCSlOtJ4Mw=
+		geiuzcnm6HHgxWNbWEnOHioWgoY=
 		</data>
 		<key>RongCloudLively.bundle/light/resources/plugin_item_camera@2x.png</key>
 		<data>
-		FweVKykj54DufJ9T5jGgTISGx5o=
+		sn9XKq8ESZs3E60FaTEvD7QRq4c=
 		</data>
 		<key>RongCloudLively.bundle/light/resources/plugin_item_camera@3x.png</key>
 		<data>
-		ckN3Mw6H1NYAgpp+WbSAh+fl34Q=
+		YPHxkUsbyTRPfukr7pGXeBm8DLA=
 		</data>
 		<key>RongCloudLively.bundle/light/resources/plugin_item_camera_highlighted@2x.png</key>
 		<data>
-		gLIB8yjAAPyIttOHsRNgP/HxwvU=
+		Q6HkaJe+9XYnAXiknF826Ej2wPg=
 		</data>
 		<key>RongCloudLively.bundle/light/resources/plugin_item_camera_highlighted@3x.png</key>
 		<data>
-		aqIHWLFCRUFgOyIIrT0oQ7sJgb0=
+		F4G1gJ123qJpB+RqzemjMvKosSU=
 		</data>
 		<key>RongCloudLively.bundle/light/resources/plugin_item_card@2x.png</key>
 		<data>
-		A+dXhOG3LwtO4Vh+7ToAqs6MMno=
+		MUpEgB0CRMbut8yIoExdW5B9zOg=
 		</data>
 		<key>RongCloudLively.bundle/light/resources/plugin_item_card@3x.png</key>
 		<data>
-		1bA187jtULAVL9aIQg4dO0+AmIk=
+		xOh2BfNeZmz8Ey3sxsZtcYjGMMU=
 		</data>
 		<key>RongCloudLively.bundle/light/resources/plugin_item_card_highlighted@2x.png</key>
 		<data>
-		H9HiLHEdisj775ESpjEj+WlIhnc=
+		Q2BJIFgDH7QzOQ1IfaUJfCiq61w=
 		</data>
 		<key>RongCloudLively.bundle/light/resources/plugin_item_card_highlighted@3x.png</key>
 		<data>
-		IyQUX1JnRVJAEY0jW0117AmiOnY=
+		m2nMRJ+rs4UvUoSaUfMtTryJxdU=
 		</data>
 		<key>RongCloudLively.bundle/light/resources/plugin_item_file@2x.png</key>
 		<data>
-		wqWAjzEW6GODjuYiGrhhqUi62/I=
+		X+vD/Mevhp5ARiULM83Nn6nwSk8=
 		</data>
 		<key>RongCloudLively.bundle/light/resources/plugin_item_file@3x.png</key>
 		<data>
-		L7VGB89JlEVAgGC3pKK1xJbQ8c4=
+		MuroeTkkFwGibWMoBaD4mjvJ50U=
 		</data>
 		<key>RongCloudLively.bundle/light/resources/plugin_item_file_highlighted@2x.png</key>
 		<data>
-		QrWPIqwOuXheKemvxra+aZkqFtQ=
+		xvU3rpXcNsHxePmXHAbyircfbDs=
 		</data>
 		<key>RongCloudLively.bundle/light/resources/plugin_item_file_highlighted@3x.png</key>
 		<data>
-		piY7PQBAnr/Yog558Q4mlbRcH7E=
+		A5BTcpVBkEauoXTpj6Wm9Xs6PoE=
 		</data>
 		<key>RongCloudLively.bundle/light/resources/plugin_item_location@2x.png</key>
 		<data>
-		HH1RnkS/RPXlOaXB3fX/TyyLc8c=
+		LLiUIframwtbXmtaQM10DUpvDc0=
 		</data>
 		<key>RongCloudLively.bundle/light/resources/plugin_item_location@3x.png</key>
 		<data>
-		WoykIys3eIL7gCIopMFPg6vhheo=
+		TgOH28XJYHPvjHsMjNo1EhrZ0FA=
 		</data>
 		<key>RongCloudLively.bundle/light/resources/plugin_item_location_highlighted@2x.png</key>
 		<data>
-		DT0qPcK98u0gatBT5sPs/L0vCic=
+		WXKIGCLVe7z2ZqBcmlRYs9bgI3s=
 		</data>
 		<key>RongCloudLively.bundle/light/resources/plugin_item_location_highlighted@3x.png</key>
 		<data>
-		wkK2IRBPMoHq4EhLf2ubprGngmw=
+		8uJHP4lKxcWDzBlbSNj05TfHfYk=
 		</data>
 		<key>RongCloudLively.bundle/light/resources/plugin_item_picture@2x.png</key>
 		<data>
-		SFsLDi9oljtt045YMBzX8DQi0Q8=
+		50Wa7Ppr8sHUxPso81pKn+BHsus=
 		</data>
 		<key>RongCloudLively.bundle/light/resources/plugin_item_picture@3x.png</key>
 		<data>
-		ViRkLEQPyOYlhFtIAle+YXj5IlY=
+		nHkjpeW1OkUaZ01hTiWfR3CzVTw=
 		</data>
 		<key>RongCloudLively.bundle/light/resources/plugin_item_picture_highlighted@2x.png</key>
 		<data>
-		jHOPSbrODoPlarKFh3Yuj1Dq4/Y=
+		ZlWayd/23G/BKWWZC+Lt9MrU2Lk=
 		</data>
 		<key>RongCloudLively.bundle/light/resources/plugin_item_picture_highlighted@3x.png</key>
 		<data>
-		ZDrORk3rjEkJ4Sj42D1WMHfGwAY=
+		sFw+J2eH4tbI/5RI8ouDREgxIes=
 		</data>
 		<key>RongCloudLively.bundle/light/resources/portrait_kefu@2x.png</key>
 		<data>
@@ -4750,11 +5026,19 @@
 		</data>
 		<key>RongCloudLively.bundle/light/resources/up@2x.png</key>
 		<data>
-		NHrsDnBaAvRBkboadX8lNFfl6mE=
+		FPoRNHRs8HN9dHTE2cdGmjmfpnQ=
 		</data>
 		<key>RongCloudLively.bundle/light/resources/up@3x.png</key>
 		<data>
-		JqX+ObnHJTVGd5fXcMXbf1hZ5/0=
+		3MzVPSb3mqqHEKNXIxM4Qgq3scM=
+		</data>
+		<key>RongCloudLively.bundle/light/resources/user_detail_start_chat@2x.png</key>
+		<data>
+		n0m5WWJUeMNESwMfJx7Rah6Hr84=
+		</data>
+		<key>RongCloudLively.bundle/light/resources/user_detail_start_chat@3x.png</key>
+		<data>
+		17tcKXCMzYG43u6389TkNaul8MA=
 		</data>
 		<key>RongCloudLively.bundle/light/resources/voice_1@2x.png</key>
 		<data>
@@ -4846,13 +5130,13 @@
 		</data>
 		<key>RongCloudLively.bundle/light/theme.plist</key>
 		<data>
-		tPYSMnYvsJ93p9NnHzqa8T5jv/0=
+		raLGGPEdJMggY0ikHveneg+5tWM=
 		</data>
 		<key>ar.lproj/RongCloudKit.strings</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			g+4JmPQUM9ZF8OuhV12MPG3fclE=
+			UEgcQ0S0zNhS2pnZuL6/QFhBAwc=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -4861,7 +5145,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			wDi4t2s778+mIYFWRPE5f2anKig=
+			qH/UTHidBRXH6inS+z4qtivZGK4=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -4870,7 +5154,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			twQPb1tow0+hLrtrthpk51eLUGU=
+			nuPdAAkYbAEG5yHU0JzCAuGY2iU=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -4926,33 +5210,33 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			ulp7RxTuZL3MdZjP7SuuXq5faWg=
+			GuBk6vC4dYJfuSbhkN52QeNfHJw=
 			</data>
 			<key>hash2</key>
 			<data>
-			vFRJ9KQoT+YQ3VO7A8GTLVcDZ1IQMTEcnRbOSPu/Xas=
+			bBuxg78+DQggtWlLhTbMumi9F5Yzf7l0cqAy5zHcBlw=
 			</data>
 		</dict>
 		<key>Headers/RCApplyFriendCellViewModel.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			wL84G14p+86kYz+iSdM8NcxHXfo=
+			bUlebYUDRcYH9OUQa6cDIAEsvRE=
 			</data>
 			<key>hash2</key>
 			<data>
-			ZV4GYuk3m8jMPPrRN6ThjeLEHopOUmeEi0c4RmIRuro=
+			8yj5vH/dmFRiVEy2DJR7hnBEK11Pj+7nAGijG8BqSYA=
 			</data>
 		</dict>
 		<key>Headers/RCApplyFriendListView.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			dCop3tOGgzvMjsZ27iG9p1PCA0g=
+			ZLRzhiMfvr8aGm7JZ3T9qk3OZUE=
 			</data>
 			<key>hash2</key>
 			<data>
-			H9mmAxqCn5FAWsGAWwW+wUmZ0YOVnX0YWDVTdjfVWRs=
+			hYleHJ8ZQD9ZcFZEbH0D5XLOdW/iblC/hZ/BC0StACQ=
 			</data>
 		</dict>
 		<key>Headers/RCApplyFriendListViewController.h</key>
@@ -5036,11 +5320,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			e5Efzz2eppkUKrfs8+FDkMpwy5Y=
+			0b4HJmEzhbIh1Lfm6sh/q5fY4cg=
 			</data>
 			<key>hash2</key>
 			<data>
-			QhC/R433HA0TAOyqvqKrJSSf1hN59DSmVFM7XqnyDf4=
+			fgjkkSIXhdOIxnF/SJHyHfeoYO7cHe+q0ohWd2MinWA=
 			</data>
 		</dict>
 		<key>Headers/RCBaseCollectionView.h</key>
@@ -5135,11 +5419,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			hmX0dYmTxRbUhTTvWyIqjereqds=
+			CCKspC2p0N+lsZznJIsQFHDzf8w=
 			</data>
 			<key>hash2</key>
 			<data>
-			GUEcebVC8Zm0t2Yfc62pJaZ9g0zh1fCYNNZmyiAhU1k=
+			KyzNNBljkkriomgVpVTSRvJaeFodslTYOyWMNMnSwS4=
 			</data>
 		</dict>
 		<key>Headers/RCBaseViewController.h</key>
@@ -5157,11 +5441,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			nlOH/qcdx0q4mkz7dNzK/sOMAeM=
+			a0GWeFFO+FFG4KNXIG/gt0pwDiQ=
 			</data>
 			<key>hash2</key>
 			<data>
-			W4EUQOgt++y8oacHAer2j3PNWdUTq7L0gFTBWHziOAQ=
+			CDUuwZThtfM0tquUo2Wr3ofpfrsDid0AOX/53fnwNVU=
 			</data>
 		</dict>
 		<key>Headers/RCButton.h</key>
@@ -5179,11 +5463,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			VI/uTy112X4JKImCH29oP/QBWF0=
+			MTR0URI3r3q7MXAZVfXkKbJ4UQI=
 			</data>
 			<key>hash2</key>
 			<data>
-			NpLP1Ag34hMRBL/jpbSQcfvPWH0F5PSCjeYRaxgTISc=
+			4gUAjVoLby7Fvyv2EpmAoA+gH9wzNk1aGooX7QhNM+s=
 			</data>
 		</dict>
 		<key>Headers/RCCellViewModelProtocol.h</key>
@@ -5443,11 +5727,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			cUo8NgypYs4ZNgi6vYzMIWfTTIw=
+			Fo5behZgZUm5wXwFi1h+sYZD2Lk=
 			</data>
 			<key>hash2</key>
 			<data>
-			+DKwiUFK5Rak0COVrFlb8H/PmdnjMvveZrKunsoEZ7I=
+			b2MD8hOo9MpLLWMKkCAvdhaLPQItATe0+CldXKLLDoE=
 			</data>
 		</dict>
 		<key>Headers/RCFriendListPermanentCellViewModel.h</key>
@@ -5465,11 +5749,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			xAqqI2KLcNleSqxInXowldVUdzY=
+			xlc05Qw9dcDwMXLZitDcI72nLOI=
 			</data>
 			<key>hash2</key>
 			<data>
-			/qOE5gn+Wd94lwbQTd90FmtyVhMNLESACQJwslXvKZs=
+			soRswSjqOpFnmqGFb7z1o+9GMX6FSG/WYFVrb4ot0Fg=
 			</data>
 		</dict>
 		<key>Headers/RCFriendListViewController.h</key>
@@ -5659,15 +5943,37 @@
 			kDMwy6zcJZ/uanl+uNRxzlFwbmiT4QkXQLSbEJPb10I=
 			</data>
 		</dict>
+		<key>Headers/RCGroupMemberAdditionalCell.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			KTrfnbEQTI6D6ui9jg2C0uBKW4Y=
+			</data>
+			<key>hash2</key>
+			<data>
+			qV3g2ZbBOTzbPXV1+IFWLBDP3cb4GoDmgAEou39ixzA=
+			</data>
+		</dict>
+		<key>Headers/RCGroupMemberAdditionalCellViewModel.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			7uvxcl2Vy5tqtiLZ3Whj/OUfHeA=
+			</data>
+			<key>hash2</key>
+			<data>
+			xlOiH6b2wtA/jaKW1yI6AZEveNpglWRHURVWscKGnw8=
+			</data>
+		</dict>
 		<key>Headers/RCGroupMemberCellViewModel.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			z+i+VBNgbBJJmcUFtoQYjm9hBAU=
+			PqcW4erbj33BOQKRHXUpDWwS4Vk=
 			</data>
 			<key>hash2</key>
 			<data>
-			JheRcVOxawAYtRtXNkYsqYGyUaVUq/yDkhYSQqo7sKM=
+			xF47L7sYW+9o7whp4PWHpY/ci5xPiHuJ8MUioYVwb/g=
 			</data>
 		</dict>
 		<key>Headers/RCGroupMemberListViewController.h</key>
@@ -5696,11 +6002,33 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			GXfusRTmpG4XdyNS1GU3O2wqOJA=
+			GdejJJtAmAXReDwwAvnVEQmBnhg=
 			</data>
 			<key>hash2</key>
 			<data>
-			UtS5Ph9sAXS+Qc+zWbNYtE4gejgkUR9mt/qtkCHH4XE=
+			D2kJgwWUm6jmlhJCD+OWJf+tA+TG6Jzq2/xEHuyBT70=
+			</data>
+		</dict>
+		<key>Headers/RCGroupMentionViewController.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			GoI0JjvxFa9NCn23tvpaOmQMM/8=
+			</data>
+			<key>hash2</key>
+			<data>
+			sa7u/4e2LNF10YPpSbfRZNQiZU2Q1moKbKRf/jr1yNk=
+			</data>
+		</dict>
+		<key>Headers/RCGroupMentionViewModel.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			aQQFeZtZd+JGmxgs5DkHFAD12iU=
+			</data>
+			<key>hash2</key>
+			<data>
+			236Sj0subckGx/Ra0AOWTpEBxy4ZyuwgGFwRQZyzwNs=
 			</data>
 		</dict>
 		<key>Headers/RCGroupNoticeViewController.h</key>
@@ -5729,11 +6057,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			gbiaS/TA10I5KqVJiusiwM0sXQA=
+			kHSbEnJ5YKutuLN6nHgEJNenTaQ=
 			</data>
 			<key>hash2</key>
 			<data>
-			W03sITXhD12su3DHF3Y7z4H/apTVdNR76bB8deoe/YA=
+			V3dBH18RmudA9niaEza9TnSSzff79knHgswSXgKWILs=
 			</data>
 		</dict>
 		<key>Headers/RCGroupNotificationCellViewModel.h</key>
@@ -5762,11 +6090,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			egplcJsyTAIDL+sY7p8xpMpOmJg=
+			iWZvmAWOmfxFxUXADc7v0Kn8Q8o=
 			</data>
 			<key>hash2</key>
 			<data>
-			PjFZ7RMaKJkzq+lkMXaoewUgvOn2cGppZDyjVbRSAP8=
+			/4d+yqu0GiV3sIjNEyB+WCV4HdRlaYSwCsBfG9EapnQ=
 			</data>
 		</dict>
 		<key>Headers/RCGroupNotificationViewController.h</key>
@@ -5861,11 +6189,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			VY957C4HWY1uHuQyzfQWed9loSg=
+			u4uxYvTtBop8wRXbhMWG1qfd23I=
 			</data>
 			<key>hash2</key>
 			<data>
-			uCjlnRvqfQl3EM5EiZvgnfTnw38h4ErJYicHBePCwSQ=
+			b0aUScUvrudubf+9iQiq3XHMHmEP3XC7jc3SqQ9eDL0=
 			</data>
 		</dict>
 		<key>Headers/RCIMKitTheme.h</key>
@@ -6213,11 +6541,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			JMo79o88bjPp5xY3Lb5m3DYbuaw=
+			T6dZbtvMlBo5jqlwYrAIEj88EZI=
 			</data>
 			<key>hash2</key>
 			<data>
-			9S4/aohg20qU3djXEDmgmgi0IVDjqQt9YSI6rEOqEMY=
+			OpjPZaBW6j7rhXOWoJzxRJ+owfCvxBX+fvRidrRfFqU=
 			</data>
 		</dict>
 		<key>Headers/RCMyGroupsViewController.h</key>
@@ -6275,6 +6603,17 @@
 			xtg5lSpMIuwj8eZ7dSRRzZIleopzlVuRzS3XRg/Unoc=
 			</data>
 		</dict>
+		<key>Headers/RCPaddingTableViewCell.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			5K6Nntjqaw21BwYXpOLqxnvMajg=
+			</data>
+			<key>hash2</key>
+			<data>
+			Qju8KkfI9RhJS3iSgvxjArGfjaeit966H24QmNCXjZw=
+			</data>
+		</dict>
 		<key>Headers/RCPluginBoardView.h</key>
 		<dict>
 			<key>hash</key>
@@ -6301,11 +6640,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			8UMDKcNb7aT610wZAj1vPA3AWoI=
+			KcujKI7glY/hE66lJiX6bXFQxT8=
 			</data>
 			<key>hash2</key>
 			<data>
-			CHhoRPpVcH2rPC6kqSguo24JguLBLpDQfCaPCX+vfjI=
+			lv0YQemOM1HO1LyAcxTObVUHZXap1QRRNYCDmRxsinY=
 			</data>
 		</dict>
 		<key>Headers/RCProfileFooterViewModel.h</key>
@@ -6506,6 +6845,17 @@
 			JG8cZxJ1UIqy1hQcpVydqGshZlcDt21a5TfOs5MgJMA=
 			</data>
 		</dict>
+		<key>Headers/RCSearchBarListView.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			f3DdlANvnJhD/1NBmxP6+L65v2U=
+			</data>
+			<key>hash2</key>
+			<data>
+			Wyo/U+uOYLHRAPOprNYFXvq69FdZLTcVRrgFtwHqMN0=
+			</data>
+		</dict>
 		<key>Headers/RCSearchBarViewModel.h</key>
 		<dict>
 			<key>hash</key>
@@ -6605,6 +6955,17 @@
 			+2JrB04Tw0R50C8FCJKGE/QLpzf057z2MILwoLxhm+A=
 			</data>
 		</dict>
+		<key>Headers/RCSelectUserView.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			yIItt/ehjUjsF2p1MOG8dVzBrX4=
+			</data>
+			<key>hash2</key>
+			<data>
+			YpPQVD3TBncCyHDgBTsF+YpTyNU5JTyEXzo157b7Seo=
+			</data>
+		</dict>
 		<key>Headers/RCSelectUserViewController.h</key>
 		<dict>
 			<key>hash</key>
@@ -6625,6 +6986,28 @@
 			<key>hash2</key>
 			<data>
 			IyIHx8rZxJBG4JlZdZYJ8xVCwPclBhQJ6jcxsyZtON0=
+			</data>
+		</dict>
+		<key>Headers/RCSizeCalculateLabel.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			ceALTOsjWi5EHf+x2jJTmLe5Gm8=
+			</data>
+			<key>hash2</key>
+			<data>
+			X7LGamKmDeel2Bz0hrw9wuBE1QMCXPkNFrI9srv6FiE=
+			</data>
+		</dict>
+		<key>Headers/RCStackTableViewCell.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			nRIZUXrXAkouuXU6Da1HQ3Cg2qI=
+			</data>
+			<key>hash2</key>
+			<data>
+			f1UWu4EUrN+t6xvYoTn9oDE2NwMPjtbr/ervDUDY2BU=
 			</data>
 		</dict>
 		<key>Headers/RCStreamMessageCell.h</key>
@@ -6752,11 +7135,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			cq768HiK3HcajVrDGPSaUQvW8sU=
+			jvW9mcNcBP5zuDOaQwNOXEjwFtE=
 			</data>
 			<key>hash2</key>
 			<data>
-			ZWv7eZVNbt2ukGerSKfEGCcc5foQXry0+6/tRZga0KA=
+			3Op0zDoveewStYte5wfLUa3NJsD8NVpwjjeimMfkKI0=
 			</data>
 		</dict>
 		<key>Headers/RCUserSearchViewController.h</key>
@@ -6818,11 +7201,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			P/Ft3HSTynR2zhuBi+X8Y4NQ3L0=
+			hTR3nZSiXRWlF9yODFb6E6bWoKk=
 			</data>
 			<key>hash2</key>
 			<data>
-			xBY/Iwg7tjNJzWrai8rzdeUCDI86gavDilF1UXDzVfQ=
+			YmgqFAZR99s0MbJIbMH3s7XNSNAhrwZWEmRqNVJdZNM=
 			</data>
 		</dict>
 		<key>Headers/RongIMKitExtensionModule.h</key>
@@ -9520,6 +9903,94 @@
 			ayJY14uYO8WjapHH5h/hQquuHDTAzAQmUvbDABPvLgY=
 			</data>
 		</dict>
+		<key>RongCloud.bundle/group_follow_remove_btn@2x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			lJooz5CZXUpqoj1jSG4iiKzvk4A=
+			</data>
+			<key>hash2</key>
+			<data>
+			tWM43yXBN1cQXh+RfvkF7lQxNgiegVKGnyXhFflPzx8=
+			</data>
+		</dict>
+		<key>RongCloud.bundle/group_follow_remove_btn@3x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			6xrI2CKgYbsohY3Kgz3grpNhL/A=
+			</data>
+			<key>hash2</key>
+			<data>
+			s4hN6RXolna4zgjZ/5tvqyyPDfBPwHdLATjUFVWPgmo=
+			</data>
+		</dict>
+		<key>RongCloud.bundle/group_follow_remove_btn_dark@2x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			qzsNZLuTLC+MggEBer8dOCxq31U=
+			</data>
+			<key>hash2</key>
+			<data>
+			LrcG0ZvY1iYbPlMCjty6U+cxPCh0XmN58pyKVbgIhyM=
+			</data>
+		</dict>
+		<key>RongCloud.bundle/group_follow_remove_btn_dark@3x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			NjKG98k+TwTZH+DnmM6Vu4856ds=
+			</data>
+			<key>hash2</key>
+			<data>
+			QOwX4bodp2lh33C0Doj3d2A33LkONq0QviGPH5J1DtI=
+			</data>
+		</dict>
+		<key>RongCloud.bundle/group_manage_add_member@2x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			smBxk1CxUC9+6vNPv2LTrEorw/o=
+			</data>
+			<key>hash2</key>
+			<data>
+			AfatJKNN+Tza2Hv8aQFlq0dSCAurc96FlN32JvqJzQo=
+			</data>
+		</dict>
+		<key>RongCloud.bundle/group_manage_add_member@3x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			FBWUi6X4uQApCRR+9JXMG8xSEJk=
+			</data>
+			<key>hash2</key>
+			<data>
+			6yuIaeol55+X/oI7WBfHdowLmgcTJeY6X7Xc7lOnEdM=
+			</data>
+		</dict>
+		<key>RongCloud.bundle/group_manage_add_member_dark@2x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			IzUfi31mIDhW4j/2cHq18fEJamM=
+			</data>
+			<key>hash2</key>
+			<data>
+			BaB/m9Zfd3X1IWDWdHS/ePz51nXm+bqdvCgaoUqHN0w=
+			</data>
+		</dict>
+		<key>RongCloud.bundle/group_manage_add_member_dark@3x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			5T+L0akGb8URsw+dbtt4vpKkZ2E=
+			</data>
+			<key>hash2</key>
+			<data>
+			ikLiPsFA09MsqyWDF9fbmA+eQQJX5KabRp1iEijVKBg=
+			</data>
+		</dict>
 		<key>RongCloud.bundle/group_member_add.png</key>
 		<dict>
 			<key>hash</key>
@@ -9628,6 +10099,50 @@
 			<key>hash2</key>
 			<data>
 			4oO3R4TD2j8ZlqP79IfQOWN2axKs1Q0YST/FNvTrD70=
+			</data>
+		</dict>
+		<key>RongCloud.bundle/group_mention_all@2x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			nNSO1GighZFtqTRkrsLA3qBPZIg=
+			</data>
+			<key>hash2</key>
+			<data>
+			O6WxEk8cdUR7cBVWNEtMXeFuIyleEpVYmSp6zVGwf5o=
+			</data>
+		</dict>
+		<key>RongCloud.bundle/group_mention_all@3x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			p9OBDG4Z/YoI7oNn7H5PJUGGClU=
+			</data>
+			<key>hash2</key>
+			<data>
+			dCf2sOFR+qXPzDEyaybradRr4jJnXoKtSG5HrrJOhy0=
+			</data>
+		</dict>
+		<key>RongCloud.bundle/group_mention_all_dark@2x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			UmsfWUwGUWCg01noJ2wj2xAFzWg=
+			</data>
+			<key>hash2</key>
+			<data>
+			p1WwWOsG7SRm5K+Yxak4of9lrCTTs4KJPyg9l7GA0dg=
+			</data>
+		</dict>
+		<key>RongCloud.bundle/group_mention_all_dark@3x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			vrQ0SYXGDtA8c2SnsU9T4C3V+pM=
+			</data>
+			<key>hash2</key>
+			<data>
+			8inA+tiYWVJtXu2duNufyMZdBda5i1XluVoCO0ojpgM=
 			</data>
 		</dict>
 		<key>RongCloud.bundle/icon_sight_close.png</key>
@@ -13018,6 +13533,50 @@
 			w70ABOvsy26FYkwempO0dKCDNi6FNGRQDYGCnXRvL3E=
 			</data>
 		</dict>
+		<key>RongCloudLively.bundle/dark/resources/Comment@2x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			yOiQsQqOHERWh8Js1ocPYiPVlXU=
+			</data>
+			<key>hash2</key>
+			<data>
+			RuNqD2KdW/krduQHLYYwlpM6U1DoGUCRIvd99nfKNzw=
+			</data>
+		</dict>
+		<key>RongCloudLively.bundle/dark/resources/Comment@3x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			/XDfkI2xOTTQa889iiGSijN+UE0=
+			</data>
+			<key>hash2</key>
+			<data>
+			k6LWr0+UfiixbIYA5/CrviSIwu1T0imz8ibq4tqdF5M=
+			</data>
+		</dict>
+		<key>RongCloudLively.bundle/dark/resources/Comment_highlighted@2x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			jLiHkXk6cqqjuceVpYkA/ceN/DE=
+			</data>
+			<key>hash2</key>
+			<data>
+			nttc9gmHTRd407JQaybUO33+7q1FkGxLhsVG4SX6RUw=
+			</data>
+		</dict>
+		<key>RongCloudLively.bundle/dark/resources/Comment_highlighted@3x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			YGwVQJ2WNJpe8cbhIu5RXBDfPhw=
+			</data>
+			<key>hash2</key>
+			<data>
+			3V/lZon5VE4Yp/2X2SMQayRDQx2LA0zCOL2HgN42hvg=
+			</data>
+		</dict>
 		<key>RongCloudLively.bundle/dark/resources/add@2x.png</key>
 		<dict>
 			<key>hash</key>
@@ -13154,66 +13713,66 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			byUofMy+goS1CG1aXOg1LS9Sbhg=
+			sKj3QAo8X1a0uxhpjC5NhAf1Cd4=
 			</data>
 			<key>hash2</key>
 			<data>
-			To4T3R1pTE3Uq+AdGp0e/FiR0BHd8OunOywSXwfsCGo=
+			cQfQAj385/RQ0uXR7I8ZHbWmc449MrInp2/3QSKCr8E=
 			</data>
 		</dict>
 		<key>RongCloudLively.bundle/dark/resources/chat_from_bg_normal@3x.png</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			OGJmNPRus3Vo0xN/zrPpDnE4XZQ=
+			tpKu8liDzE+cOiuPT2oPZEQAD+8=
 			</data>
 			<key>hash2</key>
 			<data>
-			Ukyvcb4bymrPTuZd/MOopvciBmOEMzdsDaUyTZaYztQ=
+			z1sxS3vPYNr5VmmTK2taMIAnb3pL9FwAYIjHSgl2DCw=
 			</data>
 		</dict>
 		<key>RongCloudLively.bundle/dark/resources/chat_to_bg_normal@2x.png</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			EGxrCV8jg3c9sb1GdWDItTu37Qc=
+			uu3GwB9DcAL7ygZq7NtsuYO6n5w=
 			</data>
 			<key>hash2</key>
 			<data>
-			CVB20rUzdZBuNkMy+ze5zdXp5uMcybr6WKgjmB576hY=
+			aR0i3U9T5yxtnDEA6u1y0p76RiOsyNdQBvFBbj5TykY=
 			</data>
 		</dict>
 		<key>RongCloudLively.bundle/dark/resources/chat_to_bg_normal@3x.png</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			fVyD57rAo1ZRfLJfNushDKeNdLs=
+			rMjDZSDklieHh5JfoYRTXe2U2Eg=
 			</data>
 			<key>hash2</key>
 			<data>
-			McaFHkxiB/X172nF6330x7svCE2Rm4Sy8uywNSJyfF8=
+			DCCxMm3wxncApXol3ouzMtcmzAvqdDwNsAB67gR7Wf0=
 			</data>
 		</dict>
 		<key>RongCloudLively.bundle/dark/resources/chat_to_bg_white@2x.png</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			KO04AqnWpx8YsVCIwq+JK11weFY=
+			kz/kQn9gU4C8oGZ4kxtIvc1Swxg=
 			</data>
 			<key>hash2</key>
 			<data>
-			3F70hakTOR9eB1P9P5+VP4u3ILibaWu7wzTUI65zY9k=
+			5hop91qgBLovKZVm3oUlJxcpTeIyVyOjWNHmJpBSyTQ=
 			</data>
 		</dict>
 		<key>RongCloudLively.bundle/dark/resources/chat_to_bg_white@3x.png</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			sO6QJPi0SWlzqvnF0UGYkj4hQoc=
+			jDPKj11URUrj6t8qZ+8CP9is35A=
 			</data>
 			<key>hash2</key>
 			<data>
-			9xCiGMLs+OEyRbryZZhznTYeP+lnGBxgwcCnbJGmYwo=
+			EC34JDyJcP4P7IwrXqp7FrGD2CzG3eYJk01CrXaYVR8=
 			</data>
 		</dict>
 		<key>RongCloudLively.bundle/dark/resources/close_burn@2x.png</key>
@@ -13456,6 +14015,28 @@
 			<key>hash2</key>
 			<data>
 			tEoq/kC2XXHgLxobLjsnjRqroYM81rQd4zSCN7DTj/Q=
+			</data>
+		</dict>
+		<key>RongCloudLively.bundle/dark/resources/disable_select@2x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			P4KfX52CWHNomTgv5XkYxMExAlE=
+			</data>
+			<key>hash2</key>
+			<data>
+			P37bvb0XeK5dblQTXz/Pufb8/PTdFy2WnJ01A2mE4ww=
+			</data>
+		</dict>
+		<key>RongCloudLively.bundle/dark/resources/disable_select@3x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			ugaTlngcwma/ECu9YVEiK+KhO2k=
+			</data>
+			<key>hash2</key>
+			<data>
+			fn9/TH7TOFAekmZTEOClu+HHuUupxMcZI1Pxmt+CzdE=
 			</data>
 		</dict>
 		<key>RongCloudLively.bundle/dark/resources/edit_cancel@2x.png</key>
@@ -13722,6 +14303,72 @@
 			SW6lysfoh/dvSNxRAZFraz+hlgHunZBWFMXPki6QLlc=
 			</data>
 		</dict>
+		<key>RongCloudLively.bundle/dark/resources/friend_apply_more@2x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			8D3Vc/CS7tMvUMYnci1BJAsXCY4=
+			</data>
+			<key>hash2</key>
+			<data>
+			YTRxl/QbiesYEv31P37uQCBw0RonGaw/tlD2XxSSAG8=
+			</data>
+		</dict>
+		<key>RongCloudLively.bundle/dark/resources/friend_apply_more@3x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			cHe0b5BX7dQS60IlXR5EHPQgFGs=
+			</data>
+			<key>hash2</key>
+			<data>
+			9/uFsFb5iSXKF9NMc99O2xxRASvyOkhYf3Mu7oeStn8=
+			</data>
+		</dict>
+		<key>RongCloudLively.bundle/dark/resources/friend_list_add_new@2x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			Hwfh1eEU822lLK4USEuG6klV4X8=
+			</data>
+			<key>hash2</key>
+			<data>
+			J7YnQIzh5759LLtrudHUMbDKfcOBuRnNTpWZ/rC7T8k=
+			</data>
+		</dict>
+		<key>RongCloudLively.bundle/dark/resources/friend_list_add_new@3x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			4r1UYXmyjoKcHMue18IuXm1N4Q4=
+			</data>
+			<key>hash2</key>
+			<data>
+			RNDOLUWEoQ/oCPXV/zcboZTFGouKY9OTs5IJyFXjW3Q=
+			</data>
+		</dict>
+		<key>RongCloudLively.bundle/dark/resources/friend_not_exist@2x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			+Cgrac1sbdYGsgc6NJ/TI1SywJs=
+			</data>
+			<key>hash2</key>
+			<data>
+			s4RDrgiSCB9GXndxbxV/IvdSK/YEWkI0Cs+X4/YWkPk=
+			</data>
+		</dict>
+		<key>RongCloudLively.bundle/dark/resources/friend_not_exist@3x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			duBXjx9CsYcbbRRTkFTDcyfiUf4=
+			</data>
+			<key>hash2</key>
+			<data>
+			PTDBCOUPqNkOhKzgiZYlqwdKDmNh32ZUufr9j7aSIwQ=
+			</data>
+		</dict>
 		<key>RongCloudLively.bundle/dark/resources/from_burn_picture@2x.png</key>
 		<dict>
 			<key>hash</key>
@@ -13830,6 +14477,138 @@
 			<key>hash2</key>
 			<data>
 			qvB7bQVrdf2kiaU303tTAWF+wzGpHh9WKQRcRpBtdrI=
+			</data>
+		</dict>
+		<key>RongCloudLively.bundle/dark/resources/gender_cell_check@2x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			l+9IeVVb/RkwWrNQUuQRxbCOgDQ=
+			</data>
+			<key>hash2</key>
+			<data>
+			w+i/NZOm8HZatUyvhd2OV01z2/yxkDotGO5Bu9zv9O4=
+			</data>
+		</dict>
+		<key>RongCloudLively.bundle/dark/resources/gender_cell_check@3x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			K7Ytm7wxl8dTjDTtO3YQTh7yLTc=
+			</data>
+			<key>hash2</key>
+			<data>
+			HtRNQUUF9hu/IoO6AYE499g7YsmBfNZ2Ew95cepYtHI=
+			</data>
+		</dict>
+		<key>RongCloudLively.bundle/dark/resources/group_follow_remove_btn@2x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			qzsNZLuTLC+MggEBer8dOCxq31U=
+			</data>
+			<key>hash2</key>
+			<data>
+			LrcG0ZvY1iYbPlMCjty6U+cxPCh0XmN58pyKVbgIhyM=
+			</data>
+		</dict>
+		<key>RongCloudLively.bundle/dark/resources/group_follow_remove_btn@3x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			NjKG98k+TwTZH+DnmM6Vu4856ds=
+			</data>
+			<key>hash2</key>
+			<data>
+			QOwX4bodp2lh33C0Doj3d2A33LkONq0QviGPH5J1DtI=
+			</data>
+		</dict>
+		<key>RongCloudLively.bundle/dark/resources/group_manage_add_member@2x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			IzUfi31mIDhW4j/2cHq18fEJamM=
+			</data>
+			<key>hash2</key>
+			<data>
+			BaB/m9Zfd3X1IWDWdHS/ePz51nXm+bqdvCgaoUqHN0w=
+			</data>
+		</dict>
+		<key>RongCloudLively.bundle/dark/resources/group_manage_add_member@3x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			5T+L0akGb8URsw+dbtt4vpKkZ2E=
+			</data>
+			<key>hash2</key>
+			<data>
+			ikLiPsFA09MsqyWDF9fbmA+eQQJX5KabRp1iEijVKBg=
+			</data>
+		</dict>
+		<key>RongCloudLively.bundle/dark/resources/group_member_add@2x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			lxjkXC0F2mG7INeuNDbwzGec3zM=
+			</data>
+			<key>hash2</key>
+			<data>
+			EnP2dpNP+CDF1cquMomDTfRoULNsAdf2Rlg8jT0a5zA=
+			</data>
+		</dict>
+		<key>RongCloudLively.bundle/dark/resources/group_member_add@3x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			6IftD74lGws6FnXSCkURsOxWm58=
+			</data>
+			<key>hash2</key>
+			<data>
+			Pg+0uSlop2ksDhW3q6jkNkbM3/k2KT9sFbttah1MYYM=
+			</data>
+		</dict>
+		<key>RongCloudLively.bundle/dark/resources/group_member_remove@2x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			FUz3WUfv4Cu+C7h8tvfLBVjfd8w=
+			</data>
+			<key>hash2</key>
+			<data>
+			SNGGJZ2fp+EtHkdGiAKKUDgeCALFsWUxUUTj6TodLGs=
+			</data>
+		</dict>
+		<key>RongCloudLively.bundle/dark/resources/group_member_remove@3x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			+QaaxfWlo8RYQAakfVbzIysO7yw=
+			</data>
+			<key>hash2</key>
+			<data>
+			JfvyKAW3Ow2VbOEOzt/6vwum7wnHYYtA1igtB5eKMJQ=
+			</data>
+		</dict>
+		<key>RongCloudLively.bundle/dark/resources/group_mention_all@2x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			UmsfWUwGUWCg01noJ2wj2xAFzWg=
+			</data>
+			<key>hash2</key>
+			<data>
+			p1WwWOsG7SRm5K+Yxak4of9lrCTTs4KJPyg9l7GA0dg=
+			</data>
+		</dict>
+		<key>RongCloudLively.bundle/dark/resources/group_mention_all@3x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			vrQ0SYXGDtA8c2SnsU9T4C3V+pM=
+			</data>
+			<key>hash2</key>
+			<data>
+			8inA+tiYWVJtXu2duNufyMZdBda5i1XluVoCO0ojpgM=
 			</data>
 		</dict>
 		<key>RongCloudLively.bundle/dark/resources/inputbar_add@2x.png</key>
@@ -14166,110 +14945,132 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			B3tJief+FOthTBg832B8OtovYmU=
+			uwLTdUXAbqbkNoT0UR8ZtboFRuA=
 			</data>
 			<key>hash2</key>
 			<data>
-			1whBlQ4zsbABPA2gsu3hqiUciaU6IlAVNiE8FwiuKvA=
+			6ijQ1jYCAQLTxzRzipFbQA1v6nDAtxxvaK1Hg27GOKc=
 			</data>
 		</dict>
 		<key>RongCloudLively.bundle/dark/resources/plugin_item_burn@3x.png</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			5+pP9Vvhv2UomjoYXJgs78indTw=
+			dFsY0JbBVA7LQfqUatJH6Uc3C70=
 			</data>
 			<key>hash2</key>
 			<data>
-			1BqCZU/hHtVprniIS2uPdDYDgpGynP/cV6JxbWDrSqA=
+			W7yOtL7/4QXr74Z2qa7VMNeI8wr2ASqMfbhhGvtCKbU=
 			</data>
 		</dict>
 		<key>RongCloudLively.bundle/dark/resources/plugin_item_burn_highlighted@2x.png</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			6PdNqvfaQsAGMpWYI4SN85QzYuY=
+			dIyYBbsqdlSmdZNcy68POEy7RbE=
 			</data>
 			<key>hash2</key>
 			<data>
-			eIjP5FEM4+UWv3B8A4gOuIPE5iaAnJhxxUo33ungjeE=
+			fUQ/J6rOqCUgl4A5WGX4jWchf4JsDRw+nWSZewPnC58=
 			</data>
 		</dict>
 		<key>RongCloudLively.bundle/dark/resources/plugin_item_burn_highlighted@3x.png</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			rwuiWQHG+y3tDrVmjKJa24kwILI=
+			QL43flZx2n+bdP+mFbBAE13THJM=
 			</data>
 			<key>hash2</key>
 			<data>
-			HG2NLIJJMv21ki35PhGefkhs4N7cWIP9dejfrmyVIj0=
+			72mUjrHHcrfuEjCtX/ED/7nT6aqDzVp36LcPLCooAks=
 			</data>
 		</dict>
 		<key>RongCloudLively.bundle/dark/resources/plugin_item_camera@2x.png</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			fw4d26RfQ6c+5xjhi2CqtMkzypo=
+			8m71uL7bvjVsZtj48z5kib1jM/c=
 			</data>
 			<key>hash2</key>
 			<data>
-			hHFffP9kkMF/pOSh8QCByXJuz3geRpDBL16dObDtoUU=
+			jXuG6ovl9sQOUxo7pjNIVlQ3ouEFWd200VHTP6QmKQM=
 			</data>
 		</dict>
 		<key>RongCloudLively.bundle/dark/resources/plugin_item_camera@3x.png</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			5kS9i+7SWNUzdFVHHLgIlQCx9HM=
+			U5kwD/YpAuofGeJS0LdbAvxSq8k=
 			</data>
 			<key>hash2</key>
 			<data>
-			tRb+7TSKJ0cHohyxzSQcWsmzHl7X5bozlcvwZgk1we0=
+			MGebPa8kl4llzmLwfyUA7SCb30OGjLwddCSkHGtO+EM=
 			</data>
 		</dict>
 		<key>RongCloudLively.bundle/dark/resources/plugin_item_camera_highlighted@2x.png</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			+dAg14mFZiVPI9VIjThOnOjrlZQ=
+			+CXlt5JQhfV9Q6eosacb42KL9kA=
 			</data>
 			<key>hash2</key>
 			<data>
-			USw4TiLkBZuPWGqeLHPTDhjjBjptTriU2QK3ohmMsjc=
+			cJMrbBM5/nIjaro88qdKH83L0Ls+06S7jqmzNB6RMfo=
 			</data>
 		</dict>
 		<key>RongCloudLively.bundle/dark/resources/plugin_item_camera_highlighted@3x.png</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			OoxW3tu+UE+qTqiiyf9M+c890Fg=
+			NOa0bErcBn6xSDvymjUDb4P/C98=
 			</data>
 			<key>hash2</key>
 			<data>
-			1nTx+Y+wuB0HBhtT16MQV2UJognvKa4ismckjJmp8mo=
+			eIh1qCYfHg+XsC0FfzxSdA5atQfqhZM6iGsji+jn7c4=
 			</data>
 		</dict>
 		<key>RongCloudLively.bundle/dark/resources/plugin_item_card@2x.png</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			QM1/QtfTPUccf+D/A8PVRgnLO5Y=
+			tUnL77QgQQTqpQlpgWpvR6R2R30=
 			</data>
 			<key>hash2</key>
 			<data>
-			G6awioVBkvrCg/c5AlK7hxv+XJdly9tvSDq0KRHUXVM=
+			PcA16KrMinP7FfR+7qvbFnRlp9HEp7juE9KwFJoizJ4=
 			</data>
 		</dict>
 		<key>RongCloudLively.bundle/dark/resources/plugin_item_card@3x.png</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			hOxbvQ+2DXK56x42shBrFGsTWN8=
+			vqDul0Hg+s70A0JOh1HQSurQL+k=
 			</data>
 			<key>hash2</key>
 			<data>
-			ED98K/dpSLTYAK74AhbLrZyyzLe2REne97vmpc+u0DE=
+			iTgcmYdziqJ50XOD8ilYyQu0UcGt+k6LlkUr0qUrJTI=
+			</data>
+		</dict>
+		<key>RongCloudLively.bundle/dark/resources/plugin_item_card_highlighted.@2x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			vvvXHoCsG7kVI8XdX1+Bth79Esw=
+			</data>
+			<key>hash2</key>
+			<data>
+			8HnKUTYz+Nlh8pg+growyGIAtUW+cB+ji4QfR9VKflc=
+			</data>
+		</dict>
+		<key>RongCloudLively.bundle/dark/resources/plugin_item_card_highlighted.@3x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			4UoubrcQpKc2uLacBz0OfN2viYs=
+			</data>
+			<key>hash2</key>
+			<data>
+			GEnlulWKd0NmU+sNvW3ROMQWsSlmQR+xTAksSQGNB0w=
 			</data>
 		</dict>
 		<key>RongCloudLively.bundle/dark/resources/plugin_item_card_highlighted@2x.png</key>
@@ -14298,132 +15099,132 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			IwMLwt7AcXWJvAeeLtbRGX9ea/g=
+			Xrcln4ICbUAi1OjtqM6bhKH5Nvc=
 			</data>
 			<key>hash2</key>
 			<data>
-			tFpBNY9Jey9E5gpfMBJUH/JT10QmjFNmmQ1rWzlLMB8=
+			5nCYPuBHzsm4EJfYBHEuAAzBUsKGecuMTHV3oM7cKio=
 			</data>
 		</dict>
 		<key>RongCloudLively.bundle/dark/resources/plugin_item_file@3x.png</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			VSUmPHO6HPUSiALbDcaSATwxdRw=
+			tdpKpP9UiglWK+Q0w+nI6e9vr6U=
 			</data>
 			<key>hash2</key>
 			<data>
-			2/z0xIxWqXXEK7UuHgTT6qxoGA8jIfbcvdGg1ka5GK8=
+			ZEp0iXdYK0qEwlH4MMqIHwyOMDmBW/Ojk22n63mEUHw=
 			</data>
 		</dict>
 		<key>RongCloudLively.bundle/dark/resources/plugin_item_file_highlighted@2x.png</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			1v4cXAH/JISpR1CPti7Q+940MNQ=
+			e8KaHzvJvJk9TbQKeMTOS3ztgR8=
 			</data>
 			<key>hash2</key>
 			<data>
-			pwU8OiuZQktAFnxMuAx4cqHzhL7vCUvjM1sNZeKh7to=
+			xd4tGwFXlSTmMQVOBSIlmlKMlXkalU+iXqD99JoyyFQ=
 			</data>
 		</dict>
 		<key>RongCloudLively.bundle/dark/resources/plugin_item_file_highlighted@3x.png</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			pun2weOqfNpEB8nMcGZ7nk9G590=
+			ESy47mxbTpSp9Oo/nunukXN4cNo=
 			</data>
 			<key>hash2</key>
 			<data>
-			94uYIy/PYgxkmJTT9QkX5a6Oxn4VkEIW3ZjVwSTzEto=
+			qViwBVb42O6CE0EGnGowItr6xnqAJb50JzWiEaf31ms=
 			</data>
 		</dict>
 		<key>RongCloudLively.bundle/dark/resources/plugin_item_location@2x.png</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			X2MABicjXJIzyuoHmlB7V8ph+OQ=
+			MD2rAe4FiZ8WcHrsNl4swY52nuY=
 			</data>
 			<key>hash2</key>
 			<data>
-			xLjueoPfZTK0yrHTnG2MAK7oDXbs0VWtyP/RyZFa1Zw=
+			NBqluTQ+Fu/l1OvgO96KvdJ6bYJks+gE55jQChI5h74=
 			</data>
 		</dict>
 		<key>RongCloudLively.bundle/dark/resources/plugin_item_location@3x.png</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			JvElJfAKhTmowwRzkTgBQJXBNlw=
+			EWomcVFoT1fM8w0e8DJzjFvOa9E=
 			</data>
 			<key>hash2</key>
 			<data>
-			0OkEYEfasWXU6LLzaW7G5vTaG/1ucG7jkMQN3O45I5o=
+			aGPWFAzP9p03ULLGytFO6zV97UZwnRg+YBPwGeCub9s=
 			</data>
 		</dict>
 		<key>RongCloudLively.bundle/dark/resources/plugin_item_location_highlighted@2x.png</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			zlSXlYyHd/Z8g8azxJa24UtGPuw=
+			J1Vp8isCxHYNzhJE3oYovMwIOfU=
 			</data>
 			<key>hash2</key>
 			<data>
-			JuILGv6SXbp2uxbvrASGkZaWkobH7DtVTRASoCoT50A=
+			LkgabyMlm3M/XSmrdhpdWInqhSIULYB7XXY3StPcpL8=
 			</data>
 		</dict>
 		<key>RongCloudLively.bundle/dark/resources/plugin_item_location_highlighted@3x.png</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			LVvQ6mO++gxTwZHc6fvO43zuKQg=
+			AUp6CBK69qN/Cb3LtD+4W9mydFo=
 			</data>
 			<key>hash2</key>
 			<data>
-			xnkbai5hoWc68s4oGYfxXm9wokkhxHrK4/pHd9rB+7M=
+			YRDOsyXKe6pbIBcwRvWOf1EspanCm2iLRptbUKzM2a4=
 			</data>
 		</dict>
 		<key>RongCloudLively.bundle/dark/resources/plugin_item_picture@2x.png</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			x1YXINIFWS7n0Poy8C3FqSokCcw=
+			03E1vwaR+pfFLvqk1Ilvu9mrXcc=
 			</data>
 			<key>hash2</key>
 			<data>
-			1ElxMJV/7P3ZWWoha8Us+a7plRdUe5E3mledBriT9uI=
+			NnMP1MDHqU9aFkVKZX3JyOY/WtLQILSxZ+iIhipuh5I=
 			</data>
 		</dict>
 		<key>RongCloudLively.bundle/dark/resources/plugin_item_picture@3x.png</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			1JtuIpa2n7CaM8RIt2AbyWoEJlQ=
+			j4TyGobB5wObG53rSsgCyeBGNI0=
 			</data>
 			<key>hash2</key>
 			<data>
-			ZHQ7H0ScjPRunJdIQJphbLT/2mwm7JLiRRD9H7Bxopc=
+			AeRMoPluCBkIcruI4oimaKizdy7iml9UQaqzHARhDfU=
 			</data>
 		</dict>
 		<key>RongCloudLively.bundle/dark/resources/plugin_item_picture_highlighted@2x.png</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			wHSGp6HE6u0EWozDHT1wn+gM2m4=
+			lAlE97NdDXXUaYXjbl3w73oADaE=
 			</data>
 			<key>hash2</key>
 			<data>
-			hll+LqIXFuTDwmgfrTxOxXYJzfSEq1UCC7kw+QXWmHs=
+			sSoUJKPfcZ7NwuOfkL9tSCB5Dia3i6CVFpCG93b8kNk=
 			</data>
 		</dict>
 		<key>RongCloudLively.bundle/dark/resources/plugin_item_picture_highlighted@3x.png</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			eMbOphJUP1Hab4TYqGT+EDvXVwg=
+			w+/rELyWsf9RUBHH4N9RVrkR9YA=
 			</data>
 			<key>hash2</key>
 			<data>
-			mhQrh2XGavtO3ksdaRwPdUMDz2fEgOLguYMayt+oFvQ=
+			T/adMN47pvUCW8MYank49zDXTNsejjjGnhWomiGyvhM=
 			</data>
 		</dict>
 		<key>RongCloudLively.bundle/dark/resources/portrait_kefu@2x.png</key>
@@ -14496,22 +15297,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			rrV4cQU/nZ1DkQLMMf37JF0C0F0=
+			4zRzZiSbJR4OgIx306j2a+ms6WI=
 			</data>
 			<key>hash2</key>
 			<data>
-			fY1ZOB9Du/bpqdHGprwzWrV/VmiIvxP7eHtmm4IhMqQ=
+			7iijg9VUs7hif9nPNfuXR1B1O3OVUfb3kjg84vfO9y4=
 			</data>
 		</dict>
 		<key>RongCloudLively.bundle/dark/resources/rc_conversation_list_msg_sending@3x.png</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			tDZeL8f4Z3/zFMY7cS/rfvC1OQU=
+			r4m1K8RkBqoHGQbRlN0OdO0mUQg=
 			</data>
 			<key>hash2</key>
 			<data>
-			/XoN8IKD0zD3Xec7eREEuLsjflSwBDH0GNMVWEcz5zU=
+			/aa1PKAeH0tcL7PmUhBYeuAzdEDz5lN0PalL3QPLek8=
 			</data>
 		</dict>
 		<key>RongCloudLively.bundle/dark/resources/rc_setting@2x.png</key>
@@ -14716,22 +15517,44 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			DiIxeo3TJ+dbd6seGUz+WpxFOGQ=
+			kfzxCX6sRUQ2IxR8JJv0dWTM2aQ=
 			</data>
 			<key>hash2</key>
 			<data>
-			fNtu6pd2MwcV08prL5vhp22BRckjxkZ8fs0rryCHAzc=
+			ulyF8DKEbztzuyCZbc5cDl0c0KL6dA00D1FIzk1dQw4=
 			</data>
 		</dict>
 		<key>RongCloudLively.bundle/dark/resources/up@3x.png</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			VB44aNSevGNk4Li9DHfKuWDkm58=
+			rxfXmftauVBZJsAbEN/arrNN+OI=
 			</data>
 			<key>hash2</key>
 			<data>
-			3TUas+DWC8Mn8n9rWVV53S69tUTYG0owdhfcox2KmoU=
+			KGGFkHYwnaccGub9vW9CbuBtf3zcCGReltWtdR3mkts=
+			</data>
+		</dict>
+		<key>RongCloudLively.bundle/dark/resources/user_detail_start_chat@2x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			gEdZOR0mOQ91ztVRFbzVES2NyQQ=
+			</data>
+			<key>hash2</key>
+			<data>
+			I254AHZoFvtIFwAGdPhFNYCRUP/gZtjFnnErP3TnCyw=
+			</data>
+		</dict>
+		<key>RongCloudLively.bundle/dark/resources/user_detail_start_chat@3x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			UHA0SokX9mOJo3EaOj9XX4oGpT4=
+			</data>
+			<key>hash2</key>
+			<data>
+			qyGI1+PjBbw+XzM+UWc6oLqE6E+OgTJ6+OPWTWkKHYg=
 			</data>
 		</dict>
 		<key>RongCloudLively.bundle/dark/resources/voice_burn@2x.png</key>
@@ -14782,55 +15605,55 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			gafN87hqwRu3IW9ueFKa6dIdudY=
+			s6OuTvXCsxnkU24WxnUnfsAeL0o=
 			</data>
 			<key>hash2</key>
 			<data>
-			0eJCu9eTxVqwbZVN9S74J4HsmbK4D2WKn+M1wyGW6LQ=
+			FdOtO4vGYodptLv15Edtg4YcPv3L6H0nHYIqdH4Ct28=
 			</data>
 		</dict>
 		<key>RongCloudLively.bundle/light/resources/Comment@2x.png</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			4La08engq2d5tTv4scXOJazMsgU=
+			JqykDrpVD4qF14Hdw4yJSog3Plk=
 			</data>
 			<key>hash2</key>
 			<data>
-			tf3BK76c6qP0beHlCVZpVMiC1I+9RpzNgucXYHw2bVQ=
+			znI1cNX11PqvymXxl+V5CFiqxxdEKUIB2K5Y5Wagumg=
 			</data>
 		</dict>
 		<key>RongCloudLively.bundle/light/resources/Comment@3x.png</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			LchquheyWVFsI+kasPzb9CtJNaQ=
+			12+I9fwwLMiqXNAM3xHw8XBCrUY=
 			</data>
 			<key>hash2</key>
 			<data>
-			LLOY3N2G95vM5T/zwlEyLzgFVlrJke7uV6vCcJ7ONxk=
+			oReO3BIkkfRH7XvEx1wgk8nDlo1EL9wlX5Bd3j1hl0c=
 			</data>
 		</dict>
 		<key>RongCloudLively.bundle/light/resources/Comment_highlighted@2x.png</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			My8E687GXhA7d8JnvvWAhp66Zpc=
+			1r93HnGA1jGzSk2ZzQDxu0Eha6I=
 			</data>
 			<key>hash2</key>
 			<data>
-			uFh328SDszngh7v4DkDfiJ5Q9zK9gGhmWJeBcytdOOw=
+			A3U94vuLUFQ7NrnkyIzZ8KoZNZUlhFYCHEPFffGpEjg=
 			</data>
 		</dict>
 		<key>RongCloudLively.bundle/light/resources/Comment_highlighted@3x.png</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			MGXvSBDNFVlv5uHtvR0nQDfg3HE=
+			2R+6jAYwv/drUn8Ym8CLsIdvYuI=
 			</data>
 			<key>hash2</key>
 			<data>
-			Jp7w41FVtsHGUV/s7bZmIsHBgbbiqUHuRhx3bONiSHI=
+			IBFjN0jPK8AlhgIFEf75P0TKZbCqxoRNtkYDJCZp/sg=
 			</data>
 		</dict>
 		<key>RongCloudLively.bundle/light/resources/ExcelFile@2x.png</key>
@@ -15299,22 +16122,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			uIS9ROJXjW9AUQNzgAIVVsvu2ns=
+			Bl+IDoztpyt6YjMMN3+BDaSxZ1U=
 			</data>
 			<key>hash2</key>
 			<data>
-			zVsnQuTEQO1+tYkSssEa5RVgThUpH/Sx3akGuhIOMRE=
+			RuojyHskQ6sTRZWMfZQyIxnq6JD6eUeHPcGk/cwfkcs=
 			</data>
 		</dict>
 		<key>RongCloudLively.bundle/light/resources/chat_to_bg_white@3x.png</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			GtG/FvdQqAiydK2lTLYlpHcrqu0=
+			NJVsJNDJNPvlmCNqeXjiH/qIAsY=
 			</data>
 			<key>hash2</key>
 			<data>
-			jVlTONR3Z7pPgamdGYIaKH/8yrzhHA5uSTRmOxJ/t/I=
+			rrrNMAiOYXt1/NDbfc6d3DRpVVhkd2sxK69+4zTlXUg=
 			</data>
 		</dict>
 		<key>RongCloudLively.bundle/light/resources/close_burn@2x.png</key>
@@ -15669,6 +16492,28 @@
 			JmqM1R8yrhX/j+et5wc0rgmjxYz17avL027mjaJXZmk=
 			</data>
 		</dict>
+		<key>RongCloudLively.bundle/light/resources/disable_select@2x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			az+YoFGLe1EkRal5iUNeIdj2r4k=
+			</data>
+			<key>hash2</key>
+			<data>
+			/YZrYPxOri7by4yPqozBXtB0URNC4kBIbDWpuKxLPts=
+			</data>
+		</dict>
+		<key>RongCloudLively.bundle/light/resources/disable_select@3x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			fnSyhCT0dDmfAmRseItR4ygMLao=
+			</data>
+			<key>hash2</key>
+			<data>
+			tQ8TKcHzqVAjDrk653eGZ3uiCVxaLQVxHPC56k1CWXY=
+			</data>
+		</dict>
 		<key>RongCloudLively.bundle/light/resources/edit_cancel@2x.png</key>
 		<dict>
 			<key>hash</key>
@@ -15955,6 +16800,72 @@
 			gA6K308SWgsr82lgLTwJZT0/BcR/1PjaK0QQyxN2uzM=
 			</data>
 		</dict>
+		<key>RongCloudLively.bundle/light/resources/friend_apply_more@2x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			yCSbEGx5rStnOq0+gS/E6fLZvtU=
+			</data>
+			<key>hash2</key>
+			<data>
+			g6zscpV6eJzCZDxSsVZ5EuOU1Iqkq1sNnifx1ul0FkY=
+			</data>
+		</dict>
+		<key>RongCloudLively.bundle/light/resources/friend_apply_more@3x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			mLuJrEbiaP6Sdrz5ZGYk4DqmAZo=
+			</data>
+			<key>hash2</key>
+			<data>
+			YRT4MkfB8wrvy2ePkJ8ybhZbYaZUhQpwWsKmJlGHKcA=
+			</data>
+		</dict>
+		<key>RongCloudLively.bundle/light/resources/friend_list_add_new@2x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			iD5NBt7SdiUZcCDxFSz3P+9q1VA=
+			</data>
+			<key>hash2</key>
+			<data>
+			Dr+i/cgR0M4dHBVnN8ISd9DlCDhGFtFfjoasAnTyjyE=
+			</data>
+		</dict>
+		<key>RongCloudLively.bundle/light/resources/friend_list_add_new@3x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			f1sbwdqfNOvpZdRgwiI0eMk39gc=
+			</data>
+			<key>hash2</key>
+			<data>
+			2dNa8mWCZ9mELrzoP2eQ9TvVSBLY7eNkugLbKM7qk14=
+			</data>
+		</dict>
+		<key>RongCloudLively.bundle/light/resources/friend_not_exist@2x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			32kScA2Z8axfyLtNop8qefrFsZM=
+			</data>
+			<key>hash2</key>
+			<data>
+			qnQoIOxBYD9Bu7W4RpaFw7aeczhR9FbJBPDfFNs/qPA=
+			</data>
+		</dict>
+		<key>RongCloudLively.bundle/light/resources/friend_not_exist@3x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			se1mhgrOtRHzTDFzdyhn7hxiu/4=
+			</data>
+			<key>hash2</key>
+			<data>
+			lkcu24zGr/8gw+t/+CkBtadMQqxpY2ABck0n/9YhGTo=
+			</data>
+		</dict>
 		<key>RongCloudLively.bundle/light/resources/from_burn_picture@2x.png</key>
 		<dict>
 			<key>hash</key>
@@ -16065,6 +16976,28 @@
 			h86FONWHmKeoYmmm4SJQM6jGyUY6+VyXzurweNC1+8o=
 			</data>
 		</dict>
+		<key>RongCloudLively.bundle/light/resources/gender_cell_check@2x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			MYekVf2tsq9XdtYkEcBjUDNDEtU=
+			</data>
+			<key>hash2</key>
+			<data>
+			hfRe1lu1r5IYWbBjtmTB4BgOtWAZ3cLlLoii/GrqJsQ=
+			</data>
+		</dict>
+		<key>RongCloudLively.bundle/light/resources/gender_cell_check@3x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			lKUfC33laXhPijBhb8FpKaq/rF0=
+			</data>
+			<key>hash2</key>
+			<data>
+			7yimCxHwAuS1pNC1j0yTaL38JcQr7ZRUAvP6ACt9xXo=
+			</data>
+		</dict>
 		<key>RongCloudLively.bundle/light/resources/gif_loadfailed@2x.png</key>
 		<dict>
 			<key>hash</key>
@@ -16151,6 +17084,116 @@
 			<key>hash2</key>
 			<data>
 			ipP9gl6Q/C5B3M4kZMpj2jM7xqZuEuqDvM0S7/uKz1U=
+			</data>
+		</dict>
+		<key>RongCloudLively.bundle/light/resources/group_follow_remove_btn@2x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			lJooz5CZXUpqoj1jSG4iiKzvk4A=
+			</data>
+			<key>hash2</key>
+			<data>
+			tWM43yXBN1cQXh+RfvkF7lQxNgiegVKGnyXhFflPzx8=
+			</data>
+		</dict>
+		<key>RongCloudLively.bundle/light/resources/group_follow_remove_btn@3x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			6xrI2CKgYbsohY3Kgz3grpNhL/A=
+			</data>
+			<key>hash2</key>
+			<data>
+			s4hN6RXolna4zgjZ/5tvqyyPDfBPwHdLATjUFVWPgmo=
+			</data>
+		</dict>
+		<key>RongCloudLively.bundle/light/resources/group_manage_add_member@2x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			smBxk1CxUC9+6vNPv2LTrEorw/o=
+			</data>
+			<key>hash2</key>
+			<data>
+			AfatJKNN+Tza2Hv8aQFlq0dSCAurc96FlN32JvqJzQo=
+			</data>
+		</dict>
+		<key>RongCloudLively.bundle/light/resources/group_manage_add_member@3x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			FBWUi6X4uQApCRR+9JXMG8xSEJk=
+			</data>
+			<key>hash2</key>
+			<data>
+			6yuIaeol55+X/oI7WBfHdowLmgcTJeY6X7Xc7lOnEdM=
+			</data>
+		</dict>
+		<key>RongCloudLively.bundle/light/resources/group_member_add@2x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			lDbnTkWKFKS3YptBNPSxu8t5I3E=
+			</data>
+			<key>hash2</key>
+			<data>
+			Svnf88V4K98E8Ct39n2/sMCFU7GqD8CksPI7r64k8w0=
+			</data>
+		</dict>
+		<key>RongCloudLively.bundle/light/resources/group_member_add@3x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			sLSTe+0kgyvChkBA5pxPI1MOLvo=
+			</data>
+			<key>hash2</key>
+			<data>
+			1gQqxIwJoCcxTU4/tSkrza7d+O5anvtcXBKNYfsnOiM=
+			</data>
+		</dict>
+		<key>RongCloudLively.bundle/light/resources/group_member_remove@2x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			LF3x5oygIqdulZev203YP7fuqMQ=
+			</data>
+			<key>hash2</key>
+			<data>
+			7d/lcJ80QoTvwmOj9k7koA0VjBngzgmPsAFBwJSwloQ=
+			</data>
+		</dict>
+		<key>RongCloudLively.bundle/light/resources/group_member_remove@3x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			94uTdvU+hwOTKsaP490lFNZJ25s=
+			</data>
+			<key>hash2</key>
+			<data>
+			AF5WLq62ybMMMfRhWtohFzhWymJaATNwlOchRA7d2o0=
+			</data>
+		</dict>
+		<key>RongCloudLively.bundle/light/resources/group_mention_all@2x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			nNSO1GighZFtqTRkrsLA3qBPZIg=
+			</data>
+			<key>hash2</key>
+			<data>
+			O6WxEk8cdUR7cBVWNEtMXeFuIyleEpVYmSp6zVGwf5o=
+			</data>
+		</dict>
+		<key>RongCloudLively.bundle/light/resources/group_mention_all@3x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			p9OBDG4Z/YoI7oNn7H5PJUGGClU=
+			</data>
+			<key>hash2</key>
+			<data>
+			dCf2sOFR+qXPzDEyaybradRr4jJnXoKtSG5HrrJOhy0=
 			</data>
 		</dict>
 		<key>RongCloudLively.bundle/light/resources/icon_account@2x.png</key>
@@ -17070,264 +18113,264 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			YXSOOKP6r2z2mLbAcJfpn5Hutjc=
+			Go3yDWCTdqqdN6dHAfwRdz6dZ9w=
 			</data>
 			<key>hash2</key>
 			<data>
-			9e5iGVHZacY5+Hi28VAvF/G1dfne3KBpb5JW54riPVc=
+			M+dPpT4SXoOwHlahU/Kf1kJlSSHdM3HU+sO/9ojVTuo=
 			</data>
 		</dict>
 		<key>RongCloudLively.bundle/light/resources/plugin_item_burn@3x.png</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			/5xLVlniPjDOJjSRnrTm576uTOk=
+			fDwZnQgtJ/33AwTchxR4C0u2oaQ=
 			</data>
 			<key>hash2</key>
 			<data>
-			DsTrzfVnOpN7uwU1Lw5ldzwlcTDmEXIVZ/w8tMn2trk=
+			IO4HMzhkqvA5O7jjyDNWYx/M4CKL7y5jDyuOKiFNZGg=
 			</data>
 		</dict>
 		<key>RongCloudLively.bundle/light/resources/plugin_item_burn_highlighted@2x.png</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			5lRmKAHDSgt0kzc7dynoBP5jpm0=
+			sHzsmZxsgNvolDq6uVg0IT0o2QI=
 			</data>
 			<key>hash2</key>
 			<data>
-			F9qZiTzrEvKZIcigjWP+ceDAYgXOM1U8RvrVrM542g8=
+			gIKCzNN/glKbFuHtlG201a5M7XZgIyLzenZ/P9hpTs0=
 			</data>
 		</dict>
 		<key>RongCloudLively.bundle/light/resources/plugin_item_burn_highlighted@3x.png</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			Sx1dz5NvdNKw+ww86SCSlOtJ4Mw=
+			geiuzcnm6HHgxWNbWEnOHioWgoY=
 			</data>
 			<key>hash2</key>
 			<data>
-			vUH+K4oYU+3MQifOqlT5Y4gFLd8ZsTOYRLCbdGUOYTQ=
+			uW6jmsQ7EwIKR5Zwa7JeDQs8Tig1tYBrHIk/FXb2Gto=
 			</data>
 		</dict>
 		<key>RongCloudLively.bundle/light/resources/plugin_item_camera@2x.png</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			FweVKykj54DufJ9T5jGgTISGx5o=
+			sn9XKq8ESZs3E60FaTEvD7QRq4c=
 			</data>
 			<key>hash2</key>
 			<data>
-			gdsnVoaWF9o/hRo/JguxtZ/+cggYVIrYZ1Dew8HwTj4=
+			ziQiwgaSJRl8Nz9yOUb9O4UV5XGLnTOSAL4RPWUV22w=
 			</data>
 		</dict>
 		<key>RongCloudLively.bundle/light/resources/plugin_item_camera@3x.png</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			ckN3Mw6H1NYAgpp+WbSAh+fl34Q=
+			YPHxkUsbyTRPfukr7pGXeBm8DLA=
 			</data>
 			<key>hash2</key>
 			<data>
-			vGS1sRTJYVrwBQMO7GjV6KT7GEdNe+6yYUEoXnvE1zw=
+			1OyerduwSd10qZW/mlEtdugJAYS1p4VN3/jbAlWyKuE=
 			</data>
 		</dict>
 		<key>RongCloudLively.bundle/light/resources/plugin_item_camera_highlighted@2x.png</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			gLIB8yjAAPyIttOHsRNgP/HxwvU=
+			Q6HkaJe+9XYnAXiknF826Ej2wPg=
 			</data>
 			<key>hash2</key>
 			<data>
-			a2yOH1SeWTv+JbBvbfgOnl2TYId97VbM1VBztX8aBa4=
+			OpPoopuiZEy5qQiuq+XgUjPFWVUPhfO/UoyMlzbwkLo=
 			</data>
 		</dict>
 		<key>RongCloudLively.bundle/light/resources/plugin_item_camera_highlighted@3x.png</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			aqIHWLFCRUFgOyIIrT0oQ7sJgb0=
+			F4G1gJ123qJpB+RqzemjMvKosSU=
 			</data>
 			<key>hash2</key>
 			<data>
-			IXyNSNcG755M0JGCFNuAOS+Ftnl8aAkE+FpFVnUVJe0=
+			zBGnwAwe/Sg1hSl8m3mlqebE5lxKceQ0lxr7cvBmOU8=
 			</data>
 		</dict>
 		<key>RongCloudLively.bundle/light/resources/plugin_item_card@2x.png</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			A+dXhOG3LwtO4Vh+7ToAqs6MMno=
+			MUpEgB0CRMbut8yIoExdW5B9zOg=
 			</data>
 			<key>hash2</key>
 			<data>
-			stFI+ZY5C+P9D7jxoTpSykWSzOWLjx3TO1eOT7hUs5w=
+			l1SeH1T3UHUn/q3SELU9cen0exwSgqa5O+kCtz7JVQg=
 			</data>
 		</dict>
 		<key>RongCloudLively.bundle/light/resources/plugin_item_card@3x.png</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			1bA187jtULAVL9aIQg4dO0+AmIk=
+			xOh2BfNeZmz8Ey3sxsZtcYjGMMU=
 			</data>
 			<key>hash2</key>
 			<data>
-			+G1t7FlnyNqzYplB96VmvrB4VFcEVdwTcHsrbrpw7f4=
+			zesTomyZfpg2iQf92oG0WfOPNovjf2fO0zZMNqFfdD4=
 			</data>
 		</dict>
 		<key>RongCloudLively.bundle/light/resources/plugin_item_card_highlighted@2x.png</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			H9HiLHEdisj775ESpjEj+WlIhnc=
+			Q2BJIFgDH7QzOQ1IfaUJfCiq61w=
 			</data>
 			<key>hash2</key>
 			<data>
-			1of9tgnN3ZAmIQ/L6/TIuy4402XoDrkoUcLOQENe00I=
+			69/4/S3IBxkAD/UdijhD4BzOqY8W1NgxLEyT48Fe8+s=
 			</data>
 		</dict>
 		<key>RongCloudLively.bundle/light/resources/plugin_item_card_highlighted@3x.png</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			IyQUX1JnRVJAEY0jW0117AmiOnY=
+			m2nMRJ+rs4UvUoSaUfMtTryJxdU=
 			</data>
 			<key>hash2</key>
 			<data>
-			gf+E4IaPgfR/xcd2Hs6GZIK/NBSA5kpRbCB20q8lSNw=
+			8xtbTXKnItjAOscjqdIhYnSJlzKrBDaHrqW4ZiVlGIo=
 			</data>
 		</dict>
 		<key>RongCloudLively.bundle/light/resources/plugin_item_file@2x.png</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			wqWAjzEW6GODjuYiGrhhqUi62/I=
+			X+vD/Mevhp5ARiULM83Nn6nwSk8=
 			</data>
 			<key>hash2</key>
 			<data>
-			UQSL39jlTyJ450/qV/ijFnw5Jyf895i1wyAHQ6i51T4=
+			7qXZd0TWl+m7VyO8rs5PUlWzsmxjIGdOJEaF9IOaBwg=
 			</data>
 		</dict>
 		<key>RongCloudLively.bundle/light/resources/plugin_item_file@3x.png</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			L7VGB89JlEVAgGC3pKK1xJbQ8c4=
+			MuroeTkkFwGibWMoBaD4mjvJ50U=
 			</data>
 			<key>hash2</key>
 			<data>
-			6WCjI/5QKVsvWxHbKM9ziDftm5uu9A1fwQNAjDpsZ9c=
+			Qxr2POioWwZjFzndRiDl0J+TxLY5eRR2IrqZqSAsvx8=
 			</data>
 		</dict>
 		<key>RongCloudLively.bundle/light/resources/plugin_item_file_highlighted@2x.png</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			QrWPIqwOuXheKemvxra+aZkqFtQ=
+			xvU3rpXcNsHxePmXHAbyircfbDs=
 			</data>
 			<key>hash2</key>
 			<data>
-			lvFkN8GwyIsrxMDpZX8T19OS7uwdtJ1q51QLfndfAb0=
+			ayb29VwbHgm95COyLymmL1ZoGp1C3fHnFoow1H/Uew4=
 			</data>
 		</dict>
 		<key>RongCloudLively.bundle/light/resources/plugin_item_file_highlighted@3x.png</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			piY7PQBAnr/Yog558Q4mlbRcH7E=
+			A5BTcpVBkEauoXTpj6Wm9Xs6PoE=
 			</data>
 			<key>hash2</key>
 			<data>
-			4FhCC7htyKLhcCvTtzPU8PlT3iCNPZ4M48OrCsaZSeA=
+			pQ1T1XmGpPFJbZHjWPJDsPuol35EV8v8SDJ13tx1fZo=
 			</data>
 		</dict>
 		<key>RongCloudLively.bundle/light/resources/plugin_item_location@2x.png</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			HH1RnkS/RPXlOaXB3fX/TyyLc8c=
+			LLiUIframwtbXmtaQM10DUpvDc0=
 			</data>
 			<key>hash2</key>
 			<data>
-			kELAPFzq9uKUFLWtfr7oHD3Ju3rLUB43u9IUp6jDjRg=
+			eC0p02dGK8wi0aqXO67molgF9ljtqPrgQFf8pTKp8tY=
 			</data>
 		</dict>
 		<key>RongCloudLively.bundle/light/resources/plugin_item_location@3x.png</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			WoykIys3eIL7gCIopMFPg6vhheo=
+			TgOH28XJYHPvjHsMjNo1EhrZ0FA=
 			</data>
 			<key>hash2</key>
 			<data>
-			WyoeMOk41npRP21l1p1woJ7EQDzW/pX0eq1ebouMlw0=
+			b8BeEjbicrQTiQmmPn1HroLjb7nuTYysK68giF7yvLI=
 			</data>
 		</dict>
 		<key>RongCloudLively.bundle/light/resources/plugin_item_location_highlighted@2x.png</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			DT0qPcK98u0gatBT5sPs/L0vCic=
+			WXKIGCLVe7z2ZqBcmlRYs9bgI3s=
 			</data>
 			<key>hash2</key>
 			<data>
-			8rOC1uD9pqpouytoCgd3a1mhvZ+qzGG/4XfmUkF50DQ=
+			UKQFdF5pXEctTxKOU3v4E/Ahqj0iql7PCmYxbdqJI9o=
 			</data>
 		</dict>
 		<key>RongCloudLively.bundle/light/resources/plugin_item_location_highlighted@3x.png</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			wkK2IRBPMoHq4EhLf2ubprGngmw=
+			8uJHP4lKxcWDzBlbSNj05TfHfYk=
 			</data>
 			<key>hash2</key>
 			<data>
-			8axhs3PEO/MLGwtggScjBnZMoXE++QwDVsETKt+Rk6Q=
+			rtChSTGCsIsKWO0Oukao3zj3RsEYimaFOVsGsmUIMEU=
 			</data>
 		</dict>
 		<key>RongCloudLively.bundle/light/resources/plugin_item_picture@2x.png</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			SFsLDi9oljtt045YMBzX8DQi0Q8=
+			50Wa7Ppr8sHUxPso81pKn+BHsus=
 			</data>
 			<key>hash2</key>
 			<data>
-			D69+s2iy893xSS2i1+glGP8syuVbd2uKQR0KjpteKa4=
+			tnIFDyXM1mFthblKo69sfZtNNs7rTYcXC5DiSS+49kM=
 			</data>
 		</dict>
 		<key>RongCloudLively.bundle/light/resources/plugin_item_picture@3x.png</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			ViRkLEQPyOYlhFtIAle+YXj5IlY=
+			nHkjpeW1OkUaZ01hTiWfR3CzVTw=
 			</data>
 			<key>hash2</key>
 			<data>
-			5CIEx0JvHWkVNA864ft0NAJqBOKvv8pPw4Qv5yvSKkM=
+			3CPtEvrKqR6E6F6o0MlmO+vmDFFL7KopsvhH4hlkTc8=
 			</data>
 		</dict>
 		<key>RongCloudLively.bundle/light/resources/plugin_item_picture_highlighted@2x.png</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			jHOPSbrODoPlarKFh3Yuj1Dq4/Y=
+			ZlWayd/23G/BKWWZC+Lt9MrU2Lk=
 			</data>
 			<key>hash2</key>
 			<data>
-			WvAk1Lo2FR9dU/A89NilgsT7PbRGmQ+AW2te0CxPnXI=
+			E2J9kqqUy2/yARJplZIu4EgsGhl7knwbhhBQYzzjM00=
 			</data>
 		</dict>
 		<key>RongCloudLively.bundle/light/resources/plugin_item_picture_highlighted@3x.png</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			ZDrORk3rjEkJ4Sj42D1WMHfGwAY=
+			sFw+J2eH4tbI/5RI8ouDREgxIes=
 			</data>
 			<key>hash2</key>
 			<data>
-			aTw1GFav02eMVucykdXVhQp5dQ1jH/mShA3ueI6FP68=
+			yiUACIk4dRmNgSpUB+JBoo9HGjy7mh5VBlzldWcKUA4=
 			</data>
 		</dict>
 		<key>RongCloudLively.bundle/light/resources/portrait_kefu@2x.png</key>
@@ -17917,22 +18960,44 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			NHrsDnBaAvRBkboadX8lNFfl6mE=
+			FPoRNHRs8HN9dHTE2cdGmjmfpnQ=
 			</data>
 			<key>hash2</key>
 			<data>
-			xl/j9U/W6it0Q04f9n2IOuuGiIxMRgOCDoLWNTY/2Uo=
+			G5KsBHz2lJEv6ypF8BrjiT9kVSn5Rd+W+jrUAXBrm7Q=
 			</data>
 		</dict>
 		<key>RongCloudLively.bundle/light/resources/up@3x.png</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			JqX+ObnHJTVGd5fXcMXbf1hZ5/0=
+			3MzVPSb3mqqHEKNXIxM4Qgq3scM=
 			</data>
 			<key>hash2</key>
 			<data>
-			3kdyc/bSMq825UQ0eUpNOOl4iWs56H2wR+wKXOp53KA=
+			nMCtyzG1cFJIy3M6MVGERmXkmsnotlSorlxe53J51BU=
+			</data>
+		</dict>
+		<key>RongCloudLively.bundle/light/resources/user_detail_start_chat@2x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			n0m5WWJUeMNESwMfJx7Rah6Hr84=
+			</data>
+			<key>hash2</key>
+			<data>
+			xe0d8dLzsPcOEhqPcTpZoMelzGyrv9JIBoHsw37zRRM=
+			</data>
+		</dict>
+		<key>RongCloudLively.bundle/light/resources/user_detail_start_chat@3x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			17tcKXCMzYG43u6389TkNaul8MA=
+			</data>
+			<key>hash2</key>
+			<data>
+			ZhivSfu54FLroSl68Gz+wX2jisy3KkBMBmlKGmIwfvU=
 			</data>
 		</dict>
 		<key>RongCloudLively.bundle/light/resources/voice_1@2x.png</key>
@@ -18181,22 +19246,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			tPYSMnYvsJ93p9NnHzqa8T5jv/0=
+			raLGGPEdJMggY0ikHveneg+5tWM=
 			</data>
 			<key>hash2</key>
 			<data>
-			+pzy0N7WBXDhUF1AVQI1APCLFliLi7XBrgkfmkxhZ1M=
+			Xxv4leygRnvZz/HqOi4C5dGUNptQAjidDnR0F8dQOqU=
 			</data>
 		</dict>
 		<key>ar.lproj/RongCloudKit.strings</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			g+4JmPQUM9ZF8OuhV12MPG3fclE=
+			UEgcQ0S0zNhS2pnZuL6/QFhBAwc=
 			</data>
 			<key>hash2</key>
 			<data>
-			380YCvLzQap80F7TKYadGwRwtflAhhtuYapVdDXi7Bo=
+			4uzmdeQryKu/mNa88PS7ij7XtIOG6pm9WexMlBkcPGQ=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -18205,11 +19270,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			wDi4t2s778+mIYFWRPE5f2anKig=
+			qH/UTHidBRXH6inS+z4qtivZGK4=
 			</data>
 			<key>hash2</key>
 			<data>
-			kIGr45rJUgbQ6CU0cK8SM1SZfrc7BYcYdXlwt+na9EM=
+			6n7rGqI7RvLYuOcD44mC1Qz2vtZO8aCLrrtem7zeL4s=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -18218,11 +19283,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			twQPb1tow0+hLrtrthpk51eLUGU=
+			nuPdAAkYbAEG5yHU0JzCAuGY2iU=
 			</data>
 			<key>hash2</key>
 			<data>
-			0/G6xgMwKuSHpp/sYIBkWZWniCCEfZtTcvIxQWoj2lk=
+			IjgFF6bhvSYno6ZCVNRqwjRA62O2XAbb/cwbq5MGgOY=
 			</data>
 			<key>optional</key>
 			<true/>

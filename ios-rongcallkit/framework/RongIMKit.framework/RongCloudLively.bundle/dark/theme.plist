@@ -13,19 +13,27 @@
 		<key>text_secondary_color</key>
 		<string>#7C838E</string>
 		<key>common_background_color</key>
-		<string>#141414</string>
+		<string>#2D2D32</string>
 		<key>auxiliary_background_1_color</key>
-		<string>#1E1E1E</string>
+		<string>#191A1F</string>
 		<key>auxiliary_background_2_color</key>
-		<string>#7CA9FF</string>
-		<key>mask_color</key>
-		<string>#14141480</string>
+		<string>#408FFF</string>
+		<key>view_background_color</key>
+		<string>#191A1F</string>
+		<key>conversation-list_background_color</key>
+		<string>#2d2d324D</string>
 		<key>line_background_color</key>
 		<string>#FFFFFF1A</string>
-		<key>link_color</key>
-		<string>#0047FF</string>
 		<key>selected_background_color</key>
-		<string>#FFFFFF14</string>
+		<string>#FFFFFF1A</string>
+		<key>mask_color</key>
+		<string>#00000080</string>
+		<key>pop_layer_background_color</key>
+		<string>#2D2D32</string>
+		<key>link_color</key>
+		<string>#FFFFFF</string>
+		<key>highlight_color</key>
+		<string>#2D2D32</string>
 		<key>success_color</key>
 		<string>#17EA61</string>
 		<key>hint_color</key>
@@ -34,18 +42,14 @@
 		<string>#D1D1D1</string>
 		<key>clear_color</key>
 		<string>#FFFFFF00</string>
-		<key>view_background_color</key>
-		<string>#232323</string>
-		<key>conversation-list_background_color</key>
-		<string>#14141480</string>
 		<key>network_Indicator_view_bg_color</key>
 		<string>#F74D434D</string>
-		<key>pop_layer_background_color</key>
-		<string>#323232</string>
 		<key>control_title_white_color</key>
 		<string>#FFFFFF</string>
-		<key>highlight_color</key>
-		<string>#0047FF14</string>
+		<key>conversation_stick_color</key>
+		<string>#2D2D32</string>
+		<key>auxiliary_view_color</key>
+		<string>#4C4D57</string>
 	</dict>
 	<key>images</key>
 	<dict>
@@ -103,13 +107,18 @@
 		<string>plugin_item_burn.png</string>
 		<key>conversation_plugin_item_destruct_highlighted_img</key>
 		<string>plugin_item_burn_highlighted.png</string>
+		<key>conversation_plugin_item_comment_img</key>
+		<string>Comment.png
+Comment.png</string>
+		<key>conversation_plugin_item_comment_highlighted_img</key>
+		<string>Comment_highlighted.png</string>
 		<key>conversation_msg_edit_cancel_img</key>
 		<string>edit_cancel.png</string>
 		<key>conversation_msg_edit_collapse_img</key>
 		<string>edit_collapse.png</string>
 		<key>conversation_msg_edit_confirm_img</key>
 		<string>edit_confirm.png</string>
-		<key>conversaiton_msg_edit_emoji_img</key>
+		<key>conversation_msg_edit_emoji_img</key>
 		<string>edit_emoji.png</string>
 		<key>conversation_msg_edit_expand_img</key>
 		<string>edit_expand.png</string>
@@ -213,6 +222,26 @@
 		<string>sight_preview_cancel.png</string>
 		<key>video_player_done_btn_img</key>
 		<string>sight_preview_done.png</string>
+		<key>friend_apply_more_img</key>
+		<string>friend_apply_more.png</string>
+		<key>friend_list_add_new_img</key>
+		<string>friend_list_add_new.png</string>
+		<key>group_member_remove_img</key>
+		<string>group_member_remove.png</string>
+		<key>group_member_add_img</key>
+		<string>group_member_add.png</string>
+		<key>group_member_disable_select_img</key>
+		<string>disable_select.png</string>
+		<key>group_manage_add_member_img</key>
+		<string>group_manage_add_member.png</string>
+		<key>group_manage_gender_cell_check_img</key>
+		<string>gender_cell_check.png</string>
+		<key>user_profile_start_chat_img</key>
+		<string>user_detail_start_chat.png</string>
+		<key>friend_search_not_exist_img</key>
+		<string>friend_not_exist.png</string>
+		<key>group_mention_all_img</key>
+		<string>group_mention_all.png</string>
 	</dict>
 </dict>
 </plist>

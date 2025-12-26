@@ -21,6 +21,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 在 view 上配置 searchBar
 - (void)configureSearchBar:(UIView *)bar;
+
+- (void)displayEmptyView:(BOOL)display;
 @end
 
 NS_ASSUME_NONNULL_END

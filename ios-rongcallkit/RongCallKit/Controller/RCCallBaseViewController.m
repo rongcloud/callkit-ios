@@ -978,6 +978,7 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
 
     if (callStatus == RCCallActive) {
         self.asrButton.hidden = NO;
+        self.asrButton.frame = CGRectMake(RCCallHorizontalMargin, RCCallMiniButtonTopMargin + RCCallStatusBarHeight + RCCallMiniButtonLength + RCCallHorizontalMargin, 50, 30);
     } else if (callStatus != RCCallHangup) {
         self.asrButton.hidden = YES;
     }
@@ -1502,7 +1503,7 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
         }
 
         if (callStatus == RCCallActive) {
-            self.cameraSwitchButton.frame = CGRectMake(xRTL,
+            self.cameraSwitchButton.frame = CGRectMake(self.view.frame.size.width - RCCallHorizontalMiddleMargin - RCCallCustomButtonLength,
                                                        RCCallMiniButtonLength + RCCallStatusBarHeight,
                                                        RCCallMiniButtonLength, RCCallMiniButtonLength);
             self.cameraSwitchButton.hidden = NO;

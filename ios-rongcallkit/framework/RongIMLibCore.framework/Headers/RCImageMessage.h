@@ -37,8 +37,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// 图片消息的缩略图
 @property (nonatomic, strong, nullable) UIImage *thumbnailImage;
 
-/// 缩略图的 Base64 字符串。
-@property (nonatomic, copy, readonly, nullable) NSString *thumbnailBase64String;
+/// 缩略图的 Base64 字符串，根据 thumbnailImage 属性生成，当 thumbnailImage 重新设置时，该字段会自动更新。
+/// - Note: 允许用户主动设置该字段，设置后需要用户维护缩略图数据的完整性，否则可能导致接收端缩略图显示异常。
+@property (nonatomic, copy, nullable) NSString *thumbnailBase64String;
 
 /// 缩略图的宽度。
 @property (nonatomic, assign, readonly) NSInteger thumWidth;

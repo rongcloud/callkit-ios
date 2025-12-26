@@ -1001,6 +1001,12 @@ typedef NS_ENUM(NSUInteger, RCDataSourceType) {
 /// - Returns: SDK中缓存的用户信息
 - (nullable RCUserInfo *)getUserInfoCache:(NSString *)userId;
 
+/// 获取用户信息(首先从缓存中获取, 没有缓存从远端获取)
+/// - Parameters:
+///   - userId:  用户ID
+///   - completeBlock:completeBlock
+- (void)getUserInfo:(NSString *)userId complete:(void (^)(RCUserInfo *userInfo))completeBlock;
+
 /// 清空SDK中所有的用户信息缓存
 /// 
 /// 使用此方法，会清空SDK中所有的用户信息缓存。
