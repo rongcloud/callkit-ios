@@ -168,4 +168,7 @@
  */
 - (void)didLongPressCellPortrait:(RCConversationModel *)model;
 
+/// cell 收到通知，显示已更新
+- (void)didUpdateCell:(RCConversationCell *)cell model:(RCConversationModel *)model;
+
 @end

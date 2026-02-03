@@ -159,7 +159,7 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 /*!
- 语音识别监听器
+ 智能语音代理
  */
 @protocol RCCallASRDelegate <NSObject>
 
@@ -203,6 +203,20 @@ NS_ASSUME_NONNULL_BEGIN
  @remarks 代理
  */
 - (void)didReceiveRealtimeTranslationContent:(RCRTCRealtimeTranslationContent *)content;
+
+/*!
+ 智能总结开始通知回调
+ 
+ @remarks 代理
+ */
+- (void)didReceiveStartSummarization:(NSString *)taskId;
+
+/*!
+ 智能总结关闭通知回调
+ 
+ @remarks 代理
+ */
+- (void)didReceiveStopSummarization:(NSString *)taskId;
 
 @end
 
@@ -448,7 +462,7 @@ NS_ASSUME_NONNULL_BEGIN
  @discussion
  设置语音识别监听器
  
- @remarks 语音识别设置
+ @remarks 智能语音
  */
 - (void)setASRDelegate:(id<RCCallASRDelegate>)delegate;
 
@@ -459,9 +473,20 @@ NS_ASSUME_NONNULL_BEGIN
  @discussion
  设置语音识别源语言
  
- @remarks 语音识别设置
+ @remarks 智能语音
  */
 - (void)setSrcLanguageCode:(NSString *)languageCode;
+
+/*!
+ 设置语音识别中本地用户的昵称
+ 
+ @param nickName 昵称，用于智能总结
+ @discussion
+ 设置语音识别中本地用户的昵称
+ 
+ @remarks 智能语音
+ */
+- (void)setNickName:(NSString *)nickName;
 
 /*!
  开启语音识别服务
@@ -471,7 +496,7 @@ NS_ASSUME_NONNULL_BEGIN
  @discussion
  开启语音识别服务，如果房间内没有人发布流，则无法开启语音识别服务，SDK 会在有人发布流后补偿进行开启语音识别服务
  
- @remarks 语音识别
+ @remarks 智能语音
  */
 - (void)startASR:(nullable void (^)(BOOL success, NSInteger code))completion;
 
@@ -483,7 +508,7 @@ NS_ASSUME_NONNULL_BEGIN
  @discussion
  停止语音识别服务
  
- @remarks 语音识别设置
+ @remarks 智能语音
  */
 - (void)stopASR:(nullable void (^)(BOOL success, NSInteger code))completion;
 
@@ -496,7 +521,7 @@ NS_ASSUME_NONNULL_BEGIN
 1. 通话接通后，可以通过此接口打开或关闭语音识别功能；
 2. 默认关闭语音识别功能，开启后会在通话过程中自动识别用户语音并转换为文字。
  
-@remarks 语音识别设置
+@remarks 智能语音
  */
 - (int)setEnableASR:(BOOL)enable;
 
@@ -508,7 +533,7 @@ NS_ASSUME_NONNULL_BEGIN
  1. 语音翻译依赖语音识别服务，需要在收到 RCCallASRDelegate 的 didReceiveStartASR 回调后，调用开启语音翻译
  2. 开启语音翻译，会通过 RCCallASRDelegate 的 didReceiveRealtimeTranslationContent 回调返回语音翻译结果
  
- @remarks 语音识别设置
+ @remarks 智能语音
  */
 - (void)startRealtimeTranslation:(NSString *)destLangCode copmletion:(nullable void (^)(BOOL success, NSInteger code))completion;
 
@@ -518,9 +543,77 @@ NS_ASSUME_NONNULL_BEGIN
  @discussion
  关闭语音翻译
  
- @remarks 语音识别设置
+ @remarks 智能语音
  */
 - (void)stopRealtimeTranslation:(nullable void (^)(BOOL success, NSInteger code))completion;
+
+/*!
+ 开始智能总结任务
+ 
+ @param completion 开启智能总结任务回调
+ 
+ @discussion
+ 1. 智能总结任务依赖语音识别服务，需要在收到 RCCallASRDelegate 的 didReceiveStartASR 回调后，调用开启智能总结任务
+ 2. 开始智能总结任务为房间级别接口，房间内开始智能总结任务，会通过 RCCallASRDelegate 的 didReceiveStartSummarization 回调返回智能总结任务状态
+ 3. completion 中 taskId 为开始智能总结任务 ID
+ 
+ @remarks 智能语音
+ */
+- (void)startSummarization:(nullable void(^)(BOOL isSuccess, RCRTCCode code, NSString *taskId))completion;
+
+/*!
+ 关闭智能总结任务
+ 
+ @param completion 关闭智能总结任务回调
+ 
+ @discussion
+ 1. 关闭智能总结任务为房间级别接口，房间内关闭智能总结任务，会通过 RCCallASRDelegate 的 didReceiveStopSummarization 回调返回智能总结任务状态
+ 
+ @remarks 智能语音
+ */
+- (void)stopSummarization:(nullable void(^)(BOOL isSuccess, RCRTCCode code))completion;
+
+/*!
+ 生成智能总结
+ 
+ @param roomId 生成智能总结的通话 ID
+ @param taskId 智能总结任务 ID，通过 didReceiveStartSummarization 回调获取到
+ @param startTime 本次需要总结的开始时间，UTC 时间戳，单位秒，传入 0，表示总结开始的时间
+ @param endTime 本次需要总结的结束时间，UTC 时间戳，单位秒，传入 0，表示当前时间，如果总结已经停止，则表示总结结束的时间
+ @param config 生成智能总结配置
+ @param contentBlock 内容回调
+ @param completion 结果回调
+ 
+ @remarks 智能语音
+ */
+- (void)generateSummarization:(nonnull NSString *)callId
+                       taskId:(nonnull NSString *)taskId
+                    startTime:(NSTimeInterval)startTime
+                      endTime:(NSTimeInterval)endTime
+                       config:(nullable RCRTCGenerateSummarizationConfig *)config
+                 contentBlock:(nullable void(^)(NSString *content))contentBlock
+                   completion:(nullable void(^)(BOOL isSuccess, RCRTCCode code))completion;
+
+/*!
+ 获取语音转文字
+ 
+ @param roomId 获取语音转文字的通话 ID
+ @param taskId 智能总结任务 ID，通过 didReceiveStartSummarization 回调获取到
+ @param startTime 本次需要获取语音转文字的开始时间，UTC 时间戳，单位秒，传入 0，表示总结开始的时间
+ @param endTime 本次需要获取语音转文字的结束时间，UTC 时间戳，单位秒，传入 0，表示当前时间，如果总结已经停止，则表示总结结束的时间
+ @param destLang 目标语言代码，如果传入 nil，则使用默认语言
+ @param contentBlock 内容回调，如果内容比较多，contentBlock 会回调多次
+ @param completion 结果回调
+ 
+ @remarks 智能语音
+ */
+- (void)getASRContent:(nonnull NSString *)callId
+               taskId:(nonnull NSString *)taskId
+            startTime:(NSTimeInterval)startTime
+              endTime:(NSTimeInterval)endTime
+             destLang:(nullable NSString *)destLang
+         contentBlock:(nullable void(^)(NSString *content))contentBlock
+           completion:(nullable void(^)(BOOL isSuccess, RCRTCCode code))completion;
 
 /*!
  设置忙线处理策略

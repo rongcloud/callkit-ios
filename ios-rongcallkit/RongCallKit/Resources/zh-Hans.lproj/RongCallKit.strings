@@ -64,6 +64,7 @@
 "VoIPCallHangupByOtherClient"="己方其他端已挂断";//替换为其他设备已处理
 "VoIPCallDoSomethingByOtherClient"="其他设备已处理";
 "VoIP_Rejected_By_Blacklist"="已被对方加入黑名单";
+"VoIP_Rejected_By_NotInWhiteList"="不在对方白名单";
 "VoIPCallMediaServerClosed"="音视频服务已关闭";
 "VoIPCallRemoteBusyLineAndShowAdvice"="对方忙，请稍后再试";
 "VoIPCallRemoteDidInvite"="%@ 加入群聊";
@@ -105,3 +106,11 @@
 "subtitle_translation_display_chinese" = "简体中文";
 "subtitle_translation_display_english" = "English(英文)";
 "subtitle_translation_display_arabic" = " العربية(阿拉伯语)";
+"ai_summary_completed" = "AI总结完成";
+"call_start_time" = "通话开始时间：";
+"show_summary_detail" = "查看详情";
+"ai_summary_title" = "AI 总结";
+"summarization" = "总结";
+"summary_content" = "总结内容";
+"start_summray_failed_retry_later" = "开启失败，请稍后重试";
+"request_failed_retry_later" = "需要更多内容才能总结，请稍后再试";

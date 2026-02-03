@@ -526,7 +526,7 @@ NS_ASSUME_NONNULL_BEGIN
  @discussion
  开启语音识别服务，如果房间内没有人发布流，则无法开启语音识别服务，SDK 会在有人发布流后补偿进行开启语音识别服务
  
- @remarks 语音识别
+ @remarks 智能语音
  */
 - (void)startASR:(nullable RCRTCOperationCallback)completion;
 
@@ -538,7 +538,7 @@ NS_ASSUME_NONNULL_BEGIN
  @discussion
  停止语音识别服务
  
- @remarks 语音识别
+ @remarks 智能语音
  */
 - (void)stopASR:(nullable RCRTCOperationCallback)completion;
 
@@ -550,29 +550,33 @@ NS_ASSUME_NONNULL_BEGIN
  @discussion
  获取语音识别服务是否可用，非实时查询接口，根据端上缓存进行的判断
  
- @remarks 语音识别
+ @remarks 智能语音
  */
 - (BOOL)asrIsAvailable;
 
 /*!
  开启语音翻译
+ 
  @param destLangCode 翻译目标语言码
+ @param completion 开启语音翻译回调
  
  @discussion
  1. 语音翻译依赖语音识别服务，需要在收到 RCRTCRoomEventDelegate 的 didReceiveStartASR 回调后，调用开启语音翻译
  2. 开启语音翻译，会通过 RCRTCRoomEventDelegate 的 didReceiveRealtimeTranslationContent 回调返回语音翻译结果
  
- @remarks 语音识别
+ @remarks 智能语音
  */
 - (void)startRealtimeTranslation:(NSString *)destLangCode copmletion:(nullable RCRTCOperationCallback)completion;
 
 /*!
  关闭语音翻译
  
+ @param completion 关闭语音翻译回调
+ 
  @discussion
  关闭语音翻译
  
- @remarks 语音识别
+ @remarks 智能语音
  */
 - (void)stopRealtimeTranslation:(nullable RCRTCOperationCallback)completion;
 
@@ -583,9 +587,35 @@ NS_ASSUME_NONNULL_BEGIN
  @discussion
  设置接收语音识别信息时候，会通过 RCRTCRoomEventDelegate 的 didReceiveASRContent 回调返回语音识别结果
  
- @remarks 语音识别
+ @remarks 智能语音
  */
 - (int)setEnableASR:(BOOL)enable;
+
+/*!
+ 开始智能总结任务
+ 
+ @param completion 开启智能总结任务回调
+ 
+ @discussion
+ 1. 智能总结任务依赖语音识别服务，需要在收到 RCRTCRoomEventDelegate 的 didReceiveStartASR 回调后，调用开启智能总结任务
+ 2. 开始智能总结任务为房间级别接口，房间内开始智能总结任务，会通过 RCRTCRoomEventDelegate 的 didReceiveStartSummarization 回调返回智能总结任务状态
+ 3. completion 中 taskId 为开始智能总结任务 ID
+ 
+ @remarks 智能语音
+ */
+- (void)startSummarization:(nullable void(^)(BOOL isSuccess, RCRTCCode code, NSString *taskId))completion;
+
+/*!
+ 关闭智能总结任务
+ 
+ @param completion 关闭智能总结任务回调
+ 
+ @discussion
+ 1. 关闭智能总结任务为房间级别接口，房间内关闭智能总结任务，会通过 RCRTCRoomEventDelegate 的 didReceiveStopSummarization 回调返回智能总结任务状态
+ 
+ @remarks 智能语音
+ */
+- (void)stopSummarization:(nullable void(^)(BOOL isSuccess, RCRTCCode code))completion;
 
 @end
 

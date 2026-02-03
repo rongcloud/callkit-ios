@@ -8,6 +8,7 @@
 
 #import "RCCallKitUtility.h"
 #import <AVFoundation/AVFoundation.h>
+#import <objc/message.h>
 #import "RCCall.h"
 
 UIColor *rgb(CGFloat red, CGFloat green, CGFloat blue) {
@@ -160,6 +161,9 @@ UIColor *dynamic_color(NSInteger light_hex_value, NSInteger dark_hex_value) {
         case RCCallDisconnectReasonAddToBlackList:
             hangupReasonString = RCCallKitLocalizedString(@"VoIP_Rejected_By_Blacklist");
             break;
+        case RCCallDisconnectReasonNotInWhiteList:
+            hangupReasonString = RCCallKitLocalizedString(@"VoIP_Rejected_By_NotInWhiteList");
+            break;
         case RCCallDisconnectReasonMediaServerClosed:
             hangupReasonString = RCCallKitLocalizedString(@"VoIPCallMediaServerClosed");
             break;
@@ -308,34 +312,34 @@ UIColor *dynamic_color(NSInteger light_hex_value, NSInteger dark_hex_value) {
 }
 
 + (NSString *)localizedString:(NSString *)key table:(NSString *)table {
-    
-    NSString *language = [[NSLocale preferredLanguages] firstObject];
-    if (language.length == 0) {
-        return key;
-    }
-    NSString *fileNamePrefix = @"en";
-    if([language hasPrefix:@"zh"]) {
-        fileNamePrefix = @"zh-Hans";
-    } else if ([language hasPrefix:@"ar"]) {
-        fileNamePrefix = @"ar";
-    }
-    NSString *fullName = [NSString stringWithFormat:@"%@.strings", table];
-  
-    NSBundle *mainBundle = [NSBundle mainBundle];
-    NSString *path = [mainBundle pathForResource:fileNamePrefix ofType:@"lproj"];
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    NSString *filePath = [path stringByAppendingPathComponent:fullName];
-    if (![fileManager fileExistsAtPath:filePath]) {
-        NSBundle *frameworkBundle = [NSBundle bundleForClass:[self class]];
-        path = [frameworkBundle pathForResource:fileNamePrefix ofType:@"lproj"];
-    }
-    
-    NSBundle *bundle = [NSBundle bundleWithPath:path];
-    NSString *localizedString = [bundle localizedStringForKey:key value:nil table:table];
-    if (!localizedString) {
-        localizedString = key;
-    }
-    return localizedString;
+    return [RCKitUtility localizedString:key table:table];
+//    NSString *language = [[NSLocale preferredLanguages] firstObject];
+//    if (language.length == 0) {
+//        return key;
+//    }
+//    NSString *fileNamePrefix = @"en";
+//    if([language hasPrefix:@"zh"]) {
+//        fileNamePrefix = @"zh-Hans";
+//    } else if ([language hasPrefix:@"ar"]) {
+//        fileNamePrefix = @"ar";
+//    }
+//    NSString *fullName = [NSString stringWithFormat:@"%@.strings", table];
+//  
+//    NSBundle *mainBundle = [NSBundle mainBundle];
+//    NSString *path = [mainBundle pathForResource:fileNamePrefix ofType:@"lproj"];
+//    NSFileManager *fileManager = [NSFileManager defaultManager];
+//    NSString *filePath = [path stringByAppendingPathComponent:fullName];
+//    if (![fileManager fileExistsAtPath:filePath]) {
+//        NSBundle *frameworkBundle = [NSBundle bundleForClass:[self class]];
+//        path = [frameworkBundle pathForResource:fileNamePrefix ofType:@"lproj"];
+//    }
+//    
+//    NSBundle *bundle = [NSBundle bundleWithPath:path];
+//    NSString *localizedString = [bundle localizedStringForKey:key value:nil table:table];
+//    if (!localizedString) {
+//        localizedString = key;
+//    }
+//    return localizedString;
 }
 
 + (NSString *)fileName:(NSString *)fileName ofBundle:(NSString *)bundleName {
@@ -367,6 +371,20 @@ UIColor *dynamic_color(NSInteger light_hex_value, NSInteger dark_hex_value) {
     BOOL isArabicChar = (firstChar >= 0x0600 && firstChar <= 0x06FF) ||
                            (firstChar >= 0x0750 && firstChar <= 0x077F);
     return isArabicChar;
+}
+
++ (RCMessage *)insertOutgoingMessage:(RCConversationType)conversationType
+                            targetId:(NSString *)targetId
+                          sentStatus:(RCSentStatus)sentStatus
+                             content:(RCMessageContent *)content
+                            sentTime:(long long)sentTime {
+    return ((id (*)(id, SEL, NSInteger, id, NSInteger, id, long long))objc_msgSend)(
+        [RCCoreClient sharedCoreClient], @selector(insertOutgoingMessage:targetId:sentStatus:content:sentTime:),
+        conversationType, targetId, sentStatus, content, sentTime);
+}
+
++ (void)receiveFakeMessage:(RCMessage *)message {
+    [[RCCoreClient sharedCoreClient] performSelector:@selector(receiveFakeMessage:) withObject:message];
 }
 
 @end

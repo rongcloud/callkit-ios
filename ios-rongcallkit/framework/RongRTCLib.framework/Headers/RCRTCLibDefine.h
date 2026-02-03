@@ -633,6 +633,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+/**
+ 语音识别结果
+ */
 @interface RCRTCASRContent : NSObject
 /**
  当前语音识别关联用户的 ID
@@ -657,6 +660,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+/**
+ 语音翻译结果
+ */
 @interface RCRTCRealtimeTranslationContent : NSObject
 /**
  当前语音翻译的目标语言码
@@ -682,6 +688,59 @@ NS_ASSUME_NONNULL_BEGIN
  当前语音翻译是否结束, 如果为 YES, 则表示当前语音翻译已结束
  */
 @property (nonatomic, assign) BOOL isEnd;
+
+@end
+
+/*!
+ 输出格式
+ */
+typedef NS_ENUM(NSUInteger, RCRTCSummarizationFormat) {
+    /*!
+     MarkDown 格式
+     */
+    RCRTCSummarizationFormatMarkDown = 0,
+    /*!
+     JSON 格式
+     */
+    RCRTCSummarizationFormatJSON = 1
+};
+
+/**
+ 生成智能总结配置
+ */
+@interface RCRTCGenerateSummarizationConfig : NSObject
+/**
+ 自定义提示词，最大长度100
+ */
+@property (nonatomic, copy) NSString *customPrompt;
+/**
+ 输出智能总结的目标语言代码
+ */
+@property (nonatomic, copy) NSString *destLang;
+/**
+ 是否输出总结摘要。即对整个会议的高度概括，默认: NO
+ */
+@property (nonatomic, assign) BOOL enableSummarization;
+/**
+ 是否为输出总结整体，默认: NO
+ */
+@property (nonatomic, assign) BOOL enableSummarizationDetails;
+/**
+ 是否输出章节摘要，即按时间线或话题划分的会议段落总结，默认: NO
+ */
+@property (nonatomic, assign) BOOL enableChapterSummary;
+/**
+ 是否输出待办事项提取，自动识别会议中达成的共识和分配的任务，默认: NO
+ */
+@property (nonatomic, assign) BOOL enableTodoList;
+/**
+ 是否输出话题提取，默认: NO
+ */
+@property (nonatomic, assign) BOOL enableHashtag;
+/**
+ 输出格式
+ */
+@property (nonatomic, assign) RCRTCSummarizationFormat format;
 
 @end
 

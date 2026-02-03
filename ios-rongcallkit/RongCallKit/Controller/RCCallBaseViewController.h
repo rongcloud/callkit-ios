@@ -27,7 +27,7 @@
 /*!
  会话目标ID
  */
-@property (nonatomic, strong, readonly) NSString *targetId;
+@property (nonatomic, copy, readonly) NSString *targetId;
 
 /*!
  媒体类型
@@ -105,6 +105,11 @@
 @property (nonatomic, strong) UIButton *asrButton;
 
 /*!
+ 智能总结 Button
+ */
+@property (nonatomic, strong) UIButton *aiSummaryButton;
+
+/*!
  + Button
  */
 @property (nonatomic, strong) UIButton *addButton;
@@ -124,7 +129,7 @@
  */
 @property (nonatomic, strong) UIImageView *signalImageView;
 
-#pragma mark - 回调
+#pragma mark - 回调（需要通过扩展类实现）
 /*!
  通话即将接通
  */
@@ -194,73 +199,5 @@
  @discussion 如果您需要重写并调整UI的布局，应该先调用super。
  */
 - (void)resetLayout:(BOOL)isMultiCall mediaType:(RCCallMediaType)mediaType callStatus:(RCCallStatus)callStatus;
-
-- (void)inviteUserButtonClicked;
-
-- (void)whiteBoardButtonClicked;
-
-/*!
- 点击语音识别按钮
-*/
-- (void)realTimeSubtitleButtonClicked;
-
-/*!
- 点击接听按钮
-*/
-- (void)acceptButtonClicked;
-
-/*!
- 点击挂断按钮
-*/
-- (void)hangupButtonClicked;
-
-#pragma mark - 初始化
-/*!
- 初始化呼入的ViewController
-
- @param callSession 呼入的通话实体
-
- @return ViewController
- */
-- (instancetype)initWithIncomingCall:(RCCallSession *)callSession;
-
-/*!
- 初始化ViewController并发起通话
-
- @param conversationType 会话类型
- @param targetId         会话目标ID
- @param mediaType        通话媒体类型
- @param userIdList       邀请的用户ID列表
-
- @return ViewController
- */
-- (instancetype)initWithOutgoingCall:(RCConversationType)conversationType
-                            targetId:(NSString *)targetId
-                           mediaType:(RCCallMediaType)mediaType
-                          userIdList:(NSArray *)userIdList;
-
-/*!
- 初始化ViewController并发起跨应用通话
-
- @param conversationType 会话类型
- @param targetId         会话目标ID
- @param mediaType        通话媒体类型
- @param userIdList       邀请的用户ID列表（注意此处ID组成形式为Appkey+UserId, 格式为appkey_userid，注意下划线拼接）
-
- @return ViewController
- */
-- (instancetype)initWithOutgoingCrossCall:(RCConversationType)conversationType
-                                 targetId:(NSString *)targetId
-                                mediaType:(RCCallMediaType)mediaType
-                               userIdList:(NSArray *)userIdList;
-
-/*!
- 初始化已经接通的ViewController
-
- @param callSession 已经接通的通话实体
-
- @return ViewController
- */
-- (instancetype)initWithActiveCall:(RCCallSession *)callSession;
 
 @end

@@ -328,6 +328,10 @@ typedef NS_ENUM(NSInteger, RCCallDisconnectReason) {
      */
     RCCallDisconnectReasonMediaServerClosed = 104,
     /*!
+     对方开启白名单，己方不在对方白名单
+    */
+    RCCallDisconnectReasonNotInWhiteList = 105,
+    /*!
      己方被降级为观察者
      */
     RCCallDisconnectReasonDegrade = 301

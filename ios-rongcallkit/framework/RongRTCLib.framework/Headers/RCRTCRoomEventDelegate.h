@@ -61,6 +61,20 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)didReceiveRealtimeTranslationContent:(RCRTCRealtimeTranslationContent *)content;
 
 /*!
+ 智能总结开始通知回调
+ 
+ @remarks 代理
+ */
+- (void)didReceiveStartSummarization:(NSString *)taskId;
+
+/*!
+ 智能总结关闭通知回调
+ 
+ @remarks 代理
+ */
+- (void)didReceiveStopSummarization:(NSString *)taskId;
+
+/*!
  远端用户加入通知
  
  @param user 加入的用户信息

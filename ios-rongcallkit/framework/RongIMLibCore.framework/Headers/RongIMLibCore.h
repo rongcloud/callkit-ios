@@ -33,6 +33,8 @@ FOUNDATION_EXPORT const unsigned char RongIMLibCoreVersionString[];
 #import <RongIMLibCore/RCConversation.h>
 #import <RongIMLibCore/RCGroup.h>
 #import <RongIMLibCore/RCUserTypingStatus.h>
+#import <RongIMLibCore/RCDataManagementInfo.h>
+
 /// 消息相关类
 #import <RongIMLibCore/RCCommandMessage.h>
 #import <RongIMLibCore/RCCommandNotificationMessage.h>

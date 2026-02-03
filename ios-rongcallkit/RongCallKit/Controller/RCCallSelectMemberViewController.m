@@ -31,6 +31,11 @@ typedef void (^CompleteBlock)(NSArray *addUserIdList);
 @property (nonatomic, strong) UITableViewController *resultController;
 @property (nonatomic, strong) NSString *searchText;
 @property (nonatomic, strong) NSMutableArray *resultUserIdList;
+@property (nonatomic, strong) NSMutableArray *allUserIdList;
+
+@property (nonatomic, strong) RCPagingQueryResult *queryResult;
+@property (nonatomic, assign) BOOL isLoadingMembers;
+@property (nonatomic, strong) NSMutableDictionary *groupMembers;
 
 @end
 
@@ -45,18 +50,26 @@ typedef void (^CompleteBlock)(NSArray *addUserIdList);
         self.conversationType = conversationType;
         self.targetId = targetId;
         self.mediaType = mediaType;
+        self.allUserIdList = [[NSMutableArray alloc] init];
+        self.groupMembers = [[NSMutableDictionary alloc] init];
         __weak typeof(self) weakSelf = self;
         if (conversationType == ConversationType_GROUP) {
-            if ([RCIM sharedRCIM].groupMemberDataSource &&
-                [[RCIM sharedRCIM].groupMemberDataSource respondsToSelector:@selector(getAllMembersOfGroup:result:)]) {
-                [[RCIM sharedRCIM].groupMemberDataSource getAllMembersOfGroup:self.targetId
-                                                                       result:^(NSArray *userIdList) {
-                                                                           weakSelf.listingUserIdList = userIdList;
-                                                                           RCLogI(@"get the members success");
-                                                                       }];
+            if ([RCIM sharedRCIM].currentDataSourceType == RCDataSourceTypeInfoManagement) {
+                [self loadAllGroupMembersByRole:existUserIdList];
+            } else {
+                if ([RCIM sharedRCIM].groupMemberDataSource &&
+                    [[RCIM sharedRCIM].groupMemberDataSource respondsToSelector:@selector(getAllMembersOfGroup:result:)]) {
+                    [[RCIM sharedRCIM].groupMemberDataSource getAllMembersOfGroup:self.targetId
+                                                                           result:^(NSArray *userIdList) {
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            weakSelf.allUserIdList = [NSMutableArray arrayWithArray:userIdList];
+                        });
+                    }];
+                }
             }
+            
         } else {
-            self.listingUserIdList = [NSMutableArray arrayWithArray:existUserIdList];
+            self.allUserIdList = [NSMutableArray arrayWithArray:existUserIdList];
         }
         self.existUserIdList = existUserIdList;
         self.selectUserIds = [[NSMutableArray alloc] init];
@@ -70,14 +83,17 @@ typedef void (^CompleteBlock)(NSArray *addUserIdList);
     return self;
 }
 
-- (void)setListingUserIdList:(NSArray *)listingUserIdList {
-    _listingUserIdList = listingUserIdList;
-
-    _resultUserIdList = [NSMutableArray arrayWithArray:listingUserIdList];
+- (void)setAllUserIdList:(NSMutableArray *)allUserIdList {
+    _allUserIdList = [allUserIdList mutableCopy];
+    _resultUserIdList = [allUserIdList mutableCopy];
     __weak typeof(self) weakSelf = self;
     dispatch_async(dispatch_get_main_queue(), ^{
         [weakSelf.tableView reloadData];
     });
+}
+
+- (NSArray *)listingUserIdList {
+    return _allUserIdList;
 }
 
 - (void)viewDidLoad {
@@ -227,8 +243,7 @@ typedef void (^CompleteBlock)(NSArray *addUserIdList);
 
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    NSInteger count = tableView == self.tableView ? self.listingUserIdList.count :self.resultUserIdList.count;
-//    return self.resultUserIdList.count;
+    NSInteger count = tableView == self.tableView ? self.allUserIdList.count : self.resultUserIdList.count;
     return count;
 }
 
@@ -238,10 +253,9 @@ typedef void (^CompleteBlock)(NSArray *addUserIdList);
     NSString *resuseID = tableView == self.tableView ? reusableID : reusableSearchID;
     RCCallSelectingMemberCell *cell = [self.tableView dequeueReusableCellWithIdentifier:resuseID];
     
-    NSArray *userIds = (tableView == self.tableView ? self.listingUserIdList :self.resultUserIdList);
+    NSArray *userIds = (tableView == self.tableView ? self.allUserIdList : self.resultUserIdList);
     
-
-    if (self.resultUserIdList.count != self.listingUserIdList.count) {
+    if (self.resultUserIdList.count != self.allUserIdList.count) {
         cell = [self.tableView dequeueReusableCellWithIdentifier:reusableSearchID];
     }
     if (!cell) {
@@ -249,7 +263,6 @@ typedef void (^CompleteBlock)(NSArray *addUserIdList);
     }
     cell.tintColor = [UIColor colorWithRed:58 / 255.0 green:145 / 255.0 blue:243 / 255.0 alpha:1 / 1.0];
 
-//    NSString *userId = userIds[indexPath.row];
     NSString *userId = [userIds objectAtIndex:indexPath.row];
     if ([self.existUserIdList containsObject:userId]) {
         [cell.selectedImageView setImage:[RCCallKitUtility imageFromVoIPBundle:@"voip/deselect.png"]];
@@ -260,7 +273,17 @@ typedef void (^CompleteBlock)(NSArray *addUserIdList);
     }
     RCUserInfo *userInfo;
     if (self.conversationType == ConversationType_GROUP) {
-        userInfo = [[RCUserInfoCacheManager sharedManager] getUserInfo:userId inGroupId:self.targetId];
+        if ([RCIM sharedRCIM].currentDataSourceType == RCDataSourceTypeInfoManagement) {
+            RCGroupMemberInfo *member = self.groupMembers[userId];
+            if (member) {
+                userInfo = [[RCUserInfo alloc] init];
+                userInfo.userId = member.userId;
+                userInfo.name = member.nickname.length ? member.nickname : member.name;
+                userInfo.portraitUri = member.portraitUri;
+            }
+        } else {
+            userInfo = [[RCUserInfoCacheManager sharedManager] getUserInfo:userId inGroupId:self.targetId];
+        }
     } else {
         userInfo = [[RCUserInfoCacheManager sharedManager] getUserInfo:userId];
     }
@@ -280,8 +303,7 @@ typedef void (^CompleteBlock)(NSArray *addUserIdList);
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    NSArray *userIds = (tableView == self.tableView ? self.listingUserIdList :self.resultUserIdList);
+    NSArray *userIds = (tableView == self.tableView ? self.allUserIdList :self.resultUserIdList);
     NSString *userId = [userIds objectAtIndex:indexPath.row];
     if (![self.existUserIdList containsObject:userId]) {
         if ([self.selectUserIds containsObject:userId]) {
@@ -336,6 +358,16 @@ typedef void (^CompleteBlock)(NSArray *addUserIdList);
     }
 }
 
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (self.tableView != tableView || self.conversationType != ConversationType_GROUP ||
+        [RCIM sharedRCIM].currentDataSourceType != RCDataSourceTypeInfoManagement) {
+        return;
+    }
+    if (indexPath.row + 10 > self.allUserIdList.count) {
+        [self fetchGroupMembersByPage];
+    }
+}
+
 #pragma mark - UISearchControllerDelegate
 - (void)willPresentSearchController:(UISearchController *)searchController {
     self.tabBarController.tabBar.hidden = YES;
@@ -371,11 +403,11 @@ typedef void (^CompleteBlock)(NSArray *addUserIdList);
     NSDictionary *userInfoDic = notification.object;
     NSString *updateUserId = userInfoDic[@"userId"];
 
-    for (NSString *userId in self.listingUserIdList) {
+    for (NSString *userId in self.allUserIdList) {
         if ([updateUserId isEqualToString:userId]) {
             __weak typeof(self) weakSelf = self;
             dispatch_async(dispatch_get_main_queue(), ^{
-                NSIndexPath *index = [NSIndexPath indexPathForRow:[weakSelf.listingUserIdList indexOfObject:userId]
+                NSIndexPath *index = [NSIndexPath indexPathForRow:[weakSelf.allUserIdList indexOfObject:userId]
                                                         inSection:0];
                 UITableViewCell *cell = [weakSelf.tableView cellForRowAtIndexPath:index];
                 if (cell) {
@@ -423,10 +455,10 @@ typedef void (^CompleteBlock)(NSArray *addUserIdList);
 #pragma mark - Private
 - (void)searchTexts {
     if ([self.searchText isEqualToString:@""]) {
-        self.resultUserIdList = [NSMutableArray arrayWithArray:self.listingUserIdList];
+        self.resultUserIdList = [NSMutableArray arrayWithArray:self.allUserIdList];
     } else {
         self.resultUserIdList = [NSMutableArray array];
-        for (NSString *userId in self.listingUserIdList) {
+        for (NSString *userId in self.allUserIdList) {
             RCUserInfo *userInfo;
             if (self.conversationType == ConversationType_GROUP) {
                 userInfo = [[RCUserInfoCacheManager sharedManager] getUserInfo:userId inGroupId:self.targetId];
@@ -443,6 +475,131 @@ typedef void (^CompleteBlock)(NSArray *addUserIdList);
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)fetchGroupMembersByPage {
+    if (self.isLoadingMembers) {
+        return;
+    }
+    if (self.queryResult && self.queryResult.pageToken.length == 0) {
+        return;
+    }
+    self.isLoadingMembers = YES;
+    
+    RCGetGroupMembersOption *option = [RCGetGroupMembersOption new];
+    option.filterRobotType = RCFilterRobotTypeExclueRobot;
+    option.pageToken = self.queryResult.pageToken;
+    option.count = 50;
+    option.order = YES;
+    __weak typeof(self) weakSelf = self;
+    [[RCCoreClient sharedCoreClient] getGroupMembersByRole:self.targetId role:RCGroupMemberRoleUndef option:option success:^(RCPagingQueryResult<RCGroupMemberInfo *> * _Nonnull result) {
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+        if (!strongSelf) {
+            return;
+        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            strongSelf.queryResult = result;
+            if (result.data.count == 0) {
+                strongSelf.isLoadingMembers = NO;
+                return;
+            }
+            NSMutableArray *userIds = [NSMutableArray array];
+            for (RCGroupMemberInfo *member in result.data) {
+                strongSelf.groupMembers[member.userId] = member;
+                [userIds addObject:member.userId];
+            }
+            NSMutableSet *existing = [NSMutableSet setWithArray:strongSelf.allUserIdList];
+            for (NSString *userId in userIds) {
+                if (userId.length == 0 || [existing containsObject:userId]) {
+                    continue;
+                }
+                [existing addObject:userId];
+                [strongSelf.allUserIdList addObject:userId];
+            }
+            strongSelf.isLoadingMembers = NO;
+            [strongSelf.tableView reloadData];
+        });
+    } error:^(RCErrorCode errorCode) {
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+        if (!strongSelf) {
+            return;
+        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            strongSelf.isLoadingMembers = NO;
+        });
+        return;
+    }];
+}
+
+- (void)loadAllGroupMembersByRole:(NSArray *)existUserIdList {
+    self.isLoadingMembers = YES;
+    __weak typeof(self) weakSelf = self;
+    __block NSString *pageToken = nil;
+    __block void (^fetchNextPage)(void) = nil;
+    fetchNextPage = ^{
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+        if (!strongSelf) {
+            return;
+        }
+        RCGetGroupMembersOption *option = [RCGetGroupMembersOption new];
+        option.filterRobotType = RCFilterRobotTypeExclueRobot;
+        option.pageToken = pageToken;
+        option.count = 100;
+        option.order = YES;
+        [[RCCoreClient sharedCoreClient] getGroupMembersByRole:strongSelf.targetId
+                                                         role:RCGroupMemberRoleUndef
+                                                       option:option
+                                                      success:^(RCPagingQueryResult<RCGroupMemberInfo *> * _Nonnull result) {
+            pageToken = result.pageToken;
+            dispatch_async(dispatch_get_main_queue(), ^{
+                __strong typeof(weakSelf) strongSelf2 = weakSelf;
+                if (!strongSelf2) {
+                    return;
+                }
+                
+                strongSelf2.queryResult = result;
+                
+                if (result.data.count > 0) {
+                    NSMutableSet *existing = [NSMutableSet setWithArray:strongSelf2.allUserIdList];
+                    for (RCGroupMemberInfo *member in result.data) {
+                        NSString *userId = member.userId;
+                        if (userId.length == 0) {
+                            continue;
+                        }
+                        strongSelf2.groupMembers[userId] = member;
+                        if (![existing containsObject:userId]) {
+                            [existing addObject:userId];
+                            [strongSelf2.allUserIdList addObject:userId];
+                        }
+                    }
+                    [strongSelf2.tableView reloadData];
+                }
+                
+                if (pageToken.length == 0) {
+                    strongSelf2.isLoadingMembers = NO;
+                }
+            });
+            
+            if (pageToken.length == 0) {
+                return;
+            }
+            if (fetchNextPage) {
+                fetchNextPage();
+            }
+        } error:^(RCErrorCode errorCode) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                __strong typeof(weakSelf) strongSelf2 = weakSelf;
+                if (!strongSelf2) {
+                    return;
+                }
+                if (strongSelf2.allUserIdList.count == 0 && existUserIdList.count > 0) {
+                    strongSelf2.allUserIdList = [NSMutableArray arrayWithArray:existUserIdList];
+                }
+                strongSelf2.isLoadingMembers = NO;
+            });
+        }];
+    };
+    fetchNextPage();
 }
 
 @end

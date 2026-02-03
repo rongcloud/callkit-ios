@@ -473,6 +473,48 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)stopRTCProbeTest:(nullable RCRTCOperationCallback)callback;
 
+#pragma mark - 智能语音
+/*!
+ 生成智能总结
+ 
+ @param roomId 生成智能总结的房间 ID
+ @param taskId 智能总结任务 ID，通过 didReceiveStartSummarization 回调获取到
+ @param startTime 本次需要总结的开始时间，UTC 时间戳，单位秒，传入 0，表示总结开始的时间
+ @param endTime 本次需要总结的结束时间，UTC 时间戳，单位秒，传入 0，表示当前时间，如果总结已经停止，则表示总结结束的时间
+ @param config 生成智能总结配置
+ @param contentBlock 内容回调
+ @param completion 结果回调
+ 
+ @remarks 智能语音
+ */
+- (void)generateSummarization:(nonnull NSString *)roomId
+                       taskId:(nonnull NSString *)taskId
+                    startTime:(NSTimeInterval)startTime
+                      endTime:(NSTimeInterval)endTime
+                       config:(nullable RCRTCGenerateSummarizationConfig *)config
+                 contentBlock:(nullable void(^)(NSString *content))contentBlock
+                   completion:(nullable void(^)(BOOL isSuccess, RCRTCCode code))completion;
+
+/*!
+ 获取语音转文字
+ 
+ @param roomId 获取语音转文字的房间 ID
+ @param taskId 智能总结任务 ID，通过 didReceiveStartSummarization 回调获取到
+ @param startTime 本次需要获取语音转文字的开始时间，UTC 时间戳，单位秒，传入 0，表示总结开始的时间
+ @param endTime 本次需要获取语音转文字的结束时间，UTC 时间戳，单位秒，传入 0，表示当前时间，如果总结已经停止，则表示总结结束的时间
+ @param destLang 目标语言代码，如果传入 nil，则使用默认语言
+ @param contentBlock 内容回调，如果内容比较多，contentBlock 会回调多次
+ @param completion 结果回调
+ 
+ @remarks 智能语音
+ */
+- (void)getASRContent:(nonnull NSString *)roomId
+               taskId:(nonnull NSString *)taskId
+            startTime:(NSTimeInterval)startTime
+              endTime:(NSTimeInterval)endTime
+             destLang:(nullable NSString *)destLang
+         contentBlock:(nullable void(^)(NSString *content))contentBlock
+           completion:(nullable void(^)(BOOL isSuccess, RCRTCCode code))completion;
 
 #pragma mark - SDK 版本号
 /*!

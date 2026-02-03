@@ -7,6 +7,7 @@
 //
 
 #import "RCCallAudioMultiCallViewController.h"
+#import "RCCallBaseViewController+Private.h"
 #import "RCAudioMultiCallUserCollectionLayout.h"
 #import "RCCXCall.h"
 #import "RCCall.h"
@@ -29,24 +30,6 @@
 @end
 
 @implementation RCCallAudioMultiCallViewController
-
-- (instancetype)initWithIncomingCall:(RCCallSession *)callSession {
-    return [super initWithIncomingCall:callSession];
-}
-
-- (instancetype)initWithOutgoingCall:(RCConversationType)conversationType
-                            targetId:(NSString *)targetId
-                          userIdList:(NSArray *)userIdList {
-    return [super initWithOutgoingCall:conversationType
-                              targetId:targetId
-                             mediaType:RCCallMediaAudio
-                            userIdList:userIdList];
-}
-
-- (instancetype)initWithActiveCall:(RCCallSession *)callSession {
-    return [super initWithActiveCall:callSession];
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
 

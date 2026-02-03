@@ -82,6 +82,37 @@ typedef NS_ENUM(NSInteger, RCKitInterfaceLayoutDirection) {
 /// 开启之后，会在会话列表、会话页面、好友列表中显示在线状态图标
 @property (nonatomic, assign) BOOL enableUserOnlineStatus;
 
+/// 指定当前显示的语言，默认跟随系统语言
+///
+/// SDK 内置语言：
+///  - RCKitLanguageZH_HANS 简体中文
+///  - RCKitLanguageEN            英语
+///  - RCKitLanguageAR            阿拉伯语
+///
+/// **支持的语言格式：**
+/// - **标准 BCP-47 格式**
+///   - `zh-Hans`（简体中文）
+///   - `en`（英语）
+///   - `ar`（阿拉伯语）
+///
+/// **传入的语言标识最终以 Xcode 创建的 lproj 文件名为准。**
+///
+/// **添加新语言支持：**
+/// 1. 在项目中添加对应的 `.lproj` 文件夹（如 `ja.lproj`、`zh-Hant.lproj`）
+/// 2. 将 `RongCloudKit.strings` 文件复制到新文件夹并翻译，语言文件路径结构为：`Project Folder` -> `ja.lproj` -> `RongCloudKit.strings`
+/// 3. 无需修改代码，系统会自动识别并支持新语言
+///
+/// **示例：**
+/// ```objc
+/// // 设置为英语
+/// [RCKitConfig defaultConfig].preferredLanguage = RCKitLanguageEN;
+///
+/// // 设置为日语（需要先添加 ja.lproj 资源）
+/// [RCKitConfig defaultConfig].preferredLanguage = @"ja";
+/// ```
+///  - Warning: SDK 目前不支持繁体中文，会自动降级显示为简体中文，如需显示繁体中文，需自行添加 zh_Hant 语言文件
+///  - Since: 5.36.0
+@property (nonatomic, copy, nullable) NSString *preferredLanguage;
 
 /// 注册文件消息图标配置，根据文件后缀，自定义会话中文件消息展示的图标
 /// - Parameter types: 文件图标字典，key 是文件后缀（例如："png"、"pdf"），value 是本地文件路径

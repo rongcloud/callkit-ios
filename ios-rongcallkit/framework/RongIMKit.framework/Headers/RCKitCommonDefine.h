@@ -73,4 +73,11 @@
 //在允许横竖屏的页面出现或者消失时发此通知，Notification 的 object 为 @(YES) 或者 @(NO)
 #define RCKitViewSupportAutorotateNotification @"RCKitViewSupportAutorotateNotification"
 
+/// 中文(简体)
+static NSString *const RCKitLanguageZH_HANS = @"zh-Hans";
+/// 英文
+static NSString *const RCKitLanguageEN = @"en";
+/// 阿拉伯语
+static NSString *const RCKitLanguageAR = @"ar";
+
 #endif /* RCKitCommonDefine_h */

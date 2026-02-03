@@ -8,15 +8,15 @@
 
 #import "RCCall.h"
 #import <AVFoundation/AVFoundation.h>
-#import "RCCXCall.h"
-#import "RCCallAudioMultiCallViewController.h"
-#import "RCCallBaseViewController.h"
-#import "RCCallDetailMessageCell.h"
 #import "RCCallKitUtility.h"
-#import "RCCallSelectMemberViewController.h"
+#import "RCCXCall.h"
+#import "RCCallBaseViewController+Private.h"
 #import "RCCallSingleCallViewController.h"
-#import "RCCallTipMessageCell.h"
+#import "RCCallAudioMultiCallViewController.h"
 #import "RCCallVideoMultiCallViewController.h"
+#import "RCCallDetailMessageCell.h"
+#import "RCCallSelectMemberViewController.h"
+#import "RCCallTipMessageCell.h"
 #import "RCUserInfoCacheManager.h"
 #import "RCAdapteRongCallKitSwiftHeader.h"
 #if __IPHONE_10_0
@@ -41,9 +41,9 @@
     }
 #endif
 
-static NSString *const __RongCallKit__Version = @"5.34.0_opensource";
-static NSString *const __RongCallKit__Commit = @"c2a1700e7";
-static NSString *const __RongCallKit__Time = @"202512261049";
+static NSString *const __RongCallKit__Version = @"5.36.0_opensource";
+static NSString *const __RongCallKit__Commit = @"f7092f5dc";
+static NSString *const __RongCallKit__Time = @"202602021646";
 
 @interface RCCall () <RCCallReceiveDelegate, RCLCKCenterDelegate>
 
@@ -121,20 +121,26 @@ static NSString *const __RongCallKit__Time = @"202512261049";
     if ([self preCheckForStartCall:mediaType]) {
         [self checkSystemPermission:mediaType
                             success:^{
-                                [self startSingleCallViewController:targetId mediaType:mediaType];
-                            }];
+            [self startSingleCallViewController:targetId mediaType:mediaType];
+        }];
     }
 }
 
 - (void)startSingleCrossCall:(NSString *)targetId mediaType:(RCCallMediaType)mediaType {
+    if (!targetId) {
+        return;
+    }
     RCCallSingleCallViewController *singleCallViewController =
-        [[RCCallSingleCallViewController alloc] initWithOutgoingCrossCall:targetId mediaType:mediaType];
+    [[RCCallSingleCallViewController alloc] initWithOutgoingCrossCall:ConversationType_PRIVATE targetId:targetId mediaType:mediaType userIdList:@[targetId]];
     [self presentCallViewController:singleCallViewController];
 }
 
 - (void)startSingleCallViewController:(NSString *)targetId mediaType:(RCCallMediaType)mediaType {
+    if (!targetId) {
+        return;
+    }
     RCCallSingleCallViewController *singleCallViewController =
-        [[RCCallSingleCallViewController alloc] initWithOutgoingCall:targetId mediaType:mediaType];
+    [[RCCallSingleCallViewController alloc] initWithOutgoingCall:ConversationType_PRIVATE targetId:targetId mediaType:mediaType userIdList:@[targetId]];
     [self presentCallViewController:singleCallViewController];
 }
 
@@ -144,10 +150,10 @@ static NSString *const __RongCallKit__Time = @"202512261049";
     if ([self preCheckForStartCall:mediaType]) {
         [self checkSystemPermission:mediaType
                             success:^{
-                                [self startSelectMemberViewContoller:conversationType
-                                                            targetId:targetId
-                                                           mediaType:mediaType];
-                            }];
+            [self startSelectMemberViewContoller:conversationType
+                                        targetId:targetId
+                                       mediaType:mediaType];
+        }];
     }
 }
 
@@ -181,22 +187,15 @@ static NSString *const __RongCallKit__Time = @"202512261049";
     if ([self preCheckForStartCall:mediaType]) {
         [self checkSystemPermission:mediaType
                             success:^{
-                                UIViewController *avCallVC = nil;
-                                if (mediaType == RCCallMediaAudio) {
-                                    avCallVC = [[RCCallAudioMultiCallViewController alloc]
-                                        initWithOutgoingCall:conversationType
-                                                    targetId:targetId
-                                                  userIdList:userIdList];
-
-                                } else {
-                                    avCallVC = [[RCCallVideoMultiCallViewController alloc]
-                                        initWithOutgoingCall:conversationType
-                                                    targetId:targetId
-                                                   mediaType:mediaType
-                                                  userIdList:userIdList];
-                                }
-                                [self presentCallViewController:avCallVC];
-                            }];
+            UIViewController *avCallVC = nil;
+            if (mediaType == RCCallMediaAudio) {
+                avCallVC = [[RCCallAudioMultiCallViewController alloc] initWithOutgoingCall:conversationType targetId:targetId mediaType:mediaType userIdList:userIdList];
+                
+            } else {
+                avCallVC = [[RCCallVideoMultiCallViewController alloc] initWithOutgoingCall:conversationType targetId:targetId mediaType:mediaType userIdList:userIdList];
+            }
+            [self presentCallViewController:avCallVC];
+        }];
     }
 }
 

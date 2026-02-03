@@ -17,6 +17,10 @@ NS_ASSUME_NONNULL_BEGIN
  语音识别源语言
  */
 @property (nonatomic, copy) NSString *srcLanguageCode;
+/*!
+ 昵称，用于智能总结
+ */
+@property (nonatomic, copy) NSString *nickName;
 
 /*!
  加入房间场景, 默认值: RCRTCRoomTypeNormal

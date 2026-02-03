@@ -19,6 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class RCReadReceiptInfo, RCGroupReadReceiptInfoV2, RCMessageConfig;
 @class RCReceivedStatusInfo, RCMessage;
 @class RCEditedMessageDraft;
+@class RCDataManagementInfo;
 
 /// 会话类，包含会话的所有属性。
 @interface RCConversation : NSObject <NSCoding>
@@ -168,6 +169,15 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// - Since:5.28.0
 @property (nonatomic, strong) RCEditedMessageDraft *editedMessageDraft;
+
+#pragma mark - 托管信息
+
+/// 托管信息，包含会话名称和头像
+///
+/// 该属性仅支持单聊、群聊和系统会话。
+/// - Warning: 只有开启信息托管功能后，该属性才有效，否则返回 nil。
+/// - Since:5.36.0
+@property (nonatomic, strong, nullable) RCDataManagementInfo *dataMgmtInfo;
 
 @end
 

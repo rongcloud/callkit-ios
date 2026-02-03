@@ -6,6 +6,7 @@
 */
 
 "VoIP_Rejected_By_Blacklist"="تم إضافتها إلى القائمة السوداء";
+"VoIP_Rejected_By_NotInWhiteList"="لست ضمن القائمة البيضاء للطرف الآخر";
 "VoIPAudioCall"="مكالمة صوتية";
 "VoIPVideoCall"="مكالمة فيديو";
 "VoIPAudioCallExistedWarning"="مكالمة صوتية جارية , حاول مرة اخرى";
@@ -70,8 +71,8 @@
 "VoIPCall_addMembers"="اختر الأعضاء";
 "VoIPCall_whiteBoard"="السبورة البيضاء";
 "VoIPCall_hand_raise"="ارفع يدك للتحدث";
-"VoIPCall_invite_signal_call"=" invite you to call";
-"VoIPCall_invite_group_call"=" invite you to group call";
+"VoIPCall_invite_signal_call"=" يدعوك للاتصال";
+"VoIPCall_invite_group_call"=" يدعوك للانضمام إلى مكالمة جماعية";
 
 "bottom_result_view_choosed_person" = "تم اختيار  %zi أشخاص";
 "VoIPCallDoSomethingByOtherClient"="تم الرد على الأجهزة الأخرى .";
@@ -88,3 +89,11 @@
 "subtitle_translation_display_chinese" = "简体中文(الصينية المبسطة)";
 "subtitle_translation_display_english" = "English(الإنجليزية)";
 "subtitle_translation_display_arabic" = "العربية";
+"ai_summary_completed" = "اكتمل ملخص الذكاء الاصطناعي";
+"call_start_time" = "وقت بدء المكالمة: ";
+"show_summary_detail" = "عرض التفاصيل";
+"ai_summary_title" = "ملخص ذكاء اصطناعي";
+"summarization" = "ملخص";
+"summary_content" = "محتوى الملخص";
+"start_summray_failed_retry_later" = "فشل التشغيل، يرجى المحاولة مرة أخرى لاحقًا";
+"request_failed_retry_later" = "يتطلب المزيد من المحتوى للتلخيص. يرجى المحاولة مرة أخرى لاحقاً";

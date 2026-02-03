@@ -90,7 +90,7 @@
     if (!_tLabel) {
         _tLabel =
             [[UILabel alloc] initWithFrame:CGRectMake(0, self.bounds.size.height, self.bounds.size.width * 2, 26)];
-        _tLabel.numberOfLines = 2;
+        _tLabel.numberOfLines = 1;
         [_tLabel setFont:[UIFont fontWithName:@"PingFangSC-Regular" size:13]];
         _tLabel.textColor = [UIColor whiteColor];
         [self addSubview:_tLabel];

@@ -47,36 +47,4 @@
  */
 @property (nonatomic, strong) UICollectionViewLayout *userCollectionViewLayout;
 
-#pragma mark - 初始化
-/*!
- 初始化呼入的多人音频ViewController
-
- @param callSession 呼入的通话实体
-
- @return 多人音频ViewController
- */
-- (instancetype)initWithIncomingCall:(RCCallSession *)callSession;
-
-/*!
- 初始化多人音频ViewController并发起通话
-
- @param conversationType 会话类型
- @param targetId         会话目标ID
- @param userIdList       邀请的用户ID列表
-
- @return 多人音频ViewController
- */
-- (instancetype)initWithOutgoingCall:(RCConversationType)conversationType
-                            targetId:(NSString *)targetId
-                          userIdList:(NSArray *)userIdList;
-
-/*!
- 初始化已经接通的多人音频ViewController
-
- @param callSession 已经接通的通话实体
-
- @return 多人音频ViewController
- */
-- (instancetype)initWithActiveCall:(RCCallSession *)callSession;
-
 @end

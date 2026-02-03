@@ -11,6 +11,9 @@
 #import "RCCallDetailMessageCell.h"
 #import "RCCallKitUtility.h"
 #import "RCCallTipMessageCell.h"
+#import "RCCallAISummaryMessage.h"
+#import "RCCallAISummaryMessageCell.h"
+#import "RCCallAISummaryController.h"
 
 // appkey 默认长度
 static NSInteger kAppkeyLength = 13;
@@ -23,8 +26,14 @@ static NSInteger kAppkeyLength = 13;
  @warning IMKit会通过这个方法生成并加载CallKit，强烈建议不要删除其中的逻辑，否则肯能导致CallKit功能不正常。
  */
 + (instancetype)loadRongExtensionModule {
-    [RCCall sharedRCCall];
-    return [[RCCallKitExtensionModule alloc] init];
+    static RCCallKitExtensionModule *module = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        [RCCall sharedRCCall];
+        module = [[RCCallKitExtensionModule alloc] init];
+        [[RCCoreClient sharedCoreClient] registerMessageType:RCCallAISummaryMessage.class];
+    });
+    return module;
 }
 
 - (void)destroyModule {
@@ -32,18 +41,25 @@ static NSInteger kAppkeyLength = 13;
 
 - (NSArray<RCExtensionMessageCellInfo *> *)getMessageCellInfoList:(RCConversationType)conversationType
                                                          targetId:(NSString *)targetId {
+    NSMutableArray *cellInfos = [NSMutableArray new];
     if (conversationType == ConversationType_PRIVATE) {
         RCExtensionMessageCellInfo *cellInfo = [RCExtensionMessageCellInfo new];
         cellInfo.messageContentClass = [RCCallSummaryMessage class];
         cellInfo.messageCellClass = [RCCallDetailMessageCell class];
-        return @[ cellInfo ];
+        [cellInfos addObject:cellInfo];
     } else if (conversationType == ConversationType_GROUP || conversationType == ConversationType_DISCUSSION) {
         RCExtensionMessageCellInfo *cellInfo = [RCExtensionMessageCellInfo new];
         cellInfo.messageContentClass = [RCCallSummaryMessage class];
         cellInfo.messageCellClass = [RCCallTipMessageCell class];
-        return @[ cellInfo ];
+        [cellInfos addObject:cellInfo];
     }
-    return nil;
+    {
+        RCExtensionMessageCellInfo *cellInfo = [RCExtensionMessageCellInfo new];
+        cellInfo.messageContentClass = [RCCallAISummaryMessage class];
+        cellInfo.messageCellClass = [RCCallAISummaryMessageCell class];
+        [cellInfos addObject:cellInfo];
+    }
+    return cellInfos;
 }
 
 - (void)didTapMessageCell:(RCMessageModel *)messageModel {
@@ -57,6 +73,27 @@ static NSInteger kAppkeyLength = 13;
             callMessage.hangupReason != RCCallDisconnectReasonAcceptByOtherClient) {
             [self startSingleCall:messageModel.targetId mediaType:callMessage.mediaType];
         }
+    } else if ([messageModel.content isKindOfClass:[RCCallAISummaryMessage class]]) {
+        RCCallAISummaryMessage *callSummarizationMessage = (RCCallAISummaryMessage *)messageModel.content;
+        
+        // 跳转到 AI 总结详情页（从消息列表打开，不显示开关）
+        RCCallAISummaryController *detailVC = [[RCCallAISummaryController alloc]
+                                                             initWithTaskId:callSummarizationMessage.taskId
+                                                             callId:callSummarizationMessage.callId
+                                                             displayStartSummaryButton:NO
+                                                             isSummaryStarted:NO
+                                                             isASRStarted:NO
+                                                             autoGenSummary:YES
+                                                             defaultContent:nil];
+        
+        UINavigationController *navVC = [[UINavigationController alloc] initWithRootViewController:detailVC];
+        navVC.modalPresentationStyle = UIModalPresentationFullScreen;
+        
+        UIViewController *rootVC = [RCKitUtility getKeyWindow].rootViewController;
+        while (rootVC.presentedViewController) {
+            rootVC = rootVC.presentedViewController;
+        }
+        [rootVC presentViewController:navVC animated:YES completion:nil];
     }
 }
 

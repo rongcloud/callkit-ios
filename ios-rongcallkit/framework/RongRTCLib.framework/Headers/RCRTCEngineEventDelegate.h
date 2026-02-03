@@ -97,6 +97,7 @@ NS_ASSUME_NONNULL_BEGIN
  @remarks 代理
  */
 - (void)didRTCConnectionStateChanged:(RCRTCConnectionState)state;
+
 @end
 
 NS_ASSUME_NONNULL_END

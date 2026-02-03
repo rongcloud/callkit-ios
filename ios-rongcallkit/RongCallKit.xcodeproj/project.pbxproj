@@ -60,6 +60,60 @@
 		A6BE1B3A1CCEFAAC00FF6BF7 /* RCCallKitUtility.h in Headers */ = {isa = PBXBuildFile; fileRef = A6BE1B1C1CCEFAAC00FF6BF7 /* RCCallKitUtility.h */; };
 		A6BE1B3B1CCEFAAC00FF6BF7 /* RCCallKitUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = A6BE1B1D1CCEFAAC00FF6BF7 /* RCCallKitUtility.m */; };
 		A6BE1B481CCEFBC700FF6BF7 /* RongCallLib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6BE1B461CCEFBC700FF6BF7 /* RongCallLib.framework */; };
+		E509A9922EE2BF2400D7DCAF /* RCCallBaseViewController+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = E509A9912EE2BF2300D7DCAF /* RCCallBaseViewController+Private.h */; };
+		E509AAC72EE69EB100D7DCAF /* RCCallAISummaryMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = E509AAC52EE69EB100D7DCAF /* RCCallAISummaryMessage.m */; };
+		E509AAC82EE69EB100D7DCAF /* RCCallAISummaryMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = E509AAC42EE69EB100D7DCAF /* RCCallAISummaryMessage.h */; };
+		E509AACB2EE6A8D500D7DCAF /* RCCallAISummaryMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E509AACA2EE6A8D500D7DCAF /* RCCallAISummaryMessageCell.m */; };
+		E509AACC2EE6A8D500D7DCAF /* RCCallAISummaryMessageCell.h in Headers */ = {isa = PBXBuildFile; fileRef = E509AAC92EE6A8D500D7DCAF /* RCCallAISummaryMessageCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E509AAF92EE6B46300D7DCAF /* xml.c in Sources */ = {isa = PBXBuildFile; fileRef = E509AAF62EE6B46300D7DCAF /* xml.c */; };
+		E509AAFA2EE6B46300D7DCAF /* houdini_html_e.c in Sources */ = {isa = PBXBuildFile; fileRef = E509AADF2EE6B46300D7DCAF /* houdini_html_e.c */; };
+		E509AAFB2EE6B46300D7DCAF /* case_fold.inc in Sources */ = {isa = PBXBuildFile; fileRef = E509AAD02EE6B46300D7DCAF /* case_fold.inc */; };
+		E509AAFC2EE6B46300D7DCAF /* inlines.c in Sources */ = {isa = PBXBuildFile; fileRef = E509AAE32EE6B46300D7DCAF /* inlines.c */; };
+		E509AAFD2EE6B46300D7DCAF /* buffer.c in Sources */ = {isa = PBXBuildFile; fileRef = E509AACF2EE6B46300D7DCAF /* buffer.c */; };
+		E509AAFE2EE6B46300D7DCAF /* iterator.c in Sources */ = {isa = PBXBuildFile; fileRef = E509AAE52EE6B46300D7DCAF /* iterator.c */; };
+		E509AAFF2EE6B46300D7DCAF /* man.c in Sources */ = {isa = PBXBuildFile; fileRef = E509AAE92EE6B46300D7DCAF /* man.c */; };
+		E509AB002EE6B46300D7DCAF /* cmark_ctype.c in Sources */ = {isa = PBXBuildFile; fileRef = E509AAD62EE6B46300D7DCAF /* cmark_ctype.c */; };
+		E509AB012EE6B46300D7DCAF /* latex.c in Sources */ = {isa = PBXBuildFile; fileRef = E509AAE62EE6B46300D7DCAF /* latex.c */; };
+		E509AB022EE6B46300D7DCAF /* blocks.c in Sources */ = {isa = PBXBuildFile; fileRef = E509AACD2EE6B46300D7DCAF /* blocks.c */; };
+		E509AB032EE6B46300D7DCAF /* cmark.c in Sources */ = {isa = PBXBuildFile; fileRef = E509AAD42EE6B46300D7DCAF /* cmark.c */; };
+		E509AB042EE6B46300D7DCAF /* entities.inc in Sources */ = {isa = PBXBuildFile; fileRef = E509AADC2EE6B46300D7DCAF /* entities.inc */; };
+		E509AB052EE6B46300D7DCAF /* houdini_href_e.c in Sources */ = {isa = PBXBuildFile; fileRef = E509AADE2EE6B46300D7DCAF /* houdini_href_e.c */; };
+		E509AB062EE6B46300D7DCAF /* render.c in Sources */ = {isa = PBXBuildFile; fileRef = E509AAF02EE6B46300D7DCAF /* render.c */; };
+		E509AB072EE6B46300D7DCAF /* houdini_html_u.c in Sources */ = {isa = PBXBuildFile; fileRef = E509AAE02EE6B46300D7DCAF /* houdini_html_u.c */; };
+		E509AB082EE6B46300D7DCAF /* commonmark.c in Sources */ = {isa = PBXBuildFile; fileRef = E509AADB2EE6B46300D7DCAF /* commonmark.c */; };
+		E509AB092EE6B46300D7DCAF /* scanners.c in Sources */ = {isa = PBXBuildFile; fileRef = E509AAF22EE6B46300D7DCAF /* scanners.c */; };
+		E509AB0A2EE6B46300D7DCAF /* utf8.c in Sources */ = {isa = PBXBuildFile; fileRef = E509AAF52EE6B46300D7DCAF /* utf8.c */; };
+		E509AB0B2EE6B46300D7DCAF /* node.c in Sources */ = {isa = PBXBuildFile; fileRef = E509AAEB2EE6B46300D7DCAF /* node.c */; };
+		E509AB0C2EE6B46300D7DCAF /* references.c in Sources */ = {isa = PBXBuildFile; fileRef = E509AAEE2EE6B46300D7DCAF /* references.c */; };
+		E509AB0D2EE6B46300D7DCAF /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = E509AAE82EE6B46300D7DCAF /* main.c */; };
+		E509AB0E2EE6B46300D7DCAF /* html.c in Sources */ = {isa = PBXBuildFile; fileRef = E509AAE12EE6B46300D7DCAF /* html.c */; };
+		E509AB0F2EE6B46300D7DCAF /* buffer.h in Headers */ = {isa = PBXBuildFile; fileRef = E509AACE2EE6B46300D7DCAF /* buffer.h */; };
+		E509AB102EE6B46300D7DCAF /* houdini.h in Headers */ = {isa = PBXBuildFile; fileRef = E509AADD2EE6B46300D7DCAF /* houdini.h */; };
+		E509AB112EE6B46300D7DCAF /* inlines.h in Headers */ = {isa = PBXBuildFile; fileRef = E509AAE22EE6B46300D7DCAF /* inlines.h */; };
+		E509AB122EE6B46300D7DCAF /* chunk.h in Headers */ = {isa = PBXBuildFile; fileRef = E509AAD12EE6B46300D7DCAF /* chunk.h */; };
+		E509AB132EE6B46300D7DCAF /* utf8.h in Headers */ = {isa = PBXBuildFile; fileRef = E509AAF42EE6B46300D7DCAF /* utf8.h */; };
+		E509AB142EE6B46300D7DCAF /* parser.h in Headers */ = {isa = PBXBuildFile; fileRef = E509AAEC2EE6B46300D7DCAF /* parser.h */; };
+		E509AB152EE6B46300D7DCAF /* render.h in Headers */ = {isa = PBXBuildFile; fileRef = E509AAEF2EE6B46300D7DCAF /* render.h */; };
+		E509AB162EE6B46300D7DCAF /* cmark_version.h in Headers */ = {isa = PBXBuildFile; fileRef = E509AAD82EE6B46300D7DCAF /* cmark_version.h */; };
+		E509AB172EE6B46300D7DCAF /* scanners.h in Headers */ = {isa = PBXBuildFile; fileRef = E509AAF12EE6B46300D7DCAF /* scanners.h */; };
+		E509AB182EE6B46300D7DCAF /* cmark_export.h in Headers */ = {isa = PBXBuildFile; fileRef = E509AAD72EE6B46300D7DCAF /* cmark_export.h */; };
+		E509AB192EE6B46300D7DCAF /* node.h in Headers */ = {isa = PBXBuildFile; fileRef = E509AAEA2EE6B46300D7DCAF /* node.h */; };
+		E509AB1A2EE6B46300D7DCAF /* cmark.h in Headers */ = {isa = PBXBuildFile; fileRef = E509AAD32EE6B46300D7DCAF /* cmark.h */; };
+		E509AB1B2EE6B46300D7DCAF /* cmark_ctype.h in Headers */ = {isa = PBXBuildFile; fileRef = E509AAD52EE6B46300D7DCAF /* cmark_ctype.h */; };
+		E509AB1C2EE6B46300D7DCAF /* references.h in Headers */ = {isa = PBXBuildFile; fileRef = E509AAED2EE6B46300D7DCAF /* references.h */; };
+		E509AB1D2EE6B46300D7DCAF /* iterator.h in Headers */ = {isa = PBXBuildFile; fileRef = E509AAE42EE6B46300D7DCAF /* iterator.h */; };
+		E509AB1E2EE6B46300D7DCAF /* libcmark.pc.in in Resources */ = {isa = PBXBuildFile; fileRef = E509AAE72EE6B46300D7DCAF /* libcmark.pc.in */; };
+		E509AB1F2EE6B46300D7DCAF /* cmarkConfig.cmake.in in Resources */ = {isa = PBXBuildFile; fileRef = E509AADA2EE6B46300D7DCAF /* cmarkConfig.cmake.in */; };
+		E509AB202EE6B46300D7DCAF /* CMakeLists.txt in Resources */ = {isa = PBXBuildFile; fileRef = E509AAD22EE6B46300D7DCAF /* CMakeLists.txt */; };
+		E509AB212EE6B46300D7DCAF /* cmark_version.h.in in Resources */ = {isa = PBXBuildFile; fileRef = E509AAD92EE6B46300D7DCAF /* cmark_version.h.in */; };
+		E509AB222EE6B46300D7DCAF /* scanners.re in Resources */ = {isa = PBXBuildFile; fileRef = E509AAF32EE6B46300D7DCAF /* scanners.re */; };
+		E509AB252EE6BBC000D7DCAF /* RCCallAISummaryController.m in Sources */ = {isa = PBXBuildFile; fileRef = E509AB242EE6BBC000D7DCAF /* RCCallAISummaryController.m */; };
+		E509AB262EE6BBC000D7DCAF /* RCCallAISummaryController.h in Headers */ = {isa = PBXBuildFile; fileRef = E509AB232EE6BBC000D7DCAF /* RCCallAISummaryController.h */; };
+		E509AB3F2EE6DC9300D7DCAF /* RCCallKitExtensionModule.h in Headers */ = {isa = PBXBuildFile; fileRef = E509AB3C2EE6DC9300D7DCAF /* RCCallKitExtensionModule.h */; };
+		E509AB402EE6DC9300D7DCAF /* RCCallKitExtensionModule.m in Sources */ = {isa = PBXBuildFile; fileRef = E509AB3D2EE6DC9300D7DCAF /* RCCallKitExtensionModule.m */; };
+		E509AB452EE6DCAE00D7DCAF /* RCUserInfoCacheManager.h in Headers */ = {isa = PBXBuildFile; fileRef = E509AB432EE6DCAE00D7DCAF /* RCUserInfoCacheManager.h */; };
+		E509AB462EE6DCAE00D7DCAF /* RCloudImageLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = E509AB412EE6DCAE00D7DCAF /* RCloudImageLoader.h */; };
+		E509AB472EE6DCAE00D7DCAF /* RCloudImageView.h in Headers */ = {isa = PBXBuildFile; fileRef = E509AB422EE6DCAE00D7DCAF /* RCloudImageView.h */; };
 		E53AB2D62E2FADB30049C0DE /* RCLCK.swift in Sources */ = {isa = PBXBuildFile; fileRef = E53AB2D52E2FADB30049C0DE /* RCLCK.swift */; };
 		E59AFC652EBDEC7300BEC9A2 /* RCAdapteRongIMKitHeader.h in Headers */ = {isa = PBXBuildFile; fileRef = E59AFC642EBDEC7300BEC9A2 /* RCAdapteRongIMKitHeader.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E59AFC662EBDEC7300BEC9A2 /* RCAdapteRongCallKitSwiftHeader.h in Headers */ = {isa = PBXBuildFile; fileRef = E59AFC632EBDEC7300BEC9A2 /* RCAdapteRongCallKitSwiftHeader.h */; };
@@ -68,11 +122,6 @@
 		E5B2D5C12E69299F00A257EF /* RCCallASRContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B2D5C02E69299F00A257EF /* RCCallASRContentView.m */; };
 		E5B2D5C22E69299F00A257EF /* RCCallASRContentView.h in Headers */ = {isa = PBXBuildFile; fileRef = E5B2D5BF2E69299F00A257EF /* RCCallASRContentView.h */; };
 		E5E1BFCF2E4AD22300DDB7A6 /* RongCallKit.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5AC79E59256F5A5900B06789 /* RongCallKit.strings */; };
-		F8235CDD1CE5B2A100C95B26 /* RCloudImageLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = F8235CD91CE5B2A100C95B26 /* RCloudImageLoader.h */; };
-		F8235CDE1CE5B2A100C95B26 /* RCloudImageView.h in Headers */ = {isa = PBXBuildFile; fileRef = F8235CDA1CE5B2A100C95B26 /* RCloudImageView.h */; };
-		F8235CDF1CE5B2A100C95B26 /* RCUserInfoCacheManager.h in Headers */ = {isa = PBXBuildFile; fileRef = F8235CDB1CE5B2A100C95B26 /* RCUserInfoCacheManager.h */; };
-		F8D2904C1D2790E3002BFA65 /* RCCallKitExtensionModule.h in Headers */ = {isa = PBXBuildFile; fileRef = F8D2904A1D2790E3002BFA65 /* RCCallKitExtensionModule.h */; };
-		F8D2904D1D2790E3002BFA65 /* RCCallKitExtensionModule.m in Sources */ = {isa = PBXBuildFile; fileRef = F8D2904B1D2790E3002BFA65 /* RCCallKitExtensionModule.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -137,6 +186,60 @@
 		B26F124A2480E69C0039081A /* jenkins_build.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = jenkins_build.sh; sourceTree = "<group>"; };
 		B2B0B1702480D096007DAFF4 /* after_build.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = after_build.sh; sourceTree = "<group>"; };
 		B2B0B1712480D096007DAFF4 /* before_build.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = before_build.sh; sourceTree = "<group>"; };
+		E509A9912EE2BF2300D7DCAF /* RCCallBaseViewController+Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RCCallBaseViewController+Private.h"; sourceTree = "<group>"; };
+		E509AAC42EE69EB100D7DCAF /* RCCallAISummaryMessage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCCallAISummaryMessage.h; sourceTree = "<group>"; };
+		E509AAC52EE69EB100D7DCAF /* RCCallAISummaryMessage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCCallAISummaryMessage.m; sourceTree = "<group>"; };
+		E509AAC92EE6A8D500D7DCAF /* RCCallAISummaryMessageCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCCallAISummaryMessageCell.h; sourceTree = "<group>"; };
+		E509AACA2EE6A8D500D7DCAF /* RCCallAISummaryMessageCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCCallAISummaryMessageCell.m; sourceTree = "<group>"; };
+		E509AACD2EE6B46300D7DCAF /* blocks.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = blocks.c; sourceTree = "<group>"; };
+		E509AACE2EE6B46300D7DCAF /* buffer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = buffer.h; sourceTree = "<group>"; };
+		E509AACF2EE6B46300D7DCAF /* buffer.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = buffer.c; sourceTree = "<group>"; };
+		E509AAD02EE6B46300D7DCAF /* case_fold.inc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.pascal; path = case_fold.inc; sourceTree = "<group>"; };
+		E509AAD12EE6B46300D7DCAF /* chunk.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = chunk.h; sourceTree = "<group>"; };
+		E509AAD22EE6B46300D7DCAF /* CMakeLists.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = CMakeLists.txt; sourceTree = "<group>"; };
+		E509AAD32EE6B46300D7DCAF /* cmark.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = cmark.h; sourceTree = "<group>"; };
+		E509AAD42EE6B46300D7DCAF /* cmark.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = cmark.c; sourceTree = "<group>"; };
+		E509AAD52EE6B46300D7DCAF /* cmark_ctype.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = cmark_ctype.h; sourceTree = "<group>"; };
+		E509AAD62EE6B46300D7DCAF /* cmark_ctype.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = cmark_ctype.c; sourceTree = "<group>"; };
+		E509AAD72EE6B46300D7DCAF /* cmark_export.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = cmark_export.h; sourceTree = "<group>"; };
+		E509AAD82EE6B46300D7DCAF /* cmark_version.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = cmark_version.h; sourceTree = "<group>"; };
+		E509AAD92EE6B46300D7DCAF /* cmark_version.h.in */ = {isa = PBXFileReference; lastKnownFileType = text; path = cmark_version.h.in; sourceTree = "<group>"; };
+		E509AADA2EE6B46300D7DCAF /* cmarkConfig.cmake.in */ = {isa = PBXFileReference; lastKnownFileType = text; path = cmarkConfig.cmake.in; sourceTree = "<group>"; };
+		E509AADB2EE6B46300D7DCAF /* commonmark.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = commonmark.c; sourceTree = "<group>"; };
+		E509AADC2EE6B46300D7DCAF /* entities.inc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.pascal; path = entities.inc; sourceTree = "<group>"; };
+		E509AADD2EE6B46300D7DCAF /* houdini.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = houdini.h; sourceTree = "<group>"; };
+		E509AADE2EE6B46300D7DCAF /* houdini_href_e.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = houdini_href_e.c; sourceTree = "<group>"; };
+		E509AADF2EE6B46300D7DCAF /* houdini_html_e.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = houdini_html_e.c; sourceTree = "<group>"; };
+		E509AAE02EE6B46300D7DCAF /* houdini_html_u.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = houdini_html_u.c; sourceTree = "<group>"; };
+		E509AAE12EE6B46300D7DCAF /* html.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = html.c; sourceTree = "<group>"; };
+		E509AAE22EE6B46300D7DCAF /* inlines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = inlines.h; sourceTree = "<group>"; };
+		E509AAE32EE6B46300D7DCAF /* inlines.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = inlines.c; sourceTree = "<group>"; };
+		E509AAE42EE6B46300D7DCAF /* iterator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = iterator.h; sourceTree = "<group>"; };
+		E509AAE52EE6B46300D7DCAF /* iterator.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = iterator.c; sourceTree = "<group>"; };
+		E509AAE62EE6B46300D7DCAF /* latex.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = latex.c; sourceTree = "<group>"; };
+		E509AAE72EE6B46300D7DCAF /* libcmark.pc.in */ = {isa = PBXFileReference; lastKnownFileType = text; path = libcmark.pc.in; sourceTree = "<group>"; };
+		E509AAE82EE6B46300D7DCAF /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
+		E509AAE92EE6B46300D7DCAF /* man.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = man.c; sourceTree = "<group>"; };
+		E509AAEA2EE6B46300D7DCAF /* node.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = node.h; sourceTree = "<group>"; };
+		E509AAEB2EE6B46300D7DCAF /* node.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = node.c; sourceTree = "<group>"; };
+		E509AAEC2EE6B46300D7DCAF /* parser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = parser.h; sourceTree = "<group>"; };
+		E509AAED2EE6B46300D7DCAF /* references.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = references.h; sourceTree = "<group>"; };
+		E509AAEE2EE6B46300D7DCAF /* references.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = references.c; sourceTree = "<group>"; };
+		E509AAEF2EE6B46300D7DCAF /* render.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = render.h; sourceTree = "<group>"; };
+		E509AAF02EE6B46300D7DCAF /* render.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = render.c; sourceTree = "<group>"; };
+		E509AAF12EE6B46300D7DCAF /* scanners.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = scanners.h; sourceTree = "<group>"; };
+		E509AAF22EE6B46300D7DCAF /* scanners.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = scanners.c; sourceTree = "<group>"; };
+		E509AAF32EE6B46300D7DCAF /* scanners.re */ = {isa = PBXFileReference; lastKnownFileType = text; path = scanners.re; sourceTree = "<group>"; };
+		E509AAF42EE6B46300D7DCAF /* utf8.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = utf8.h; sourceTree = "<group>"; };
+		E509AAF52EE6B46300D7DCAF /* utf8.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = utf8.c; sourceTree = "<group>"; };
+		E509AAF62EE6B46300D7DCAF /* xml.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = xml.c; sourceTree = "<group>"; };
+		E509AB232EE6BBC000D7DCAF /* RCCallAISummaryController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCCallAISummaryController.h; sourceTree = "<group>"; };
+		E509AB242EE6BBC000D7DCAF /* RCCallAISummaryController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCCallAISummaryController.m; sourceTree = "<group>"; };
+		E509AB3C2EE6DC9300D7DCAF /* RCCallKitExtensionModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCCallKitExtensionModule.h; sourceTree = "<group>"; };
+		E509AB3D2EE6DC9300D7DCAF /* RCCallKitExtensionModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCCallKitExtensionModule.m; sourceTree = "<group>"; };
+		E509AB412EE6DCAE00D7DCAF /* RCloudImageLoader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCloudImageLoader.h; sourceTree = "<group>"; };
+		E509AB422EE6DCAE00D7DCAF /* RCloudImageView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCloudImageView.h; sourceTree = "<group>"; };
+		E509AB432EE6DCAE00D7DCAF /* RCUserInfoCacheManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCUserInfoCacheManager.h; sourceTree = "<group>"; };
 		E50FA9972595BEC7001A8A53 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/RongCallKit.strings; sourceTree = "<group>"; };
 		E53AB2D52E2FADB30049C0DE /* RCLCK.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RCLCK.swift; sourceTree = "<group>"; };
 		E59AFC632EBDEC7300BEC9A2 /* RCAdapteRongCallKitSwiftHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCAdapteRongCallKitSwiftHeader.h; sourceTree = "<group>"; };
@@ -145,11 +248,6 @@
 		E5B2D5BC2E6832D800A257EF /* RCCallASRConfigController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCCallASRConfigController.m; sourceTree = "<group>"; };
 		E5B2D5BF2E69299F00A257EF /* RCCallASRContentView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCCallASRContentView.h; sourceTree = "<group>"; };
 		E5B2D5C02E69299F00A257EF /* RCCallASRContentView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCCallASRContentView.m; sourceTree = "<group>"; };
-		F8235CD91CE5B2A100C95B26 /* RCloudImageLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RCloudImageLoader.h; path = Header/RCloudImageLoader.h; sourceTree = "<group>"; };
-		F8235CDA1CE5B2A100C95B26 /* RCloudImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RCloudImageView.h; path = Header/RCloudImageView.h; sourceTree = "<group>"; };
-		F8235CDB1CE5B2A100C95B26 /* RCUserInfoCacheManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RCUserInfoCacheManager.h; path = Header/RCUserInfoCacheManager.h; sourceTree = "<group>"; };
-		F8D2904A1D2790E3002BFA65 /* RCCallKitExtensionModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RCCallKitExtensionModule.h; path = Extension/RCCallKitExtensionModule.h; sourceTree = "<group>"; };
-		F8D2904B1D2790E3002BFA65 /* RCCallKitExtensionModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RCCallKitExtensionModule.m; path = Extension/RCCallKitExtensionModule.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -230,15 +328,17 @@
 		A6BE1A501CCE561200FF6BF7 /* RongCallKit */ = {
 			isa = PBXGroup;
 			children = (
-				F8D290491D2790C1002BFA65 /* Extension */,
+				E509AB442EE6DCAE00D7DCAF /* Header */,
+				E509AB3E2EE6DC9300D7DCAF /* Extension */,
+				E509AAF82EE6B46300D7DCAF /* Vendor */,
 				A6BE1AFB1CCEFAAC00FF6BF7 /* Cell */,
 				A6BE1B041CCEFAAC00FF6BF7 /* Controller */,
 				A6BE1B0F1CCEFAAC00FF6BF7 /* Layout */,
+				E509AAC62EE69EB100D7DCAF /* Message */,
 				398680B6205E84D600B12F15 /* View */,
 				A6BE1B141CCEFAAC00FF6BF7 /* Model */,
 				390467EC20738446007CE8DE /* Category */,
 				A6BE1B191CCEFAAC00FF6BF7 /* Utility */,
-				F8235CD71CE5B29200C95B26 /* Header */,
 				5AC79E58256F5A5900B06789 /* Resources */,
 				A6BE1A511CCE561200FF6BF7 /* RongCallKit.h */,
 				E59AFC632EBDEC7300BEC9A2 /* RCAdapteRongCallKitSwiftHeader.h */,
@@ -261,6 +361,8 @@
 				A68AFAE61CCEFF5B00F16B3D /* RCCallDetailMessageCell.m */,
 				A68AFAE71CCEFF5B00F16B3D /* RCCallTipMessageCell.h */,
 				A68AFAE81CCEFF5B00F16B3D /* RCCallTipMessageCell.m */,
+				E509AAC92EE6A8D500D7DCAF /* RCCallAISummaryMessageCell.h */,
+				E509AACA2EE6A8D500D7DCAF /* RCCallAISummaryMessageCell.m */,
 				A6BE1B001CCEFAAC00FF6BF7 /* RCCallSelectingMemberCell.h */,
 				A6BE1B011CCEFAAC00FF6BF7 /* RCCallSelectingMemberCell.m */,
 				A6BE1AFE1CCEFAAC00FF6BF7 /* RCCallMultiCallUserCell.h */,
@@ -272,12 +374,15 @@
 		A6BE1B041CCEFAAC00FF6BF7 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				E509AB232EE6BBC000D7DCAF /* RCCallAISummaryController.h */,
+				E509AB242EE6BBC000D7DCAF /* RCCallAISummaryController.m */,
 				E5B2D5BB2E6832D800A257EF /* RCCallASRConfigController.h */,
 				E5B2D5BC2E6832D800A257EF /* RCCallASRConfigController.m */,
 				A6BE1B091CCEFAAC00FF6BF7 /* RCCallSelectMemberViewController.h */,
 				A6BE1B0A1CCEFAAC00FF6BF7 /* RCCallSelectMemberViewController.m */,
 				A6BE1B071CCEFAAC00FF6BF7 /* RCCallBaseViewController.h */,
 				A6BE1B081CCEFAAC00FF6BF7 /* RCCallBaseViewController.m */,
+				E509A9912EE2BF2300D7DCAF /* RCCallBaseViewController+Private.h */,
 				A6BE1B0B1CCEFAAC00FF6BF7 /* RCCallSingleCallViewController.h */,
 				A6BE1B0C1CCEFAAC00FF6BF7 /* RCCallSingleCallViewController.m */,
 				A6BE1B051CCEFAAC00FF6BF7 /* RCCallAudioMultiCallViewController.h */,
@@ -358,23 +463,89 @@
 			name = Script;
 			sourceTree = "<group>";
 		};
-		F8235CD71CE5B29200C95B26 /* Header */ = {
+		E509AAC62EE69EB100D7DCAF /* Message */ = {
 			isa = PBXGroup;
 			children = (
-				F8235CD91CE5B2A100C95B26 /* RCloudImageLoader.h */,
-				F8235CDA1CE5B2A100C95B26 /* RCloudImageView.h */,
-				F8235CDB1CE5B2A100C95B26 /* RCUserInfoCacheManager.h */,
+				E509AAC42EE69EB100D7DCAF /* RCCallAISummaryMessage.h */,
+				E509AAC52EE69EB100D7DCAF /* RCCallAISummaryMessage.m */,
 			);
-			name = Header;
+			path = Message;
 			sourceTree = "<group>";
 		};
-		F8D290491D2790C1002BFA65 /* Extension */ = {
+		E509AAF72EE6B46300D7DCAF /* cmark */ = {
 			isa = PBXGroup;
 			children = (
-				F8D2904A1D2790E3002BFA65 /* RCCallKitExtensionModule.h */,
-				F8D2904B1D2790E3002BFA65 /* RCCallKitExtensionModule.m */,
+				E509AACD2EE6B46300D7DCAF /* blocks.c */,
+				E509AACE2EE6B46300D7DCAF /* buffer.h */,
+				E509AACF2EE6B46300D7DCAF /* buffer.c */,
+				E509AAD02EE6B46300D7DCAF /* case_fold.inc */,
+				E509AAD12EE6B46300D7DCAF /* chunk.h */,
+				E509AAD22EE6B46300D7DCAF /* CMakeLists.txt */,
+				E509AAD32EE6B46300D7DCAF /* cmark.h */,
+				E509AAD42EE6B46300D7DCAF /* cmark.c */,
+				E509AAD52EE6B46300D7DCAF /* cmark_ctype.h */,
+				E509AAD62EE6B46300D7DCAF /* cmark_ctype.c */,
+				E509AAD72EE6B46300D7DCAF /* cmark_export.h */,
+				E509AAD82EE6B46300D7DCAF /* cmark_version.h */,
+				E509AAD92EE6B46300D7DCAF /* cmark_version.h.in */,
+				E509AADA2EE6B46300D7DCAF /* cmarkConfig.cmake.in */,
+				E509AADB2EE6B46300D7DCAF /* commonmark.c */,
+				E509AADC2EE6B46300D7DCAF /* entities.inc */,
+				E509AADD2EE6B46300D7DCAF /* houdini.h */,
+				E509AADE2EE6B46300D7DCAF /* houdini_href_e.c */,
+				E509AADF2EE6B46300D7DCAF /* houdini_html_e.c */,
+				E509AAE02EE6B46300D7DCAF /* houdini_html_u.c */,
+				E509AAE12EE6B46300D7DCAF /* html.c */,
+				E509AAE22EE6B46300D7DCAF /* inlines.h */,
+				E509AAE32EE6B46300D7DCAF /* inlines.c */,
+				E509AAE42EE6B46300D7DCAF /* iterator.h */,
+				E509AAE52EE6B46300D7DCAF /* iterator.c */,
+				E509AAE62EE6B46300D7DCAF /* latex.c */,
+				E509AAE72EE6B46300D7DCAF /* libcmark.pc.in */,
+				E509AAE82EE6B46300D7DCAF /* main.c */,
+				E509AAE92EE6B46300D7DCAF /* man.c */,
+				E509AAEA2EE6B46300D7DCAF /* node.h */,
+				E509AAEB2EE6B46300D7DCAF /* node.c */,
+				E509AAEC2EE6B46300D7DCAF /* parser.h */,
+				E509AAED2EE6B46300D7DCAF /* references.h */,
+				E509AAEE2EE6B46300D7DCAF /* references.c */,
+				E509AAEF2EE6B46300D7DCAF /* render.h */,
+				E509AAF02EE6B46300D7DCAF /* render.c */,
+				E509AAF12EE6B46300D7DCAF /* scanners.h */,
+				E509AAF22EE6B46300D7DCAF /* scanners.c */,
+				E509AAF32EE6B46300D7DCAF /* scanners.re */,
+				E509AAF42EE6B46300D7DCAF /* utf8.h */,
+				E509AAF52EE6B46300D7DCAF /* utf8.c */,
+				E509AAF62EE6B46300D7DCAF /* xml.c */,
 			);
-			name = Extension;
+			path = cmark;
+			sourceTree = "<group>";
+		};
+		E509AAF82EE6B46300D7DCAF /* Vendor */ = {
+			isa = PBXGroup;
+			children = (
+				E509AAF72EE6B46300D7DCAF /* cmark */,
+			);
+			path = Vendor;
+			sourceTree = "<group>";
+		};
+		E509AB3E2EE6DC9300D7DCAF /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				E509AB3C2EE6DC9300D7DCAF /* RCCallKitExtensionModule.h */,
+				E509AB3D2EE6DC9300D7DCAF /* RCCallKitExtensionModule.m */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		E509AB442EE6DCAE00D7DCAF /* Header */ = {
+			isa = PBXGroup;
+			children = (
+				E509AB412EE6DCAE00D7DCAF /* RCloudImageLoader.h */,
+				E509AB422EE6DCAE00D7DCAF /* RCloudImageView.h */,
+				E509AB432EE6DCAE00D7DCAF /* RCUserInfoCacheManager.h */,
+			);
+			path = Header;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -392,27 +563,46 @@
 				3933DF5D206117A100C80615 /* KxCallMenu.h in Headers */,
 				E5B2D5C22E69299F00A257EF /* RCCallASRContentView.h in Headers */,
 				A6BE1B281CCEFAAC00FF6BF7 /* RCCallBaseViewController.h in Headers */,
-				F8235CDE1CE5B2A100C95B26 /* RCloudImageView.h in Headers */,
 				983FBC4220BD41010084841D /* RCVideoCollectionViewLayout.h in Headers */,
+				E509AAC82EE69EB100D7DCAF /* RCCallAISummaryMessage.h in Headers */,
 				A6BE1B2C1CCEFAAC00FF6BF7 /* RCCallSingleCallViewController.h in Headers */,
 				A6BE1B261CCEFAAC00FF6BF7 /* RCCallAudioMultiCallViewController.h in Headers */,
+				E509AB262EE6BBC000D7DCAF /* RCCallAISummaryController.h in Headers */,
 				A6BE1B2E1CCEFAAC00FF6BF7 /* RCCallVideoMultiCallViewController.h in Headers */,
+				E509A9922EE2BF2400D7DCAF /* RCCallBaseViewController+Private.h in Headers */,
 				A6BE1B381CCEFAAC00FF6BF7 /* RCCallFloatingBoard.h in Headers */,
 				1E5721A125ADD394002FC406 /* RCCallTextButton.h in Headers */,
 				E5B2D5BE2E6832D900A257EF /* RCCallASRConfigController.h in Headers */,
 				A6BE1B201CCEFAAC00FF6BF7 /* RCCallMultiCallUserCell.h in Headers */,
 				9CE36FD6200F5FDC0068263B /* RCCXCall.h in Headers */,
-				F8235CDD1CE5B2A100C95B26 /* RCloudImageLoader.h in Headers */,
 				A68AFAE91CCEFF5B00F16B3D /* RCCallDetailMessageCell.h in Headers */,
 				A6BE1B321CCEFAAC00FF6BF7 /* RCVideoMultiCallUserCollectionLayout.h in Headers */,
 				A68AFAEB1CCEFF5B00F16B3D /* RCCallTipMessageCell.h in Headers */,
 				A6BE1B341CCEFAAC00FF6BF7 /* RCCallUserCallInfoModel.h in Headers */,
 				A6BE1B3A1CCEFAAC00FF6BF7 /* RCCallKitUtility.h in Headers */,
 				A6BE1A521CCE561200FF6BF7 /* RongCallKit.h in Headers */,
+				E509AACC2EE6A8D500D7DCAF /* RCCallAISummaryMessageCell.h in Headers */,
 				390467F020738446007CE8DE /* UICollectionView+BackgroundView.h in Headers */,
-				F8235CDF1CE5B2A100C95B26 /* RCUserInfoCacheManager.h in Headers */,
+				E509AB3F2EE6DC9300D7DCAF /* RCCallKitExtensionModule.h in Headers */,
 				A6BE1B301CCEFAAC00FF6BF7 /* RCAudioMultiCallUserCollectionLayout.h in Headers */,
-				F8D2904C1D2790E3002BFA65 /* RCCallKitExtensionModule.h in Headers */,
+				E509AB0F2EE6B46300D7DCAF /* buffer.h in Headers */,
+				E509AB102EE6B46300D7DCAF /* houdini.h in Headers */,
+				E509AB112EE6B46300D7DCAF /* inlines.h in Headers */,
+				E509AB122EE6B46300D7DCAF /* chunk.h in Headers */,
+				E509AB132EE6B46300D7DCAF /* utf8.h in Headers */,
+				E509AB142EE6B46300D7DCAF /* parser.h in Headers */,
+				E509AB152EE6B46300D7DCAF /* render.h in Headers */,
+				E509AB452EE6DCAE00D7DCAF /* RCUserInfoCacheManager.h in Headers */,
+				E509AB462EE6DCAE00D7DCAF /* RCloudImageLoader.h in Headers */,
+				E509AB472EE6DCAE00D7DCAF /* RCloudImageView.h in Headers */,
+				E509AB162EE6B46300D7DCAF /* cmark_version.h in Headers */,
+				E509AB172EE6B46300D7DCAF /* scanners.h in Headers */,
+				E509AB182EE6B46300D7DCAF /* cmark_export.h in Headers */,
+				E509AB192EE6B46300D7DCAF /* node.h in Headers */,
+				E509AB1A2EE6B46300D7DCAF /* cmark.h in Headers */,
+				E509AB1B2EE6B46300D7DCAF /* cmark_ctype.h in Headers */,
+				E509AB1C2EE6B46300D7DCAF /* references.h in Headers */,
+				E509AB1D2EE6B46300D7DCAF /* iterator.h in Headers */,
 				E59AFC662EBDEC7300BEC9A2 /* RCAdapteRongCallKitSwiftHeader.h in Headers */,
 				A6BE1B221CCEFAAC00FF6BF7 /* RCCallSelectingMemberCell.h in Headers */,
 			);
@@ -485,6 +675,11 @@
 			files = (
 				998BF9972B51354B00785582 /* PrivacyInfo.xcprivacy in Resources */,
 				E5E1BFCF2E4AD22300DDB7A6 /* RongCallKit.strings in Resources */,
+				E509AB1E2EE6B46300D7DCAF /* libcmark.pc.in in Resources */,
+				E509AB1F2EE6B46300D7DCAF /* cmarkConfig.cmake.in in Resources */,
+				E509AB202EE6B46300D7DCAF /* CMakeLists.txt in Resources */,
+				E509AB212EE6B46300D7DCAF /* cmark_version.h.in in Resources */,
+				E509AB222EE6B46300D7DCAF /* scanners.re in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -535,16 +730,41 @@
 				A6BE1B3B1CCEFAAC00FF6BF7 /* RCCallKitUtility.m in Sources */,
 				3933DF5C206117A100C80615 /* KxCallMenu.m in Sources */,
 				A6BE1B2F1CCEFAAC00FF6BF7 /* RCCallVideoMultiCallViewController.m in Sources */,
+				E509AB402EE6DC9300D7DCAF /* RCCallKitExtensionModule.m in Sources */,
+				E509AAF92EE6B46300D7DCAF /* xml.c in Sources */,
+				E509AAFA2EE6B46300D7DCAF /* houdini_html_e.c in Sources */,
+				E509AAFB2EE6B46300D7DCAF /* case_fold.inc in Sources */,
+				E509AAFC2EE6B46300D7DCAF /* inlines.c in Sources */,
+				E509AAFD2EE6B46300D7DCAF /* buffer.c in Sources */,
+				E509AAFE2EE6B46300D7DCAF /* iterator.c in Sources */,
+				E509AAFF2EE6B46300D7DCAF /* man.c in Sources */,
+				E509AB002EE6B46300D7DCAF /* cmark_ctype.c in Sources */,
+				E509AB012EE6B46300D7DCAF /* latex.c in Sources */,
+				E509AB022EE6B46300D7DCAF /* blocks.c in Sources */,
+				E509AB032EE6B46300D7DCAF /* cmark.c in Sources */,
+				E509AB042EE6B46300D7DCAF /* entities.inc in Sources */,
+				E509AB052EE6B46300D7DCAF /* houdini_href_e.c in Sources */,
+				E509AB062EE6B46300D7DCAF /* render.c in Sources */,
+				E509AB072EE6B46300D7DCAF /* houdini_html_u.c in Sources */,
+				E509AB082EE6B46300D7DCAF /* commonmark.c in Sources */,
+				E509AB092EE6B46300D7DCAF /* scanners.c in Sources */,
+				E509AB0A2EE6B46300D7DCAF /* utf8.c in Sources */,
+				E509AB0B2EE6B46300D7DCAF /* node.c in Sources */,
+				E509AB0C2EE6B46300D7DCAF /* references.c in Sources */,
+				E509AB0D2EE6B46300D7DCAF /* main.c in Sources */,
+				E509AB0E2EE6B46300D7DCAF /* html.c in Sources */,
 				A6BE1B271CCEFAAC00FF6BF7 /* RCCallAudioMultiCallViewController.m in Sources */,
+				E509AB252EE6BBC000D7DCAF /* RCCallAISummaryController.m in Sources */,
 				E5B2D5C12E69299F00A257EF /* RCCallASRContentView.m in Sources */,
+				E509AACB2EE6A8D500D7DCAF /* RCCallAISummaryMessageCell.m in Sources */,
 				E5B2D5BD2E6832D900A257EF /* RCCallASRConfigController.m in Sources */,
 				A6BE1B391CCEFAAC00FF6BF7 /* RCCallFloatingBoard.m in Sources */,
 				E53AB2D62E2FADB30049C0DE /* RCLCK.swift in Sources */,
 				9CE36FD7200F5FDC0068263B /* RCCXCall.m in Sources */,
+				E509AAC72EE69EB100D7DCAF /* RCCallAISummaryMessage.m in Sources */,
 				A6BE1B2D1CCEFAAC00FF6BF7 /* RCCallSingleCallViewController.m in Sources */,
 				1E5721A225ADD394002FC406 /* RCCallTextButton.m in Sources */,
 				A68AFAEA1CCEFF5B00F16B3D /* RCCallDetailMessageCell.m in Sources */,
-				F8D2904D1D2790E3002BFA65 /* RCCallKitExtensionModule.m in Sources */,
 				98A609D220B56EB200BB5158 /* RCCallToolBar.m in Sources */,
 				A6BE1B291CCEFAAC00FF6BF7 /* RCCallBaseViewController.m in Sources */,
 				A68AFAEC1CCEFF5B00F16B3D /* RCCallTipMessageCell.m in Sources */,

@@ -142,7 +142,7 @@
 		</data>
 		<key>Headers/RCConversationCell.h</key>
 		<data>
-		of7MAFvM4u4MIvk9YbBj/FmV8wo=
+		83/7+f3vtyJrc2Q69xGSu5yljEc=
 		</data>
 		<key>Headers/RCConversationDetailContentView.h</key>
 		<data>
@@ -154,7 +154,7 @@
 		</data>
 		<key>Headers/RCConversationModel.h</key>
 		<data>
-		TQwIQREBu1XfFQTcRPLxamZfnQo=
+		oh1smhLLSH443XortuhUgAuj36I=
 		</data>
 		<key>Headers/RCConversationStatusView.h</key>
 		<data>
@@ -406,7 +406,7 @@
 		</data>
 		<key>Headers/RCKitCommonDefine.h</key>
 		<data>
-		sw8PVOx7yPTRdWfA5UR1sdSlVQk=
+		s7vyVc8x9HDeLdhoAyu5taGmF3s=
 		</data>
 		<key>Headers/RCKitConfig.h</key>
 		<data>
@@ -426,7 +426,7 @@
 		</data>
 		<key>Headers/RCKitUIConf.h</key>
 		<data>
-		3XQttdXU2Ey662oBVsjzi6BtR+o=
+		GIB+gHWwrP3JhilZBz/Hp3cgFKs=
 		</data>
 		<key>Headers/RCKitUtility.h</key>
 		<data>
@@ -5540,11 +5540,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			of7MAFvM4u4MIvk9YbBj/FmV8wo=
+			83/7+f3vtyJrc2Q69xGSu5yljEc=
 			</data>
 			<key>hash2</key>
 			<data>
-			sUBXhRqtxWfCC4yfrjlPuEyPnrX7Bzt6/bSPRg2a/NI=
+			kD7n2TNsxsaYwCKW0ea47qEjbPkkOxA6UtZnRtgqylo=
 			</data>
 		</dict>
 		<key>Headers/RCConversationDetailContentView.h</key>
@@ -5573,11 +5573,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			TQwIQREBu1XfFQTcRPLxamZfnQo=
+			oh1smhLLSH443XortuhUgAuj36I=
 			</data>
 			<key>hash2</key>
 			<data>
-			gd1G24xRUJh3M+tSYX3b3NcNcWwbERiacL2drr4Y5Uk=
+			lNkwy1GjvxSGBEmVsjj3We9opyIgimIJqFKSgu6Yexc=
 			</data>
 		</dict>
 		<key>Headers/RCConversationStatusView.h</key>
@@ -6266,11 +6266,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			sw8PVOx7yPTRdWfA5UR1sdSlVQk=
+			s7vyVc8x9HDeLdhoAyu5taGmF3s=
 			</data>
 			<key>hash2</key>
 			<data>
-			bSDP8LDeuDD6ewRh2Ah3YPeHavSLnIGESxQsuZeGsYU=
+			qdHhZSTnbozbXxtqoVYaq72hB8+uJSVjjfOWMDDQsi8=
 			</data>
 		</dict>
 		<key>Headers/RCKitConfig.h</key>
@@ -6321,11 +6321,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			3XQttdXU2Ey662oBVsjzi6BtR+o=
+			GIB+gHWwrP3JhilZBz/Hp3cgFKs=
 			</data>
 			<key>hash2</key>
 			<data>
-			/k7JMioPdlqPtEBlYuG+UvjXqKqDZYYPKssBt2MaUJg=
+			JXbrZISHEHPQdyJAiqR9sL+qZlSo4VuzJPLs06FJNKI=
 			</data>
 		</dict>
 		<key>Headers/RCKitUtility.h</key>

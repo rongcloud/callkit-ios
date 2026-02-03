@@ -205,6 +205,13 @@ NS_ASSUME_NONNULL_BEGIN
 /// - Since: 5.32.0
 @property (nonatomic, strong) RCSubscribeUserOnlineStatus *onlineStatus;
 
+
+/// 托管信息，包含会话名称和头像
+///
+/// 该属性仅支持单聊、群聊和系统会话。
+/// - Since: 5.36.0
+@property (nonatomic, strong, nullable) RCDataManagementInfo *dataMgmtInfo;
+
 /*!
  初始化会话显示数据模型
 

@@ -96,4 +96,11 @@ UIColor *dynamic_color(NSInteger light_hex_value, NSInteger dark_hex_value);
 
 + (BOOL)firstCharIsArabic:(NSString *)text;
 
++ (RCMessage *)insertOutgoingMessage:(RCConversationType)conversationType
+                            targetId:(NSString *)targetId
+                          sentStatus:(RCSentStatus)sentStatus
+                             content:(RCMessageContent *)content
+                            sentTime:(long long)sentTime;
++ (void)receiveFakeMessage:(RCMessage *)message;
+
 @end

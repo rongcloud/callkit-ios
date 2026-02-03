@@ -7,6 +7,7 @@
 //
 
 #import "RCCallSingleCallViewController.h"
+#import "RCCallBaseViewController+Private.h"
 #import "RCCXCall.h"
 #import "RCCall.h"
 #import "RCCallFloatingBoard.h"
@@ -24,40 +25,6 @@
 @end
 
 @implementation RCCallSingleCallViewController
-
-// init
-- (instancetype)initWithIncomingCall:(RCCallSession *)callSession {
-    return [super initWithIncomingCall:callSession];
-}
-
-- (instancetype)initWithOutgoingCall:(NSString *)targetId mediaType:(RCCallMediaType)mediaType {
-    if (targetId.length == 0) {
-        NSAssert(NO, @"被叫端 id 不能为空");
-        return nil;
-    }
-    
-    return [super initWithOutgoingCall:ConversationType_PRIVATE
-                              targetId:targetId
-                             mediaType:mediaType
-                            userIdList:@[targetId]];
-}
-
-- (instancetype)initWithOutgoingCrossCall:(NSString *)targetId mediaType:(RCCallMediaType)mediaType {
-    if (targetId.length == 0) {
-        NSAssert(NO, @"被叫端 id 不能为空");
-        return nil;
-    }
-    
-    return [super initWithOutgoingCrossCall:ConversationType_PRIVATE
-                                   targetId:targetId
-                                  mediaType:mediaType
-                                 userIdList:@[targetId]];
-}
-
-- (instancetype)initWithActiveCall:(RCCallSession *)callSession {
-    return [super initWithActiveCall:callSession];
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
 
@@ -451,6 +418,7 @@
             self.timeLabel.hidden = self.isFullScreen;
             self.signalImageView.hidden = self.isFullScreen;
             self.asrButton.hidden = self.isFullScreen;
+            self.aiSummaryButton.hidden = self.isFullScreen;
         }
     }
 }

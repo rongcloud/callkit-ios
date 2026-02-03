@@ -62,7 +62,7 @@
 		</data>
 		<key>Headers/RCConversation.h</key>
 		<data>
-		75WW91uPpaIS1LN3nmIz0UDc1YM=
+		QwLBLhDPyecIvIjPX4HyVqvPRAg=
 		</data>
 		<key>Headers/RCConversationBatchDeletionParams.h</key>
 		<data>
@@ -108,6 +108,10 @@
 		<data>
 		44Ni2DZJ/TCVyOXFfIik7uIU5OM=
 		</data>
+		<key>Headers/RCDataManagementInfo.h</key>
+		<data>
+		VbhF1nS8FlK/NjgmXxNm8acW1Og=
+		</data>
 		<key>Headers/RCDownloadInfo.h</key>
 		<data>
 		ytwwjcn9LNMOyj8hpB1dKmk+f14=
@@ -122,7 +126,7 @@
 		</data>
 		<key>Headers/RCErrorCode.h</key>
 		<data>
-		yOOXx4AiZioZfJK8+FSwKbi0oXY=
+		cwdFzQVMZ6+3GUqd8Ec0ooLksPY=
 		</data>
 		<key>Headers/RCFileMessage.h</key>
 		<data>
@@ -550,7 +554,7 @@
 		</data>
 		<key>Headers/RongIMLibCore.h</key>
 		<data>
-		x3ItpPJaFOmnApWZD4Z5pj66azM=
+		Sy+cTNfu+4nmoV51cjP1BcKnfe4=
 		</data>
 		<key>Info.plist</key>
 		<data>
@@ -725,11 +729,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			75WW91uPpaIS1LN3nmIz0UDc1YM=
+			QwLBLhDPyecIvIjPX4HyVqvPRAg=
 			</data>
 			<key>hash2</key>
 			<data>
-			tIYiW6YPJg0M3Z+Hxekarc7LFSVWfpRPnpWNQomELoY=
+			SRvHCsb7KUH+kcVKnIoIVBC3w2rmfhHANUzowoN7MAw=
 			</data>
 		</dict>
 		<key>Headers/RCConversationBatchDeletionParams.h</key>
@@ -853,6 +857,17 @@
 			gnVpJl8kHpZcs2o7CrIDmnNyjqGUmkQNjcAfZtI/CfI=
 			</data>
 		</dict>
+		<key>Headers/RCDataManagementInfo.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			VbhF1nS8FlK/NjgmXxNm8acW1Og=
+			</data>
+			<key>hash2</key>
+			<data>
+			Op1teyiVeG8swADFktBqOWlRlCNYTPZ3Dob6GX+cx4Y=
+			</data>
+		</dict>
 		<key>Headers/RCDownloadInfo.h</key>
 		<dict>
 			<key>hash</key>
@@ -890,11 +905,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			yOOXx4AiZioZfJK8+FSwKbi0oXY=
+			cwdFzQVMZ6+3GUqd8Ec0ooLksPY=
 			</data>
 			<key>hash2</key>
 			<data>
-			nzHif/NBQsfpZBU2v+H2HR8vlpQVQBd69OA48Jq2xU0=
+			pUEBJ9hgLBdFCSUbSpMmMXlTdDg2dRm3eMIhcFLi6go=
 			</data>
 		</dict>
 		<key>Headers/RCFileMessage.h</key>
@@ -2067,11 +2082,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			x3ItpPJaFOmnApWZD4Z5pj66azM=
+			Sy+cTNfu+4nmoV51cjP1BcKnfe4=
 			</data>
 			<key>hash2</key>
 			<data>
-			Z2OghqtIKBou6eFa1U/SL3fKofB5Kv/tpKO8LdRY43c=
+			mYclSsx3wcRbYxuqwLKMuSC/EUtko9aUCHmPHqXSVpw=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
