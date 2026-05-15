@@ -41,9 +41,56 @@
     }
 #endif
 
-static NSString *const __RongCallKit__Version = @"5.36.0_opensource";
-static NSString *const __RongCallKit__Commit = @"f7092f5dc";
-static NSString *const __RongCallKit__Time = @"202602021646";
+static NSString *const __RongCallKit__Version = @"5.38.0_opensource";
+static NSString *const __RongCallKit__Commit = @"80037f056";
+static NSString *const __RongCallKit__Time = @"202605141104";
+
+static NSString *RCCallTrimmedNonEmptyString(id obj) {
+    if (![obj isKindOfClass:[NSString class]]) {
+        return nil;
+    }
+    NSString *s = [(NSString *)obj stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    return s.length ? s : nil;
+}
+
+/// VoIP 远程推送：有 `title` 用 `title`；否则用 IMKit 用户信息缓存中的昵称；再否则用 `inviterUserId`。
+/// `title` 来源：`aps.alert.title`，或 `appData` 为字典时的 `appData.title`。
+static NSString *RCCallVoIPCallerDisplayName(NSDictionary *userDict, NSString *inviterUserId) {
+    NSDictionary *aps = userDict[@"aps"];
+    if ([aps isKindOfClass:[NSDictionary class]]) {
+        id alert = aps[@"alert"];
+        if ([alert isKindOfClass:[NSDictionary class]]) {
+            NSString *t = RCCallTrimmedNonEmptyString([(NSDictionary *)alert objectForKey:@"title"]);
+            if (t.length) {
+                return t;
+            }
+        }
+    }
+    id appData = userDict[@"appData"];
+    NSDictionary *appDataDic = nil;
+    if ([appData isKindOfClass:[NSDictionary class]]) {
+        appDataDic = (NSDictionary *)appData;
+    } else if ([appData isKindOfClass:[NSString class]]) {
+        NSData *jsonData = [(NSString *)appData dataUsingEncoding:NSUTF8StringEncoding];
+        if (jsonData) {
+            id obj = [NSJSONSerialization JSONObjectWithData:jsonData options:kNilOptions error:nil];
+            if ([obj isKindOfClass:[NSDictionary class]]) {
+                appDataDic = (NSDictionary *)obj;
+            }
+        }
+    }
+    if (appDataDic) {
+        NSString *t = RCCallTrimmedNonEmptyString([appDataDic objectForKey:@"title"]);
+        if (t.length) {
+            return t;
+        }
+    }
+    RCUserInfo *userInfo = [[RCUserInfoCacheManager sharedManager] getUserInfo:inviterUserId];
+    if (userInfo.name.length) {
+        return userInfo.name;
+    }
+    return inviterUserId ?: @"";
+}
 
 @interface RCCall () <RCCallReceiveDelegate, RCLCKCenterDelegate>
 
@@ -406,23 +453,33 @@ static NSString *const __RongCallKit__Time = @"202602021646";
     if (!self.canIncomingCall) {
         return;
     }
+    NSString *callerDisplayName = RCCallVoIPCallerDisplayName(userDict ?: @{}, inviterUserId);
+    BOOL isGroup = NO;
+    NSDictionary *rc = [userDict objectForKey:@"rc"];
+    if ([rc isKindOfClass:NSDictionary.class]) {
+        isGroup = ![[rc objectForKey:@"cType"] isEqualToString:@"PR"];
+    }
+    NSString *inviteSuffix = isGroup ? RCCallKitLocalizedString(@"VoIPCall_invite_group_call")
+                                     : RCCallKitLocalizedString(@"VoIPCall_invite_signal_call");
+    NSString *incomingLineDisplayName =
+        [[callerDisplayName stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]
+            stringByAppendingString:inviteSuffix];
 #if PUBLIC
     if (@available(iOS 17.4, *)) {
-        BOOL isGroup = NO;
-        NSDictionary *rc = [userDict objectForKey:@"rc"];
-        if ([rc isKindOfClass:NSDictionary.class]) {
-            isGroup = ![[rc objectForKey:@"cType"] isEqualToString:@"PR"];
-        }
         [self checkSystemPermission:mediaType
                             success:^{}];
-        [[RCLCKCenter shareInstance] reportIncomingCall:callId inviterId:inviterUserId userIdList:userIdList isGroup:isGroup isVideo:mediaType == RCCallMediaVideo];
+        [[RCLCKCenter shareInstance] reportIncomingCall:callId
+                                               isVideo:mediaType == RCCallMediaVideo
+                                     callerDisplayName:incomingLineDisplayName];
         return;
     }
 #else
     if (isVoIPPush) {
         NSInteger checker = [RCCallKitUtility compareVersion:[UIDevice currentDevice].systemVersion toVersion:@"10.0"];
         if (checker >= 0) {
-            [[RCCXCall sharedInstance] reportIncomingCallWithCallId:callId inviter:inviterUserId userIdList:userIdList isVideo:mediaType == RCCallMediaVideo];
+            [[RCCXCall sharedInstance] reportIncomingCallWithCallId:callId
+                                                              isVideo:mediaType == RCCallMediaVideo
+                                                    callerDisplayName:incomingLineDisplayName];
             return;
         }
     }
@@ -575,13 +632,6 @@ static NSString *const __RongCallKit__Time = @"202602021646";
         return;
     }
     [[RCFwLog getInstance] write:RC_Level_I type:RC_Type_RTC tag:@"L-LCK-S" keys:@[@"desc"] values:@[log]];
-}
-
-- (NSString *)didLocalizedString:(NSString *)key {
-    if (!key.length) {
-        return nil;
-    }
-    return RCCallKitLocalizedString(key);
 }
 
 #pragma mark - alert

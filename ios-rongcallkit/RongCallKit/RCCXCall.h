@@ -47,15 +47,13 @@
 /*!
  通知苹果 Callkit 来电
 
- @param callId 通话 id
- @param inviterId 来电人用户 id
- @param userIdList 被邀请者的 userId 列表。nil 表示单人通话
+ @param callId 通话 id（同时作为 `CXHandle` 的 value，便于系统关联）
  @param isVideo 是否视频通话。YES: video NO: audio
+ @param callerDisplayName 完整来电展示文案（由调用方组装）
  */
 - (void)reportIncomingCallWithCallId:(NSString *)callId
-                             inviter:(NSString *)inviterId
-                          userIdList:(NSArray<NSString *> *)userIdList
-                             isVideo:(BOOL)isVideo;
+                             isVideo:(BOOL)isVideo
+                   callerDisplayName:(NSString *)callerDisplayName;
 
 /*!
  接通苹果 Callkit 通话

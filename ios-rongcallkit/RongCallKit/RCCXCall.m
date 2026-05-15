@@ -111,9 +111,8 @@
 }
 
 - (void)reportIncomingCallWithCallId:(NSString *)callId
-                             inviter:(NSString *)inviterId
-                          userIdList:(NSArray<NSString *> *)userIdList
-                             isVideo:(BOOL)isVideo {
+                             isVideo:(BOOL)isVideo
+                   callerDisplayName:(NSString *)callerDisplayName {
 //RCCallKit_Delete_Start
 #if PUBLIC
 #else
@@ -127,19 +126,10 @@
     }
     CXCallUpdate *update = [[CXCallUpdate alloc] init];
     update.supportsHolding = NO;
-    NSString *localizedCallerName = [[RCUserInfoCacheManager sharedManager] getUserInfo:inviterId].name;
-    NSString *handleValue = inviterId;
-    for (NSString *userId in userIdList) {
-        if ([userId isEqualToString:inviterId]) {
-            break;
-        }
-        NSString *name = [[RCUserInfoCacheManager sharedManager] getUserInfo:userId].name;
-        if (name.length > 0) {
-            localizedCallerName = [localizedCallerName stringByAppendingFormat:@"、%@", name];
-        }
-        handleValue = [handleValue stringByAppendingFormat:@":::%@", userId];
-    }
+    NSString *localizedCallerName =
+        [callerDisplayName stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     update.localizedCallerName = localizedCallerName;
+    NSString *handleValue = (callId.length > 0) ? callId : localizedCallerName;
     CXHandle *handle = [[CXHandle alloc] initWithType:CXHandleTypeGeneric value:handleValue];
     update.remoteHandle = handle;
     if (isVideo) {

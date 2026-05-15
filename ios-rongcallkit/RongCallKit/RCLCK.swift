@@ -9,11 +9,6 @@
 import Foundation
 import AVFoundation
 import LiveCommunicationKit
-#if canImport(RongCloudOpenSource)
-import RongCloudOpenSource.RongIMKit
-#else
-import RongIMKit
-#endif
 
 let kCallNewSession = Notification.Name(rawValue: "RCCallNewSessionCreation Notification")
 
@@ -22,7 +17,6 @@ let kCallNewSession = Notification.Name(rawValue: "RCCallNewSessionCreation Noti
     @objc optional func didPerformMuteAction(_ isAudioMuted: Bool)
     @objc optional func didPerformEndAction()
     @objc optional func didLogLCK(_ log: String)
-    @objc optional func didLocalizedString(_ key: String) -> String
 }
 
 @available(iOS 17.4, *)
@@ -161,9 +155,10 @@ let kCallNewSession = Notification.Name(rawValue: "RCCallNewSessionCreation Noti
         return uuidString
     }
     
-    @objc public func reportIncomingCall(_ callId: String, inviterId: String, userIdList: [String], isGroup: Bool, isVideo: Bool) {
+    /// - Parameter callerDisplayName: 完整来电展示文案（由调用方组装，如昵称 + 邀请后缀）。
+    @objc public func reportIncomingCall(_ callId: String, isVideo: Bool, callerDisplayName: String) {
         let state = UIApplication.shared.applicationState
-        delegate?.didLogLCK?("reportIncomingCall callId: \(callId) inviterId: \(inviterId) appState: \(state)")
+        delegate?.didLogLCK?("reportIncomingCall callId: \(callId) callerDisplayName: \(callerDisplayName) appState: \(state)")
         if (callId.count == 0 ||
             state == .active ||
             conversationUUID != nil) {
@@ -171,9 +166,8 @@ let kCallNewSession = Notification.Name(rawValue: "RCCallNewSessionCreation Noti
         }
         Task {
             do {
-                let inviterText = isGroup ? delegate?.didLocalizedString?("VoIPCall_invite_group_call") : delegate?.didLocalizedString?("VoIPCall_invite_signal_call")
-                let inviterName: String = RCIM.shared().getUserInfoCache(inviterId)?.name ?? inviterId
-                let handle = Handle(type: .generic, value: inviterName + (inviterText ?? ""), displayName: inviterName + (inviterText ?? ""))
+                let inviterName = callerDisplayName.trimmingCharacters(in: .whitespacesAndNewlines)
+                let handle = Handle(type: .generic, value: inviterName, displayName: inviterName)
                 var update = Conversation.Update(members: [handle])
                 if isVideo {
                     update.capabilities = [.playingTones, .video]
