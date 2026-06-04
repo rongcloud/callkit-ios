@@ -10,6 +10,17 @@
 #import <RongIMLibCore/RongIMLibCore.h>
 
 NS_ASSUME_NONNULL_BEGIN
+
+/// IMKit V2 引用消息展示态。
+typedef NS_ENUM(NSInteger, RCQuoteReferenceLoadStatus) {
+    RCQuoteReferenceLoadStatusUnknown = 0,
+    RCQuoteReferenceLoadStatusLoading,
+    RCQuoteReferenceLoadStatusLoaded,
+    RCQuoteReferenceLoadStatusDeleted,
+    RCQuoteReferenceLoadStatusRecalled,
+    RCQuoteReferenceLoadStatusFailed
+};
+
 /*!
  消息Cell的数据模型类
  */
@@ -39,6 +50,11 @@ NS_ASSUME_NONNULL_BEGIN
  目标会话ID
  */
 @property (nonatomic, copy) NSString *targetId;
+
+/*!
+ 所属频道 ID
+ */
+@property (nonatomic, copy, nullable) NSString *channelId;
 
 /*!
  消息ID
@@ -110,6 +126,15 @@ NS_ASSUME_NONNULL_BEGIN
   服务器消息唯一ID（在同一个Appkey下全局唯一）
  */
 @property (nonatomic, copy, nullable) NSString *messageUId;
+
+/// 引用消息 V2 的引用关系信息。
+@property (nonatomic, strong, nullable) RCQuoteInfo *quoteInfo;
+
+/// 引用消息 V2 批量查询后的原消息。
+@property (nonatomic, strong, nullable) RCMessage *quoteReferencedMessage;
+
+/// 引用消息 V2 批量查询展示态。
+@property (nonatomic, assign) RCQuoteReferenceLoadStatus quoteReferenceLoadStatus;
 
 /*!
  消息是否可以发送请求回执

@@ -24,6 +24,11 @@ NS_ASSUME_NONNULL_BEGIN
 /// - Since: 5.26.0
 @property (nonatomic, readonly, assign) NSInteger messageModifiableMinutes;
 
+/// 消息体大小限制，单位：字节。导航未配置时为 0。
+///
+/// - Since: 5.36.0
+@property (nonatomic, readonly, assign) NSInteger message_size_limit;
+
 /// 已读回执版本
 ///
 /// - Since: 5.30.0

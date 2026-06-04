@@ -197,6 +197,18 @@
 @property (nonatomic, assign) BOOL enableMessageReference __deprecated_msg(
 "Use RCKitConfigCenter.message.enableMessageReference instead");
 
+/*!
+ 发送引用消息时是否使用 quote 回复 V2，默认值是 NO。
+ */
+@property (nonatomic, assign) BOOL enableQuoteV2 __deprecated_msg(
+"Use RCKitConfigCenter.message.enableQuoteV2 instead");
+
+/*!
+ quote 引用态下允许发送的消息类型白名单，默认包含文本、图片、GIF、小视频、语音、高清语音、文件、位置消息。
+ */
+@property (nonatomic, copy, nullable) NSArray<NSString *> *quoteMessageTypeWhiteList __deprecated_msg(
+"Use RCKitConfigCenter.message.quoteMessageTypeWhiteList instead");
+
 /**
 小视频的最长录制时间，单位是秒，默认值是 10s。
 

@@ -20,6 +20,7 @@
 #define NameHeight 14
 @class RCloudImageView;
 @class RCCircularLoadingView;
+@class RCReferencedContentView;
 
 /*!
  展示的消息Cell类
@@ -102,6 +103,9 @@
  用于显示群组消息已读进度
  */
 @property (strong, nonatomic) RCReadReceiptProgressView *receiptProgressView;
+
+/// V2 引用消息卡片视图。
+@property (nonatomic, strong) RCReferencedContentView *quoteCardView;
 
 /*!
  是否显示头像

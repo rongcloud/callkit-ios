@@ -295,6 +295,12 @@ typedef enum : NSUInteger {
              pushContent:(nullable NSString *)pushContent
                appUpload:(BOOL)appUpload;
 
+/// 将当前引用状态附加到待发送消息上。
+/// 当开发者重写发送逻辑并手动构造 RCMessage 时，可在调用 RCIM/RCCoreClient 发送前调用此方法，保持 V2 引用生效。
+/// - Parameter message: 待发送的消息对象
+/// - Returns: 是否成功附加引用信息
+- (BOOL)applyQuoteInfoIfActiveToMessage:(RCMessage *)message;
+
 /// 上传媒体信息到App指定的服务器的回调
 /// - Parameter message:        媒体消息（图片消息或文件消息）的实体
 /// - Parameter uploadListener: SDK图片上传进度监听

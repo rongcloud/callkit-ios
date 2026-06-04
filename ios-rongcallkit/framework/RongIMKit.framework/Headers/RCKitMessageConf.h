@@ -109,6 +109,12 @@
 /// 是否支持消息引用功能，默认值是YES ，聊天页面长按消息支持引用（目前仅支持文本消息、文件消息、图文消息、图片消息、引用消息的引用）
 @property (nonatomic, assign) BOOL enableMessageReference;
 
+/// 发送引用消息时是否使用 quote 回复 V2，默认值是 NO。
+@property (nonatomic, assign) BOOL enableQuoteV2;
+
+/// quote 引用态下允许发送的消息类型白名单，默认包含文本、图片、GIF、小视频、语音、高清语音、文件、位置消息。
+@property (nonatomic, copy, nullable) NSArray<NSString *> *quoteMessageTypeWhiteList;
+
 /// 小视频的最长录制时间，单位是秒，默认值是 10s。
 ///
 /// 在集成了融云小视频功能后，可以通过此方法来设置小视频的最长录制时间。录制时间最长不能超过 2 分钟。
@@ -133,4 +139,3 @@
 @property (nonatomic, strong) UIColor *editedTextColor;
 
 @end
-

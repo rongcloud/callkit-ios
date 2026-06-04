@@ -24,8 +24,33 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+typedef NS_ENUM(NSInteger, RCQuoteMessageStatus) {
+    RCQuoteMessageStatusDefault = 0,
+    RCQuoteMessageStatusDeleted = 1,
+    RCQuoteMessageStatusRecalled = 2,
+};
+
 @class RCReceivedStatusInfo;
 @class RCMessageModifyInfo;
+
+/// 引用消息 V2 的引用关系信息。
+@interface RCQuoteInfo : NSObject <NSCopying, NSCoding>
+
+/// 被引用消息的 messageUId。
+@property (nonatomic, copy) NSString *messageUId;
+
+/// 被引用消息发送者 ID。
+@property (nonatomic, copy, nullable) NSString *senderId;
+
+/// 被引用消息类型名。
+@property (nonatomic, copy, nullable) NSString *objectName;
+
+/// 被引用消息状态。
+@property (nonatomic, assign) RCQuoteMessageStatus quoteMessageStatus;
+
+- (instancetype)initWithMessageUId:(NSString *)messageUId;
+
+@end
 
 /// 消息实体类
 ///
@@ -78,6 +103,9 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// 服务器消息唯一 ID（在同一个 AppKey 下全局唯一）
 @property (nonatomic, copy, nullable) NSString *messageUId;
+
+/// 引用消息 V2 的引用关系信息。
+@property (nonatomic, strong, nullable) RCQuoteInfo *quoteInfo;
 
 /// 阅读回执状态
 @property (nonatomic, strong, nullable) RCReadReceiptInfo *readReceiptInfo;

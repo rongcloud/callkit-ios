@@ -41,9 +41,9 @@
     }
 #endif
 
-static NSString *const __RongCallKit__Version = @"5.38.0_opensource";
+static NSString *const __RongCallKit__Version = @"5.40.0_opensource";
 static NSString *const __RongCallKit__Commit = @"80037f056";
-static NSString *const __RongCallKit__Time = @"202605141104";
+static NSString *const __RongCallKit__Time = @"202606011040";
 
 static NSString *RCCallTrimmedNonEmptyString(id obj) {
     if (![obj isKindOfClass:[NSString class]]) {

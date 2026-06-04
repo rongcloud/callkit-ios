@@ -1962,6 +1962,57 @@ FOUNDATION_EXPORT NSString *const RCLibDispatchReadReceiptNotification;
               searchWords:(nullable NSArray <NSString *> *)searchWords
                completion:(nullable void(^)(RCErrorCode code))completion;
 
+#pragma mark - original Message Methods
+
+/// 高性能异步批量插入消息（该消息只插入本地数据库，实际不会发送给服务器和对方）
+///
+/// - Parameter messages 批量处理的消息列表
+/// - Parameter success 回调
+/// - Parameter error 回调，返回 RCErrorCode 错误码
+///
+/// RCMessage 下列属性会被入库，其余属性会被抛弃
+/// conversationType    会话类型
+/// targetId            会话 ID
+/// messageUId            服务器消息唯一 ID
+/// messageDirection    消息方向
+/// senderUserId        发送者 ID
+/// receivedStatus      接收状态；消息方向为接收方，并且 receivedStatus 为 ReceivedStatus_UNREAD /// 时，该条消息未读
+/// sentStatus          发送状态
+/// content 消息的内容，此处的消息 只能以 json 形式保存在  MessageContent.rawJsonData 中
+/// sentTime            消息发送的 Unix 时间戳，单位为毫秒 ，会影响消息排序
+/// extra            RCMessage 的额外字段
+///
+/// - Warning: 此方法不支持聊天室和超级群的会话类型。每批最多处理  500 条消息，超过 500 条返回 INVALID_PARAMETER_MESSAGELIST
+///
+/// 消息的未读会累加到会话的未读数上
+///
+/// - Remark: 高级功能
+/// - Since: 5.40.0
+- (void)batchInsertOriginalMessage:(NSArray<RCMessage *> *)messages
+                           success:(nullable void (^)(void))successBlock
+                             error:(nullable void (^)(RCErrorCode status))errorBlock;
+
+
+/// 高性能异步批量获取接收的消息
+///
+/// - Parameter conversationIdentifier 会话标识
+/// - Parameter timestamp 消息的发送时间戳 sentTime。默认可设置为 0
+/// - Parameter count 消息个数，一次性最多获取 500 个
+/// - Parameter success 回调，返回 [RCMessage] 数组
+/// - Parameter error 回调，返回 RCErrorCode 错误码
+///
+/// - Warning: 为了提升批量获取的性能 RCMessage.content 只会以 json 形式保存在 MessageContent.rawJsonData 中
+/// - Warning: 此方法不支持聊天室和超级群的会话类型
+/// - Warning: 此处返回的消息内容都是消息基类 RCMessageContent
+///
+/// - Remark: 高级功能
+/// - Since: 5.40.0
+- (void)batchFetchOriginalMessage:(RCConversationIdentifier *)conversationIdentifier
+                        timestamp:(int64_t)timestamp
+                            count:(int32_t)count
+                          success:(nullable void (^)(NSArray<RCMessage *> *messages))successBlock
+                            error:(nullable void (^)(RCErrorCode status))errorBlock;
+
 #pragma mark - 会话列表操作
 
 /// 获取 @我未读消息的会话列表
@@ -4353,7 +4404,9 @@ FOUNDATION_EXPORT NSString *const RCLibDispatchReadReceiptNotification;
 
 @class RCMessageResult;
 @class RCModifyMessageParams;
+@class RCGetMessagesByUIdsParams;
 @class RCRefreshReferenceMessageParams;
+@class RCConversationIdentifier;
 
 /// 消息编辑。
 ///
@@ -4367,6 +4420,15 @@ FOUNDATION_EXPORT NSString *const RCLibDispatchReadReceiptNotification;
 ///   - completionHandler: 回调结果。
 - (void)modifyMessageWithParams:(RCModifyMessageParams *)params
               completionHandler:(void (^)(RCMessage *message, RCErrorCode code))completionHandler;
+
+/// 批量通过全局唯一 ID 获取消息实体。
+///
+/// - Parameter params: 查询参数对象。
+/// - Parameter successBlock: 获取成功的回调，按请求 UID 返回查询结果。
+/// - Parameter errorBlock: 获取失败的回调。
+- (void)getMessagesByUIds:(RCGetMessagesByUIdsParams *)params
+                  success:(nullable void (^)(NSArray<RCMessageResult *> *results))successBlock
+                    error:(nullable void (^)(RCErrorCode status))errorBlock;
 
 /// 批量查询需要刷新的引用消息。
 ///

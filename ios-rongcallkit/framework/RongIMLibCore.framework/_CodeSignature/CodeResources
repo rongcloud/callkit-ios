@@ -14,7 +14,7 @@
 		</data>
 		<key>Headers/RCAppSettings.h</key>
 		<data>
-		CLpxL0VQk3cd25i7wbGR6oWtlvc=
+		VOQa/Xh1mtStFYKw7xvJzG9h3Cw=
 		</data>
 		<key>Headers/RCBlockedMessageInfo.h</key>
 		<data>
@@ -106,7 +106,7 @@
 		</data>
 		<key>Headers/RCCoreClient.h</key>
 		<data>
-		44Ni2DZJ/TCVyOXFfIik7uIU5OM=
+		S/tNVGaJ90pvKrEpzcXP66xSMBo=
 		</data>
 		<key>Headers/RCDataManagementInfo.h</key>
 		<data>
@@ -171,6 +171,10 @@
 		<key>Headers/RCGetGroupMembersOption.h</key>
 		<data>
 		Tw89Xh7YXNU69K8sQ+U24yprD9I=
+		</data>
+		<key>Headers/RCGetMessagesByUIdsParams.h</key>
+		<data>
+		ti9J+OsIky7xuj1LmELX34OUZmo=
 		</data>
 		<key>Headers/RCGetUnreadMentionMeConversationListParams.h</key>
 		<data>
@@ -274,7 +278,7 @@
 		</data>
 		<key>Headers/RCMessage.h</key>
 		<data>
-		RvSx/iSWy/KEBTK5GzmSEX5oIpo=
+		IxLVrnymwDjiRV9fkPGu1mEaTQA=
 		</data>
 		<key>Headers/RCMessageAuditInfo.h</key>
 		<data>
@@ -554,7 +558,7 @@
 		</data>
 		<key>Headers/RongIMLibCore.h</key>
 		<data>
-		Sy+cTNfu+4nmoV51cjP1BcKnfe4=
+		KzGNYOotT4yxPv6IQumW/fsWW0g=
 		</data>
 		<key>Info.plist</key>
 		<data>
@@ -597,11 +601,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			CLpxL0VQk3cd25i7wbGR6oWtlvc=
+			VOQa/Xh1mtStFYKw7xvJzG9h3Cw=
 			</data>
 			<key>hash2</key>
 			<data>
-			FRtykY4ZyobHMrg3sfKVhLGcA+Hn8p7UzybGkvENNp0=
+			MsCvimS6EPF4adlBfvSjYIq0vEL7S/zS5jQRJC3d0EQ=
 			</data>
 		</dict>
 		<key>Headers/RCBlockedMessageInfo.h</key>
@@ -850,11 +854,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			44Ni2DZJ/TCVyOXFfIik7uIU5OM=
+			S/tNVGaJ90pvKrEpzcXP66xSMBo=
 			</data>
 			<key>hash2</key>
 			<data>
-			gnVpJl8kHpZcs2o7CrIDmnNyjqGUmkQNjcAfZtI/CfI=
+			sk+vgjnPxm1SaieQ+t2pxozkAUcBbheSvINe+tGPpck=
 			</data>
 		</dict>
 		<key>Headers/RCDataManagementInfo.h</key>
@@ -1031,6 +1035,17 @@
 			<key>hash2</key>
 			<data>
 			eAJZsM7B8XAbvcVTTUHVIylwBvbAIncO119EryOASko=
+			</data>
+		</dict>
+		<key>Headers/RCGetMessagesByUIdsParams.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			ti9J+OsIky7xuj1LmELX34OUZmo=
+			</data>
+			<key>hash2</key>
+			<data>
+			P5LO8uzZLT4emhv8ghr+JQCPptzy3T6XlWtN5reiqVk=
 			</data>
 		</dict>
 		<key>Headers/RCGetUnreadMentionMeConversationListParams.h</key>
@@ -1312,11 +1327,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			RvSx/iSWy/KEBTK5GzmSEX5oIpo=
+			IxLVrnymwDjiRV9fkPGu1mEaTQA=
 			</data>
 			<key>hash2</key>
 			<data>
-			FdVcTfJ30WDKUVfRiy4VpSOfJAwS8WO1qKWqF7vVssU=
+			F/UA4klvIxVS/xzKh8bRPPdn87Rxrqdfs68Vlxyah4k=
 			</data>
 		</dict>
 		<key>Headers/RCMessageAuditInfo.h</key>
@@ -2082,11 +2097,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			Sy+cTNfu+4nmoV51cjP1BcKnfe4=
+			KzGNYOotT4yxPv6IQumW/fsWW0g=
 			</data>
 			<key>hash2</key>
 			<data>
-			mYclSsx3wcRbYxuqwLKMuSC/EUtko9aUCHmPHqXSVpw=
+			VziWJ4dPelF+6EyxDZ8aIRuX1oC533sWJ1wl+oXINNM=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
