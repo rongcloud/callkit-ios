@@ -9,6 +9,16 @@
 #import <UIKit/UIKit.h>
 #import "RCKitTranslationConfig.h"
 
+/// 消息回应展示模式。
+///
+/// - Since: 5.42.0
+typedef NS_ENUM(NSInteger, RCMessageReactionDisplayMode) {
+    /// 仅显示回应数。
+    RCMessageReactionDisplayModeCountOnly = 0,
+    /// 显示回应用户摘要。
+    RCMessageReactionDisplayModeDetail = 1,
+};
+
 @interface RCKitMessageConf : NSObject
 #pragma mark - Config
 
@@ -137,5 +147,20 @@
 /// 默认： 0x7C838E ，暗黑： 0xFFFFFF
 /// 可通过 RCDYCOLOR 宏设置正常和暗黑的颜色
 @property (nonatomic, strong) UIColor *editedTextColor;
+
+/// 是否开启消息回应功能，默认值是 NO。
+///
+/// - Since: 5.42.0
+@property (nonatomic, assign) BOOL enableMessageReaction;
+
+/// 消息回应展示模式，默认值是 ``RCMessageReactionDisplayModeCountOnly``。
+///
+/// - Since: 5.42.0
+@property (nonatomic, assign) RCMessageReactionDisplayMode messageReactionDisplayMode;
+
+/// 常用回应展示数量，默认值是 14，有效范围 [1, 20]。
+///
+/// - Since: 5.42.0
+@property (nonatomic, assign) NSInteger frequentlyUsedReactionDisplayCount;
 
 @end

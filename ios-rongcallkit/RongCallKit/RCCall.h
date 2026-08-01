@@ -47,6 +47,17 @@ UIKIT_EXTERN NSNotificationName const RCCallNewSessionCreationNotification;
 @property (nonatomic, assign) BOOL canIncomingCall;
 
 /*!
+ 防诈提醒开关，默认: NO 关闭。
+
+ @discussion
+ 开启后，主叫发起通话或被叫收到通话弹出通话页面时，会先弹出一个防诈骗提示框。
+ 用户点击「确认」后才会继续通话流程；主叫场景下，呼叫邀请也会延迟到用户确认后才真正发出，
+ 在此之前不会向对方发起任何呼叫。用户点击「取消」则挂断（或不发起）当前通话并关闭页面。
+ 请在发起或接听通话前设置。仅在开关开启时才进行防诈提醒。
+ */
+@property (nonatomic, assign) BOOL antiFraudTipEnabled;
+
+/*!
  设置是否显示语音识别 UI，默认: YES 显示语音识别 UI，请通话前设置，避免引发 UI 显示错误
 */
 @property (nonatomic, assign) BOOL displayASRUI;

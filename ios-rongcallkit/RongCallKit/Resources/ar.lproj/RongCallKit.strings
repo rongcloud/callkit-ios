@@ -97,3 +97,8 @@
 "summary_content" = "محتوى الملخص";
 "start_summray_failed_retry_later" = "فشل التشغيل، يرجى المحاولة مرة أخرى لاحقًا";
 "request_failed_retry_later" = "يتطلب المزيد من المحتوى للتلخيص. يرجى المحاولة مرة أخرى لاحقاً";
+// تنبيه مكافحة الاحتيال
+"VoIPCallAntiFraudTipTitle" = "تنبيه لمكافحة الاحتيال";
+"VoIPCallAntiFraudTipMessage" = "احذر من الاحتيال عبر الاتصالات والإنترنت. إذا طلب منك الطرف الآخر تحويل أموال أو تقديم رمز تحقق أو مشاركة معلومات شخصية، فأغلق المكالمة فوراً. هل تريد متابعة المكالمة؟";
+"VoIPCallAntiFraudTipConfirm" = "تأكيد";
+"VoIPCallAntiFraudTipCancel" = "إلغاء";

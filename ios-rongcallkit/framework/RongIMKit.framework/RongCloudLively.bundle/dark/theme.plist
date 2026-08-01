@@ -8,6 +8,16 @@
 	<dict>
 		<key>primary_color</key>
 		<string>#4177FF</string>
+		<key>message_reaction_default_background_color</key>
+		<string>#FFFFFF33</string>
+		<key>message_reaction_selected_background_color</key>
+		<string>#2052B7</string>
+		<key>message_reaction_divider_color</key>
+		<string>#FFFFFF</string>
+		<key>message_reaction_selected_border_color</key>
+		<string>#4177FFCC</string>
+		<key>message_reaction_item_text_color</key>
+		<string>#FFFFFF</string>
 		<key>text_primary_color</key>
 		<string>#FFFFFF</string>
 		<key>text_secondary_color</key>
@@ -212,6 +222,8 @@ Comment.png</string>
 		<string>emoji_btn_normal.png</string>
 		<key>location_map_annotation_img</key>
 		<string>map_annotation.png</string>
+		<key>conversation_menu_item_reaction_img</key>
+		<string>menu_item_reaction.png</string>
 		<key>conversation_msg_rrs_v5_unread_gray_img</key>
 		<string>msg_rrs_v5_unread_gray_dark.png</string>
 		<key>video_player_play_btn_img</key>

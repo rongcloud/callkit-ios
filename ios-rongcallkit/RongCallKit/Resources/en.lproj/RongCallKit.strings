@@ -114,3 +114,8 @@
 "summary_content" = "Summary Content";
 "start_summray_failed_retry_later" = "Failed to start, please try again later";
 "request_failed_retry_later" = "More content is required for summarization. Please try again later";
+// Anti-fraud tip
+"VoIPCallAntiFraudTipTitle" = "Anti-Fraud Reminder";
+"VoIPCallAntiFraudTipMessage" = "Beware of telecom and online fraud. If the other party asks you to transfer money, provide a verification code, or share personal information, hang up immediately. Continue the call?";
+"VoIPCallAntiFraudTipConfirm" = "Confirm";
+"VoIPCallAntiFraudTipCancel" = "Cancel";

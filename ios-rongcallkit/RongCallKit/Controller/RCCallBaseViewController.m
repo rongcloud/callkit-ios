@@ -58,6 +58,24 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
 @interface RCCallBaseViewController () <RCCallASRDelegate> {
     UIImage *signalImage0, *signalImage1, *signalImage2, *signalImage3, *signalImage4, *signalImage5;
     BOOL hangupButtonClick;
+    BOOL needAntiFraudTip;    // 本次通话是否需要防诈提醒（主叫/被叫 YES，恢复通话 NO）
+    BOOL hasShownAntiFraudTip;// 是否已弹过防诈提醒，防止最小化恢复时重复弹出
+
+    // 主叫防诈：开关开启时，呼叫邀请（startCall:）延迟到用户确认后才发起，
+    // 以下变量用于暂存发起呼叫所需的参数。
+    BOOL pendingOutgoingCall;              // 是否有一个待用户确认后才发起的主叫
+    BOOL pendingOutgoingIsCross;           // 待发起的主叫是否为跨应用呼叫
+    RCConversationType pendingConversationType;
+    NSString *pendingTargetId;
+    RCCallMediaType pendingMediaType;
+    NSArray *pendingUserIdList;
+
+    // LCK/CallKit 被叫补弹：若防诈弹窗需要在 App 处于后台时展示（如系统来电界面接听后
+    // App 尚未回到前台），present 会失败。此时暂存后续回调，等回到前台再补弹，避免弹窗丢失。
+    void (^pendingAntiFraudContinueBlock)(void);
+
+    // 前台通知（appDidBecomeActive）是否已注册，避免重复注册导致回前台时重复播铃/重复处理。
+    BOOL foregroundNotificationRegistered;
 }
 @property (nonatomic, assign) long long deltaTime;
 @property (nonatomic, strong) NSTimer *activeTimer;
@@ -94,6 +112,7 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
 @end
 
 @implementation RCCallBaseViewController
+
 #pragma mark - init
 - (instancetype)initWithIncomingCall:(RCCallSession *)callSession {
     self = [super init];
@@ -113,6 +132,8 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
         self.needPlayingRingAfterForeground = YES;
         self.receivedFirstKeyFrame = NO;
         hangupButtonClick = NO;
+        needAntiFraudTip = YES;    // 被叫收到呼叫，需要防诈提醒
+        hasShownAntiFraudTip = NO;
         _deltaTime = [[RCCoreClient sharedCoreClient] getDeltaTime];
         [[RCCallClient sharedRCCallClient] setASRDelegate:self];
         [self setSrcLanguageCode];
@@ -124,109 +145,147 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
 - (instancetype)initWithOutgoingCall:(RCConversationType)conversationType isCrossCallType:(BOOL)isCross targetId:(NSString *)targetId mediaType:(RCCallMediaType)mediaType userIdList:(NSArray *)userIdList {
     self = [super init];
     if (self) {
-        [self willChangeValueForKey:@"callSession"];
-        
-        NSString *hangupPushContent = RCCallKitLocalizedString(@"VoIPCall_hangup_PushContent");
-        
-        RCMessagePushConfig *invitePushConfig = [self getPushConfig];
-        RCMessagePushConfig *hangupPushConfig = [self getPushConfig];
-        
-        RCUserInfo *userInfo =
-            [[RCUserInfoCacheManager sharedManager] getUserInfo: [RCCoreClient sharedCoreClient].currentUserInfo.userId];
-        NSString *invitePushContent;
-        if (conversationType == ConversationType_PRIVATE) {
-            if (userInfo) {
-                invitePushContent =
-                (mediaType == RCCallMediaAudio ? RCCallKitLocalizedString(@"VoIPCall_invite_audio_push_Content"): RCCallKitLocalizedString(@"VoIPCall_invite_video_push_Content"));
-                if (!invitePushConfig.pushTitle.length) {
-                    invitePushConfig.pushTitle = [RCCoreClient sharedCoreClient].currentUserInfo.name;
-                }
-                if (!hangupPushConfig.pushTitle.length) {
-                    hangupPushConfig.pushTitle = [RCCoreClient sharedCoreClient].currentUserInfo.name;
-                }
+        hangupButtonClick = NO;
+        needAntiFraudTip = YES;    // 主叫发起呼叫，需要防诈提醒
+        hasShownAntiFraudTip = NO;
+
+        // 预置会话相关信息，供防诈弹窗展示对端信息、以及延迟发起时的界面使用
+        _conversationType = conversationType;
+        _targetId = targetId;
+
+        if ([RCCall sharedRCCall].antiFraudTipEnabled) {
+            // 防诈开关开启：呼叫邀请必须在用户确认后才发出，此处仅暂存参数，
+            // 真正的 startCall: 推迟到 viewDidAppear 弹窗确认后的 rc_performPendingOutgoingCall 执行。
+            pendingOutgoingCall = YES;
+            pendingOutgoingIsCross = isCross;
+            pendingConversationType = conversationType;
+            pendingTargetId = [targetId copy];
+            pendingMediaType = mediaType;
+            pendingUserIdList = [userIdList copy];
+            // 延迟发起期间 rc_startOutgoingCall 尚未执行、前台观察者未注册。此处提前注册，
+            // 保证即使延迟窗口内 App 切到后台再回前台，防诈弹窗也能通过 appDidBecomeActive 补弹，
+            // 不会卡在等待弹窗的黑屏状态。（registerForegroundNotification 已做防重复处理）
+            [self registerForegroundNotification];
+        } else {
+            // 开关关闭：保持原有行为，立即发起呼叫。
+            [self rc_startOutgoingCall:conversationType
+                       isCrossCallType:isCross
+                              targetId:targetId
+                             mediaType:mediaType
+                            userIdList:userIdList];
+        }
+    }
+    return self;
+}
+
+/// 真正发起主叫呼叫（配置推送、创建 callSession、注册通知等）。
+/// 防诈开关关闭时在 init 中同步调用；开关开启时延迟到用户确认后调用。
+- (void)rc_startOutgoingCall:(RCConversationType)conversationType
+             isCrossCallType:(BOOL)isCross
+                    targetId:(NSString *)targetId
+                   mediaType:(RCCallMediaType)mediaType
+                  userIdList:(NSArray *)userIdList {
+    [self willChangeValueForKey:@"callSession"];
+
+    NSString *hangupPushContent = RCCallKitLocalizedString(@"VoIPCall_hangup_PushContent");
+
+    RCMessagePushConfig *invitePushConfig = [self getPushConfig];
+    RCMessagePushConfig *hangupPushConfig = [self getPushConfig];
+
+    RCUserInfo *userInfo =
+        [[RCUserInfoCacheManager sharedManager] getUserInfo: [RCCoreClient sharedCoreClient].currentUserInfo.userId];
+    NSString *invitePushContent;
+    if (conversationType == ConversationType_PRIVATE) {
+        if (userInfo) {
+            invitePushContent =
+            (mediaType == RCCallMediaAudio ? RCCallKitLocalizedString(@"VoIPCall_invite_audio_push_Content"): RCCallKitLocalizedString(@"VoIPCall_invite_video_push_Content"));
+            if (!invitePushConfig.pushTitle.length) {
+                invitePushConfig.pushTitle = [RCCoreClient sharedCoreClient].currentUserInfo.name;
             }
-            else {
-                invitePushContent = mediaType == RCCallMediaVideo ?
-                    RCCallKitLocalizedString(@"VoIPVideoCallIncomingWithoutUserName") :
-                    RCCallKitLocalizedString(@"VoIPAudioCallIncomingWithoutUserName");
-            }
-            if (!invitePushConfig.pushContent.length) {
-                invitePushConfig.pushContent = invitePushContent;
-            }
-            if (!hangupPushConfig.pushContent.length) {
-                hangupPushConfig.pushContent = hangupPushContent;
+            if (!hangupPushConfig.pushTitle.length) {
+                hangupPushConfig.pushTitle = [RCCoreClient sharedCoreClient].currentUserInfo.name;
             }
         }
         else {
-            RCGroup *groupInfo = [[RCUserInfoCacheManager sharedManager] getGroupInfo:targetId];
-            if (userInfo) {
-                invitePushContent =
-                    [NSString stringWithFormat:@"%@ %@", [RCCoreClient sharedCoreClient].currentUserInfo.name, mediaType == RCCallMediaAudio ? RCCallKitLocalizedString(@"VoIPCall_invite_audio_push_Content") : RCCallKitLocalizedString(@"VoIPCall_invite_video_push_Content")];
-            }
-            else {
-                invitePushContent = mediaType == RCCallMediaVideo ?
-                    RCCallKitLocalizedString(@"VoIPVideoCallIncomingWithoutUserName") :
-                    RCCallKitLocalizedString(@"VoIPAudioCallIncomingWithoutUserName");
-            }
-            if (!invitePushConfig.pushTitle.length) {
-                invitePushConfig.pushTitle = groupInfo.groupName;
-            }
-            if (!invitePushConfig.pushContent.length) {
-                invitePushConfig.pushContent = invitePushContent;
-            }
-            if (!hangupPushConfig.pushTitle.length) {
-                hangupPushConfig.pushTitle = groupInfo.groupName;
-            }
-            if (!hangupPushConfig.pushContent.length) {
-                hangupPushConfig.pushContent = hangupPushContent;
-            }
+            invitePushContent = mediaType == RCCallMediaVideo ?
+                RCCallKitLocalizedString(@"VoIPVideoCallIncomingWithoutUserName") :
+                RCCallKitLocalizedString(@"VoIPAudioCallIncomingWithoutUserName");
         }
-        [[RCCallClient sharedRCCallClient] setInvitePushConfig:invitePushConfig];
-        [[RCCallClient sharedRCCallClient] setHangupPushConfig:hangupPushConfig];
-
-        if (isCross) {
-            _callSession = [[RCCallClient sharedRCCallClient] startCrossCall:conversationType
-                                                               targetId:targetId
-                                                                     to:userIdList
-                                                              mediaType:mediaType
-                                                        sessionDelegate:self
-                                                                  extra:nil];
-        } else {
-            _callSession = [[RCCallClient sharedRCCallClient] startCall:conversationType
-                                                               targetId:targetId
-                                                                     to:userIdList
-                                                              mediaType:mediaType
-                                                        sessionDelegate:self
-                                                                  extra:nil];
+        if (!invitePushConfig.pushContent.length) {
+            invitePushConfig.pushContent = invitePushContent;
         }
-        _callId = _callSession.callId;
-        _targetId = _callSession.targetId;
-        _conversationType = _callSession.conversationType;
-        
-        [[NSNotificationCenter defaultCenter] postNotificationName:RCCallNewSessionCreationNotification
-                                                            object:_callSession];
-        [self didChangeValueForKey:@"callSession"];
-        if (conversationType == ConversationType_PRIVATE) {
-            [[RCCXCall sharedInstance] startCallId:_callSession.callId userId:targetId];
-        } else {
-            NSString *str = @"";
-            for (NSString *userId in userIdList) {
-                str = [str stringByAppendingFormat:@"%@:::", userId];
-            }
-            str = [str substringToIndex:str.length - 3];
-            [[RCCXCall sharedInstance] startCallId:_callSession.callId userId:str];
+        if (!hangupPushConfig.pushContent.length) {
+            hangupPushConfig.pushContent = hangupPushContent;
         }
-        
-        [self registerForegroundNotification];
-        [RCCallKitUtility setScreenForceOn];
-        [_callSession setMinimized:NO];
-        hangupButtonClick = NO;
-        _deltaTime = [[RCCoreClient sharedCoreClient] getDeltaTime];
-        [[RCCallClient sharedRCCallClient] setASRDelegate:self];
-        [self setSrcLanguageCode];
-        [self setNickName];
     }
-    return self;
+    else {
+        RCGroup *groupInfo = [[RCUserInfoCacheManager sharedManager] getGroupInfo:targetId];
+        if (userInfo) {
+            invitePushContent =
+                [NSString stringWithFormat:@"%@ %@", [RCCoreClient sharedCoreClient].currentUserInfo.name, mediaType == RCCallMediaAudio ? RCCallKitLocalizedString(@"VoIPCall_invite_audio_push_Content") : RCCallKitLocalizedString(@"VoIPCall_invite_video_push_Content")];
+        }
+        else {
+            invitePushContent = mediaType == RCCallMediaVideo ?
+                RCCallKitLocalizedString(@"VoIPVideoCallIncomingWithoutUserName") :
+                RCCallKitLocalizedString(@"VoIPAudioCallIncomingWithoutUserName");
+        }
+        if (!invitePushConfig.pushTitle.length) {
+            invitePushConfig.pushTitle = groupInfo.groupName;
+        }
+        if (!invitePushConfig.pushContent.length) {
+            invitePushConfig.pushContent = invitePushContent;
+        }
+        if (!hangupPushConfig.pushTitle.length) {
+            hangupPushConfig.pushTitle = groupInfo.groupName;
+        }
+        if (!hangupPushConfig.pushContent.length) {
+            hangupPushConfig.pushContent = hangupPushContent;
+        }
+    }
+    [[RCCallClient sharedRCCallClient] setInvitePushConfig:invitePushConfig];
+    [[RCCallClient sharedRCCallClient] setHangupPushConfig:hangupPushConfig];
+
+    if (isCross) {
+        _callSession = [[RCCallClient sharedRCCallClient] startCrossCall:conversationType
+                                                           targetId:targetId
+                                                                 to:userIdList
+                                                          mediaType:mediaType
+                                                    sessionDelegate:self
+                                                              extra:nil];
+    } else {
+        _callSession = [[RCCallClient sharedRCCallClient] startCall:conversationType
+                                                           targetId:targetId
+                                                                 to:userIdList
+                                                          mediaType:mediaType
+                                                    sessionDelegate:self
+                                                              extra:nil];
+    }
+    _callId = _callSession.callId;
+    _targetId = _callSession.targetId;
+    _conversationType = _callSession.conversationType;
+
+    [[NSNotificationCenter defaultCenter] postNotificationName:RCCallNewSessionCreationNotification
+                                                        object:_callSession];
+    [self didChangeValueForKey:@"callSession"];
+    if (conversationType == ConversationType_PRIVATE) {
+        [[RCCXCall sharedInstance] startCallId:_callSession.callId userId:targetId];
+    } else {
+        NSString *str = @"";
+        for (NSString *userId in userIdList) {
+            str = [str stringByAppendingFormat:@"%@:::", userId];
+        }
+        str = [str substringToIndex:str.length - 3];
+        [[RCCXCall sharedInstance] startCallId:_callSession.callId userId:str];
+    }
+
+    [self registerForegroundNotification];
+    [RCCallKitUtility setScreenForceOn];
+    [_callSession setMinimized:NO];
+    hangupButtonClick = NO;
+    _deltaTime = [[RCCoreClient sharedCoreClient] getDeltaTime];
+    [[RCCallClient sharedRCCallClient] setASRDelegate:self];
+    [self setSrcLanguageCode];
+    [self setNickName];
 }
 
 - (instancetype)initWithOutgoingCrossCall:(RCConversationType)conversationType targetId:(NSString *)targetId mediaType:(RCCallMediaType)mediaType userIdList:(NSArray *)userIdList {
@@ -248,6 +307,8 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
         [_callSession addDelegate:self];
         [_callSession setMinimized:YES];
         hangupButtonClick = NO;
+        needAntiFraudTip = NO;    // 从最小化/悬浮窗恢复的通话，不再弹防诈提醒
+        hasShownAntiFraudTip = NO;
 
         if (self.callSession.callStatus == RCCallActive && self.callSession.connectedTime > 0) {
             [self updateActiveTimer];
@@ -260,6 +321,10 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
 }
 
 - (void)registerForegroundNotification {
+    if (foregroundNotificationRegistered) {
+        return;
+    }
+    foregroundNotificationRegistered = YES;
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(appDidBecomeActive)
                                                  name:UIApplicationDidBecomeActiveNotification
@@ -302,6 +367,13 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
 }
 
 - (void)appDidBecomeActive {
+    // LCK/CallKit 系统界面接听后回到前台：补弹之前因非 active 而未能展示的防诈弹窗。
+    if (pendingAntiFraudContinueBlock) {
+        void (^continueBlock)(void) = pendingAntiFraudContinueBlock;
+        pendingAntiFraudContinueBlock = nil;
+        [self rc_showAntiFraudTipIfNeededThen:continueBlock];
+    }
+
     if (self.needPlayingAlertAfterForeground) {
         [self checkApplicationStateAndAlert];
     } else if (self.needPlayingRingAfterForeground) {
@@ -820,6 +892,110 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
     } else {
         [self.callSession hangup];
     }
+}
+
+#pragma mark - 防诈提醒
+- (void)rc_showAntiFraudTipIfNeededThen:(void (^)(void))continueBlock {
+    // 开关关闭 / 无需提醒（恢复通话）/ 已提示过：直接执行后续流程
+    if (![RCCall sharedRCCall].antiFraudTipEnabled || !needAntiFraudTip || hasShownAntiFraudTip) {
+        if (continueBlock) {
+            continueBlock();
+        }
+        return;
+    }
+
+    // 只要 App 未处于 active，就延迟弹窗，待 appDidBecomeActive 时再补弹；不提前置位
+    // hasShownAntiFraudTip，避免"标记已弹但实际没弹"造成永久丢失。
+    //
+    // 为什么覆盖 .inactive（而非仅 .background）：
+    // 首次安装且用 CallKit 呼叫时，发起前会弹系统权限框（麦克风/摄像头），App 进入 .inactive；
+    // 用户授权的回调经 dispatch_async(main) 立刻创建并展示通话 VC，此时 viewDidAppear 触发，
+    // 但 App 常仍停留在 .inactive 过渡态（授权回调早于 DidBecomeActive 通知）。在这一刻、且窗口
+    // 刚 makeKeyAndVisible 的瞬间去 present 弹窗并不可靠，会稳定卡在全黑页面进不去下一步。
+    // 因此 .inactive 也必须延迟到 active 后再弹。
+    //
+    // 补弹依赖 appDidBecomeActive 观察者，这里在暂存的同时兜底注册一次（幂等），
+    // 确保任何路径（尤其主叫延迟发起）暂存后都一定能被唤醒补弹，不会卡死。
+    if ([UIApplication sharedApplication].applicationState != UIApplicationStateActive) {
+        pendingAntiFraudContinueBlock = [continueBlock copy];
+        [self registerForegroundNotification];
+        return;
+    }
+
+    hasShownAntiFraudTip = YES;
+
+    NSString *title = RCCallKitLocalizedString(@"VoIPCallAntiFraudTipTitle");
+    NSString *message = RCCallKitLocalizedString(@"VoIPCallAntiFraudTipMessage");
+    NSString *confirmTitle = RCCallKitLocalizedString(@"VoIPCallAntiFraudTipConfirm");
+    NSString *cancelTitle = RCCallKitLocalizedString(@"VoIPCallAntiFraudTipCancel");
+
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:title
+                                                                  message:message
+                                                           preferredStyle:UIAlertControllerStyleAlert];
+    __weak typeof(self) weakSelf = self;
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:cancelTitle
+                                                           style:UIAlertActionStyleCancel
+                                                         handler:^(UIAlertAction *_Nonnull action) {
+        // 取消：挂断当前通话（若是尚未发起的主叫，则直接关闭页面，不会发出任何呼叫邀请）
+        [weakSelf rc_cancelAntiFraud];
+    }];
+    UIAlertAction *confirmAction = [UIAlertAction actionWithTitle:confirmTitle
+                                                            style:UIAlertActionStyleDefault
+                                                          handler:^(UIAlertAction *_Nonnull action) {
+        // 确认：若有待发起的主叫，此时才真正发出呼叫邀请，然后继续后续流程（如系统权限检查）
+        [weakSelf rc_performPendingOutgoingCallIfNeeded];
+        if (continueBlock) {
+            continueBlock();
+        }
+    }];
+    [alert addAction:cancelAction];
+    [alert addAction:confirmAction];
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
+/// 用户点击「确认」后，若存在被防诈拦截而延迟的主叫，此时才真正发起呼叫并刷新界面。
+- (void)rc_performPendingOutgoingCallIfNeeded {
+    if (!pendingOutgoingCall) {
+        return;
+    }
+    pendingOutgoingCall = NO;
+
+    [self rc_startOutgoingCall:pendingConversationType
+               isCrossCallType:pendingOutgoingIsCross
+                      targetId:pendingTargetId
+                     mediaType:pendingMediaType
+                    userIdList:pendingUserIdList];
+
+    pendingTargetId = nil;
+    pendingUserIdList = nil;
+
+    // 呼叫已发起，callSession 就绪，按当前状态重新驱动界面（呼出中振铃 + 界面刷新）。
+    if (self.callSession.callStatus == RCCallDialing) {
+        [self checkApplicationStateAndAlert];
+        self.tipsLabel.text = RCCallKitLocalizedString(@"VoIPCallWaitingForRemoteAccept");
+    }
+    [self rc_didStartPendingOutgoingCall];
+}
+
+/// 主叫延迟发起成功后的界面刷新钩子。基类刷新布局，子类可覆写以重建界面模型。
+- (void)rc_didStartPendingOutgoingCall {
+    [self resetLayout:self.callSession.isMultiCall
+            mediaType:self.callSession.mediaType
+           callStatus:self.callSession.callStatus];
+}
+
+/// 用户点击「取消」：
+/// - 待发起的主叫：尚未创建 callSession，也未发出任何邀请，直接关闭页面即可。
+/// - 已存在会话（被叫场景）：走正常挂断流程。
+- (void)rc_cancelAntiFraud {
+    if (pendingOutgoingCall) {
+        pendingOutgoingCall = NO;
+        pendingTargetId = nil;
+        pendingUserIdList = nil;
+        [[RCCall sharedRCCall] dismissCallViewController:self];
+        return;
+    }
+    [self hangupButtonClicked];
 }
 
 - (RCCallTextButton *)cameraCloseButton {

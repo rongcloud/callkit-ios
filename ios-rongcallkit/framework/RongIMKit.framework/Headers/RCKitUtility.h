@@ -365,6 +365,21 @@
  */
 + (NSString *)getDisplayName:(RCUserInfo *)userInfo;
 
+/**
+ 获取需要显示的用户信息
+
+  groupId 为空时返回普通用户信息；groupId 非空时优先返回群成员信息，并用普通用户信息补齐 alias/name。
+ */
++ (nullable RCUserInfo *)userInfoForDisplayWithUserId:(NSString *)userId groupId:(nullable NSString *)groupId;
+
+/**
+ 获取需要显示的用户信息，只读取缓存，不触发用户信息请求
+
+  groupId 为空时返回普通用户信息；groupId 非空时优先返回群成员信息，并用普通用户信息补齐 alias/name。
+ */
++ (nullable RCUserInfo *)userInfoForDisplayFromCacheOnlyWithUserId:(NSString *_Nonnull)userId
+                                                           groupId:(nullable NSString *)groupId;
+
 
 /// 本地化字符串
 /// - Parameters:

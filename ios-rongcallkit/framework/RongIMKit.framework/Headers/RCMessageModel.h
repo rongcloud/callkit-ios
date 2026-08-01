@@ -127,6 +127,21 @@ typedef NS_ENUM(NSInteger, RCQuoteReferenceLoadStatus) {
  */
 @property (nonatomic, copy, nullable) NSString *messageUId;
 
+/// 消息是否存在回应。
+///
+/// - Since: 5.42.0
+@property (nonatomic, assign) BOOL hasReactions;
+
+/// 消息回应摘要缓存。
+///
+/// - Since: 5.42.0
+@property (nonatomic, copy, nullable) NSArray<RCMessageReaction *> *messageReactions;
+
+/// 消息回应摘要分页标记。
+///
+/// - Since: 5.42.0
+@property (nonatomic, copy, nullable) NSString *messageReactionNextPageToken;
+
 /// 引用消息 V2 的引用关系信息。
 @property (nonatomic, strong, nullable) RCQuoteInfo *quoteInfo;
 

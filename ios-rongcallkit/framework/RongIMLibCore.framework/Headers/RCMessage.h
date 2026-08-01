@@ -150,6 +150,11 @@ typedef NS_ENUM(NSInteger, RCQuoteMessageStatus) {
 /// - Note: 从 5.26.0 开始，支持全部类型的消息变更状态。
 @property (nonatomic, assign) BOOL hasChanged;
 
+/// 消息是否有回应。
+///
+/// - Since: 5.42.0
+@property (nonatomic, assign) BOOL hasReactions;
+
 /// 消息修改信息。
 ///
 /// @since 5.26.0

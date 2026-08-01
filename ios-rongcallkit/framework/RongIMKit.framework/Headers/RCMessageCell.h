@@ -21,6 +21,7 @@
 @class RCloudImageView;
 @class RCCircularLoadingView;
 @class RCReferencedContentView;
+@class RCMessageReactionView;
 
 /*!
  展示的消息Cell类
@@ -106,6 +107,11 @@
 
 /// V2 引用消息卡片视图。
 @property (nonatomic, strong) RCReferencedContentView *quoteCardView;
+
+/// 消息回应视图，位于消息气泡内部底部。
+///
+/// - Since: 5.42.0
+@property (nonatomic, strong) RCMessageReactionView *messageReactionView;
 
 /*!
  是否显示头像

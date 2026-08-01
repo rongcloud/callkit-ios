@@ -11,6 +11,7 @@
 #import "RCBaseImageView.h"
 #import "RCBaseLabel.h"
 #import "RCAttributedLabel.h"
+#import "RCMessageCellReferenceContentView.h"
 #define name_and_image_view_space 5
 
 UIKIT_EXTERN CGFloat const RCQuoteCardDefaultHeight;
@@ -20,6 +21,10 @@ UIKIT_EXTERN CGFloat const RCQuoteCardTopMargin;
 @optional
 
 - (void)didTapReferencedContentView:(RCMessageModel *)message;
+
+- (void)messageCellReferenceContentView:(RCMessageCellReferenceContentView *)referenceContentView
+                       didPerformAction:(NSString *)action
+                                  extra:(nullable NSDictionary *)extra;
 
 @end
 @interface RCReferencedContentView : UIView

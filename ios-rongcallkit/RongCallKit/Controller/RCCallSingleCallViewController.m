@@ -50,13 +50,29 @@
     [super viewDidAppear:animated];
 
     self.isFullScreen = NO;
-    [RCCallKitUtility checkSystemPermission:self.callSession.mediaType
-        success:^{
+    __weak typeof(self) weakSelf = self;
+    [self rc_showAntiFraudTipIfNeededThen:^{
+        [RCCallKitUtility checkSystemPermission:weakSelf.callSession.mediaType
+            success:^{
 
-        }
-        error:^{
-            [self hangupButtonClicked];
-        }];
+            }
+            error:^{
+                [weakSelf hangupButtonClicked];
+            }];
+    }];
+}
+
+- (void)rc_didStartPendingOutgoingCall {
+    // 主叫延迟发起后 callSession 才就绪，此时补齐远端用户信息展示。
+    RCUserInfo *userInfo = [[RCUserInfoCacheManager sharedManager] getUserInfo:self.callSession.targetId];
+    if (!userInfo) {
+        userInfo = [[RCUserInfo alloc] initWithUserId:self.callSession.targetId name:nil portrait:nil];
+    }
+    self.remoteUserInfo = userInfo;
+    [self.remoteNameLabel setText:userInfo.name];
+    [self.remotePortraitView setImageURL:[NSURL URLWithString:userInfo.portraitUri]];
+
+    [super rc_didStartPendingOutgoingCall];
 }
 
 - (RCloudImageView *)remotePortraitView {

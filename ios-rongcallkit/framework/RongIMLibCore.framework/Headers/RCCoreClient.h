@@ -4407,6 +4407,12 @@ FOUNDATION_EXPORT NSString *const RCLibDispatchReadReceiptNotification;
 @class RCGetMessagesByUIdsParams;
 @class RCRefreshReferenceMessageParams;
 @class RCConversationIdentifier;
+@class RCMessageReaction;
+@class RCMessageReactionUser;
+@class RCUpdateMessageReactionParam;
+@class RCGetMessageReactionsParam;
+@class RCGetMessageReactionUsersParam;
+@protocol RCMessageReactionDelegate;
 
 /// 消息编辑。
 ///
@@ -4445,6 +4451,69 @@ FOUNDATION_EXPORT NSString *const RCLibDispatchReadReceiptNotification;
                         localMessageBlock:(void (^)(NSArray<RCMessageResult *> *results))localMessageBlock
                        remoteMessageBlock:(void (^)(NSArray<RCMessageResult *> *results))remoteMessageBlock
                                errorBlock:(void (^)(RCErrorCode code))errorBlock;
+
+@end
+
+/// 消息回应。
+///
+/// - Since: 5.42.0
+@interface RCCoreClient (RCMessageReaction)
+
+/// 添加消息回应变更监听器。
+///
+/// - Parameter delegate: 消息回应变更监听器。
+- (void)addMessageReactionDelegate:(id<RCMessageReactionDelegate>)delegate;
+
+/// 移除消息回应变更监听器。
+///
+/// - Parameter delegate: 消息回应变更监听器。
+- (void)removeMessageReactionDelegate:(id<RCMessageReactionDelegate>)delegate;
+
+/// 添加消息回应。
+///
+/// - Parameter param: 消息回应参数。
+/// - Parameter successBlock: 添加成功回调。
+/// - Parameter errorBlock: 添加失败回调。
+- (void)addMessageReaction:(RCUpdateMessageReactionParam *)param
+                   success:(nullable void (^)(void))successBlock
+                     error:(nullable void (^)(RCErrorCode errorCode))errorBlock;
+
+/// 移除消息回应。
+///
+/// - Parameter param: 消息回应参数。
+/// - Parameter successBlock: 移除成功回调。
+/// - Parameter errorBlock: 移除失败回调。
+- (void)removeMessageReaction:(RCUpdateMessageReactionParam *)param
+                      success:(nullable void (^)(void))successBlock
+                        error:(nullable void (^)(RCErrorCode errorCode))errorBlock;
+
+/// 批量查询消息回应摘要。
+///
+/// - Parameter conversationIdentifier: 会话标识。
+/// - Parameter messageUIds: 消息唯一 ID 数组，有效长度 [1, 100]。
+/// - Parameter completion: 查询完成回调。
+- (void)batchGetMessageReactionSummaries:(RCConversationIdentifier *)conversationIdentifier
+                             messageUIds:(NSArray<NSString *> *)messageUIds
+                              completion:(nullable void (^)(NSDictionary<NSString *, NSArray<RCMessageReaction *> *> *reactionsMap,
+                                                            RCErrorCode errorCode))completion;
+
+/// 分页查询消息回应列表。
+///
+/// - Parameter param: 分页查询参数。
+/// - Parameter successBlock: 查询成功回调。
+/// - Parameter errorBlock: 查询失败回调。
+- (void)getMessageReactions:(RCGetMessageReactionsParam *)param
+                    success:(nullable void (^)(RCPagingQueryResult<RCMessageReaction *> *result))successBlock
+                      error:(nullable void (^)(RCErrorCode errorCode))errorBlock;
+
+/// 分页查询回应用户列表。
+///
+/// - Parameter param: 分页查询参数。
+/// - Parameter successBlock: 查询成功回调。
+/// - Parameter errorBlock: 查询失败回调。
+- (void)getMessageReactionUsers:(RCGetMessageReactionUsersParam *)param
+                         success:(nullable void (^)(RCPagingQueryResult<RCMessageReactionUser *> *result))successBlock
+                           error:(nullable void (^)(RCErrorCode errorCode))errorBlock;
 
 @end
 

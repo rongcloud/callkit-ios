@@ -21,7 +21,7 @@ typedef NS_ENUM(NSInteger, RCErrorCode) {
     /// 
     REJECTED_BY_BLACKLIST = 405,
 
-    /// 对方开启了只接收白名单的信息，但己方不在白名单中，发送消息失败
+    /// 对方开启了只接收白名单的信息，但己方不在白名单中，发送消息失败。
     /// 
     NOT_IN_WHITELIST = 407,
 
@@ -38,27 +38,27 @@ typedef NS_ENUM(NSInteger, RCErrorCode) {
     /// - Since: 5.6.2
     RC_CONVERSATION_NOT_SUPPORT_MESSAGE = 20109,
 
-    /// 消息内容存在敏感词
+    /// 消息内容存在敏感词。
     /// 
     /// - Since: 5.26.0
     RC_DANGEROUS_CONTENT = 20112,
 
-    /// 消息内容未通过审核
+    /// 消息内容未通过审核。
     /// 
     /// - Since: 5.26.0
     RC_CONTENT_REVIEW_REJECTED = 20113,
 
-    /// 消息超过可修改时间
+    /// 消息超过可修改时间。
     /// 
     /// - Since: 5.26.0
     MESSAGE_OVER_MODIFY_TIME_FAIL = 20114,
 
-    /// 消息大小超出限制
+    /// 消息大小超出限制。
     /// 
     /// - Since: 5.26.0
     RC_MESSAGE_SIZE_EXCEEDED = 20115,
 
-    /// 消息不支持修改
+    /// 消息不支持修改。
     /// 
     /// - Since: 5.26.0
     MESSAGE_UNSUPPORTED_MODIFY = 20116,
@@ -72,7 +72,7 @@ typedef NS_ENUM(NSInteger, RCErrorCode) {
     /// 
     SEND_MSG_FREQUENCY_OVERRUN = 20604,
 
-    /// 操作被禁止，此错误码已被弃用
+    /// 操作被禁止，此错误码已被弃用。
     /// 
     RC_OPERATION_BLOCKED = 20605,
 
@@ -96,22 +96,22 @@ typedef NS_ENUM(NSInteger, RCErrorCode) {
     /// 
     RC_MSG_REPLACED_SENSITIVE_WORD = 21502,
 
-    /// 超级群扩展消息，但是原始消息不存在。
+    /// 设置扩展消息，但是原始消息不存在。
     /// 
     /// - Since: 5.2.0
     RC_ORIGINAL_MESSAGE_NOT_EXIST = 22201,
 
-    /// 超级群扩展消息，但是原始消息不支持扩展。
+    /// 设置扩展消息，但是原始消息不支持扩展。
     /// 
     /// - Since: 5.2.0
     RC_ORIGINAL_MESSAGE_CANT_EXPAND = 22202,
 
-    /// 超级群扩展消息，扩展内容格式错误。
+    /// 设置扩展消息，扩展内容格式错误。
     /// 
     /// - Since: 5.2.0
     RC_MESSAGE_EXPAND_FORMAT_ERROR = 22203,
 
-    /// 超级群扩展消息，无操作权限。
+    /// 设置扩展消息，无操作权限。
     /// 
     /// - Since: 5.2.0
     RC_MESSAGE_EXPAND_NOT_AUTHORIZED = 22204,
@@ -243,7 +243,7 @@ typedef NS_ENUM(NSInteger, RCErrorCode) {
     /// - Since: 5.10.0
     RC_USER_PROFILE_QUERY_COUNT_EXCEED_LIMIT = 24365,
 
-    /// 未在用户托管业务中查询到此用户应用号
+    /// 未在用户托管业务中查询到此用户应用号。
     /// 
     /// - Since: 5.10.0
     RC_USER_PROFILE_USER_NOT_EXIST = 24366,
@@ -298,7 +298,7 @@ typedef NS_ENUM(NSInteger, RCErrorCode) {
     /// - Since: 5.2.0
     RC_ULTRA_GROUP_NOT_EXIST = 24410,
 
-    /// 超级群成员超限制
+    /// 超级群成员超限制。
     /// 
     /// - Since: 5.2.0
     RC_ULTRA_GROUP_MEMBERS_EXCEED_LIMIT = 24411,
@@ -566,16 +566,16 @@ typedef NS_ENUM(NSInteger, RCErrorCode) {
     /// - Since: 5.12.0
     RC_FRIEND_NOT_ALLOW_ADD_SELF = 25473,
 
-    /// 不支持添加机器人为好友
+    /// 不支持添加机器人为好友。
     /// 
     RCErrorCodeRc_friend_not_support_robot = 25474,
 
-    /// 托管资料信息审核不通过
+    /// 托管资料信息审核不通过。
     /// 
     /// - Since: 5.16.0
     RC_SERVICE_INFORMATION_AUDIT_FAILED = 25480,
 
-    /// 用户级设置服务  请求参数不合法。
+    /// 用户级设置服务，请求参数不合法。
     /// 
     RC_PUSHSETTING_PARAMETER_INVALID = 26001,
 
@@ -596,17 +596,17 @@ typedef NS_ENUM(NSInteger, RCErrorCode) {
     /// - Since: 5.6.7
     RC_READ_RECEIPT_V4_INVALID = 26005,
 
-    /// 未开通会话驱动
+    /// 未开通会话驱动。
     /// 
     /// - Since: 5.6.7
     RC_SERVER_DRIVE_UNREAD_COUNT_INVALID = 26006,
 
-    /// 消息 ID 顺序错误
+    /// 消息 ID 顺序错误。
     /// 
     /// - Since: 5.6.7
     RC_SERVER_PARAMETER_MESSAGEUIDS_CONFUSED = 26007,
 
-    /// 上报时间不支持同步
+    /// 上报时间不支持同步。
     /// 
     /// - Since: 5.6.9
     RC_SERVER_PARAMETER_TIMESTAMP_NOT_SUPPORT_SYNC = 26008,
@@ -646,31 +646,31 @@ typedef NS_ENUM(NSInteger, RCErrorCode) {
     /// 
     INVALID_PARAMETER_SIZE_NOT_FOUND = 26107,
 
-    /// 未开通v5
+    /// 未开通 v5 已读回执。
     /// 
     RC_SERVICE_RRSV5_UNAVAILABLE = 26314,
 
-    /// 不支持的已读回执方式
+    /// 不支持的已读回执方式。
     /// 
     RC_SERVICE_RRSV5_READ_RECEIPT_NOT_SUPPORT = 26315,
 
-    /// 参数长度超限
+    /// 参数长度超限。
     /// 
     RC_SERVICE_RRSV5_PARAM_LENGTH_EXCEED = 26316,
 
-    /// 不支持的会话类型
+    /// 不支持的会话类型。
     /// 
     RC_SERVICE_RRSV5_CONVERSATION_NOT_SUPPORT = 26317,
 
-    /// 不支持的已读查询类型
+    /// 不支持的已读查询类型。
     /// 
     RC_SERVICE_RRSV5_QUERY_NOT_SUPPORT = 26318,
 
-    /// 非消息发送者
+    /// 非消息发送者。
     /// 
     RC_SERVICE_RRSV5_MESSAGE_SENDER_MISMATCH = 26320,
 
-    /// 消息为不需要回执类型
+    /// 消息为不需要回执类型。
     /// 
     RC_SERVICE_RRSV5_MESSAGE_RECEIPT_NEEDLESS = 26321,
 
@@ -678,23 +678,33 @@ typedef NS_ENUM(NSInteger, RCErrorCode) {
     /// 
     RC_SERVICE_RRSV5_MESSAGE_NOT_EXIST = 26322,
 
-    /// 语音转换服务未开启
+    /// 消息回应数量超出限制
+    /// 
+    /// - Since: 5.42.0
+    RC_MSG_REACTION_LIMIT_REACHED = 26323,
+
+    /// 消息回应人数超出限制
+    /// 
+    /// - Since: 5.42.0
+    RC_MSG_REACTION_USER_LIMIT_REACHED = 26324,
+
+    /// 语音转换服务未开启。
     /// 
     RC_SERVICE_STT_UNAVAILABLE = 28300,
 
-    /// stt转换失败
+    /// stt转换失败。
     /// 
     RC_SERVICE_STT_CONVERTED_FAILED = 28304,
 
-    /// 语音转文本服务异常
+    /// 语音转文本服务异常。
     /// 
     RC_SERVICE_STT_INTERNAL_ERROR = 28305,
 
-    /// 语音转文本参数缺失
+    /// 语音转文本参数缺失。
     /// 
     RC_SERVICE_STT_PARAM_MISS = 28306,
 
-    /// 用量超过限制
+    /// 用量超过限制。
     /// 
     RC_SERVICE_STT_USAGE_EXCEED = 28307,
 
@@ -738,32 +748,32 @@ typedef NS_ENUM(NSInteger, RCErrorCode) {
     /// - Since: 5.24.0
     RC_TRANS_LANGUAGE_NOT_SUPPORT = 28407,
 
-    /// 流不存在
+    /// 流不存在。
     /// 
     /// - Since: 5.16.0
     STREAM_MESSAGE_NO_STREAM = 29002,
 
-    /// 拉取超时30秒无数据结束
+    /// 拉取超时30秒无数据结束。
     /// 
     /// - Since: 5.16.0
     STREAM_MESSAGE_DELTA_TIME_OVER = 29003,
 
-    /// 发送流超出30分钟截断
+    /// 发送流超出30分钟截断。
     /// 
     /// - Since: 5.16.0
     STREAM_MESSAGE_DELTA_TIME_LIMIT = 29004,
 
-    /// 流数据审核不过被删除
+    /// 流数据审核不过被删除。
     /// 
     /// - Since: 5.16.0
     STREAM_MESSAGE_REVIEW_FAILED = 29005,
 
-    /// 流数据大于 128 k 截断
+    /// 流数据大于 128k 截断。
     /// 
     /// - Since: 5.16.0
     STREAM_MESSAGE_DATA_TRUNCATED = 29006,
 
-    /// 拉流服务内部异常
+    /// 拉流服务内部异常。
     /// 
     /// - Since: 5.16.0
     STREAM_MESSAGE_SERVER_INTERNAL_ERROR = 29007,
@@ -812,79 +822,79 @@ typedef NS_ENUM(NSInteger, RCErrorCode) {
     /// 
     RC_PUBLICSERVICE_UNFOLLOW = 29206,
 
-    /// 请求大模型失败
+    /// 请求大模型失败。
     /// 
     RC_SERVICE_LLM_REQUEST_FAIL = 29301,
 
-    /// 大模型响应错误
+    /// 大模型响应错误。
     /// 
     RC_SERVICE_LLM_RESPONSE_ERROR = 29302,
 
-    /// 大模型响应超时
+    /// 大模型响应超时。
     /// 
     RC_SERVICE_LLM_RESPONSE_TIMEOUT = 29303,
 
-    /// 请求中的 agentId 不存在
+    /// 请求中的 agentId 不存在。
     /// 
     RC_SERVICE_ASSISTANT_NOT_FOUND = 29310,
 
-    /// 不支持的大模型服务商
+    /// 不支持的大模型服务商。
     /// 
     RC_SERVICE_LLM_CHAT_CLIENT_NOT_FOUND = 29311,
 
-    /// 请求参数的格式不对，json 反序列化失败或者空 json
+    /// 请求参数的格式不对，json 反序列化失败或者空 json。
     /// 
     RC_SERVICE_INVALID_PARAMETER_FORMAT = 29320,
 
-    /// channelType 请求参数错误
+    /// channelType 请求参数错误。
     /// 
     RC_SERVICE_INVALID_PARAMETER_CHANNELTYPE = 29321,
 
-    /// channelId 请求参数错误
+    /// channelId 请求参数错误。
     /// 
     RC_SERVICE_INVALID_PARAMETER_CHANNELID = 29322,
 
-    /// targetId 请求参数错误
+    /// targetId 请求参数错误。
     /// 
     RC_SERVICE_INVALID_PARAMETER_TARGETID = 29323,
 
-    /// message 中 userId 请求参数错误
+    /// message 中 userId 请求参数错误。
     /// 
     RC_SERVICE_INVALID_PARAMETER_MESSAGE_USERID = 29324,
 
-    /// message 中 messageId 请求参数错误
+    /// message 中 messageId 请求参数错误。
     /// 
     RC_SERVICE_INVALID_PARAMETER_MESSAGE_MESSAGEID = 29325,
 
-    /// message 中 username 请求参数错误
+    /// message 中 username 请求参数错误。
     /// 
     RC_SERVICE_INVALID_PARAMETER_MESSAGE_USERNAME = 29326,
 
-    /// message 中 type 请求参数错误
+    /// message 中 type 请求参数错误。
     /// 
     RC_SERVICE_INVALID_PARAMETER_MESSAGE_TYPE = 29327,
 
-    /// message 中 content 请求参数错误
+    /// message 中 content 请求参数错误。
     /// 
     RC_SERVICE_INVALID_PARAMETER_MESSAGE_CONTENT = 29328,
 
-    /// message 中 timestamp 请求参数错误
+    /// message 中 timestamp 请求参数错误。
     /// 
     RC_SERVICE_INVALID_PARAMETER_MESSAGE_TIMESTAMP = 29329,
 
-    /// agentId 请求参数错误
+    /// agentId 请求参数错误。
     /// 
     RC_SERVICE_INVALID_PARAMETER_AGENTID = 29330,
 
-    /// customInfo 请求参数错误中 key 的数量超限
+    /// customInfo 请求参数错误中 key 的数量超限。
     /// 
     RC_SERVICE_INVALID_PARAMETER_CUSTOMEINFO_KEY_EXCEED = 29331,
 
-    /// customInfo 请求参数错误中 key/value 的长度超限
+    /// customInfo 请求参数错误中 key/value 的长度超限。
     /// 
     RC_SERVICE_INVALID_PARAMETER_CUSTOMEINFO_LENGTH_EXCEED = 29332,
 
-    /// 未知的错误，http 状态码会是 500未知的错误，http 状态码会是 500
+    /// 未知的错误，http 状态码会是 500未知的错误，http 状态码会是 500。
     /// 
     RC_SERVICE_UNKOWN_ERROR = 29399,
 
@@ -937,7 +947,7 @@ typedef NS_ENUM(NSInteger, RCErrorCode) {
     /// 
     RC_RMTP_CONNECTED_ERROR = 30021,
 
-    /// 正在断开连接中
+    /// 正在断开连接中。
     /// 
     CONNECTION_CLOSING = 30027,
 
@@ -1007,59 +1017,59 @@ typedef NS_ENUM(NSInteger, RCErrorCode) {
     /// - Since: 5.3.0
     RC_CONN_APP_LICENSE_EXPIRED = 31030,
 
-    /// channelType 请求参数错误
+    /// channelType 请求参数错误。
     /// 
     RC_AGENT_INVALID_PARAMETER_CHANNELTYPE = 31031,
 
-    /// 无效的agent 提示词类型
+    /// 无效的 agent 提示词类型。
     /// 
     RC_AGENT_INVALID_PARAMETER_CUSTOMINFO = 31032,
 
-    /// Agent 服务不可用
+    /// Agent 服务不可用。
     /// 
     RC_AGENT_SERVICE_UNAVAILABLE = 31033,
 
-    /// message 中 userId 请求参数错误
+    /// message 中 userId 请求参数错误。
     /// 
     RC_AGENT_INVALID_PARAMETER_MESSAGE_USERID = 31034,
 
-    /// message 中 messageId 请求参数错误
+    /// message 中 messageId 请求参数错误。
     /// 
     RC_AGENT_INVALID_PARAMETER_MESSAGE_MESSAGEID = 31035,
 
-    /// message 中 username 请求参数错误
+    /// message 中 username 请求参数错误。
     /// 
     RC_AGENT_INVALID_PARAMETER_MESSAGE_USERNAME = 31036,
 
-    /// message 中 type 请求参数错误
+    /// message 中 type 请求参数错误。
     /// 
     RC_AGENT_INVALID_PARAMETER_MESSAGE_TYPE = 31037,
 
-    /// message 中 content 请求参数错误
+    /// message 中 content 请求参数错误。
     /// 
     RC_AGENT_INVALID_PARAMETER_MESSAGE_CONTENT = 31038,
 
-    /// message 中 timestamp 请求参数错误
+    /// message 中 timestamp 请求参数错误。
     /// 
     RC_AGENT_INVALID_PARAMETER_MESSAGE_TIMESTAMP = 31039,
 
-    /// agentId 请求参数错误
+    /// agentId 请求参数错误。
     /// 
     RC_AGENT_INVALID_PARAMETER_AGENTID = 31040,
 
-    /// 请求agent api 的参数 recommendationParams 类型错误
+    /// 请求 agent api 的参数 recommendationParams 类型错误。
     /// 
     RC_AGENT_INVALID_PARAMETER_RECOMMENDATIONPARAMS = 31041,
 
-    /// 请求 agent api 的上下文消息列表类型错误
+    /// 请求 agent api 的上下文消息列表类型错误。
     /// 
     RC_AGENT_INVALID_CONTEXT_MESSAGE_LIST = 31042,
 
-    /// 请求agent api 的上下文消息类型错误
+    /// 请求 agent api 的上下文消息类型错误。
     /// 
     RC_AGENT_INVALID_CONTEXT_MESSAGE = 31043,
 
-    /// 请求agent api 的上下文消息数量超过最大值
+    /// 请求 agent api 的上下文消息数量超过最大值。
     /// 
     RC_AGENT_CONTEXT_MESSAGE_LIST_EXCEED_MAX = 31044,
 
@@ -1119,19 +1129,39 @@ typedef NS_ENUM(NSInteger, RCErrorCode) {
     /// 
     RC_TAG_INVALID_FOR_CONVERSATION = 33102,
 
-    /// SDK 拉取远端会话列表失败
+    /// 不允许主动拉取远端会话
+    ///
+    /// - Since: 5.20.0
+    RC_NOT_ALLOW_PULL_CONVERSATION = 33301,
+
+    /// SDK 拉取远端会话列表失败。
     /// 
     SDK_PULL_CONVERSATION = 33302,
 
-    /// 被编辑消息是接收的或者没有发送成功的
+    /// 被编辑消息是接收的或者没有发送成功的。
     /// 
     /// - Since: 5.26.0
     RC_MODIFIED_MESSAGE_IS_NOT_SENT = 33401,
 
-    /// 被编辑的消息超过修改时限
+    /// 被编辑的消息超过修改时限。
     /// 
     /// - Since: 5.26.0
     RC_MODIFIED_MESSAGE_TIMEOUT = 33402,
+
+    /// 引用消息不存在。
+    /// 
+    /// - Since: 5.38.0
+    RC_QUOTE_MSG_NOT_FOUND = 33403,
+
+    /// 消息回应无效，ID 要求字符长度不超出 16。
+    /// 
+    /// - Since: 5.42.0
+    RC_REACTION_ID_INVALID = 33405,
+
+    /// 会话未读数查询过滤器非法
+    ///
+    /// - Since: 5.44.0
+    INVALID_PARAMETER_UNREAD_COUNT_FILTER = 33406,
 
     /// 连接已存在。
     /// 
@@ -1149,7 +1179,7 @@ typedef NS_ENUM(NSInteger, RCErrorCode) {
     /// 
     RC_KV_STORE_NOT_SYNC = 34004,
 
-    /// 连接环境不正确。
+    /// SDK 连接的环境配置不正确。
     /// 
     RC_ENVIRONMENT_ERROR = 34005,
 
@@ -1222,7 +1252,7 @@ typedef NS_ENUM(NSInteger, RCErrorCode) {
     /// - Since: 5.2.0
     RC_ULTRA_GROUP_NOT_SUPPORT = 34022,
 
-    /// 超级群频道不存在
+    /// 超级群频道不存在。
     /// 
     /// - Since: 5.2.0
     RC_ULTRA_GROUP_CHANNEL_NOT_EXIST = 34024,
@@ -1232,7 +1262,15 @@ typedef NS_ENUM(NSInteger, RCErrorCode) {
     /// - Since: 5.4.4
     RC_MESSAGE_EXPAND_CONVERSATION_TYPE_NOT_MATCH = 34025,
 
-    /// 此请求不允许重定向，请使用文件真实地址
+    /// Http 请求报 IO 异常
+    ///
+    RC_NETWORK_THROWS_IOEXCEPTION = 34026,
+
+    /// Http 请求超时
+    ///
+    RC_NETWORK_THROWS_SOCKET_TIMEOUT_EXCEPTION = 34027,
+
+    /// 此请求不允许重定向，请使用文件真实地址。
     /// 
     RC_NO_REDIRECT_ALLOWED = 34028,
 
@@ -1241,10 +1279,35 @@ typedef NS_ENUM(NSInteger, RCErrorCode) {
     /// - Since: 5.20.0
     MESSAGE_READ_RECEIPT_NOT_SUPPORT = 34029,
 
-    /// 在下载文件时遇到了 403 禁止访问的错误
+    /// 在下载文件时遇到了 403 禁止访问的错误。
     /// 
     /// - Solution encountered a 403 Forbidden error while downloading the file!
     RC_MEDIA_DOWNLOAD_FORBIDDEN = 34030,
+
+    /// TLS handshake failed
+    ///
+    /// - Since: 5.44.0
+    RC_NET_TLS_HANDSHAKE_FAILED = 34031,
+
+    /// SSL certificate validation failed
+    ///
+    /// - Since: 5.44.0
+    RC_NET_SSL_CERT_INVALID = 34032,
+
+    /// TCP connection failed
+    ///
+    /// - Since: 5.44.0
+    RC_NET_TCP_CONNECT_FAILED = 34033,
+
+    /// DNS resolution failed
+    ///
+    /// - Since: 5.44.0
+    RC_NET_DNS_RESOLVE_FAILED = 34034,
+
+    /// Server returned error status
+    ///
+    /// - Since: 5.44.0
+    RC_NET_SERVER_ERROR = 34035,
 
     /// 连接时connection option 为空。
     /// 
@@ -1360,7 +1423,7 @@ typedef NS_ENUM(NSInteger, RCErrorCode) {
     /// - Since: 5.2.2
     INVALID_PARAMETER_ULTRAGROUPMESSAGEEXPANSION_KEYARRAY = 34221,
 
-    /// uploadVoIPDeviceToken 接口检测到无效的  VoIP DeviceToken。
+    /// uploadVoIPDeviceToken 接口检测到无效的 VoIP DeviceToken。
     /// 
     /// - Since: 5.2.2
     INVALID_PARAMETER_UPLOADVOIPDEVICETOKEN = 34222,
@@ -1796,48 +1859,56 @@ typedef NS_ENUM(NSInteger, RCErrorCode) {
     /// - Since: 5.12.0
     INVALID_PARAMETER_FRIEND_INFO_EXT_FIELDS = 34335,
 
-    /// 实时会话未开启
+    /// 实时会话未开启。
     /// 
     /// - Since: 5.12.3
     RC_REAL_TIME_CONVERSATION_UNAVAILABLE = 34336,
 
-    /// 客户主动上传日志功能未打开
+    /// 客户主动上传日志功能未打开。
     /// 
     RC_USER_TRIGGERED_LOG_UPLOAD_DISABLED = 34337,
 
-    /// 客户主动上传日志时间间隔超出限制
+    /// 客户主动上传日志时间间隔超出限制。
     /// 
     RC_USER_TRIGGERED_LOG_UPLOAD_TIME_INTERVAL_EXCEED_LIMIT = 34338,
 
-    /// 客户主动上传日志时间重复，请勿重复调用
+    /// 客户主动上传日志时间重复，请勿重复调用。
     /// 
     RC_USER_TRIGGERED_LOG_UPLOAD_TIME_DUPLICATE = 34339,
 
-    /// 客户主动上传日志失败
+    /// 客户主动上传日志失败。
     /// 
     RC_USER_TRIGGERED_LOG_UPLOAD_FAILED = 34340,
 
-    /// 开发者调用接口时传入的 pushServer 无效
+    /// 开发者调用接口时传入的 pushServer 无效。
     /// 
     /// - Since: 5.20.0
     INVALID_PARAMETER_PUSH_SERVER = 34341,
 
-    /// 开发者调用接口时传入的统计地址无效
+    /// 开发者调用接口时传入的统计地址无效。
     /// 
     /// - Since: 5.20.0
     INVALID_PARAMETER_STATISTIC_SERVER = 34342,
 
-    /// 开发者传入的 pushToken 参数无效，iOS 端使用
+    /// 开发者传入的 pushToken 参数无效，iOS 端使用。
     /// 
     /// - Since: 5.20.0
     INVALID_PARAMETER_PUSH_TOKEN = 34343,
 
-    /// 服务器数据解析失败
+    /// 服务器数据解析失败。
     /// 
     /// - Since: 5.26.0
     RC_SERVER_DATA_ERROR = 34344,
 
-    /// 数据库磁盘空间已满
+    /// 服务端记录会话未读数功能开启时禁止调用此方法。
+    /// 
+    RC_SERVER_RECORD_UNREAD_COUNT_ENABLED_FORBIDDEN = 34435,
+
+    /// 服务端记录会话未读数功能未开启。
+    /// 
+    RC_SERVER_RECORD_UNREAD_COUNT_DISABLED = 34436,
+
+    /// 数据库磁盘空间已满。
     /// 
     RCErrorCodeDatabasediskfull = 34439,
 
@@ -1850,32 +1921,44 @@ typedef NS_ENUM(NSInteger, RCErrorCode) {
     /// - Solution order invalid
     RC_INVALID_PARAMETER_ORDER = 35025,
 
-    /// 传入的 disableUpdateLastMessage 参数无效。在会话类型为 ULTRA GROUP 时，该字段不允许设置为 true
+    /// 业务域名解析监听超时
+    /// 
+    RC_DNS_PROXY_TIMEOUT = 35051,
+
+    /// 业务域名解析失败
+    /// 
+    RC_DNS_PROXY_ERROR = 35052,
+
+    /// 业务域名解析返回结构不可用
+    /// 
+    RC_DNS_PROXY_DATA_STRUCTURE_ERROR = 35053,
+
+    /// 传入的 disableUpdateLastMessage 参数无效。在会话类型为 ULTRA GROUP 时，该字段不允许设置为 true。
     /// 
     /// - Since: 5.12.2
     INVALID_DISABLE_UPDATE_LAST_MESSAGE = 35054,
 
-    /// 超级群类型会话仅允许置顶默认频道
+    /// 超级群类型会话仅允许置顶默认频道。
     /// 
     /// - Since: 5.20.0
     ONLY_DEFAULT_CHANNEL_SUPPORTS_PINNING = 35055,
 
-    /// 发送消息时配置 needReceipt 错误，相关参数仅限单群聊会话内非状态消息、非群定向消息可配置，且需要开启已读回执 v5 功能
+    /// 发送消息时配置 needReceipt 错误，相关参数仅限单群聊会话内非状态消息、非群定向消息可配置，且需要开启已读回执 v5 功能。
     /// 
     /// - Since: 5.20.0
     RC_SEND_READ_RECEIPT_CONF_ERROR = 35056,
 
-    /// 语音转文字功能未开启
+    /// 语音转文字功能未开启。
     /// 
     /// - Since: 5.22.0
     RC_SPEECH_TO_TEXT_DISABLE = 35057,
 
-    /// 语音转文字请求进行中，请勿重复请求
+    /// 语音转文字请求进行中，请勿重复请求。
     /// 
     /// - Since: 5.22.0
     RC_SPEECH_TO_TEXT_REQUEST_IN_PROCESS = 35058,
 
-    /// 语音内容不可转换，参数无效
+    /// 语音内容不可转换，参数无效。
     /// 
     /// - Since: 5.22.0
     RC_SPEECH_TO_TEXT_MESSAGE_CONTENT_UNSUPPORTED = 35059,
@@ -1910,12 +1993,12 @@ typedef NS_ENUM(NSInteger, RCErrorCode) {
     /// - Since: 5.24
     RC_TRANSLATION_TEXT_INVALID = 35065,
 
-    /// 消息被拦截，不发送
+    /// 消息被拦截，不发送。
     /// 
     /// - Since: 5.24
     RC_MSG_BLOCK_SEND = 35066,
 
-    /// 流式消息不可用
+    /// 流式消息不可用。
     /// 
     /// - Since: 5.16.0
     STREAM_MESSAGE_DISABLE = 39001,
@@ -1940,12 +2023,12 @@ typedef NS_ENUM(NSInteger, RCErrorCode) {
     /// - Since: 5.16.0
     STREAM_MESSAGE_REQUEST_FAIL = 39005,
 
-    /// 消息内容正在拉取中，请勿重复请求
+    /// 消息内容正在拉取中，请勿重复请求。
     /// 
     /// - Since: 5.16.0
     STREAM_MESSAGE_REQUEST_IN_PROCESS = 39006,
 
-    /// 流式消息已同步完成，不需要重新拉取
+    /// 流式消息已同步完成，不需要重新拉取。
     /// 
     /// - Since: 5.16.0
     STREAM_MESSAGE_SYNCED = 39007,

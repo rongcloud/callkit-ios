@@ -10,6 +10,7 @@
 #import <RongIMLibCore/RongIMLibCore.h>
 
 @class RCDiscussion,RCPublicServiceProfile;
+@class RCMessageReactionUsageInfo;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -588,6 +589,15 @@ typedef NS_ENUM(NSUInteger, RCDataSourceType) {
 /// 
 /// - Returns: 当前SDK的连接状态
 - (RCConnectionStatus)getConnectionStatus;
+
+#pragma mark - 消息回应
+
+/// 获取本地常用消息回应列表。
+///
+/// - Parameter count: 查询数量，`count <= 0` 返回空数组，`count > 20` 按 20 截断。
+/// - Returns: 常用消息回应列表。
+/// - Since: 5.42.0
+- (NSArray<RCMessageReactionUsageInfo *> *)getFrequentlyUsedMessageReactionsWithCount:(NSInteger)count;
 
 #pragma mark - 消息接收与发送
 

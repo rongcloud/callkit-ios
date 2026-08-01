@@ -45,11 +45,15 @@
 #import <RongIMKit/RCVoiceMessageCell.h>
 #import <RongIMKit/RCReferenceMessageCell.h>
 #import <RongIMKit/RCReferencedContentView.h>
+#import <RongIMKit/RCReferenceInputBarView.h>
 #import <RongIMKit/RCReferencingView.h>
+#import <RongIMKit/RCMessageCellReferenceContentView.h>
 #import <RongIMKit/RCMessageCellTool.h>
 #import <RongIMKit/RCHQVoiceMessageCell.h>
 #import <RongIMKit/RCComplexTextMessageCell.h>
 #import <RongIMKit/RCStreamMessageCell.h>
+#import <RongIMKit/RCMessageReactionManager.h>
+#import <RongIMKit/RCMessageReactionUsageInfo.h>
 
 /// 工具类
 #import <RongIMKit/RCKitUtility.h>
@@ -241,11 +245,15 @@
 #import "RCVoiceMessageCell.h"
 #import "RCReferenceMessageCell.h"
 #import "RCReferencedContentView.h"
+#import "RCReferenceInputBarView.h"
 #import "RCReferencingView.h"
+#import "RCMessageCellReferenceContentView.h"
 #import "RCMessageCellTool.h"
 #import "RCHQVoiceMessageCell.h"
 #import "RCComplexTextMessageCell.h"
 #import "RCStreamMessageCell.h"
+#import "RCMessageReactionManager.h"
+#import "RCMessageReactionUsageInfo.h"
 
 
 /// 工具类

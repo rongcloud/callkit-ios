@@ -8,6 +8,10 @@
 
 #import "RCMessageModel.h"
 
+@class RCMessageCell;
+@class RCMessageReaction;
+@class RCMessageCellReferenceContentView;
+
 /*!
  消息Cell点击的回调
  */
@@ -80,6 +84,16 @@
  */
 - (void)didLongTouchSTTInfo:(RCMessageModel *)model inView:(UIView *)view;
 
+/// 点击消息回应。
+///
+/// - Since: 5.42.0
+- (void)messageCell:(RCMessageCell *)cell didTapMessageReaction:(RCMessageReaction *)reaction message:(RCMessageModel *)message;
+
+/// 点击消息回应详情入口。
+///
+/// - Since: 5.42.0
+- (void)messageCell:(RCMessageCell *)cell didTapMessageReactionDetail:(RCMessageReaction *)reaction message:(RCMessageModel *)message;
+
 /*!
  点击消息发送失败红点的回调
 
@@ -116,6 +130,17 @@
  - Parameter model: 引用消息Cell的数据模型
 */
 - (void)didTapReferencedContentView:(RCMessageModel *)model;
+
+/// 消息 cell 内的自定义引用展示 View 触发自定义事件的回调。
+/// - Parameters:
+///   - cell: 事件所在的消息 Cell。
+///   - referenceContentView: 触发事件的消息 cell 内自定义引用展示 View。
+///   - action: 业务自定义事件标识。
+///   - extra: 业务自定义事件参数。
+- (void)messageCell:(RCMessageCell *)cell
+referenceContentView:(RCMessageCellReferenceContentView *)referenceContentView
+   didPerformAction:(NSString *)action
+              extra:(nullable NSDictionary *)extra;
 
 ///  消息编辑失败后，点击重试按钮的回调
 ///  - Parameter model: 消息Cell的数据模型

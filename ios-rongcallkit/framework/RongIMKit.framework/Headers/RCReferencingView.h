@@ -9,8 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "RCMessageModel.h"
 #import "RCBaseButton.h"
-#import "RCBaseView.h"
 #import "RCBaseLabel.h"
+#import "RCReferenceInputBarView.h"
 @class RCReferencingView;
 
 @protocol RCReferencingViewDelegate <NSObject>
@@ -21,7 +21,7 @@
 
 @end
 
-@interface RCReferencingView : RCBaseView
+@interface RCReferencingView : RCReferenceInputBarView
 
 /// 关闭引用 button
 @property (nonatomic, strong) RCBaseButton *dismissButton;
@@ -38,7 +38,4 @@
 @property (nonatomic, weak) id<RCReferencingViewDelegate> delegate;
 /// 初始化引用 View
 - (instancetype)initWithModel:(RCMessageModel *)model inView:(UIView *)view;
-
-/// 当前 view 的 Y 值
-- (void)setOffsetY:(CGFloat)offsetY;
 @end

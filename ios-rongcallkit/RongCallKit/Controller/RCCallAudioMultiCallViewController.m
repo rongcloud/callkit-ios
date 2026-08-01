@@ -47,13 +47,23 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    [RCCallKitUtility checkSystemPermission:self.callSession.mediaType
-        success:^{
+    __weak typeof(self) weakSelf = self;
+    [self rc_showAntiFraudTipIfNeededThen:^{
+        [RCCallKitUtility checkSystemPermission:weakSelf.callSession.mediaType
+            success:^{
 
-        }
-        error:^{
-            [self hangupButtonClicked];
-        }];
+            }
+            error:^{
+                [weakSelf hangupButtonClicked];
+            }];
+    }];
+}
+
+- (void)rc_didStartPendingOutgoingCall {
+    // 主叫延迟发起后 callSession 才就绪，此时重建用户模型并刷新列表。
+    [self initAllUserModel];
+    [self updateAllSubUserLayout];
+    [super rc_didStartPendingOutgoingCall];
 }
 
 - (void)initAllUserModel {

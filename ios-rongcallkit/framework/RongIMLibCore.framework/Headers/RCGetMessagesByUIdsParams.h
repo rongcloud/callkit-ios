@@ -2,7 +2,7 @@
 //  RCGetMessagesByUIdsParams.h
 //  RongIMLibCore
 //
-//  Created by Codex on 2026/5/8.
+//  Created by RC on 2026/5/8.
 //  Copyright © 2026 RongCloud. All rights reserved.
 //
 

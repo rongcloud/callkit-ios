@@ -72,6 +72,11 @@ FOUNDATION_EXPORT const unsigned char RongIMLibCoreVersionString[];
 #import <RongIMLibCore/RCModifyMessageParams.h>
 #import <RongIMLibCore/RCGetMessagesByUIdsParams.h>
 #import <RongIMLibCore/RCRefreshReferenceMessageParams.h>
+#import <RongIMLibCore/RCMessageReaction.h>
+#import <RongIMLibCore/RCMessageReactionDelegate.h>
+#import <RongIMLibCore/RCMessageReactionEventData.h>
+#import <RongIMLibCore/RCMessageReactionUser.h>
+#import <RongIMLibCore/RCMessageReactionParams.h>
 
 #import <RongIMLibCore/RCConversationTagInfo.h>
 #import <RongIMLibCore/RCTagProtocol.h>

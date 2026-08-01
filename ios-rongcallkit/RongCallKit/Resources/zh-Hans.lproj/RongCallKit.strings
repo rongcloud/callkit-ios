@@ -114,3 +114,8 @@
 "summary_content" = "总结内容";
 "start_summray_failed_retry_later" = "开启失败，请稍后重试";
 "request_failed_retry_later" = "需要更多内容才能总结，请稍后再试";
+// 防诈提醒
+"VoIPCallAntiFraudTipTitle" = "防诈骗提醒";
+"VoIPCallAntiFraudTipMessage" = "请警惕电信网络诈骗。若对方要求转账、提供验证码或索取个人信息，请立即挂断。确认继续通话？";
+"VoIPCallAntiFraudTipConfirm" = "确认";
+"VoIPCallAntiFraudTipCancel" = "取消";
