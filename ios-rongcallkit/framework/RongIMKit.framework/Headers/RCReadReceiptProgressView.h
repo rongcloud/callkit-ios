@@ -26,7 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// 内部边距（填充区域与圆形边框之间的间距，默认 2.0px）
 @property (nonatomic, assign) CGFloat innerPadding;
 
-/// 圆形边框线宽（默认 2.0px）
+/// 圆形边框线宽（默认 1.17px）
 @property (nonatomic, assign) CGFloat borderWidth;
 
 @end

@@ -1129,11 +1129,6 @@ typedef NS_ENUM(NSInteger, RCErrorCode) {
     /// 
     RC_TAG_INVALID_FOR_CONVERSATION = 33102,
 
-    /// 不允许主动拉取远端会话
-    ///
-    /// - Since: 5.20.0
-    RC_NOT_ALLOW_PULL_CONVERSATION = 33301,
-
     /// SDK 拉取远端会话列表失败。
     /// 
     SDK_PULL_CONVERSATION = 33302,
@@ -1157,11 +1152,6 @@ typedef NS_ENUM(NSInteger, RCErrorCode) {
     /// 
     /// - Since: 5.42.0
     RC_REACTION_ID_INVALID = 33405,
-
-    /// 会话未读数查询过滤器非法
-    ///
-    /// - Since: 5.44.0
-    INVALID_PARAMETER_UNREAD_COUNT_FILTER = 33406,
 
     /// 连接已存在。
     /// 
@@ -1262,14 +1252,6 @@ typedef NS_ENUM(NSInteger, RCErrorCode) {
     /// - Since: 5.4.4
     RC_MESSAGE_EXPAND_CONVERSATION_TYPE_NOT_MATCH = 34025,
 
-    /// Http 请求报 IO 异常
-    ///
-    RC_NETWORK_THROWS_IOEXCEPTION = 34026,
-
-    /// Http 请求超时
-    ///
-    RC_NETWORK_THROWS_SOCKET_TIMEOUT_EXCEPTION = 34027,
-
     /// 此请求不允许重定向，请使用文件真实地址。
     /// 
     RC_NO_REDIRECT_ALLOWED = 34028,
@@ -1283,31 +1265,6 @@ typedef NS_ENUM(NSInteger, RCErrorCode) {
     /// 
     /// - Solution encountered a 403 Forbidden error while downloading the file!
     RC_MEDIA_DOWNLOAD_FORBIDDEN = 34030,
-
-    /// TLS handshake failed
-    ///
-    /// - Since: 5.44.0
-    RC_NET_TLS_HANDSHAKE_FAILED = 34031,
-
-    /// SSL certificate validation failed
-    ///
-    /// - Since: 5.44.0
-    RC_NET_SSL_CERT_INVALID = 34032,
-
-    /// TCP connection failed
-    ///
-    /// - Since: 5.44.0
-    RC_NET_TCP_CONNECT_FAILED = 34033,
-
-    /// DNS resolution failed
-    ///
-    /// - Since: 5.44.0
-    RC_NET_DNS_RESOLVE_FAILED = 34034,
-
-    /// Server returned error status
-    ///
-    /// - Since: 5.44.0
-    RC_NET_SERVER_ERROR = 34035,
 
     /// 连接时connection option 为空。
     /// 

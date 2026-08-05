@@ -30,24 +30,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-/// 会话列表未读数筛选条件。
-///
-/// 该筛选条件为单选，不支持组合；仅影响未读数筛选，不影响其他查询及排序条件。
-typedef NS_ENUM(NSInteger, RCConversationUnreadCountFilter) {
-    /// 不按未读状态筛选，返回符合其他查询条件的全部会话。
-    RCConversationUnreadCountFilterAll = 0,
-
-    /// 仅返回未读消息数大于 0 的会话，即 `unreadMessageCount > 0`。
-    RCConversationUnreadCountFilterUnreadOnly = 1,
-
-    /// 仅返回存在未读 @ 消息的会话，即 `mentionedCount > 0`。
-    /// `mentionedCount` 包含 @ 我的消息和 @ 所有人的消息。
-    RCConversationUnreadCountFilterMentionOnly = 2,
-
-    /// 仅返回未读消息数等于 0 的会话，即 `unreadMessageCount == 0`。
-    RCConversationUnreadCountFilterNoUnread = 3,
-};
-
 /// 会话列表参数配置。
 ///
 /// - Since: 5.20.0
@@ -63,9 +45,6 @@ typedef NS_ENUM(NSInteger, RCConversationUnreadCountFilter) {
 /// 查询结果的排序方式，是否置顶优先，传 YES 表示置顶会话优先返回，否则结果只以会话时间排序。
 /// 默认为 YES。
 @property (nonatomic, assign) BOOL topPriority;
-
-/// 未读数筛选条件，默认为 `RCConversationUnreadCountFilterAll`。
-@property (nonatomic, assign) RCConversationUnreadCountFilter unreadCountFilter;
 
 @end
 
