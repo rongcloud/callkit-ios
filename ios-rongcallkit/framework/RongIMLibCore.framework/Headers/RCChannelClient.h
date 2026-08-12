@@ -1003,7 +1003,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// 异步获取会话列表。
 /// - Parameters:
 ///   - filters: 会话过滤参数。
-///   - option: 参数配置。
+///   - option: 分页、排序和未读数筛选配置。传 nil 时使用默认配置。
 ///   - completion: 结果回调。
 ///
 /// - Since: 5.20.0

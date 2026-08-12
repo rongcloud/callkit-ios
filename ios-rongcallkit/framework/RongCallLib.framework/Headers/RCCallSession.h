@@ -292,9 +292,21 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)processDisplayVideoFrame:(nullable CVPixelBufferRef)pixelBuffer;
 
 /*!
+ 远端用户视频帧数据上报
+
+ @param pixelBuffer 远端用户视频数据
+ @param userId 远端用户ID
+ @discussion
+ 当前视频通话远端用户视频帧数据回调，如果修改了该视频数据，会影响显示远端用户视频帧数据
+
+ @remarks 代理
+ */
+- (void)processRemoteVideoFrame:(nullable CVPixelBufferRef)pixelBuffer userId:(nullable NSString *)userId;
+
+/*!
  当前通话为视频通话时, 收到远端用户的第一个视频帧的回调
  @param userId   远端用户ID
- 
+
  @remarks 代理
  */
 - (void)receiveRemoteUserVideoFirstKeyFrame:(nullable NSString *)userId;
