@@ -157,6 +157,7 @@ FOUNDATION_EXPORT const unsigned char RongIMLibCoreVersionString[];
 // Group
 #import <RongIMLibCore/RCGroupInfo.h>
 #import <RongIMLibCore/RCGroupMemberInfo.h>
+#import <RongIMLibCore/RCGroupOperationErrorInfo.h>
 #import <RongIMLibCore/RCFollowInfo.h>
 #import <RongIMLibCore/RCGroupApplicationInfo.h>
 

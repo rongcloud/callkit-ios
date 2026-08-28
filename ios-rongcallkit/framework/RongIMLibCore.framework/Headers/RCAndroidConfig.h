@@ -43,6 +43,16 @@ FOUNDATION_EXPORT RCImportanceHonor const RCImportanceHonorLow;
 /// 该条消息针对小米使用的推送渠道，如开发者集成了小米推送，需要指定 channelId 时，可向 Android 端研发人员获取，channelId 由开发者自行创建。
 @property (nonatomic, copy, nullable) NSString *channelIdMi;
 
+/// 小米私信推送模板 ID。
+///
+/// - Since: 5.46.0
+@property (nonatomic, copy, nullable) NSString *templateIdMi;
+
+/// 小米私信推送模板参数，键和值均为字符串。
+///
+/// - Since: 5.46.0
+@property (nonatomic, copy, nullable) NSDictionary<NSString *, NSString *> *templateParamMi;
+
 /// 小米 Large icon 链接
 ///
 /// Large icon 可以出现在大图版和多字版消息中，显示在右边。国内版仅 MIUI12 以上版本支持，以下版本均不支持；国际版支持。图片要求：大小 120 * 120px，格式为 png 或者 jpg 格式。

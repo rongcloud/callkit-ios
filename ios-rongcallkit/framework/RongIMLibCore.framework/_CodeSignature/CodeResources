@@ -10,7 +10,7 @@
 		</data>
 		<key>Headers/RCAndroidConfig.h</key>
 		<data>
-		VM4lZcQ0vdWlekhyXvVJQAN6vtw=
+		OPD98rQ4xqnXgnPbySP8BuZDbjY=
 		</data>
 		<key>Headers/RCAppSettings.h</key>
 		<data>
@@ -102,11 +102,11 @@
 		</data>
 		<key>Headers/RCCoreClient+Deprecated.h</key>
 		<data>
-		IqKN7dwO/o2ygKtzz1TuNOEZRq4=
+		QVMZGUBii8SsxHvpvxBZE4f16jw=
 		</data>
 		<key>Headers/RCCoreClient.h</key>
 		<data>
-		F5lt9+kFq2U1lMElUN3e5lJ7PQk=
+		BC8N5+wKMUgxUsMd0qgALD8UVik=
 		</data>
 		<key>Headers/RCDataManagementInfo.h</key>
 		<data>
@@ -126,7 +126,7 @@
 		</data>
 		<key>Headers/RCErrorCode.h</key>
 		<data>
-		YmnRzvIiHn784DIohN+E/nb7pTc=
+		YZU+WrH1WMA5F7NYeAtjB+7v0zI=
 		</data>
 		<key>Headers/RCFileMessage.h</key>
 		<data>
@@ -212,6 +212,10 @@
 		<data>
 		5gmQFLL7djuNHYFKcV5inAU08KY=
 		</data>
+		<key>Headers/RCGroupOperationErrorInfo.h</key>
+		<data>
+		NfKtkqxvXXy8g5EmfFbYOb3WZDo=
+		</data>
 		<key>Headers/RCGroupReadReceiptInfoV2.h</key>
 		<data>
 		KybBkFL1HVDsd3Kt7c6pRNpWmoM=
@@ -222,7 +226,7 @@
 		</data>
 		<key>Headers/RCGroupReadReceiptV2Protocol.h</key>
 		<data>
-		Yc1nbKQeOKFobe9aGtF8oALCiZ4=
+		iQ2xVpu3bFTQitLcU812QOys96k=
 		</data>
 		<key>Headers/RCHQVoiceMessage.h</key>
 		<data>
@@ -578,7 +582,7 @@
 		</data>
 		<key>Headers/RongIMLibCore.h</key>
 		<data>
-		YkrxFihapBq/Hn8SXrNt9Bfj5Lk=
+		x7zCvCRt6W5ADPor8bahlIi9Y+Y=
 		</data>
 		<key>Info.plist</key>
 		<data>
@@ -610,11 +614,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			VM4lZcQ0vdWlekhyXvVJQAN6vtw=
+			OPD98rQ4xqnXgnPbySP8BuZDbjY=
 			</data>
 			<key>hash2</key>
 			<data>
-			v//YytuvTCyrFP+ukW3Od99g8wyIGKCpxRqNvTzgbfs=
+			QHi/IvaZOmBXS9e/ruFGzhPA/SFBIX6CV6OgjgsUj3I=
 			</data>
 		</dict>
 		<key>Headers/RCAppSettings.h</key>
@@ -863,22 +867,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			IqKN7dwO/o2ygKtzz1TuNOEZRq4=
+			QVMZGUBii8SsxHvpvxBZE4f16jw=
 			</data>
 			<key>hash2</key>
 			<data>
-			ro/jo1t18ZkfeHQVy1oZEbLi4Y607m66SHicgDYHnZk=
+			dTlvKe9WHle6IZGxb6xxvFr+2074pcHKrlfPhQ1Rffo=
 			</data>
 		</dict>
 		<key>Headers/RCCoreClient.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			F5lt9+kFq2U1lMElUN3e5lJ7PQk=
+			BC8N5+wKMUgxUsMd0qgALD8UVik=
 			</data>
 			<key>hash2</key>
 			<data>
-			CUFRtfiHt5eArxvm+n/qRZWp9U5HFBZqWfdhstyLxe4=
+			TSy8L4m0zbdlxvVFqvZI8Y/AZeghUslyYJV0Cbj1dJE=
 			</data>
 		</dict>
 		<key>Headers/RCDataManagementInfo.h</key>
@@ -929,11 +933,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			YmnRzvIiHn784DIohN+E/nb7pTc=
+			YZU+WrH1WMA5F7NYeAtjB+7v0zI=
 			</data>
 			<key>hash2</key>
 			<data>
-			HkR/kYMM2pW22VG/vKjptCM99CQpLZ52bIZJaVOVLDo=
+			JuvCXBsw9IPYtByLElWVqIHyIT7ZrjsGwGMKoAda0Gc=
 			</data>
 		</dict>
 		<key>Headers/RCFileMessage.h</key>
@@ -1167,6 +1171,17 @@
 			jbzaz/hiLk9CyGu0dJXy409fLTeK4TKMN2LpMx+4yBU=
 			</data>
 		</dict>
+		<key>Headers/RCGroupOperationErrorInfo.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			NfKtkqxvXXy8g5EmfFbYOb3WZDo=
+			</data>
+			<key>hash2</key>
+			<data>
+			NKRZ5O4RSdoqOok+52oixCGSObyHEdJzXMGiLGhTF7w=
+			</data>
+		</dict>
 		<key>Headers/RCGroupReadReceiptInfoV2.h</key>
 		<dict>
 			<key>hash</key>
@@ -1193,11 +1208,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			Yc1nbKQeOKFobe9aGtF8oALCiZ4=
+			iQ2xVpu3bFTQitLcU812QOys96k=
 			</data>
 			<key>hash2</key>
 			<data>
-			1gIbONvRr3XXkcBIdKeg4iZ7V21uTLXcENToJCyAXYU=
+			iX6pTvLl1ckHfnim75dciq8S9DMB0zN9wrylfKT/7pI=
 			</data>
 		</dict>
 		<key>Headers/RCHQVoiceMessage.h</key>
@@ -2172,11 +2187,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			YkrxFihapBq/Hn8SXrNt9Bfj5Lk=
+			x7zCvCRt6W5ADPor8bahlIi9Y+Y=
 			</data>
 			<key>hash2</key>
 			<data>
-			4/+90JMR9vTaF0/uGuFMEZu7x5pI5ydZ/vbWh68Wz8A=
+			5yU2tz/ZBpOajatA05IgL384Sgk9U8JOGAlvdJFKTAY=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

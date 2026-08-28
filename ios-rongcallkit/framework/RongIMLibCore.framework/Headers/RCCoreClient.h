@@ -41,6 +41,8 @@
 
 #import <RongIMLibCore/RCGroupEventDelegate.h>
 #import <RongIMLibCore/RCGroupInfo.h>
+#import <RongIMLibCore/RCGroupMemberInfo.h>
+#import <RongIMLibCore/RCGroupOperationErrorInfo.h>
 #import <RongIMLibCore/RCGroupApplicationInfo.h>
 #import <RongIMLibCore/RCQuitGroupConfig.h>
 #import <RongIMLibCore/RCPagingQueryOption.h>
@@ -3564,24 +3566,16 @@ FOUNDATION_EXPORT NSString *const RCLibDispatchReadReceiptNotification;
 
 /// 创建群组
 /// - Parameter groupInfo: 群组信息及权限，groupId、groupName 必填，否则创建失败
-/// - Parameter inviteeUserIds: 被邀请的用户 Id 列表，可以为空，一次最多允许 30 个用户加入。
-/// - Parameter success: 成功回调。
-/// - Parameter error: 失败回调
+/// - Parameter inviteeUserIds: 被邀请的用户 ID 列表，可以为空，一次最多允许 30 个用户加入
+/// - Parameter successBlock: 成功回调
+/// - Parameter errorBlock: 失败回调。errorInfo 包含本次创建群组失败的附加信息
 ///
-/// - Note:
-///
-/// **`groupInfo` 参数说明**
-/// - `groupId` 最大长度 64 个字符。支持大小写英文字母与数字的组合
-/// - `groupName` 最长不超过 64 个字符，群名称可以重复创建
-///
-/// **`successBlock` 的 `processCode` 参数说明**
-/// - 当群组的 `inviteHandlePermission` 为被邀请人需要同意才能进群时，`processCode` 返回 `RC_GROUP_NEED_INVITEE_ACCEPT` ( 25427 )，表示需要被邀请人同意后才能进入群组。
-/// - 当群组的 `inviteHandlePermission` 为不需被邀请人同意时，`processCode` 返回 RC_SUCCESS ( 0 )，被邀请人会直接加入群组。
-/// - Since: 5.16.0
+/// - Note: 创建者本人加入群组数超限或 App Key 下群组总数超限时，errorInfo 中的属性均为空
+/// - Since: 5.46.0
 - (void)createGroup:(RCGroupInfo *)groupInfo
-     inviteeUserIds:(nullable NSArray<NSString *> *)inviteeUserIds
-       successBlock:(void (^)(RCErrorCode processCode))successBlock
-         errorBlock:(void (^)(RCErrorCode errorCode, NSArray<NSString *> *_Nullable errorKeys))errorBlock;
+      inviteeUserIds:(nullable NSArray<NSString *> *)inviteeUserIds
+        successBlock:(void (^)(RCErrorCode processCode))successBlock
+       errorWithInfo:(void (^)(RCErrorCode errorCode, RCCreateGroupErrorInfo *errorInfo))errorBlock;
 
 
 /// 更新群组信息
@@ -3761,17 +3755,13 @@ FOUNDATION_EXPORT NSString *const RCLibDispatchReadReceiptNotification;
 /// - Parameter groupId: 群组 ID
 /// - Parameter userIds: 用户 ID 列表，一次最多不超过 30 个
 /// - Parameter successBlock: 邀请成功回调
-/// - Parameter errorBlock: 失败回调
-/// - Note:
-///
-/// **`successBlock` 的 `processCode` 参数说明**
-/// - 当群组的 `joinPermission`  为需要群主或管理员审批时，`processCode` 返回 `RC_GROUP_JOIN_GROUP_NEED_MANAGER_ACCEPT` ( 25424 )，表示需要等待群主或管理员审批。
-/// - 当群组的 `joinPermission` 为不用验证，同时 `inviteHandlePermission` 为需要被邀请人同意时，`processCode` 返回 `RC_GROUP_NEED_INVITEE_ACCEPT` ( 25427 )，表示需要被邀请人同意后才能进入群组。
-/// - Since: 5.12.0
+/// - Parameter errorBlock: 失败回调。errorInfo 包含本次邀请失败的附加信息
+/// - Since: 5.46.0
 - (void)inviteUsersToGroup:(NSString *)groupId
-                   userIds:(NSArray<NSString *> *)userIds
-                   success:(void (^)(RCErrorCode processCode))successBlock
-                     error:(void (^)(RCErrorCode errorCode))errorBlock;
+                    userIds:(NSArray<NSString *> *)userIds
+                    success:(void (^)(RCErrorCode processCode))successBlock
+              errorWithInfo:(void (^)(RCErrorCode errorCode,
+                                      RCInviteUsersToGroupErrorInfo *errorInfo))errorBlock;
 
 /// 用户同意加入群组
 /// - Parameter groupId: 群组 ID

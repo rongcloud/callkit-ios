@@ -103,7 +103,6 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
 @property (nonatomic, assign) RCConversationType conversationType;
 @property (nonatomic, copy) NSString *targetId;
 @property (nonatomic, copy) NSString *callId;
-@property (nonatomic, assign) NSTimeInterval startTime;
 @property (nonatomic, copy) NSString *summaryTaskId;
 @property (nonatomic, copy) NSString *lastSummaryContent;
 @property (nonatomic, assign) BOOL isSummaryStarted;
@@ -189,8 +188,8 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
 
     NSString *hangupPushContent = RCCallKitLocalizedString(@"VoIPCall_hangup_PushContent");
 
-    RCMessagePushConfig *invitePushConfig = [self getPushConfig];
-    RCMessagePushConfig *hangupPushConfig = [self getPushConfig];
+    RCMessagePushConfig *invitePushConfig = [self getPushConfig:YES];
+    RCMessagePushConfig *hangupPushConfig = [self getPushConfig:NO];
 
     RCUserInfo *userInfo =
         [[RCUserInfoCacheManager sharedManager] getUserInfo: [RCCoreClient sharedCoreClient].currentUserInfo.userId];
@@ -342,12 +341,6 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
 }
 
 #pragma mark - getter
-- (void)setStartTime:(NSTimeInterval)startTime {
-    if (_startTime == 0) {
-        _startTime = startTime;
-    }
-}
-
 - (RCConversationType)conversationType {
     if (_conversationType != 0) {
         return _conversationType;
@@ -1250,6 +1243,9 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
         self.asrButton.frame = CGRectMake(RCCallHorizontalMargin, RCCallMiniButtonTopMargin + RCCallStatusBarHeight + RCCallMiniButtonLength + RCCallHorizontalMargin, 50, 30);
         self.aiSummaryButton.hidden = NO;
         self.aiSummaryButton.frame = CGRectMake(RCCallHorizontalMargin, RCCallMiniButtonTopMargin + RCCallStatusBarHeight + RCCallMiniButtonLength + RCCallHorizontalMargin + 30 + 8, self.aiSummaryButton.frame.size.width, 30);
+        // 接通后子类可能重建覆盖视图压在按钮之上吞掉点击,把字幕/总结按钮提到最前恢复可点击;按钮未创建时为 nil,安全跳过。
+        [self.view bringSubviewToFront:_asrButton];
+        [self.view bringSubviewToFront:_aiSummaryButton];
     } else if (callStatus != RCCallHangup) {
         self.asrButton.hidden = YES;
         self.aiSummaryButton.hidden = YES;
@@ -2570,7 +2566,6 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
 
 - (void)didReceiveStartSummarization:(NSString *)taskId {
     self.summaryTaskId = taskId;
-    self.startTime = [[NSDate date] timeIntervalSince1970] * 1000;
     self.isSummaryStarted = YES;
     [[NSNotificationCenter defaultCenter] postNotificationName:@"RCCallSummarizationStatusDidChangeNotification"
                                                         object:nil
@@ -2600,7 +2595,7 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
     RCCallAISummaryMessage *summarizationMessage = [[RCCallAISummaryMessage alloc]
                                                          initWithTaskId:taskId
                                                                  callId:callId
-                                                              startTime:self.startTime];
+                                                              startTime:self.deltaTime + self.callSession.connectedTime];
     // 插入消息到 IM
     RCMessage *message = [RCCallKitUtility insertOutgoingMessage:self.conversationType
                                                         targetId:self.targetId
@@ -2614,7 +2609,34 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
 
 #pragma mark - testPushConfig
 
-- (RCMessagePushConfig *)getPushConfig {
+// 通话小米私信模板配置读取（与 IM 消息模板隔离，音视频模板内容不同）
+static NSString * const kCallMiTemplateEnabledKey     = @"pushConfig-call-mi-template-enabled";
+static NSString * const kCallMiTemplateIdKey          = @"pushConfig-call-mi-template-id";
+static NSString * const kCallInviteMiTemplateParamKey = @"pushConfig-call-invite-mi-template-param";
+static NSString * const kCallHangupMiTemplateParamKey = @"pushConfig-call-hangup-mi-template-param";
+
+// 解析模板参数 JSON，要求为 键值均为字符串 的字典，非法则返回 nil（不崩溃、不阻断通话）
+static NSDictionary<NSString *, NSString *> *RCCallKitMiTemplateParamFromJson(NSString *json) {
+    if (json.length == 0) {
+        return nil;
+    }
+    NSData *data = [json dataUsingEncoding:NSUTF8StringEncoding];
+    if (!data) {
+        return nil;
+    }
+    id object = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+    if (![object isKindOfClass:[NSDictionary class]]) {
+        return nil;
+    }
+    for (id key in (NSDictionary *)object) {
+        if (![key isKindOfClass:[NSString class]] || ![[(NSDictionary *)object objectForKey:key] isKindOfClass:[NSString class]]) {
+            return nil;
+        }
+    }
+    return (NSDictionary<NSString *, NSString *> *)object;
+}
+
+- (RCMessagePushConfig *)getPushConfig:(BOOL)isInvite {
     RCMessagePushConfig *config = [[RCMessagePushConfig alloc] init];
     NSUserDefaults *defauts = [NSUserDefaults standardUserDefaults];
     config.disablePushTitle = [[defauts objectForKey:@"pushConfig-disablePushTitle"] boolValue];
@@ -2630,6 +2652,19 @@ NSNotificationName const RCCallNewSessionCreationNotification = @"RCCallNewSessi
     config.androidConfig.channelIdHW = [defauts objectForKey:@"pushConfig-android-hw"];
     config.androidConfig.channelIdOPPO = [defauts objectForKey:@"pushConfig-android-oppo"];
     config.androidConfig.typeVivo = [defauts objectForKey:@"pushConfig-android-vivo"];
+
+    // 通话小米私信模板：开关开启且模板 ID 非空时生效；呼叫/挂断使用各自的模板参数
+    if ([defauts boolForKey:kCallMiTemplateEnabledKey]) {
+        NSString *templateId = [defauts stringForKey:kCallMiTemplateIdKey];
+        if (templateId.length > 0) {
+            config.androidConfig.templateIdMi = templateId;
+            NSString *paramJson = [defauts stringForKey:(isInvite ? kCallInviteMiTemplateParamKey : kCallHangupMiTemplateParamKey)];
+            NSDictionary<NSString *, NSString *> *templateParam = RCCallKitMiTemplateParamFromJson(paramJson);
+            if (templateParam.count > 0) {
+                config.androidConfig.templateParamMi = templateParam;
+            }
+        }
+    }
     return config;
 }
 

@@ -17,6 +17,16 @@ typedef NS_ENUM(NSInteger, RCErrorCode) {
     /// 
     RC_SUCCESS = 0,
 
+    /// 黑名单查询结果：目标用户不在黑名单中。
+    /// 
+    /// - Solution 作为黑名单查询结果处理，无需重试或提示错误。
+    RC_NOT_IN_BLACKLIST = 101,
+
+    /// 消息被拦截，未发送。
+    /// 
+    /// - Solution 提示消息发送失败；检查消息内容和发送权限，修改后重试。
+    RC_BLOCK_MESSAGE = 102,
+
     /// 已被对方加入黑名单，消息发送失败。
     /// 
     REJECTED_BY_BLACKLIST = 405,
@@ -116,6 +126,11 @@ typedef NS_ENUM(NSInteger, RCErrorCode) {
     /// - Since: 5.2.0
     RC_MESSAGE_EXPAND_NOT_AUTHORIZED = 22204,
 
+    /// 当前 App Key 未开启消息扩展功能。
+    /// 
+    /// - Since: 5.46.0
+    RC_MESSAGE_EXPANSION_DISABLED = 22210,
+
     /// 不在该群组中。
     /// 
     NOT_IN_GROUP = 22406,
@@ -123,6 +138,16 @@ typedef NS_ENUM(NSInteger, RCErrorCode) {
     /// 在群组中已被禁言。
     /// 
     FORBIDDEN_IN_GROUP = 22408,
+
+    /// 当前 App Key 下群组总数已达上限。
+    /// 
+    /// - Since: 5.46.0
+    RC_GROUP_COUNT_EXCEED_LIMIT = 22412,
+
+    /// 用户加入的群组数量超出上限。
+    /// 
+    /// - Since: 5.46.0
+    RC_GROUP_JOIN_COUNT_EXCEED_LIMIT = 22413,
 
     /// 不在该聊天室中。
     /// 
@@ -196,6 +221,11 @@ typedef NS_ENUM(NSInteger, RCErrorCode) {
     /// 
     /// - Since: 5.10.3
     RC_CHATROOM_EXTRA_SIZE_LIMIT_EXCEED = 23437,
+
+    /// 当前 App Key 下活跃聊天室数已达上限。
+    /// 
+    /// - Since: 5.46.0
+    RC_CHATROOM_ACTIVE_COUNT_EXCEED_LIMIT = 23450,
 
     /// 没有注册 DeviveId 也就是用户没有登陆。
     /// 
@@ -1129,8 +1159,13 @@ typedef NS_ENUM(NSInteger, RCErrorCode) {
     /// 
     RC_TAG_INVALID_FOR_CONVERSATION = 33102,
 
+    /// 请求已被 SDK 清理或取消。
+    /// 
+    /// - Solution 无需重试原请求；如业务仍需完成，请重新发起请求。
+    RC_MSG_REQ_CANCELLED = 33200,
+
     /// 不允许主动拉取远端会话
-    ///
+    /// 
     /// - Since: 5.20.0
     RC_NOT_ALLOW_PULL_CONVERSATION = 33301,
 
@@ -1159,7 +1194,7 @@ typedef NS_ENUM(NSInteger, RCErrorCode) {
     RC_REACTION_ID_INVALID = 33405,
 
     /// 会话未读数查询过滤器非法
-    ///
+    /// 
     /// - Since: 5.44.0
     INVALID_PARAMETER_UNREAD_COUNT_FILTER = 33406,
 
@@ -1262,12 +1297,12 @@ typedef NS_ENUM(NSInteger, RCErrorCode) {
     /// - Since: 5.4.4
     RC_MESSAGE_EXPAND_CONVERSATION_TYPE_NOT_MATCH = 34025,
 
-    /// Http 请求报 IO 异常
-    ///
+    /// Http 请求报 IO 异常。通常为设备没有开启网络或者没有连接有效的网络。
+    /// 
     RC_NETWORK_THROWS_IOEXCEPTION = 34026,
 
-    /// Http 请求超时
-    ///
+    /// Http 请求报 SocketTimeoutException。网络超时。
+    /// 
     RC_NETWORK_THROWS_SOCKET_TIMEOUT_EXCEPTION = 34027,
 
     /// 此请求不允许重定向，请使用文件真实地址。
@@ -1285,27 +1320,27 @@ typedef NS_ENUM(NSInteger, RCErrorCode) {
     RC_MEDIA_DOWNLOAD_FORBIDDEN = 34030,
 
     /// TLS handshake failed
-    ///
+    /// 
     /// - Since: 5.44.0
     RC_NET_TLS_HANDSHAKE_FAILED = 34031,
 
     /// SSL certificate validation failed
-    ///
+    /// 
     /// - Since: 5.44.0
     RC_NET_SSL_CERT_INVALID = 34032,
 
     /// TCP connection failed
-    ///
+    /// 
     /// - Since: 5.44.0
     RC_NET_TCP_CONNECT_FAILED = 34033,
 
     /// DNS resolution failed
-    ///
+    /// 
     /// - Since: 5.44.0
     RC_NET_DNS_RESOLVE_FAILED = 34034,
 
     /// Server returned error status
-    ///
+    /// 
     /// - Since: 5.44.0
     RC_NET_SERVER_ERROR = 34035,
 

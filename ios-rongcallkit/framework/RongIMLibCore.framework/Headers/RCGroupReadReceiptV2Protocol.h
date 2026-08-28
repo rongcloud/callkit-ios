@@ -75,12 +75,13 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)onSyncConversationReadStatus:(RCMessage *)message offline:(BOOL)offline;
 
 
-/// V4 同步已读状态
+/// 多端同步会话已读状态
 /// - Parameters:
 ///   - conversationType: 会话类型
 ///   - targetId: targetId
 ///   - channelId: channelId
 ///   - readTime: readTime
+/// - Note: 5.46.0 版本之前此回调为已读 v4 专用，5.46.0 版本之后调用 -[RCCoreClient syncConversationReadStatus:targetId:time:success:error:] 方法会触发此回调。针对非已读 v4 时，此回调是 `onSyncConversationReadStatus` 的补充，可以不用。
 - (void)onSyncConversationReadTime:(RCConversationType)conversationType
                           targetId:(NSString *)targetId
                          channelId:(nullable NSString *)channelId

@@ -482,15 +482,21 @@
         if (self.isASRStarted) {
             [self doStartSummarization];
         } else {
+            // 先置等待标记,避免 ASR 状态通知先于成功回调到达时漏触发总结
+            self.waitingForASRStart = YES;
             [[RCCallClient sharedRCCallClient] startASR:^(BOOL success, NSInteger code) {
-                __strong typeof(weakSelf) strongSelf = weakSelf;
-                if (!strongSelf) return;
-                
-                if (success) {
-                    strongSelf.waitingForASRStart = YES;
-                } else {
-                    [strongSelf showErrorAlert:RCCallKitLocalizedString(@"start_summray_failed_retry_later")];
-                }
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    __strong typeof(weakSelf) strongSelf = weakSelf;
+                    if (!strongSelf) return;
+
+                    if (success) {
+                        // 状态通知可能已先到并置 isASRStarted,统一走幂等入口补触发
+                        [strongSelf tryStartSummarizationIfNeeded];
+                    } else {
+                        strongSelf.waitingForASRStart = NO;
+                        [strongSelf showErrorAlert:RCCallKitLocalizedString(@"start_summray_failed_retry_later")];
+                    }
+                });
             }];
         }
     } else {
@@ -512,12 +518,19 @@
 - (void)handleASRStatusChange:(NSNotification *)notification {
     if (self.displayStartSummaryButton) {
         BOOL started = [notification.userInfo[@"started"] boolValue];
-        self.isASRStarted = started;
-        
-        if (started && self.waitingForASRStart) {
-            self.waitingForASRStart = NO;
-            [self doStartSummarization];
-        }
+        // 与成功回调在主线程串行处理,统一走幂等入口触发总结
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.isASRStarted = started;
+            [self tryStartSummarizationIfNeeded];
+        });
+    }
+}
+
+// 幂等入口:仅当处于等待且 ASR 已启动时触发一次总结,重复调用无副作用
+- (void)tryStartSummarizationIfNeeded {
+    if (self.waitingForASRStart && self.isASRStarted) {
+        self.waitingForASRStart = NO;
+        [self doStartSummarization];
     }
 }
 
