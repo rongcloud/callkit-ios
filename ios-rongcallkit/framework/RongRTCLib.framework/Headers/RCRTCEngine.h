@@ -202,7 +202,7 @@ NS_ASSUME_NONNULL_BEGIN
  设置媒体服务器地址，特别注意如果设置了会覆盖导航下载下来的 media server url
  @return 设置是否成功
  */
-- (BOOL)setMediaServerUrl:(NSString *)url;
+- (BOOL)setMediaServerUrl:(nullable NSString *)url;
 
 #pragma mark - 听筒/扬声器切换
 /*!
