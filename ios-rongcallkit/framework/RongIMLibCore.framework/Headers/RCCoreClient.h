@@ -55,6 +55,8 @@
 #import <RongIMLibCore/RCFriendEventDelegate.h>
 
 #import <RongIMLibCore/RCStreamMessageRequestParams.h>
+#import <RongIMLibCore/RCMessageCountDetail.h>
+#import <RongIMLibCore/RCMessageCountDetailOptions.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -2158,6 +2160,21 @@ FOUNDATION_EXPORT NSString *const RCLibDispatchReadReceiptNotification;
                            endTime:(long long)endTime
                            success:(nullable void (^)(NSInteger count))successBlock
                              error:(nullable void (^)(RCErrorCode status))errorBlock;
+
+/// 异步查询会话指定时间范围内每天的本地消息数量，时间范围左闭右开，最多支持 180 个本机自然日。
+/// 协议栈按查询时系统时区划分自然日，首尾日只统计与查询区间相交的部分，仅返回有消息的日期。
+/// 结果按 dateMs 从新到旧排列，不进行网络请求。
+/// - Parameter conversationType: 会话类型
+/// - Parameter targetId: 会话 ID
+/// - Parameter channelId: 所属会话的业务标识，nil 按空字符串精确匹配
+/// - Parameter queryOptions: Unix 毫秒查询时间范围
+/// - Parameter completion: 完成回调。失败时结果为空数组；成功时只返回有消息日期的统计，无消息时返回空数组
+/// - Since: 5.48.0
+- (void)getMessageCountDetail:(RCConversationType)conversationType
+                    targetId:(NSString *)targetId
+                   channelId:(nullable NSString *)channelId
+                queryOptions:(RCMessageCountDetailOptions *)queryOptions
+                  completion:(nullable void (^)(RCErrorCode code, NSArray<RCMessageCountDetail *> *dailies))completion;
 
 /// 异步删除指定类型的会话
 ///

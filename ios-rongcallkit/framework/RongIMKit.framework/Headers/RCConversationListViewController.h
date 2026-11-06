@@ -13,6 +13,7 @@
 #import <UIKit/UIKit.h>
 #import "RCBaseTableView.h"
 @class RCNetworkIndicatorView;
+@class RCConversationViewController;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -20,6 +21,10 @@ NS_ASSUME_NONNULL_BEGIN
 @interface RCConversationListViewController : RCBaseViewController <UITableViewDataSource, UITableViewDelegate>
 
 #pragma mark - 初始化
+
+/// 呈现已完成业务配置的会话页面。容器内自动选择单栏或详情栏；独立使用时沿用当前导航栈 push。
+/// 必须在主线程调用；不会调用容器的会话页面 factory。
+- (void)showConversationViewController:(RCConversationViewController *)viewController animated:(BOOL)animated;
 
 /// 初始化会话列表
 ///

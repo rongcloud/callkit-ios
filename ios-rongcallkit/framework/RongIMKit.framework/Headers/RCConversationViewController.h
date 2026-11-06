@@ -419,6 +419,11 @@ typedef enum : NSUInteger {
 /// - Since: 5.8.2
 - (void)noMoreMessageToFetch;
 
+/// 全屏编辑状态发生变化时在主线程回调。
+/// 子类可重写以更新自定义导航项，并调用 super。
+/// - Parameter isFullScreenEdit: YES 表示当前处于全屏编辑，NO 表示已退出。
+- (void)fullScreenEditStateDidChange:(BOOL)isFullScreenEdit;
+
 #pragma mark - 自定义消息
 
 /// 用户注册自定义消息的入口

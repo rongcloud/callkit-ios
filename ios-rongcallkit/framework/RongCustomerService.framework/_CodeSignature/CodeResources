@@ -46,7 +46,7 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		etm3DRiK11dplKNKstfAL9w+o54=
+		jMUXhGUmAZTstuHDpL69EzA1pWY=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -57,10 +57,6 @@
 	<dict>
 		<key>Headers/RCCSLeaveMessage.h</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			vEiyEnTxzT8ETF4OBT9DXTpWTvs=
-			</data>
 			<key>hash2</key>
 			<data>
 			nPqxREODgbDkW1ABH+L1cKYRBWqBFBdt1CbNrXjZtt0=
@@ -68,10 +64,6 @@
 		</dict>
 		<key>Headers/RCCSLeaveMessageItem.h</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			93HzsgIi559do8QiXE2Y2e4yFZI=
-			</data>
 			<key>hash2</key>
 			<data>
 			JViflYNq/ryvjBa+u7CLAcK7eXEB6ON374o+h2KFjn8=
@@ -79,10 +71,6 @@
 		</dict>
 		<key>Headers/RCCSPullLeaveMessage.h</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			Ul8Ju5/9vH8wGyK6VBXJA1/rdmA=
-			</data>
 			<key>hash2</key>
 			<data>
 			47iTvbftFLxAJRULEasqnHOrY7dRJ/FlRRE8dpLbbog=
@@ -90,10 +78,6 @@
 		</dict>
 		<key>Headers/RCCustomerServiceClient.h</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			Q6IgKMnFuR8H731Hne7kQZeQXys=
-			</data>
 			<key>hash2</key>
 			<data>
 			mdtDQrOuaVeRqLRVnBW2Wi+mXTL7ljx3M7e6Hq14BlM=
@@ -101,10 +85,6 @@
 		</dict>
 		<key>Headers/RCCustomerServiceConfig.h</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			DehLv8gheKpHJUBfVm6VeEg1yak=
-			</data>
 			<key>hash2</key>
 			<data>
 			u2lu1Ir9XdxpycxXN4td066+XOyvJ7j+AEODJJTkbHc=
@@ -112,10 +92,6 @@
 		</dict>
 		<key>Headers/RCCustomerServiceDefine.h</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			SWMpqQ0MTBvTYUYhteMoZjPWyx0=
-			</data>
 			<key>hash2</key>
 			<data>
 			TyugXf06fl3RMmySiwIopSbR/wZmIjbpnw/RWXVBAL8=
@@ -123,10 +99,6 @@
 		</dict>
 		<key>Headers/RCCustomerServiceGroupItem.h</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			6bvrVxcKjAEK974vGaZXK028HTg=
-			</data>
 			<key>hash2</key>
 			<data>
 			bBtn1nCE2ZvM1/WnpEcz5MlR+8FANmPMnUO8oxgYwro=
@@ -134,10 +106,6 @@
 		</dict>
 		<key>Headers/RCCustomerServiceInfo.h</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			+nGvqs6eBdKSOmsV/H7OEy4gTnU=
-			</data>
 			<key>hash2</key>
 			<data>
 			haXFVsrQ/O8C2C3JbdVBrYdjCsOSoIFw+mtdKaHPr1k=
@@ -145,10 +113,6 @@
 		</dict>
 		<key>Headers/RCEvaluateItem.h</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			8Ag3hrCot8j9A6JbaphOC49ECz4=
-			</data>
 			<key>hash2</key>
 			<data>
 			Xtt/EvG2uytw/WQTFXTX4rF38Pmn/N2MAhL8Kil8+BQ=
@@ -156,10 +120,6 @@
 		</dict>
 		<key>Headers/RongCustomerService.h</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			xqQl3khlzup042O7ZbP0D3f8Hkk=
-			</data>
 			<key>hash2</key>
 			<data>
 			En474m6vTNNfYCqP0+gXzdIa+MCH8PI+Xrl3FtNPLCU=
@@ -167,10 +127,6 @@
 		</dict>
 		<key>Modules/module.modulemap</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			2Kkg43kb7hwCzyf2GVzS33Mvlbc=
-			</data>
 			<key>hash2</key>
 			<data>
 			n+pRMqVyirmCYwCm0Y5n8M8psytUfFoxxrdIwmK4AJM=

@@ -46,7 +46,7 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		zYUNezx2hvA182mbmQpX0S2lFLU=
+		S+k8ehn7PKtO4VayxguSXyhq4AI=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -57,10 +57,6 @@
 	<dict>
 		<key>Headers/RCPublicServiceClient.h</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			YdcXajx2Wx07zXw1cIxsFJvUM/0=
-			</data>
 			<key>hash2</key>
 			<data>
 			jAlCTFB+pY75ydmwSHJYPcPw49K3ChQk3PqPKRacZd0=
@@ -68,10 +64,6 @@
 		</dict>
 		<key>Headers/RCPublicServiceCommandMessage.h</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			UBdc4aZ1Y38AuUVKx0/rymVSfl4=
-			</data>
 			<key>hash2</key>
 			<data>
 			vX0AtTFNCOQuXfV5JgGaFUTFymEX0OIS4YP71h+7LSE=
@@ -79,10 +71,6 @@
 		</dict>
 		<key>Headers/RCPublicServiceDefine.h</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			ayjngqNy5ogNSKkJYaD9U59EUw8=
-			</data>
 			<key>hash2</key>
 			<data>
 			71tyYu/kn4F9Yp7s7ddzvUMNAzC2m7vOLADFLzBiGpE=
@@ -90,10 +78,6 @@
 		</dict>
 		<key>Headers/RCPublicServiceMenu.h</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			fOsH+eRX2NtYOrnY3o+K9nhjRTY=
-			</data>
 			<key>hash2</key>
 			<data>
 			SSXYUMN6WDeAvPoolJVCPUt++1xdFBzkGPFF047Dmww=
@@ -101,10 +85,6 @@
 		</dict>
 		<key>Headers/RCPublicServiceMenuItem.h</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			EjvLaj90KOD3R0jjXGMXrpvyjBY=
-			</data>
 			<key>hash2</key>
 			<data>
 			Cl9fHm1rFn3Mr5FyvJB8yw/46WfZvWcYTytJL3wSnDU=
@@ -112,10 +92,6 @@
 		</dict>
 		<key>Headers/RCPublicServiceMultiRichContentMessage.h</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			QfsZ0XRT4XxVXWos3wLDOur+UVw=
-			</data>
 			<key>hash2</key>
 			<data>
 			0BjBX36awFwhMRvIdoScEY+1U1PCW8awkeNFBVuirsU=
@@ -123,10 +99,6 @@
 		</dict>
 		<key>Headers/RCPublicServiceProfile.h</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			HngI+mCUfzz/SdLU1xqXmltybN8=
-			</data>
 			<key>hash2</key>
 			<data>
 			GWUp/xDKGPisexcB/KyeWwZ8Cj9Q6K6m/knI0gg6N3w=
@@ -134,10 +106,6 @@
 		</dict>
 		<key>Headers/RCPublicServiceRichContentMessage.h</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			4SMYH5fc19wdFlsYL89AsxtubZw=
-			</data>
 			<key>hash2</key>
 			<data>
 			qvTjstVc61xquJMYQ0SPKTptS3MC85xX96jkOyiamRo=
@@ -145,10 +113,6 @@
 		</dict>
 		<key>Headers/RCRichContentItem.h</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			pE8/uoaGJ2M0lq2adefQ+9/Dd4M=
-			</data>
 			<key>hash2</key>
 			<data>
 			9cPtffnuccOAqqyuWkZNlj0G/m9Bo2wZBqLSiSgBJLs=
@@ -156,10 +120,6 @@
 		</dict>
 		<key>Headers/RongPublicService.h</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			C7Y6ulIu870mnYNTl3HhEKWnogE=
-			</data>
 			<key>hash2</key>
 			<data>
 			CUmV68TGoCI/pw7T9rnW9jpkisAlFPyDap0UO/3jH5g=
@@ -167,10 +127,6 @@
 		</dict>
 		<key>Modules/module.modulemap</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			JnXebqCKIGxSZiJrCMXGu9k5Q+U=
-			</data>
 			<key>hash2</key>
 			<data>
 			oVdDB9e5iIz9ouHE6j1jxXwmg6B+StvPqpLnWqXNPzM=

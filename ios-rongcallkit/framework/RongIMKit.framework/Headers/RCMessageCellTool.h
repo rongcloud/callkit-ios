@@ -16,6 +16,8 @@
 @interface RCMessageCellTool : NSObject
 + (UIImage *)getDefaultMessageCellBackgroundImage:(RCMessageModel *)model;
 + (CGFloat)getMessageContentViewMaxWidth;
+/// 根据消息所在容器宽度计算气泡最大宽度，供内部测量链路使用。
++ (CGFloat)getMessageContentViewMaxWidthWithContainerWidth:(CGFloat)containerWidth;
 + (CGSize)getThumbnailImageSize:(UIImage *)image;
 + (NSDictionary *)getTextLinkOrPhoneNumberAttributeDictionary:(RCMessageDirection)msgDirection;
 + (UIImage *)translationTextBackgroundImage;

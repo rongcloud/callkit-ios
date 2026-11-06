@@ -110,6 +110,8 @@ FOUNDATION_EXPORT const unsigned char RongIMLibCoreVersionString[];
 #import <RongIMLibCore/RCGetGroupMembersOption.h>
 #import <RongIMLibCore/RCConversationsContainingRobotsOption.h>
 #import <RongIMLibCore/RCGetUnreadMentionMeConversationListParams.h>
+#import <RongIMLibCore/RCMessageCountDetail.h>
+#import <RongIMLibCore/RCMessageCountDetailOptions.h>
 
 #import <RongIMLibCore/RCFileMessage.h>
 #import <RongIMLibCore/RCFileUtility.h>

@@ -66,7 +66,7 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		cHHR9C0QZuuHcMg2Y9btxdsRTpI=
+		FpPMJo8Ea4Mg+NR/0esKLHDqXzU=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -77,10 +77,6 @@
 	<dict>
 		<key>Headers/RCChatRoomClient+Deprecated.h</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			59QNtRGVYcW/81lCM3xXg8lcQTw=
-			</data>
 			<key>hash2</key>
 			<data>
 			VeUz0KM7anFOMcjqzwc0q8t7r+w5VNR2DvbWM91Uc7o=
@@ -88,10 +84,6 @@
 		</dict>
 		<key>Headers/RCChatRoomClient.h</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			3ZE/WCsAyn9Qdx7F14M5w1x7kiE=
-			</data>
 			<key>hash2</key>
 			<data>
 			2Pn8XHp7hBa1D3vGfcAxVPcSKdqxG5nakvO+IubC5IU=
@@ -99,10 +91,6 @@
 		</dict>
 		<key>Headers/RCChatRoomEnumDefine.h</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			7ipmzPgcPv3DlG7eu7bVUPncN1I=
-			</data>
 			<key>hash2</key>
 			<data>
 			EzVs+EtKfpdjeis8qZtgtjFNOw1ANDosc411HfRTl6U=
@@ -110,10 +98,6 @@
 		</dict>
 		<key>Headers/RCChatRoomInfo.h</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			lMBSs6LuI5dj/SCgE5xofYNUNlI=
-			</data>
 			<key>hash2</key>
 			<data>
 			fdFCTcU8VIPr+5LZSLAUEPplOnimj7CTHXwJH9F4pj0=
@@ -121,10 +105,6 @@
 		</dict>
 		<key>Headers/RCChatRoomMemberAction.h</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			8zVSvoPUHmvAqJy4g+7g2uPwNlk=
-			</data>
 			<key>hash2</key>
 			<data>
 			/mjF0gKIZ4AVh+AfA4XWHAvW7qdkiIE+LH3PRp0pT1M=
@@ -132,10 +112,6 @@
 		</dict>
 		<key>Headers/RCChatRoomMemberActionModel.h</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			Kq7FrXdzQ4axCQ7jHUXBSFuUP2E=
-			</data>
 			<key>hash2</key>
 			<data>
 			viBnYaS0atwrF8B3MA29jgUN3KrX6yIzHLcnTj+r4Jw=
@@ -143,10 +119,6 @@
 		</dict>
 		<key>Headers/RCChatRoomMemberBanEvent.h</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			XMGBk5348/rPk+3SCFGlKz3bs5w=
-			</data>
 			<key>hash2</key>
 			<data>
 			uYWFoWtk0fbPUQ/fX158NA8MzZD68zGVXFv3wi9It74=
@@ -154,10 +126,6 @@
 		</dict>
 		<key>Headers/RCChatRoomMemberBlockEvent.h</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			kl/ISDncrFFOTQnWCEq5ihYM39U=
-			</data>
 			<key>hash2</key>
 			<data>
 			fAw/5mf4KgR9kzfIx4rDQtRJZY16ZJC86j7psjme1ao=
@@ -165,10 +133,6 @@
 		</dict>
 		<key>Headers/RCChatRoomMemberInfo.h</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			MeunTuYWza6J6GNeU9jJ9yAIf6k=
-			</data>
 			<key>hash2</key>
 			<data>
 			p+ptXasD1EwetwwGO6fkJejatacBm1Likt7kOiwi1c0=
@@ -176,10 +140,6 @@
 		</dict>
 		<key>Headers/RCChatRoomProtocol.h</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			dN1Cerf8C6IiNIVHIYvMUXmR8T8=
-			</data>
 			<key>hash2</key>
 			<data>
 			FP805Zw9tuCBVyHqvOiuQfvErxdVc93Hzngte47Vjao=
@@ -187,10 +147,6 @@
 		</dict>
 		<key>Headers/RCChatRoomSyncEvent.h</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			BF1X0bQS1U9pTg6JsKiouacegOs=
-			</data>
 			<key>hash2</key>
 			<data>
 			RpMzkJUbvTp7PdPLzEO0RE9VRJ17F/lJAg8LEhhGroI=
@@ -198,10 +154,6 @@
 		</dict>
 		<key>Headers/RCChatroomKVChangeInfo.h</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			kOgFBsvA95iTFPNOg8KvSZjpAp4=
-			</data>
 			<key>hash2</key>
 			<data>
 			qUsA04eVGGxQv1OgHrfHwlnT+IGTFas+JD3vziKyhhs=
@@ -209,10 +161,6 @@
 		</dict>
 		<key>Headers/RCChatroomKVNotificationMessage.h</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			MqUh4GHtUDgcpdhFkexLTJozHAs=
-			</data>
 			<key>hash2</key>
 			<data>
 			24CgnDh2oGGjydwLW/QvEkLFDKKn2ZLsXYMlLWDPcIY=
@@ -220,10 +168,6 @@
 		</dict>
 		<key>Headers/RCJoinChatRoomResponse.h</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			7CLt4pIv0TSmLd9G2GotOhGqjYA=
-			</data>
 			<key>hash2</key>
 			<data>
 			IvgmaZuARMCpoX+wh1/P+S/IOaXIu69UJUE9J5/3aU4=
@@ -231,10 +175,6 @@
 		</dict>
 		<key>Headers/RongChatRoom.h</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			0Uc+ipnUebWHdxJFY3UNRSaB9FY=
-			</data>
 			<key>hash2</key>
 			<data>
 			2ckWRnD9M3feRHniqsmr95+ttGnSL0Ugz+MGZDDWHn4=
@@ -242,10 +182,6 @@
 		</dict>
 		<key>Modules/module.modulemap</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			nhSPJb5ZyqCPWu72cgqjHyO+oN8=
-			</data>
 			<key>hash2</key>
 			<data>
 			b/0n8457o/aCxN7yKn+xTp5awkXIoiK/EIGNw1P/EbQ=

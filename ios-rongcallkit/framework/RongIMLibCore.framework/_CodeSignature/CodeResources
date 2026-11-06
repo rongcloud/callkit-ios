@@ -106,7 +106,7 @@
 		</data>
 		<key>Headers/RCCoreClient.h</key>
 		<data>
-		BC8N5+wKMUgxUsMd0qgALD8UVik=
+		JhaF1u+iLl+n8jscyeHz8fVZb3Q=
 		</data>
 		<key>Headers/RCDataManagementInfo.h</key>
 		<data>
@@ -295,6 +295,14 @@
 		<key>Headers/RCMessageContent.h</key>
 		<data>
 		7UZvhNdKgMmp76yTcN4iZ1B/85o=
+		</data>
+		<key>Headers/RCMessageCountDetail.h</key>
+		<data>
+		Eu7IVZwmwzftEt8tEP3vEvVo7bU=
+		</data>
+		<key>Headers/RCMessageCountDetailOptions.h</key>
+		<data>
+		Ca0OiP1xyaXsO+Ld2Kp5SLzc5Jo=
 		</data>
 		<key>Headers/RCMessageDigestInfo.h</key>
 		<data>
@@ -582,7 +590,7 @@
 		</data>
 		<key>Headers/RongIMLibCore.h</key>
 		<data>
-		x7zCvCRt6W5ADPor8bahlIi9Y+Y=
+		TOTX9ycBsGu1QKysBLOKyRDZWy0=
 		</data>
 		<key>Info.plist</key>
 		<data>
@@ -878,11 +886,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			BC8N5+wKMUgxUsMd0qgALD8UVik=
+			JhaF1u+iLl+n8jscyeHz8fVZb3Q=
 			</data>
 			<key>hash2</key>
 			<data>
-			TSy8L4m0zbdlxvVFqvZI8Y/AZeghUslyYJV0Cbj1dJE=
+			nhD+sVnLFUKfzbuJr94AG5a6c2ZdAWnE9i7VX78nESE=
 			</data>
 		</dict>
 		<key>Headers/RCDataManagementInfo.h</key>
@@ -1400,6 +1408,28 @@
 			<key>hash2</key>
 			<data>
 			tWD4PnJI5RciDPTTdf1wi2th++xN2it6rtc/dEc3G00=
+			</data>
+		</dict>
+		<key>Headers/RCMessageCountDetail.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			Eu7IVZwmwzftEt8tEP3vEvVo7bU=
+			</data>
+			<key>hash2</key>
+			<data>
+			y2eoNvUR3nQh0XWLkUOR7mcWLYGp+IuGzNR51T18zXI=
+			</data>
+		</dict>
+		<key>Headers/RCMessageCountDetailOptions.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			Ca0OiP1xyaXsO+Ld2Kp5SLzc5Jo=
+			</data>
+			<key>hash2</key>
+			<data>
+			TwiP8yZ6XfDSH1iPLNZXKTt/YkrUwY3Dz2HYGr9m+fc=
 			</data>
 		</dict>
 		<key>Headers/RCMessageDigestInfo.h</key>
@@ -2187,11 +2217,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			x7zCvCRt6W5ADPor8bahlIi9Y+Y=
+			TOTX9ycBsGu1QKysBLOKyRDZWy0=
 			</data>
 			<key>hash2</key>
 			<data>
-			5yU2tz/ZBpOajatA05IgL384Sgk9U8JOGAlvdJFKTAY=
+			IttSzmy/QJWhXVSd07sHa14SyfAjqCkI0zgYpSazpcY=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

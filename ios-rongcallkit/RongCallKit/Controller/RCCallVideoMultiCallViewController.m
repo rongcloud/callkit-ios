@@ -76,6 +76,9 @@
 - (void)rc_didStartPendingOutgoingCall {
     // 主叫延迟发起后 callSession 才就绪，此时重建用户模型并刷新列表。
     [self initAllUserModel];
+    if (self.mainModel) {
+        self.mainNameLabel.text = self.mainModel.userInfo.name;
+    }
     [self updateAllSubUserLayout];
     [super rc_didStartPendingOutgoingCall];
 }
@@ -592,8 +595,8 @@
         [self removeSubUserModel:[self getModelInSubUserModelList:currentUserId]];
         [self addSubUserModel:[self generateUserModel:self.callSession.inviter]];
         self.mainModel = [self generateUserModel:currentUserId];
-        _mainNameLabel.text = self.mainModel.userInfo.name;
     }
+    self.mainNameLabel.text = self.mainModel.userInfo.name;
     [self.userCollectionView removeFromSuperview];
     _userCollectionView = nil;
     [self userCollectionView];

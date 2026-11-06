@@ -20,6 +20,7 @@
 
 /// 会话页面相关类
 #import <RongIMKit/RCConversationViewController.h>
+#import <RongIMKit/RCConversationContainerViewController.h>
 #import <RongIMKit/RCImageSlideController.h>
 #import <RongIMKit/RCPublicServiceSearchViewController.h>
 
@@ -220,6 +221,7 @@
 
 /// 会话页面相关类
 #import "RCConversationViewController.h"
+#import "RCConversationContainerViewController.h"
 #import "RCImageSlideController.h"
 #import "RCPublicServiceSearchViewController.h"
 

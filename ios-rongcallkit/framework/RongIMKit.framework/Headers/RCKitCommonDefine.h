@@ -73,6 +73,9 @@
 //在允许横竖屏的页面出现或者消失时发此通知，Notification 的 object 为 @(YES) 或者 @(NO)
 #define RCKitViewSupportAutorotateNotification @"RCKitViewSupportAutorotateNotification"
 
+// 本地已读状态写入成功后通知列表重取未读数和 @ 状态，object 为 RCConversationIdentifier。
+#define RCKitConversationReadStatusDidChangeNotification @"RCKitConversationReadStatusDidChangeNotification"
+
 /// 中文(简体)
 static NSString *const RCKitLanguageZH_HANS = @"zh-Hans";
 /// 英文
